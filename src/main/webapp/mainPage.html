@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Shop Item - Start Bootstrap Template</title>
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/shop-item.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/rightmenu.css">
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="./script/script.js"></script>
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	google.charts.load('current', {
+		'packages' : [ 'corechart' ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+
+	function drawChart() {
+
+		var data = google.visualization.arrayToDataTable([
+				[ 'Task', 'Hours per Day' ], [ '요청', 5 ], [ '진행', 1 ],
+				[ '피드백', 3 ], [ '완료', 9 ], [ '보류', 1 ] ]);
+
+		var options = {
+			title : '업무 리포트'
+		};
+
+		var chart = new google.visualization.PieChart(document
+				.getElementById('piechart'));
+
+		chart.draw(data, options);
+	}
+</script>
+
+<script>
+ 
+    function acyncMovePage(url){
+    	// ajax option
+        var ajaxOption = {
+                url : url,
+                async : true,
+                type : "POST",
+                dataType : "html",
+                cache : false
+        };
+        
+        $.ajax(ajaxOption).done(function(data){
+            // Contents 영역 삭제
+            $('#ch').children().remove();
+            // Contents 영역 교체
+            $('#ch').html(data);
+        });
+    }
+ 
+</script>
+<script>
+ 
+    function acyncMovePage1(url){
+    	// ajax option
+        var ajaxOption = {
+                url : url,
+                async : true,
+                type : "POST",
+                dataType : "html",
+                cache : false
+        };
+        
+        $.ajax(ajaxOption).done(function(data){
+            // Contents 영역 삭제
+            $('#ch2').children().remove();
+            // Contents 영역 교체
+            $('#ch2').html(data);
+        });
+    }
+ 
+</script>
+
+
+
+
+</head>
+<style>
+</style>
+<body>
+	<div class="mainWrap">
+		<!-- Navigation -->
+		<div class="headerContainer">
+			<div class="headerWrap">
+				<div class="headerLeft">
+					<div class="headLogo">
+						<a href="#"><img src="images/logo_top.png"></a>
+					</div>
+					<div id="searchArea">
+
+						<form style="width: 100%" action="#" name=search method="POST">
+
+							<select class="searchButton" name="category">
+								<option value="menu1">전체</option>
+								<option value="menu2">프로젝트</option>
+								<option value="menu3">글</option>
+								<option value="menu4">댓글</option>
+								<option value="menu5">참여자</option>
+							</select> <input type="text" id="inputkeyword" value="텍스트입력"
+								onfocus="this.value='';"> <input type="submit"
+								value="검색" onclick="searchPress()">
+						</form>
+					</div>
+
+				</div>
+				<div class="headerRight">
+					<button id="serviceUpgradeBt" onclick="test()">서비스 업그레이드</button>
+					<input type="button" id="headerChatBt" onclick="test()"> <input
+						type="button" id="headerIconAlram"> <input type="button"
+						id="headerUserInfoBt">
+
+
+				</div>
+			</div>
+
+		</div>
+
+		<!--end navigation-->
+
+
+		<div class="centerArea" id="ch">
+			<!--중앙영역-->
+
+			<!--   <div class="leftContainer">-->
+
+			<div class="sidebarContainer">
+
+				<div class="new_collabo">
+					<a id="newPrjBtn">새 프로젝트</a>
+
+				</div>
+				<!--사이드바-->
+				<div class="sidebar">
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item active">전체</a> <a href="#"
+						class="list-group-item">미보관</a> <a href="#"
+						class="list-group-item">읽지않음</a> <a href="#"
+						class="list-group-item">즐겨찾기</a>
+					<hr>
+					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
+					<a onclick="acyncMovePage('task.jsp')" class="list-group-item">전체 업무</a>
+					<a onclick="acyncMovePage('calendar.jsp')"	class="list-group-item">전체 일정</a> 
+					<a href="#" class="list-group-item">전체 파일</a> 
+					<a href="#"class="list-group-item">담아둔 글</a> 
+					<a href="#"class="list-group-item">나를 지정</a> 
+						<a href="#"class="list-group-item">내 게시물</a>
+					<hr>
+					<div class="menu_plus">
+						<a class="sort" onclick="">보관함</a>
+					</div>
+					<div class="list-group">
+						<a href="#" class="list-group-item">마케팅</a> <a href="#"
+							class="list-group-item">디자인</a> <a href="#"
+							class="list-group-item">엔지니어링</a> <a href="#"
+							class="list-group-item">숨김</a>
+
+					</div>
+
+				</div>
+				<div class="clientCenterContainer">
+
+					<ul id="helpMenu_on">
+						<li><a href="#" id="oneToOneBt">1:1 문의</a></li>
+						<li><a href="#" id="helpBt">도움말</a></li>
+						<li><a href="#" id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
+						<li><a href="#" id="newNoticeBt">플로우 새소식</a></li>
+						<!-- 알림 있을 경우 class on 추가 -->
+					</ul>
+					<div class="helpButtonContainer">
+						<div id="helpMenuImg"></div>
+						<button id="helpMenuBt" onclick="clientCenterFold()">고객센터</button>
+					</div>
+				</div>
+
+			</div>
+
+			<!--//사이드바-->
+			<!-- </div> -->
+			<!--// sidebarcontainer-->
+
+			<!--// leftcontainer-->
+	
+		<!-- 전체 컨텐츠 전환 -->
+		<div  style="display: inline-block;" id="ch2">
+			<div  class="contents" style="float: left;">
+				<!-- 센터영역 -->
+
+				<div class="article">
+					<div class="article_margin">
+
+						<!-- 타이틀 -->
+						<div class="title_margin">
+							<div class="title_border">
+								<p id="title">Article</p>
+							</div>
+						</div>
+						<!-- 타이틀 -->
+
+						<!-- 업무 리포트 -->
+						<div class="work_report_border">
+							<div class="work_report">
+								<div class="work_report_title">
+									<!-- 프로젝트 명 -->
+									<p style="display: inline-block;">프로젝트명</p>
+									<a onclick="fold()"
+										style="display: inline-block; float: right; margin-right: 5px;">
+										접기</a>
+									<!-- 파이차트 -->
+
+								</div>
+
+								<div id="chart" style="float: none;">
+									<div id="piechart"></div>
+									<div class="piechart_table">
+										<table>
+											<tr>
+												<td>요청</td>
+												<td>진행</td>
+												<td>피드백</td>
+												<td>완료</td>
+												<td>보류</td>
+											</tr>
+											<tr>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												<td>4</td>
+												<td>5</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+						<!-- 글작성 폼 -->
+						<!-- ajax로 폼 변경 -->
+						<div class="write_form_margin"
+							style="margin-top: 10px; margin-bottom: 10px;">
+							<div class="write_form_border"
+								style="border: lightgray solid 1px;">
+								<div class="write_form"
+									style="background-color: white; width: 100%;">
+									<div class="write_form_select" style="width: 100%;">
+										<!-- 글작성 선택 -->
+										<ul>
+											<li><a href="#">글 작성</a></li>
+											<li><a href="#">글 작성 2.0</a></li>
+											<li><a href="#">업무</a></li>
+											<li><a href="#">일정</a></li>
+											<li><a href="#">할일</a></li>
+										</ul>
+									</div>
+
+									<!-- 글쓰기 양식 -->
+									<div class="write_form_content">
+
+										<!-- 글 쓰기 -->
+										<div class="writeForm1" style="display: block;">
+											<textarea name="writeForm1"
+												style="width: 100%; height: 140px; border-collapse: collapse;"
+												placeholder="글을 입력해 주세요"></textarea>
+										</div>
+
+										<!-- 글쓰기 2.0 -->
+										<div class="writeForm2" style="display: block;">
+											<!-- 제목입력 -->
+											<div class="writeForm2_title">
+												<input name="writeForm2_title" type="text"
+													placeholder="제목을 입력해 주세요" style="width: 100%;">
+											</div>
+											<!-- 내용입력 -->
+											<div class="writeForm2_content">
+												<!--
+                      <textarea name="writeForm2_contet" style="width: 100%; height: 140px;"></textarea>
+                       -->
+												<div class="write1" contenteditable="true"
+													placeholder="내용입력"></div>
+											</div>
+										</div>
+
+										<!-- 업무 -->
+										<div class="work_form">
+
+											<!-- 업무명 -->
+											<div class="work_form_title">
+												<input type="text" name="workForm_title"
+													placeholder="제목을 입력해 주세요" style="width: 100%;">
+											</div>
+
+										</div>
+
+										<!-- 상태 -->
+										<div class="work_form_status"></div>
+
+										<!-- 담당자 -->
+										<div class="work_form_manager"></div>
+
+										<!-- 추가항목 -->
+										<div class="work_form_title"></div>
+
+										<!-- 내용 -->
+										<div class="work_form_title"></div>
+
+									</div>
+
+									<!-- 일정 -->
+									<div></div>
+
+									<!-- 할일 -->
+									<div></div>
+
+								</div>
+
+
+								<!-- 하단 메뉴 -->
+								<div class="write_form_lower"></div>
+
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
+					<!-- 읽지 않은 알람 -->
+					<div class="alarm_margin">
+						<div class="alarm_border">
+							<div>
+								<!-- 알람 타이틀 -->
+								<div class="alarm_title">
+									<p>미확인 알람</p>
+								</div>
+
+								<!-- 알람 내용들 -->
+								<!-- forEach 태그로 출력하면 될듯 -->
+								<div class="alarm_content">
+									<div></div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<!-- //게시글 넣는곳 -->
+			</div>
+			
+			<!-- //센터영역-->
+			<!--오른쪽영역-->
+
+			<div class="rightContainer">
+
+
+
+				<div class="aside_wrap">
+					<div>
+						<a href="#" class="btn_listback">이전화면</a>
+					</div>
+
+					<div class="set_wrap col-12">
+						<ul>
+							<li><a href="#" id="file-box" class="ico1">파일함</a></li>
+							<li><a href="#" id="task-list" class="ico5">업무</a></li>
+							<li><a href="#" id="schedule-calendar" class="ico4">일정</a></li>
+							<li><a href="#" id="todo-list" class="ico3">할일</a></li>
+						</ul>
+					</div>
+
+					<div>
+						<div class="r_invite_box">
+							<a id="project-invite-btn" class="invite">초대하기</a>
+						</div>
+						<!-- 참여자목록 -->
+
+						<div class="participant_wrap">
+							<div>
+								<div>
+									<span>전체 참여자</span>&nbsp; <strong>2</strong>
+									<!-- 프로젝트 참여인원 db -->
+									<strong>명</strong> <a>전체보기</a>
+								</div>
+							</div>
+
+							<div>
+								<div>
+									<h5>
+										<strong>관리자</strong> <span>(1)</span>
+									</h5>
+								</div>
+								<ul>
+									<li class="right-sendience-li">
+										<div class="photo">
+											<img src="images/noimg.gif">
+										</div>
+										<div id="sendience-right-btns" class="btn_right">
+											<a id="sendience-chat" class="btn chat"> <span
+												class="blind">채팅</span>
+											</a>
+										</div>
+										<div class="username" style="cursor: pointer;">
+											<span id="sendience-name" user-id="" use-intt-id="">안세영
+												(나)</span>
+										</div>
+									</li>
+								</ul>
+
+								<div>
+									<h5>
+										<strong>참여자</strong> <span>(1)</span>
+									</h5>
+								</div>
+								<ul>
+									<li class="right-sendience-li">
+										<div class="photo">
+											<img src="images/noimg.gif">
+										</div>
+										<div id="sendience-right-btns" class="btn_right">
+											<a id="sendience-chat" class="btn chat"> <span
+												class="blind">채팅</span>
+											</a>
+										</div>
+										<div class="username" style="cursor: pointer;">
+											<span id="sendience-name" user-id="" use-intt-id="">장원종</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="btn_prj_chat_box">
+							<a id="project-open-chat" class="btn_prj_chat">프로젝트 채팅</a>
+						</div>
+
+					</div>
+				</div>
+
+				<script>
+					$("#project-invite-btn").on("click", function(e) {
+						alert("Click");
+					});
+				</script>
+
+			</div>
+		</div>
+
+
+			<!-- Bootstrap core JavaScript -->
+			<script src="vendor/jquery/jquery.min.js"></script>
+			<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		</div>
+		<!--end center-->
+	</div>
+
+</body>
+
+</html>

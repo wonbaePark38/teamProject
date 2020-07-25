@@ -1,0 +1,287 @@
+
+    hr{
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+
+    [contenteditable=true]:empty:not(:focus):before{
+      content: attr(placeholder);
+      display: block;
+    }
+
+    .div_text_write[contenteditable=true]{
+      font-size: 12px;
+      width: 100%;
+      min-height: 100px;
+    }
+
+
+    .work_form hr{
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+
+    .list-group a:hover{
+      background-color: #007bff;
+    }
+
+    
+    .article{
+      width: 550px;
+      min-width: 550px;
+      height: 750px;
+      background-color: rgb(242, 242, 242);
+      overflow-y: scroll;
+    }
+
+    .article_margin{
+      margin: 10px 10px 10px 10px;
+    }
+
+    .area_border{
+      border: solid black 1px;
+      background-color: white;
+    }
+
+
+
+    #title {
+      width: 100%;  
+      text-align: left;
+      margin-left: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      
+    }
+    .title_margin{
+      margin-top: 10px;
+      margin-bottom: 10px;     
+    }
+    
+    .title_border{
+      border: solid lightgrey 1px;
+      background-color: white;
+    }
+
+
+
+
+    .work_report_border{
+      border: solid lightgrey 1px;
+      background-color: white;
+    }
+
+    .work_report_title{
+      margin-left: 10px; 
+    }
+
+    #piechart{
+      margin-left: 5px;
+      width: 95%;
+    }
+
+    .piechart_table table{
+      width: 100%;
+      text-align: center;
+    }
+
+
+
+
+
+
+
+
+<!-- 글쓰는 폼-->
+    .write_form_select_table{
+      width: 100%;
+    }
+
+    .write_form_select_table tr{
+      text-align: center;
+    }
+
+    .write_form_select_table tr td{
+      width: 20%;
+    }
+
+
+    .write_form_content {
+      display: block;
+    }
+
+    .write20_form {
+      display: none;
+    }
+
+    #location_div{
+      display: none;
+    }
+
+
+
+
+
+    .work_form{
+      display: none;
+    }
+
+    .work_form_status tr td {
+      width: 20%;
+    }
+
+    #status_select_div{
+      display: inline-block; 
+      width: 90%;
+    }
+
+    #status_select_div div button{
+      width: 100%; 
+      border-radius: 3px; 
+      border-style: solid 1px black; 
+      background-color: white;
+    }
+
+    #worker_select_div{
+      display: none;
+      z-index: 99;
+      position: absolute; 
+      width: 150px; 
+      height: 150px; 
+      margin-left: 32px;
+      overflow: auto;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .schedule_form{
+      display: none;
+    }
+
+    .todo_form{
+      display: none;
+    }
+
+    .todo_worker_select_div{
+      display: none;
+      z-index: 99; 
+      width: 150px; 
+      height: 180px; 
+      background-color: white; 
+      position: absolute;
+      border-radius: 5px;
+      border: 2px solid black;
+    }
+
+
+    .external_button{
+      display: inline-block;
+      text-align: left;
+      margin-top: 10px;
+      margin-left: 20px;
+      margin-bottom: 10px;
+      padding-left: 8px;
+      padding-right: 10px;
+      height: 26px;
+      line-height: 24px;
+      font-size: 12px;
+      color: #a2a2a2;
+      font-weight: 700;
+      border: 1px solid #dfe0e3;
+      border-radius: 26px;
+      background-color: #fff;
+    }
+
+
+    #googleMap_div{
+      display: none;
+    }
+
+
+
+
+
+
+
+
+
+
+    .alarm_margin{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .alarm_border{
+      border: solid lightgrey 1px;
+      background-color: white;
+    }
+
+    .alarm_title{
+      width: 100%;
+    }
+
+    .alarm_title p{
+      margin-left: 10px;
+    }
+
+    .alarm_content{
+      background-color: lightgray;
+      width: 100%;
+    }
+
+
+
+
+
+
+
+
+
+
+    <!--  하단툴바-->
+
+    .add_file{
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url(css/img/sp_fteditbox_ico.png); 
+      background-position: 0 0;
+    }
+
+    .add_pic{
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url(css/img/sp_fteditbox_ico.png); 
+      background-position: -24px 0;
+    }
+
+    .add_location{
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url(css/img/sp_fteditbox_ico.png); 
+      background-position: -48px 0;
+    }
+    
+    #search_location_div{
+      display: none; 
+      z-index:90; 
+      position: absolute;
+      bottom: 205px;
+    }
+
+
+
