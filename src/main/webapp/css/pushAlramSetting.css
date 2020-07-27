@@ -22,7 +22,7 @@ header{
     border-bottom: 3px solid #6862c3;
 }
 
-.alram-switch-div{
+.lock-switch-div{
     display: flex;
     flex-direction: row;
     justify-content: space-between;

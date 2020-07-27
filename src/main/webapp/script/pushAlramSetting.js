@@ -2,6 +2,7 @@ $(document).ready(function () {
     
     var check = $("input[id='alram1']");
     var check2 = $("input[id='alram2']");
+    var lock = $("input[id='lock']");
     check.click(function(){
        
         $("p").toggle();
@@ -31,6 +32,22 @@ $(document).ready(function () {
             
         }
     });
+
+    lock.click(function(){
+        
+    
+        $("p").toggle();
+        var status =$('#lock');
+        if($('input:checkbox[id="lock"]').is(":checked")){
+            console.log('체크됨');
+           $('.lock-select').attr('disabled',false);
+        }else{
+            $('.lock-select').attr('disabled',true);
+            console.log('체크해제');
+            
+        }
+    });
+
 
 
 });
