@@ -12,7 +12,7 @@
 	  }
 </script>
 </head>
-<body>
+<body style="width: 380px; border:1px solid black;">
 	<div class="header" style="background-color: pink; width: 100%; margin: auto; z-index: 1;">
 		<div style="float: right;">
 			<input type="button" onclick="dimmed()">
