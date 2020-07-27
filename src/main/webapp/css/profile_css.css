@@ -21,7 +21,7 @@
 .btn_prd_sty1_b {
     height: 30px;
     padding: 0 2px 0 0;
-    background: url(../img/btn_prd_sty1_b.gif) no-repeat right top;
+    background: url(../images/btn_prd_sty1_b.gif) no-repeat right top;
 } 
 
 .btn_prd_sty1_b span {
@@ -30,7 +30,7 @@
     padding: 4px 13px 0 15px;
     font-weight: bold;
     color: #fff;
-    background: url(../img/btn_prd_sty1_b.gif) no-repeat left top;
+    background: url(../images/btn_prd_sty1_b.gif) no-repeat left top;
 }
 
 .btn_prd_sty1_b span, .btn_prd_sty1 span {
