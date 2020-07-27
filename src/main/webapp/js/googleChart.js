@@ -1,21 +1,3 @@
-
-function test(){
-  alert('클릭');
-}
-function clientCenterFold(){
-    
-    document.getElementById('helpMenu_on').style.display=(document.getElementById('helpMenu_on').style.display=='block') ? 'none' : 'block';
-
-}
-function fold(){
-    
-    document.getElementById('chart').style.display=(document.getElementById('chart').style.display=='block') ? 'none' : 'block';
-
-}
-function searchPress(){
-  console.log('클릭');
-}
-    
 google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -37,4 +19,4 @@ google.charts.load('current', {'packages':['corechart']});
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
         chart.draw(data, options);
-}
+      }
