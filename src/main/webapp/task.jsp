@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Insert title here</title>
 
-<link href="css/bootstrap.css" rel="stylesheet">
+<title>Insert title here</title>
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/task.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -33,7 +32,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- 업무 메뉴 -->
-			<div class="col-lg-3" style="padding: 0px;">
+			<div class="col-lg-3" id="task_menu" style="padding: 0px;">
 				<div>
 					<div>
 						<div>업무 구분</div>
@@ -200,7 +199,7 @@
 
 				<div class="task_head">
 					<div class="excel_load">
-						<span class="excel_btn"><span>엑셀내려받기</span></span>
+						<a class="excel_btn"><span>엑셀내려받기</span></a>
 					</div>
 					<div class="view_btn">
 						<a class="view_group"> <span>묶어보기</span>
@@ -242,8 +241,8 @@
 									<th class="work_table_th"><a>수정일</a></th>
 								</tr>
 								<tr>
-									<td><a>${task.seq}</a></td>
-									<td><a></a></td>
+									<td><a>1</a></td>
+									<td><a>2</a></td>
 									<td><a>긴급</a></td>
 									<td style="width: 100%"><a>신입사원</a></td>
 									<td><a>0%</a></td>

@@ -10,14 +10,12 @@
 <meta name="author" content="">
 <title>Insert title here</title>
 
-<link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/task.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href='css/main.css' rel='stylesheet' />
 <script src='lib/main.js'></script>
-<script src='fullcalendar/core/main.js'></script>
-<script src='fullcalendar/core/locales/ko.js'></script>
+<!-- <script src='fullcalendar/core/locales/ko.js'></script> -->
 <script>
 
 var today_date = new Date();   
@@ -32,7 +30,7 @@ var today_date = new Date();
         center: 'title',
         right: 'dayGridMonth,dayGridWeek,dayGridDay'
       },
-      initialDate: '2018-07-11',
+      initialDate: '2020-07-11',
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
