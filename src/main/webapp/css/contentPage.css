@@ -4,6 +4,17 @@
       margin-bottom: 5px;
     }
 
+    .submit_a{
+      display: inline-block; 
+      text-align: center; 
+      border-radius: 10px; 
+      vertical-align: middle; 
+      width: 80px; 
+      padding-top: 4px; 
+      padding-bottom: 4px; 
+      background-color: blanchedalmond;
+    }
+
 
     [contenteditable=true]:empty:not(:focus):before{
       content: attr(placeholder);
@@ -17,9 +28,62 @@
     }
 
 
+    #header_chat_div{
+      display: none;
+      width: 300px;
+      height: 450px;
+      padding: 5px 5px 5px 5px;
+      border: 1px solid black;
+      border-radius: 5px;
+      border-style: 1px solid black;
+      background-color: white;
+      z-index: 99;
+      position: absolute;
+      top: 60px;
+      right: 40px
+    }
+
+    #header_alarm_div{
+      display: none; 
+      width: 300px; 
+      height: 450px; 
+      border-radius: 5px; 
+      border: 1px solid black; 
+      border-style: 1px solid black; 
+      background-color: white; 
+      z-index: 99; 
+      position: absolute; 
+      top: 60px; 
+      right: 25px;
+    }
+
+    #header_option_div{
+      display: none; 
+      width: 300px; 
+      height: 230px; 
+      border: 1px solid black; 
+      border-radius: 5px; 
+      background-color: white; 
+      z-index: 99; 
+      position: absolute; 
+      top: 60px; 
+      right: 10px;
+    }
+
+
+
+
+
+
+
+
+
+
     .work_form hr{
       margin-left: 5px;
       margin-right: 5px;
+      position: relative;
+      z-index: 0;
     }
 
 
@@ -32,12 +96,12 @@
       width: 550px;
       min-width: 550px;
       height: 750px;
-      background-color: rgb(242, 242, 242);
-      overflow-y: scroll;
+      
+      flex: 1 1 0%;
     }
 
     .article_margin{
-      margin: 10px 10px 10px 10px;
+      margin: 0px 10px 10px 10px;
     }
 
     .area_border{
@@ -52,10 +116,10 @@
       text-align: left;
       margin-left: 10px;
       font-family: Arial, Helvetica, sans-serif;
+      margin-top: 16px;
       
     }
     .title_margin{
-      margin-top: 10px;
       margin-bottom: 10px;     
     }
     
@@ -76,6 +140,12 @@
       margin-left: 10px; 
     }
 
+    #work_report_fold{
+      display: inline-block; 
+      margin-right: 5px;
+      float: right;
+    }
+
     #piechart{
       margin-left: 5px;
       width: 95%;
@@ -87,27 +157,105 @@
     }
 
 
+    .img_upload_div{
+      margin-top: 3px; 
+      margin-bottom: 3px;
+    }
+
+    .img_upload_div a{
+      width: 10%; 
+      display: inline-block;
+    }
+
+
+    .img_upload{
+      display: inline-block; 
+      width: 88%; 
+      height: 60px; 
+      background-color: violet;
+    }
+   
+
+    .file_upload_div{
+      margin-top: 3px; 
+      margin-bottom: 3px;
+    }
+
+    .file_upload_div a{
+      width: 10%; 
+      display: inline-block;
+    }
+
+    .file_upload{
+      display: inline-block; 
+      width: 88%; 
+      height: 60px; 
+      background-color: thistle;
+    }
+
+    .add_file{
+      display: inline-block; 
+      width: 24px; 
+      height: 24px; 
+      background: url(../images/sp_fteditbox_ico.png); 
+      background-position: 0 0;
+    }
+
+    .add_pic{
+      display: inline-block; 
+      width: 24px; 
+      height: 24px;
+      background: url(../images/sp_fteditbox_ico.png); 
+      background-position: -24px 0;
+    }
+
+    
+
+    .add_loc{
+      display: inline-block; 
+      width: 24px; 
+      height: 24px; 
+      background: url(../images/sp_fteditbox_ico.png); 
+      background-position: -48px 0;
+    }
 
 
 
+    #write_form_margin{
+      margin-top: 10px; 
+      margin-bottom: 10px;
+    }
 
+    #write_form_border{
+      background-color: white; 
+      border: lightgray solid 1px;
+    }
 
+    #write_form_select_div{
+      margin-left: 5px; 
+      margin-right: 5px;
+    }
 
-<!-- 글쓰는 폼-->
-    .write_form_select_table{
+    #write_form_select{
       width: 100%;
     }
 
-    .write_form_select_table tr{
+    #write_form_select_table{
+      width: 100%;
+    }
+
+    #write_form_select_table tr{
       text-align: center;
     }
 
-    .write_form_select_table tr td{
+    #write_form_select_table tr td{
       width: 20%;
     }
 
 
-    .write_form_content {
+
+
+    #write_form_content {
       display: block;
     }
 
@@ -119,6 +267,10 @@
       display: none;
     }
 
+    #locationMap{
+      width: 100%; 
+      height: 200px;
+    }
 
 
 
@@ -126,6 +278,7 @@
     .work_form{
       display: none;
     }
+
 
     .work_form_status tr td {
       width: 20%;
@@ -136,17 +289,22 @@
       width: 90%;
     }
 
-    #status_select_div div button{
-      width: 100%; 
+    #status_select_div div span{
+      width: 20%; 
       border-radius: 3px; 
       border-style: solid 1px black; 
       background-color: white;
     }
 
+    #work_worker_select{
+     width: 20%; 
+     display: inline-block;
+    }
+
     #worker_select_div{
       display: none;
       z-index: 99;
-      position: absolute; 
+      position: relative; 
       width: 150px; 
       height: 150px; 
       margin-left: 32px;
@@ -154,15 +312,59 @@
     }
 
 
+    #work_status_img{
+      display: inline-block;
+      width: 22px;
+      height: 20px;
+      background: url(../images/ico_worktit.png) no-repeat;
+      background-position: 0px 1px;
+      margin-bottom: 0px;
+    }
 
+    #work_worker_img{
+      display: inline-block;
+      width: 22px;
+      height: 20px;
+      background: url(../images/ico_worktit.png) no-repeat;
+      background-position: 1px -45px;
+      margin-bottom: 0px;
+    }
 
+    #work_start_img{
+      display: inline-block;
+      width: 22px;
+      height: 20px;
+      background: url(../images/ico_worktit.png) no-repeat;
+      background-position: 1px -85px;
+      margin-bottom: 0px;
+    }
 
+    #work_end_img{
+      display: inline-block;
+      width: 22px;
+      height: 20px;
+      background: url(../images/ico_worktit.png) no-repeat;
+      background-position: 1px -125px;
+      margin-bottom: 0px;
+    }
 
+    #work_progress_img{
+      display: inline-block;
+      width: 22px;
+      height: 20px;
+      background: url(../images/ico_worktit.png) no-repeat;
+      background-position: 1px -165px;
+      margin-bottom: 0px;
+    }
 
-
-
-
-
+    #work_order_img{
+      display: inline-block;
+      width: 22px;
+      height: 20px;
+      background: url(../images/ico_worktit.png) no-repeat;
+      background-position: 1px -205px;
+      margin-bottom: 0px;
+    }
 
 
 
@@ -170,23 +372,29 @@
       display: none;
     }
 
-    .todo_form{
-      display: none;
+    #sche_time_img{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(../images/ico_time.png) no-repeat;
     }
 
-    .todo_worker_select_div{
-      display: none;
-      z-index: 99; 
-      width: 150px; 
-      height: 180px; 
-      background-color: white; 
-      position: absolute;
-      border-radius: 5px;
-      border: 2px solid black;
+    #sche_loc_img{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(../images/ico_map.png) no-repeat;
     }
 
+    #sche_alarm_img{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(../images/ico_alarm.png) no-repeat;
+    }
 
-    .external_button{
+   
+    #external_button{
       display: inline-block;
       text-align: left;
       margin-top: 10px;
@@ -204,18 +412,27 @@
       background-color: #fff;
     }
 
-
-    #googleMap_div{
+    #work_form_external_div{
       display: none;
+    }
+
+
+    #order_div{
+      display: none; 
+      z-index: 99; 
+      width: 100px; 
+      height: 130px; 
+      position: absolute; 
+      background-color: white;
+      border: 1px solid black;
     }
 
 
 
 
-
-
-
-
+    #googleMap_div{
+      display: none;
+    }
 
 
     .alarm_margin{
@@ -242,39 +459,33 @@
     }
 
 
-
-
-
-
-
-
-
-
-    <!--  하단툴바-->
-
-    .add_file{
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      background: url(css/img/sp_fteditbox_ico.png); 
-      background-position: 0 0;
+    .todo_form{
+      display: none;
     }
 
-    .add_pic{
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      background: url(css/img/sp_fteditbox_ico.png); 
-      background-position: -24px 0;
+    .todo_worker_select_div{
+      display: none;
+      z-index: 99; 
+      width: 150px; 
+      height: 180px; 
+      background-color: white; 
+      position: absolute;
+      border-radius: 5px;
+      border: 2px solid black;
+      
     }
 
-    .add_location{
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      background: url(css/img/sp_fteditbox_ico.png); 
-      background-position: -48px 0;
+    #todo_append_img{
+      
     }
+
+    #todo_append{
+      display: inline-block;
+      padding-left: 26px;
+      background: url(../images/ico_todo.png) no-repeat 2px -22px;
+    }
+
+    
     
     #search_location_div{
       display: none; 
