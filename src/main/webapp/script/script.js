@@ -11,7 +11,7 @@
   //movebt.disabled = 'disabled';
   var listViewStats = 0;
   
-  $(function(){
+  $(document).ready(function(){
     $(".downimg").show();
     $(".upimg").hide();
     

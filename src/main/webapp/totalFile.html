@@ -58,7 +58,7 @@
         <div class="centerAreaContainer">
             <div class="fileIconArea">
                 <div id="btnLeft">
-                    <div id="presentPath">현재 위치 > </div>
+                    <div id="presentPath">현재 > </div>
                     <span id="changePathArea"> </span>
                 </div>
 
@@ -311,6 +311,39 @@
                        
                     </div><!--end tableRow for문 반복구간 끝-->
 
+                    <div class="tableRow"><!--for문 반복구간 시작-->
+                        <div class="cell col1">
+                            <input type="checkbox" name="box" class="col1-checkbox">
+                        </div>
+                        <div class="cell col2">드래그로 순서 바꾸는 리스트</div>
+                        <div class="cell col3">32 b</div>
+                        <div class="cell col4">홍길동</div>
+                        <div class="cell col5">2020-07-21</div>
+                        <div class="cell col6">
+                            
+                            <button class="moreBt" onclick="hiddenMenuFold(this,event);">
+                                <img src="images/more_color_select_on.png">
+                            </button>
+                        </div><!--end cell col6-->
+                        
+                        <div class="moreMenuContainer">
+                            <div class="hiddenMenu">
+                                <button class="moreMenuDownloadBt" type="button" onclick="test()" alt="다운로드">
+                                    <span class="moreMenuDownloadSpan"></span> 다운로드
+                                </button>
+                                
+                                <button class="moreMenuOpenBt" type="button" onclick="test()" alt="열기">
+                                    <span class="moreMenuOpenSpan"></span>열기
+                                </button>
+                                <button class="moreMenuDetailViewBt" type="button" onclick="test()" alt="상세보기">
+                                    <span class="moreMenuDetailViewSpan"></span>상세보기
+                                </button>
+                              
+                            </div>
+                        </div>    
+
+                       
+                    </div><!--end tableRow for문 반복구간 끝-->
 
 
                        

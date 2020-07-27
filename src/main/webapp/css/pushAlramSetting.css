@@ -1,0 +1,221 @@
+body{
+    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
+ 
+}
+a{
+    cursor: pointer;
+}
+
+.wrap{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 800px;
+    height: 700px;
+    
+}
+header{
+
+    width: 100%;
+    height:10%;
+    font-size: 30px;
+    border-bottom: 3px solid #6862c3;
+}
+
+.alram-switch-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 25px;
+}
+
+
+.wrap label{
+    font-size: 13px;
+}
+
+.alram-type{
+    
+    margin-top: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #f2f2f2;;
+    
+}
+
+
+.checkbox-style{
+    width: 25px;
+    height: 25px;
+}
+
+.project-alram{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+.chatting-alram{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.switch1 {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    vertical-align:middle;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch1 input {display:none;}
+  
+  /* The slider */
+  .slider1 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider1:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  #alram1:checked + .slider1 {
+    background-color: #2196F3;
+  }
+  
+  #alram1:focus + .slider1 {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  #alram1:checked + .slider1:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider1.round {
+    border-radius: 34px;
+  }
+  
+  .slider1.round:before {
+    border-radius: 50%;
+  }
+  
+  .onoff-message1{
+      margin:0px;
+      display:inline-block;
+      font-size:15px;
+      font-weight:bold;
+  }
+
+  .not-prohibite-switch-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 25px;
+}
+  
+
+.switch2 {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    vertical-align:middle;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch2 input {display:none;}
+  
+  /* The slider */
+  .slider2 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider2:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  #alram2:checked + .slider2 {
+    background-color: #2196F3;
+  }
+  
+  #alram2:focus + .slider2 {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  #alram2:checked + .slider2:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider2.round {
+    border-radius: 34px;
+  }
+  
+  .slider2.round:before {
+    border-radius: 50%;
+  }
+  
+  .onoff-message2{
+      margin:0px;
+      display:inline-block;
+      font-size:15px;
+      font-weight:bold;
+  }
+
+  .combobox-div{
+      display: flex;
+      flex-direction: row;
+      padding-top: 20px;
+      width: 100%;
+      height: 5%;
+  }
+  .start-combobox{
+      width: 100px;
+      height: 100%;
+  }
+
+  .end-combobox{
+    width: 100px;
+    height: 100%;
+}
+
