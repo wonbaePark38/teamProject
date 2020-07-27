@@ -122,7 +122,7 @@
 		<div class="remark_div">
 			
 			<div class="photo" style="float: left; padding-left: 10px;">
-				<img id="user_profile_remark">
+				<img id="user_profile_work">
 			</div>
 			<div class="remark_setting">
 				<span>수정</span><em>|</em><span>삭제</span>

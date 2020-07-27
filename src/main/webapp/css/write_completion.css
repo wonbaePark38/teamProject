@@ -158,7 +158,7 @@
 
 
 <!-- -->
-[contenteditable=true]:empty:not(:focus):before{
+[contenteditable=true]:empty:before{
       content: attr(placeholder);
       display: block;
     }
@@ -263,6 +263,13 @@
 	background: url(../images/btn_icon_down.gif) no-repeat 0px 3px; 
 }
 
+.msg_page pre{
+	display: inline-block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 0em 0px;
+}
+
 .file_div{
 	margin: 15px 0 0 80px;	
 }
@@ -353,7 +360,7 @@
 	position: relative; 
 	
 }
-.remark_data{
+.remark_data {
 	width: 80%;
     background-color: transparent;
     min-height: 20px;
@@ -363,6 +370,18 @@
     font-size: 13px;
     color: #000;
 }
+
+.msg_data, .msg_data_if{
+	width: 80%;
+    background-color: transparent;
+    margin-left: 45px;
+    margin-top: -4px;
+    padding: 5px 0 5px 9px;
+    font-size: 13px;
+    color: #000;
+	
+}
+
 .remark_data pre{
 	display: block;
     font-family: monospace;
@@ -535,6 +554,19 @@
 	float: right; 
 	margin-top: -3px;
 }
+
+.msg_user{
+	padding: 5px 0px 5px 0px;
+}
+#user_profile_msg{
+	width: 28px; 
+	height: 28px; 
+	cover; 
+	background-image: url(../images/empty_photo_s.png); 
+	background-size: cover; 
+	background-repeat: no-repeat;
+}
+
 #user_profile_remark{
 	width: 32px; 
 	height: 32px; 
