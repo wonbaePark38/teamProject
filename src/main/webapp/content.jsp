@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="css/task.css" rel="stylesheet">
+<link href="css/write_completion.css" rel="stylesheet">
 <script type="text/javascript">
 	function contentset(){
 	    document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';

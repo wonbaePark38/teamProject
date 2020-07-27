@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="css/task.css" rel="stylesheet">
+<link href="css/write_completion.css" rel="stylesheet">
 <script type="text/javascript">
 	function dimmed(){
 	    document.getElementById('dimmed').style.display=(document.getElementById('dimmed').style.display=='block') ? 'none' : 'block';
