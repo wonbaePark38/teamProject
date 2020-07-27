@@ -1,18 +1,6 @@
 @charset "UTF-8";
 
 
-/*
-세영 css
-*/
-
-
-element.style {
-  top: 0px;
-  bottom: 0px;
-  padding-top: 117px;
-  height: auto;
-}
-
 .aside_wrap {
   
   top: 76px;
