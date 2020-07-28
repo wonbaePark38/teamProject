@@ -7,10 +7,7 @@ body{
     font-size: 16px;
     overflow-y: hidden;
   }
- /* .centerAreaContainer .fileIconArea .btnLeft ::before{
-    content:"123";
-    color: tomato;
-  }*/ 
+
   ul, li{
     list-style: none;
     font-size: 14px;  
@@ -146,7 +143,7 @@ body{
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding-top: 30px;
+    padding-top: 35px;
     background-color:#ffffff;
   }
   .fileIconArea{
@@ -201,12 +198,17 @@ body{
     
   }
   .rightBtCollection{
-    display:flex;
+    display: flex;
     flex-direction: row;
-    width: 70%;
-    height: 70%;
+    justify-items: start;
     align-items: center;
-    justify-content: flex-end;
+    border: 0;
+   
+  }
+
+  .rightBtCollection button{
+    margin-left: 3px;
+    height: 40px;
     
   }
  
@@ -217,19 +219,11 @@ body{
     align-items: center;
     background-color: white;
     border: 0;
-    height: 100%;
     margin-right: 5px;
+    
   }
 
-  /*
-  #moveSpan{
-    
-    background: url('../images/move.png') no-repeat;
-    cursor:pointer;
-    
-    width: 33px;
-    height:33px;
-  }*/
+
   #deleteFolderBt{
     display: flex;
     flex-direction: row;
@@ -239,14 +233,7 @@ body{
     border: 0;
     margin-right: 5px;
   }
-  /*
-  #deleteFolderSpan{
-    background: url('../images/recycle.png') no-repeat;
-    cursor:pointer;
-    
-    width: 33px;
-    height:33px;
-  }*/
+
   
   #downloadBt{
     display: flex;
@@ -257,14 +244,7 @@ body{
     border: 0;
     margin-right: 5px;
   }
-  #downloadSpan{
-    background: url('../images/download.png') no-repeat;
-    cursor:pointer;
-    margin-top: 10px;
-    width: 33px;
-    height:33px;
   
-  }
   #newFolderSpan{
     background: url('../images/ico_newfile.png') no-repeat;
     cursor:pointer;
