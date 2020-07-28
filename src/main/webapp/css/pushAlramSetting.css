@@ -62,6 +62,13 @@ header{
 }
 
 
+.alram-switch-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 25px;
+}
+
 .switch1 {
     position: relative;
     display: inline-block;

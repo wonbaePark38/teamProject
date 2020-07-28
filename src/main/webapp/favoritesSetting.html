@@ -6,7 +6,8 @@
     <title>즐겨찾기 설정</title>
     <link href="css/favoritesSetting.css" rel="stylesheet"/>
     <script type="text/javascript" scr="script/favoritesSetting.js"></script>
-    <script src="js/jquery-3.5.1-min.js"></script>
+    <script type="text/javascript" src="script/configScript.js"></script>
+    <script src="script/jquery-3.5.1-min.js"></script>
 </head>
 
 <body>
@@ -28,7 +29,7 @@
         </div>
 
         <div class="reset-div">
-            <button type="button"  id="reset-bt">
+            <button type="button" onclick="reset();" id="reset-bt">
                 <span>초기화</span>
             </button>
         </div>
@@ -36,18 +37,18 @@
         <div id="modal">
             <div class="modal-content">
                 <h5>프로젝트에 표기한 모든 별도 표기를 초기화합니다.(복구 되지 않습니다)</h5>
-                <button type="button" id="comfirm-cancle">취소</button>
-                <button type="button" id="confirm">확인</button>
+                <button type="button" id="comfirm-cancle" onclick="settinCancel();">취소</button>
+                <button type="button" id="confirm" onclick="settingConfirm()">확인</button>
             </div>
 
-            <div class="modal-layer">
-
-            </div>
+            
         </div>
 
         <div class="tutorial-div">
             <img src="images/bookmark_tutorial.png">
         </div>
+       
     </div>
 </body>
+<script src="script/jquery-3.5.1-min.js"></script>
 </html>
