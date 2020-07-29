@@ -1,12 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>즐겨찾기 설정</title>
     <link href="css/favoritesSetting.css" rel="stylesheet"/>
-    <script type="text/javascript" scr="script/favoritesSetting.js"></script>
-    <script type="text/javascript" src="script/configScript.js"></script>
+   	<script type="text/javascript" src="script/configScript.js"></script>
     <script src="script/jquery-3.5.1-min.js"></script>
 </head>
 

@@ -57,8 +57,8 @@ $(document).ready(function () {
        
         $.ajax({
            
-            url :'accountInfo.html',
-            type :'GET',
+            url :'accountInfo.jsp',
+            type :'POST',
             cache:false,
             dataType:"html",
             beforeSend:function(){
@@ -85,8 +85,8 @@ $(document).ready(function () {
        
         $.ajax({
            
-            url :'settingPassword.html',
-            type :'GET',
+            url :'settingPassword.jsp',
+            type :'POST',
             cache:false,
             dataType:"html",
             beforeSend:function(){
@@ -113,8 +113,8 @@ $(document).ready(function () {
        
         $.ajax({
            
-            url :'pushAlramSetting.html',
-            type :'GET',
+            url :'pushAlramSetting.jsp',
+            type :'POST',
             cache:false,
             dataType:"html",
             beforeSend:function(){
@@ -141,8 +141,8 @@ $(document).ready(function () {
        
         $.ajax({
            
-            url :'lockModeConfig.html',
-            type :'GET',
+            url :'lockModeConfig.jsp',
+            type :'POST',
             cache:false,
             dataType:"html",
             beforeSend:function(){
@@ -169,8 +169,8 @@ $(document).ready(function () {
        
         $.ajax({
            
-            url :'favoritesSetting.html',
-            type :'GET',
+            url :'favoritesSetting.jsp',
+            type :'POST',
             cache:false,
             dataType:"html",
             beforeSend:function(){
@@ -194,13 +194,16 @@ $(document).ready(function () {
         
     });
 
+   
+
+
     $('#language-setting').click(function () {
         console.log('접속');
        
         $.ajax({
            
-            url :'languageSetting.html',
-            type :'GET',
+            url :'languageSetting.jsp',
+            type :'POST',
             cache:false,
             dataType:"html",
             beforeSend:function(){
@@ -225,12 +228,12 @@ $(document).ready(function () {
     });
 
     $('#connect-device-setting').click(function () {
-        console.log('접속');
+        console.log('접속페이지');
        
         $.ajax({
            
             url :'connectManage.jsp',
-            type :'GET',
+            type :'POST',
             cache:false,
             dataType:"html",
             beforeSend:function(){
@@ -260,7 +263,7 @@ $(document).ready(function () {
 
 
 function reset(){
-   
+	
     var modal = document.getElementById('modal');
     modal.style.display = "block";
 }

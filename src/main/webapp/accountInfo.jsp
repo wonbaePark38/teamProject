@@ -1,13 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>계정정보</title>
-    <link href='css/accountInfo.css' rel='stylesheet' />
+<meta charset="UTF-8">
+<title>계정정보</title>
+<link href='css/accountInfo.css' rel='stylesheet' />
 </head>
 <body>
-  <div class="wrap">
+	  <div class="wrap">
       <header>
         계정 정보
       </header> <!--end header-->
@@ -117,6 +118,5 @@
 
 
   </div>
-    
 </body>
 </html>

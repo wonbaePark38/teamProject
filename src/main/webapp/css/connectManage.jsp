@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>접속 기기 관리 페이지</title>
-<link href="css/connectManage.css" rel="stylesheet">
-<script type="text/javascript" src="script/configScript.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
-	  <div class="wrap">
+
+<div class="wrap">
         <header>
             접속 기기 관리
         </header>
@@ -37,5 +36,6 @@
 
         <!--end for문 -->
     </div>
+
 </body>
 </html>
