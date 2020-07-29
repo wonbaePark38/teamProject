@@ -852,7 +852,7 @@ img, label {
 .ivtemail_list input[type=text] {
     border: 1px solid #dfdfdf;
     width: 416px;
-    margin-left: 15px;
+    margin-left: -20px;
     height: 38px;
     line-height: 34px;
     font-size: 14px;
@@ -877,7 +877,7 @@ img, label {
     padding: 18px;
     padding-right: 0;
     width: 440px;
-    height: 184px;
+    height: 130px;
     overflow-y: auto;
     border: 1px solid #e7e9eb;
     border-radius: 2px;
@@ -893,9 +893,22 @@ img, label {
     padding: 0 2px 0 0;
     background: url(../images/btn_prd_sty1_b.gif) no-repeat right top;
 }
-.btn_prd_sty1_b span, .btn_prd_sty1 span {
-    padding-top: 7px;
+
+.btn_prd_sty1 span, .btn_prd_sty1_b span {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    vertical-align: top;
 }
+
+.btn_prd_sty1, .btn_prd_sty1_b {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
 .btn_prd_sty1_b span {
     min-width: 80px;
     height: 26px;
@@ -904,6 +917,5 @@ img, label {
     color: #fff;
     background: url(../images/btn_prd_sty1_b.gif) no-repeat left top;
 }
-
 
 

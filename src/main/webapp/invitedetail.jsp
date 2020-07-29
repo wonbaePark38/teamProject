@@ -6,14 +6,46 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/invite_css.css">
+<script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
 </head>
 <body>
+	<div class="prdbx_wrap center-popup" id="inviteBox" style="width: 500px; height: 620px; z-index: 1100; ">
+    <input type="hidden" id="_INVITE_LINK" value="https://flow.team/Invite/1C7cg1u3dX0z1h3nj7oD9CK"> <!-- 링크 생성 -->
+    <div class="prdbx_default" style="display: block;">
+        <div class="prdbx_df_top">
+            <h1 id="invitePrjName">메인프로젝트</h1>
+            <a class="btn_close" id="inviteBoxClose" title="닫기"></a>
+        </div>
+        <div class="prdbx_df_cn">
+            <ul>
+                <li id="emplDvsnInvite" class=""><!-- 활성화클래스 on -->
+                    <span class="ico ico1"></span>
+                    <span class="business"></span>
+                    <p class="tit" >팀, 직원 동료 초대</p>
+                    <p class="txt" >회사 직원 또는 조직도를 확인하고 초대할 수 있습니다.</p>
+                </li>
+                <li id="sendienceInvite" class="on">
+                    <span class="ico ico2"></span>
+                    <p class="tit" >프로젝트 참여자</p>
+                    <p class="txt" >프로젝트를 함께 했던 사람을 초대할 수 있습니다.</p>
+                </li>
+                <li id="emailInvite" class="on">
+                    <span class="ico ico3"></span>
+                    <p class="tit" >이메일로 초대장 발송</p>
+                    <p class="txt" >초대장을 이메일로 발송할 수 있습니다.</p>
+                </li>
+                <li id="inviteLink" class="on">
+                    <span class="ico ico4"></span>
+                    <p class="tit" >초대링크</p>
+                    <p class="txt"><a id="linkUrl" class="ellipsis">https://flow.team/Invite/1C7cg1u3dX0z1h3nj7oD9CK</a><a class="btn_url_copy"><span class="blind" data-langcode="CLP1180">복사하기</span></a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-	<div class="prdbx_wrap center-popup" id="inviteDetail" style="width: 500px; height: 620px; z-index: 1101;">
 
-
-
-
+	<div class="prdbx_wrap center-popup" id="inviteDetail" style="width: 500px; height: 620px; z-index: 1101; display: none;" >
 
 
 <!-- //초대하기 상세 -->
@@ -27,7 +59,7 @@
         </div>
         <!-- //상단 타이틀 영역 -->
         <!-- 검색영역 -->
-        <div class="prdbx_hd_sch" id="invtSrchBox" style="display:block;">
+        <div class="prdbx_hd_sch" id="invtSrchBox" style="display: none;">
             <div class="prd_schbx_in">
                 <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="invtSrchTxt" value="" class="ui-autocomplete-input" autocomplete="off" placeholder="함께 프로젝트를 진행했었던 사람들을 찾아보세요!">
                 <div id="clearInvtSrchTxt" style="cursor: pointer; display: none; position: absolute; right: 16px; margin-top: 6px; background: url(../images/btn_sch_del.png) 0px 0px / 15px no-repeat; width: 25px; height: 25px;"></div>
@@ -46,14 +78,18 @@
         <!-- //탭영역 -->
 
         <!-- 참여자 선택 -->
-        <div class="prd_namebx bline mCustomScrollbar _mCS_11 mCS_no_scrollbar" id="selectedItemList" style="display: none;"><div id="mCSB_11" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 90px;" tabindex="0"><div id="mCSB_11_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><!-- 라인있는 경우 bline 클래스 추가 -->
+        <div class="prd_namebx bline mCustomScrollbar _mCS_11 mCS_no_scrollbar" id="selectedItemList" style="display: block;"><div id="mCSB_11" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_11_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><!-- 라인있는 경우 bline 클래스 추가 -->
             <div class="prd_name_cn" id="selectedRcvrList">
 
-            </div>
+            <div class="nameTag_s" style="" rcvr_cd="ahncount@gmail.com" rcvr_gb="U" id="person_ahncountgmailcom">
+                <img src="images/img_photo_null32.png" alt="" onerror="this.src='images/img_photo_null32.png'">
+                <strong data-langcode="H331" title="안세영">안세영</strong>
+                <button><span class="blind" >삭제</span></button>
+            </div></div>
             <div class="prd_name_btn">
-                <a class="all_del" >전체 삭제</a>
+                <a class="all_del">전체 삭제</a>
             </div>
-        </div><div id="mCSB_11_scrollbar_vertical" class="mCSB_scrollTools mCSB_11_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><a href="#" class="mCSB_buttonUp" oncontextmenu="return false;"></a><div class="mCSB_draggerContainer"><div id="mCSB_11_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div><a href="#" class="mCSB_buttonDown" oncontextmenu="return false;"></a></div></div></div>
+        </div><div id="mCSB_11_scrollbar_vertical" class="mCSB_scrollTools mCSB_11_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><a href="#" class="mCSB_buttonUp" oncontextmenu="return false;"></a><div class="mCSB_draggerContainer"><div id="mCSB_11_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div><a href="#" class="mCSB_buttonDown" oncontextmenu="return false;"></a></div></div></div>
         <!-- //참여자 선택 -->
 
         <!-- 조직도 부서 선택시 -->
@@ -96,7 +132,9 @@
         <!-- //선택된 참여자 아이템 -->
 
         <!-- 참여자/조직도 리스트 -->
-        <div class="prdcn_scroll mCustomScrollbar _mCS_12 mCS_no_scrollbar" id="willBeInvitedItemList" style="height: 460px; display: block;"><div id="mCSB_12" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_12_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><!-- 기본 높이 464px / 탭만 있는 경우 412px / 탭 , 조직도 부서선택 있는경우 340px / 참여자 선택,탭 모두 있는 경우 290px -->
+        <div class="prdcn_scroll mCustomScrollbar _mCS_12 mCS_no_scrollbar" id="willBeInvitedItemList" style="height: 460px; display: block;">
+        <div id="mCSB_12" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0">
+        <div id="mCSB_12_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><!-- 기본 높이 464px / 탭만 있는 경우 412px / 탭 , 조직도 부서선택 있는경우 340px / 참여자 선택,탭 모두 있는 경우 290px -->
             <div class="prdcn_list">
                 <ul><li class="invite_li" style="display: block; cursor: pointer;" id="person_ahncountgmailcom"><!-- 활성화클래스 on --><!--  class="bg depth1 depth2 depth3" -->
                 <span class="bg"></span>
@@ -178,7 +216,7 @@
         <!-- //검색결과 없음 -->
 
 
-        <div id="inviteViaEmail" style="display:none; z-index:1002;">
+        <div id="inviteViaEmail" style="display: none; z-index:1002;">
             <!-- 초대장 발송 이메일목록 -->
             <div class="ivtemail_list_wrap">
                 <div class="ivtemail_list">
@@ -195,7 +233,7 @@
             <!-- 초대장 내용 -->
             <div class="ivtemail_cont_wrap">
                 <div style="color: blue;font-weight: bold;padding-bottom: 5px;padding-left:10px;">[<span>아래 내용은 편집하실 수 있습니다.</span>]</div>
-                <textarea class="ivtemail_cont">				</textarea>
+                <textarea class="ivtemail_cont" placeholder="내용을 입력해주세요."></textarea>
             </div>
             <!-- //초대장 내용 -->
         </div>
@@ -209,4 +247,19 @@
 
 
 </body>
+<script>
+$("#inviteBox .prdbx_default .prdbx_df_cn li").on("click", function (e) {
+    if($(this).attr("id") == "sendienceInvite") {
+    	$(".prdbx_default").css("display", "none");
+    	$("#inviteDetail").css("display", "block");
+    } else if($(this).attr("id") == "emailInvite") {
+    	$(".prdbx_default").css("display", "none");
+    	$("#inviteDetail").css("display", "block");
+    	$("#willBeInvitedItemList").css("display", "none");
+    	$("#inviteViaEmail").css("display", "block");
+    } else if($(this).attr("id") == "inviteLink") {
+        console.log(3);
+    }
+});
+</script>
 </html>
