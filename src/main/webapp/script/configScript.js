@@ -229,7 +229,7 @@ $(document).ready(function () {
        
         $.ajax({
            
-            url :'connectManage.html',
+            url :'connectManage.jsp',
             type :'GET',
             cache:false,
             dataType:"html",
