@@ -11,9 +11,9 @@
 </head>
 <body>
     <div class="mainWrap">
-        <header>
-            플로우 사용 통계        
-        </header>
+        <div class="header">
+           	 플로우 사용 통계        
+        </div>
 
         <div class="input-div">
             <form method="POST" action="#">
@@ -94,7 +94,7 @@
                         
                     </td>
 
-                    <td>
+                    <td style="display:flex; flex-wrap:wrap;">
                         deux38@naver.com
                     </td>
                     <td>

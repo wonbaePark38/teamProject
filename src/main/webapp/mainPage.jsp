@@ -156,7 +156,7 @@
 						<div style="margin-left: 10px;">
 							<div style="margin-top: 10px;">
 								<img src="images/pf_ico1_off.png">
-								<a href="privateConfig.html">환경설정</a>
+								<a href="privateConfig.jsp">환경설정</a>
 							</div>
 							<div style="margin-top: 10px;">
 								<img src="images/pf_ico5_off.png">
