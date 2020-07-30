@@ -1,9 +1,6 @@
 
 function test(){
-<<<<<<< HEAD
   alert('클릭');
-=======
-alert('클릭');
 }
 
 function hiddenMenuFold(thisevent,e){
@@ -20,9 +17,7 @@ function hiddenMenuFold(thisevent,e){
   
   
   //thisevent.style.display=(document.querySelector('.moreMenuContainer2').style.display=='block') ? 'none' : 'block';
-  
-  
->>>>>>> 64727a329502d60dac21b9e95a16677088015633
+ 
 }
 function clientCenterFold(){
     
