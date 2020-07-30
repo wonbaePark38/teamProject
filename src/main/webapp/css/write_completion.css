@@ -203,12 +203,16 @@
 	float: left;
 }
 
+.post_idx{
+	width: 511px;  
+	background-color: #ffffff;
+}
+
 .top_writer{
 	display: inline-block; 
 	width: 474px;
 	height: 60px; 
 	padding: 25px 12px 0px 25px; 
-	background-color: pink;
 }
 
 .box_btn{

@@ -18,10 +18,10 @@
 	
 </script>
 </head>
-<body>
+<body style="background-color: gray;">
 	
 
-	<div class="post_idx"style="width: 511px;  background-color: pink;">
+	<div class="post_idx">
 		<!-- 탑 -->
 		<div class="top_writer">
 			<div class="photo" style="float: left;">
