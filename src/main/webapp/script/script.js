@@ -1,6 +1,28 @@
 
 function test(){
+<<<<<<< HEAD
   alert('클릭');
+=======
+alert('클릭');
+}
+
+function hiddenMenuFold(thisevent,e){
+  var node = $(thisevent).parent().next();
+  var presentDisplay = node.css('display');
+  if(presentDisplay == 'block'){
+    
+    node.css('display','none');
+  }
+  else{
+    node.css("display","block");
+  }
+  
+  
+  
+  //thisevent.style.display=(document.querySelector('.moreMenuContainer2').style.display=='block') ? 'none' : 'block';
+  
+  
+>>>>>>> 64727a329502d60dac21b9e95a16677088015633
 }
 function clientCenterFold(){
     
