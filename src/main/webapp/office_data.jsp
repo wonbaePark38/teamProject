@@ -13,6 +13,7 @@ $(function(){
 		$(this).hide();
 		$('input[id^=set_btn]').show();
 	});
+	console.log("원종바보");
 });
 </script>
 </head>
