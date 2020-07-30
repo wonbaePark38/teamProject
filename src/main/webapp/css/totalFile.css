@@ -1,912 +1,933 @@
-body {
-	margin: 0 auto;
-	background-color: #f2f2f2;
-	border: 1px solid #eaeaea;
-	font-size: 16px;
-	overflow-y: hidden;
-}
-
-ul, li {
-	list-style: none;
-	font-size: 14px;
-}
-
-a {
-	font-size: 14px;
-	font-weight: 400;
-	color: black;
-}
-
-button {
-	border: 0;
-	background-color: white;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.mainWrap {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	flex-wrap: nowrap;
-	background-color: #f2f2f2;
-}
-
-.headerContainer {
-	border-bottom: 1px solid #e7e8e9;
-	flex-direction: row;
-	justify-content: center;
-	position: fixed;
-	width: 100%;
-	height: 60px;
-	z-index: 1000;
-	align-items: center;
-	background-color: #ffffff;
-}
-
-.headerWrap {
-	display: flex;
-	flex-direction: row;
-	width: 1024px;
-	height: 100%;
-	margin: 0 auto;
-	justify-content: center;
-	flex-wrap: nowrap;
-}
-
-.headerLeft {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	width: 60%;
-	align-items: center;
-}
-
-.headLogo {
-	margin-right: 10px;
-	width: 5%;
-}
-
-.headerRight {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: flex-end;
-	width: 50%;
-	align-items: center;
-}
-
-#serviceUpgradeBt {
-	width: 130px;
-	height: 50%;
-	margin-right: 10px;
-	padding: 1px;
-	text-align: center;
-	font-size: 14px;
-	font-weight: 600;
-	border: 0;
-	border-radius: 20px;
-	background: #fff;
-	color: #5f5ab9;
-}
-
-#headerChatBt {
-	border: none;
-	width: 30px;
-	height: 30px;
-	margin-right: 20px;
-	background: url('../images/top_icon_btn_chat.png') no-repeat;
-	cursor: pointer;
-}
-
-#headerChatBt:hover {
-	background-position: 0 -30px;
-}
-
-#headerIconAlram {
-	border: none;
-	width: 30px;
-	height: 30px;
-	margin-right: 20px;
-	background: url('../images/top_icon_btn_alram.png') no-repeat;
-	cursor: pointer;
-}
-
-#headerIconAlram:hover {
-	border: none;
-	background-position: 0 -30px;
-}
-
-#headerUserInfoBt {
-	border: none;
-	width: 30px;
-	height: 30px;
-	margin-right: 20px;
-	background: url('../images/account_default30.png') no-repeat;
-	cursor: pointer;
-}
-
-.centerAreaContainer {
-	width: 1024px;
-	height: 768px;
-	display: flex;
-	flex-direction: column;
-	margin: 0 auto;
-	padding-top: 35px;
-	background-color: #ffffff;
-}
-
-.fileIconArea {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	height: 60px;
-	background-color: #f2f2f2;
-	justify-content: space-between;
-	align-items: center;
-}
-
-#btnLeft {
-	display: flex;
-	flex-direction: row;
-	width: 30%;
-	height: 100%;
-	align-items: center;
-}
-
-#presentPath {
-	display: flex;
-	flex-direction: row;
-	width: 25%;
-	height: 40%;
-	margin-left: 8px;
-}
-
-#changePathArea {
-	color: blue;
-}
-
-.btnRight {
-	display: flex;
-	align-items: center;
-	width: 70%;
-	height: 100%;
-	justify-content: flex-end;
-	font-size: 13px;
-}
-
-.check-message-container {
-	display: flex;
-	width: 30%;
-	height: 100%;
-	font-size: 20px;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	color: crimson;
-	display: block;
-	background-color: darkblue;
-}
-
-.rightBtCollection {
-	display: flex;
-	flex-direction: row;
-	justify-items: start;
-	align-items: center;
-	border: 0;
-}
-
-.rightBtCollection button {
-	margin-left: 3px;
-	height: 40px;
-}
-
-#moveBt {
-	display: flex;
-	flex-direction: row;
-	justify-items: start;
-	align-items: center;
-	background-color: white;
-	border: 0;
-	margin-right: 5px;
-}
-
-#deleteFolderBt {
-	display: flex;
-	flex-direction: row;
-	justify-items: start;
-	align-items: center;
-	background-color: white;
-	border: 0;
-	margin-right: 5px;
-}
-
-#downloadBt {
-	display: flex;
-	flex-direction: row;
-	justify-items: start;
-	align-items: center;
-	background-color: white;
-	border: 0;
-	margin-right: 5px;
-}
-
-#newFolderSpan {
-	background: url('../images/ico_newfile.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-}
-
-#newFolderBt {
-	display: flex;
-	flex-direction: row;
-	justify-items: start;
-	align-items: center;
-	background-color: white;
-	border: 0;
-	margin-right: 5px;
-}
-
-#listSortBt {
-	display: flex;
-	flex-direction: row;
-	justify-items: center;
-	align-items: center;
-	padding-top: 3px;
-	padding-left: -2px;
-	height: 80%;
-	border: 0;
-	background-color: #615cba;
-}
-
-#listSortSpan {
-	background: url('../images/ico_list_on.png') no-repeat;
-	width: 22px;
-	height: 22px;
-	margin-left: 3px;
-}
-
-#badukSortBt {
-	display: flex;
-	flex-direction: row;
-	justify-items: center;
-	align-items: center;
-	height: 80%;
-	padding-top: 3px;
-	padding-left: -2px;
-	border: 0;
-	background-color: #c2bdcc;
-}
-
-#badukSortSpan {
-	background: url('../images/ico_thumb.png') no-repeat;
-	margin-left: 3px;
-	width: 22px;
-	height: 22px;
-}
-
-#closeBt {
-	background-color: #615cba;
-	color: whitesmoke;
-	border: none;
-	height: 80%;
-	margin-left: 5px;
-}
-
-.contentsAreaContainer {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-}
-
-#filetypeSelectContainer {
-	display: none;
-	height: 30%;
-	width: 100%;
-	font-size: 13px;
-	z-index: 1000;
-}
-
-#cloudBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#cloudBt:hover {
-	background-color: whitesmoke;
-}
-
-#cloudBtSpan {
-	background: url('../images/filemoa_ico02.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#pdfBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#pdfBt:hover {
-	background-color: whitesmoke;
-}
-
-#pdfBtSpan {
-	background: url('../images/filemoa_ico03.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#wordBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#wordBt:hover {
-	background-color: whitesmoke;
-}
-
-#wordBtSpan {
-	background: url('../images/filemoa_ico04.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#excelBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#excelBt:hover {
-	background-color: whitesmoke;
-}
-
-#excelBtSpan {
-	background: url('../images/filemoa_ico04.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#hangeulBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#hangeulBt:hover {
-	background-color: whitesmoke;
-}
-
-#hangeulBtSpan {
-	background: url('../images/filemoa_ico05.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#pptBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#pptBt:hover {
-	background-color: whitesmoke;
-}
-
-#pptBtSpan {
-	background: url('../images/filemoa_ico06.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#imgBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#imgBt:hover {
-	background-color: whitesmoke;
-}
-
-#imgBtSpan {
-	background: url('../images/filemoa_ico07.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#multimediaBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#multimediaBt:hover {
-	background-color: whitesmoke;
-}
-
-#multimediaBtSpan {
-	background: url('../images/filemoa_ico08.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#htmlBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#htmlBt:hover {
-	background-color: whitesmoke;
-}
-
-#htmlBtSpan {
-	background: url('../images/filemoa_ico09.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#cadBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#cadBt:hover {
-	background-color: whitesmoke;
-}
-
-#cadBtSpan {
-	background: url('../images/filemoa_ico10.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-#archiveBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#archiveBt:hover {
-	background-color: whitesmoke;
-}
-
-#archiveBtSpan {
-	background: url('../images/filemoa_ico11.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-.selectfiletypeDiv {
-	width: 100%;
-	background-color: white;
-}
-
-.filetype {
-	height: 9%;
-	font-weight: 800;
-	width: 100%;
-	border-bottom: 1px solid #f2f2f2;
-	padding-left: 10px;
-	padding-top: 15px;
-}
-
-#formatCheck {
-	height: 100%;
-}
-
-.filetypeBt {
-	width: 90%;
-	height: 90%;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.sorttype {
-	display: flex;
-	height: 100%;
-	height: 6%;
-	align-items: center;
-}
-
-.checkSort {
-	align-items: center;
-	flex-direction: row;
-	margin-left: 20px;
-}
-
-#checkbox {
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
-}
-
-.leftMenuContainer {
-	display: flex;
-	height: 100%;
-	flex-direction: column;
-	border: 0;
-	flex-basis: 20%;
-	border-right: 1px solid #f2f2f2;
-	align-items: center;
-}
-
-.checkImage {
-	width: 13px;
-	height: 10px;
-	background: url('../images/filemoa_chk.png') no-repeat;
-	float: right;
-	margin-top: 6px;
-}
-
-.tableContainer {
-	flex-basis: 80%;
-}
-
-.totalBtDiv {
-	height: 7%;
-	width: 100%;
-	border-bottom: 1px solid #e7e8e9;
-	padding-left: 10px;
-	padding-top: 5px;
-}
-
-.projectLb {
-	height: 6%;
-	width: 100%;
-	padding-left: 10px;
-	padding-top: 5px;
-	border-bottom: 1px solid #e7e8e9;
-	font-weight: 800;
-}
-
-.searchProject {
-	height: 8%;
-	width: 100%;
-}
-
-#searchForm {
-	height: 80%;
-	margin-left: 7px;
-	margin-top: 4px;
-	background-color: #f2f2f2;
-	border: 0;
-}
-
-#projectFolder {
-	padding-inline-start: 0;
-}
-
-.projectFolderDiv {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-}
-
-#totalProject {
-	width: 100%;
-}
-
-.totalProjectDiv {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	height: 30px;
-	align-items: center;
-}
-
-#totalProjectButton {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	border: 0;
-	background-color: white;
-}
-
-#colorIcon1 {
-	width: 15px;
-	height: 15px;
-	margin-right: 6px;
-	background-color: #615cba;
-	margin-left: 7px;
-}
-
-#colorIcon2 {
-	width: 15px;
-	height: 15px;
-	margin-right: 6px;
-	background-color: rgb(195, 245, 13);
-	margin-left: 7px;
-}
 
-#colorIcon3 {
-	width: 15px;
-	height: 15px;
-	margin-right: 6px;
-	margin-left: 7px;
-	background-color: #eeac44;
-}
-
-#oneToOneButton {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	border: 0;
-	background-color: #ffffff;
-}
-
-#useGuideButton {
-	display: flex;
-	align-items: center;
-	width: 60%;
-	background-color: #ffffff;
-	width: 100%;
-	border: 0;
-}
-
-.main-article-container {
-	display: flex;
-	flex-direction: column;
-	width: 80%;
-	height: 100%;
-}
-
-.title-container {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	height: 5%;
-	font-size: 13px;
-	align-items: center;
-	border-bottom: 2px solid #f2f2f2;
-}
-
-.checkbox-all-div {
-	display: flex;
-	justify-content: center;
-	width: 5%;
-}
-
-.checkbox-all {
-	width: 22px;
-	height: 22px;
-}
-
-.file-name-sort {
-	display: flex;
-	width: 40%;
-	height: 100%;
-	justify-content: center;
-}
-
-.file-size-sort {
-	display: flex;
-	width: 15%;
-	height: 100%;
-	justify-content: center;
-}
-
-.file-up-person {
-	display: flex;
-	width: 15%;
-	height: 100%;
-	justify-content: center;
-}
-
-.file-up-date {
-	display: flex;
-	width: 20%;
-	height: 100%;
-	justify-content: center;
-}
-
-.tableRow {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-items: self-end;
-	width: 100%;
-	height: 5%;
-	align-items: center;
-	text-align: center;
-	font-size: 14px;
-	justify-content: flex-end;
-	border-bottom: 1px solid #f2f2f2;
-}
-
-.tableRow:hover {
-	background-color: #e7e8e9;
-}
-
-.tableRow:hover .col6 {
-	opacity: 1;
-}
-
-.col1 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 5%;
-	height: 100%;
-}
-
-.col1-checkbox {
-	width: 50%;
-	height: 70%;
-}
-
-.col2 {
-	width: 40%;
-}
-
-.col3 {
-	width: 15%;
-}
-
-.col4 {
-	width: 15%;
-}
-
-.col5 {
-	justify-content: center;
-	width: 20%;
-}
-
-.col6 {
-	display: flex;
-	background-color: violet;
-	width: 5%;
-	opacity: 0;
-}
-
-.moreBt {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-}
-
-.hiddenBtContainer {
-	display: flex;
-	width: 20%;
-	height: 150px;
-	justify-content: center;
-	z-index: 3;
-	display: block;
-	background-color: yellowgreen;
-}
-
-.moreMenuContainer {
-	display: flex;
-	width: 150px;
-	height: 150px;
-	background-color: #5f5ab9;
-	justify-content: flex-end;
-	display: none;
-	z-index: 4;
-}
-
-.hiddenMenu {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	margin-top: 0;
-	background-color: white;
-	border: 2px solid #e7e8e9;
-	width: 100%;
-	height: 100%;
-}
-
-.moreMenuDownloadBt {
-	display: flex;
-	align-items: center;
-	height: 30%;
-	width: 100%;
-}
-
-.moreMenuDownloadSpan {
-	background: url('../images/download.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-.moreMenuOpenBt {
-	display: flex;
-	align-items: center;
-	height: 30%;
-	width: 100%;
-}
-
-.moreMenuOpenSpan {
-	background: url('../images/ico_more_list03.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
-
-.moreMenuDetailViewBt {
-	display: flex;
-	align-items: center;
-	background-color: white;
-	height: 30%;
-	width: 100%;
-}
-
-.moreMenuDetailViewSpan {
-	background: url('../images/ico_more_list05.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
+body{
+  
+    margin: 0 auto;
+    background-color:#f2f2f2 ;
+    border: 1px solid  #eaeaea;
+    font-size: 16px;
+    overflow-y: hidden;
+  }
+ /* .centerAreaContainer .fileIconArea .btnLeft ::before{
+    content:"123";
+    color: tomato;
+  }*/ 
+  ul, li{
+    list-style: none;
+    font-size: 14px;  
+  }
+
+  a{
+    font-size: 14px;
+    font-weight: 400;
+    color:black;
+  }
+  button{
+    border: 0;
+    background-color: white;
+  }
+  a:hover{
+   
+    text-decoration: none;
+  }
+
+  .mainWrap{
+   display: flex;
+   flex-direction: column;
+   width:100%;
+   height: 100%;
+   flex-wrap: nowrap;
+   background-color: #f2f2f2;
+   
+   }
+
+   .headerContainer{
+    border-bottom: 1px solid #e7e8e9;
+    flex-direction: row;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height:60px;
+    z-index: 1000;
+    
+    align-items: center;
+    background-color: #ffffff;
+   }
+  
+  .headerWrap{
+    display:flex;
+    flex-direction: row;
+    width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  .headerLeft{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+   
+    justify-content: flex-start;
+    width:60%;
+   
+    align-items: center;
+    
+  }
+  .headLogo{
+    margin-right: 10px;
+    width:5%;
+  }
+  .headerRight{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:50%;
+    
+    align-items: center;
+    
+  }
+  #serviceUpgradeBt{
+    width: 130px;
+    height:50%;
+    
+    margin-right:10px;
+    padding: 1px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    border: 0;
+    border-radius: 20px;
+    background: #fff;
+    color: #5f5ab9;
+  }
+  #headerChatBt{
+    border:none;
+    width:30px;
+    height:30px;
+    margin-right: 20px;
+    
+    
+    background: url('../images/top_icon_btn_chat.png') no-repeat;
+    cursor:pointer;
+  }
+  #headerChatBt:hover {
+    background-position: 0 -30px;
+  }
+  #headerIconAlram{
+    border:none;
+    width:30px;
+    height:30px;
+    margin-right: 20px;
+   
+    background: url('../images/top_icon_btn_alram.png') no-repeat;
+    
+    cursor:pointer;
+  }
+  #headerIconAlram:hover {
+    border:none;
+    background-position: 0 -30px;
+  }
+  #headerUserInfoBt{
+    border:none;
+    width:30px;
+    height:30px;
+    
+    margin-right: 20px;
+    
+    background: url('../images/account_default30.png') no-repeat;
+    cursor:pointer;
+  }
+  .centerAreaContainer{
+    width:1024px;
+    height:768px;
+    
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding-top: 30px;
+    background-color:#ffffff;
+  }
+  .fileIconArea{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    background-color: #f2f2f2 ;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+  
+  #btnLeft{
+    display: flex;
+    flex-direction: row;
+    width:30%;
+    height: 100%;
+    align-items: center;
+    
+  }
+  #presentPath{
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    height: 40%;
+    margin-left: 8px;
+  }
+  #changePathArea{
+    color: blue;
+  }
+  .btnRight{
+   display: flex;
+   align-items: center;
+    width:  70%;
+    height: 100%;
+    justify-content: flex-end;
+    font-size: 13px;
+    
+  }
+  .check-message-container{
+    display: flex;
+    width:30%;
+    height: 100%;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: crimson;
+    display:block;
+    background-color: darkblue;
+    
+  }
+  .rightBtCollection{
+    display:flex;
+    flex-direction: row;
+    width: 70%;
+    height: 70%;
+    align-items: center;
+    justify-content: flex-end;
+    
+  }
+ 
+  #moveBt{
+    display: flex;
+    flex-direction: row;
+    justify-items: start;
+    align-items: center;
+    background-color: white;
+    border: 0;
+    height: 100%;
+    margin-right: 5px;
+  }
+
+  /*
+  #moveSpan{
+    
+    background: url('../images/move.png') no-repeat;
+    cursor:pointer;
+    
+    width: 33px;
+    height:33px;
+  }*/
+  #deleteFolderBt{
+    display: flex;
+    flex-direction: row;
+    justify-items: start;
+    align-items: center;
+    background-color: white;
+    border: 0;
+    margin-right: 5px;
+  }
+  /*
+  #deleteFolderSpan{
+    background: url('../images/recycle.png') no-repeat;
+    cursor:pointer;
+    
+    width: 33px;
+    height:33px;
+  }*/
+  
+  #downloadBt{
+    display: flex;
+    flex-direction: row;
+    justify-items: start;
+    align-items: center;
+    background-color: white;
+    border: 0;
+    margin-right: 5px;
+  }
+  #downloadSpan{
+    background: url('../images/download.png') no-repeat;
+    cursor:pointer;
+    margin-top: 10px;
+    width: 33px;
+    height:33px;
+  
+  }
+  #newFolderSpan{
+    background: url('../images/ico_newfile.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+  }
+  #newFolderBt{
+    
+    display: flex;
+    flex-direction: row;
+    justify-items: start;
+    align-items: center;
+    background-color: white;
+    border: 0;
+    margin-right: 5px;
+  }
+  #listSortBt{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    padding-top: 3px;
+    padding-left: -2px;
+    height:80%;
+    border: 0;
+    background-color: #615cba;
+  }
+  #listSortSpan{
+    background: url('../images/ico_list_on.png') no-repeat;
+    width: 22px;
+    height:22px;
+    margin-left: 3px;
+  }
+
+  #badukSortBt{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    height:80%;
+    padding-top: 3px;
+    padding-left: -2px;
+    border: 0;
+   background-color:  #c2bdcc;
+  }
+  #badukSortSpan{
+    background: url('../images/ico_thumb.png') no-repeat;
+    margin-left: 3px;
+    width: 22px;
+    height:22px;
+
+  }
+  #closeBt{
+    background-color: #615cba;
+    color: whitesmoke;
+    border: none;
+    height:80%;
+    margin-left: 5px;
+  }
+
+  
+  .contentsAreaContainer{
+      width: 100%;
+      height:100%;
+      display: flex;
+      flex-direction: row;
+      
+  }
+  #filetypeSelectContainer{
+    display: none;
+    height: 30%;
+    width:  100%;
+    font-size: 13px;
+    z-index: 1000;
+    
+  }
+  #cloudBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #cloudBt:hover{
+    background-color: whitesmoke;
+  }
+  #cloudBtSpan{
+    background: url('../images/filemoa_ico02.png') no-repeat;
+    
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #pdfBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width:100%;
+    background-color: white;
+  }
+  #pdfBt:hover{
+    background-color: whitesmoke;
+  }
+  #pdfBtSpan{
+    background: url('../images/filemoa_ico03.png') no-repeat;
+    
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #wordBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #wordBt:hover{
+    background-color: whitesmoke;
+  }
+  #wordBtSpan{
+    background: url('../images/filemoa_ico04.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #excelBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #excelBt:hover{
+    background-color: whitesmoke;
+  }
+  #excelBtSpan{
+    background: url('../images/filemoa_ico04.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #hangeulBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #hangeulBt:hover{
+    background-color: whitesmoke;
+  }
+  
+  #hangeulBtSpan{
+    background: url('../images/filemoa_ico05.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #pptBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #pptBt:hover{
+    background-color: whitesmoke;
+  }
+  
+  #pptBtSpan{
+    background: url('../images/filemoa_ico06.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #imgBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #imgBt:hover{
+    background-color: whitesmoke;
+  }
+  
+  #imgBtSpan{
+    background: url('../images/filemoa_ico07.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #multimediaBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #multimediaBt:hover{
+    background-color: whitesmoke;
+  }
+  
+  #multimediaBtSpan{
+    background: url('../images/filemoa_ico08.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+
+  #htmlBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #htmlBt:hover{
+    background-color: whitesmoke;
+  }
+  
+  #htmlBtSpan{
+    background: url('../images/filemoa_ico09.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #cadBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #cadBt:hover{
+    background-color: whitesmoke;
+  }
+  
+  #cadBtSpan{
+    background: url('../images/filemoa_ico10.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+  #archiveBt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0;
+    width: 100%;
+    background-color: white;
+  }
+  #archiveBt:hover{
+    background-color: whitesmoke;
+  }
+  
+  #archiveBtSpan{
+    background: url('../images/filemoa_ico11.png') no-repeat;
+    cursor:pointer;
+    width: 33px;
+    height:33px;
+    margin-top: 10px;
+  }
+.selectfiletypeDiv{
+  width: 100%;
+  background-color: white;
+}
+  .filetype{
+    
+    height:9%;
+    font-weight: 800;
+    width: 100%;
+    border-bottom:1px solid #f2f2f2;
+    padding-left: 10px;
+    padding-top: 15px;
+    
+  }
+ 
+  
+  #formatCheck{
+    height: 100%;
+   
+  }
+  .filetypeBt{
+    width: 90%;
+    height:90%;
+    
+    text-align: center;
+    vertical-align: middle;
+   
+  }
+  .sorttype{
+    display: flex;
+    height:100%;
+    
+    height:6%;
+    align-items: center;
+
+  }
+  .checkSort{
+    align-items: center;
+    flex-direction: row;
+    margin-left: 20px;
+
+  }
+  #checkbox{
+    width:20px;
+    height: 20px;
+    vertical-align: middle;
+  }
+  .leftMenuContainer{
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      border: 0;
+      flex-basis: 20%;
+      border-right: 1px solid#f2f2f2;
+      
+      align-items: center;
+  }
+ 
+  .checkImage{
+    width: 13px;
+    height:10px;
+    background: url('../images/filemoa_chk.png') no-repeat;
+    float: right;
+    margin-top: 6px;
+  }
+  .tableContainer{
+     
+      flex-basis: 80%;
+      
+  }
+  .totalBtDiv{
+    height:7%;
+    width: 100%;
+    border-bottom: 1px solid  #e7e8e9;
+    padding-left: 10px;
+    padding-top: 5px;
+   
+  }
+  .projectLb{
+    height:6%;
+    width:100%;
+    padding-left: 10px;
+    padding-top: 5px;
+    border-bottom: 1px solid #e7e8e9;
+    font-weight: 800;
+  }
+  .searchProject{
+    height: 8%;
+    width: 100%;
+  }
+  #searchForm{
+    height:80%;
+    margin-left: 7px;
+    margin-top:4px;
+    background-color: #f2f2f2;
+    border: 0;
+  }
+  #projectFolder{
+    padding-inline-start: 0;
+  }
+  .projectFolderDiv{
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    height:100%;
+  }
+
+  #totalProject{
+    width: 100%;
+    
+    
+  }
+  .totalProjectDiv{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height:30px;
+    
+    align-items: center;
+  }
+  #totalProjectButton{
+    display: flex;
+    align-items: center;
+    width:100%;
+    border: 0;
+    background-color: white;
+  }
+  #colorIcon1{
+    width:15px;
+    height:15px;
+    margin-right: 6px;
+    background-color: #615cba;
+    margin-left: 7px;
+    
+  }
+  #colorIcon2{
+    width:15px;
+    height:15px;
+    margin-right: 6px;
+    background-color: rgb(195, 245, 13);
+    margin-left: 7px;
+  }
+  #colorIcon3{
+    width:15px;
+    height:15px;
+    margin-right: 6px;
+    margin-left: 7px;
+    background-color: #eeac44;
+  }
+  #oneToOneButton{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 0;
+    background-color:#ffffff;
+    
+  }
+  #useGuideButton{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    
+    background-color:#ffffff;
+    width:100%;
+    border: 0;
+  }
+
+  .main-article-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    
+   
+  }
+  .title-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height:5%;
+    font-size: 13px;
+    
+    align-items: center;
+    border-bottom: 2px solid #f2f2f2;
+    
+  }
+  .checkbox-all-div{
+    display: flex;
+    justify-content: center;
+    width: 5%;
+   
+  }
+  .checkbox-all{
+    width: 22px;
+    height:22px;
+  }
+  .file-name-sort{
+    display: flex;
+    width: 40%;
+    height: 100%;
+    justify-content: center;
+    
+  }
+
+  .file-size-sort{
+    display: flex;
+    width: 15%;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .file-up-person{
+    display: flex;
+    width:15%;
+    height: 100%;
+    justify-content: center;
+    
+  }
+
+  .file-up-date{
+    display: flex;
+    width:20%;
+    height: 100%;
+    justify-content: center;
+    
+  }
+  
+  .tableRow{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-items: self-end;
+    width: 100%;
+    height:5%;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    justify-content: flex-end; 
+    border-bottom: 1px solid #f2f2f2;
+    
+  }
+  .tableRow:hover{
+    background-color:#e7e8e9;
+  }
+  .tableRow:hover .col6{
+    opacity: 1;
+  }
+
+  .col1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height:100%;
+  }
+  .col1-checkbox{
+    width:50%;
+    height:70%;
+  }
+  .col2{
+    
+    width:40%;
+    
+  }
+  .col3{
+   
+    width:15%;
+  }
+  .col4{
+   
+    width:15%;
+    
+  }
+  .col5{
+    
+    justify-content: center;
+    width:20%;
+  }
+  .col6{
+    display: flex;
+    
+    background-color: violet;
+    width:5%;
+    opacity: 0;
+    
+  }
+
+  .moreBt{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+  }
+    
+  .hiddenBtContainer{
+    display: flex;
+    width: 20%;
+    height:150px;
+    justify-content: center;
+    z-index: 3;
+    display: block;
+    background-color: yellowgreen;
+    
+  }
+.moreMenuContainer{
+ 
+  display: flex;
+  width: 150px;
+  height: 150px;
+  background-color: #5f5ab9;
+  justify-content: flex-end;
+  display: none;
+  z-index:4;
+
+}
+ .hiddenMenu{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin-top: 0;
+   background-color: white;
+   border: 2px solid #e7e8e9;
+   width: 100%;
+   height: 100%;
+   
+   
+ }
+ .moreMenuDownloadBt{
+  display: flex;
+  align-items: center;
+  
+  height:30%;
+  width: 100%;
+ }
+ .moreMenuDownloadSpan{
+  background: url('../images/download.png') no-repeat;
+  cursor:pointer;
+  width: 33px;
+  height:33px;
+  margin-top: 10px;
+  
+} 
+
+ .moreMenuOpenBt{
+  display: flex;
+  align-items: center;
+  
+  height:30%;
+  width: 100%;
+ }
+ .moreMenuOpenSpan{
+  background: url('../images/ico_more_list03.png') no-repeat;
+  cursor:pointer;
+  width: 33px;
+  height:33px;
+  margin-top: 10px;
+  
+ } 
+
+ .moreMenuDetailViewBt{
+  display: flex;
+  
+  align-items: center;
+  background-color: white;
+  height:30%;
+  width: 100%;
+ }
+ .moreMenuDetailViewSpan{
+  background: url('../images/ico_more_list05.png') no-repeat;
+  cursor:pointer;
+  width: 33px;
+  height:33px;
+  margin-top: 10px;
+  
+ }
+
+
+
+
+
+ 
