@@ -200,7 +200,7 @@
 		</div>
 
 		
-		<div id="waiting" style="display: block;">
+		<div id="waiting" style="display: none;">
 			<div class="user_data_list" style="padding-top: 30px;">
 				<table>
 					<colgroup>
