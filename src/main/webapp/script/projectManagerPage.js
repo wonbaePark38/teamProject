@@ -1,10 +1,11 @@
 $(document).ready(function(){
+	
     $('#payment-info').click(function () {
         console.log('접속');
        
         $.ajax({
            
-            url :'paymentInfo.html',
+            url :'paymentInfo.jsp',
             type :'GET',
             cache:false,
             dataType:"html",
@@ -18,9 +19,7 @@ $(document).ready(function(){
               console.log(data);
             },
             error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
+                
                 alert('통신실패');
             }
          

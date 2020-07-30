@@ -42,7 +42,7 @@
                         
                         <strong class="title-text">프로젝트</strong>
                         <div class="project-menu">
-                            <a herf="#" class="list-group-item" id="project-manage">프로젝트 관리</a>
+                            <a href="#" class="list-group-item" id="project-manage">프로젝트 관리</a>
                         
                             <a href="#" class="list-group-item" id="company-project-manage">회사 프로젝트 관리</a>
                             <a href="#" class="list-group-item" id="open-project-manage">공개 프로젝트 관리</a>
@@ -52,13 +52,13 @@
                         
                         <strong class="title-text">통계/리포트</strong>
                         <div class="report-menu">
-                            <a herf="#" class="list-group-item" id="connect-statistics">접속 통계</a>
+                            <a href="#" class="list-group-item" id="connect-statistics">접속 통계</a>
                             <a href="#" class="list-group-item" id="use-statistics">사용 통계</a>
                         </div>
                         
                         <strong class="title-text">보안설정</strong>
                         <div class="security-menu">
-                            <a herf="#" class="list-group-item" id="download-contorl">파일 다운로드 제한</a>
+                            <a href="#" class="list-group-item" id="download-contorl">파일 다운로드 제한</a>
                         </div>
                         <strong class="title-text">로그</strong>
                         <div class="log-menu">
@@ -67,7 +67,7 @@
                         
                         <strong class="title-text">결제</strong>
                         <div class="payment-menu">
-                            <a herf="#" class="list-group-item" id="payment-info">결제 정보</a>
+                            <a href="#" class="list-group-item" id="payment-info">결제 정보</a>
                           
                         </div>
                         
