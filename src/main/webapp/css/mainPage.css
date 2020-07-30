@@ -21,9 +21,7 @@ a:hover{
   background-color:#e7e8e9;
   text-decoration: none;
 }
-li:hover{
-  background-color:#e7e8e9;
-}
+
 .mainWrap{
  display: flex;
  flex-direction: column;
@@ -243,6 +241,10 @@ button:focus{
   display: none;
   padding: 0;
 
+}
+
+#helpMenu_on li:hover{
+  background-color:#e7e8e9;  
 }
 .clientCenterContainer{
   display: flex;

@@ -128,32 +128,6 @@
 
 function test(){
 alert('클릭');
-/*
-var temp = document.getElementById('tempnode');
-var add='<a href=javascript:alert("클릭!!")>';
-add+='체크';
-add+='</a>';
-temp.innerHTML=add;
-*/
-
-
-/*var sourceNode = document.getElementById('totalProjectButton').value;
-var present = document.getElementById('btnLeft');
-vat addNode = '<input type="button" onclick= '
-*/
-
-
-/*
-var present = document.getElementById('totalProjectButton').innerText;
-
-var temp = document.getElementById('tempnode');
-var newtag = document.createElement('a');
-temp.appendChild(newtag);
-var add='<a href="#>' +present+'</a>';
-
-
-
-*/
 }
 
 function hiddenMenuFold(thisevent,e){
