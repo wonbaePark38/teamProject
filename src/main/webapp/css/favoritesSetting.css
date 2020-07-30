@@ -1,96 +1,99 @@
-body{
-    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
- 
-}
-a{
-    cursor: pointer;
+body {
+	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
+		sans-serif;
 }
 
-.wrap{
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 800px;
-    height: 700px;
-    
-}
-header{
-    width: 100%;
-    height:10%;
-    font-size: 30px;
-    border-bottom: 3px solid #6862c3;
-}
-.text-area{
-    height: 3%;
-    margin-left: 15px;    
-    padding-bottom: 5px;
-   
-}
-.setting-div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 15px;
-    height:20%;
-    border-bottom: 2px solid #e7e8e9;
-    
-}
-.use-div{
-    padding: 10px;
-}
-.not-use-div{
-    padding:10px;
-}
-.reset-div{
-    margin-left: 15px;
-    
-}
-#reset-bt{
-    cursor: pointer;
-    border: 0;
-    background-color: white;
-    color: blue;
-    font-size: 15px;    
+a {
+	cursor: pointer;
 }
 
-#modal{
-    width:500px;
-    height:300px;
-    background-color: blueviolet;
-    
-    display: none; 
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto;
-     background-color: rgb(0,0,0);
-     background-color: rgba(0,0,0,0.4);
-}
-#confirm{
-  width: 70px;
-  height: 25px;
-  background-color: #6862c3;
-  color: white;
-  border: 0;
-  
+.wrap {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	width: 800px;
+	height: 700px;
 }
 
-#comfirm-cancle{
-    width: 70px;
+header {
+	width: 100%;
+	height: 10%;
+	font-size: 30px;
+	border-bottom: 3px solid #6862c3;
 }
 
-.modal-content{
-    text-align: center;  
-    background-color: #fefefe;
-    margin: 15% auto; 
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%; 
-    
+.text-area {
+	height: 3%;
+	margin-left: 15px;
+	padding-bottom: 5px;
 }
-.tutorial-div{
-    margin: 40px 0 0 15px;
+
+.setting-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 15px;
+	height: 20%;
+	border-bottom: 2px solid #e7e8e9;
+}
+
+.use-div {
+	padding: 10px;
+}
+
+.not-use-div {
+	padding: 10px;
+}
+
+.reset-div {
+	margin-left: 15px;
+}
+
+#reset-bt {
+	cursor: pointer;
+	border: 0;
+	background-color: white;
+	color: blue;
+	font-size: 15px;
+}
+
+#modal {
+	width: 500px;
+	height: 300px;
+	background-color: blueviolet;
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+#confirm {
+	width: 70px;
+	height: 25px;
+	background-color: #6862c3;
+	color: white;
+	border: 0;
+}
+
+#comfirm-cancle {
+	width: 70px;
+}
+
+.modal-content {
+	text-align: center;
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%;
+}
+
+.tutorial-div {
+	margin: 40px 0 0 15px;
 }

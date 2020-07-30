@@ -1,310 +1,287 @@
-body{
-    
-    margin: 0 auto;
-    background-color:#f2f2f2 ;
-    border: 1px solid  #eaeaea;
-    overflow-x: hidden;
-    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
-    
-  }
-  a{
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 800;
-    text-decoration: none;
-  }
-  
-  a:hover{
-    background-color:#e7e8e9;
-    text-decoration: none;
-  }
-  li:hover{
-    background-color:#e7e8e9;
-  }
-.mainWrap{
-    display: flex;
-    flex-direction: column;
-    width:100%;
-    height: 100%;
-    flex-wrap: nowrap;
-    background-color:#f2f2f2 ;
-    
-    }
+body {
+	margin: 0 auto;
+	background-color: #f2f2f2;
+	border: 1px solid #eaeaea;
+	overflow-x: hidden;
+	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
+		sans-serif;
+}
 
-    .headerContainer{
-        border-bottom: 2px solid #e7e8e9;
-        flex-direction: row;
-        justify-content: center;
-        position: fixed;
-        width: 100%;
-        height:60px;
-        z-index: 1000;
-        
-        align-items: center;
-        
-        background-color:#ffffff;
-      
-        
-      }
-      
-      .headerWrap{
-        display:flex;
-        flex-direction: row;
-        width: 1024px;
-        margin: 0 auto;
-        height:100%;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: nowrap;
-        
-      }
-      .headerLeft{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        
-       
-        justify-content: flex-start;
-        width:60%;
-        height:80%;
-        align-items: center;
-        
-      }
-      .headLogo{
-        margin-right: 10px;
-        width:5%;
-      }
-      
-      
-      
-      
-      .headListContainer{
-        display: flex;
-        flex-direction: column;
-      }  
-      
-   
-      .headerRight{
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        justify-content: flex-end;
-        width:50%;
-        height:80%;
-      }
-      
+a {
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 800;
+	text-decoration: none;
+}
 
-      #header_chat_div{
-        display: none;
-        width: 300px;
-        height: 450px;
-        padding: 5px 5px 5px 5px;
-        border: 1px solid black;
-        border-radius: 5px;
-        border-style: 1px solid black;
-        background-color: white;
-        z-index: 99;
-        position: absolute;
-        top: 62px;
-        right: 40px
-      }
-  
-      #header_alarm_div{
-        display: none; 
-        width: 300px; 
-        height: 450px; 
-        border-radius: 5px; 
-        border: 1px solid black; 
-        border-style: 1px solid black; 
-        background-color: white; 
-        z-index: 99; 
-        position: absolute; 
-        top: 62px; 
-        right: 25px;
-      }
-  
-      #header_option_div{
-        display: none; 
-        width: 300px; 
-        height: 230px; 
-        border: 1px solid black; 
-        border-radius: 5px; 
-        background-color: white; 
-        z-index: 99; 
-        position: absolute; 
-        top: 62px; 
-        right: 10px;
-      }
-  
+a:hover {
+	background-color: #e7e8e9;
+	text-decoration: none;
+}
 
+li:hover {
+	background-color: #e7e8e9;
+}
 
+.mainWrap {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	flex-wrap: nowrap;
+	background-color: #f2f2f2;
+}
 
-      #serviceUpgradeBt{
-        width: 130px;
-        height:50%;
-        margin-top: 12pt;
-        margin-right:10px;
-        padding: 1px;
-        text-align: center;
-        font-size: 14px;
-        font-weight: 600;
-        border: 0;
-        border-radius: 20px;
-        background: #fff;
-        color: #5f5ab9;
-      }
-      #headerChatBt{
-        border:none;
-        width:30px;
-        height:30px;
-        margin-right: 20px;
-        margin-top: 13px;
-        
-        background: url('../images/top_icon_btn_chat.png') no-repeat;
-        cursor:pointer;
-      }
-      #headerChatBt:hover {
-        background-position: 0 -30px;
-      }
-      #headerIconAlram{
-        border:none;
-        width:30px;
-        height:30px;
-        margin-right: 20px;
-        margin-top: 13px;
-        background: url('../images/top_icon_btn_alram.png') no-repeat;
-        
-        cursor:pointer;
-      }
-      #headerIconAlram:hover {
-        border:none;
-        background-position: 0 -30px;
-      }
-      
-      #headerUserInfoBt{
-        border:none;
-        width:30px;
-        height:30px;
-        
-        margin-right: 20px;
-        margin-top: 13px;
-        background: url('../images/account_default30.png') no-repeat;
-        cursor:pointer;
-      }
+.headerContainer {
+	border-bottom: 2px solid #e7e8e9;
+	flex-direction: row;
+	justify-content: center;
+	position: fixed;
+	width: 100%;
+	height: 60px;
+	z-index: 1000;
+	align-items: center;
+	background-color: #ffffff;
+}
 
-      .centerArea{
-       
-        
-        display: flex;
-        width:1024px;
-        height: 768px;
-        flex-direction: row;
-        position: relative;
-        padding-top: 60pt;
-        
-        margin: 0 auto;
-        background-color:#f2f2f2;
-        
-      }
-      .sidebarContainer{
-  
-        display:flex;
-        position:fixed;
-        flex-direction: column;
-        height:100%;
-        width:200px;
-        
-        
-        
-        background-color:#f2f2f2 ;
-      }
-      .sidebar {
-        overflow-y: hidden;
-        overflow-x: hidden; 
-        width: 100%;
-        padding-bottom: 80px;
-    }
-      .go-back-container{
-  
-        cursor: pointer;
-        display: block;
-        font-size: 25px;
-        line-height: 50px;
-        color:white;
-        background-color: #6862c3;
-        font-weight: 800;
-        text-align: center;
-        border: 1px solid #e4e4e6c7;
-        border-radius: 10px;
-        
-        box-sizing: border-box;
-        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
-        margin-bottom: 5%;
-      }
-      #go-back-bt{
-        font-size: 15px;
-        
-      }
+.headerWrap {
+	display: flex;
+	flex-direction: row;
+	width: 1024px;
+	margin: 0 auto;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+}
 
-      .list-group-item {
-        position: relative;
-        display: block;
-        padding: 0.2rem 3rem;
-        font-size: 14px;
-      
-        color:#333;
-        font-weight: 500;
-        width: 100%;
+.headerLeft {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	width: 60%;
+	height: 80%;
+	align-items: center;
+}
 
-      } 
-      .clientCenterContainer{
-        display: flex;
-        flex-direction: column;
-        width: 150px;
-        padding-bottom: 50px;
-        
-      }
-      #helpMenu_on{
-        display: none;
-        padding: 0;
-        background-color: #f2f2f2;
-        
-      }
-      #helpMenuImg{
-        display: block;
-        margin-left: -10px;
-        margin-top:-6px;
-        width: 50%;
-        height: 78px;
-        background: url(../images/ico_help.png) no-repeat;
-    }
-    #helpMenuBt{
-     
-      width:100px;
-      height:60px;
-      margin-top: 10pt;
-      padding: 1px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 600;
-      border: 0;
-      border-radius: 20px;
-      background: #fff;
-      color: #5f5ab9;
-      
-    }
-    .helpButtonContainer{
-      display: flex;
-      flex-direction: row;
-      margin-top: auto;
-      padding-bottom: 50px;
-    
-    }
+.headLogo {
+	margin-right: 10px;
+	width: 5%;
+}
 
-    #ajaxpagecontainer{
-      margin-left: 220px;
-      width: 824px;
-      height: 100%;
-    }
+.headListContainer {
+	display: flex;
+	flex-direction: column;
+}
 
-     
+.headerRight {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: flex-end;
+	width: 50%;
+	height: 80%;
+}
+
+#header_chat_div {
+	display: none;
+	width: 300px;
+	height: 450px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid black;
+	border-radius: 5px;
+	border-style: 1px solid black;
+	background-color: white;
+	z-index: 99;
+	position: absolute;
+	top: 62px;
+	right: 40px
+}
+
+#header_alarm_div {
+	display: none;
+	width: 300px;
+	height: 450px;
+	border-radius: 5px;
+	border: 1px solid black;
+	border-style: 1px solid black;
+	background-color: white;
+	z-index: 99;
+	position: absolute;
+	top: 62px;
+	right: 25px;
+}
+
+#header_option_div {
+	display: none;
+	width: 300px;
+	height: 230px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: white;
+	z-index: 99;
+	position: absolute;
+	top: 62px;
+	right: 10px;
+}
+
+#serviceUpgradeBt {
+	width: 130px;
+	height: 50%;
+	margin-top: 12pt;
+	margin-right: 10px;
+	padding: 1px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	border: 0;
+	border-radius: 20px;
+	background: #fff;
+	color: #5f5ab9;
+}
+
+#headerChatBt {
+	border: none;
+	width: 30px;
+	height: 30px;
+	margin-right: 20px;
+	margin-top: 13px;
+	background: url('../images/top_icon_btn_chat.png') no-repeat;
+	cursor: pointer;
+}
+
+#headerChatBt:hover {
+	background-position: 0 -30px;
+}
+
+#headerIconAlram {
+	border: none;
+	width: 30px;
+	height: 30px;
+	margin-right: 20px;
+	margin-top: 13px;
+	background: url('../images/top_icon_btn_alram.png') no-repeat;
+	cursor: pointer;
+}
+
+#headerIconAlram:hover {
+	border: none;
+	background-position: 0 -30px;
+}
+
+#headerUserInfoBt {
+	border: none;
+	width: 30px;
+	height: 30px;
+	margin-right: 20px;
+	margin-top: 13px;
+	background: url('../images/account_default30.png') no-repeat;
+	cursor: pointer;
+}
+
+.centerArea {
+	display: flex;
+	width: 1024px;
+	height: 768px;
+	flex-direction: row;
+	position: relative;
+	padding-top: 60pt;
+	margin: 0 auto;
+	background-color: #f2f2f2;
+}
+
+.sidebarContainer {
+	display: flex;
+	position: fixed;
+	flex-direction: column;
+	height: 100%;
+	width: 200px;
+	background-color: #f2f2f2;
+}
+
+.sidebar {
+	overflow-y: hidden;
+	overflow-x: hidden;
+	width: 100%;
+	padding-bottom: 80px;
+}
+
+.go-back-container {
+	cursor: pointer;
+	display: block;
+	font-size: 25px;
+	line-height: 50px;
+	color: white;
+	background-color: #6862c3;
+	font-weight: 800;
+	text-align: center;
+	border: 1px solid #e4e4e6c7;
+	border-radius: 10px;
+	box-sizing: border-box;
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+	margin-bottom: 5%;
+}
+
+#go-back-bt {
+	font-size: 15px;
+}
+
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: 0.2rem 3rem;
+	font-size: 14px;
+	color: #333;
+	font-weight: 500;
+	width: 100%;
+}
+
+.clientCenterContainer {
+	display: flex;
+	flex-direction: column;
+	width: 150px;
+	padding-bottom: 50px;
+}
+
+#helpMenu_on {
+	display: none;
+	padding: 0;
+	background-color: #f2f2f2;
+}
+
+#helpMenuImg {
+	display: block;
+	margin-left: -10px;
+	margin-top: -6px;
+	width: 50%;
+	height: 78px;
+	background: url(../images/ico_help.png) no-repeat;
+}
+
+#helpMenuBt {
+	width: 100px;
+	height: 60px;
+	margin-top: 10pt;
+	padding: 1px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	border: 0;
+	border-radius: 20px;
+	background: #fff;
+	color: #5f5ab9;
+}
+
+.helpButtonContainer {
+	display: flex;
+	flex-direction: row;
+	margin-top: auto;
+	padding-bottom: 50px;
+}
+
+#ajaxpagecontainer {
+	margin-left: 220px;
+	width: 824px;
+	height: 100%;
+}

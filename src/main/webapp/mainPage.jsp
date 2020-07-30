@@ -88,7 +88,7 @@
 
 					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
 					<a onclick="acyncMovePage('task.jsp')" class="list-group-item">전체 업무</a>
-					<a onclick="acyncMovePage('calendar.jsp')" class="list-group-item">전체 일정</a>
+					<a href="calendar.jsp" class="list-group-item">전체 일정</a>
 					<a href="totalFile.html" class="list-group-item">전체 파일</a>
 					<a href="#" class="list-group-item">담아둔 글</a>
 					<a href="#" class="list-group-item">나를 지정</a>

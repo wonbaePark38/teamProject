@@ -81,25 +81,25 @@
 				<!--사이드바-->
 				<div class="sidebar">
 					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">전체</a>
-					<a href="#" class="list-group-item">미보관</a>
-					<a href="#" class="list-group-item">읽지않음</a>
-					<a href="#" class="list-group-item">즐겨찾기</a>
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">미보관</a>
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">읽지않음</a>
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">즐겨찾기</a>
 
 					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
 					<a onclick="acyncMovePage('task.jsp')" class="list-group-item">전체 업무</a>
 					<a onclick="acyncMovePage('calendar.jsp')" class="list-group-item">전체 일정</a>
 					<a href="totalFile.html" class="list-group-item">전체 파일</a>
-					<a href="#" class="list-group-item">담아둔 글</a>
-					<a href="#" class="list-group-item">나를 지정</a>
-					<a href="#" class="list-group-item">내 게시물</a>
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">담아둔 글</a>
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">나를 지정</a>
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">내 게시물</a>
 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
 
 					</div>
 					<div class="list-group">
-						<a href="#" class="list-group-item">마케팅</a> <a href="#" class="list-group-item">디자인</a> <a
-							href="#" class="list-group-item">엔지니어링</a> <a href="#" class="list-group-item">숨김</a>
+						<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">마케팅</a> <a href="#" class="list-group-item">디자인</a>
+						 <a onclick="acyncMovePage1('content.jsp')" class="list-group-item">엔지니어링</a> <a href="#" class="list-group-item">숨김</a>
 
 					</div>
 
@@ -155,7 +155,7 @@
 						<div style="margin-left: 10px;">
 							<div style="margin-top: 10px;">
 								<img src="images/pf_ico1_off.png">
-								<a href="privateConfig.html">환경설정</a>
+								<a href="privateConfig.jsp">환경설정</a>
 							</div>
 							<div style="margin-top: 10px;">
 								<img src="images/pf_ico5_off.png">
@@ -976,11 +976,11 @@
 	 
 					   <div class="set_wrap col-12">
 						  <ul style="padding-inline-start: 0px;">
-							 <li><a href="#" id="file-box" class="ico1"
+							 <li><a href="totalFile.html" id="file-box" class="ico1"
 								style="padding-top: 30px; height: 50px;">파일함</a></li>
-							 <li><a href="#" id="task-list" class="ico5"
+							 <li><a onclick="acyncMovePage('task.jsp')" id="task-list" class="ico5"
 								style="padding-top: 30px; height: 50px;">업무</a></li>
-							 <li><a href="#" id="schedule-calendar" class="ico4"
+							 <li><a onclick="acyncMovePage('calendar.jsp')" id="schedule-calendar" class="ico4"
 								style="padding-top: 30px; height: 50px;">일정</a></li>
 							 <li><a href="#" id="todo-list" class="ico3"
 								style="padding-top: 30px; height: 50px;">할일</a></li>
@@ -989,7 +989,7 @@
 	 
 					   <div>
 						  <div class="r_invite_box">
-							 <a id="project-invite-btn" class="invite">초대하기</a>
+							 <a id="project-invite-btn" class="invite" href="invitedetail.jsp">초대하기</a>
 						  </div>
 						  <!-- 참여자목록 -->
 	 
