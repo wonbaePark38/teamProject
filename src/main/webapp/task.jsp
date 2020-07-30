@@ -18,14 +18,14 @@
     }
     function fold2(){
         document.getElementById('more2').style.display=(document.getElementById('more2').style.display=='block') ? 'none' : 'block';
-      }
+    }
     function fold3(){
         document.getElementById('more3').style.display=(document.getElementById('more3').style.display=='block') ? 'none' : 'block';
-      }
+    }
     function fold4(){
         document.getElementById('more4').style.display=(document.getElementById('more4').style.display=='block') ? 'none' : 'block';
-      }
-  </script>
+    }
+</script>
 </head>
 <body>
 
