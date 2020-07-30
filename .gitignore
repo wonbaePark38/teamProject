@@ -3,6 +3,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,node,java,linux,maven,eclipse,java-web,vuejs
 
 ### Eclipse ###
+.DS_Store
+.classpath
+.project
 .metadata
 bin/
 tmp/
