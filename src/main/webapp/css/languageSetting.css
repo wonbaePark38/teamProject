@@ -1,0 +1,64 @@
+body{
+    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
+ 
+}
+a{
+    cursor: pointer;
+}
+
+.wrap{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 800px;
+    height: 700px;
+    
+}
+header{
+
+    width: 100%;
+    height:10%;
+    font-size: 30px;
+    border-bottom: 3px solid #6862c3;
+}
+
+.language-setting-div{
+    
+    
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 8%;
+    margin-left: 15px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+#language-select{
+    margin-left: 57px;
+    width: 400px;
+    height: 40px;
+}
+.small-text{
+    margin: 15px 0 25px 15px;
+    font-size: 13px;
+}
+
+.timezone-setting-div{
+    
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 8%;
+    align-items: center;
+    margin: 15px 0 0 15px;
+    border-top: 1px solid #eaeaea;
+    padding-top: 20px;
+}
+
+#timezone-select{
+    margin-left: 40px;
+    width: 400px;
+    height: 40px;
+}
+
