@@ -1,6 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 
 	<meta charset="utf-8">
@@ -1121,6 +1122,5 @@
 <script type="text/javascript" src="script/articleScript.js"></script>
 <script type="text/javascript" src="./script/script.js"></script>
 <script type="text/javascript" src="./script/task.js"></script>
-
 
 </html>

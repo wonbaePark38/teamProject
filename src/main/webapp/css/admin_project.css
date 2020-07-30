@@ -3,10 +3,19 @@
 body {
 	font-size: 14px;
 }
-
+header{
+        display: flex;
+        align-items: center;
+        height: 60px;
+        font-size: 20px;
+        
+        box-sizing: border-box;
+        border-bottom: 1px solid grey;
+        
+}
 .pj_wrap {
     position: relative;
-    padding: 21px 30px 25px 30px;
+    padding: 0 20px 0 0;
     min-width: 960px;
 }
 

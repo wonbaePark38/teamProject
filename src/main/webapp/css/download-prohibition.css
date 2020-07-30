@@ -7,13 +7,6 @@ body{
     font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
     height: 768px;
   }
-  a{
-    cursor: pointer;
-    font-size: 14px;
-    margin: 3px 0 3px 0;
-    color: darkviolet;
-    text-decoration: underline;
-  }
 
   .mainWrap{
     display: flex;

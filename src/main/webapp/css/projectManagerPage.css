@@ -1,153 +1,139 @@
-body{
-    margin: 0 auto;
-    background-color:#f2f2f2 ;
-    border: 1px solid  #eaeaea;
-    overflow-x: hidden;
-    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
-    height: 768px;
-  }
-  a{
-    cursor: pointer;
-    font-size: 15px;
-    margin: 3px 0 3px 0;
-    color: #bebec3;
-    text-decoration: none;
-  }
-  button{
-      cursor: pointer;
-  }
-  a:hover{
-    text-decoration: underline;
-    
-  }
-  
-  li:hover{
-    background-color:#e7e8e9;
-  }
-.wrap{
-    display: flex;
-    flex-direction: row;
-   
-    flex-wrap: nowrap;
-    background-color:#f2f2f2 ;
-    
-    margin: 0 auto;
-    }
-    header{
-        display: flex;
-        align-items: center;
-        height: 60px;
-        font-size: 20px;
-        
-        box-sizing: border-box;
-        margin-bottom: 5%;
-        padding-left: 30px;
-        border-bottom: 1px solid grey;
-        
-    }
+body {
+	margin: 0 auto;
+	background-color: #f2f2f2;
+	border: 1px solid #eaeaea;
+	overflow-x: hidden;
+	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
+		sans-serif;
+	height: 768px;
+}
 
-    .sidebarContainer{
-        
-        display:flex;
-       
-        flex-direction: column;
-        height:100%;
-        width:250px;
-        background-color: #4f545d;
-    }
-      .sidebar {
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        width: 100%;
-        
-      }
-    .title-text{
-        margin-left: 20px;
-        color: white;
-    }
-      .go-back-container{
-        height: 60px;
-        cursor: pointer;
-        display: block;
-        font-size: 25px;
-        line-height: 50px;
-        color:white;
-        background-color: #3d4044;
-        font-weight: 800;
-        text-align: center;
-        border: 1px solid #e4e4e6c7;
-        box-sizing: border-box;
-        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
-        margin-bottom: 5%;
-      }
-      #go-back-bt{
-        font-size: 15px;
-    }
+a {
+	cursor: pointer;
+	font-size: 15px;
+	margin: 3px 0 3px 0;
+	color: #bebec3;
+	text-decoration: none;
+}
 
-      .company-menu{
-          display: flex;
-          flex-direction: column;
-         
-          margin:10px 0 20px 40px;
-      }
+button {
+	cursor: pointer;
+}
 
-      .project-menu{
-        display: flex;
-        flex-direction: column;
-        margin:10px 0 20px 40px;
-      }
+a:hover {
+	text-decoration: underline;
+}
 
-      .report-menu{
-          display: flex;
-          flex-direction: column;
-          margin:10px 0 20px 40px;
-      }
+li:hover {
+	background-color: #e7e8e9;
+}
 
-      .security-menu{
-        display: flex;
-        flex-direction: column;
-        margin:10px 0 20px 40px;
-      }
+.wrap {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	background-color: #f2f2f2;
+	margin: 0 auto;
+}
 
-      .log-menu{
-        display: flex;
-        flex-direction: column;
-        margin:10px 0 20px 40px;
-    }
+.sidebarContainer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 250px;
+	background-color: #4f545d;
+}
 
-    .payment-menu{
-        display: flex;
-        flex-direction: column;
-        margin:10px 0 20px 40px;
-    }
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	width: 100%;
+}
 
-   #helpMenuBt{
-        
-      width:200px;
-      height:40px;
-      margin-top: 10pt;
-      padding: 1px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 600;
-      border: 0;
-      margin-left: 20px;
-      background: #fff;
-      
-      
-    }
-    .manager-helper-container{
-      display: flex;
-      flex-direction: row;
-      margin-top: auto;
-      padding-bottom: 50px;
-    
-    }
+.title-text {
+	margin-left: 20px;
+	color: white;
+}
 
-    #ajaxpagecontainer{
-      width: 75%;
-      height: 100%;
-      background-color: crimson;
-    }
+.go-back-container {
+	height: 60px;
+	cursor: pointer;
+	display: block;
+	font-size: 25px;
+	line-height: 50px;
+	color: white;
+	background-color: #3d4044;
+	font-weight: 800;
+	text-align: center;
+	border: 1px solid #e4e4e6c7;
+	box-sizing: border-box;
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+	margin-bottom: 5%;
+}
 
+#go-back-bt {
+	font-size: 15px;
+}
+
+.company-menu {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0 20px 40px;
+}
+
+.project-menu {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0 20px 40px;
+}
+
+.report-menu {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0 20px 40px;
+}
+
+.security-menu {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0 20px 40px;
+}
+
+.log-menu {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0 20px 40px;
+}
+
+.payment-menu {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0 20px 40px;
+}
+
+#helpMenuBt {
+	width: 200px;
+	height: 40px;
+	margin-top: 10pt;
+	padding: 1px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	border: 0;
+	margin-left: 20px;
+	background: #fff;
+}
+
+.manager-helper-container {
+	display: flex;
+	flex-direction: row;
+	margin-top: auto;
+	padding-bottom: 50px;
+}
+
+#ajaxpagecontainer {
+	width: 75%;
+	height: 100%;
+	padding-left: 20px;
+}
