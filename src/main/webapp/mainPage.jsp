@@ -17,7 +17,6 @@
 <link href="css/mainPage.css" rel="stylesheet">
 <link href="css/task.css" rel="stylesheet">
 <link href="css/messanger_css.css" rel="stylesheet">
-<script src="script/jquery-3.5.1-min.js"></script>
 <script src="js/page_ajax.js"></script>
 <link href="css/contentPage.css" rel="stylesheet">
 
@@ -325,7 +324,7 @@
 							<!-- 내프로필 -->
 							<div>
 								<div>
-									<span style="font-size: 12px;"> <stong>내 프로필</stong>
+									<span style="font-size: 12px;"> <strong>내 프로필</strong>
 									</span>
 								</div>
 								<div style="display: inline-block;">
@@ -343,7 +342,7 @@
 							<!-- 전체 연락처 -->
 							<div style="width: 100%;">
 								<div>
-									<span style="font-size: 12px;"> <stong>전체 연락처</stong>
+									<span style="font-size: 12px;"> <strong>전체 연락처</strong>
 									</span>
 								</div>
 								<!-- forEach -->
@@ -455,8 +454,8 @@
 											<!-- 글 쓰기 -->
 											<form>
 												<div id="writeForm_div">
-													<div name="writeForm" class="div_text_write"
-														contenteditable="true" placeholder="내용입력"></div>
+													<div class="div_text_write"
+														contenteditable="true"></div>
 
 													<!-- 이미지 업로드 -->
 													<div>
@@ -497,8 +496,7 @@
 													<hr>
 													<!-- 내용입력 -->
 													<div class="writeForm2_content">
-														<div name="writeForm2_contet" class="div_text_write"
-															contenteditable="true" placeholder="내용을 입력해 주세요"></div>
+														<div class="div_text_write" contenteditable="true"></div>
 													</div>
 													<!-- //내용입력 -->
 
@@ -560,23 +558,23 @@
 														<!-- 상태 선택 테이블 -->
 														<div id="status_select_div">
 															<div style="display: inline-block; width: 16%;">
-																<span id="request" onclick="request()" value="request"
+																<span id="request" onclick="request()"
 																	style="background-color: #4aaefb;">요청</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
-																<span id="doing" onclick="doing()" value="doing">진행</span>
+																<span id="doing" onclick="doing()">진행</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="feedback" onclick="feedback()"
-																	value="feedback">피드백</span>
+																	>피드백</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="complete" onclick="complete()"
-																	value="complete">완료</span>
+																	>완료</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="postpone" onclick="postpone()"
-																	value="postpone">보류</span>
+																	>보류</span>
 															</div>
 														</div>
 														<!-- //상태 선택 테이블 -->
@@ -695,7 +693,7 @@
 													<!-- 내용 -->
 													<div class="work_form_content">
 														<div class="div_text_write" contenteditable="true"
-															style="width: 100%;" placeholder="내용을 입력해 주세요"></div>
+															style="width: 100%;"></div>
 													</div>
 													<!-- //내용 -->
 
@@ -737,8 +735,10 @@
 																placeholder="일정 제목을 입력해주세요">
 														</div>
 														<!-- //일정 제목 -->
-
-														<hr>
+														<div>
+															<hr>
+														</div>
+														
 
 														<!-- 일정 내용 -->
 														<div class="schedule_content">
@@ -773,8 +773,9 @@
 																		</label>
 																	</div> <!-- //날짜 선택 --></li>
 																<!-- //데이트 피커 -->
-
+																
 																<hr>
+																
 
 																<!-- 장소검색 -->
 																<li><span id="sche_loc_img"
@@ -782,16 +783,18 @@
 																	<div class="schedule_place" id="sche_place"
 																		style="display: inline-block;">
 																		<input id="address" type="text" placeholder="주소입력" />
-																	</div></li>
+																	</div>
 																<!-- //장소 검색 -->
 
 																<!-- google Map -->
-																<div id="googleMap_div">
-																	<div id="googleMap" style="width: 100%; height: 200px;"></div>
-																</div>
+																	<div id="googleMap_div">
+																		<div id="googleMap" style="width: 100%; height: 200px;"></div>
+																	</div>
 																<!-- //google Map -->
-
+																</li>
+																
 																<hr>
+																
 																<!-- 몇분전에 알람줄지 -->
 																<li>
 																	<!-- 알람 -->
@@ -804,6 +807,7 @@
 																			<option>2시간전</option>
 																			<option>12시간전</option>
 																		</select>
+																	</div>
 																</li>
 																<!-- //몇분전에 알람줄지 -->
 
@@ -1062,13 +1066,10 @@
 				</div>
 
 
-
-				<!-- Bootstrap core JavaScript -->
-				<script src="vendor/jquery/jquery.min.js"></script>
-				<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 			</div>
 			<!--end center-->
 		</div>
+		
 		<div id="new_plus" style="display: none; z-index: 1001;">
 			<div
 				style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px 10px 10px 10px; background-color: white;">
@@ -1094,46 +1095,29 @@
 	</div>
 
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	</div>
-	<!--end center-->
-	</div>
-	<div id="new_plus" style="display: none; z-index: 1001;">
-		<div
-			style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px 10px 10px 10px; background-color: white;">
-			<div
-				style="text-align: center; margin: auto; padding-bottom: 10px; border-bottom: 1px solid #eaeaea;">
-				<span style="padding-left: 15px; font-size: 20px;">보관함 만들기</span> <a
-					href="#" style="float: right" onclick="new_plus()">X</a>
-			</div>
-			<div style="margin: auto; padding: 20px;">
-				<input type="text" placeholder="보관함명 입력(최대50자)"
-					style="width: 90%; height: 30px;">
-				<div style="padding-top: 15px">
-					<input class="box_btn" type="button" value="취소"
-						onclick="new_plus()"> <input
-						style="background-color: aqua;" class="box_btn" type="button"
-						value="만들기">
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 
-<!-- jquery -->
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 <script src="script/jquery-3.5.1-min.js"></script>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
-<script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript" src="script/datepicker.js"></script>
-
+<script type="text/javascript" src="script/datePick-jquery.js"></script>
 
 <script type="text/javascript" src="script/articleScript.js"></script>
-<script type="text/javascript" src="./script/script.js"></script>
-<script type="text/javascript" src="./script/task.js"></script>
+<script type="text/javascript" src="script/script.js"></script>
+<script type="text/javascript" src="script/task.js"></script>
+
+<!-- 구글지도 -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10&callback=initMap"></script>
+<script type="text/javascript" src="script/googleMap.js"></script>
+
+<!-- 구글 차트 -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="script/googleChart.js"></script>
 
 </html>

@@ -189,34 +189,4 @@ function fold(){
 function searchPress(){
   console.log('클릭');
 }
-<<<<<<< HEAD
-    
-=======
 
-function foldfiletype(){
-  document.getElementById('filetypeSelectContainer').style.display=(document.getElementById('filetypeSelectContainer').style.display=='block') ? 'none' : 'block';
- }
- 
- google.charts.load('current', {'packages':['corechart']});
-       google.charts.setOnLoadCallback(drawChart);
- 
-       function drawChart() {
- 
-         var data = google.visualization.arrayToDataTable([
-           ['Task', 'Hours per Day'],
-           ['요청', 5],
-           ['진행', 1],
-           ['피드백', 3],
-           ['완료', 9],
-           ['보류', 1]
-         ]);
- 
-         var options = {
-           title: '업무 리포트'
-         };
- 
-         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
- 
-         chart.draw(data, options);
- }
->>>>>>> d156633297a71b0f813182ac1944796e1df1ec2e
