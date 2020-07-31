@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +11,14 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     
     <script type="text/javascript" src="script/connectionStatistics.js"></script>
-    <script type="text/javascript">
-       
-      </script>
-
+  
 
 </head>
 <body>
     <div class="mainWrap">
-        <header>
+        <div class="header">
             접속 통계
-        </header>
+        </div>
         <div class="contents">
             <div class="select-type-text-div">
                 <div class="month-select">
@@ -68,8 +65,8 @@
 
             <div class="table-view-div">
                 <table class="statistics">
-                    <thead>
-                        <tr>
+                    <thead class="title-head">
+                        <tr class="con-statistics-tr">
                             <th scope="col">
                                 이름
                             </th>
@@ -93,7 +90,7 @@
                     </thead>
                     <!--for문 들어갈 자리-->
                     <tbody>
-                        <tr>
+                        <tr class="statistics-data-row">
                             <td>
                                 박원배
                             </td>
@@ -119,4 +116,9 @@
     </div>
 </body>
 
+<script src="script/jquery-3.5.1-min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript" src="script/connectionStatistics.js"></script>
+  
 </html>

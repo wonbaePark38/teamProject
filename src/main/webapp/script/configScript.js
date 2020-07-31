@@ -36,16 +36,15 @@ $(document).ready(function () {
     });
 
     lock.click(function(){
-        
-    
+    	
         $("p").toggle();
         var status =$('#lock');
         if($('input:checkbox[id="lock"]').is(":checked")){
-            console.log('체크됨');
+            console.log('락체크됨');
            $('.lock-select').attr('disabled',false);
         }else{
             $('.lock-select').attr('disabled',true);
-            console.log('체크해제');
+            console.log('락체크해제');
             
         }
     });

@@ -5,7 +5,7 @@ body {
 	overflow-x: hidden;
 	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
 		sans-serif;
-	width: 100%;
+	
 	height: 768px;
 }
 
@@ -16,10 +16,9 @@ body {
 	margin: 0 auto;
 }
 
-header {
+.header {
 	display: flex;
 	align-items: center;
-	width: 100%;
 	height: 60px;
 	font-size: 20px;
 	box-sizing: border-box;
@@ -63,8 +62,7 @@ label {
 }
 
 #chart-div {
-	display: flex;
-	justify-content: center;
+	
 }
 
 .data-input-div {
@@ -72,6 +70,7 @@ label {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	min-width:650px;
 	height: 5%;
 }
 
@@ -100,27 +99,26 @@ label {
 }
 
 .table-view-div {
-	width: 100%;
+	min-width:600px;
 }
 
 .statistics {
 	width: 100%;
 	display: table;
-	width: 100%;
+	
 	empty-cells: show;
 	border-collapse: collapse;
-	table-layout: fixed;
 	border-color: grey;
 }
 
-tr {
+.con-statistics-tr {
 	display: table-row;
 	vertical-align: inherit;
 	border-color: inherit;
 	height: 40px;
 }
 
-th {
+.con-statistics-tr th {
 	vertical-align: middle;
 	font-size: 13px;
 	background-color: #f9f9fb;
@@ -129,7 +127,9 @@ th {
 	border: 1px solid #e1e1e2;
 }
 
-td {
+.statistics-data-row td {
 	font-size: 13px;
 	text-align: center;
 }
+
+

@@ -8,7 +8,7 @@
     <title>Document</title>
     <link href="css/lockModeConfig.css" rel="stylesheet">
     <script src="script/jquery-3.5.1-min.js"></script>
-    <script type="text/javascript" src="script/pushAlramSetting.js"></script>
+    <script type="text/javascript" src="script/configScript.js"></script>
 </head>
 <body>
    <div class="wrap">

@@ -74,12 +74,12 @@
                         
                     </div>
                     
-                    <div class="manager-helper-container">
+                   <!--  <div class="manager-helper-container">
                        <button id="helpMenuBt">
                         <span></span>관리자 도움말
                        </button>
                     </div>
-                    
+                     -->
     
                 </div> <!--// sidebarcontainer-->
                 
