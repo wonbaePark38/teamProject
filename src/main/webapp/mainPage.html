@@ -16,14 +16,12 @@
 	<link href="css/mainPage.css" rel="stylesheet">
 	<link href="css/task.css" rel="stylesheet">
 	<link href="css/messanger_css.css" rel="stylesheet">
-	<script src="script/jquery-3.5.1-min.js"></script>
 	<link href="css/contentPage.css" rel="stylesheet">
 
+	
 
 
 </head>
-<style>
-</style>
 
 <body>
 
@@ -309,7 +307,7 @@
 							<div>
 								<div>
 									<span style="font-size: 12px;">
-										<stong>내 프로필</stong>
+										<strong>내 프로필</strong>
 									</span>
 								</div>
 								<div style="display: inline-block;">
@@ -328,7 +326,7 @@
 							<div style="width: 100%;">
 								<div>
 									<span style="font-size: 12px;">
-										<stong>전체 연락처</stong>
+										<strong>전체 연락처</strong>
 									</span>
 								</div>
 								<!-- forEach -->
@@ -439,8 +437,8 @@
 											<!-- 글 쓰기 -->
 											<form>
 												<div id="writeForm_div">
-													<div name="writeForm" class="div_text_write" contenteditable="true"
-														placeholder="내용입력"></div>
+													<div class="div_text_write" contenteditable="true"
+														></div>
 
 													<!-- 이미지 업로드 -->
 													<div>
@@ -461,7 +459,7 @@
 																<option></option>
 																<option></option>
 															</select>
-															<a class="submit_a">올리기</a>
+															<a class="submit_a" onclick="">올리기</a>
 														</div>
 													</div>
 													<!-- //하단 툴바 -->
@@ -482,8 +480,8 @@
 													<hr>
 													<!-- 내용입력 -->
 													<div class="writeForm2_content">
-														<div name="writeForm2_contet" class="div_text_write"
-															contenteditable="true" placeholder="내용을 입력해 주세요"></div>
+														<div class="div_text_write"
+															contenteditable="true"></div>
 													</div>
 													<!-- //내용입력 -->
 
@@ -546,24 +544,24 @@
 														<!-- 상태 선택 테이블 -->
 														<div id="status_select_div">
 															<div style="display: inline-block; width: 16%;">
-																<span id="request" onclick="request()" value="request"
+																<span id="request" onclick="request()" 
 																	style="background-color: #4aaefb;">요청</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="doing" onclick="doing()"
-																	value="doing">진행</span>
+																	>진행</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="feedback" onclick="feedback()"
-																	value="feedback">피드백</span>
+																	>피드백</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="complete" onclick="complete()"
-																	value="complete">완료</span>
+																	>완료</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="postpone" onclick="postpone()"
-																	value="postpone">보류</span>
+																	>보류</span>
 															</div>
 														</div>
 														<!-- //상태 선택 테이블 -->
@@ -682,7 +680,7 @@
 													<!-- 내용 -->
 													<div class="work_form_content">
 														<div class="div_text_write" contenteditable="true"
-															style="width: 100%;" placeholder="내용을 입력해 주세요"></div>
+															style="width: 100%;" ></div>
 													</div>
 													<!-- //내용 -->
 
@@ -785,8 +783,7 @@
 
 																<!-- google Map -->
 																<div id="googleMap_div">
-																	<div id="googleMap"
-																		style="width: 100%; height: 200px;"></div>
+																	<div id="googleMap"></div>
 																</div>
 																<!-- //google Map -->
 
@@ -804,6 +801,7 @@
 																			<option>2시간전</option>
 																			<option>12시간전</option>
 																		</select>
+																	</div>
 																</li>
 																<!-- //몇분전에 알람줄지 -->
 
@@ -1085,9 +1083,7 @@
 		</div>
 
 
-			<!-- Bootstrap core JavaScript -->
-			<script src="vendor/jquery/jquery.min.js"></script>
-			<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+			
 		</div>
 		<!--end center-->
 	</div>
@@ -1108,19 +1104,22 @@
 		</div>
 	</div>
 </body>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- jquery -->
 <script src="script/jquery-3.5.1-min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-
+	
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript" src="script/datepicker.js"></script>
-
-
+	
+	
 <script type="text/javascript" src="script/articleScript.js"></script>
 <script type="text/javascript" src="./script/script.js"></script>
 <script type="text/javascript" src="./script/task.js"></script>
-
+	
 
 </html>
