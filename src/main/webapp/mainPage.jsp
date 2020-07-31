@@ -1,24 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-	<title>메인페이지</title>
+<title>메인페이지</title>
 
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-	<!-- Custom styles for this template -->
-	<link href="css/mainPage.css" rel="stylesheet">
-	<link href="css/task.css" rel="stylesheet">
-	<link href="css/messanger_css.css" rel="stylesheet">
-	<script src="script/jquery-3.5.1-min.js"></script>
-	<link href="css/contentPage.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="css/mainPage.css" rel="stylesheet">
+<link href="css/task.css" rel="stylesheet">
+<link href="css/messanger_css.css" rel="stylesheet">
+<script src="script/jquery-3.5.1-min.js"></script>
+<script src="js/page_ajax.js"></script>
+<link href="css/contentPage.css" rel="stylesheet">
 
 
 
@@ -47,8 +48,9 @@
 								<option value="menu3">글</option>
 								<option value="menu4">댓글</option>
 								<option value="menu5">참여자</option>
-							</select> <input type="text" id="inputkeyword" value="텍스트입력" onfocus="this.value='';">
-							<input type="submit" value="검색" onclick="searchPress()">
+							</select> <input type="text" id="inputkeyword" value="텍스트입력"
+								onfocus="this.value='';"> <input type="submit"
+								value="검색" onclick="searchPress()">
 						</form>
 					</div>
 
@@ -76,31 +78,43 @@
 			<div class="sidebarContainer">
 
 				<div class="new_collabo">
-					<a id="newPrjBtn">새 프로젝트</a>
+					<a id="newPrjBtn"  onclick="messengerPop('newproject.jsp')">새 프로젝트</a>
 
 				</div>
 				<!--사이드바-->
 				<div class="sidebar">
-					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item">전체</a>
-					<a href="#" class="list-group-item">미보관</a>
-					<a href="#" class="list-group-item">읽지않음</a>
-					<a href="#" class="list-group-item">즐겨찾기</a>
+					<a onclick="acyncMovePage1('content.jsp')"  class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
+					<a onclick="acyncMovePage1('content.jsp')" href="#"
+						  class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">미보관</a> <a
+						onclick="acyncMovePage1('content.jsp')" href="#"
+						 class="list-group-item" style="padding: .5rem 1.25rem;">읽지않음</a> <a
+						onclick="acyncMovePage1('content.jsp')" href="#"
+						 class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
 					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
-					<a onclick="acyncMovePage('task.jsp')" class="list-group-item">전체 업무</a>
-					<a href="calendar.jsp" class="list-group-item">전체 일정</a>
-					<a href="totalFile.html" class="list-group-item">전체 파일</a>
-					<a href="#" class="list-group-item">담아둔 글</a>
-					<a href="#" class="list-group-item">나를 지정</a>
-					<a href="#" class="list-group-item">내 게시물</a>
+					<a onclick="acyncMovePage('task.jsp')"  class="list-group-item" style="padding: .5rem 1.25rem;">전체
+						업무</a> <a href="calendar.jsp"  class="list-group-item" style="padding: .5rem 1.25rem;">전체 일정</a> <a
+						href="totalFile.html"  class="list-group-item" style="padding: .5rem 1.25rem;">전체 파일</a> <a
+						onclick="acyncMovePage1('content.jsp')" href="#"
+						 class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a> <a
+						onclick="acyncMovePage1('content.jsp')" href="#"
+						 class="list-group-item" style="padding: .5rem 1.25rem;">나를 지정</a> <a
+						onclick="acyncMovePage1('content.jsp')" href="#"
+						 class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
 
 					</div>
 					<div class="list-group">
-						<a href="#" class="list-group-item">마케팅</a> <a href="#" class="list-group-item">디자인</a> <a
-							href="#" class="list-group-item">엔지니어링</a> <a href="#" class="list-group-item">숨김</a>
+						<a onclick="acyncMovePage1('content.jsp')" href="#"
+							 class="list-group-item" style="padding: .5rem 1.25rem;">마케팅</a> <a
+							onclick="acyncMovePage1('content.jsp')" href="#"
+							 class="list-group-item" style="padding: .5rem 1.25rem;">디자인</a> <a
+							onclick="acyncMovePage1('content.jsp')" href="#"
+							 class="list-group-item" style="padding: .5rem 1.25rem;">엔지니어링</a> <a
+							onclick="acyncMovePage1('content.jsp')" href="#"
+							 class="list-group-item" style="padding: .5rem 1.25rem;">숨김</a>
 
 					</div>
 
@@ -135,19 +149,18 @@
 					<!-- 옵션 영역 -->
 					<div id="header_option_div">
 						<!-- 유저 정보 -->
-						<div id="option_user" style="margin-top: 20px; margin-bottom: 10px;">
+						<div id="option_user"
+							style="margin-top: 20px; margin-bottom: 10px;">
 							<div style="text-align: center;">
-								<img src="images/account_default30.png" style="border-radius: 20px;">
+								<img src="images/account_default30.png"
+									style="border-radius: 20px;">
 							</div>
 							<div style="text-align: center;">
-								<span>
-									<strong>사용자명</strong>
+								<span> <strong>사용자명</strong>
 								</span>
 							</div>
 							<div style="text-align: center;">
-								<span style="font-size: 12px;">
-									test버전 이용중
-								</span>
+								<span style="font-size: 12px;"> test버전 이용중 </span>
 							</div>
 						</div>
 						<!-- //유저 정보 -->
@@ -155,16 +168,14 @@
 						<!-- 옵션 -->
 						<div style="margin-left: 10px;">
 							<div style="margin-top: 10px;">
-								<img src="images/pf_ico1_off.png">
-								<a href="privateConfig.jsp">환경설정</a>
+								<img src="images/pf_ico1_off.png"> <a
+									href="privateConfig.jsp">환경설정</a>
 							</div>
 							<div style="margin-top: 10px;">
-								<img src="images/pf_ico5_off.png">
-								<a>도움말</a>
+								<img src="images/pf_ico5_off.png"> <a>도움말</a>
 							</div>
 							<div style="margin-top: 10px;">
-								<img src="images/pf_ico3_off.png">
-								<a>로그아웃</a>
+								<img src="images/pf_ico3_off.png"> <a>로그아웃</a>
 							</div>
 						</div>
 
@@ -196,7 +207,7 @@
 						<!-- 미확인 알람 -->
 						<div style="display: block;">
 							<div style="padding-left: 6px; padding-right: 6px;">
-								<input type="text" style=" width: 100%;" placeholder="미확인 알람 검색">
+								<input type="text" style="width: 100%;" placeholder="미확인 알람 검색">
 							</div>
 
 							<!-- forEach -->
@@ -206,8 +217,9 @@
 								</div>
 								<div style="width: 75%; display: inline-block;">
 									<div style="height: 18px;">
-										<span style="font-size: 12px;"><strong>프로젝트명</strong></span>
-										<span style="margin-top: 5px; font-size: 10px; float: right;">작성 시간</span>
+										<span style="font-size: 12px;"><strong>프로젝트명</strong></span> <span
+											style="margin-top: 5px; font-size: 10px; float: right;">작성
+											시간</span>
 									</div>
 									<div style="height: 18px;">
 										<span style="font-size: 10px;">*님의 새글 등록</span>
@@ -224,7 +236,7 @@
 						<!-- 전체 알람 -->
 						<div style="display: none;">
 							<div style="padding-left: 6px; padding-right: 6px;">
-								<input type="text" style=" width: 100%;" placeholder="전체 알람 검색">
+								<input type="text" style="width: 100%;" placeholder="전체 알람 검색">
 							</div>
 
 							<!-- forEach -->
@@ -234,8 +246,9 @@
 								</div>
 								<div style="width: 75%; display: inline-block;">
 									<div style="height: 18px;">
-										<span style="font-size: 12px;"><strong>프로젝트명</strong></span>
-										<span style="margin-top: 5px; font-size: 10px; float: right;">작성 시간</span>
+										<span style="font-size: 12px;"><strong>프로젝트명</strong></span> <span
+											style="margin-top: 5px; font-size: 10px; float: right;">작성
+											시간</span>
 									</div>
 									<div style="height: 18px;">
 										<span style="font-size: 10px;">*님의 새글 등록</span>
@@ -277,19 +290,21 @@
 						<!-- 채팅방 -->
 						<div id="header_chat_chattingRoom" style="display: block;">
 							<div style="padding-left: 6px; padding-right: 6px;">
-								<input type="text" style=" width: 100%;" placeholder="채팅방 또는 이름 검색">
+								<input type="text" style="width: 100%;"
+									placeholder="채팅방 또는 이름 검색">
 							</div>
 
 							<!-- forEach -->
 							<div style="vertical-align: middle;">
 								<div style="display: inline-block;">
-									<img src="images/empty_photo_s.png" style="margin-bottom: 20px;">
+									<img src="images/empty_photo_s.png"
+										style="margin-bottom: 20px;">
 								</div>
 								<div style="width: 75%; display: inline-block;">
 									<div>
-										<span style="font-size: 9px; max-width: 155px;">채팅방이름</span>
-										<span style="font-size: 9px;">인원수</span>
-										<span style="font-size: 9px; float: right; margin-top: 9px;">마지막채팅시간</span>
+										<span style="font-size: 9px; max-width: 155px;">채팅방이름</span> <span
+											style="font-size: 9px;">인원수</span> <span
+											style="font-size: 9px; float: right; margin-top: 9px;">마지막채팅시간</span>
 									</div>
 									<div>
 										<span style="font-size: 12px;">채팅내용</span>
@@ -303,14 +318,14 @@
 						<!-- 연락처 -->
 						<div id="header_chat_contactAddress" style="display: none;">
 							<div style="padding-left: 6px; padding-right: 6px;">
-								<input type="text" style=" width: 100%;" placeholder="이름,소속 또는 연락처 검색">
+								<input type="text" style="width: 100%;"
+									placeholder="이름,소속 또는 연락처 검색">
 							</div>
 
 							<!-- 내프로필 -->
 							<div>
 								<div>
-									<span style="font-size: 12px;">
-										<stong>내 프로필</stong>
+									<span style="font-size: 12px;"> <stong>내 프로필</stong>
 									</span>
 								</div>
 								<div style="display: inline-block;">
@@ -328,8 +343,7 @@
 							<!-- 전체 연락처 -->
 							<div style="width: 100%;">
 								<div>
-									<span style="font-size: 12px;">
-										<stong>전체 연락처</stong>
+									<span style="font-size: 12px;"> <stong>전체 연락처</stong>
 									</span>
 								</div>
 								<!-- forEach -->
@@ -337,9 +351,10 @@
 									<div style="display: inline-block;">
 										<img src="images/empty_photo_s.png">
 									</div>
-									<div style="display: inline-block; width: 80px; vertical-align: middle;">
-										<span style="font-size: 11px;"><strong>참여자명</strong></span>
-										<span style="font-size: 10px;">test@test.com</span>
+									<div
+										style="display: inline-block; width: 80px; vertical-align: middle;">
+										<span style="font-size: 11px;"><strong>참여자명</strong></span> <span
+											style="font-size: 10px;">test@test.com</span>
 									</div>
 
 									<div style="display: inline-block; margin-left: 115px;">
@@ -440,8 +455,8 @@
 											<!-- 글 쓰기 -->
 											<form>
 												<div id="writeForm_div">
-													<div name="writeForm" class="div_text_write" contenteditable="true"
-														placeholder="내용입력"></div>
+													<div name="writeForm" class="div_text_write"
+														contenteditable="true" placeholder="내용입력"></div>
 
 													<!-- 이미지 업로드 -->
 													<div>
@@ -453,16 +468,15 @@
 
 													<!-- 하단 툴바 -->
 													<hr>
-													<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
+													<div
+														style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 
-														<a class="add_file"></a>
-														<a class="add_pic"></a>
+														<a class="add_file"></a> <a class="add_pic"></a>
 														<div style="display: inline-block; float: right;">
-															<select style=" vertical-align: middle; height: 27px;">
+															<select style="vertical-align: middle; height: 27px;">
 																<option></option>
 																<option></option>
-															</select>
-															<a class="submit_a">올리기</a>
+															</select> <a class="submit_a">올리기</a>
 														</div>
 													</div>
 													<!-- //하단 툴바 -->
@@ -498,17 +512,16 @@
 
 													<!-- 하단 툴바 -->
 													<hr>
-													<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
+													<div
+														style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 
-														<a class="add_file"></a>
-														<a class="add_pic"></a>
-														<a class="add_loc" onclick="locationPick()"></a>
+														<a class="add_file"></a> <a class="add_pic"></a> <a
+															class="add_loc" onclick="locationPick()"></a>
 														<div style="display: inline-block; float: right;">
-															<select style=" vertical-align: middle; height: 27px;">
+															<select style="vertical-align: middle; height: 27px;">
 																<option></option>
 																<option></option>
-															</select>
-															<a class="submit_a">올리기</a>
+															</select> <a class="submit_a">올리기</a>
 														</div>
 
 
@@ -551,8 +564,7 @@
 																	style="background-color: #4aaefb;">요청</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
-																<span id="doing" onclick="doing()"
-																	value="doing">진행</span>
+																<span id="doing" onclick="doing()" value="doing">진행</span>
 															</div>
 															<div style="display: inline-block; width: 16%;">
 																<span id="feedback" onclick="feedback()"
@@ -575,9 +587,9 @@
 													<!-- 담당자 -->
 													<div class="work_form_manager">
 														<div>
-															<label id="work_worker_img"></label>
-															<input type="text" id="work_worker_select"
-																onclick="work_workerSelect()" placeholder="담당자 추가">
+															<label id="work_worker_img"></label> <input type="text"
+																id="work_worker_select" onclick="work_workerSelect()"
+																placeholder="담당자 추가">
 															<div id="worker_select_div">
 																<ul
 																	style="list-style: none; background-color: white; padding-left: 0px;">
@@ -692,16 +704,15 @@
 
 													<!-- 하단 툴바 -->
 													<hr>
-													<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
+													<div
+														style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 
-														<a class="add_file"></a>
-														<a class="add_pic"></a>
+														<a class="add_file"></a> <a class="add_pic"></a>
 														<div style="display: inline-block; float: right;">
-															<select style=" vertical-align: middle; height: 27px;">
+															<select style="vertical-align: middle; height: 27px;">
 																<option></option>
 																<option></option>
-															</select>
-															<a class="submit_a">올리기</a>
+															</select> <a class="submit_a">올리기</a>
 														</div>
 													</div>
 
@@ -721,7 +732,8 @@
 													<div>
 														<!-- 일정 제목 -->
 														<div>
-															<input type="text" style="width: 100%; border-style: none;"
+															<input type="text"
+																style="width: 100%; border-style: none;"
 																placeholder="일정 제목을 입력해주세요">
 														</div>
 														<!-- //일정 제목 -->
@@ -734,25 +746,20 @@
 															<ul
 																style="list-style: none; padding-left: 5px; margin-bottom: 0px;">
 																<!-- 데이트 피커 -->
-																<li>
-																	<span id="sche_time_img"></span>
-																	<!-- 날짜 선택 -->
+																<li><span id="sche_time_img"></span> <!-- 날짜 선택 -->
 																	<div style="display: inline-block; width: 80%;">
 																		<input type="text" id="sche_start_date"
-																			placeholder="오늘날자"
-																			style="width: 20%;">&nbsp;
+																			placeholder="오늘날자" style="width: 20%;">&nbsp;
 
-																		<select name="start_time"
-																			id="start_time_select">
+																		<select name="start_time" id="start_time_select">
 																			<option>00:00</option>
 																			<option>00:30</option>
 																			<option>01:00</option>
 																			<option>01:30</option>
 																			<option>02:00</option>
 																			<option>02:30</option>
-																		</select> &nbsp;~&nbsp; <input type="text"
-																			id="sche_end_date" placeholder="종료날자"
-																			style="width: 20%;">&nbsp;
+																		</select> &nbsp;~&nbsp; <input type="text" id="sche_end_date"
+																			placeholder="종료날자" style="width: 20%;">&nbsp;
 
 																		<select name="end_time" id="end_time_select">
 																			<option>00:00</option>
@@ -762,32 +769,25 @@
 																			<option>02:00</option>
 																			<option>02:30</option>
 																		</select> <label> <input type="checkbox"
-																				id="alldayCheck" onclick="alldayBtn()">
-																			<span>종일</span>
+																			id="alldayCheck" onclick="alldayBtn()"> <span>종일</span>
 																		</label>
-																	</div> <!-- //날짜 선택 -->
-																</li>
+																	</div> <!-- //날짜 선택 --></li>
 																<!-- //데이트 피커 -->
 
 																<hr>
 
 																<!-- 장소검색 -->
-																<li>
-																	<span id="sche_loc_img"
-																		style="display: inline-block;"></span>
-																	<!-- 장소 검색 -->
+																<li><span id="sche_loc_img"
+																	style="display: inline-block;"></span> <!-- 장소 검색 -->
 																	<div class="schedule_place" id="sche_place"
 																		style="display: inline-block;">
-																		<input id="address" type="text"
-																			placeholder="주소입력" />
-																	</div>
-																</li>
+																		<input id="address" type="text" placeholder="주소입력" />
+																	</div></li>
 																<!-- //장소 검색 -->
 
 																<!-- google Map -->
 																<div id="googleMap_div">
-																	<div id="googleMap"
-																		style="width: 100%; height: 200px;"></div>
+																	<div id="googleMap" style="width: 100%; height: 200px;"></div>
 																</div>
 																<!-- //google Map -->
 
@@ -797,8 +797,7 @@
 																	<!-- 알람 -->
 																	<div class="schedule_alarm">
 
-																		<span id="sche_alarm_img"></span>
-																		<select>
+																		<span id="sche_alarm_img"></span> <select>
 																			<option>10분전</option>
 																			<option>30분전</option>
 																			<option>1시간전</option>
@@ -813,8 +812,7 @@
 																<!-- 일정 메모 -->
 																<li>
 																	<div>
-																		<div class="div_text_write"
-																			contenteditable="true"></div>
+																		<div class="div_text_write" contenteditable="true"></div>
 																	</div>
 																</li>
 
@@ -824,15 +822,12 @@
 																	<div
 																		style="width: 100%; text-align: right; margin-top: 5px; margin-bottom: 5px;">
 																		<div style="display: inline-block;">
-																			<select
-																				style=" vertical-align: middle; height: 27px;">
+																			<select style="vertical-align: middle; height: 27px;">
 																				<option></option>
 																				<option></option>
-																			</select>
-																			<a class="submit_a">올리기</a>
+																			</select> <a class="submit_a">올리기</a>
 																		</div>
-																	</div>
-																	<!-- //하단 툴바 -->
+																	</div> <!-- //하단 툴바 -->
 																</li>
 
 																<!-- //일정 메모 -->
@@ -864,8 +859,8 @@
 
 													<!-- 할일 추가 -->
 													<div>
-														<span id="todo_append_img"></span>
-														<a id="todo_append" onclick="todoAppend()"> 할일 추가 </a>
+														<span id="todo_append_img"></span> <a id="todo_append"
+															onclick="todoAppend()"> 할일 추가 </a>
 
 													</div>
 													<!-- //할일 추가 -->
@@ -875,11 +870,10 @@
 													<div
 														style="width: 100%; text-align: right; margin-top: 5px; margin-bottom: 5px;">
 														<div style="display: inline-block;">
-															<select style=" vertical-align: middle; height: 27px;">
+															<select style="vertical-align: middle; height: 27px;">
 																<option></option>
 																<option></option>
-															</select>
-															<a class="submit_a">올리기</a>
+															</select> <a class="submit_a">올리기</a>
 														</div>
 													</div>
 
@@ -900,63 +894,71 @@
 							</div>
 							<!-- //글작성 폼 -->
 							<!-- 미확인 알람 -->
-                     <div id="unread_alarm_div" style="width: 100%;">
-                        <div style="width: 100%; height: 50px; background-color: white;">
-                           <span id="unread_alarm_img" style="display: inline-block; vertical-align: middle; margin-left: 8px; margin-right: 11px; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -44px;"></span>
-                           <h5 style="display: inline-block; vertical-align: middle; margin-top: 10px; font-size: 15px;"><strong>미확인 알람</strong></h5>
-                           <span style="display: inline-block; vertical-align: middle; text-align: center; width: 30px; height: 14px; border-radius: 8px; background-color: red; font-size: 12px;">12</span>
-                           <span style="display: inline-block; vertical-align: middle; margin-left: 300px; font-size: 13px;"><strong>모두읽음</strong></span>
-                        </div>
-                        <!-- 알람글 최초 3개 -->
-                        <!-- forEach -->
-                        <div style="background-color: lightgray; width: 100%;">
-                           <div style="width: 100%; padding: 5px 5px 5px 5px;">
-                              <div style="display: inline-block;">
-                                 <img src="images/empty_photo_s.png">
-                              </div>
-                              <div style="display: inline-block; width: 400px; vertical-align: middle;">
-                                 <span style="font-size: 12px;"><strong>글쓴놈</strong></span>
-                                 <span style="font-size: 10px;">현재일자 |</span>
-                                 <span style="font-size: 10px;">현재시간</span>
-                                 <br>
-                                 <span style="font-size: 10px;">글내용입니다</span>
-                              </div>
-                              <span style="display: inline-block; vertical-align: middle; text-align: center; font-size: 12px; border-radius: 10px; border: 3px solid #676869; background-color: lightgray; width: 45px; height: 25px; margin-left: 20px;">
-                                 보기
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- //forEach -->
-                     <div style="text-align: center; vertical-align: middle; background-color: white;">
-                        <span style="font-size: 9px;">더보기</span>
-                     </div>
-                     <!-- //미확인 알람 -->
+							<div id="unread_alarm_div" style="width: 100%;">
+								<div style="width: 100%; height: 50px; background-color: white;">
+									<span id="unread_alarm_img"
+										style="display: inline-block; vertical-align: middle; margin-left: 8px; margin-right: 11px; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -44px;"></span>
+									<h5
+										style="display: inline-block; vertical-align: middle; margin-top: 10px; font-size: 15px;">
+										<strong>미확인 알람</strong>
+									</h5>
+									<span
+										style="display: inline-block; vertical-align: middle; text-align: center; width: 30px; height: 14px; border-radius: 8px; background-color: red; font-size: 12px;">12</span>
+									<span
+										style="display: inline-block; vertical-align: middle; margin-left: 300px; font-size: 13px;"><strong>모두읽음</strong></span>
+								</div>
+								<!-- 알람글 최초 3개 -->
+								<!-- forEach -->
+								<div style="background-color: lightgray; width: 100%;">
+									<div style="width: 100%; padding: 5px 5px 5px 5px;">
+										<div style="display: inline-block;">
+											<img src="images/empty_photo_s.png">
+										</div>
+										<div
+											style="display: inline-block; width: 400px; vertical-align: middle;">
+											<span style="font-size: 12px;"><strong>글쓴놈</strong></span> <span
+												style="font-size: 10px;">현재일자 |</span> <span
+												style="font-size: 10px;">현재시간</span> <br> <span
+												style="font-size: 10px;">글내용입니다</span>
+										</div>
+										<span
+											style="display: inline-block; vertical-align: middle; text-align: center; font-size: 12px; border-radius: 10px; border: 3px solid #676869; background-color: lightgray; width: 45px; height: 25px; margin-left: 20px;">
+											보기 </span>
+									</div>
+								</div>
+							</div>
+							<!-- //forEach -->
+							<div
+								style="text-align: center; vertical-align: middle; background-color: white;">
+								<span style="font-size: 9px;">더보기</span>
+							</div>
+							<!-- //미확인 알람 -->
 
-                     <!-- 상단 고정글 -->
-                     <div id="upper_fixed_article" style="margin-top: 10px;">
-                        <div style="width: 100%; height: 35px; background-color: white; padding: 5px 5px 5px 5px;">
-                           <span id="upper_fixed_img" style="display: inline-block;vertical-align: middle; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -66px;"></span>
-                           <span style="display: inline-block;">상단 고정글</span>
-                           <span style="margin-left: 5px;"><strong>2</strong></span>
+							<!-- 상단 고정글 -->
+							<div id="upper_fixed_article" style="margin-top: 10px;">
+								<div
+									style="width: 100%; height: 35px; background-color: white; padding: 5px 5px 5px 5px;">
+									<span id="upper_fixed_img"
+										style="display: inline-block; vertical-align: middle; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -66px;"></span>
+									<span style="display: inline-block;">상단 고정글</span> <span
+										style="margin-left: 5px;"><strong>2</strong></span>
 
-                        </div>
-                        <!-- forEach -->
-                        <div style="background-color: white; padding: 5px;">
-                           <div style="display: inline-block; width: 270px;">
-                              <span style="display: inline-block;">[피드백]</span>
-                              <span style="display: inline-block;">글 제목</span>
-                           </div>
-                           <span style="display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 13px; font-size: 10px; border-radius: 5px; background-color: lightblue; margin-left: 170px;">요청</span>
-                        </div>
-                        <!-- 누르면 나올 게시물 -->
-                        <div style="display: none;">
-
-                        </div>
-                        <!-- //누르면 나올 게시물 -->
-                        <!-- //forEach -->
-                     </div>
-                     <!-- //상단 고정글 -->
+								</div>
+								<!-- forEach -->
+								<div style="background-color: white; padding: 5px;">
+									<div style="display: inline-block; width: 270px;">
+										<span style="display: inline-block;">[피드백]</span> <span
+											style="display: inline-block;">글 제목</span>
+									</div>
+									<span
+										style="display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 13px; font-size: 10px; border-radius: 5px; background-color: lightblue; margin-left: 170px;">요청</span>
+								</div>
+								<!-- 누르면 나올 게시물 -->
+								<div style="display: none;"></div>
+								<!-- //누르면 나올 게시물 -->
+								<!-- //forEach -->
+							</div>
+							<!-- //상단 고정글 -->
 						</div>
 					</div>
 					<!-- //게시글 넣는곳 -->
@@ -971,139 +973,149 @@
 
 
 					<div class="aside_wrap">
-					   <div>
-						  <a href="#" class="btn_listback">이전화면</a>
-					   </div>
-	 
-					   <div class="set_wrap col-12">
-						  <ul style="padding-inline-start: 0px;">
-							 <li><a href="#" id="file-box" class="ico1"
-								style="padding-top: 30px; height: 50px;">파일함</a></li>
-							 <li><a href="#" id="task-list" class="ico5"
-								style="padding-top: 30px; height: 50px;">업무</a></li>
-							 <li><a href="#" id="schedule-calendar" class="ico4"
-								style="padding-top: 30px; height: 50px;">일정</a></li>
-							 <li><a href="#" id="todo-list" class="ico3"
-								style="padding-top: 30px; height: 50px;">할일</a></li>
-						  </ul>
-					   </div>
-	 
-					   <div>
-						  <div class="r_invite_box">
-							 <a id="project-invite-btn" class="invite">초대하기</a>
-						  </div>
-						  <!-- 참여자목록 -->
-	 
-						  <div class="participant_wrap">
-							 <div>
-								<div class="msg_user">
-								   <strong>전체 참여자</strong>&nbsp; <strong>2</strong>
-								   <!-- 프로젝트 참여인원 db -->
-								   <strong>명</strong> <a>전체보기</a>
-								</div>
-							 </div>
-	 
-							 <div>
+						<div>
+							<a href="#" class="btn_listback">이전화면</a>
+						</div>
+
+						<div class="set_wrap col-12">
+							<ul style="padding-inline-start: 0px;">
+								<li><a href="totalFile.html" id="file-box" class="ico1"
+									style="padding-top: 30px; height: 50px;">파일함</a></li>
+								<li><a href="task.jsp" id="task-list" class="ico5"
+									style="padding-top: 30px; height: 50px;">업무</a></li>
+								<li><a href="calendar.jsp" id="schedule-calendar" class="ico4"
+									style="padding-top: 30px; height: 50px;">일정</a></li>
+								<li><a href="#" id="todo-list" class="ico3"
+									style="padding-top: 30px; height: 50px;">할일</a></li>
+							</ul>
+						</div>
+
+						<div>
+							<div class="r_invite_box">
+								<a id="project-invite-btn" class="invite" onclick="invitePop('invitedetail.jsp')">초대하기</a>
+
+							</div>
+							<!-- 참여자목록 -->
+
+							<div class="participant_wrap">
 								<div>
-								   <h5>
-									  <strong id="msg">관리자</strong> <span id="msg">(1)</span>
-								   </h5>
+									<div class="msg_user">
+										<strong>전체 참여자</strong>&nbsp; <strong>2</strong>
+										<!-- 프로젝트 참여인원 db -->
+										<strong>명</strong> <a>전체보기</a>
+									</div>
 								</div>
-								<ul>
-								   <li class="right-sendience-li">
-									  <div class="msgphoto">
-										 <img id="uimg" src="images/noimg.gif">
-									  </div>
-									  <div id="sendience-right-btns" class="btn_right">
-										 <a id="sendience-chat" class="btn chat"> <span
-											class="blind">채팅</span>
-										 </a>
-									  </div>
-									  <div class="username" style="cursor: pointer;">
-										 <span id="sendience-name" user-id="" use-intt-id="">안세영
-											(나)</span>
-									  </div>
-								   </li>
-								</ul>
-	 
+
 								<div>
-								   <h5>
-									  <strong id="msg">참여자</strong> <span id="msg">(1)</span>
-								   </h5>
+									<div>
+										<h5>
+											<strong id="msg">관리자</strong> <span id="msg">(1)</span>
+										</h5>
+									</div>
+									<ul>
+										<li class="right-sendience-li">
+											<div class="msgphoto">
+												<img id="uimg" src="images/noimg.gif">
+											</div>
+											<div id="sendience-right-btns" class="btn_right">
+												<a id="sendience-chat" class="btn chat"> <span
+													class="blind">채팅</span>
+												</a>
+											</div>
+											<div class="username" style="cursor: pointer;">
+												<span id="sendience-name" user-id="" use-intt-id="">안세영
+													(나)</span>
+											</div>
+										</li>
+									</ul>
+
+									<div>
+										<h5>
+											<strong id="msg">참여자</strong> <span id="msg">(1)</span>
+										</h5>
+									</div>
+									<ul>
+										<li class="right-sendience-li">
+											<div class="msgphoto">
+												<img id="uimg" src="images/noimg.gif">
+											</div>
+											<div id="sendience-right-btns" class="btn_right">
+												<a id="sendience-chat" class="btn chat"> <span
+													class="blind">채팅</span>
+												</a>
+											</div>
+											<div class="username" style="cursor: pointer;">
+												<span id="sendience-name" user-id="" use-intt-id="">장원종</span>
+											</div>
+										</li>
+									</ul>
 								</div>
-								<ul>
-								   <li class="right-sendience-li">
-									  <div class="msgphoto">
-										 <img id="uimg" src="images/noimg.gif">
-									  </div>
-									  <div id="sendience-right-btns" class="btn_right">
-										 <a id="sendience-chat" class="btn chat"> <span
-											class="blind">채팅</span>
-										 </a>
-									  </div>
-									  <div class="username" style="cursor: pointer;">
-										 <span id="sendience-name" user-id="" use-intt-id="">장원종</span>
-									  </div>
-								   </li>
-								</ul>
-							 </div>
-						  </div>
-	 
-						  <div class="btn_prj_chat_box">
-							 <a id="project-open-chat" class="btn_prj_chat">프로젝트 채팅</a>
-						  </div>
-	 
-					   </div>
+							</div>
+
+							<div class="btn_prj_chat_box">
+								<a id="project-open-chat" class="btn_prj_chat">프로젝트 채팅</a>
+							</div>
+
+						</div>
 					</div>
-	 
-				 </div>
-	 
-	 
-	 
-				 <!-- Bootstrap core JavaScript -->
-				 <script src="vendor/jquery/jquery.min.js"></script>
-				 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-			 </div>
-			 <!--end center-->
-		 </div>
-		 <div id="new_plus" style="display: none; z-index: 1001;">
-				 <div style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top:200px; margin-left:auto; margin-right:auto; padding: 10px 10px 10px 10px;background-color: white;">
-					 <div style="text-align: center; margin: auto; padding-bottom: 10px; border-bottom: 1px solid #eaeaea; ">
-						 <span style="padding-left: 15px; font-size: 20px;">보관함 만들기</span> 
-						 <a href="#" style="float: right" onclick="new_plus()">X</a>
-					 </div>
-					 <div style="margin: auto; padding: 20px;">
-						 <input type="text" placeholder="보관함명 입력(최대50자)"	style="width: 90%; height: 30px;">
-						 <div style="padding-top: 15px">
-							 <input class="box_btn" type="button" value="취소" onclick="new_plus()"> 
-							 <input style="background-color: aqua;" class="box_btn" type="button" value="만들기">
-						 </div>
-					 </div>
-			 </div>
-		 </div>
-	 
 
+				</div>
+
+
+
+				<!-- Bootstrap core JavaScript -->
+				<script src="vendor/jquery/jquery.min.js"></script>
+				<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+			</div>
+			<!--end center-->
+		</div>
+		<div id="new_plus" style="display: none; z-index: 1001;">
+			<div
+				style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px 10px 10px 10px; background-color: white;">
+				<div
+					style="text-align: center; margin: auto; padding-bottom: 10px; border-bottom: 1px solid #eaeaea;">
+					<span style="padding-left: 15px; font-size: 20px;">보관함 만들기</span> <a
+						href="#" style="float: right" onclick="new_plus()">X</a>
+				</div>
+				<div style="margin: auto; padding: 20px;">
+					<input type="text" placeholder="보관함명 입력(최대50자)"
+						style="width: 90%; height: 30px;">
+					<div style="padding-top: 15px">
+						<input class="box_btn" type="button" value="취소"
+							onclick="new_plus()"> <input
+							style="background-color: aqua;" class="box_btn" type="button"
+							value="만들기">
+					</div>
+				</div>
+			</div>
 		</div>
 
 
-			<!-- Bootstrap core JavaScript -->
-			<script src="vendor/jquery/jquery.min.js"></script>
-			<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		</div>
-		<!--end center-->
+	</div>
+
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	</div>
+	<!--end center-->
 	</div>
 	<div id="new_plus" style="display: none; z-index: 1001;">
 		<div
-			style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top:200px; margin-left:auto; margin-right:auto; padding: 10px 10px 10px 10px;background-color: white;">
-			<div style="text-align: center; margin: auto; padding-bottom: 10px; border-bottom: 1px solid #eaeaea; ">
-				<span style="padding-left: 15px; font-size: 20px;">보관함 만들기</span>
-				<a href="#" style="float: right" onclick="new_plus()">X</a>
+			style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px 10px 10px 10px; background-color: white;">
+			<div
+				style="text-align: center; margin: auto; padding-bottom: 10px; border-bottom: 1px solid #eaeaea;">
+				<span style="padding-left: 15px; font-size: 20px;">보관함 만들기</span> <a
+					href="#" style="float: right" onclick="new_plus()">X</a>
 			</div>
 			<div style="margin: auto; padding: 20px;">
-				<input type="text" placeholder="보관함명 입력(최대50자)" style="width: 90%; height: 30px;">
+				<input type="text" placeholder="보관함명 입력(최대50자)"
+					style="width: 90%; height: 30px;">
 				<div style="padding-top: 15px">
-					<input class="box_btn" type="button" value="취소" onclick="new_plus()">
-					<input style="background-color: aqua;" class="box_btn" type="button" value="만들기">
+					<input class="box_btn" type="button" value="취소"
+						onclick="new_plus()"> <input
+						style="background-color: aqua;" class="box_btn" type="button"
+						value="만들기">
 				</div>
 			</div>
 		</div>
@@ -1112,7 +1124,8 @@
 
 <!-- jquery -->
 <script src="script/jquery-3.5.1-min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
 <script type="text/javascript" src="script/script.js"></script>

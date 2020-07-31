@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="css/newproject_css.css">
 </head>
 <body>
-
-	<div class="layerstyle4" style="width: 500px;">
+<div class="background_shadow" style="z-index: 9000;"></div>
+	<div class="layerstyle4" style="width: 500px; z-index: 9001" >
 		<div id="projectOptionLayer" class="layerstyle4_po" style="display: block;">
 			<div class="layerstyle4_title">
 				<h3>프로젝트 만들기</h3>
@@ -17,7 +17,7 @@
 					<img alt="닫기" src="images/btn_layerstyle3_close.gif">
 				</a>
 			</div>
-			<div class="newrm_wrap">
+			<div class="newrm_wrap" style="background-color: #fff;">
 				<dl class="nwrtitle_box">
 					<dt>
 						<input id="COLABO_TTL" placeholder="프로젝트 제목을 입력하세요" rows="1" class="autosize" style="max-height: 59px;" maxlength="50">
@@ -60,6 +60,6 @@
 			</div>
 		</div>
 	</div>
-
+	
 </body>
 </html>
