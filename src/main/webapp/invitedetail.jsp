@@ -9,7 +9,8 @@
 <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
 </head>
 <body>
-	<div class="prdbx_wrap center-popup" id="inviteBox" style="width: 500px; height: 620px; z-index: 1100; ">
+
+	<div class="prdbx_wrap center-popup" id="inviteBox" style="width: 500px; height: 600px; z-index: 9999; ">
     <input type="hidden" id="_INVITE_LINK" value="https://flow.team/Invite/1C7cg1u3dX0z1h3nj7oD9CK"> <!-- 링크 생성 -->
     <div class="prdbx_default" style="display: block;">
         <div class="prdbx_df_top">
@@ -244,7 +245,7 @@
     </div>
 </div>
 
-
+<div class="background_shadow" style="z-index: 9000;"></div>
 
 </body>
 <script>
