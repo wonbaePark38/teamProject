@@ -27,13 +27,15 @@
     });
 
     $("#listSortBt").click(function(){
-    
-      listBt.style.backgroundColor = "#00aaf8";
-      badukBt.style.backgroundColor = "#c2bdcc";
+      console.log('리스트버튼');
+      $('#listSortBt').css('backgroundColor','#615cba');
+      $('#listSortBt').css('backgroundColor','#00aaf8');
+     
     });
   
     $('#badukSortBt').click(function(){
-      listBt.style.backgroundColor = "#c2bdcc";
+      console.log('바둑버튼');
+      listBt.style.backgroundColor = "#dadbdc";
       badukBt.style.backgroundColor = "#00aaf8";
     });
     $("#namesortbt").click(function(){
