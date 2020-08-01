@@ -29,14 +29,14 @@
     $("#listSortBt").click(function(){
       console.log('리스트버튼');
       $('#listSortBt').css('backgroundColor','#615cba');
-      $('#listSortBt').css('backgroundColor','#00aaf8');
-     
+      $('#badukSortBt').css('backgroundColor','#e4e7eb');
     });
   
     $('#badukSortBt').click(function(){
       console.log('바둑버튼');
-      listBt.style.backgroundColor = "#dadbdc";
-      badukBt.style.backgroundColor = "#00aaf8";
+      $('#listSortBt').css('backgroundColor','#e4e7eb');
+      $('#badukSortBt').css('backgroundColor','#615cba');
+      
     });
     $("#namesortbt").click(function(){
       
@@ -82,7 +82,7 @@
     });
   
     $("#updatesortbt").click(function(){
-      
+      console.log('화살표버튼 클릭');
       if(updateStatus==1){
         $("#updatesortbt .downimg").hide();
         $("#updatesortbt .upimg").show();
@@ -90,6 +90,34 @@
       }else if(updateStatus==0){
         $("#updatesortbt .downimg").show();
         $("#updatesortbt .upimg").hide();
+        updateStatus=1;
+      }
+      
+    });
+
+    $("#updatesortbt-baduk").click(function(){
+      console.log('화살표버튼 클릭');
+      if(updateStatus==1){
+        $("#updatesortbt-baduk .downimg").hide();
+        $("#updatesortbt-baduk .upimg").show();
+        updateStatus=0;
+      }else if(updateStatus==0){
+        $("#updatesortbt-baduk .downimg").show();
+        $("#updatesortbt-baduk .upimg").hide();
+        updateStatus=1;
+      }
+      
+    });
+
+    $("#namesortbt-baduk").click(function(){
+      console.log('화살표버튼 클릭');
+      if(updateStatus==1){
+        $("#namesortbt-baduk .downimg").hide();
+        $("#namesortbt-baduk .upimg").show();
+        updateStatus=0;
+      }else if(updateStatus==0){
+        $("#namesortbt-baduk .downimg").show();
+        $("#namesortbt-baduk .upimg").hide();
         updateStatus=1;
       }
       
@@ -168,53 +196,21 @@ function hiddenMenuFold(thisevent,e){
   else{
     node.css("display","block");
   }
-  
+}
+
+  function badukListhiddenMenuFold(thisevent,e){
+    
+    var node = $(thisevent).parent().next();
+   console.log();
+    var presentDisplay = node.css('display');
+    if(presentDisplay == 'block'){
+      
+      node.css('display','none');
+    }
+    else{
+      node.css("display","block");
+    }
+  }
   
   
   //thisevent.style.display=(document.querySelector('.moreMenuContainer2').style.display=='block') ? 'none' : 'block';
-  
-  
-}
-
- 
-
-
-function clientCenterFold(){
-    
-    document.getElementById('helpMenu_on').style.display=(document.getElementById('helpMenu_on').style.display=='block') ? 'none' : 'block';
-
-}
-function fold(){
-    
-    document.getElementById('chart').style.display=(document.getElementById('chart').style.display=='block') ? 'none' : 'block';
-}
-function searchPress(){
-  console.log('클릭');
-}
-
-function foldfiletype(){
-  document.getElementById('filetypeSelectContainer').style.display=(document.getElementById('filetypeSelectContainer').style.display=='block') ? 'none' : 'block';
- }
- 
- google.charts.load('current', {'packages':['corechart']});
-       google.charts.setOnLoadCallback(drawChart);
- 
-       function drawChart() {
- 
-         var data = google.visualization.arrayToDataTable([
-           ['Task', 'Hours per Day'],
-           ['요청', 5],
-           ['진행', 1],
-           ['피드백', 3],
-           ['완료', 9],
-           ['보류', 1]
-         ]);
- 
-         var options = {
-           title: '업무 리포트'
-         };
- 
-         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
- 
-         chart.draw(data, options);
- }
