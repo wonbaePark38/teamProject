@@ -20,7 +20,9 @@
 <script src="js/page_ajax.js"></script>
 <link href="css/contentPage.css" rel="stylesheet">
 
-
+<script src="script/jquery-3.5.1-min.js"></script>
+<script type="text/javascript" src="script/submittest.js"></script>
+<script type="text/javascript" src="script/fileupload.js"></script>
 
 </head>
 <style>
@@ -368,7 +370,8 @@
 					</div>
 
 					<!-- //채팅 영역 -->
-					<!-- 게시글 넣는곳 -->
+
+
 					<!-- 게시글 넣는곳 -->
 					<div class="article">
 						<div class="article_margin">
@@ -452,34 +455,43 @@
 										<div id="write_form_content">
 
 											<!-- 글 쓰기 -->
-											<form>
+											<form method="get" action="writeform1.do" id="writeForm_1" enctype="multipart/form-data">
+												
 												<div id="writeForm_div">
-													<div class="div_text_write"
-														contenteditable="true"></div>
-
+												
+													<textarea name="writeform1_content" id="writeForm1_content_text" class="div_text_write" contenteditable="true"></textarea>
+													
+													
+													<!-- 파일 업로드 -->
+													<div>
+														<div class="post_file"></div>
+													</div>
+													<!-- //파일 업로드 -->
 													<!-- 이미지 업로드 -->
 													<div>
 														<div class="post_images"></div>
 													</div>
 													<!-- //이미지 업로드 -->
 
-
-
 													<!-- 하단 툴바 -->
 													<hr>
 													<div
 														style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
-
-														<a class="add_file"></a> <a class="add_pic"></a>
+														<input type="file" id="writeForm1_file" name="writeForm1_file" style="display: none;">
+														<a id="writeForm1_file_add" class="add_file"></a> 
+														<a class="add_pic"></a>
 														<div style="display: inline-block; float: right;">
 															<select style="vertical-align: middle; height: 27px;">
 																<option></option>
 																<option></option>
-															</select> <a class="submit_a">올리기</a>
+															</select> 
+ 															<a class="submit_a" onclick="writeForm_submit1()">올리기</a>
 														</div>
 													</div>
 													<!-- //하단 툴바 -->
+													
 												</div>
+												
 											</form>
 											<!-- //글 쓰기 -->
 
@@ -513,8 +525,9 @@
 													<div
 														style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 
-														<a class="add_file"></a> <a class="add_pic"></a> <a
-															class="add_loc" onclick="locationPick()"></a>
+														<a class="add_file"></a> 
+														<a class="add_pic"></a> 
+														<a class="add_loc" onclick="locationPick()"></a>
 														<div style="display: inline-block; float: right;">
 															<select style="vertical-align: middle; height: 27px;">
 																<option></option>
@@ -1101,14 +1114,14 @@
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script src="script/jquery-3.5.1-min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
+<script type="text/javascript" src="script/articleScript.js"></script>
 <script type="text/javascript" src="script/datepicker.js"></script>
 <script type="text/javascript" src="script/datePick-jquery.js"></script>
 
-<script type="text/javascript" src="script/articleScript.js"></script>
+
 <script type="text/javascript" src="script/script.js"></script>
 <script type="text/javascript" src="script/task.js"></script>
 
