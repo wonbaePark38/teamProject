@@ -11,8 +11,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close"
 		p:driverClassName="oracle.jdbc.driver.OracleDriver"
-		p:url="jdbc:oracle:thin:@localhost:1521/XEPDB1" p:username="mytest"
-		p:password="mytest" />
+		p:url="jdbc:oracle:thin:@mydatabase.ccj4fynhvkft.us-east-2.rds.amazonaws.com:1521:myDB" p:username="admin"
+		p:password="1q2w3e4r" />
 		
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

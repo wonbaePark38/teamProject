@@ -455,7 +455,7 @@
 										<div id="write_form_content">
 
 											<!-- 글 쓰기 -->
-											<form method="get" action="writeform1.do" id="writeForm_1" enctype="multipart/form-data">
+											<form method="post" action="writeform1.do" id="writeForm_1" enctype="multipart/form-data">
 												
 												<div id="writeForm_div">
 												
@@ -463,23 +463,22 @@
 													
 													
 													<!-- 파일 업로드 -->
-													<div>
-														<div class="post_file"></div>
-													</div>
+													<div id="writeForm1_uploadFile" class="post_file"></div>
 													<!-- //파일 업로드 -->
+													
 													<!-- 이미지 업로드 -->
 													<div>
-														<div class="post_images"></div>
+														<div id="writeForm1_uploadImg" class="post_images"></div>
 													</div>
 													<!-- //이미지 업로드 -->
 
 													<!-- 하단 툴바 -->
 													<hr>
-													<div
-														style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
-														<input type="file" id="writeForm1_file" name="writeForm1_file" style="display: none;">
+													<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;" onsubmit="attech_file_check()">
+														<input type="file" id="writeForm1_file" name="writeForm1_file" onchange="fileCheck(this)" style="display: none;">
 														<a id="writeForm1_file_add" class="add_file"></a> 
-														<a class="add_pic"></a>
+														<input type="file" id="writeForm1_img" name="writeForm1_img" onchange="imgCheck(this)" accept="image/gif, image/jpg, image/png" style="display: none;">
+														<a id="writeForm1_img_add" class="add_pic"></a>
 														<div style="display: inline-block; float: right;">
 															<select style="vertical-align: middle; height: 27px;">
 																<option></option>
