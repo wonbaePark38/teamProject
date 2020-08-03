@@ -14,13 +14,15 @@
 		<org.aspectj-version>1.9.5</org.aspectj-version>
 		<org.slf4j-version>1.7.30</org.slf4j-version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>Spring Plugins</id>
-			<url>https://repo.spring.io/plugins-release/</url>
-		</repository>
-	</repositories>
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
 		<dependency>
@@ -30,12 +32,13 @@
 		</dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc6 -->
 		<dependency>
-			<groupId>com.oracle</groupId>
+			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.3</version>
+			<version>11.2.0.4</version>
 		</dependency>
+
 
 
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
