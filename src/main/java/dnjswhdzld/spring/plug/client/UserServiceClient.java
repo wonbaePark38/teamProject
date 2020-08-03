@@ -1,15 +1,18 @@
 package dnjswhdzld.spring.plug.client;
 
-import java.util.List;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
-import dnjswhdzld.spring.plug.client.impl.UserDAO;
 
 public class UserServiceClient {
 	public static void main(String[] args) {
-		try {
-			
+		
+		AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
+		
+		UserService userService = container.getBean("userService", UserService.class);
+		
+		
 		System.out.println("start");
-		UserDAO userDAO = new UserDAO();
 		UserVO vo = new UserVO();
 		System.out.println("DAO, VO 객체생성");
 		vo.setOfficename("dnjswhdzld");
@@ -21,10 +24,9 @@ public class UserServiceClient {
 		vo.setDevice("com");
 		vo.setUserstate("정상");
 		vo.setUsermanager("관리자");
-		userDAO.insertUser(vo);
+		userService.insertUser(vo);
 		System.out.println(1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		container.close();
+
 	}
 }
