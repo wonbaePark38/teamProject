@@ -57,6 +57,7 @@ $(function() {
 
 function fileCheck(obj) {
 	
+	var file_div = obj.parentNode.parentNode.childNodes[5];
 	
 	var filePoint = obj.value.lastIndexOf('\\');
 	var fileName = obj.value.substring(filePoint + 1, obj.length);
@@ -110,7 +111,7 @@ function fileCheck(obj) {
 		
 		ext_file_div.append(ext_file_div_cancle);
 		
-		document.getElementById('writeForm1_uploadFile').appendChild(ext_file_div);
+		file_div.appendChild(ext_file_div);
 }
 
 function imgCheck(obj) {
@@ -168,6 +169,8 @@ function imgCheck(obj) {
 			ext_file_div.append(ext_file_div_cancle);
 			
 		document.getElementById('writeForm1_uploadImg').appendChild(ext_file_div);
+		
+
 			
 	}else{
 		alert('이미지 파일이 아닙니다.')

@@ -84,22 +84,19 @@
 					<div id="write_form_content">
 
 						<!-- 글 쓰기 -->
-						<form method="post" action="writeform1.do" id="writeForm_1" enctype="multipart/form-data">
+						<form method="post" action="writeform1.do" id="writeForm1_form" enctype="multipart/form-data">
 
 							<input type="hidden" name="form_name" value="nomalWrite">
 							<div id="writeForm_div">
 
 								<textarea name="writeform1_content" id="writeForm1_content_text" class="div_text_write"></textarea>
 
-
 								<!-- 파일 업로드 -->
 								<div id="writeForm1_uploadFile" class="post_file"></div>
 								<!-- //파일 업로드 -->
 
 								<!-- 이미지 업로드 -->
-								<div>
-									<div id="writeForm1_uploadImg" class="post_images"></div>
-								</div>
+								<div id="writeForm1_uploadImg" class="post_images"></div>
 								<!-- //이미지 업로드 -->
 
 								<!-- 하단 툴바 -->
@@ -127,27 +124,33 @@
 						<!-- //글 쓰기 -->
 
 						<!-- 글쓰기 2.0 -->
-						<form method="post" action="writeform2.do" id="writeForm_2" enctype="multipart/form-data">
+						<form method="post" action="writeform2.do" id="writeForm2_form" enctype="multipart/form-data">
 							<input type="hidden" name="form_name" value="nomalWrite2.0">
-							<input type="hidden" name="writeform2_lat" id="writeform2_lat" value="">
-							<input type="hidden" name="writeform2_lng" id="writeform2_lng" value="">
 							<div class="write20_form" id="write20Form_div">
 								<!-- 제목입력 -->
 								<div class="writeForm2_title">
 									<input name="writeForm2_title" type="text" placeholder="제목을 입력해 주세요" style="width: 80%; border-style: none;">
 								</div>
 								<hr>
-								<!-- 내용입력 -->
-								<textarea name="writeForm2_content" id="writeForm2_content_text" class="div_text_write"></textarea>
-								<!-- //내용입력 -->
+								
+								<textarea name="writeForm2_content" id="writeForm2_content_text" class="div_text_write"></textarea>							
+								
+								<!-- 파일 업로드 -->
+								<div id="writeForm2_uploadFile" class="post_file"></div>
+								<!-- //파일 업로드 -->
 
+								<!-- 이미지 업로드 -->
+								<div id="writeForm2_uploadImg" class="post_images"></div>
+								<!-- //이미지 업로드 -->
+								
+								
 								<!-- 지도 영역 -->
 								<div id="location_div">
 									<div id="locationMap"></div>
 								</div>
 								<!-- //지도 영역 -->
 
-
+								
 
 								<!-- 하단 툴바 -->
 								<hr>
@@ -226,24 +229,15 @@
 								<!-- 담당자 -->
 								<div class="work_form_manager">
 									<div>
-										<label id="work_worker_img"></label> <input type="text"
-											id="work_worker_select" onclick="work_workerSelect()"
-											placeholder="담당자 추가">
+										<label id="work_worker_img"></label> 
+										<input type="text" id="work_worker_select" onclick="work_workerSelect()" placeholder="담당자 추가">
 										<div id="worker_select_div">
-											<ul
-												style="list-style: none; background-color: white; padding-left: 0px;">
-												<li>테스트1</li>
-												<li>테스트2</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-												<li>테스트3</li>
-
+											<ul style="list-style: none; border:1px solid black; background-color: white; padding-left: 0px;">
+												<!-- forEach -->
+												<li><a onclick="add_worker(this)">테스트1</a></li>
+												<li><a>테스트2</a></li>
+												<li><a>테스트3</a></li>
+												<!-- //forEach -->
 											</ul>
 										</div>
 									</div>
@@ -295,8 +289,7 @@
 										<div>
 											<label id="work_progress_img"></label>
 											<div style="display: inline;">
-												<progress id="progress" value="0" max="100"
-													onclick="progressBar()"></progress>
+												<progress id="progress" value="0" max="100" onclick="progressBar()"></progress>
 											</div>
 										</div>
 									</div>

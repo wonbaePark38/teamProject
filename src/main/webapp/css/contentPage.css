@@ -301,9 +301,10 @@ hr {
 	z-index: 99;
 	position: relative;
 	width: 150px;
-	height: 150px;
+	max-height: 150px;
 	margin-left: 32px;
 	overflow: auto;
+	right: 6px;
 }
 
 #work_status_img {

@@ -148,6 +148,9 @@ function headerOption(){
     
   }
 
+  function add_worker(obj) {
+	
+}
  
 
   //allday

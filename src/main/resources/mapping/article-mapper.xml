@@ -30,7 +30,7 @@
 	INSERT INTO mainpage_article2
 	(project_id, article_id, form_name, writeform2_title, writeform2_content, writeform2_latlng, writer, regDate, file_name, img_name) 
 	VALUES
-	( 1 ,article_seq.nextval , #{form_name}, #{writeform2_title}, #{writeform1_content}, #{writeform2_latlng}, 'tester', sysdate, #{file_name}, #{img_name})
+	( 1 ,article_seq.nextval , #{form_name}, #{writeForm2_title}, #{writeForm2_content}, #{writeForm2_latlng, jdbcType=VARCHAR}, 'tester', sysdate, #{file_name, jdbcType=VARCHAR}, #{img_name, jdbcType=VARCHAR})
 	</insert>
 
 

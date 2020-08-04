@@ -23,9 +23,9 @@ public class Article1VO {
 
 	
 	//글쓰기2.0
-	private String writeform2_title;
-	private String writeform2_content;
-	private String writeform2_latlng;
+	private String writeForm2_title;
+	private String writeForm2_content;
+	private String writeForm2_latlng;
 	
 	// 공동 get, set
 	public int getProject_id() {
@@ -112,30 +112,41 @@ public class Article1VO {
 	// 글쓰기 get,set 끝
 
 	
+
+	
 	// 글쓰기 2.0 get,set
-	public String getWriteform2_title() {
-		return writeform2_title;
+	
+	public String getWriteForm2_title() {
+		return writeForm2_title;
 	}
 
-	public void setWriteform2_title(String writeform2_title) {
-		this.writeform2_title = writeform2_title;
+	public void setWriteForm2_title(String writeForm2_title) {
+		this.writeForm2_title = writeForm2_title;
 	}
 
-	public String getWriteform2_content() {
-		return writeform2_content;
+	public String getWriteForm2_content() {
+		return writeForm2_content;
 	}
 
-	public void setWriteform2_content(String writeform2_content) {
-		this.writeform2_content = writeform2_content;
+	public void setWriteForm2_content(String writeForm2_content) {
+		this.writeForm2_content = writeForm2_content;
 	}
 
-	public String getWriteform2_latlng() {
-		return writeform2_latlng;
+	public String getWriteForm2_latlng() {
+		return writeForm2_latlng;
 	}
 
-	public void setWriteform2_latlng(String writeform2_latlng) {
-		this.writeform2_latlng = writeform2_latlng;
+	public void setWriteForm2_latlng(String writeForm2_latlng) {
+		this.writeForm2_latlng = writeForm2_latlng;
 	}
+
+	
+	@Override
+	public String toString() {
+		return "Article1VO [writeForm2_title=" + writeForm2_title + ", writeForm2_content=" + writeForm2_content
+				+ ", writeForm2_latlng=" + writeForm2_latlng + "]";
+	}
+	
 	// 글쓰기 2.0 get,set 끝
 
 	

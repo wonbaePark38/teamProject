@@ -53,7 +53,7 @@ public class MainPageController {
 		}
 		
 		
-		service.insertArticle1(vo);
+		service.insertArticle2(vo);
 		
 		return "mainPage.jsp";
 	}
