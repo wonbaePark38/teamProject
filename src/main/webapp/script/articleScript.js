@@ -149,8 +149,13 @@ function headerOption(){
   }
 
   function add_worker(obj) {
+	var worker_name = obj.innerText;
 	
-}
+	var worker_append = document.createElement('div');
+	worker_append.setAttribute('style','display:inline-block; width: 40px; background-color: red; margin-right: 3px; height: 25px; border-radius: 3px;');
+	
+	document.getElementById('worker_append_div').appendChild(worker_append);
+  }
  
 
   //allday

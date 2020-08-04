@@ -229,8 +229,11 @@
 								<!-- 담당자 -->
 								<div class="work_form_manager">
 									<div>
-										<label id="work_worker_img"></label> 
+										<label id="work_worker_img"></label>
+										<div id="worker_append_div"style="display:inline-block"></div>
+										
 										<input type="text" id="work_worker_select" onclick="work_workerSelect()" placeholder="담당자 추가">
+										
 										<div id="worker_select_div">
 											<ul style="list-style: none; border:1px solid black; background-color: white; padding-left: 0px;">
 												<!-- forEach -->
