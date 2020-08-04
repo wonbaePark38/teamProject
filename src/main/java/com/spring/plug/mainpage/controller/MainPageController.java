@@ -59,6 +59,13 @@ public class MainPageController {
 	}
 	
 	
+	@RequestMapping(value = "/writeform3.do")
+	public String article3Insert(Article1VO vo) throws IOException{
+		
+		service.insertArticle3(vo);
+		
+		return "mainPage.jsp";
+	}
 	
 	
 	

@@ -356,7 +356,7 @@
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
 											<option></option>
-										</select> <a class="submit_a">올리기</a>
+										</select> <a class="submit_a" onclick="writeForm_submit3()">올리기</a>
 									</div>
 								</div>
 

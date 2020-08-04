@@ -29,12 +29,11 @@ public class Article1VO {
 	
 	
 	// 업무
-	
 	private String workForm3_title;
 	private String writeForm3_status;
 	private String writeForm3_workersName;
-	private Date writeForm3_start_date;
-	private Date writeForm3_end_date;
+	private String writeForm3_start_date;
+	private String writeForm3_end_date;
 	private String writeForm3_progress;
 	private String writeForm3_order;
 	private String writeForm3_content;
@@ -180,19 +179,19 @@ public class Article1VO {
 		this.writeForm3_workersName = writeForm3_workersName;
 	}
 
-	public Date getWriteForm3_start_date() {
+	public String getWriteForm3_start_date() {
 		return writeForm3_start_date;
 	}
 
-	public void setWriteForm3_start_date(Date writeForm3_start_date) {
+	public void setWriteForm3_start_date(String writeForm3_start_date) {
 		this.writeForm3_start_date = writeForm3_start_date;
 	}
 
-	public Date getWriteForm3_end_date() {
+	public String getWriteForm3_end_date() {
 		return writeForm3_end_date;
 	}
 
-	public void setWriteForm3_end_date(Date writeForm3_end_date) {
+	public void setWriteForm3_end_date(String writeForm3_end_date) {
 		this.writeForm3_end_date = writeForm3_end_date;
 	}
 

@@ -7,4 +7,6 @@ public interface ArticleService {
 	void insertArticle1(Article1VO vo);
 	
 	void insertArticle2(Article1VO vo);
+	
+	void insertArticle3(Article1VO vo);
 }

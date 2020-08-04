@@ -15,3 +15,11 @@ function writeForm_submit2() {
 	
 	form2.submit();
 }
+
+function writeForm_submit3() {
+	var form3 = document.getElementById('writeForm3_form');
+	
+	
+	
+	form3.submit();
+}
