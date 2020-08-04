@@ -10,9 +10,8 @@ public class ProjectDirController {
 
 	@RequestMapping(value = "mainPage.jsp", method = RequestMethod.GET)
 	public ModelAndView project() {
-		System.out.println("project");
-		
 		return null;
 	}
+	
 	
 }
