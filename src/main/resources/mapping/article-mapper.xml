@@ -8,7 +8,7 @@
 	INSERT INTO mainpage_article1
 	(project_id,article_id,form_name,writeform1_content,writer,regDate,file_name,img_name) 
 	VALUES
-	( 1 ,article_seq.nextval , #{form_name}, #{writeform1_content}, 'tester', sysdate, #{file_name}, #{img_name})
+	( 1 ,article_seq.nextval , #{form_name}, #{writeform1_content}, 'tester', sysdate, #{file_name, jdbcType=VARCHAR}, #{img_name, jdbcType=VARCHAR})
 	</insert>
 
 

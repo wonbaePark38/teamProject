@@ -189,10 +189,11 @@
 
 
 						<!-- 업무 글쓰기 -->
-						<form>
+						<form method="post" action="writeform3.do" id="writeForm3_form">
 							<div class="work_form" id="workForm_div">
 
-								<input type="hidden" name="workForm3_status">
+								<input type="hidden" name="form_name" value="workWrite">
+								
 								<!-- 업무명 -->
 								<div id="work_form_title">
 									<input type="text" name="workForm3_title" placeholder="업무명을 입력해 주세요" style="width: 80%; border-style: none;">
@@ -204,9 +205,11 @@
 									<label id="work_status_img"></label>
 									<!-- 상태 선택 테이블 -->
 									<div id="status_select_div">
+									
+										<input type="hidden" name="writeForm3_status" id="work_status">
+									
 										<div style="display: inline-block; width: 16%;">
-											<span id="request" onclick="request()"
-												style="background-color: #4aaefb;">요청</span>
+											<span id="request" onclick="request()" style="background-color: #4aaefb;">요청</span>
 										</div>
 										<div style="display: inline-block; width: 16%;">
 											<span id="doing" onclick="doing()">진행</span>
@@ -230,9 +233,10 @@
 								<div class="work_form_manager">
 									<div>
 										<label id="work_worker_img"></label>
-										<div id="worker_append_div"style="display:inline-block"></div>
 										
-										<input type="text" id="work_worker_select" onclick="work_workerSelect()" placeholder="담당자 추가">
+										<div style="display: inline-block;">
+											<input type="text" id="work_worker_select" onclick="work_workerSelect()" placeholder="담당자 추가">
+										</div>
 										
 										<div id="worker_select_div">
 											<ul style="list-style: none; border:1px solid black; background-color: white; padding-left: 0px;">
@@ -243,6 +247,10 @@
 												<!-- //forEach -->
 											</ul>
 										</div>
+										
+										<input type="hidden" id="work_workers" name="writeForm3_workersName">
+										
+										<div id="worker_append_div" style="margin-left: 26px; margin-top: 5px"></div>
 									</div>
 								</div>
 								<!-- //담당자 -->
@@ -262,8 +270,7 @@
 										<div>
 											<label id="work_start_img"></label>
 											<div style="display: inline;">
-												<input type="text" id="start_date" placeholder="시작일"
-													style="border-style: none;">
+												<input type="text" name="writeForm3_start_date" id="start_date" placeholder="시작일" style="border-style: none;">
 											</div>
 
 										</div>
@@ -277,8 +284,7 @@
 										<div>
 											<label id="work_end_img"></label>
 											<div style="display: inline;">
-												<input type="text" id="end_date" placeholder="마감일"
-													style="border-style: none;">
+												<input type="text" name="writeForm3_end_date" id="end_date" placeholder="마감일" style="border-style: none;">
 											</div>
 
 										</div>
@@ -291,6 +297,7 @@
 									<div>
 										<div>
 											<label id="work_progress_img"></label>
+											<input type="hidden" name="writeForm3_progress" id="work_progress" value="0">
 											<div style="display: inline;">
 												<progress id="progress" value="0" max="100" onclick="progressBar()"></progress>
 											</div>
@@ -305,8 +312,7 @@
 										<div>
 											<label id="work_order_img"></label>
 											<div style="width: 40%; display: inline-block;">
-												<input type="text" placeholder="우선순위 선택"
-													style="border-style: none;">
+												<input type="text" name="writeForm3_order" id="work_order" placeholder="우선순위 선택" onclick="orderSelectDiv()" style="border-style: none;">
 											</div>
 										</div>
 									</div>
@@ -314,10 +320,10 @@
 									<div id="order_div">
 										<div>
 											<ul>
-												<li>낮음</li>
-												<li>보통</li>
-												<li>높음</li>
-												<li>긴급</li>
+												<li><a onclick="orderSelect(this)">낮음</a></li>
+												<li><a onclick="orderSelect(this)">보통</a></li>
+												<li><a onclick="orderSelect(this)">높음</a></li>
+												<li><a onclick="orderSelect(this)">긴급</a></li>
 											</ul>
 										</div>
 									</div>
@@ -328,13 +334,17 @@
 
 
 								<!-- 내용 -->
-								<div class="work_form_content">
-									<div class="div_text_write" contenteditable="true"
-										style="width: 100%;"></div>
-								</div>
+								<textarea class="div_text_write" name="writeForm3_content"></textarea>
+								
 								<!-- //내용 -->
 
+								<!-- 파일 업로드 -->
+								<div id="writeForm3_uploadFile" class="post_file"></div>
+								<!-- //파일 업로드 -->
 
+								<!-- 이미지 업로드 -->
+								<div id="writeForm3_uploadImg" class="post_images"></div>
+								<!-- //이미지 업로드 -->
 
 
 								<!-- 하단 툴바 -->

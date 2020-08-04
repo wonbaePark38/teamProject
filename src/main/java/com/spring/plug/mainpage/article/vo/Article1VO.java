@@ -27,6 +27,18 @@ public class Article1VO {
 	private String writeForm2_content;
 	private String writeForm2_latlng;
 	
+	
+	// 업무
+	
+	private String workForm3_title;
+	private String writeForm3_status;
+	private String writeForm3_workersName;
+	private Date writeForm3_start_date;
+	private Date writeForm3_end_date;
+	private String writeForm3_progress;
+	private String writeForm3_order;
+	private String writeForm3_content;
+	
 	// 공동 get, set
 	public int getProject_id() {
 		return project_id;
@@ -140,14 +152,86 @@ public class Article1VO {
 		this.writeForm2_latlng = writeForm2_latlng;
 	}
 
+	// 글쓰기 2.0 get,set 끝
 	
-	@Override
-	public String toString() {
-		return "Article1VO [writeForm2_title=" + writeForm2_title + ", writeForm2_content=" + writeForm2_content
-				+ ", writeForm2_latlng=" + writeForm2_latlng + "]";
+
+	// 업무 get,set
+	public String getWorkForm3_title() {
+		return workForm3_title;
+	}
+
+	public void setWorkForm3_title(String workForm3_title) {
+		this.workForm3_title = workForm3_title;
+	}
+
+	public String getWriteForm3_status() {
+		return writeForm3_status;
+	}
+
+	public void setWriteForm3_status(String writeForm3_status) {
+		this.writeForm3_status = writeForm3_status;
+	}
+
+	public String getWriteForm3_workersName() {
+		return writeForm3_workersName;
+	}
+
+	public void setWriteForm3_workersName(String writeForm3_workersName) {
+		this.writeForm3_workersName = writeForm3_workersName;
+	}
+
+	public Date getWriteForm3_start_date() {
+		return writeForm3_start_date;
+	}
+
+	public void setWriteForm3_start_date(Date writeForm3_start_date) {
+		this.writeForm3_start_date = writeForm3_start_date;
+	}
+
+	public Date getWriteForm3_end_date() {
+		return writeForm3_end_date;
+	}
+
+	public void setWriteForm3_end_date(Date writeForm3_end_date) {
+		this.writeForm3_end_date = writeForm3_end_date;
+	}
+
+	public String getWriteForm3_progress() {
+		return writeForm3_progress;
+	}
+
+	public void setWriteForm3_progress(String writeForm3_progress) {
+		this.writeForm3_progress = writeForm3_progress;
+	}
+
+	public String getWriteForm3_order() {
+		return writeForm3_order;
+	}
+
+	public void setWriteForm3_order(String writeForm3_order) {
+		this.writeForm3_order = writeForm3_order;
+	}
+
+	public String getWriteForm3_content() {
+		return writeForm3_content;
+	}
+
+	public void setWriteForm3_content(String writeForm3_content) {
+		this.writeForm3_content = writeForm3_content;
 	}
 	
-	// 글쓰기 2.0 get,set 끝
+	
+
+	@Override
+	public String toString() {
+		return "Article1VO [workForm3_title=" + workForm3_title + ", writeForm3_status=" + writeForm3_status
+				+ ", writeForm3_workersName=" + writeForm3_workersName + ", writeForm3_start_date="
+				+ writeForm3_start_date + ", writeForm3_end_date=" + writeForm3_end_date + ", writeForm3_progress="
+				+ writeForm3_progress + ", writeForm3_order=" + writeForm3_order + ", writeForm3_content="
+				+ writeForm3_content + "]";
+	}
+	
+	
 
 	
 	
