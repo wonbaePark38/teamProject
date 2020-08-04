@@ -897,6 +897,7 @@
 								</div>
 							</div>
 							<!-- //글작성 폼 -->
+							
 							<!-- 미확인 알람 -->
 							<div id="unread_alarm_div" style="width: 100%;">
 								<div style="width: 100%; height: 50px; background-color: white;">
