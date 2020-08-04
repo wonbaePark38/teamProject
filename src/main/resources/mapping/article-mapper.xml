@@ -4,8 +4,11 @@
 
 <mapper namespace="ArticleDAO">
 
-	<insert id="articleInsert" useGeneratedKeys="true" parameterType="articleVO">
-	INSERT INTO article_writeform1(article_id, writeform1_content) VALUES( article_seq.nextval ,#{writeform1_content})
+	<insert id="articleInsert" useGeneratedKeys="true" parameterType="article1VO">
+	INSERT INTO mainpage_article1
+	(project_id,article_id,form_name,writeform1_content,writeform1_writer,regDate,file_name,img_name) 
+	VALUES
+	( 1 ,article_seq.nextval , #{form_name}, #{writeform1_content}, 'tester', sysdate, #{file_name}, 'test_img_name')
 	</insert>
 
 </mapper>

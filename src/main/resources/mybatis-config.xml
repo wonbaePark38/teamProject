@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.spring.plug.articlewriteform.vo.ArticleVO" alias="articleVO"></typeAlias>
+		<typeAlias type="com.spring.plug.mainpage.article.vo.Article1VO" alias="article1VO"></typeAlias>
 	</typeAliases>
 	
 	<mappers>

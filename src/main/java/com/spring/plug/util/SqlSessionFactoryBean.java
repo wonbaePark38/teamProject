@@ -1,4 +1,4 @@
-package com.spring.plug.articlewriteform.util;
+package com.spring.plug.util;
 
 import java.io.Reader;
 
@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class ArticleSqlSessionFactoryBean {
+public class SqlSessionFactoryBean {
 	
 	private static SqlSessionFactory sessionFactory = null;
 	

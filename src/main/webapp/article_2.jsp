@@ -67,37 +67,14 @@
 			</div>
 			
 			<!-- 이미지 -->
-			<input type="button" onclick="img_load()" value="이미지 업로드 버튼">
+			
 			<div id="post_images">
-				<!-- 이미지가 들어갈 영역 -->
-				<!-- 
-				<div class='post_image'>
-					<div class='post_box'>
-						<img class='post_load_img'>
-						<input type='button' id='img_close'>
-					</div>
-				</div>
-				 -->
+				
 			</div>
 			<!-- 파일 -->
-			<input type="button" onclick="file_load()" value="파일 업로드 버튼">
+			
 			<div id="post_files">
-				<!-- 파일이 들어갈 영역 -->
-				<!-- <div class="post_file" >
-					<div style="height: 70px; width: 100%; border: 1px solid #eaeaea; position: relative;">
-						<img id="download_icon">
-							<dl class="file_div">
-								<dt>
-								<a href="#">파일 이름</a>
-							</dt>
-							<dd style="margin: 0px;">파일 크기</dd>
-						</dl>
-						<div class="down_fil" >
-							<a id="down_logo" style="display: inline-block;color: #555;" href="#">&nbsp;&nbsp;&nbsp;다운로드</a>
-						</div>
-					</div>
-				</div> 
-				-->
+				
 			</div>
 			<div style="text-align:right; padding-right: 10px;">
 				<span>댓글 n 개</span>&nbsp;<span>읽음 n 명</span>

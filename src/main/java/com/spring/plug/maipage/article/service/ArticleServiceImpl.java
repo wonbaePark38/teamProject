@@ -1,10 +1,10 @@
-package com.spring.plug.articlewriteform.service;
+package com.spring.plug.maipage.article.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.plug.articlewriteform.dao.ArticleDAO;
-import com.spring.plug.articlewriteform.vo.ArticleVO;
+import com.spring.plug.mainpage.article.dao.ArticleDAO;
+import com.spring.plug.mainpage.article.vo.Article1VO;
 
 @Service
 public class ArticleServiceImpl implements ArticleService{
@@ -13,9 +13,9 @@ public class ArticleServiceImpl implements ArticleService{
 	private ArticleDAO dao;
 
 	@Override
-	public void insertArticle(ArticleVO vo) {
+	public void insertArticle1(Article1VO vo) {
 		
-		dao.insertArticle(vo);
+		dao.article1_insert(vo);
 	}
 	
 	
