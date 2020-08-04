@@ -22,6 +22,39 @@ $(function() {
 
 });
 
+
+$(function() {
+
+	$('#writeForm2_file_add').click(function(e) {
+
+		e.preventDefault();
+
+		$('#writeForm1_file').click();
+
+	});
+
+});
+
+$(function() {
+
+	$('#writeForm2_img_add').click(function(e) {
+
+		e.preventDefault();
+
+		$('#writeForm1_img').click();
+
+	});
+
+});
+
+
+
+
+
+
+
+
+
 function fileCheck(obj) {
 	
 	
@@ -83,11 +116,11 @@ function fileCheck(obj) {
 function imgCheck(obj) {
 	
 	imgPoint = obj.value.lastIndexOf('.');
-	extName = obj.value.substring(pathPoint + 1,obj.length);
+	extName = obj.value.substring(imgPoint + 1,obj.length);
 	fileType = extName.toLowerCase();
 	
 	var imgPointCut = obj.value.lastIndexOf('\\');
-	var imgName = obj.value.substring(pathPoint + 1, obj.length);
+	var imgName = obj.value.substring(imgPointCut + 1, obj.length);
 	
 	if(fileType == 'jpg'||fileType == 'png'||fileType == 'gif'){
 		
@@ -111,13 +144,13 @@ function imgCheck(obj) {
 			ext_file_div_div.setAttribute('style','display: inline-block; margin-left: 10px');
 			
 				var ext_file_div_div_p1 = document.createElement('p');
-				ext_file_div_div_p1.innerText = fileName;
+				ext_file_div_div_p1.innerText = imgName;
 				ext_file_div_div_p1.setAttribute('style','display:block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;');
 			
 				ext_file_div_div.append(ext_file_div_div_p1);
 				
 				var ext_file_div_div_p2 = document.createElement('p');
-				ext_file_div_div_p2.innerText = fileSize + ' byte';
+				
 				ext_file_div_div_p2.setAttribute('style','margin-top: 0px; margin-bottom: 0px; font-size: 12px;');
 				
 				ext_file_div_div.append(ext_file_div_div_p2);
@@ -133,6 +166,8 @@ function imgCheck(obj) {
 				ext_file_div_cancle.append(ext_file_div_cancle_a);
 			
 			ext_file_div.append(ext_file_div_cancle);
+			
+		document.getElementById('writeForm1_uploadImg').appendChild(ext_file_div);
 			
 	}else{
 		alert('이미지 파일이 아닙니다.')

@@ -1,5 +1,11 @@
 
 
+
+
+
+
+
+
 //헤더 채팅영역
 function headerChatting(){
   document.getElementById('header_chat_div').style.display=(document.getElementById('header_chat_div').style.display=='block') ? 'none' : 'block';

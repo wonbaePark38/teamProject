@@ -83,7 +83,6 @@
              */
             function geocodeAddress(geocoder, resultMap) {
                 console.log('geocodeAddress 함수 실행');
- 
                 
 
                 if(inputStatus == 'address'){
@@ -103,6 +102,7 @@
                      */
                     geocoder.geocode({'address': address}, function(result, status) {
     
+                    	
                         if (status === 'OK') {
                             // 맵의 중심 좌표를 설정한다.
                             resultMap.setCenter(result[0].geometry.location);
@@ -137,8 +137,20 @@
                     geocoder.geocode({'address': location}, function(result, status) {
 
                         if (status === 'OK') {
+                        	
+                        	var lat_value = result[0].geometry.location.lat();
+                        	var lng_value = result[0].geometry.location.lng();
+                        	
+                        	document.getElementByid('writeform2_lat').value = lat_value;
+                        	document.getElementByid('writeform2_lng').value = lng_value;
+                        	
+                        	
+                        	console.log(result[0].geometry.location.lat());
+                        	console.log(result[0].geometry.location.lng());
+                        	
                             // 맵의 중심 좌표를 설정한다.
-                            resultMap.setCenter(result[0].geometry.location);
+                            var loc = resultMap.setCenter(result[0].geometry.location);
+                            
                             // 맵의 확대 정도를 설정한다.
                             resultMap.setZoom(18);
                             // 맵 마커

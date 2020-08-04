@@ -84,14 +84,12 @@
 					<div id="write_form_content">
 
 						<!-- 글 쓰기 -->
-						<form method="post" action="writeform1.do" id="writeForm_1"
-							enctype="multipart/form-data">
+						<form method="post" action="writeform1.do" id="writeForm_1" enctype="multipart/form-data">
 
 							<input type="hidden" name="form_name" value="nomalWrite">
 							<div id="writeForm_div">
 
-								<textarea name="writeform1_content" id="writeForm1_content_text"
-									class="div_text_write" contenteditable="true"></textarea>
+								<textarea name="writeform1_content" id="writeForm1_content_text" class="div_text_write"></textarea>
 
 
 								<!-- 파일 업로드 -->
@@ -106,16 +104,14 @@
 
 								<!-- 하단 툴바 -->
 								<hr>
-								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;"
-									onsubmit="attech_file_check()">
-									<input type="file" id="writeForm1_file" name="writeForm1_file"
-										onchange="fileCheck(this)" style="display: none;"> <a
-										id="writeForm1_file_add" class="add_file"></a> <input
-										type="file" id="writeForm1_img" name="writeForm1_img"
-										onchange="imgCheck(this)"
-										accept="image/gif, image/jpg, image/png"
-										style="display: none;"> <a id="writeForm1_img_add"
-										class="add_pic"></a>
+								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;" onsubmit="attech_file_check()">
+								
+									<input type="file" id="writeForm1_file" name="writeForm_file" onchange="fileCheck(this)" style="display: none;">
+									<input type="file" id="writeForm1_img" name="writeForm_img" onchange="imgCheck(this)" accept="image/gif, image/jpg, image/png" style="display: none;"> 
+									
+									<a id="writeForm1_file_add" class="add_file"></a> 
+									<a id="writeForm1_img_add" class="add_pic"></a>
+									
 									<div style="display: inline-block; float: right;">
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
@@ -131,20 +127,18 @@
 						<!-- //글 쓰기 -->
 
 						<!-- 글쓰기 2.0 -->
-						<form>
+						<form method="post" action="writeform2.do" id="writeForm_2" enctype="multipart/form-data">
+							<input type="hidden" name="form_name" value="nomalWrite2.0">
+							<input type="hidden" name="writeform2_lat" id="writeform2_lat" value="">
+							<input type="hidden" name="writeform2_lng" id="writeform2_lng" value="">
 							<div class="write20_form" id="write20Form_div">
-
 								<!-- 제목입력 -->
 								<div class="writeForm2_title">
-									<input name="writeForm2_title" type="text"
-										placeholder="제목을 입력해 주세요"
-										style="width: 80%; border-style: none;">
+									<input name="writeForm2_title" type="text" placeholder="제목을 입력해 주세요" style="width: 80%; border-style: none;">
 								</div>
 								<hr>
 								<!-- 내용입력 -->
-								<div class="writeForm2_content">
-									<div class="div_text_write" contenteditable="true"></div>
-								</div>
+								<textarea name="writeForm2_content" id="writeForm2_content_text" class="div_text_write"></textarea>
 								<!-- //내용입력 -->
 
 								<!-- 지도 영역 -->
@@ -158,14 +152,20 @@
 								<!-- 하단 툴바 -->
 								<hr>
 								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
-
-									<a class="add_file"></a> <a class="add_pic"></a> <a
-										class="add_loc" onclick="locationPick()"></a>
+								
+									<input type="file" id="writeForm2_file" name="writeForm_file" onchange="fileCheck(this)" style="display: none;">
+									<input type="file" id="writeForm2_img" name="writeForm_img" onchange="imgCheck(this)" accept="image/gif, image/jpg, image/png" style="display: none;"> 
+									
+									<a id="writeForm2_file_add" class="add_file"></a> 
+									<a id="writeForm2_img_add" class="add_pic"></a> 
+									<a class="add_loc" onclick="locationPick()"></a>
+									
 									<div style="display: inline-block; float: right;">
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
 											<option></option>
-										</select> <a class="submit_a">올리기</a>
+										</select> 
+										<a class="submit_a" onclick="writeForm_submit2()">올리기</a>
 									</div>
 
 
@@ -189,11 +189,10 @@
 						<form>
 							<div class="work_form" id="workForm_div">
 
+								<input type="hidden" name="workForm3_status">
 								<!-- 업무명 -->
 								<div id="work_form_title">
-									<input type="text" name="workForm_title"
-										placeholder="업무명을 입력해 주세요"
-										style="width: 80%; border-style: none;">
+									<input type="text" name="workForm3_title" placeholder="업무명을 입력해 주세요" style="width: 80%; border-style: none;">
 								</div>
 								<!-- //업무명 -->
 								<hr>
@@ -527,15 +526,84 @@
 
 				</div>
 				<!-- write_form_border -->
-				
-				
-				
-				
-				<div style="background-color: black; width: 100%; height: 300px;"></div>
-				
+
+
+
+
+
+
 			</div>
 		</div>
 		<!-- //글작성 폼 -->
+
+		<!-- 미확인 알람 -->
+		<div id="unread_alarm_div" style="width: 100%;">
+			<div style="width: 100%; height: 50px; background-color: white;">
+				<span id="unread_alarm_img"
+					style="display: inline-block; vertical-align: middle; margin-left: 8px; margin-right: 11px; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -44px;"></span>
+				<h5
+					style="display: inline-block; vertical-align: middle; margin-top: 10px; font-size: 15px;">
+					<strong>미확인 알람</strong>
+				</h5>
+				<span
+					style="display: inline-block; vertical-align: middle; text-align: center; width: 30px; height: 14px; border-radius: 8px; background-color: red; font-size: 12px;">12</span>
+				<span
+					style="display: inline-block; vertical-align: middle; margin-left: 300px; font-size: 13px;"><strong>모두읽음</strong></span>
+			</div>
+			<!-- 알람글 최초 3개 -->
+			<!-- forEach -->
+			<div style="background-color: lightgray; width: 100%;">
+				<div style="width: 100%; padding: 5px 5px 5px 5px;">
+					<div style="display: inline-block;">
+						<img src="images/empty_photo_s.png">
+					</div>
+					<div
+						style="display: inline-block; width: 400px; vertical-align: middle;">
+						<span style="font-size: 12px;"><strong>글쓴놈</strong></span> <span
+							style="font-size: 10px;">현재일자 |</span> <span
+							style="font-size: 10px;">현재시간</span> <br> <span
+							style="font-size: 10px;">글내용입니다</span>
+					</div>
+					<span
+						style="display: inline-block; vertical-align: middle; text-align: center; font-size: 12px; border-radius: 10px; border: 3px solid #676869; background-color: lightgray; width: 45px; height: 25px; margin-left: 20px;">
+						보기 </span>
+				</div>
+			</div>
+		</div>
+		<!-- //forEach -->
+		<div
+			style="text-align: center; vertical-align: middle; background-color: white;">
+			<span style="font-size: 9px;">더보기</span>
+		</div>
+		<!-- //미확인 알람 -->
+
+		<!-- 상단 고정글 -->
+		<div id="upper_fixed_article" style="margin-top: 10px;">
+			<div
+				style="width: 100%; height: 35px; background-color: white; padding: 5px 5px 5px 5px;">
+				<span id="upper_fixed_img"
+					style="display: inline-block; vertical-align: middle; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -66px;"></span>
+				<span style="display: inline-block;">상단 고정글</span> <span
+					style="margin-left: 5px;"><strong>2</strong></span>
+
+			</div>
+			<!-- forEach -->
+			<div style="background-color: white; padding: 5px;">
+				<div style="display: inline-block; width: 270px;">
+					<span style="display: inline-block;">[피드백]</span> <span
+						style="display: inline-block;">글 제목</span>
+				</div>
+				<span
+					style="display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 13px; font-size: 10px; border-radius: 5px; background-color: lightblue; margin-left: 170px;">요청</span>
+			</div>
+			<!-- 누르면 나올 게시물 -->
+			<div style="display: none;"></div>
+			<!-- //누르면 나올 게시물 -->
+			<!-- //forEach -->
+		</div>
+		<!-- //상단 고정글 -->
+
+		<div id="article_show" style=" width: 100%; margin-top: 10px"></div>
 
 	</div>
 </div>

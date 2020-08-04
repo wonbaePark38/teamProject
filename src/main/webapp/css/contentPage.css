@@ -19,7 +19,7 @@ hr {
 	display: block;
 }
 
-.div_text_write[contenteditable=true] {
+.div_text_write {
 	font-size: 12px;
 	width: 100%;
 	min-height: 100px;
@@ -256,6 +256,10 @@ hr {
 
 .write20_form {
 	display: none;
+}
+
+#writeForm2_content{
+	width: 100%;
 }
 
 #location_div {
