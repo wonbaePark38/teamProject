@@ -1,15 +1,12 @@
 package dnjswhdzld.spring.plug.projectdir.impl;
 
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 
 import dnjswhdzld.spring.plug.projectdir.ProjectdirVO;
-import dnjswhdzld.spring.plug.util.SqlSessionFactoryBean;
 
 public class ProjectdirDAO {
-	private SqlSession sqlSession;
-	public ProjectdirDAO() {
-		sqlSession = SqlSessionFactoryBean.getSqlSessionInstance();
-	}
+	private SqlSessionTemplate sqlSessionTemplate;
 	public void insertProjectDir(ProjectdirVO vo) {
+		sqlSessionTemplate.insert("ProjectdirDAO.insertProjectdirInsert",vo);
 	}
 }

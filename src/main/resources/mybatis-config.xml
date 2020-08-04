@@ -4,10 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="dnjswhdzld.spring.plug.client.UserVO" alias="usertest"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="mappings/user-mapping.xml" />
 	</mappers>
 </configuration>
