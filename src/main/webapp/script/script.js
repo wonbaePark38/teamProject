@@ -212,8 +212,7 @@ function hiddenMenuFold(thisevent,e){
     }
   }
   
-  
-<<<<<<< HEAD
+
   
 
   /*구글 로그인 로그아웃 코드*/
@@ -294,6 +293,5 @@ function searchPress(){
   console.log('클릭');
 }
 
-=======
+
   //thisevent.style.display=(document.querySelector('.moreMenuContainer2').style.display=='block') ? 'none' : 'block';
->>>>>>> branch 'wonbaetest' of https://github.com/wonbaePark38/teamProject.git
