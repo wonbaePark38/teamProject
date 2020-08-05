@@ -16,5 +16,18 @@ public class UserServiceImpl implements UserService{
 	public UserVO getUser(UserVO vo) {
 		return userDAO.getUser(vo);
 	}
+
+
+	@Override
+	public UserVO getSocialUser(UserVO vo) {
+		return userDAO.getSocialUser(vo);
+	}
+
+
+	@Override
+	public String getUserEmail() {
+		
+		return null;
+	}
 	
 }
