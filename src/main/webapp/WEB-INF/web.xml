@@ -11,7 +11,9 @@
    <listener>
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
    </listener>
-
+<!-- //공통으로 사용할 빈 객체가 있을때 사용하는 구문 -->
+   
+   
    <filter>
       <filter-name>encodingFilter</filter-name>
       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
