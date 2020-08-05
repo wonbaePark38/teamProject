@@ -253,7 +253,16 @@ function headerOption(){
   var workerSelectEvent = "";
   var workerName_a = "";
 
+  var todo_param = "";
+  
+  var todo_value = "";
+  var todo_date_value = "";
+  var todo_worker_value = "";
+  
+  
   function todoAppend(){
+	  
+	 
 
       // id 만들기
       todo_div = divIdNumCreate('todo_div');
@@ -295,6 +304,7 @@ function headerOption(){
       todoDatePickInput.setAttribute('placeholder','일자');
       todoDatePickInput.setAttribute('readOnly','true');
       todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
+      todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "mm/dd"});');
 
       todoDatePickDiv.append(todoDatePickInput);
       todoAppendContent.append(todoDatePickDiv);

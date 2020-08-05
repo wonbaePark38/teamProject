@@ -518,11 +518,11 @@
 
 
 						<!-- 할일 -->
-						<form>
+						<form method="post" action="writeform5.do" id="writeForm5_form">
 							<div class="todo_form" id="todoForm_div">
 								<!-- 할일 제목 -->
 								<div>
-									<input placeholder="할일제목을 입력해 주세요"
+									<input placeholder="할일제목을 입력해 주세요" name="writeForm5_title"
 										style="width: 80%; border-style: none;">
 								</div>
 								<!-- //할일 제목 -->
@@ -548,7 +548,7 @@
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
 											<option></option>
-										</select> <a class="submit_a">올리기</a>
+										</select> <a class="submit_a" onclick="">올리기</a>
 									</div>
 								</div>
 
