@@ -182,11 +182,5 @@ function clientCenterFold(){
     document.getElementById('helpMenu_on').style.display=(document.getElementById('helpMenu_on').style.display=='block') ? 'none' : 'block';
 
 }
-function fold(){
-    
-    document.getElementById('chart').style.display=(document.getElementById('chart').style.display=='block') ? 'none' : 'block';
-}
-function searchPress(){
-  console.log('클릭');
-}
+
 

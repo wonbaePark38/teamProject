@@ -59,6 +59,8 @@ function headerOption(){
     document.getElementById('progress').value = value;
   }
   
+  
+  
   // 글쓰기 버튼
   function writeForm(){
     document.getElementById('writeForm_div').style.display='block';
