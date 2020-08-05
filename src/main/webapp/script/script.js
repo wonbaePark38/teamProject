@@ -5,8 +5,8 @@
   var filesizeStatus = 1;
   var writerStatus = 1;
   var updateStatus = 1;
-  var node2='';
-  var node2style;
+  var listBt = document.getElementById('listSortBt');
+  var badukBt = document.getElementById('badukSortBt');
   //movebt=document.getElementById('moveBt');
   //movebt.disabled = 'disabled';
   var listViewStats = 0;
@@ -26,27 +26,16 @@
       $('.col1-checkbox').prop('checked',this.checked);
     });
 
-    $('.checkbox-all-baduk').click(function(){
-     
-      $('.checkbox-baduk').prop('checked',this.checked);
-    });
-
     $("#listSortBt").click(function(){
       console.log('리스트버튼');
       $('#listSortBt').css('backgroundColor','#615cba');
       $('#badukSortBt').css('backgroundColor','#e4e7eb');
-      $('.baduk-main-article-container').css('display','none');
-      $('.list-main-article-container').css('display','block');
-      
     });
   
     $('#badukSortBt').click(function(){
       console.log('바둑버튼');
       $('#listSortBt').css('backgroundColor','#e4e7eb');
       $('#badukSortBt').css('backgroundColor','#615cba');
-      
-      $('.list-main-article-container').css('display','none');
-      $('.baduk-main-article-container').css('display','block');
       
     });
     $("#namesortbt").click(function(){
@@ -133,36 +122,16 @@
       }
       
     });
-   
-    //히든 메뉴 클릭했을때 열고닫아주는 이벤트
-   
-
-    $('.moreBt').click(function(){
+    
+    //히든 메뉴 다른곳 클릭했을때 닫아주는 이벤트
+    $(document).mouseup(function(e){
+      var container=$('.moreMenuContainer');
       
-      var node = $(this).parent().next();
       
-      style = node.css('display');
-      if( node.css('display') == 'none'){
-        style = 'block';
-        node.css('display','block');
-      }else{
-        style='none';
-        node.css('display','none');
+      if(container.has(e.target).length==0){
+        container.css('display','none');
       }
-
     });
-
-    /*$(document).click(function(e){
-      var style= node2.css('display');
-      if(style == 'block'){
-        console.log('뭐지');
-        style='none';
-        node2.css('display','none');
-      }
-
-    });*/
-    
-    
     
     //체크박스 체크 했을때 발생하는 이벤트
     $('.col1-checkbox').on('change',function(){
@@ -182,67 +151,69 @@
       
     });
     
-    $("#USER_PW").keypress(function(event){
-    	var value=$('#USER_PW').val();
-    	var str = value.length+1;
-    	
-    	if(str>0){
-    		$('.signup_btn_st1').css('background-color','#5a53d0');
-    		$('.signup_btn_st1').attr('disabled',false);
-      }
-    });
-    	
-    
- });
+   
+  });
   
-  function loginErrchk(){
-	  if (document.getElementById("USER_ID").value == "") {
-		  alert("내용을 입력해주세요");
-		  return false;
-	  }else
-		  document.loginBt.submit();
-  }
-  
+
+
 function test(){
 alert('클릭');
+/*
+var temp = document.getElementById('tempnode');
+var add='<a href=javascript:alert("클릭!!")>';
+add+='체크';
+add+='</a>';
+temp.innerHTML=add;
+*/
 
+
+/*var sourceNode = document.getElementById('totalProjectButton').value;
+var present = document.getElementById('btnLeft');
+vat addNode = '<input type="button" onclick= '
+*/
+
+
+/*
+var present = document.getElementById('totalProjectButton').innerText;
+
+var temp = document.getElementById('tempnode');
+var newtag = document.createElement('a');
+temp.appendChild(newtag);
+var add='<a href="#>' +present+'</a>';
+
+
+
+*/
 }
 
-function hiddenMenuFold(thisevent){
-  
+function hiddenMenuFold(thisevent,e){
   var node = $(thisevent).parent().next();
-  
-  console.log('스크립트' + node2style);
   var presentDisplay = node.css('display');
- 
-  if(node2style == 'block'){
-    node2.css('display','none');
-    node2style = node.css('display');
+  if(presentDisplay == 'block'){
+    
+    node.css('display','none');
   }
   else{
-    node2.css("display","block");
-    node2style = node.css('display');
+    node.css("display","block");
   }
 }
 
-  function badukListhiddenMenuFold(thisevent){
+  function badukListhiddenMenuFold(thisevent,e){
     
     var node = $(thisevent).parent().next();
-     
+   console.log();
     var presentDisplay = node.css('display');
     if(presentDisplay == 'block'){
+      
       node.css('display','none');
     }
     else{
       node.css("display","block");
-      
     }
   }
   
-  function loginError(){
-	 alert('아이디나 비밀번호가 틀렸습니다'); 
-  }
   
+<<<<<<< HEAD
   
 
   /*구글 로그인 로그아웃 코드*/
@@ -323,3 +294,6 @@ function searchPress(){
   console.log('클릭');
 }
 
+=======
+  //thisevent.style.display=(document.querySelector('.moreMenuContainer2').style.display=='block') ? 'none' : 'block';
+>>>>>>> branch 'wonbaetest' of https://github.com/wonbaePark38/teamProject.git
