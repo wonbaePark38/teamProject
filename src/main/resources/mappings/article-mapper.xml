@@ -58,6 +58,7 @@
    #{writeForm3_workersName, jdbcType=VARCHAR},
    #{writeForm3_start_date, jdbcType=VARCHAR},
    #{writeForm3_end_date, jdbcType=VARCHAR},
+   #{writeForm3_progress, jdbcType=VARCHAR},
    #{writeForm3_order, jdbcType=VARCHAR},
    #{writeForm3_content, jdbcType=VARCHAR}
    )
