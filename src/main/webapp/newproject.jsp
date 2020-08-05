@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/newproject_css.css">
-<script src="js/newproject.js" ></script>
+<script src="script/newproject.js" ></script>
 </head>
 <body>
 <form action="newproject.do" id="newproject" method="post">
