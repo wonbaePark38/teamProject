@@ -1,4 +1,4 @@
-package dnjswhdzld.spring.plug.client;
+package com.spring.plug.client;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;

@@ -1,4 +1,4 @@
-package dnjswhdzld.spring.plug.client;
+package com.spring.plug.client;
 
 import java.util.Date;
 

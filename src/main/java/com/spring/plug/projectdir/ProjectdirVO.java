@@ -1,4 +1,4 @@
-package dnjswhdzld.spring.plug.projectdir;
+package com.spring.plug.projectdir;
 
 public class ProjectdirVO {
 	private String projectname;

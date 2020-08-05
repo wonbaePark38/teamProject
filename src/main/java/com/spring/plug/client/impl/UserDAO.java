@@ -1,11 +1,11 @@
-package dnjswhdzld.spring.plug.client.impl;
+package com.spring.plug.client.impl;
 
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import dnjswhdzld.spring.plug.client.UserVO;
-import dnjswhdzld.spring.plug.util.SqlSessionFactoryBean;
+import com.spring.plug.client.UserVO;
+import com.spring.plug.util.SqlSessionFactoryBean;
 
 public class UserDAO {
 	private SqlSession sqlSession;

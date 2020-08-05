@@ -1,11 +1,11 @@
-package dnjswhdzld.spring.plug.client.impl;
+package com.spring.plug.client.impl;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import dnjswhdzld.spring.plug.client.UserVO;
+import com.spring.plug.client.UserVO;
 
 @Repository
 public class UserDAOMybatis extends SqlSessionDaoSupport {

@@ -10,5 +10,10 @@
 		INSERT INTO projectdir (projectname, projectuser, projecttype, projectmanager, projectcontent)
 		VALUES(#{projectname}, #{projectuser}, #{projecttype}, #{projectmanager}, #{projectcontent}) 
 	</insert>
-		
+	
+	<select id="getprojectDirList" parameterType="projectdir">
+		SELECT * FROM projectdir
+		WHERE project
+	</select>
+	
 </mapper>
