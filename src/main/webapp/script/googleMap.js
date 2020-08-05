@@ -135,6 +135,17 @@
                      *      ㄴ status : 상태. OK가 나오면 정상.
                      */
                     geocoder.geocode({'address': location}, function(result, status) {
+                    	
+                    	lat_value = result[0].geometry.location.lat();
+                    	lng_value = result[0].geometry.location.lng();
+                    	var latlngArr = [lat_value, lng_value];
+                    	
+                    	var latlng_value_input = document.createElement('input');
+                    	latlng_value_input.setAttribute('type','hidden');
+                    	latlng_value_input.setAttribute('name','writeForm2_latlng');
+                    	latlng_value_input.setAttribute('value',latlngArr);
+                    	
+                    	document.getElementById('writeForm2_form').appendChild(latlng_value_input);
 
                         if (status === 'OK') {
                             // 맵의 중심 좌표를 설정한다.
