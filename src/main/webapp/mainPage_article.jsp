@@ -371,13 +371,12 @@
 
 
 						<!-- 일정 -->
-						<form>
+						<form method="post" action="writeform4.do" id="writeForm4_form">
 							<div class="schedule_form" id="scheduleForm_div">
 								<div>
 									<!-- 일정 제목 -->
 									<div>
-										<input type="text" style="width: 100%; border-style: none;"
-											placeholder="일정 제목을 입력해주세요">
+										<input type="text" name="writeForm4_title" style="width: 100%; border-style: none;" placeholder="일정 제목을 입력해주세요">
 									</div>
 									<!-- //일정 제목 -->
 									<div>
@@ -393,26 +392,41 @@
 											<!-- 데이트 피커 -->
 											<li><span id="sche_time_img"></span> <!-- 날짜 선택 -->
 												<div style="display: inline-block; width: 80%;">
-													<input type="text" id="sche_start_date" placeholder="오늘날자"
-														style="width: 20%;">&nbsp; <select
-														name="start_time" id="start_time_select">
+													<input type="text" name="writeForm4_start_date" id="sche_start_date" placeholder="오늘날자" style="width: 20%;">&nbsp; 
+													<select name="start_time" id="start_time_select">
 														<option>00:00</option>
-														<option>00:30</option>
 														<option>01:00</option>
-														<option>01:30</option>
 														<option>02:00</option>
-														<option>02:30</option>
-													</select> &nbsp;~&nbsp; <input type="text" id="sche_end_date"
-														placeholder="종료날자" style="width: 20%;">&nbsp; <select
-														name="end_time" id="end_time_select">
+														<option>03:00</option>
+														<option>04:00</option>
+														<option>05:00</option>
+														<option>06:00</option>
+														<option>07:00</option>
+														<option>08:00</option>
+														<option>09:00</option>
+														<option>10:00</option>
+														<option>11:00</option>
+													</select> 
+													
+													&nbsp;~&nbsp; 
+													
+													<input type="text" name="writeForm4_end_date" id="sche_end_date" placeholder="종료날자" style="width: 20%;">&nbsp; 
+													<select name="end_time" id="end_time_select">
 														<option>00:00</option>
-														<option>00:30</option>
 														<option>01:00</option>
-														<option>01:30</option>
 														<option>02:00</option>
-														<option>02:30</option>
-													</select> <label> <input type="checkbox" id="alldayCheck"
-														onclick="alldayBtn()"> <span>종일</span>
+														<option>03:00</option>
+														<option>04:00</option>
+														<option>05:00</option>
+														<option>06:00</option>
+														<option>07:00</option>
+														<option>08:00</option>
+														<option>09:00</option>
+														<option>10:00</option>
+														<option>11:00</option>
+													</select> 
+													<label> 
+														<input type="checkbox" id="alldayCheck" onclick="alldayBtn()"> <span>종일</span>
 													</label>
 												</div> <!-- //날짜 선택 --></li>
 											<!-- //데이트 피커 -->
@@ -421,15 +435,21 @@
 
 
 											<!-- 장소검색 -->
-											<li><span id="sche_loc_img"
-												style="display: inline-block;"></span> <!-- 장소 검색 -->
-												<div class="schedule_place" id="sche_place"
-													style="display: inline-block;">
+											<li>
+												<span id="sche_loc_img" style="display: inline-block;"></span> 
+												
+												<!-- 장소 검색 -->
+												<div class="schedule_place" id="sche_place" style="display: inline-block;">
 													<input id="address" type="text" placeholder="주소입력" />
-												</div> <!-- //장소 검색 --> <!-- google Map -->
+												</div> 
+												<!-- //장소 검색 --> 
+												
+												<!-- google Map -->
 												<div id="googleMap_div">
 													<div id="googleMap" style="width: 100%; height: 200px;"></div>
-												</div> <!-- //google Map --></li>
+												</div> 
+												<!-- //google Map -->
+											</li>
 
 											<hr>
 
@@ -485,17 +505,16 @@
 
 
 						<!-- 할일 -->
-						<form>
+						<form method="post" action="writeform5.do" id="writeForm5_form">
 							<div class="todo_form" id="todoForm_div">
 								<!-- 할일 제목 -->
 								<div>
-									<input placeholder="할일제목을 입력해 주세요"
-										style="width: 80%; border-style: none;">
+									<input name="writeForm5_title" placeholder="할일제목을 입력해 주세요" style="width: 80%; border-style: none;">
 								</div>
 								<!-- //할일 제목 -->
 
 
-								<div id="todoContent_external"></div>
+								<textarea id="todoContent_external"></textarea>
 								<!-- //할일내용 -->
 
 
