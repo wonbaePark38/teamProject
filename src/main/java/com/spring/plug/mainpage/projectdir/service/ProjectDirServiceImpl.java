@@ -28,8 +28,8 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 
 	@Override
 	public List<ProjectDirVO> getProjectDirList(ProjectDirVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("service");
+		return projectDirDAO.getProjectDirList(vo);
 	}
 
 }

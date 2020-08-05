@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link href="css/write_completion.css" rel="stylesheet">
+<script src="script/newproject.js"></script>
 <script type="text/javascript">
 	function contentset(){
 	    document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';
@@ -15,6 +17,9 @@
 
 </head>
 <body>
+	<!-- <form action="projectdir.do" id="projectdir" method="post">
+	</form> -->
+	<input type="hidden" name="projectmanager" value="dnjswhdzld">
 	<div class="contents" style=" position:relative; width: 100%;">
 		<div style="padding-left: 15px;">
 			<div class="컨텐츠 헤더">
@@ -46,46 +51,20 @@
 			</div>
 			
 			<div class="컨텐츠"  style="z-index: 1; display: inline-block; width: 100%;">
-				<div class="pro" >
-					<input class="title_btn" type="button" value="즐">
-					<div class="title_box">
-						<span>프로젝트 이름</span>
+				
+				<c:forEach var="projectdir" items="${projectDirList}">
+					<div class="pro" >
+						<input class="title_btn" type="button" value="즐">
+						<div class="title_box">
+							<span>${projectdir.projectname}</span>
+						</div>
+						<div class="title_box_s">
+							<span>${projectdir.projectuser}</span>
+							<span>명 참여중</span>
+						</div>
 					</div>
-					<div class="title_box_s">
-						<span>n명</span>
-						<span>참여중</span>
-					</div>
-				</div>
-				<div class="pro" >
-					<input class="title_btn" type="button" value="즐">
-					<div class="title_box">
-						<span>프로젝트 이름</span>
-					</div>
-					<div class="title_box_s">
-						<span>n명</span>
-						<span>참여중</span>
-					</div>
-				</div>
-				<div class="pro" >
-					<input class="title_btn" type="button" value="즐">
-					<div class="title_box">
-						<span>프로젝트 이름</span>
-					</div>
-					<div class="title_box_s">
-						<span>n명</span>
-						<span>참여중</span>
-					</div>
-				</div>
-				<div class="pro" >
-					<input class="title_btn" type="button" value="즐">
-					<div class="title_box">
-						<span>프로젝트 이름</span>
-					</div>
-					<div class="title_box_s">
-						<span>n명</span>
-						<span>참여중</span>
-					</div>
-				</div>
+				</c:forEach>
+				
 			</div>
 		</div>
 	</div>

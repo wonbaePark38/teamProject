@@ -1,11 +1,19 @@
 package com.spring.plug.mainpage.projectdir.vo;
 
 public class ProjectDirVO {
+	private int projectnum;
 	private String projectname;
 	private String projectuser;
 	private String projecttype;
 	private String projectmanager;
 	private String projectcontent;
+	
+	public int getProjectnum() {
+		return projectnum;
+	}
+	public void setProjectnum(int projectnum) {
+		this.projectnum = projectnum;
+	}
 	public String getProjectname() {
 		return projectname;
 	}

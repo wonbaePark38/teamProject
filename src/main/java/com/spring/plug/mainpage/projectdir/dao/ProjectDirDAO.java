@@ -1,5 +1,7 @@
 package com.spring.plug.mainpage.projectdir.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,5 +18,10 @@ public class ProjectDirDAO {
 		System.out.println("새 프로젝트 생성");
 		System.out.println("dao : "+vo.toString());
 		sqlSessionTemplate.insert("ProjectDirDAO.projectDirInsert", vo);
+	}
+	
+	public List<ProjectDirVO> getProjectDirList(ProjectDirVO vo){
+		System.out.println("프로젝트 출력");
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirList",vo);
 	}
 }

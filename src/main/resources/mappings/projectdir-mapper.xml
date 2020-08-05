@@ -4,11 +4,23 @@
 
 <mapper namespace="ProjectDirDAO">
 	
+	<resultMap type="projectdir" id="projectdir">
+		<result property="projectname" column="PROJECTNAME" />
+		<result property="projectuser" column="PROJECTUSER" />
+		<result property="projecttype" column="PROJECTTYPE" />
+		<result property="projectmanager" column="PROJECTMANAGER" />
+		<result property="projectcontent" column="PROJECTCONTENT" />
+	</resultMap>
 	
 	
 	<insert id="projectDirInsert" parameterType="projectdir">
-		INSERT INTO projectdir (projectname, projectuser, projecttype, projectmanager, projectcontent)
-		VALUES(#{projectname}, #{projectuser}, #{projecttype}, #{projectmanager}, #{projectcontent}) 
+		INSERT INTO projectdir (projectnum, projectname, projectuser, projecttype, projectmanager, projectcontent)
+		VALUES((select nvl(max(projectnum), 0) +1 from projectdir), #{projectname}, #{projectuser}, #{projecttype}, #{projectmanager}, #{projectcontent}) 
 	</insert>
 		
+	<select id="getProjectDirList" resultType="projectdir" parameterType="projectdir">
+		SELECT * FROM projectdir WHERE projectmanager = #{projectmanager} ORDER BY projectnum DESC
+	</select>
+	
+	
 </mapper>
