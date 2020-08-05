@@ -29,12 +29,10 @@
 			<div>
 				<input type="checkbox">&nbsp;<span>자동 로그인</span>
 			</div>
-<<<<<<< HEAD
+
 			<input type="submit" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
 			
-=======
 			<a href="mainPage.html" class="signup_btn_st1">로그인</a>
->>>>>>> branch 'wonbaetest' of https://github.com/wonbaePark38/teamProject.git
 		</div>
 		<div class="forgot-password">
 			<a>비밀번호를 잊어버리셨나요?</a>
@@ -44,7 +42,6 @@
 				<em>또는</em>
 			</span>
 		</div>
-<<<<<<< HEAD
 		</form>
 
 	<ul class="another_id">
@@ -67,13 +64,11 @@
 		</form>
 	</ul>
 
-=======
 		<ul class="another_id">
 			<li class="google">
 				<span>Google 계정으로 시작</span>
 			</li>
 		</ul>
->>>>>>> branch 'wonbaetest' of https://github.com/wonbaePark38/teamProject.git
 	</div>
 	
 	
