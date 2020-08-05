@@ -50,6 +50,9 @@ public class Article1VO {
    private String writeForm4_latlng;
    
    
+   //할일
+   
+   
    // 공동 get, set
    public int getProject_id() {
       return project_id;

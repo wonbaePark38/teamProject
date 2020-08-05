@@ -275,10 +275,10 @@ function headerOption(){
       todoAppendContent.innerHTML 
         = "<hr>";
 
-      var cancleBtn = document.createElement('button');
+      var cancleBtn = document.createElement('a');
       cancleBtn.setAttribute('onclick','delete_todo("'+ todo_div +'")');
-      cancleBtn.setAttribute('style','border-radius: 35%; background-color: red; border-style: none;');
-      cancleBtn.innerHTML = '-';
+      cancleBtn.setAttribute('style','display: inline-block; width: 18px; height: 18px; background: url(images/btn_todo_checkbox.png) no-repeat 0 -85px;');
+
 
       todoAppendContent.appendChild(cancleBtn);
 
