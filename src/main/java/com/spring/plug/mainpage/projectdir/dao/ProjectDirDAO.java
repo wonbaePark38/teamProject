@@ -10,11 +10,11 @@ import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 public class ProjectDirDAO {
 	
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public void projectDirInsert(ProjectDirVO vo) {
 		System.out.println("새 프로젝트 생성");
 		System.out.println("dao : "+vo.toString());
-		sessionTemplate.insert("ProjectDirDAO.projectDirInsert", vo);
+		sqlSessionTemplate.insert("ProjectDirDAO.projectDirInsert", vo);
 	}
 }

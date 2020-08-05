@@ -10,12 +10,12 @@ import com.spring.plug.signup.vo.SignupVO;
 public class SignupDAO {
 
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 
 	public void insertMember(SignupVO vo) {
 		System.out.println("insert 기능 처리");
 		System.out.println("dao : " + vo.toString());
-		sessionTemplate.insert("SignupDAO.insertMember",vo);
+		sqlSessionTemplate.insert("SignupDAO.insertMember",vo);
 	}
 	
 }

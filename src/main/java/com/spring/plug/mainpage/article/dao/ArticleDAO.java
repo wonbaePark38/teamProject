@@ -10,23 +10,23 @@ import com.spring.plug.mainpage.article.vo.Article1VO;
 public class ArticleDAO{
    
    @Autowired
-   private SqlSessionTemplate sessionTemplate;
+   private SqlSessionTemplate sqlSessionTemplate;
 
    public void article1_insert(Article1VO vo) {
       System.out.println("article1 insert 기능 처리");
       System.out.println("dao : " + vo.toString());
-      sessionTemplate.insert("ArticleDAO.article1Insert",vo);
+      sqlSessionTemplate.insert("ArticleDAO.article1Insert",vo);
    }
    
    public void article2_insert(Article1VO vo) {
       System.out.println("article1 insert 기능 처리");
       System.out.println("dao : " + vo.toString());
-      sessionTemplate.insert("ArticleDAO.article2Insert",vo);
+      sqlSessionTemplate.insert("ArticleDAO.article2Insert",vo);
    }
    
    public void article3_insert(Article1VO vo) {
       System.out.println("article1 insert 기능 처리");
       System.out.println("dao : " + vo.toString());
-      sessionTemplate.insert("ArticleDAO.article3Insert",vo);
+      sqlSessionTemplate.insert("ArticleDAO.article3Insert",vo);
    }
 }

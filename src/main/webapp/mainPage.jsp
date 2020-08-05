@@ -17,7 +17,7 @@
 <link href="css/mainPage.css" rel="stylesheet">
 <link href="css/task.css" rel="stylesheet">
 <link href="css/messanger_css.css" rel="stylesheet">
-<script src="js/page_ajax.js"></script>
+<script src="script/page_ajax.js"></script>
 <link href="css/contentPage.css" rel="stylesheet">
 
 <script src="script/jquery-3.5.1-min.js"></script>
