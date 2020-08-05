@@ -9,11 +9,13 @@
 		<typeAlias alias="user" type="com.spring.plug.login.vo.UserVO"></typeAlias>
 		<typeAlias alias="article1VO" type="com.spring.plug.mainpage.article.vo.Article1VO" ></typeAlias>
 		<typeAlias alias="projectdir" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
+		<typeAlias alias="signup" type="com.spring.plug.login.vo.UserVO"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappings/user-mapping.xml" />
 		<mapper resource="mappings/article-mapper.xml" />
 		<mapper resource="mappings/projectdir-mapper.xml"/>
+		<mapper resource="mappings/signup-mapper.xml"/>
 	</mappers>
 </configuration>
