@@ -23,3 +23,11 @@ function writeForm_submit3() {
 	
 	form3.submit();
 }
+
+function writeForm_submit4() {
+	var form4 = document.getElementById('writeForm4_form');
+	
+	
+	
+	form4.submit();
+}

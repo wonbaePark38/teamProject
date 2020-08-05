@@ -361,6 +361,8 @@ hr {
 	margin-bottom: 0px;
 }
 
+
+
 .schedule_form {
 	display: none;
 }
@@ -386,6 +388,12 @@ hr {
 	background: url(../images/ico_alarm.png) no-repeat;
 }
 
+#sche_text_write {
+	font-size: 12px;
+	width: 99%;
+	min-height: 100px;
+}
+
 #external_button {
 	display: inline-block;
 	text-align: left;
@@ -407,6 +415,8 @@ hr {
 #work_form_external_div {
 	display: none;
 }
+
+
 
 #order_div {
 	display: none;

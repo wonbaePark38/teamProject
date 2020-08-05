@@ -102,6 +102,17 @@
                      *      ㄴ status : 상태. OK가 나오면 정상.
                      */
                     geocoder.geocode({'address': address}, function(result, status) {
+                    	
+                    	lat_value = result[0].geometry.location.lat();
+                    	lng_value = result[0].geometry.location.lng();
+                    	var latlngArr = [lat_value, lng_value];
+                    	
+                    	var latlng_value_input = document.createElement('input');
+                    	latlng_value_input.setAttribute('type','hidden');
+                    	latlng_value_input.setAttribute('name','writeForm4_latlng');
+                    	latlng_value_input.setAttribute('value',latlngArr);
+                    	
+                    	document.getElementById('writeForm4_form').appendChild(latlng_value_input);
     
                         if (status === 'OK') {
                             // 맵의 중심 좌표를 설정한다.
@@ -136,16 +147,16 @@
                      */
                     geocoder.geocode({'address': location}, function(result, status) {
                     	
-                    	lat_value = result[0].geometry.location.lat();
-                    	lng_value = result[0].geometry.location.lng();
-                    	var latlngArr = [lat_value, lng_value];
+                    	lat_value1 = result[0].geometry.location.lat();
+                    	lng_value1 = result[0].geometry.location.lng();
+                    	var latlngArr1 = [lat_value1, lng_value1];
                     	
-                    	var latlng_value_input = document.createElement('input');
-                    	latlng_value_input.setAttribute('type','hidden');
-                    	latlng_value_input.setAttribute('name','writeForm2_latlng');
-                    	latlng_value_input.setAttribute('value',latlngArr);
+                    	var latlng_value_input1 = document.createElement('input');
+                    	latlng_value_input1.setAttribute('type','hidden');
+                    	latlng_value_input1.setAttribute('name','writeForm2_latlng');
+                    	latlng_value_input1.setAttribute('value',latlngArr1);
                     	
-                    	document.getElementById('writeForm2_form').appendChild(latlng_value_input);
+                    	document.getElementById('writeForm2_form').appendChild(latlng_value_input1);
 
                         if (status === 'OK') {
                             // 맵의 중심 좌표를 설정한다.
