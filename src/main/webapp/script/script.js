@@ -295,7 +295,7 @@ function hiddenMenuFold(thisevent){
 				  success: function(res){
 					  
 					 var id=res.id;
-					 console.log(res);
+					 console.log("res정보" + res);
 					 document.getElementById('kakaoId').value = id;
 					 //document.kakaoSubmit.submit();				
 		  }

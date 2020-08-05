@@ -7,10 +7,14 @@
 	<typeAliases>
 		<typeAlias alias="myboard" type="com.spring.plug.board.BoardVO"></typeAlias>
 		<typeAlias alias="user" type="com.spring.plug.user.UserVO"></typeAlias>
+		<typeAlias alias="article1VO" type="com.spring.plug.mainpage.article.vo.Article1VO" ></typeAlias>
+		<typeAlias type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO" alias="projectdir"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappings/board-mapping.xml" />
 		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mappings/article-mapper.xml" />
+		<mapper resource="mappings/projectdir-mapper.xml"/>
 	</mappers>
 </configuration>

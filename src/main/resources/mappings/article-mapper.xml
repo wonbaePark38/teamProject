@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ArticleDAO">
+
+   <insert id="article1Insert" useGeneratedKeys="true" parameterType="article1VO">
+   INSERT INTO mainpage_article1
+   (project_id,article_id,form_name,writeform1_content,writer,regDate,file_name,img_name) 
+   VALUES
+   ( 1 ,article_seq.nextval , #{form_name}, #{writeform1_content}, 'tester', sysdate, #{file_name, jdbcType=VARCHAR}, #{img_name, jdbcType=VARCHAR})
+   </insert>
+
+
+
+
+
+   <insert id="article2Insert" useGeneratedKeys="true" parameterType="article1VO">
+   INSERT INTO mainpage_article2
+   (project_id, article_id, form_name, writeform2_title, writeform2_content, writeform2_latlng, writer, regDate, file_name, img_name) 
+   VALUES
+   ( 1 ,article_seq.nextval , #{form_name}, #{writeForm2_title}, #{writeForm2_content}, #{writeForm2_latlng, jdbcType=VARCHAR}, 'tester', sysdate, #{file_name, jdbcType=VARCHAR}, #{img_name, jdbcType=VARCHAR})
+   </insert>
+
+
+
+   
+   <insert id="article3Insert" useGeneratedKeys="true" parameterType="article1VO">
+   INSERT INTO mainpage_article3
+   (
+   project_id, 
+   article_id, 
+   form_name, 
+   writer, 
+   regDate, 
+   file_name, 
+   img_name, 
+   writeForm3_title, 
+   writeForm3_status, 
+   writeForm3_workersName, 
+   writeForm3_start_date, 
+   writeForm3_end_date, 
+   writeForm3_progress, 
+   writeForm3_order, 
+   writeForm3_content
+   )
+   VALUES
+   (
+   1, 
+   article_seq.nextval, 
+   #{form_name},
+   'tester3',
+   sysdate,
+   #{file_name, jdbcType=VARCHAR},
+   #{img_name, jdbcType=VARCHAR},
+   #{writeForm3_title, jdbcType=VARCHAR},
+   #{writeForm3_status, jdbcType=VARCHAR},
+   #{writeForm3_workersName, jdbcType=VARCHAR},
+   #{writeForm3_start_date, jdbcType=VARCHAR},
+   #{writeForm3_end_date, jdbcType=VARCHAR},
+   #{writeForm3_order, jdbcType=VARCHAR},
+   #{writeForm3_content, jdbcType=VARCHAR}
+   )
+   </insert>
+
+</mapper>
