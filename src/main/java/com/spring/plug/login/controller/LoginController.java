@@ -29,9 +29,7 @@ public class LoginController{
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
 	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session,HttpServletRequest request) {
-		/*if(vo.getEmail() == null || vo.getEmail().equals("")) {
-			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다");
-		}*/
+		
 		System.out.println("로그인 시도 정보: " + vo.getEmail());
 		/*
 		 * 
@@ -65,11 +63,6 @@ public class LoginController{
 			}
 			
 		}
-		
-		
-		
-		
-		
 	}
 	
 

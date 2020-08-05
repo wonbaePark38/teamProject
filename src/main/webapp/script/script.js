@@ -152,17 +152,7 @@
 
     });
 
-    /*$(document).click(function(e){
-      var style= node2.css('display');
-      if(style == 'block'){
-        console.log('뭐지');
-        style='none';
-        node2.css('display','none');
-      }
-
-    });*/
-    
-    
+   
     
     //체크박스 체크 했을때 발생하는 이벤트
     $('.col1-checkbox').on('change',function(){
@@ -183,8 +173,9 @@
     });
     
     $("#USER_PW").keypress(function(event){
-    	var value=$('#USER_PW').val();
-    	var str = value.length+1;
+    	
+    	var passwordLength=$('#USER_PW').val();
+    	var str = passwordLength.length+1;
     	
     	if(str>0){
     		$('.signup_btn_st1').css('background-color','#5a53d0');
@@ -196,17 +187,14 @@
  });
   
   function loginErrchk(){
-	  if (document.getElementById("USER_ID").value == "") {
-		  alert("내용을 입력해주세요");
-		  return false;
+	  var idForm = document.getElementById("USER_ID").value;
+	  var passwordForm = document.getElementById("USER_PW").value;
+	  if (!idForm || !passwordForm) {
+		  alert("아이디와 비밀번호 모두 입력하세요");
 	  }else
-		  document.loginBt.submit();
+	  document.loginBt.submit();
   }
-  
-function test(){
-alert('클릭');
 
-}
 
 function hiddenMenuFold(thisevent){
   
@@ -238,10 +226,12 @@ function hiddenMenuFold(thisevent){
       
     }
   }
-  
-  function loginError(){
-	 alert('아이디나 비밀번호가 틀렸습니다'); 
-  }
+  function loginErrorView(){
+	  
+	  alert('아이디나 비밀번호가 틀렸습니다'); 
+	  document.getElementById('USER_PW').value ="";
+	  //var passwordForm = document.getElementById("USER_PW");
+	}
   
   
 
@@ -281,12 +271,7 @@ function hiddenMenuFold(thisevent){
   
   /*카카오 로그인 코드*/
   var startKakaoLogin = function(){
-	  
-	  
 	  Kakao.init('7b60be3909569dd7f234238a2bae4b61');
-	  
-	  
-	  
 	  Kakao.Auth.loginForm({
 		  success: function(authObj){
 			  

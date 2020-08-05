@@ -14,18 +14,14 @@
 <link rel="stylesheet" href="css/login_css.css" />
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+<script type="text/javascript" src="script/script.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script>
-	
-			 
-	
-</script>
+
 </head>
 <body>
 	<c:if test="${status eq 'false'}">
 		<script type="text/javascript">
-			loginError();
+			loginErrorView();
 		</script>
 		
 	</c:if>
@@ -40,16 +36,16 @@
 		<div>
 			<ul>
 				<li>
-					<input type="text" id="USER_ID" name="email" placeholder="이메일 또는 아이디"  value="${userVO.email}" >
+					<input type="text" id="USER_ID" name="email" placeholder="이메일 또는 아이디" >
 				</li>
 				<li>
-					<input type="password" id="USER_PW" name="password" placeholder="비밀번호"  value="${userVO.password}" >
+					<input type="password" id="USER_PW" name="password" placeholder="비밀번호" >
 				</li>
 			</ul>
 			<div>
 				<input type="checkbox">&nbsp;<span>자동 로그인</span>
 			</div>
-			<input type="submit" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
+			<input type="button" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
 			
 		</div>
 		<div class="forgot-password">
@@ -86,5 +82,5 @@
 	
 	
 </body>
-<script type="text/javascript" src="script/script.js"></script>
+
 </html>
