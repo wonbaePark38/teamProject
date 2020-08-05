@@ -592,7 +592,7 @@ body{
     margin-left: 20px;
 
   }
-  .checkbox-baduk{
+  #checkbox{
     width:20px;
     height: 20px;
     vertical-align: middle;
@@ -835,10 +835,9 @@ body{
     background-color: violet;
     width:5%;
     opacity: 0;
-   
     
   }
- 
+
   .moreBt{
     display: flex;
     flex-direction: column;
@@ -934,8 +933,8 @@ body{
   flex-direction: column;
   width: 80%;
   height: 100%;
-  display:none;
-
+ 
+ 
 }
 
 .file-name-sort-baduk{
@@ -954,10 +953,7 @@ body{
   
   
 }
-.checkbox-all-baduk{
-  width: 22px;
-  height:22px;  
-}
+
 .check-box-baduk{
   display: flex;
   flex-direction: row;

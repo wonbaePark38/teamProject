@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 //헤더 채팅영역
 function headerChatting(){
   document.getElementById('header_chat_div').style.display=(document.getElementById('header_chat_div').style.display=='block') ? 'none' : 'block';
@@ -45,8 +52,14 @@ function headerOption(){
     var postValue =  document.getElementById('progress').value;
     value = postValue + 20;
 
+    if(value > 100){
+    	value = 0;
+    }
+    document.getElementById('work_progress').value = value;
     document.getElementById('progress').value = value;
   }
+  
+  
   
   // 글쓰기 버튼
   function writeForm(){
@@ -101,6 +114,8 @@ function headerOption(){
     document.getElementById('feedback').style.backgroundColor = 'white';
     document.getElementById('complete').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
+    
+    document.getElementById('work_status').value = 'request';
   }
 
   function doing(){
@@ -109,6 +124,8 @@ function headerOption(){
     document.getElementById('feedback').style.backgroundColor = 'white';
     document.getElementById('complete').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
+    
+    document.getElementById('work_status').value = 'doing';
   }
 
   function feedback(){
@@ -117,6 +134,8 @@ function headerOption(){
     document.getElementById('doing').style.backgroundColor = 'white';
     document.getElementById('complete').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
+    
+    document.getElementById('work_status').value = 'feedback';
   }
 
   function complete(){
@@ -125,6 +144,8 @@ function headerOption(){
     document.getElementById('doing').style.backgroundColor = 'white';
     document.getElementById('feedback').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
+    
+    document.getElementById('work_status').value = 'complete';
   }
 
   function postpone(){
@@ -133,6 +154,8 @@ function headerOption(){
     document.getElementById('doing').style.backgroundColor = 'white';
     document.getElementById('feedback').style.backgroundColor = 'white';
     document.getElementById('complete').style.backgroundColor = 'white';
+    
+    document.getElementById('work_status').value = 'postpone';
   }
 
   // 업무탭 작업자 선택영역
@@ -141,6 +164,36 @@ function headerOption(){
     
   }
 
+  // 업무탭 작업자 추가 및 작업자들 저장
+  var workers_name = [];
+  
+  function add_worker(obj) {
+	var worker_name = obj.innerText;
+	
+	
+	workers_name.push(worker_name);
+	
+	var work_workers_value = document.getElementById('work_workers').value; 
+	
+	work_workers_value = workers_name;
+	
+	console.log(work_workers_value);
+	
+	var worker_append = document.createElement('div');
+	worker_append.setAttribute('style','display:inline-block; width: 100px; background-color: #efeff9; margin-top: 3px; margin-right: 3px; height: 30px; border-radius: 3px;');
+		
+		var worker_append_workerName = document.createElement('span');
+		worker_append_workerName.setAttribute('style','display: inline-block; vertical-align:middle; width: 80px; margin-left:5px;');
+		worker_append_workerName.innerText = obj.innerText;
+		worker_append.append(worker_append_workerName);
+	
+		var worker_append_cancle = document.createElement('button');
+		worker_append_cancle.setAttribute('style','vertical-align: middle; display: inline-block; height: 30px; width: 14px; border: none; background: url(images/btn_del_name.png) no-repeat center center;');
+		worker_append.append(worker_append_cancle);
+		
+	
+	document.getElementById('worker_append_div').appendChild(worker_append);
+  }
  
 
   //allday
@@ -149,6 +202,16 @@ function headerOption(){
     document.getElementById('end_time_select').disabled = (document.getElementById('end_time_select').disabled == true)? false : true;
   }
   
+  // 우선순위 선택영역 표시
+  function orderSelectDiv() {
+	document.getElementById('order_div').style.display = (document.getElementById('order_div').style.display == 'block') ? 'none' : 'block';
+  }
+  
+  function orderSelect(order) {
+	document.getElementById('work_order').value = order.innerText;
+	document.getElementById('order_div').style.display = 'none';
+	
+  }
 
   // todo append
   var startDivNum = 0;

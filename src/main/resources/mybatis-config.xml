@@ -3,14 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	
 	<typeAliases>
-		<typeAlias alias="myboard" type="com.spring.plug.board.BoardVO"></typeAlias>
-		<typeAlias alias="user" type="com.spring.plug.user.UserVO"></typeAlias>
+		<typeAlias type="com.spring.plug.mainpage.article.vo.Article1VO" alias="article1VO"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="mappings/board-mapping.xml" />
-		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mapping/article-mapper.xml" />
 	</mappers>
 </configuration>

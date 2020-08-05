@@ -7,7 +7,9 @@
         
         var myMap = null;
 
+        var lat_value = null;
         
+        var lng_value = null;
         
 
         function initMap() {
@@ -83,7 +85,6 @@
              */
             function geocodeAddress(geocoder, resultMap) {
                 console.log('geocodeAddress 함수 실행');
- 
                 
 
                 if(inputStatus == 'address'){
@@ -103,6 +104,7 @@
                      */
                     geocoder.geocode({'address': address}, function(result, status) {
     
+                    	
                         if (status === 'OK') {
                             // 맵의 중심 좌표를 설정한다.
                             resultMap.setCenter(result[0].geometry.location);
@@ -134,11 +136,31 @@
                      *      ㄴ result : 결과값
                      *      ㄴ status : 상태. OK가 나오면 정상.
                      */
+                    
                     geocoder.geocode({'address': location}, function(result, status) {
 
                         if (status === 'OK') {
+                        	
+                        	lat_value = result[0].geometry.location.lat();
+                        	lng_value = result[0].geometry.location.lng();
+                        	var latlngArr = [lat_value, lng_value];
+                        	
+                        	var latlng_value_input = document.createElement('input');
+                        	latlng_value_input.setAttribute('type','hidden');
+                        	latlng_value_input.setAttribute('name','writeForm2_latlng');
+                        	latlng_value_input.setAttribute('value',latlngArr);
+                        	
+                        	document.getElementById('writeForm2_form').appendChild(latlng_value_input);
+                        	
+                        	
+                        	
+                        	
+                        	console.log(result[0].geometry.location.lat());
+                        	console.log(result[0].geometry.location.lng());
+                        	
                             // 맵의 중심 좌표를 설정한다.
-                            resultMap.setCenter(result[0].geometry.location);
+                            var loc = resultMap.setCenter(result[0].geometry.location);
+                            
                             // 맵의 확대 정도를 설정한다.
                             resultMap.setZoom(18);
                             // 맵 마커

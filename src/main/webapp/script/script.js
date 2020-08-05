@@ -183,24 +183,24 @@
     });
     
     $("#USER_PW").keypress(function(event){
-    	var value=$('#USER_PW').val();
-    	var str = value.length+1;
-    	
-    	if(str>0){
-    		$('.signup_btn_st1').css('background-color','#5a53d0');
-    		$('.signup_btn_st1').attr('disabled',false);
+       var value=$('#USER_PW').val();
+       var str = value.length+1;
+       
+       if(str>0){
+          $('.signup_btn_st1').css('background-color','#5a53d0');
+          $('.signup_btn_st1').attr('disabled',false);
       }
     });
-    	
+       
     
  });
   
   function loginErrchk(){
-	  if (document.getElementById("USER_ID").value == "") {
-		  alert("내용을 입력해주세요");
-		  return false;
-	  }else
-		  document.loginBt.submit();
+     if (document.getElementById("USER_ID").value == "") {
+        alert("내용을 입력해주세요");
+        return false;
+     }else
+        document.loginBt.submit();
   }
   
 function test(){
@@ -240,17 +240,17 @@ function hiddenMenuFold(thisevent){
   }
   
   function loginError(){
-	 alert('아이디나 비밀번호가 틀렸습니다'); 
+    alert('아이디나 비밀번호가 틀렸습니다'); 
   }
   
   
 
   /*구글 로그인 로그아웃 코드*/
   function signOut(){
-	  var auth2 = gapi.auth2.getAuthInstance();
-	  auth2.signOut().then(function(){
-		  console.log('구글 로그아웃');
-	  });
+     var auth2 = gapi.auth2.getAuthInstance();
+     auth2.signOut().then(function(){
+        console.log('구글 로그아웃');
+     });
   }
   
   var googleUser = {};
@@ -266,47 +266,47 @@ function hiddenMenuFold(thisevent){
     });
   };
   function attachSignin(element) {
-	    
-	    auth2.attachClickHandler(element, {},
-	    	function(googleUser) {
-	    	var profile = googleUser.getBasicProfile();
-	    	console.log("Email: " + profile.getEmail());
-	    	console.log('Full Name: ' + profile.getName());
-	    	document.getElementById('googleId').value = profile.getEmail();
-	    	
-	    	document.googleSubmit.submit();
-	    	
+       
+       auth2.attachClickHandler(element, {},
+          function(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          console.log("Email: " + profile.getEmail());
+          console.log('Full Name: ' + profile.getName());
+          document.getElementById('googleId').value = profile.getEmail();
+          
+          document.googleSubmit.submit();
+          
         }, function(error) {});    
   }
   
   /*카카오 로그인 코드*/
   var startKakaoLogin = function(){
-	  
-	  
-	  Kakao.init('7b60be3909569dd7f234238a2bae4b61');
-	  
-	  
-	  
-	  Kakao.Auth.loginForm({
-		  success: function(authObj){
-			  
-			  Kakao.API.request({
-				  url :'/v2/user/me',
-				  success: function(res){
-					  
-					 var id=res.id;
-					 console.log(res);
-					 document.getElementById('kakaoId').value = id;
-					 //document.kakaoSubmit.submit();				
-		  }
-	  })
-	    console.log(authObj);
-			  var token = authObj.access_token;
-		  },
-		  fail: function(err){
-			  alert(JSON.stringify(err));
-		  }
-	  });
+     
+     
+     Kakao.init('7b60be3909569dd7f234238a2bae4b61');
+     
+     
+     
+     Kakao.Auth.loginForm({
+        success: function(authObj){
+           
+           Kakao.API.request({
+              url :'/v2/user/me',
+              success: function(res){
+                 
+                var id=res.id;
+                console.log(res);
+                document.getElementById('kakaoId').value = id;
+                //document.kakaoSubmit.submit();            
+        }
+     })
+       console.log(authObj);
+           var token = authObj.access_token;
+        },
+        fail: function(err){
+           alert(JSON.stringify(err));
+        }
+     });
   } 
 
   //thisevent.style.display=(document.querySelector('.moreMenuContainer2').style.display=='block') ? 'none' : 'block';
