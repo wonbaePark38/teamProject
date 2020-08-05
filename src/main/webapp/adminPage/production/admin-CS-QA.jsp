@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -31,27 +33,29 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <a style="display: inline-block; width: 60px; height: 20px; padding-top: 2px; margin-left: 10px; text-align: center; cursor: pointer; vertical-align: middle; color: white;">로그아웃</a>
                 <ul class="nav side-menu">
                   
                   <li><a><i class="fa fa-edit"></i> 회원<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a>회원 관리</a></li>
-                      <li><a>회원 검색</a></li>
+                      <li><a href="admin-User-management.jsp">회원 관리</a></li>
+                      <li><a href="admin-User-searchUser.jsp">회원 검색</a></li>
+                      <li><a href="admin-User-log.jsp">회원 로그</a></li>
                     </ul>
                   </li>
 
 
                   <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a>게시글</a></li>
-                      <li><a>프로젝트</a></li>
+                      <li><a href="admin-Project-article.jsp">게시글</a></li>
+                      <li><a href="admin-Project-project.jsp">프로젝트</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-bar-chart-o"></i> 매출 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      
+                      <li><a href="admin-Sales-sales.jsp">매출</a></li>
+                      <li><a href="admin-Sales-saleLog.jsp">결제내역</a></li>
                     </ul>
                   </li>
 
@@ -59,15 +63,12 @@
 
                   <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a>FAQ 관리</a></li>
-                      <li><a>1:1 문의</a></li>
-                      <li><a>신고접수</a></li>
+                      <li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
+                      <li><a href="admin-CS-QA.jsp">1:1 문의</a></li>
+                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
                     </ul>
                   </li>                  
 
-                  <li><a><i class="fa fa-table"></i> ??? <span class="fa fa-chevron-down"></span></a>
-                    
-                  </li>
                   
                   
                 </ul>
@@ -76,7 +77,7 @@
               
 
             </div>
-            <!-- /sidebar menu -->
+            <!--  //side bar  -->
           </div>
         </div>
 
@@ -99,7 +100,7 @@
                             <th class="admin_cs_qa_contentArea_regDate">작성일</th>
                         </tr>
                         <!-- forEach -->
-                        <tr>
+                        <tr onclick="location.href='admin-CS-Board.html'">
                             <td class="admin_cs_qa_contentArea_no"><a>123456789</a></td>
                             <td class="admin_cs_qa_contentArea_writer"><a>홍길동임</a></td>
                             <td class="admin_cs_qa_contentArea_title"><a>ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ</a></td>
@@ -128,8 +129,6 @@
         <script src="../vendors/jquery/dist/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- DateJS -->
-        <script src="../vendors/DateJS/build/date.js"></script>
         <!-- Custom Theme Scripts -->
         <script src="../build/js/custom.min.js"></script>
 	

@@ -10,24 +10,24 @@
 <body>
 
 	<div class="sign-up-wrap">
-		<form action>
+		<form action="signup.do" method="post">
 			<div>
 				<div>
 					<label class="signup-label">이메일</label>
 					<div class="inputbox">
-						<input type="text" id="email" placeholder="exam@email.com">
+						<input type="text" id="email" name="email" placeholder="exam@email.com" value="${ SignupVO.email }">
 					</div>
 				</div>
 				<div>
 					<label class="signup-label">이름</label>
 					<div class="inputbox">
-						<input type="text" id="name" placeholder="이름">
+						<input type="text" id="username" name="userName" placeholder="이름" value="${ SignupVO.userName }" >
 					</div>
 				</div>
 				<div>
 					<label class="signup-label">비밀번호</label>
 					<div class="inputbox">
-						<input type="password" id="password" placeholder="비밀번호 입력">
+						<input type="password" id="password" name="userPw" placeholder="비밀번호 입력" value="${ SignupVO.userPw }">
 					</div>
 				</div>
 				<div>
@@ -43,7 +43,7 @@
 				</div>
 			
 				<div>
-					<button class="btn-signup-next">다음</button>
+					<button class="btn-signup-next" type="submit">다음</button>
 				</div>
 			</div>
 		</form>

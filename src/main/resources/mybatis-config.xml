@@ -3,22 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="db.properties" />
 	<typeAliases>
-		<typeAlias type="dnjswhdzld.spring.plug.client.UserVO" alias="usertest"></typeAlias>
+		<typeAlias type="com.spring.plug.articlewriteform.vo.ArticleVO" alias="articleVO"></typeAlias>
+		<typeAlias type="com.spring.plug.signup.vo.SignupVO" alias="signup"></typeAlias>
 	</typeAliases>
-	<environments default="development">
-		<environment id="development">
-			<transactionManager type="JDBC" />
-			<dataSource type="POOLED">
-				<property name="driver" value="${jdbc.driverClassName}" />
-				<property name="url" value="${jdbc.url}" />
-				<property name="username" value="${jdbc.username}" />
-				<property name="password" value="${jdbc.password}" />
-			</dataSource>
-		</environment>
-	</environments>
+	
 	<mappers>
-		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mapping/article-mapper.xml" />
+		<mapper resource="mappings/signup-mapper.xml" />
 	</mappers>
 </configuration>

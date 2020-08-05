@@ -9,6 +9,21 @@
     min-height: 200px;
 }
 
+#admin_cs_notice_contentArea_divText[contenteditable=true]{
+    font-size: 12px;
+    width: 100%; 
+    min-height: 200px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16,10 +31,12 @@
 
 #admin_cs_faq_contentArea{
     width: 800px;
+
 }
 
 #admin_cs_faq_contentArea_writeBtn{
     text-align: right;
+    margin-bottom: 20px;
 }
 
 #admin_cs_faq_contentArea_writeBtn a{
@@ -52,6 +69,15 @@
     width: 100px; 
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -112,6 +138,12 @@
 
 
 
+
+
+
+
+
+
 #admin_cs_article_contentArea{
     width: 800px;
 }
@@ -147,6 +179,87 @@
     color: black;
     background-color: aliceblue;
 }
+
+
+
+
+
+
+
+
+
+
+
+#admin_cs_notice_contentArea{
+    width: 800px;
+}
+
+#admin_cs_notice_contentArea_title{
+    display: inline-block; 
+    vertical-align: middle;
+}
+
+#admin_cs_notice_contentArea_title span{
+    font-size: 15px;
+}
+
+#admin_cs_notice_contentArea_title_input{
+    display: inline-block; 
+    vertical-align: middle; 
+    width: 80%;
+}
+
+#admin_cs_notice_contentArea_title_input input{
+    width: 100%;
+}
+
+#admin_cs_notice_contentArea_fileUpload{
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-left: 10px;
+}
+
+#admin_cs_notice_contentArea_fileUpload_img{
+    display: inline-block; 
+    background: url(../../images/ico_newfile.png) no-repeat; 
+    width: 30px; 
+    height: 30px;
+}
+
+#admin_cs_notice_contentArea_picUpload{
+    display: inline-block; 
+    vertical-align: middle;
+}
+
+#admin_cs_notice_contentArea_picUpload_img{
+    display: inline-block; 
+    vertical-align: middle; 
+    text-align: center; 
+    background: url(../../images/filemoa_ico07.png) no-repeat; 
+    width: 30px; 
+    height: 30px;
+}
+
+#admin_cs_notice_contentArea_lower_btn{
+    float: right;
+}
+
+#admin_cs_notice_contentArea_lower_btn a{
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    padding-top: 3px;
+}
+
+
+
+
+
+
 
 
 
@@ -190,6 +303,111 @@
     font-size: 15px;
 }
 
+
+
+
+
+
+
+
+
+
+
+#admin_article_content_info table tr{
+    width: 500px;
+}
+
+#admin_article_content_info table tr th{
+    width: 200px;
+}
+
+#admin_article_content_info table tr td{
+    width: 200px;
+}
+
+#admin_article_content_statics1{
+    display: inline-block; 
+    width: 800px; 
+    height: 400px; 
+    background-color: bisque;
+}
+
+#admin_article_content_datepick{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#admin_article_content_datepick select{
+    vertical-align: middle; 
+    height: 25px;
+}
+
+#admin_article_content_datepick input{
+    display: inline-block; 
+    vertical-align: middle; 
+    width: 100px;
+    height: 25px;
+}
+
+#admin_article_content_datepick button{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    height: 25px;
+}
+
+#admin_article_content_statics2{
+    display: inline-block; 
+    width: 800px; 
+    height: 400px; 
+    background-color: bisque;
+}
+
+#admin_article_content_statics3{
+    display: inline-block; 
+    width: 800px; 
+    height: 400px; 
+    background-color: bisque;
+}
+
+
+
+
+
+
+
+
+
+#admin_sale_log_content_datepick select{
+    display: inline-block; 
+    vertical-align: middle; 
+    height: 25px;
+}
+
+#admin_sale_log_content_datepick div{
+    display: inline-block; 
+}
+
+#admin_sale_log_content_datepick div input{
+    width: 100px;
+    height: 25px;
+    display: inline-block; 
+    vertical-align: middle;
+}
+
+#admin_sale_log_content_datepick div button{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    height: 25px;
+    display: inline-block;
+}
+
+
+
+
+
+
 #statics_compare_yesterday{
     display: inline-block; 
     width: 800px; 
@@ -232,6 +450,71 @@
 }
 
 
+#admin_sale_log_content_infoTable{
+    margin-top: 20px;
+}
+
+
+#admin_sale_sales_content_info table tr{
+    width: 620px;
+}
+
+#admin_sale_sales_content_info table tr th{
+    width: 200px;
+}
+
+#admin_sale_sales_content_info table tr td{
+    width: 200px;
+}
+
+#admin_sale_sales_content_datepick select{
+    display: inline-block; 
+    vertical-align: middle; 
+    height: 25px;
+}
+
+#admin_sale_sales_content_datepick div{
+    display: inline-block;
+}
+
+#admin_sale_sales_content_datepick input{
+    display: inline-block; 
+    vertical-align: middle;
+    height: 25px;
+    width: 100px;
+}
+
+#admin_sale_sales_content_datepick button{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    height: 25px;
+    display: inline-block;
+    text-align: center;
+}
+
+#admin_sale_sales_content_statics1{
+    width: 800px; 
+    height: 400px; 
+    margin-top: 20px; 
+    background-color: bisque;
+}
+
+#admin_sale_sales_content_statics2{
+    display: inline-block; 
+    width: 800px; 
+    height: 400px; 
+    margin-top: 20px; 
+    background-color: bisque;
+}
+
+#admin_sale_sales_content_statics3{
+    display: inline-block; 
+    width: 800px; 
+    height: 400px; 
+    margin-top: 20px; 
+    background-color: bisque;
+}
 
 
 
@@ -245,25 +528,45 @@
 
 
 
+#admin_user_management_content{
+    width: 100%;
+}
 
+#admin_user_management_content_info{
+    margin-bottom: 20px;
+}
 
+#admin_user_management_content_info table tr{
+    width: 620px;
+}
 
+#admin_user_management_content_info table tr th{
+    width: 200px;
+}
 
+#admin_user_management_content_info table tr td{
+    width: 200px;
+}
 
+#admin_user_management_content_statics1{
+    width: 700px; height: 400px; background-color: bisque;
+}
 
+#admin_user_management_content_statics2{
+    width: 700px; height: 400px; background-color: bisque;
+}
 
+#admin_user_management_content_statics3{
+    width: 700px; height: 400px; background-color: bisque;
+}
 
+#admin_user_management_content_statics4{
+    width: 700px; height: 400px; background-color: bisque;
+}
 
-
-
-
-
-
-
-
-
-
-
+#admin_user_management_content_statics5{
+    width: 700px; height: 400px; background-color: bisque;
+}
 
 
 

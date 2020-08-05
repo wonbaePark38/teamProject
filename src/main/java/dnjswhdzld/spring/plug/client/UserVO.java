@@ -3,6 +3,7 @@ package dnjswhdzld.spring.plug.client;
 import java.util.Date;
 
 public class UserVO {
+	
 	private int seq;
 	private String officename;
 	private String username;

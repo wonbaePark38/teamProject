@@ -14,9 +14,9 @@ function projectPage(url) {
 		// Contents 영역 교체
 		$('#ajaxpagecontainer').html(data);
 	});
-}
+};
 
-$(document)
+
 function officePop(url) {
 	// ajax option
 	var ajaxOption = {
@@ -31,4 +31,36 @@ function officePop(url) {
 		// Contents 영역 교체
 		$('.wrap').append(data);
 	});
-}
+};
+
+function newprojectPop(url) {
+	// ajax option
+	var ajaxOption = {
+			url : url,
+			async : true,
+			type : "POST",
+			dataType : "html",
+			cache : false
+	};
+	
+	$.ajax(ajaxOption).done(function(data) {
+		// Contents 영역 교체
+		$('.mainWrap').append(data);
+	});
+};
+
+function invitePop(url) {
+	// ajax option
+	var ajaxOption = {
+			url : url,
+			async : true,
+			type : "POST",
+			dataType : "html",
+			cache : false
+	};
+	
+	$.ajax(ajaxOption).done(function(data) {
+		// Contents 영역 교체
+		$('.mainWrap').append(data);
+	});
+};

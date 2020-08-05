@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -31,27 +33,29 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <a style="display: inline-block; width: 60px; height: 20px; padding-top: 2px; margin-left: 10px; text-align: center; cursor: pointer; vertical-align: middle; color: white;">로그아웃</a>
                 <ul class="nav side-menu">
                   
                   <li><a><i class="fa fa-edit"></i> 회원<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a>회원 관리</a></li>
-                      <li><a>회원 검색</a></li>
+                      <li><a href="admin-User-management.jsp">회원 관리</a></li>
+                      <li><a href="admin-User-searchUser.jsp">회원 검색</a></li>
+                      <li><a href="admin-User-log.jsp">회원 로그</a></li>
                     </ul>
                   </li>
 
 
                   <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a>게시글</a></li>
-                      <li><a>프로젝트</a></li>
+                      <li><a href="admin-Project-article.jsp">게시글</a></li>
+                      <li><a href="admin-Project-project.jsp">프로젝트</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-bar-chart-o"></i> 매출 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      
+                      <li><a href="admin-Sales-sales.jsp">매출</a></li>
+                      <li><a href="admin-Sales-saleLog.jsp">결제내역</a></li>
                     </ul>
                   </li>
 
@@ -59,15 +63,12 @@
 
                   <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a>FAQ 관리</a></li>
-                      <li><a>1:1 문의</a></li>
-                      <li><a>신고접수</a></li>
+                      <li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
+                      <li><a href="admin-CS-QA.jsp">1:1 문의</a></li>
+                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
                     </ul>
                   </li>                  
 
-                  <li><a><i class="fa fa-table"></i> ??? <span class="fa fa-chevron-down"></span></a>
-                    
-                  </li>
                   
                   
                 </ul>
@@ -76,7 +77,7 @@
               
 
             </div>
-            <!-- /sidebar menu -->
+            <!--  //side bar  -->
           </div>
         </div>
 
@@ -86,36 +87,14 @@
         <div class="right_col" role="main">
           <div style="width: 100%;">
             <div>
-              <span><h1><strong>매출</strong></h1></span>
+              <span><h1><strong>접속로그</strong></h1></span>
               <hr>
             </div>
           </div>
 
           <div>
-            <table>
-              <tr style="width: 620px;">
-                <th style="width: 200px;">오늘 결제 건</th>
-                <th style="width: 200px;">이번달 결제 건</th>
-                <th style="width: 200px;">이번달 환불 건</th>
-              </tr>
-              <tr style="width: 620px;">
-                <td style="width: 200px;">1</td>
-                <td style="width: 200px;">2</td>
-                <td style="width: 200px;">0</td>
-              </tr>
-            </table>
-          </div>,
-
-          <hr>
-
-          <!-- 기간별 매출 조회 -->
-          <div>
             <div>
-              <span>매출 조회</span>
-            </div>
-
-            <div>
-              <select name="" id="" style="display: inline-block; vertical-align: middle; height: 25px;">
+              <select name="" style="display: inline-block; height: 25px;">
                 <option>1월</option>
                 <option>2월</option>
                 <option>3월</option>
@@ -133,49 +112,37 @@
                 <input type="text" placeholder="시작일">
                 <span>~</span>
                 <input type="text" placeholder="종료일">
+                <button>검색</button>
               </div>
-
-              <!-- 기간별 매출 -->
-              <div style=" display: inline-block; width: 800px; height: 400px; margin-top: 20px; background-color: bisque;"></div>
-              <!-- //기간별 매출 -->
-              
             </div>
 
-            <hr>
 
-            <div>
+            <div style="margin-top: 20px;">
+              <table>
+                <tr>
+                  <th style="width: 150px;">아이디</th>
+                  <th style="width: 200px;">접속일자</th>
+                  <th style="width: 1200px;">로그아웃</th>
+                </tr>
+                <!-- forEach -->
+                <tr>
+                  <td style="width: 150px;">abc123456</td>
+                  <td style="width: 100px;">2020/02/02 13:32:12</td>
+                  <td style="width: 100px;">2020/02/02 17:32:12</td>
+                </tr>
+                <!-- //forEach -->
+              </table>
+              <!-- 페이징처리 -->
 
-              <div>
-                <span>전년도 동월 대비 매출</span>
-              </div>
-
-              <!-- 전년도 대비 매출 -->
-              <div style=" display: inline-block; width: 800px; height: 400px; margin-top: 20px; background-color: bisque;"></div>
-              <!-- //전년도 대비 매출 -->
-
+              <!-- //페이징처리 -->
             </div>
 
-            <hr>
 
-            <div>
-              <div>
-                <span>전월 대비 매출</span>
-              </div>
-
-              <!-- 전월 대비 매출 -->
-              <div style=" display: inline-block; width: 800px; height: 400px; margin-top: 20px; background-color: bisque;"></div>
-              <!-- //전월 대비 매출 -->
-
-            </div>
-
-          </div>
-          <!-- //기간별 매출 조회 -->
-
-          <hr>
-
+			</div>
           
         </div>
         <!-- //page content -->
+
       </div>
     </div>
 
@@ -183,8 +150,6 @@
         <script src="../vendors/jquery/dist/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- DateJS -->
-        <script src="../vendors/DateJS/build/date.js"></script>
         <!-- Custom Theme Scripts -->
         <script src="../build/js/custom.min.js"></script>
 	

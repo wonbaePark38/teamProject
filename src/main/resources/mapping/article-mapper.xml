@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ArticleDAO">
+
+	<insert id="articleInsert" useGeneratedKeys="true" parameterType="articleVO">
+		INSERT INTO article_writeform1(article_id, writeform1_content) VALUES( article_seq.nextval ,#{writeform1_content})
+	</insert>
+
+</mapper>
