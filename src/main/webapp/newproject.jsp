@@ -6,8 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/newproject_css.css">
+<script src="js/newproject.js" ></script>
 </head>
 <body>
+<form action="newproject.do" id="newproject" method="post">
+
+<!-- 유저 아이디 -->
+<input type="hidden" name="projectmanager" value="dnjswhdzld">
+<input type="hidden" name="projectuser" value="1">
+<input type="hidden" name="projecttype" value="1">
 <div class="background_shadow" style="z-index: 9000;"></div>
 	<div class="layerstyle4" style="width: 500px; z-index: 9001" >
 		<div id="projectOptionLayer" class="layerstyle4_po" style="display: block;">
@@ -20,10 +27,10 @@
 			<div class="newrm_wrap" style="background-color: #fff;">
 				<dl class="nwrtitle_box">
 					<dt>
-						<input id="COLABO_TTL" placeholder="프로젝트 제목을 입력하세요" rows="1" class="autosize" style="max-height: 59px;" maxlength="50">
+						<input name="projectname" id="COLABO_TTL" placeholder="프로젝트 제목을 입력하세요" rows="1" class="autosize" style="max-height: 59px;" maxlength="50">
 					</dt>
 					<dd style="padding: 0; margin: 0px;">
-						<textarea id="COLABO_CNTN" placeholder="설명글을 입력할 수 있습니다." rows="1" class="autosize" style="max-height: 90px; overflow: auto; padding: 9px; height: 55px;"></textarea>
+						<textarea name="projectcontent" id="COLABO_CNTN" placeholder="설명글을 입력할 수 있습니다." rows="1" class="autosize" style="max-height: 90px; overflow: auto; padding: 9px; height: 55px;"></textarea>
 					</dd>
 				</dl>
 				
@@ -55,11 +62,11 @@
 				</dl>
 				
 				<div class="t_center" style="margin-top:30px;">
-					<a id="flowMakeBtn" type="button" class="new_btnstyle50 on">프로젝트 생성</a>
+					<a id="flowMakeBtn" type="button" class="new_btnstyle50 on" onclick="newproject()">프로젝트 생성</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+</form>
 </body>
 </html>

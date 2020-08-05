@@ -11,6 +11,9 @@
 	function contentset(){
 	    document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';
 	  }
+	$(document).ready(function(){
+    	alert('123');
+    })
 </script>
 
 </head>

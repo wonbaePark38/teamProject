@@ -84,7 +84,10 @@
 				</div>
 				<!--사이드바-->
 				<div class="sidebar">
-					<a onclick="acyncMovePage1('content.jsp')"  class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
+					<form action="projectDir.do" id="pform">
+					
+						<a onclick="pro1('content.jsp')" id="pro1" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
+					</form>
 					<a onclick="acyncMovePage1('content.jsp')" href="#"
 						  class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">미보관</a> <a
 						onclick="acyncMovePage1('content.jsp')" href="#"
