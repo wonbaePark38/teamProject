@@ -86,10 +86,10 @@
                     </button>
 
                     <button id="listSortBt" type="button">
-                        <i class="fas fa-list-alt" style="color:darkgrey; font-size: 25px;"></i>
+                        <i class="fas fa-list-alt" style="color:white; font-size: 25px;"></i>
                     </button>
                     <button id="badukSortBt" type="button" >
-                        <i class="fab fa-microsoft" style="color:darkgrey; font-size: 25px;"></i>
+                        <i class="fab fa-microsoft" style="color: white; font-size: 25px;"></i>
                     </button>
                     <input type="button" onclick="" value="닫기" id="closeBt">
                     </div>
@@ -203,7 +203,7 @@
                     </div>
                 </div>
 
-                <section class="main-article-container">
+                <section class="list-main-article-container" style="display: none;">
                     <div class="title-container">
                         <div class="checkbox-all-div">
                             <input type="checkbox" class="checkbox-all">
@@ -344,12 +344,142 @@
 
                        
                     </div><!--end tableRow for문 반복구간 끝-->
+                </section><!--end listmainarticleContainer-->
+                
+                
+                <section class="baduk-main-article-container" style="display: block;">
+                    <div class="title-container">
+                        <div class="checkbox-all-div">
+                            <input type="checkbox" class="checkbox-all">
+                        </div>
 
+                        <div class="file-up-date">
+                            <button type="button" id="updatesortbt-baduk">
+                                최근 업로드순
+                                <img class="downimg" src="images/btn_arrdw.png" style="padding-bottom: 3px;">
+                                <img class="upimg" src="images/btn_arrup.png" style="padding-bottom: 3px;">
+                            </button>
+                        </div>
 
-                       
-                    </div> <!--end tableRow for문 반복구간 끝-->
-                    
-                </section><!--end mainarticleContainer-->
+                        <div class="file-name-sort-baduk">
+                            <button type="button" id="namesortbt-baduk">
+                                파일명
+                                <img class="downimg" src="images/btn_arrdw.png" style="padding-bottom: 3px;">
+                                <img class="upimg" src="images/btn_arrup.png" style="padding-bottom: 3px;">
+                            </button>   
+                        </div>
+
+                    </div>
+
+                    <div class="baduk-sort-div">
+                        <div class=item-info><!--for문 들어갈 자라-->
+                            <div class="check-box-baduk">
+                                <input type="checkbox" id="checkbox" style="margin-left: 5px;">
+                                    <button class="moreBt" onclick="badukListhiddenMenuFold(this,event);">
+                                    <img src="images/more_color_select_on.png">
+                                </button>
+                               
+                            </div>
+                            <div class="moreMenuContainer">
+                                <div class="hiddenMenu">
+                                    <button class="moreMenuDownloadBt" type="button" onclick="test()" alt="다운로드">
+                                        <span class="moreMenuDownloadSpan"></span> 다운로드
+                                    </button>
+                                    
+                                    <button class="moreMenuOpenBt" type="button" onclick="test()" alt="열기">
+                                        <span class="moreMenuOpenSpan"></span>열기
+                                    </button>
+                                    <button class="moreMenuDetailViewBt" type="button" onclick="test()" alt="상세보기">
+                                        <span class="moreMenuDetailViewSpan"></span>상세보기
+                                    </button>
+                                  
+                                </div>
+                            </div>
+                            
+                            <div class="item-bt">
+                                <img src="images/filemoa_ico02.png">
+                            </div>
+                            <div class="file-name">
+                                파일이름 들어갈 자리
+                            </div>
+      
+                            
+                           
+                        </div><!--for문 들어갈 자라-->
+
+                        <div class=item-info><!--for문 들어갈 자라-->
+                            <div class="check-box-baduk">
+                                <input type="checkbox" id="checkbox" style="margin-left: 5px;">
+                                    <button class="moreBt" onclick="badukListhiddenMenuFold(this,event);">
+                                    <img src="images/more_color_select_on.png">
+                                </button>
+                               
+                            </div>
+                            <div class="moreMenuContainer">
+                                <div class="hiddenMenu">
+                                    <button class="moreMenuDownloadBt" type="button" onclick="test()" alt="다운로드">
+                                        <span class="moreMenuDownloadSpan"></span> 다운로드
+                                    </button>
+                                    
+                                    <button class="moreMenuOpenBt" type="button" onclick="test()" alt="열기">
+                                        <span class="moreMenuOpenSpan"></span>열기
+                                    </button>
+                                    <button class="moreMenuDetailViewBt" type="button" onclick="test()" alt="상세보기">
+                                        <span class="moreMenuDetailViewSpan"></span>상세보기
+                                    </button>
+                                  
+                                </div>
+                            </div>
+                            
+                            <div class="item-bt">
+                                <img src="images/filemoa_ico02.png">
+                            </div>
+                            <div class="file-name">
+                                파일이름 들어갈 자리
+                            </div>
+      
+                            
+                           
+                        </div><!--for문 들어갈 자라-->
+                        
+
+                        <div class=item-info><!--for문 들어갈 자라-->
+                            <div class="check-box-baduk">
+                                <input type="checkbox" id="checkbox" style="margin-left: 5px;">
+                                    <button class="moreBt" onclick="badukListhiddenMenuFold(this,event);">
+                                    <img src="images/more_color_select_on.png">
+                                </button>
+                               
+                            </div>
+                            <div class="moreMenuContainer">
+                                <div class="hiddenMenu">
+                                    <button class="moreMenuDownloadBt" type="button" onclick="test()" alt="다운로드">
+                                        <span class="moreMenuDownloadSpan"></span> 다운로드
+                                    </button>
+                                    
+                                    <button class="moreMenuOpenBt" type="button" onclick="test()" alt="열기">
+                                        <span class="moreMenuOpenSpan"></span>열기
+                                    </button>
+                                    <button class="moreMenuDetailViewBt" type="button" onclick="test()" alt="상세보기">
+                                        <span class="moreMenuDetailViewSpan"></span>상세보기
+                                    </button>
+                                  
+                                </div>
+                            </div>
+                            
+                            <div class="item-bt">
+                                <img src="images/filemoa_ico02.png">
+                            </div>
+                            <div class="file-name">
+                                파일이름 들어갈 자리
+                            </div>
+      
+                            
+                           
+                        </div><!--for문 들어갈 자라-->
+                    </div>    
+                </section>
+               
             </div>
         </div>
           
@@ -360,7 +490,7 @@
     <!--main wrap-->
 </body>
 
-<script type="text/javascript" src="./script/script.js"></script>
+
 
 </html>
 
