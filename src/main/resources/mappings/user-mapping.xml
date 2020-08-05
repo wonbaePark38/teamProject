@@ -3,23 +3,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserDAO">
-	<resultMap type="usertest" id="userResult">
-		<id property="seq" column="SEQ"/>
-		<result property="officename" column="OFFICENAME"/>
-		<result property="username" column="USERNAME"/>
-		<result property="groupname" column="GROUPNAME"/>
-		<result property="department" column="DEPARTMENT"/>
+	<resultMap type="user" id="userResult">
+		
+		
 		<result property="email" column="EMAIL"/>
-		<result property="phone" column="PHONE"/>
-		<result property="device" column="DEVICE"/>
-		<result property="userstate" column="USERSTATE"/>
-		<result property="usermanager" column="USERMANAGER"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="name" column="NAME"/>
 	</resultMap>
 	
-	
-	<insert id="insertUser" parameterType="usertest"> 
-		INSERT INTO usertest (seq, officename, username, groupname, department, email, phone, device, userstate, usermanager) VALUES((select nvl(max(seq), 0)+1 from usertest), #{officename}, #{username}, #{groupname}, #{department}, #{email}, #{phone}, #{device}, #{userstate}, #{usermanager}) 
-	</insert>
-	
+	<select id="getUser" resultType="user"
+		parameterType="user">
+		SELECT * FROM wonbaetest WHERE email=#{email} and password=#{password}
+	</select>
 	
 </mapper>

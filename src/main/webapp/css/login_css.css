@@ -29,10 +29,13 @@ div.btn-register a {
 	min-width: 380px;
 	height: 60px;
 	line-height: 60px;
+	border:0;
+	outline:0;
 	font-size: 18px;
 	color: #fff;
 	text-align: center;
 	background-color: #cccdd0;
+	cursor:pointer;
 }
 
 .line_through span {
@@ -65,9 +68,18 @@ div.btn-register a {
 	height: 48px;
 	line-height: 48px;
 	border: 1px solid #ebebeb;
-	background: #fff url(../img/ico_google.gif) no-repeat 91px 11px;
+	background: #fff url(../images/ico_google.gif) no-repeat 91px 11px;
 }
 
+.another_id li.kakao {
+	height: 48px;
+	line-height: 48px;
+	border: 1px solid #ebebeb;
+	background: #fddc3f url(../images/ico_kakao.jpg) no-repeat 88px 11px;
+}
+.another_id a{
+	text-decoration: none;
+}
 .another_id li {
 	cursor: pointer;
 	padding-left: 128px;

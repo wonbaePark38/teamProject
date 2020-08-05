@@ -216,7 +216,7 @@ body{
     align-items: center;
     background-color: white;
     border: 0;
-    height: 100%;
+   
     margin-right: 5px;
   }
 
@@ -236,6 +236,7 @@ body{
     align-items: center;
     background-color: white;
     border: 0;
+    
     margin-right: 5px;
   }
   /*
@@ -254,6 +255,7 @@ body{
     align-items: center;
     background-color: white;
     border: 0;
+   
     margin-right: 5px;
   }
   #downloadSpan{
@@ -307,7 +309,7 @@ body{
     padding-top: 3px;
     padding-left: -2px;
     border: 0;
-   background-color:  #c2bdcc;
+    background-color:  #e4e7eb;
   }
   #badukSortSpan{
     background: url('../images/ico_thumb.png') no-repeat;
@@ -590,7 +592,7 @@ body{
     margin-left: 20px;
 
   }
-  #checkbox{
+  .checkbox-baduk{
     width:20px;
     height: 20px;
     vertical-align: middle;
@@ -716,12 +718,12 @@ body{
     border: 0;
   }
 
-  .main-article-container{
+  .list-main-article-container{
     display: flex;
     flex-direction: column;
     width: 80%;
     height: 100%;
-    
+    display: block;
    
   }
   .title-container{
@@ -833,20 +835,20 @@ body{
     background-color: violet;
     width:5%;
     opacity: 0;
+   
     
   }
-
+ 
   .moreBt{
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height:100%;
+    
   }
     
   .hiddenBtContainer{
     display: flex;
     width: 20%;
-    height:150px;
+    height:170px;
     justify-content: center;
     z-index: 3;
     display: block;
@@ -858,7 +860,7 @@ body{
   display: flex;
   width: 150px;
   height: 150px;
-  background-color: #5f5ab9;
+  
   justify-content: flex-end;
   display: none;
   z-index:4;
@@ -866,14 +868,16 @@ body{
 }
  .hiddenMenu{
    display: flex;
+   position: absolute;
    flex-direction: column;
    justify-content: center;
+   align-items: center;
    margin-top: 0;
    background-color: white;
-   border: 2px solid #e7e8e9;
-   width: 100%;
-   height: 100%;
-   
+   border: 1px solid #e7e8e9;
+   width: 165px;
+   height: 150px;
+ 
    
  }
  .moreMenuDownloadBt{
@@ -925,7 +929,71 @@ body{
   
  }
 
+ .baduk-main-article-container{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+  display:none;
 
+}
+
+.file-name-sort-baduk{
+  display: flex;
+    
+    height: 100%;
+    justify-content: center;  
+}
+
+.baduk-sort-div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  
+  
+}
+.checkbox-all-baduk{
+  width: 22px;
+  height:22px;  
+}
+.check-box-baduk{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height:30%;
+  align-items: center;
+  
+  justify-content: space-between;
+
+}
+
+
+.item-info{
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  height: 180px;
+  border: 1px solid #e7e8e9;
+  margin: 20px;
+}
+.item-bt{
+  width: 100%;
+  height: 70%;
+ 
+  text-align: center;
+}
+
+.file-name{
+  display: flex;
+
+  height: 30%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+}
 
 
 
