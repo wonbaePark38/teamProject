@@ -29,7 +29,7 @@ public class Article1VO {
 	
 	
 	// 업무
-	private String workForm3_title;
+	private String writeForm3_title;
 	private String writeForm3_status;
 	private String writeForm3_workersName;
 	private String writeForm3_start_date;
@@ -155,12 +155,12 @@ public class Article1VO {
 	
 
 	// 업무 get,set
-	public String getWorkForm3_title() {
-		return workForm3_title;
+	public String getWriteForm3_title() {
+		return writeForm3_title;
 	}
 
-	public void setWorkForm3_title(String workForm3_title) {
-		this.workForm3_title = workForm3_title;
+	public void setWorkForm3_title(String writeForm3_title) {
+		this.writeForm3_title = writeForm3_title;
 	}
 
 	public String getWriteForm3_status() {
@@ -223,7 +223,7 @@ public class Article1VO {
 
 	@Override
 	public String toString() {
-		return "Article1VO [workForm3_title=" + workForm3_title + ", writeForm3_status=" + writeForm3_status
+		return "Article1VO [writeForm3_title=" + writeForm3_title + ", writeForm3_status=" + writeForm3_status
 				+ ", writeForm3_workersName=" + writeForm3_workersName + ", writeForm3_start_date="
 				+ writeForm3_start_date + ", writeForm3_end_date=" + writeForm3_end_date + ", writeForm3_progress="
 				+ writeForm3_progress + ", writeForm3_order=" + writeForm3_order + ", writeForm3_content="
