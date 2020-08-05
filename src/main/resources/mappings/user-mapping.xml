@@ -16,4 +16,9 @@
 		SELECT * FROM wonbaetest WHERE email=#{email} and password=#{password}
 	</select>
 	
+	<select id="getSocialUser" resultType="user"
+		parameterType="user">
+		SELECT * FROM wonbaetest WHERE email=#{email}
+	</select>
+	
 </mapper>

@@ -49,7 +49,7 @@
 			<div>
 				<input type="checkbox">&nbsp;<span>자동 로그인</span>
 			</div>
-			<button type="button" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled>로그인</button>
+			<input type="submit" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
 			
 		</div>
 		<div class="forgot-password">
@@ -65,7 +65,8 @@
 	<ul class="another_id">
 		<form method="POST" action="login.do" name="googleSubmit">
 			<a href='javascript:void(0);' onclick="startGoogleLogin()">
-			<input type="hidden" id="googleId" name="email" value="${userVO.email}">
+			<input type="hidden" id="googleInfo" name="email" value="${userVO.email}">
+			<input type="hidden" id="socialGoogle" name="socialCompare" value="${userVO.socialCompare}">
 				<li class="google" id="googleBt"><span>Google 계정으로 시작</span></li>
 
 			</a>
@@ -73,7 +74,8 @@
 
 		<form method="POST" action="login.do" name="kakaoSubmit">
 			<a href='javascript:void(0);' onclick="startKakaoLogin()">
-			<input type="hidden" id="kakaoId" name="email" value="${userVO.email}">
+			<input type="hidden" id="kakaoInfo" name="email" value="${userVO.email}">
+			<input type="hidden" id="socialKakao" name="socialCompare" value="${userVO.socialCompare}">
 				<li class="kakao" id="kakaoBt"><span>Kakao 계정으로 시작</span></li>
 
 			</a>

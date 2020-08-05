@@ -272,8 +272,8 @@ function hiddenMenuFold(thisevent){
 	    	var profile = googleUser.getBasicProfile();
 	    	console.log("Email: " + profile.getEmail());
 	    	console.log('Full Name: ' + profile.getName());
-	    	document.getElementById('googleId').value = profile.getEmail();
-	    	
+	    	document.getElementById('googleInfo').value = profile.getEmail();
+	    	document.getElementById('socialGoogle').value = 'social';
 	    	document.googleSubmit.submit();
 	    	
         }, function(error) {});    
@@ -294,10 +294,11 @@ function hiddenMenuFold(thisevent){
 				  url :'/v2/user/me',
 				  success: function(res){
 					  
-					 var id=res.id;
-					 console.log("res정보" + res);
-					 document.getElementById('kakaoId').value = id;
-					 //document.kakaoSubmit.submit();				
+					 var email = res.kakao_account.email;
+					 var name = res.properties.nickname;
+					 document.getElementById('kakaoInfo').value = email;
+					 document.getElementById('socialKakao').value = 'social';
+					 document.kakaoSubmit.submit();
 		  }
 	  })
 	    console.log(authObj);
