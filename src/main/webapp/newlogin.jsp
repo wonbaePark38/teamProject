@@ -6,6 +6,10 @@
 <meta charset="UTF-8">
 <title>Login</title>
 <link rel="stylesheet" href="css/login_css.css" />
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
 
@@ -32,7 +36,7 @@
 
 			<input type="submit" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
 			
-			<a href="mainPage.html" class="signup_btn_st1">로그인</a>
+			
 		</div>
 		<div class="forgot-password">
 			<a>비밀번호를 잊어버리셨나요?</a>
@@ -64,13 +68,10 @@
 		</form>
 	</ul>
 
-		<ul class="another_id">
-			<li class="google">
-				<span>Google 계정으로 시작</span>
-			</li>
-		</ul>
+		
 	</div>
 	
 	
 </body>
+<script type="text/javascript" src="script/script.js"></script>
 </html>

@@ -38,7 +38,7 @@ public class LoginController{
 		 * 회원 가입한 회원과 소셜 로그인 한 사람을 구분함
 		 */
 		if(vo.getSocialCompare()!=null) {// 소셜 로그인한 회원은 여기
-			UserVO user = userService.getSocialUser(vo);
+			
 			session.setAttribute("userEmail",vo.getEmail());
 			mav.setViewName("content.jsp");
 			return mav;
