@@ -34,7 +34,7 @@
 				<input type="checkbox">&nbsp;<span>자동 로그인</span>
 			</div>
 
-			<input type="submit" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
+			<input type="submit" class="signup_btn_st1"  disabled=disabled value="로그인">
 			
 			
 		</div>
