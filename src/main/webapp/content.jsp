@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,16 +47,18 @@
 			</div>
 			
 			<div class="컨텐츠"  style="z-index: 1; display: inline-block; width: 100%;">
-				<div class="pro" >
-					<input class="title_btn" type="button" value="즐">
-					<div class="title_box">
-						<span>프로젝트 이름</span>
+				<c:forEach var="project" items="${projectDirList }">
+					<div class="pro" >
+						<input class="title_btn" type="button" value="즐">
+						<div class="title_box">
+							<span>프로젝트 이름</span>
+						</div>
+						<div class="title_box_s">
+							<span>n명</span>
+							<span>참여중</span>
+						</div>
 					</div>
-					<div class="title_box_s">
-						<span>n명</span>
-						<span>참여중</span>
-					</div>
-				</div>
+				</c:forEach>
 				<div class="pro" >
 					<input class="title_btn" type="button" value="즐">
 					<div class="title_box">
