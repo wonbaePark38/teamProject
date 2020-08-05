@@ -63,5 +63,41 @@
    #{writeForm3_content, jdbcType=VARCHAR}
    )
    </insert>
+   
+   
+   <insert id="article4Insert" useGeneratedKeys="true" parameterType="article1VO">
+   INSERT INTO mainpage_article4
+   (
+   project_id, 
+   article_id, 
+   form_name, 
+   writer, 
+   regDate, 
+   writeForm4_title,
+   writeForm4_start_date,
+   writeForm4_start_time,
+   writeForm4_end_date,
+   writeForm4_end_time,
+   writeForm4_alarm_time,
+   writeForm4_content,
+   writeForm4_latlng
+   )
+   VALUES
+   (
+   1, 
+   article_seq.nextval, 
+   #{form_name},
+   'tester3',
+   sysdate,
+   #{writeForm4_title},
+   #{writeForm4_start_date},
+   #{writeForm4_start_time},
+   #{writeForm4_end_date},
+   #{writeForm4_end_time},
+   #{writeForm4_alarm_time},
+   #{writeForm4_content, jdbcType=VARCHAR},
+   #{writeForm4_latlng, jdbcType=VARCHAR}
+   )   
+   </insert>
 
 </mapper>

@@ -38,6 +38,18 @@ public class Article1VO {
    private String writeForm3_order;
    private String writeForm3_content;
    
+   
+   // 일정
+   private String writeForm4_title;
+   private String writeForm4_start_date;
+   private String writeForm4_start_time;
+   private String writeForm4_end_date;
+   private String writeForm4_end_time;
+   private String writeForm4_alarm_time;
+   private String writeForm4_content;
+   private String writeForm4_latlng;
+   
+   
    // 공동 get, set
    public int getProject_id() {
       return project_id;
@@ -218,18 +230,85 @@ public class Article1VO {
    public void setWriteForm3_content(String writeForm3_content) {
       this.writeForm3_content = writeForm3_content;
    }
-   
-   
 
-   @Override
-   public String toString() {
-      return "Article1VO [workForm3_title=" + workForm3_title + ", writeForm3_status=" + writeForm3_status
-            + ", writeForm3_workersName=" + writeForm3_workersName + ", writeForm3_start_date="
-            + writeForm3_start_date + ", writeForm3_end_date=" + writeForm3_end_date + ", writeForm3_progress="
-            + writeForm3_progress + ", writeForm3_order=" + writeForm3_order + ", writeForm3_content="
-            + writeForm3_content + "]";
-   }
    
+   // 일정 get,set
+	public String getWriteForm4_title() {
+		return writeForm4_title;
+	}
+	
+	public void setWriteForm4_title(String writeForm4_title) {
+		this.writeForm4_title = writeForm4_title;
+	}
+	
+	public String getWriteForm4_start_date() {
+		return writeForm4_start_date;
+	}
+	
+	public void setWriteForm4_start_date(String writeForm4_start_date) {
+		this.writeForm4_start_date = writeForm4_start_date;
+	}
+	
+	public String getWriteForm4_start_time() {
+		return writeForm4_start_time;
+	}
+	
+	public void setWriteForm4_start_time(String writeForm4_start_time) {
+		this.writeForm4_start_time = writeForm4_start_time;
+	}
+	
+	public String getWriteForm4_end_date() {
+		return writeForm4_end_date;
+	}
+	
+	public void setWriteForm4_end_date(String writeForm4_end_date) {
+		this.writeForm4_end_date = writeForm4_end_date;
+	}
+	
+	public String getWriteForm4_end_time() {
+		return writeForm4_end_time;
+	}
+	
+	public void setWriteForm4_end_time(String writeForm4_end_time) {
+		this.writeForm4_end_time = writeForm4_end_time;
+	}
+	
+	public String getWriteForm4_alarm_time() {
+		return writeForm4_alarm_time;
+	}
+	
+	public void setWriteForm4_alarm_time(String writeForm4_alarm_time) {
+		this.writeForm4_alarm_time = writeForm4_alarm_time;
+	}
+	
+	public String getWriteForm4_content() {
+		return writeForm4_content;
+	}
+	
+	public void setWriteForm4_content(String writeForm4_content) {
+		this.writeForm4_content = writeForm4_content;
+	}
+	
+	public String getWriteForm4_latlng() {
+		return writeForm4_latlng;
+	}
+	
+	public void setWriteForm4_latlng(String writeForm4_latlng) {
+		this.writeForm4_latlng = writeForm4_latlng;
+	}
+
+	@Override
+	public String toString() {
+		return "Article1VO [writeForm4_start_date=" + writeForm4_start_date + ", writeForm4_start_time="
+				+ writeForm4_start_time + ", writeForm4_end_date=" + writeForm4_end_date + ", writeForm4_end_time="
+				+ writeForm4_end_time + ", writeForm4_alarm_time=" + writeForm4_alarm_time + ", writeForm4_content="
+				+ writeForm4_content + ", writeForm4_latlng=" + writeForm4_latlng + "]";
+	}
+   
+   
+	
+
+  
    
 
    

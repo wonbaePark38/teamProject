@@ -371,13 +371,13 @@
 
 
 						<!-- 일정 -->
-						<form>
+						<form method="post" action="writeform4.do" id="writeForm4_form">
+							<input type="hidden" name="form_name" value="scheWrite">
 							<div class="schedule_form" id="scheduleForm_div">
 								<div>
 									<!-- 일정 제목 -->
 									<div>
-										<input type="text" style="width: 100%; border-style: none;"
-											placeholder="일정 제목을 입력해주세요">
+										<input type="text" name="writeForm4_title" style="width: 100%; border-style: none;" placeholder="일정 제목을 입력해주세요">
 									</div>
 									<!-- //일정 제목 -->
 									<div>
@@ -393,24 +393,60 @@
 											<!-- 데이트 피커 -->
 											<li><span id="sche_time_img"></span> <!-- 날짜 선택 -->
 												<div style="display: inline-block; width: 80%;">
-													<input type="text" id="sche_start_date" placeholder="오늘날자"
+													<input type="text" name="writeForm4_start_date" id="sche_start_date" placeholder="오늘날자" readonly="readonly"
 														style="width: 20%;">&nbsp; <select
-														name="start_time" id="start_time_select">
-														<option>00:00</option>
-														<option>00:30</option>
-														<option>01:00</option>
-														<option>01:30</option>
-														<option>02:00</option>
-														<option>02:30</option>
-													</select> &nbsp;~&nbsp; <input type="text" id="sche_end_date"
+														name="writeForm4_start_time" id="start_time_select">
+														<option value="00">00:00</option>
+														<option value="01">01:00</option>
+														<option value="02">02:00</option>
+														<option value="03">03:00</option>
+														<option value="04">04:00</option>
+														<option value="05">05:00</option>
+														<option value="06">06:00</option>
+														<option value="07">07:00</option>
+														<option value="08">08:00</option>
+														<option value="09">09:00</option>
+														<option value="10">10:00</option>
+														<option value="11">11:00</option>
+														<option value="12">12:00</option>
+														<option value="13">13:00</option>
+														<option value="14">14:00</option>
+														<option value="15">15:00</option>
+														<option value="16">16:00</option>
+														<option value="17">17:00</option>
+														<option value="18">18:00</option>
+														<option value="19">19:00</option>
+														<option value="20">20:00</option>
+														<option value="21">21:00</option>
+														<option value="22">22:00</option>
+														<option value="23">23:00</option>
+													</select> &nbsp;~&nbsp; <input type="text" name="writeForm4_end_date" id="sche_end_date" readonly="readonly"
 														placeholder="종료날자" style="width: 20%;">&nbsp; <select
-														name="end_time" id="end_time_select">
-														<option>00:00</option>
-														<option>00:30</option>
-														<option>01:00</option>
-														<option>01:30</option>
-														<option>02:00</option>
-														<option>02:30</option>
+														name="writeForm4_end_time" id="end_time_select">
+														<option value="00">00:00</option>
+														<option value="01">01:00</option>
+														<option value="02">02:00</option>
+														<option value="03">03:00</option>
+														<option value="04">04:00</option>
+														<option value="05">05:00</option>
+														<option value="06">06:00</option>
+														<option value="07">07:00</option>
+														<option value="08">08:00</option>
+														<option value="09">09:00</option>
+														<option value="10">10:00</option>
+														<option value="11">11:00</option>
+														<option value="12">12:00</option>
+														<option value="13">13:00</option>
+														<option value="14">14:00</option>
+														<option value="15">15:00</option>
+														<option value="16">16:00</option>
+														<option value="17">17:00</option>
+														<option value="18">18:00</option>
+														<option value="19">19:00</option>
+														<option value="20">20:00</option>
+														<option value="21">21:00</option>
+														<option value="22">22:00</option>
+														<option value="23">23:00</option>
 													</select> <label> <input type="checkbox" id="alldayCheck"
 														onclick="alldayBtn()"> <span>종일</span>
 													</label>
@@ -438,12 +474,12 @@
 												<!-- 알람 -->
 												<div class="schedule_alarm">
 
-													<span id="sche_alarm_img"></span> <select>
-														<option>10분전</option>
-														<option>30분전</option>
-														<option>1시간전</option>
-														<option>2시간전</option>
-														<option>12시간전</option>
+													<span id="sche_alarm_img"></span> <select name="writeForm4_alarm_time">
+														<option value="10">10분전</option>
+														<option value="30">30분전</option>
+														<option value="60">1시간전</option>
+														<option value="120">2시간전</option>
+														<option value="720">12시간전</option>
 													</select>
 												</div>
 											</li>
@@ -453,11 +489,8 @@
 
 											<!-- 일정 메모 -->
 											<li>
-												<div>
-													<div class="div_text_write" contenteditable="true"></div>
-												</div>
-											</li>
-
+												
+												<textarea name="writeForm4_content" id="sche_text_write"></textarea>
 											<li>
 												<!-- 하단 툴바 -->
 												<hr>
@@ -467,7 +500,7 @@
 														<select style="vertical-align: middle; height: 27px;">
 															<option></option>
 															<option></option>
-														</select> <a class="submit_a">올리기</a>
+														</select> <a class="submit_a" onclick="writeForm_submit4()">올리기</a>
 													</div>
 												</div> <!-- //하단 툴바 -->
 											</li>

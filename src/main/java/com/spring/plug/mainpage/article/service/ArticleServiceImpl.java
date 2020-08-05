@@ -37,6 +37,16 @@ public class ArticleServiceImpl implements ArticleService{
       dao.article3_insert(vo);
       
    }
+
+
+
+
+
+	@Override
+	public void insertArticle4(Article1VO vo) {
+		dao.article4_insert(vo);
+		
+	}
    
    
    
