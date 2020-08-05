@@ -14,6 +14,7 @@ public class UserDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
 	//private final String USER_GET = "select * from wonbaetest where email= ? and password= ?";
 	
 	public UserVO getUser(UserVO vo) {
