@@ -11,23 +11,24 @@
 
 	<div class="sign-up-wrap">
 		<form action="signup.do" method="post">
+		<input type="hidden" name="socialCompare" value="N" >
 			<div>
 				<div>
 					<label class="signup-label">이메일</label>
 					<div class="inputbox">
-						<input type="text" id="email" name="email" placeholder="exam@email.com" value="${ SignupVO.email }">
+						<input type="text" id="email" name="email" placeholder="exam@email.com" value="${ UserVO.email }">
 					</div>
 				</div>
 				<div>
 					<label class="signup-label">이름</label>
 					<div class="inputbox">
-						<input type="text" id="username" name="userName" placeholder="이름" value="${ SignupVO.userName }" >
+						<input type="text" id="name" name="name" placeholder="이름" value="${ UserVO.name }" >
 					</div>
 				</div>
 				<div>
 					<label class="signup-label">비밀번호</label>
 					<div class="inputbox">
-						<input type="password" id="password" name="userPw" placeholder="비밀번호 입력" value="${ SignupVO.userPw }">
+						<input type="password" id="password" name="password" placeholder="비밀번호 입력" value="${ UserVO.password }">
 					</div>
 				</div>
 				<div>

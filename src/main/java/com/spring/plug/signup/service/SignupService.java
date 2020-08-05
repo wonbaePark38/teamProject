@@ -1,9 +1,9 @@
 package com.spring.plug.signup.service;
 
-import com.spring.plug.signup.vo.SignupVO;
+import com.spring.plug.login.vo.UserVO;
 
 public interface SignupService {
 
-	void insertMember(SignupVO vo);
+	void insertMember(UserVO vo);
 	
 }
