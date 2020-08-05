@@ -1,4 +1,4 @@
-package com.spring.plug.maipage.article.service;
+package com.spring.plug.mainpage.article.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.spring.plug.maipage.article.service;
+package com.spring.plug.mainpage.article.service;
 
 import com.spring.plug.mainpage.article.vo.Article1VO;
 

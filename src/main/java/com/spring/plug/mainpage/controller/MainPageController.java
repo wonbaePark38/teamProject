@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.plug.mainpage.article.service.ArticleService;
 import com.spring.plug.mainpage.article.vo.Article1VO;
-import com.spring.plug.maipage.article.service.ArticleService;
 
 @Controller
 public class MainPageController {
