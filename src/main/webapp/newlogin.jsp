@@ -59,7 +59,7 @@
 		</form>
 
 	<ul class="another_id">
-		<form method="POST" action="login.do" name="googleSubmit">
+		<form method="POST" action="slogin.do" name="googleSubmit">
 			<a href='javascript:void(0);' onclick="startGoogleLogin()">
 			<input type="hidden" id="googleInfo" name="email" value="${userVO.email}">
 			<input type="hidden" id="socialGoogle" name="socialCompare" value="${userVO.socialCompare}">
@@ -68,9 +68,11 @@
 			</a>
 		</form>
 
-		<form method="POST" action="login.do" name="kakaoSubmit">
+		<form method="POST" action="slogin.do" name="kakaoSubmit">
 			<a href='javascript:void(0);' onclick="startKakaoLogin()">
-			<input type="hidden" id="kakaoInfo" name="email" value="${userVO.email}">
+			<input type="hidden" id="kakaoInfo" name="email">
+			<input type="hidden" id="kakaoName" name="name">
+			
 			<input type="hidden" id="socialKakao" name="socialCompare" value="${userVO.socialCompare}">
 				<li class="kakao" id="kakaoBt"><span>Kakao 계정으로 시작</span></li>
 

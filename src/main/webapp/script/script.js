@@ -282,6 +282,7 @@ function hiddenMenuFold(thisevent){
 					 var email = res.kakao_account.email;
 					 var name = res.properties.nickname;
 					 document.getElementById('kakaoInfo').value = email;
+					 document.getElementById('kakaoName').value = name;
 					 document.getElementById('socialKakao').value = 'social';
 					 document.kakaoSubmit.submit();
 		  }

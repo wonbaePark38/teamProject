@@ -25,6 +25,11 @@ public class UserDAO {
 		return (UserVO) sqlSessionTemplate.selectOne("UserDAO.getSocialUser",vo);
 	}
 	
+	public String getSaltById(String email) {
+		System.out.println("-->mybatis로 소트 알아오는 기능 처리");
+		return sqlSessionTemplate.selectOne("UserDAO.getSaltById",email);
+	}
+
 	/*public String getUserEmail(UserVO vo) {
 		System.out.println("-->MyBatis로 소셜 login 기능 처리");
 		return (UserVO) sqlSessionTemplate.selectOne("UserDAO.getSocialUser",vo);
