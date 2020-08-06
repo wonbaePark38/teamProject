@@ -30,9 +30,9 @@ public class UserDAO {
 		return sqlSessionTemplate.selectOne("UserDAO.getSaltById",email);
 	}
 
-	/*public String getUserEmail(UserVO vo) {
-		System.out.println("-->MyBatis로 소셜 login 기능 처리");
-		return (UserVO) sqlSessionTemplate.selectOne("UserDAO.getSocialUser",vo);
-	}*/
+	public void addSocialUser(UserVO vo) {
+		System.out.println("소셜 로그인 신규 회원 추가");
+		sqlSessionTemplate.selectOne("UserDAO.getSaltById", vo);
+	}
 }
 

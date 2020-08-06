@@ -35,12 +35,11 @@ public class SocialLoginController{
 			session.setAttribute("userEmail",vo.getEmail()); //이메일 세션 저장
 			session.setAttribute("userName", vo.getName()); //이름 세션 저장
 			if(user != null) { // 이미 소셜 이메일로 로그인 이력 있던 사람
-				
 				mav.setViewName("content.jsp");
 				mav.addObject("user" , user);
 				return mav;
 			}else {//소셜 이메일로 처음 로그인 시도 한 사람
-				//db에 로그인 정보 인서트 해줘야함
+				userService.addSocialUser(vo);
 			}
 			
 			mav.setViewName("content.jsp");
