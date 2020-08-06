@@ -19,12 +19,20 @@
 
 </head>
 <body>
-	<c:if test="${status eq 'false'}">
+	<c:if test="${status eq 'passwordFalse'}">
 		<script type="text/javascript">
-			loginErrorView();
+			errorPassword();
 		</script>
 		
 	</c:if>
+	
+	<c:if test="${status eq 'notJoin'}">
+		<script type="text/javascript">
+			errorEmail();
+		</script>
+		
+	</c:if>
+	
 	<div>
 		<div class="btn-register">
 			<a href="signup.jsp">회원가입</a>
@@ -61,8 +69,10 @@
 	<ul class="another_id">
 		<form method="POST" action="slogin.do" name="googleSubmit">
 			<a href='javascript:void(0);' onclick="startGoogleLogin()">
-			<input type="hidden" id="googleInfo" name="email" value="${userVO.email}">
-			<input type="hidden" id="socialGoogle" name="socialCompare" value="${userVO.socialCompare}">
+			<input type="hidden" id="googleInfo" name="email">
+			<input type="hidden" id="googleName" name="name">
+			
+			<input type="hidden" id="socialGoogle" name="socialCompare">
 				<li class="google" id="googleBt"><span>Google 계정으로 시작</span></li>
 
 			</a>
@@ -73,7 +83,7 @@
 			<input type="hidden" id="kakaoInfo" name="email">
 			<input type="hidden" id="kakaoName" name="name">
 			
-			<input type="hidden" id="socialKakao" name="socialCompare" value="${userVO.socialCompare}">
+			<input type="hidden" id="socialKakao" name="socialCompare">
 				<li class="kakao" id="kakaoBt"><span>Kakao 계정으로 시작</span></li>
 
 			</a>

@@ -35,6 +35,14 @@ public class LoginController{
 			 */
 			System.out.println("로그인 컨트롤러 진입");
 			String salt = userService.getSaltById(vo.getEmail());
+			
+			if(salt==null) {
+				System.out.println("가입된 회원이 아닙니다");
+				mav.setViewName("newlogin.jsp");
+				mav.addObject("status", "notJoin");
+				return mav;
+			}
+			
 			String inputPassword = SHA256Util.getEncrypt(vo.getPassword(), salt);
 			vo.setPassword(inputPassword);
 			UserVO user = userService.getUser(vo);
@@ -48,9 +56,9 @@ public class LoginController{
 				
 				return mav;
 			}else {
-				System.out.println("아이디와 비번이 틀림");
+				System.out.println("비밀번호가 틀렸습니다");
 				mav.setViewName("newlogin.jsp");
-				mav.addObject("status", "false");
+				mav.addObject("status", "passwordFalse");
 				return mav;
 			}
 			

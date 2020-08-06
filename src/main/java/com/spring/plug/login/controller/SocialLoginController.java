@@ -32,13 +32,18 @@ public class SocialLoginController{
 			System.out.println("소셜 컨트롤러 진입");
 			
 			UserVO user = userService.getSocialUser(vo);
+			
+			System.out.println("리턴 이메일"+ user.getEmail());
+			
 			session.setAttribute("userEmail",vo.getEmail()); //이메일 세션 저장
 			session.setAttribute("userName", vo.getName()); //이름 세션 저장
 			if(user != null) { // 이미 소셜 이메일로 로그인 이력 있던 사람
+				System.out.println("소셜 로그인 로그인 이력있는 사람");
 				mav.setViewName("content.jsp");
 				mav.addObject("user" , user);
 				return mav;
 			}else {//소셜 이메일로 처음 로그인 시도 한 사람
+				System.out.println("소셜 처음 로그인한 사람");
 				userService.addSocialUser(vo);
 			}
 			

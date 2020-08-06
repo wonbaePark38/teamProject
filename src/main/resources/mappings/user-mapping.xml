@@ -13,9 +13,9 @@
 		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email} and MEMBER_PASSWORD=#{password}
 	</select>
 	
-	<select id="getSocialUser" resultType="user"
+	<select id="getSocialUser" resultMap="getUser"
 		parameterType="user">
-		SELECT * FROM wonbaetest WHERE email=#{email}
+		SELECT MEMBER_EMAIL FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
 	<select id="getSaltById" resultType="String"
@@ -23,4 +23,10 @@
 		SELECT SALT FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
+	<insert id="addSocialUser" parameterType="user">
+		INSERT INTO MEMBERINFO 
+		(MEMBER_ID, MEMBER_EMAIL, MEMBER_NAME, REGDATE, MEMBER_ISSOCIAL) 
+		VALUES
+		((select nvl(max(MEMBER_ID), 0)+1 from MEMBERINFO), #{email}, #{name}, SYSDATE, #{socialCompare})
+	</insert>
 </mapper>

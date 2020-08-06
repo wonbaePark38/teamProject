@@ -226,14 +226,17 @@ function hiddenMenuFold(thisevent){
       
     }
   }
-  function loginErrorView(){
+  function errorEmail(){
 	  
-	  alert('아이디나 비밀번호가 틀렸습니다'); 
+	  alert('없는 이메일 입니다.');
+	  document.getElementById('USER_ID').value ="";
 	  document.getElementById('USER_PW').value ="";
-	  //var passwordForm = document.getElementById("USER_PW");
 	}
   
-  
+  function errorPassword(){
+	  alert('비밀번호가 틀렸습니다.');
+	  document.getElementById('USER_PW').value ="";
+  }
 
   /*구글 로그인 로그아웃 코드*/
   function signOut(){
@@ -260,10 +263,10 @@ function hiddenMenuFold(thisevent){
 	    auth2.attachClickHandler(element, {},
 	    	function(googleUser) {
 	    	var profile = googleUser.getBasicProfile();
-	    	console.log("Email: " + profile.getEmail());
-	    	console.log('Full Name: ' + profile.getName());
+	    	
 	    	document.getElementById('googleInfo').value = profile.getEmail();
-	    	document.getElementById('socialGoogle').value = 'social';
+	    	document.getElementById('googleName').value = profile.getName();
+	    	document.getElementById('socialGoogle').value = 'y';
 	    	document.googleSubmit.submit();
 	    	
         }, function(error) {});    
@@ -283,7 +286,7 @@ function hiddenMenuFold(thisevent){
 					 var name = res.properties.nickname;
 					 document.getElementById('kakaoInfo').value = email;
 					 document.getElementById('kakaoName').value = name;
-					 document.getElementById('socialKakao').value = 'social';
+					 document.getElementById('socialKakao').value = 'y';
 					 document.kakaoSubmit.submit();
 		  }
 	  })

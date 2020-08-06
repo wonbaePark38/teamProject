@@ -32,7 +32,7 @@ public class UserDAO {
 
 	public void addSocialUser(UserVO vo) {
 		System.out.println("소셜 로그인 신규 회원 추가");
-		sqlSessionTemplate.selectOne("UserDAO.getSaltById", vo);
+		sqlSessionTemplate.insert("UserDAO.addSocialUser", vo);
 	}
 }
 
