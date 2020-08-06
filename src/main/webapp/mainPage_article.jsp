@@ -518,8 +518,8 @@
 
 
 						<!-- 할일 -->
-						<form method="post" action="writeform5.do" id="writeForm5_form">
-						
+						<form method="get" action="writeform5.do" id="writeForm5_form">
+							<input type="hidden" name="form_name" value="todoWrite">
 							<input type="hidden" name="writeForm5_content" id="todo_content_value">
 							<input type="hidden" name="writeForm5_date" id="todo_date_value">
 							<input type="hidden" name="writeForm5_worker" id="todo_worker_value">
@@ -553,7 +553,8 @@
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
 											<option></option>
-										</select> <a class="submit_a" onclick="">올리기</a>
+										</select> <a class="submit_a" onclick="writeForm_submit5()">올리기</a>
+										
 									</div>
 								</div>
 

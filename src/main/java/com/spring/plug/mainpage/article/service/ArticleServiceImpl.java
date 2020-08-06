@@ -11,7 +11,8 @@ public class ArticleServiceImpl implements ArticleService{
 
    @Autowired
    private ArticleDAO dao;
-
+   
+   
    @Override
    public void insertArticle1(Article1VO vo) {
       
@@ -46,6 +47,17 @@ public class ArticleServiceImpl implements ArticleService{
 	public void insertArticle4(Article1VO vo) {
 		dao.article4_insert(vo);
 		
+	}
+
+
+
+
+
+	@Override
+	public void insertArticle5(Article1VO vo) {
+		
+		
+		 dao.article5_insert(vo);
 	}
    
    

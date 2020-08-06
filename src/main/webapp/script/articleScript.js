@@ -255,7 +255,7 @@ function headerOption(){
 
 	var todo_param = "";
   
-	var todo_value = "";
+	var todo_content_value = "";
 	var todo_date_value = "";
 	var todo_worker_value = "";
   
@@ -263,35 +263,37 @@ function headerOption(){
 	var todo_content = [];
 	var todo_date = [];
 	var todo_worker = [];
+	
+	var todo_seq;
   
-	function writeForm5_content_arr(obj) {
+	function writeForm5_content_arr(obj,seq) {
 		
-		todo_content.push(obj.value);
+		todo_content[seq] = obj.value;
 		console.log(todo_content);
 		
 		document.getElementById('todo_content_value').value = todo_content;
-		
 	}
 	
-	function writeForm5_date_arr(obj) {
+	function writeForm5_date_arr(obj,seq) {
 			
-			todo_date.push(obj.value);
-			console.log(todo_date);
+		todo_date[seq] = obj.value;
+		console.log(todo_date);
 			
-			document.getElementById('todo_date_value').value = todo_date;
-			
-		}
-	
-	function writeForm5_worker_arr(obj) {
-		
-		todo_worker.push(obj.value);
-		console.log(obj.value);
-		console.log(todo_worker);
-		
-		document.getElementById('todo_worker_value').value = todo_worker;
-		
+		document.getElementById('todo_date_value').value = todo_date;
 	}
+  
   function todoAppend(){
+	  
+	  var seq_num = 'seq_'+startDivNum;
+	  
+	  var todo_seq_input = document.createElement('input');
+	  todo_seq_input.setAttribute('type','hidden');
+	  todo_seq_input.setAttribute('id',seq_num);
+	  todo_seq_input.setAttribute('value',startDivNum);
+	  
+	  document.getElementById('todoContent_external').appendChild(todo_seq_input);
+	  
+	  todo_seq = document.getElementById(seq_num).value;
 	  
       // id 만들기
       todo_div = divIdNumCreate('todo_div');
@@ -316,7 +318,7 @@ function headerOption(){
       inputTag.setAttribute('type','text');
       inputTag.setAttribute('placeholder','할일 입력');
       inputTag.setAttribute('style','border-style: none; width: 70%; margin-left: 3px; margin-right: 5.5px;');
-      inputTag.setAttribute('onchange','writeForm5_content_arr(this)');
+      inputTag.setAttribute('onchange','writeForm5_content_arr(this,'+todo_seq+')');
       todoAppendContent.append(inputTag);
       
       
@@ -334,7 +336,7 @@ function headerOption(){
 	      todoDatePickInput.setAttribute('readOnly','true');
 	      todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
 	      todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "mm/dd"});');
-	      todoDatePickInput.setAttribute('onchange','writeForm5_date_arr(this)');
+	      todoDatePickInput.setAttribute('onchange','writeForm5_date_arr(this,'+todo_seq+')');
 	      
 	      todoDatePickDiv.append(todoDatePickInput);
 	      
@@ -375,7 +377,7 @@ function headerOption(){
           var todoWorkerLi = document.createElement('li');
             var todoWorkerLi_a = document.createElement('a');
             todoWorkerLi_a.setAttribute('id',workerName_a);
-            todoWorkerLi_a.setAttribute('onclick','selectWorker("'+ workerName_a +'","'+ workerInputId +'","'+ workerSelectEvent +'")');
+            todoWorkerLi_a.setAttribute('onclick','selectWorker('+ todo_seq +',"'+ workerName_a +'","'+ workerInputId +'","'+ workerSelectEvent +'")');
             todoWorkerLi.append(todoWorkerLi_a);
             todoWorkerLi_a.innerHTML= i;
             
@@ -395,14 +397,11 @@ function headerOption(){
     }
 
     //리스트에서 작업자 선택
-    function selectWorker(name,id,div){
+    function selectWorker(seq,name,id,div){
     	
-      todo_worker.push(obj.value);
-	  console.log(obj.value);
+      todo_worker[seq] = name;
 	  console.log(todo_worker);
-		
 	  document.getElementById('todo_worker_value').value = todo_worker;
-     
     	
     	
       var test31 =  document.getElementById(name).innerText;
