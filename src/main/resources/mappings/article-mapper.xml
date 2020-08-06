@@ -101,31 +101,31 @@
    </insert>
 
 
-<!-- 	<insert id="article5Insert" useGeneratedKeys="true" parameterType="article1VO"> -->
-<!-- 	INSERT INTO mainpage_article5 -->
-<!--    ( -->
-<!--    project_id,  -->
-<!--    article_id,  -->
-<!--    form_name,  -->
-<!--    writer,  -->
-<!--    regDate,  -->
-<!--    writeForm5_title, -->
-<!--    writeForm5_content, -->
-<!--    writeForm5_date, -->
-<!--    writeForm5_worker -->
-<!--    ) -->
-<!--    VALUES -->
-<!--    ( -->
-<!--    1,  -->
-<!--    article_seq.nextval,  -->
-<!--    #{form_name}, -->
-<!--    'tester3', -->
-<!--    sysdate, -->
-<!--    #{writeForm5_title}, -->
-<!--    #{writeForm5_content}, -->
-<!--    #{writeForm5_date}, -->
-<!--    #{writeForm5_worker} -->
-<!--    ) -->
+	<insert id="article5Insert" useGeneratedKeys="true" parameterType="article1VO">
+	INSERT INTO mainpage_article5
+   (
+   project_id, 
+   article_id, 
+   form_name, 
+   writer, 
+   regDate, 
+   writeForm5_title,
+   writeForm5_content,
+   writeForm5_date,
+   writeForm5_worker
+   )
+   VALUES
+   (
+   1, 
+   article_seq.nextval, 
+   #{form_name},
+   'tester3',
+   sysdate,
+   #{writeForm5_title},
+   #{writeForm5_content},
+   #{writeForm5_date},
+   #{writeForm5_worker}
+   )
 	
-<!-- 	</insert> -->
+	</insert>
 </mapper>

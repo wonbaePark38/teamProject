@@ -255,9 +255,9 @@ function headerOption(){
 
 	var todo_param = "";
   
-	var todo_content_value = "";
-	var todo_date_value = "";
-	var todo_worker_value = "";
+	var todo_content_value;
+	var todo_date_value;
+	var todo_worker_value;
   
   
 	var todo_content = [];

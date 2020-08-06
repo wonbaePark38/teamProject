@@ -17,79 +17,92 @@ import com.spring.plug.mainpage.article.service.ArticleService;
 @Controller
 public class MainPageController {
 
-   @Autowired
-   private ArticleService service;
-   
-   
-   @RequestMapping(value = "/writeform1.do")
-   public String article1Insert(Article1VO vo) throws IOException{
+	@Autowired
+	private ArticleService service;
 
-      MultipartFile uploadFile = vo.getWriteForm_file();
-      System.out.println("controller" + vo.toString());
-      
-      
-      if(!uploadFile.isEmpty()) {
-         String fileName = uploadFile.getOriginalFilename();
-         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-      }
-      
-      
-      service.insertArticle1(vo);
-      
-      return "mainPage.jsp";
-   }
-   
-   
-   
-   @RequestMapping(value="/writeform2.do")
-   public String article2Insert(Article1VO vo) throws IOException{
-      
-      MultipartFile uploadFile = vo.getWriteForm_file();
-      System.out.println("controller" + vo.toString());
-      
-      
-      if(!uploadFile.isEmpty()) {
-         String fileName = uploadFile.getOriginalFilename();
-         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-      }
-      
-      
-      service.insertArticle2(vo);
-      
-      return "mainPage.jsp";
-   }
-   
-   
-   @RequestMapping(value = "/writeform3.do")
-   public String article3Insert(Article1VO vo) throws IOException{
-      
-      service.insertArticle3(vo);
-      
-      return "mainPage.jsp";
-   }
-   
-   
-   @RequestMapping(value = "/writeform4.do")
-   public String article4Insert(Article1VO vo) throws IOException{
-	   
-	   service.insertArticle4(vo);
-	   
-	   return "mainPage.jsp";
-   }
-   
-   @RequestMapping(value = "/writeform5.do")
-   public String article5Insert(Article1VO vo) throws IOException{
-	   
-	   System.out.println("controller entrance");
-	   
-	   
-	   
-	   
-	   
-	   System.out.println(vo.toString());
-	   
-	   service.insertArticle5(vo);
-	   return "mainPage.jsp";
-   }
-   
+	private String writeForm5_content;
+	private String writeForm5_date;
+	private String writeForm5_worker;
+
+	@RequestMapping(value = "/writeform1.do")
+	public String article1Insert(Article1VO vo) throws IOException {
+
+		MultipartFile uploadFile = vo.getWriteForm_file();
+		System.out.println("controller" + vo.toString());
+
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
+		}
+
+		service.insertArticle1(vo);
+
+		return "mainPage.jsp";
+	}
+
+	@RequestMapping(value = "/writeform2.do")
+	public String article2Insert(Article1VO vo) throws IOException {
+
+		MultipartFile uploadFile = vo.getWriteForm_file();
+		System.out.println("controller" + vo.toString());
+
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
+		}
+
+		service.insertArticle2(vo);
+
+		return "mainPage.jsp";
+	}
+
+	@RequestMapping(value = "/writeform3.do")
+	public String article3Insert(Article1VO vo) throws IOException {
+
+		service.insertArticle3(vo);
+
+		return "mainPage.jsp";
+	}
+
+	@RequestMapping(value = "/writeform4.do")
+	public String article4Insert(Article1VO vo) throws IOException {
+
+		service.insertArticle4(vo);
+
+		return "mainPage.jsp";
+	}
+
+	@RequestMapping(value = "/writeform5.do")
+	public String article5Insert(ArticleTodoArrVO article) throws IOException {
+
+		Article1VO vo = new Article1VO();
+
+		System.out.println("controller entrance");
+
+		for (int i = 0; i < article.getWriteForm5_content().length; i++) {
+			if (i == 0) {
+				writeForm5_content = article.getWriteForm5_content()[i];
+				writeForm5_date = article.getWriteForm5_date()[i];
+				writeForm5_worker = article.getWriteForm5_worker()[i];
+			} else {
+				writeForm5_content += ("," + article.getWriteForm5_content()[i]);
+				writeForm5_date += ("," + article.getWriteForm5_date()[i]);
+				writeForm5_worker += ("," + article.getWriteForm5_worker()[i]);
+			}
+		}
+
+		vo.setProject_id(article.getProject_id());
+		vo.setArticle_id(article.getArticle_id());
+		vo.setForm_name(article.getForm_name());
+		vo.setWriter(article.getWriter());
+		vo.setRegDate(article.getRegDate());
+		vo.setWriteForm5_title(article.getWriteForm5_title());
+		vo.setWriteForm5_content(writeForm5_content);
+		vo.setWriteForm5_date(writeForm5_date);
+		vo.setWriteForm5_worker(writeForm5_worker);
+
+		service.insertArticle5(vo);
+		return "mainPage.jsp";
+	}
+
 }
