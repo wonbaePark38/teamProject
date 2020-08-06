@@ -23,13 +23,6 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getSocialUser(vo);
 	}
 
-<<<<<<< HEAD
-
-	@Override
-	public String getUserEmail() {
-		
-		return null;
-=======
 	@Override
 	public String getSaltById(String email) {
 		System.out.println("서비스임플 호출");
@@ -40,7 +33,6 @@ public class UserServiceImpl implements UserService{
 	public void addSocialUser(UserVO vo) {
 		System.out.println("소셜 로그인 회원 추가 호출");
 		userDAO.addSocialUser(vo);
->>>>>>> refs/remotes/origin/ttttt
 	}
 	
 }
