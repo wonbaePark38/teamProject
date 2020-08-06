@@ -519,6 +519,11 @@
 
 						<!-- 할일 -->
 						<form method="post" action="writeform5.do" id="writeForm5_form">
+						
+							<input type="hidden" name="writeForm5_content" id="todo_content_value">
+							<input type="hidden" name="writeForm5_date" id="todo_date_value">
+							<input type="hidden" name="writeForm5_worker" id="todo_worker_value">
+							
 							<div class="todo_form" id="todoForm_div">
 								<!-- 할일 제목 -->
 								<div>

@@ -247,23 +247,52 @@ function headerOption(){
   }
 
 
-  var todo_div = "";
-  var workerPickId = "";
-  var workerInputId = "";
-  var workerSelectEvent = "";
-  var workerName_a = "";
+	var todo_div = "";
+	var workerPickId = "";
+	var workerInputId = "";
+	var workerSelectEvent = "";
+	var workerName_a = "";
 
-  var todo_param = "";
+	var todo_param = "";
   
-  var todo_value = "";
-  var todo_date_value = "";
-  var todo_worker_value = "";
+	var todo_value = "";
+	var todo_date_value = "";
+	var todo_worker_value = "";
   
   
+	var todo_content = [];
+	var todo_date = [];
+	var todo_worker = [];
+  
+	function writeForm5_content_arr(obj) {
+		
+		todo_content.push(obj.value);
+		console.log(todo_content);
+		
+		document.getElementById('todo_content_value').value = todo_content;
+		
+	}
+	
+	function writeForm5_date_arr(obj) {
+			
+			todo_date.push(obj.value);
+			console.log(todo_date);
+			
+			document.getElementById('todo_date_value').value = todo_date;
+			
+		}
+	
+	function writeForm5_worker_arr(obj) {
+		
+		todo_worker.push(obj.value);
+		console.log(obj.value);
+		console.log(todo_worker);
+		
+		document.getElementById('todo_worker_value').value = todo_worker;
+		
+	}
   function todoAppend(){
 	  
-	 
-
       // id 만들기
       todo_div = divIdNumCreate('todo_div');
       workerPickId = workerIdNumCreate('todo_worker_pick_div');
@@ -287,7 +316,7 @@ function headerOption(){
       inputTag.setAttribute('type','text');
       inputTag.setAttribute('placeholder','할일 입력');
       inputTag.setAttribute('style','border-style: none; width: 70%; margin-left: 3px; margin-right: 5.5px;');
-      
+      inputTag.setAttribute('onchange','writeForm5_content_arr(this)');
       todoAppendContent.append(inputTag);
       
       
@@ -298,15 +327,17 @@ function headerOption(){
       todoDatePickDiv.setAttribute('id',datePickId);
       todoDatePickDiv.setAttribute('style','width: 11%; display: inline-block;');
 
-      var todoDatePickInput = document.createElement('input');
-      todoDatePickInput.setAttribute('type','text');
-      todoDatePickInput.setAttribute('class','todo_date_input_external');
-      todoDatePickInput.setAttribute('placeholder','일자');
-      todoDatePickInput.setAttribute('readOnly','true');
-      todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
-      todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "mm/dd"});');
-
-      todoDatePickDiv.append(todoDatePickInput);
+	      var todoDatePickInput = document.createElement('input');
+	      todoDatePickInput.setAttribute('type','text');
+	      todoDatePickInput.setAttribute('class','todo_date_input_external');
+	      todoDatePickInput.setAttribute('placeholder','일자');
+	      todoDatePickInput.setAttribute('readOnly','true');
+	      todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
+	      todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "mm/dd"});');
+	      todoDatePickInput.setAttribute('onchange','writeForm5_date_arr(this)');
+	      
+	      todoDatePickDiv.append(todoDatePickInput);
+	      
       todoAppendContent.append(todoDatePickDiv);
 
 
@@ -326,6 +357,7 @@ function headerOption(){
         todoWorkerPickInput.setAttribute('readOnly','true');
         todoWorkerPickInput.setAttribute('style','width: 91%; margin-left: 0px;');
         todoWorkerPickInput.setAttribute('onclick','worker_pick("'+ workerSelectEvent +'")');
+        
         todoWorkerPicDiv.append(todoWorkerPickInput);
 
         var todoWorkerSelectDiv = document.createElement('div');
@@ -364,8 +396,18 @@ function headerOption(){
 
     //리스트에서 작업자 선택
     function selectWorker(name,id,div){
+    	
+      todo_worker.push(obj.value);
+	  console.log(obj.value);
+	  console.log(todo_worker);
+		
+	  document.getElementById('todo_worker_value').value = todo_worker;
+     
+    	
+    	
       var test31 =  document.getElementById(name).innerText;
-      document.getElementById(id).value = test31;
+		
+	  document.getElementById(id).value = name;
       document.getElementById(div).style.display = 'none';
     }
 
