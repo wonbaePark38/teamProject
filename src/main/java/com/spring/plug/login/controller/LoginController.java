@@ -26,7 +26,7 @@ public class LoginController{
 	}
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
-	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session,HttpServletRequest request) {
+	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session) {
 			/*
 			 * 입력한 이메일로 db에 저장된 salt값을 가저온 후에
 			 * salt와 입력한 비밀번호를 암호화 시키고

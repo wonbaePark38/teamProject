@@ -33,8 +33,6 @@ public class SocialLoginController{
 			
 			UserVO user = userService.getSocialUser(vo);
 			
-			System.out.println("리턴 이메일"+ user.getEmail());
-			
 			session.setAttribute("userEmail",vo.getEmail()); //이메일 세션 저장
 			session.setAttribute("userName", vo.getName()); //이름 세션 저장
 			if(user != null) { // 이미 소셜 이메일로 로그인 이력 있던 사람

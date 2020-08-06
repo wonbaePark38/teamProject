@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="#package.#mapperinterfacename">
+	<select id="getProjectList" resultType="등록한 vo"> 
+		로그인한 사람의 이메일로 가입되어있는 프로젝트 셀렉트 코드
+	</select>
+	
+	<select id="getFileList" resultType="등록한 vo">
+		SELECT * FROM  WHERE 1=1
+		<if test="searchFileCondition=='TITLE'">
+			AND title writer '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchFileCondition=='CONTENT'">
+			AND content file_name '%'||#{searchKeyword}||'%'
+		</if>
+		ORDER BY seq DESC
+		UNION
+		
+		SELECT * FROM  WHERE 1=1
+		<if test="searchFileCondition=='TITLE'">
+			AND title writer '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchFileCondition=='CONTENT'">
+			AND content file_name '%'||#{searchKeyword}||'%'
+		</if>
+		ORDER BY seq DESC
+		UNION
+		
+		SELECT * FROM  WHERE 1=1
+		<if test="searchFileCondition=='TITLE'">
+			AND title writer '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchFileCondition=='CONTENT'">
+			AND content file_name '%'||#{searchKeyword}||'%'
+		</if>
+		ORDER BY seq DESC
+		
+		
+	</select>
+
+
+</mapper>
