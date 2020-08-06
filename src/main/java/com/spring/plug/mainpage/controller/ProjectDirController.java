@@ -18,17 +18,31 @@ public class ProjectDirController {
 	
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
 	public String projectDirInsert(ProjectDirVO vo) {
-		System.out.println("111");
 		projectDirService.insertProjectDir(vo);
+		projectDirService.insertProjectLookup(vo);
 		return "mainPage.jsp";
 	}
 	
 	@RequestMapping(value="/content.do", method = RequestMethod.GET)
 	public String getProjectDirList(ProjectDirVO vo, Model model) {
-		System.out.println("controller 시작");
-		vo.setProjectmanager("dnjswhdzld");
 		model.addAttribute("projectDirList",projectDirService.getProjectDirList(vo));
-		System.out.println("controller 끝");
+		return "content.jsp";
+	}
+	
+	@RequestMapping(value="/content_total.do")
+	public String getProjectDirTotal(ProjectDirVO vo, Model model) {
+		model.addAttribute("projectDirList",projectDirService.getProjectDirTotal(vo));
+		return "content.jsp";
+	}
+
+	@RequestMapping(value="/content_ascending.do")
+	public String getProjectListSetAscending(ProjectDirVO vo, Model model) {
+		model.addAttribute("projectDirList",projectDirService.getProjectDirAscending(vo));
+		return "content.jsp";
+	}
+	@RequestMapping(value="/content_descending.do")
+	public String getProjectListSetDescending(ProjectDirVO vo, Model model) {
+		model.addAttribute("projectDirList",projectDirService.getProjectDirDescending(vo));
 		return "content.jsp";
 	}
 	

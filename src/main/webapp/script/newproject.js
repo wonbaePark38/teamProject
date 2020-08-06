@@ -4,6 +4,3 @@ function newproject(){
 	newproject.submit();
 }
 
-function projectdir(){
-	var projectdir = document.getElementById('')
-}

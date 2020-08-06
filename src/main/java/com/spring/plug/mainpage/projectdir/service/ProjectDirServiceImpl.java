@@ -16,10 +16,14 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	
 	@Override
 	public void insertProjectDir(ProjectDirVO vo) {
-		
 		projectDirDAO.projectDirInsert(vo);
 	}
 
+	@Override
+	public void insertProjectLookup(ProjectDirVO vo) {
+		projectDirDAO.projectLookup(vo);
+	}
+	
 	@Override
 	public void getProjectDir(ProjectDirVO vo) {
 		// TODO Auto-generated method stub
@@ -28,8 +32,23 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 
 	@Override
 	public List<ProjectDirVO> getProjectDirList(ProjectDirVO vo) {
-		System.out.println("service");
 		return projectDirDAO.getProjectDirList(vo);
+	}
+
+	@Override
+	public List<ProjectDirVO> getProjectDirAscending(ProjectDirVO vo) {
+		return projectDirDAO.getProjectDirDescending(vo);
+	}
+	
+	@Override
+	public List<ProjectDirVO> getProjectDirDescending(ProjectDirVO vo) {
+		return projectDirDAO.getProjectDirDescending(vo);
+	}
+	
+
+	@Override
+	public List<ProjectDirVO> getProjectDirTotal(ProjectDirVO vo) {
+		return projectDirDAO.getProjectDirTotal(vo);
 	}
 
 }

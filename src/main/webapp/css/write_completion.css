@@ -203,6 +203,16 @@
 	float: left;
 }
 
+.content_set a{
+	
+}
+.content_set a:hover{
+	cursor: pointer;
+	background-color: aqua;
+	opacity: 0.3;
+		
+}
+
 .post_idx {
 	width: 511px;
 	background-color: #ffffff;

@@ -19,9 +19,20 @@ public class ProjectDirDAO {
 		System.out.println("dao : "+vo.toString());
 		sqlSessionTemplate.insert("ProjectDirDAO.projectDirInsert", vo);
 	}
+	public void projectLookup(ProjectDirVO vo) {
+		System.out.println("프로젝트 가입자 데이터 저장");
+		System.out.println("dao : "+vo.toString());
+		sqlSessionTemplate.insert("ProjectDirDAO.projectLookup", vo);
+	}
 	
 	public List<ProjectDirVO> getProjectDirList(ProjectDirVO vo){
-		System.out.println("프로젝트 출력");
+		System.out.println("dao : "+vo.toString());
 		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirList",vo);
+	}
+	public List<ProjectDirVO> getProjectDirTotal(ProjectDirVO vo){
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotal",vo);
+	}
+	public List<ProjectDirVO> getProjectDirDescending(ProjectDirVO vo){
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirDescending",vo);
 	}
 }
