@@ -247,14 +247,54 @@ function headerOption(){
   }
 
 
-  var todo_div = "";
-  var workerPickId = "";
-  var workerInputId = "";
-  var workerSelectEvent = "";
-  var workerName_a = "";
+	var todo_div = "";
+	var workerPickId = "";
+	var workerInputId = "";
+	var workerSelectEvent = "";
+	var workerName_a = "";
 
+	var todo_param = "";
+  
+	var todo_content_value = "";
+	var todo_date_value = "";
+	var todo_worker_value = "";
+  
+  
+	var todo_content = [];
+	var todo_date = [];
+	var todo_worker = [];
+	
+	var todo_seq;
+  
+	function writeForm5_content_arr(obj,seq) {
+		
+		todo_content[seq] = obj.value;
+		console.log(todo_content);
+		
+		document.getElementById('todo_content_value').value = todo_content;
+	}
+	
+	function writeForm5_date_arr(obj,seq) {
+			
+		todo_date[seq] = obj.value;
+		console.log(todo_date);
+			
+		document.getElementById('todo_date_value').value = todo_date;
+	}
+  
   function todoAppend(){
-
+	  
+	  var seq_num = 'seq_'+startDivNum;
+	  
+	  var todo_seq_input = document.createElement('input');
+	  todo_seq_input.setAttribute('type','hidden');
+	  todo_seq_input.setAttribute('id',seq_num);
+	  todo_seq_input.setAttribute('value',startDivNum);
+	  
+	  document.getElementById('todoContent_external').appendChild(todo_seq_input);
+	  
+	  todo_seq = document.getElementById(seq_num).value;
+	  
       // id 만들기
       todo_div = divIdNumCreate('todo_div');
       workerPickId = workerIdNumCreate('todo_worker_pick_div');
@@ -266,10 +306,10 @@ function headerOption(){
       todoAppendContent.innerHTML 
         = "<hr>";
 
-      var cancleBtn = document.createElement('button');
+      var cancleBtn = document.createElement('a');
       cancleBtn.setAttribute('onclick','delete_todo("'+ todo_div +'")');
-      cancleBtn.setAttribute('style','border-radius: 35%; background-color: red; border-style: none;');
-      cancleBtn.innerHTML = '-';
+      cancleBtn.setAttribute('style','display: inline-block; width: 18px; height: 18px; background: url(images/btn_todo_checkbox.png) no-repeat 0 -85px;');
+
 
       todoAppendContent.appendChild(cancleBtn);
 
@@ -278,7 +318,7 @@ function headerOption(){
       inputTag.setAttribute('type','text');
       inputTag.setAttribute('placeholder','할일 입력');
       inputTag.setAttribute('style','border-style: none; width: 70%; margin-left: 3px; margin-right: 5.5px;');
-      
+      inputTag.setAttribute('onchange','writeForm5_content_arr(this,'+todo_seq+')');
       todoAppendContent.append(inputTag);
       
       
@@ -289,14 +329,17 @@ function headerOption(){
       todoDatePickDiv.setAttribute('id',datePickId);
       todoDatePickDiv.setAttribute('style','width: 11%; display: inline-block;');
 
-      var todoDatePickInput = document.createElement('input');
-      todoDatePickInput.setAttribute('type','text');
-      todoDatePickInput.setAttribute('class','todo_date_input_external');
-      todoDatePickInput.setAttribute('placeholder','일자');
-      todoDatePickInput.setAttribute('readOnly','true');
-      todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
-
-      todoDatePickDiv.append(todoDatePickInput);
+	      var todoDatePickInput = document.createElement('input');
+	      todoDatePickInput.setAttribute('type','text');
+	      todoDatePickInput.setAttribute('class','todo_date_input_external');
+	      todoDatePickInput.setAttribute('placeholder','일자');
+	      todoDatePickInput.setAttribute('readOnly','true');
+	      todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
+	      todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "mm/dd"});');
+	      todoDatePickInput.setAttribute('onchange','writeForm5_date_arr(this,'+todo_seq+')');
+	      
+	      todoDatePickDiv.append(todoDatePickInput);
+	      
       todoAppendContent.append(todoDatePickDiv);
 
 
@@ -316,6 +359,7 @@ function headerOption(){
         todoWorkerPickInput.setAttribute('readOnly','true');
         todoWorkerPickInput.setAttribute('style','width: 91%; margin-left: 0px;');
         todoWorkerPickInput.setAttribute('onclick','worker_pick("'+ workerSelectEvent +'")');
+        
         todoWorkerPicDiv.append(todoWorkerPickInput);
 
         var todoWorkerSelectDiv = document.createElement('div');
@@ -333,7 +377,7 @@ function headerOption(){
           var todoWorkerLi = document.createElement('li');
             var todoWorkerLi_a = document.createElement('a');
             todoWorkerLi_a.setAttribute('id',workerName_a);
-            todoWorkerLi_a.setAttribute('onclick','selectWorker("'+ workerName_a +'","'+ workerInputId +'","'+ workerSelectEvent +'")');
+            todoWorkerLi_a.setAttribute('onclick','selectWorker('+ todo_seq +',"'+ workerName_a +'","'+ workerInputId +'","'+ workerSelectEvent +'")');
             todoWorkerLi.append(todoWorkerLi_a);
             todoWorkerLi_a.innerHTML= i;
             
@@ -353,9 +397,16 @@ function headerOption(){
     }
 
     //리스트에서 작업자 선택
-    function selectWorker(name,id,div){
+    function selectWorker(seq,name,id,div){
+    	
+      todo_worker[seq] = name;
+	  console.log(todo_worker);
+	  document.getElementById('todo_worker_value').value = todo_worker;
+    	
+    	
       var test31 =  document.getElementById(name).innerText;
-      document.getElementById(id).value = test31;
+		
+	  document.getElementById(id).value = name;
       document.getElementById(div).style.display = 'none';
     }
 

@@ -16,8 +16,11 @@
     $("#sche_end_date").datepicker();
   });
 
-
-  $('#todoAppend').click(function(){
+  function todo_datepick(obj){
+	  $(obj).datepicker();
+  }
+  
+  $(".todo_date_input_external").click(function() {
     $(".todo_date_input_external").datepicker({dateFormat : 'mm/dd'});
   });
 

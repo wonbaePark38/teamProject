@@ -518,11 +518,16 @@
 
 
 						<!-- 할일 -->
-						<form>
+						<form method="get" action="writeform5.do" id="writeForm5_form">
+							<input type="hidden" name="form_name" value="todoWrite">
+							<input type="hidden" name="writeForm5_content" id="todo_content_value">
+							<input type="hidden" name="writeForm5_date" id="todo_date_value">
+							<input type="hidden" name="writeForm5_worker" id="todo_worker_value">
+							
 							<div class="todo_form" id="todoForm_div">
 								<!-- 할일 제목 -->
 								<div>
-									<input placeholder="할일제목을 입력해 주세요"
+									<input placeholder="할일제목을 입력해 주세요" name="writeForm5_title"
 										style="width: 80%; border-style: none;">
 								</div>
 								<!-- //할일 제목 -->
@@ -548,7 +553,8 @@
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
 											<option></option>
-										</select> <a class="submit_a">올리기</a>
+										</select> <a class="submit_a" onclick="writeForm_submit5()">올리기</a>
+										
 									</div>
 								</div>
 

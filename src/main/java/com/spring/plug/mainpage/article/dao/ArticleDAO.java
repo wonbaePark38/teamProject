@@ -11,6 +11,13 @@ public class ArticleDAO{
    
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
+   
+   private int arrLength;
+   private String writeForm5_title;
+   private String writeForm5_content;
+   private String writeForm5_date;
+   private String writeForm5_worker;
+
 
    public void article1_insert(Article1VO vo) {
       System.out.println("article1 insert 기능 처리");
@@ -36,6 +43,11 @@ public class ArticleDAO{
 	   sqlSessionTemplate.insert("ArticleDAO.article4Insert",vo);
    }
    
-   
+   public void article5_insert(Article1VO vo) {
+	   System.out.println("article4 insert 기능 처리");
+	   System.out.println("dao : " + vo.toString()); 
+	   sqlSessionTemplate.insert("ArticleDAO.article5Insert",vo);
+	 
+   }
    
 }
