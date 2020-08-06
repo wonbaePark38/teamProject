@@ -132,6 +132,11 @@
         container.css('display','none');
       }
     });
+<<<<<<< HEAD
+=======
+
+   
+>>>>>>> refs/remotes/origin/ttttt
     
     //체크박스 체크 했을때 발생하는 이벤트
     $('.col1-checkbox').on('change',function(){
@@ -151,9 +156,26 @@
       
     });
     
+<<<<<<< HEAD
    
   });
+=======
+    $("#USER_PW").keypress(function(event){
+    	
+    	var passwordLength=$('#USER_PW').val();
+    	var str = passwordLength.length+1;
+    	
+    	if(str>0){
+    		$('.signup_btn_st1').css('background-color','#5a53d0');
+    		$('.signup_btn_st1').attr('disabled',false);
+      }
+    });
+    	
+    
+ });
+>>>>>>> refs/remotes/origin/ttttt
   
+<<<<<<< HEAD
 
 
 function test(){
@@ -165,7 +187,18 @@ add+='체크';
 add+='</a>';
 temp.innerHTML=add;
 */
+=======
+  function loginErrchk(){
+	  var idForm = document.getElementById("USER_ID").value;
+	  var passwordForm = document.getElementById("USER_PW").value;
+	  if (!idForm || !passwordForm) {
+		  alert("아이디와 비밀번호 모두 입력하세요");
+	  }else
+	  document.loginBt.submit();
+  }
+>>>>>>> refs/remotes/origin/ttttt
 
+<<<<<<< HEAD
 
 /*var sourceNode = document.getElementById('totalProjectButton').value;
 var present = document.getElementById('btnLeft');
@@ -185,6 +218,8 @@ var add='<a href="#>' +present+'</a>';
 
 */
 }
+=======
+>>>>>>> refs/remotes/origin/ttttt
 
 function hiddenMenuFold(thisevent,e){
   var node = $(thisevent).parent().next();
@@ -211,9 +246,22 @@ function hiddenMenuFold(thisevent,e){
       node.css("display","block");
     }
   }
+  function errorEmail(){
+	  
+	  alert('없는 이메일 입니다.');
+	  document.getElementById('USER_ID').value ="";
+	  document.getElementById('USER_PW').value ="";
+	}
   
+<<<<<<< HEAD
 
   
+=======
+  function errorPassword(){
+	  alert('비밀번호가 틀렸습니다.');
+	  document.getElementById('USER_PW').value ="";
+  }
+>>>>>>> refs/remotes/origin/ttttt
 
   /*구글 로그인 로그아웃 코드*/
   function signOut(){
@@ -240,10 +288,17 @@ function hiddenMenuFold(thisevent,e){
 	    auth2.attachClickHandler(element, {},
 	    	function(googleUser) {
 	    	var profile = googleUser.getBasicProfile();
+<<<<<<< HEAD
 	    	console.log("Email: " + profile.getEmail());
 	    	console.log('Full Name: ' + profile.getName());
 	    	document.getElementById('googleInfo').value = profile.getEmail();
 	    	document.getElementById('socialGoogle').value = 'social';
+=======
+	    	
+	    	document.getElementById('googleInfo').value = profile.getEmail();
+	    	document.getElementById('googleName').value = profile.getName();
+	    	document.getElementById('socialGoogle').value = 'y';
+>>>>>>> refs/remotes/origin/ttttt
 	    	document.googleSubmit.submit();
 	    	
         }, function(error) {});    
@@ -251,12 +306,7 @@ function hiddenMenuFold(thisevent,e){
   
   /*카카오 로그인 코드*/
   var startKakaoLogin = function(){
-	  
-	  
 	  Kakao.init('7b60be3909569dd7f234238a2bae4b61');
-	  
-	  
-	  
 	  Kakao.Auth.loginForm({
 		  success: function(authObj){
 			  
@@ -267,7 +317,12 @@ function hiddenMenuFold(thisevent,e){
 					 var email = res.kakao_account.email;
 					 var name = res.properties.nickname;
 					 document.getElementById('kakaoInfo').value = email;
+<<<<<<< HEAD
 					 document.getElementById('socialKakao').value = 'social';
+=======
+					 document.getElementById('kakaoName').value = name;
+					 document.getElementById('socialKakao').value = 'y';
+>>>>>>> refs/remotes/origin/ttttt
 					 document.kakaoSubmit.submit();
 		  }
 	  })

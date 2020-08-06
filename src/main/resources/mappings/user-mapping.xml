@@ -3,17 +3,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserDAO">
-	<resultMap type="user" id="userResult">
-		
-		
-		<result property="email" column="EMAIL"/>
-		<result property="password" column="PASSWORD"/>
-		<result property="name" column="NAME"/>
+	<resultMap id="getUser" type="user" >
+		<result property="email" column="MEMBER_EMAIL" />
+		<result property="password" column="MEMBER_PASSWORD" />
 	</resultMap>
 	
-	<select id="getUser" resultType="user"
+	<select id="getUser" resultMap="getUser"
 		parameterType="user">
-		SELECT * FROM wonbaetest WHERE email=#{email} and password=#{password}
+		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email} and MEMBER_PASSWORD=#{password}
 	</select>
 	
+	<select id="getSocialUser" resultMap="getUser"
+		parameterType="user">
+		SELECT MEMBER_EMAIL FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
+	</select>
+	
+	<select id="getSaltById" resultType="String"
+		parameterType="String">
+		SELECT SALT FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
+	</select>
+	
+	<insert id="addSocialUser" parameterType="user">
+		INSERT INTO MEMBERINFO 
+		(MEMBER_ID, MEMBER_EMAIL, MEMBER_NAME, REGDATE, MEMBER_ISSOCIAL) 
+		VALUES
+		((select nvl(max(MEMBER_ID), 0)+1 from MEMBERINFO), #{email}, #{name}, SYSDATE, #{socialCompare})
+	</insert>
 </mapper>

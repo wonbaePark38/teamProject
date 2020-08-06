@@ -13,6 +13,24 @@ public class UserVO {
 	private String authKey;
 	private String authStatus;
 	
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+	public Date getJoinDate() {
+		return joinDate;
+	}
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+	public String getSocialCompare() {
+		return socialCompare;
+	}
+	public void setSocialCompare(String socialCompare) {
+		this.socialCompare = socialCompare;
+	}
 	
 
 	public String getAuthKey() {
@@ -32,24 +50,6 @@ public class UserVO {
 	}
 	public void setSalt(String salt) {
 		this.salt = salt;
-	}
-	public int getSeq() {
-		return seq;
-	}
-	public void setSeq(int seq) {
-		this.seq = seq;
-	}
-	public Date getJoinDate() {
-		return joinDate;
-	}
-	public void setJoinDate(Date joinDate) {
-		this.joinDate = joinDate;
-	}
-	public String getSocialCompare() {
-		return socialCompare;
-	}
-	public void setSocialCompare(String socialCompare) {
-		this.socialCompare = socialCompare;
 	}
 
 	public String getEmail() {

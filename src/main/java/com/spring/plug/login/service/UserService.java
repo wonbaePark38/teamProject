@@ -6,4 +6,7 @@ public interface UserService {
 	public UserVO getUser(UserVO vo);
 	public UserVO getSocialUser(UserVO vo);
 	public String getUserEmail();
+	public String getSaltById(String email);
+	public void addSocialUser(UserVO vo);
+	
 }
