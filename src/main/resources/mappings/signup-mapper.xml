@@ -10,10 +10,17 @@
 		<result property="password" column="MEMBER_PASSWORD" />
 		<result property="socialCompare" column="MEMBER_ISSOCIAL" />
 		<result property="joinDate" column="REGDATE" />
+		<result property="salt" column="SALT" />
+		<result property="authKey" column="AUTHKEY" />
+		<result property="authStatus" column="AUTHSTATUS" />
 	</resultMap>
 
 	<insert id="insertMember" parameterType="signup">
-		INSERT INTO MEMBERINFO VALUES((select nvl(max(MEMBER_ID), 0)+1 from memberinfo), #{email}, #{name}, #{password}, #{socialCompare}, #{joinDate})
+		INSERT INTO MEMBERINFO VALUES((select nvl(max(MEMBER_ID), 0)+1 from memberinfo), #{email}, #{name}, #{password}, #{socialCompare}, #{joinDate}, #{salt}, #{authKey}, #{authStatus})
 	</insert>
+	
+	<update id="updateAuthkey" parameterType="signup">
+		UPDATE MEMBERINFO SET AUTHKEY = #{authKey} WHERE MEMBER_ID = #{seq}
+	</update>
 
 </mapper>
