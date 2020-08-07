@@ -12,11 +12,6 @@ public class ArticleDAO{
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
    
-   private int arrLength;
-   private String writeForm5_title;
-   private String writeForm5_content;
-   private String writeForm5_date;
-   private String writeForm5_worker;
 
 
    public void article1_insert(Article1VO vo) {
