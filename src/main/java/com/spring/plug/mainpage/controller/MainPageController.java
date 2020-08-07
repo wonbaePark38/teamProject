@@ -20,6 +20,9 @@ public class MainPageController {
    @Autowired
    private ArticleService service;
    
+   private String writeForm5_content;
+   private String writeForm5_date;
+   private String writeForm5_worker;
    
    @RequestMapping(value = "/writeform1.do")
    public String article1Insert(Article1VO vo) throws IOException{
