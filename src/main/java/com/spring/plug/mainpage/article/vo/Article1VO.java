@@ -49,9 +49,9 @@ public class Article1VO {
 
 	// 할일
 	private String writeForm5_title;
-	private String writeForm5_content_value;
-	private String writeForm5_date_value;
-	private String writeForm5_worker_value;
+	private String writeForm5_content;
+	private String writeForm5_date;
+	private String writeForm5_worker;
 
 	
 	// 공동 get, set
@@ -304,36 +304,38 @@ public class Article1VO {
 		this.writeForm5_title = writeForm5_title;
 	}
 
-	public String getWriteForm5_content_value() {
-		return writeForm5_content_value;
+	public String getWriteForm5_content() {
+		return writeForm5_content;
 	}
 
-	public void setWriteForm5_content_value(String writeForm5_content_value) {
-		this.writeForm5_content_value = writeForm5_content_value;
+	public void setWriteForm5_content(String writeForm5_content) {
+		this.writeForm5_content = writeForm5_content;
 	}
 
-	public String getWriteForm5_date_value() {
-		return writeForm5_date_value;
+	public String getWriteForm5_date() {
+		return writeForm5_date;
 	}
 
-	public void setWriteForm5_date_value(String writeForm5_date_value) {
-		this.writeForm5_date_value = writeForm5_date_value;
+	public void setWriteForm5_date(String writeForm5_date) {
+		this.writeForm5_date = writeForm5_date;
 	}
 
-	public String getWriteForm5_worker_value() {
-		return writeForm5_worker_value;
+	public String getWriteForm5_worker() {
+		return writeForm5_worker;
 	}
 
-	public void setWriteForm5_worker_value(String writeForm5_worker_value) {
-		this.writeForm5_worker_value = writeForm5_worker_value;
+	public void setWriteForm5_worker(String writeForm5_worker) {
+		this.writeForm5_worker = writeForm5_worker;
 	}
 
 	@Override
 	public String toString() {
-		return "Article1VO [writeForm5_title=" + writeForm5_title + ", writeForm5_content_value="
-				+ writeForm5_content_value + ", writeForm5_date_value=" + writeForm5_date_value
-				+ ", writeForm5_worker_value=" + writeForm5_worker_value + "]";
+		return "Article1VO [writeForm5_title=" + writeForm5_title + ", writeForm5_content=" + writeForm5_content
+				+ ", writeForm5_date=" + writeForm5_date + ", writeForm5_worker=" + writeForm5_worker + "]";
 	}
+
+	
+	
 
 	
 	
