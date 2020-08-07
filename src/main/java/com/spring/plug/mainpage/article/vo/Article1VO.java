@@ -8,27 +8,41 @@ import org.springframework.web.multipart.MultipartFile;
 public class Article1VO {
 
 	// 공통
-	private int project_id;
-	private int article_id;
 
 	private MultipartFile writeForm_file;
 	private MultipartFile writeForm_img;
-	private String form_name;
-	private Date regDate;
-	private String file_name;
-	private String img_name;
-	private String writer;
-
+	private int article_id;
+	
 	// 글쓰기
-	private String writeform1_content;
+	private int writeForm1_project_id;
+
+	private String writeForm1_form_name;
+	private Date writeForm1_regDate;
+	private String writeForm1_file_name;
+	private String writeForm1_img_name;
+	private String writeForm1_writer;
+	private String writeForm1_content;
 
 	// 글쓰기2.0
+	private int writeForm2_project_id;
+	private String writeForm2_form_name;
+	private Date writeForm2_regDate;
+	private String writeForm2_file_name;
+	private String writeForm2_img_name;
+	private String writeForm2_writer;
 	private String writeForm2_title;
 	private String writeForm2_content;
 	private String writeForm2_latlng;
 
 	// 업무
-	private String workForm3_title;
+	private int writeForm3_project_id;
+	private int writeForm3_tasknum;
+	private String writeForm3_form_name;
+	private Date writeForm3_regDate;
+	private String writeForm3_file_name;
+	private String writeForm3_img_name;
+	private String writeForm3_writer;
+	private String writeForm3_title;
 	private String writeForm3_status;
 	private String writeForm3_workersName;
 	private String writeForm3_start_date;
@@ -38,6 +52,10 @@ public class Article1VO {
 	private String writeForm3_content;
 
 	// 일정
+	private int writeForm4_project_id;
+	private String writeForm4_form_name;
+	private Date writeForm4_regDate;
+	private String writeForm4_writer;
 	private String writeForm4_title;
 	private String writeForm4_start_date;
 	private String writeForm4_start_time;
@@ -48,28 +66,14 @@ public class Article1VO {
 	private String writeForm4_latlng;
 
 	// 할일
+	private int writeForm5_project_id;
+	private String writeForm5_form_name;
+	private Date writeForm5_regDate;
+	private String writeForm5_writer;
 	private String writeForm5_title;
-	private String writeForm5_content_value;
-	private String writeForm5_date_value;
-	private String writeForm5_worker_value;
-
-	
-	// 공동 get, set
-	public int getProject_id() {
-		return project_id;
-	}
-
-	public void setProject_id(int project_id) {
-		this.project_id = project_id;
-	}
-
-	public int getArticle_id() {
-		return article_id;
-	}
-
-	public void setArticle_id(int article_id) {
-		this.article_id = article_id;
-	}
+	private String writeForm5_content;
+	private String writeForm5_date;
+	private String writeForm5_worker;
 
 	public MultipartFile getWriteForm_file() {
 		return writeForm_file;
@@ -82,62 +86,128 @@ public class Article1VO {
 	public MultipartFile getWriteForm_img() {
 		return writeForm_img;
 	}
+	
+	
+
+	public int getArticle_id() {
+		return article_id;
+	}
+
+	public void setArticle_id(int article_id) {
+		this.article_id = article_id;
+	}
+	
+	
 
 	public void setWriteForm_img(MultipartFile writeForm_img) {
 		this.writeForm_img = writeForm_img;
 	}
 
-	public String getForm_name() {
-		return form_name;
+	public int getWriteForm1_project_id() {
+		return writeForm1_project_id;
 	}
 
-	public void setForm_name(String form_name) {
-		this.form_name = form_name;
+	public void setWriteForm1_project_id(int writeForm1_project_id) {
+		this.writeForm1_project_id = writeForm1_project_id;
 	}
 
-	public Date getRegDate() {
-		return regDate;
+
+	public String getWriteForm1_form_name() {
+		return writeForm1_form_name;
 	}
 
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setWriteForm1_form_name(String writeForm1_form_name) {
+		this.writeForm1_form_name = writeForm1_form_name;
 	}
 
-	public String getFile_name() {
-		return file_name;
+	public Date getWriteForm1_regDate() {
+		return writeForm1_regDate;
 	}
 
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
+	public void setWriteForm1_regDate(Date writeForm1_regDate) {
+		this.writeForm1_regDate = writeForm1_regDate;
 	}
 
-	public String getImg_name() {
-		return img_name;
+	public String getWriteForm1_file_name() {
+		return writeForm1_file_name;
 	}
 
-	public void setImg_name(String img_name) {
-		this.img_name = img_name;
+	public void setWriteForm1_file_name(String writeForm1_file_name) {
+		this.writeForm1_file_name = writeForm1_file_name;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getWriteForm1_img_name() {
+		return writeForm1_img_name;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setWriteForm1_img_name(String writeForm1_img_name) {
+		this.writeForm1_img_name = writeForm1_img_name;
 	}
 
-	// 글쓰기 get,set
-	public String getWriteform1_content() {
-		return writeform1_content;
+	public String getWriteForm1_writer() {
+		return writeForm1_writer;
 	}
 
-	public void setWriteform1_content(String writeform1_content) {
-		this.writeform1_content = writeform1_content;
+	public void setWriteForm1_writer(String writeForm1_writer) {
+		this.writeForm1_writer = writeForm1_writer;
 	}
-	// 글쓰기 get,set 끝
 
-	// 글쓰기 2.0 get,set
+	public String getWriteForm1_content() {
+		return writeForm1_content;
+	}
+
+	public void setWriteForm1_content(String writeForm1_content) {
+		this.writeForm1_content = writeForm1_content;
+	}
+
+	public int getWriteForm2_project_id() {
+		return writeForm2_project_id;
+	}
+
+	public void setWriteForm2_project_id(int writeForm2_project_id) {
+		this.writeForm2_project_id = writeForm2_project_id;
+	}
+
+
+	public String getWriteForm2_form_name() {
+		return writeForm2_form_name;
+	}
+
+	public void setWriteForm2_form_name(String writeForm2_form_name) {
+		this.writeForm2_form_name = writeForm2_form_name;
+	}
+
+	public Date getWriteForm2_regDate() {
+		return writeForm2_regDate;
+	}
+
+	public void setWriteForm2_regDate(Date writeForm2_regDate) {
+		this.writeForm2_regDate = writeForm2_regDate;
+	}
+
+	public String getWriteForm2_file_name() {
+		return writeForm2_file_name;
+	}
+
+	public void setWriteForm2_file_name(String writeForm2_file_name) {
+		this.writeForm2_file_name = writeForm2_file_name;
+	}
+
+	public String getWriteForm2_img_name() {
+		return writeForm2_img_name;
+	}
+
+	public void setWriteForm2_img_name(String writeForm2_img_name) {
+		this.writeForm2_img_name = writeForm2_img_name;
+	}
+
+	public String getWriteForm2_writer() {
+		return writeForm2_writer;
+	}
+
+	public void setWriteForm2_writer(String writeForm2_writer) {
+		this.writeForm2_writer = writeForm2_writer;
+	}
 
 	public String getWriteForm2_title() {
 		return writeForm2_title;
@@ -163,15 +233,69 @@ public class Article1VO {
 		this.writeForm2_latlng = writeForm2_latlng;
 	}
 
-	// 글쓰기 2.0 get,set 끝
-
-	// 업무 get,set
-	public String getWorkForm3_title() {
-		return workForm3_title;
+	public int getWriteForm3_project_id() {
+		return writeForm3_project_id;
 	}
 
-	public void setWorkForm3_title(String workForm3_title) {
-		this.workForm3_title = workForm3_title;
+	public void setWriteForm3_project_id(int writeForm3_project_id) {
+		this.writeForm3_project_id = writeForm3_project_id;
+	}
+
+
+	public int getWriteForm3_tasknum() {
+		return writeForm3_tasknum;
+	}
+
+	public void setWriteForm3_tasknum(int writeForm3_tasknum) {
+		this.writeForm3_tasknum = writeForm3_tasknum;
+	}
+
+	public String getWriteForm3_form_name() {
+		return writeForm3_form_name;
+	}
+
+	public void setWriteForm3_form_name(String writeForm3_form_name) {
+		this.writeForm3_form_name = writeForm3_form_name;
+	}
+
+	public Date getWriteForm3_regDate() {
+		return writeForm3_regDate;
+	}
+
+	public void setWriteForm3_regDate(Date writeForm3_regDate) {
+		this.writeForm3_regDate = writeForm3_regDate;
+	}
+
+	public String getWriteForm3_file_name() {
+		return writeForm3_file_name;
+	}
+
+	public void setWriteForm3_file_name(String writeForm3_file_name) {
+		this.writeForm3_file_name = writeForm3_file_name;
+	}
+
+	public String getWriteForm3_img_name() {
+		return writeForm3_img_name;
+	}
+
+	public void setWriteForm3_img_name(String writeForm3_img_name) {
+		this.writeForm3_img_name = writeForm3_img_name;
+	}
+
+	public String getWriteForm3_writer() {
+		return writeForm3_writer;
+	}
+
+	public void setWriteForm3_writer(String writeForm3_writer) {
+		this.writeForm3_writer = writeForm3_writer;
+	}
+
+	public String getWriteForm3_title() {
+		return writeForm3_title;
+	}
+
+	public void setWriteForm3_title(String workForm3_title) {
+		this.writeForm3_title = workForm3_title;
 	}
 
 	public String getWriteForm3_status() {
@@ -230,7 +354,39 @@ public class Article1VO {
 		this.writeForm3_content = writeForm3_content;
 	}
 
-	// 일정 get,set
+	public int getWriteForm4_project_id() {
+		return writeForm4_project_id;
+	}
+
+	public void setWriteForm4_project_id(int writeForm4_project_id) {
+		this.writeForm4_project_id = writeForm4_project_id;
+	}
+
+
+	public String getWriteForm4_form_name() {
+		return writeForm4_form_name;
+	}
+
+	public void setWriteForm4_form_name(String writeForm4_form_name) {
+		this.writeForm4_form_name = writeForm4_form_name;
+	}
+
+	public Date getWriteForm4_regDate() {
+		return writeForm4_regDate;
+	}
+
+	public void setWriteForm4_regDate(Date writeForm4_regDate) {
+		this.writeForm4_regDate = writeForm4_regDate;
+	}
+
+	public String getWriteForm4_writer() {
+		return writeForm4_writer;
+	}
+
+	public void setWriteForm4_writer(String writeForm4_writer) {
+		this.writeForm4_writer = writeForm4_writer;
+	}
+
 	public String getWriteForm4_title() {
 		return writeForm4_title;
 	}
@@ -295,7 +451,39 @@ public class Article1VO {
 		this.writeForm4_latlng = writeForm4_latlng;
 	}
 
-	// 힐일 get,set
+	public int getWriteForm5_project_id() {
+		return writeForm5_project_id;
+	}
+
+	public void setWriteForm5_project_id(int writeForm5_project_id) {
+		this.writeForm5_project_id = writeForm5_project_id;
+	}
+
+
+	public String getWriteForm5_form_name() {
+		return writeForm5_form_name;
+	}
+
+	public void setWriteForm5_form_name(String writeForm5_form_name) {
+		this.writeForm5_form_name = writeForm5_form_name;
+	}
+
+	public Date getWriteForm5_regDate() {
+		return writeForm5_regDate;
+	}
+
+	public void setWriteForm5_regDate(Date writeForm5_regDate) {
+		this.writeForm5_regDate = writeForm5_regDate;
+	}
+
+	public String getWriteForm5_writer() {
+		return writeForm5_writer;
+	}
+
+	public void setWriteForm5_writer(String writeForm5_writer) {
+		this.writeForm5_writer = writeForm5_writer;
+	}
+
 	public String getWriteForm5_title() {
 		return writeForm5_title;
 	}
@@ -304,37 +492,41 @@ public class Article1VO {
 		this.writeForm5_title = writeForm5_title;
 	}
 
-	public String getWriteForm5_content_value() {
-		return writeForm5_content_value;
+	public String getWriteForm5_content() {
+		return writeForm5_content;
 	}
 
-	public void setWriteForm5_content_value(String writeForm5_content_value) {
-		this.writeForm5_content_value = writeForm5_content_value;
+	public void setWriteForm5_content(String writeForm5_content) {
+		this.writeForm5_content = writeForm5_content;
 	}
 
-	public String getWriteForm5_date_value() {
-		return writeForm5_date_value;
+	public String getWriteForm5_date() {
+		return writeForm5_date;
 	}
 
-	public void setWriteForm5_date_value(String writeForm5_date_value) {
-		this.writeForm5_date_value = writeForm5_date_value;
+	public void setWriteForm5_date(String writeForm5_date) {
+		this.writeForm5_date = writeForm5_date;
 	}
 
-	public String getWriteForm5_worker_value() {
-		return writeForm5_worker_value;
+	public String getWriteForm5_worker() {
+		return writeForm5_worker;
 	}
 
-	public void setWriteForm5_worker_value(String writeForm5_worker_value) {
-		this.writeForm5_worker_value = writeForm5_worker_value;
+	public void setWriteForm5_worker(String writeForm5_worker) {
+		this.writeForm5_worker = writeForm5_worker;
 	}
 
 	@Override
 	public String toString() {
-		return "Article1VO [writeForm5_title=" + writeForm5_title + ", writeForm5_content_value="
-				+ writeForm5_content_value + ", writeForm5_date_value=" + writeForm5_date_value
-				+ ", writeForm5_worker_value=" + writeForm5_worker_value + "]";
+		return "Article1VO [writeForm4_regDate=" + writeForm4_regDate + ", writeForm4_writer=" + writeForm4_writer
+				+ ", writeForm4_title=" + writeForm4_title + ", writeForm4_start_date=" + writeForm4_start_date
+				+ ", writeForm4_start_time=" + writeForm4_start_time + ", writeForm4_end_date=" + writeForm4_end_date
+				+ ", writeForm4_end_time=" + writeForm4_end_time + ", writeForm4_alarm_time=" + writeForm4_alarm_time
+				+ ", writeForm4_content=" + writeForm4_content + ", writeForm4_latlng=" + writeForm4_latlng + "]";
 	}
 
+	
+	
 	
 	
 	

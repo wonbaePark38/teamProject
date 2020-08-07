@@ -255,9 +255,9 @@ function headerOption(){
 
 	var todo_param = "";
   
-	var todo_content_value = "";
-	var todo_date_value = "";
-	var todo_worker_value = "";
+	var todo_content_value;
+	var todo_date_value;
+	var todo_worker_value;
   
   
 	var todo_content = [];
@@ -265,18 +265,34 @@ function headerOption(){
 	var todo_worker = [];
 	
 	var todo_seq;
+	
+	function writeForm5_onsubmit(){
+		
+		if(todo_content.length != 0 ){
+			alert('할일 입력해');
+		}else if(todo_content.length == todo_seq){
+			return true;
+		}
+		
+		
+	}
   
 	function writeForm5_content_arr(obj,seq) {
 		
-		todo_content[seq] = obj.value;
+		var obj_value = obj.value;
+		
+		todo_content[seq] = obj_value;
 		console.log(todo_content);
 		
 		document.getElementById('todo_content_value').value = todo_content;
 	}
 	
 	function writeForm5_date_arr(obj,seq) {
-			
-		todo_date[seq] = obj.value;
+		
+		var obj_value = obj.value;
+		
+		todo_date[seq] = obj_value;
+		
 		console.log(todo_date);
 			
 		document.getElementById('todo_date_value').value = todo_date;
@@ -318,7 +334,7 @@ function headerOption(){
       inputTag.setAttribute('type','text');
       inputTag.setAttribute('placeholder','할일 입력');
       inputTag.setAttribute('style','border-style: none; width: 70%; margin-left: 3px; margin-right: 5.5px;');
-      inputTag.setAttribute('onchange','writeForm5_content_arr(this,'+todo_seq+')');
+      inputTag.setAttribute('oninput','writeForm5_content_arr(this,'+todo_seq+')');
       todoAppendContent.append(inputTag);
       
       

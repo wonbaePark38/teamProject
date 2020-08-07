@@ -1,5 +1,7 @@
 package com.spring.plug.mainpage.article.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,12 +14,10 @@ public class ArticleDAO{
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
    
-   private int arrLength;
-   private String writeForm5_title;
-   private String writeForm5_content;
-   private String writeForm5_date;
-   private String writeForm5_worker;
-
+   public List<Article1VO> article_select(Article1VO vo){
+	   
+	   return sqlSessionTemplate.selectList("ArticleDAO.articleSelectAll",vo);
+   }
 
    public void article1_insert(Article1VO vo) {
       System.out.println("article1 insert 기능 처리");
@@ -49,5 +49,5 @@ public class ArticleDAO{
 	   sqlSessionTemplate.insert("ArticleDAO.article5Insert",vo);
 	 
    }
-   
+
 }

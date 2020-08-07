@@ -86,10 +86,10 @@
 						<!-- 글 쓰기 -->
 						<form method="post" action="writeform1.do" id="writeForm1_form" enctype="multipart/form-data">
 
-							<input type="hidden" name="form_name" value="nomalWrite">
+							<input type="hidden" name="writeForm1_form_name" value="nomalWrite">
 							<div id="writeForm_div">
 
-								<textarea name="writeform1_content" id="writeForm1_content_text" class="div_text_write"></textarea>
+								<textarea name="writeForm1_content" id="writeForm1_content_text" class="div_text_write"></textarea>
 
 								<!-- 파일 업로드 -->
 								<div id="writeForm1_uploadFile" class="post_file"></div>
@@ -125,7 +125,7 @@
 
 						<!-- 글쓰기 2.0 -->
 						<form method="post" action="writeform2.do" id="writeForm2_form" enctype="multipart/form-data">
-							<input type="hidden" name="form_name" value="nomalWrite2.0">
+							<input type="hidden" name="writeForm2_form_name" value="nomalWrite2.0">
 							<div class="write20_form" id="write20Form_div">
 								<!-- 제목입력 -->
 								<div class="writeForm2_title">
@@ -192,7 +192,7 @@
 						<form method="post" action="writeform3.do" id="writeForm3_form">
 							<div class="work_form" id="workForm_div">
 
-								<input type="hidden" name="form_name" value="workWrite">
+								<input type="hidden" name="writeForm3_form_name" value="workWrite">
 								
 								<!-- 업무명 -->
 								<div id="work_form_title">
@@ -372,7 +372,7 @@
 
 						<!-- 일정 -->
 						<form method="post" action="writeform4.do" id="writeForm4_form">
-							<input type="hidden" name="form_name" value="scheWrite">
+							<input type="hidden" name="writeForm4_form_name" value="scheWrite">
 							<div class="schedule_form" id="scheduleForm_div">
 								<div>
 									<!-- 일정 제목 -->
@@ -519,7 +519,8 @@
 
 						<!-- 할일 -->
 						<form method="get" action="writeform5.do" id="writeForm5_form">
-							<input type="hidden" name="form_name" value="todoWrite">
+						
+							<input type="hidden" name="writeForm5_form_name" value="todoWrite">
 							<input type="hidden" name="writeForm5_content" id="todo_content_value">
 							<input type="hidden" name="writeForm5_date" id="todo_date_value">
 							<input type="hidden" name="writeForm5_worker" id="todo_worker_value">
@@ -559,7 +560,6 @@
 								</div>
 
 								<!-- //하단 툴바 -->
-
 							</div>
 						</form>
 						<!-- //할일 -->
@@ -647,9 +647,12 @@
 			<!-- //forEach -->
 		</div>
 		<!-- //상단 고정글 -->
-
-		<div id="article_show" style=" width: 100%; margin-top: 10px"></div>
-
+	
+		<!-- 게시글 출력하는 곳  -->
+		<div id="article_show" style=" width: 100%; margin-top: 10px">
+		
+		</div>
+		<!-- 게시글 출력하는 곳 -->
 	</div>
 </div>
 <!-- //게시글 넣는곳 -->
