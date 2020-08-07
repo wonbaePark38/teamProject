@@ -9,22 +9,10 @@
 <title>Insert title here</title>
 <link href="css/write_completion.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
-<script src="script/newproject.js"></script>
+<script src="script/projectdir.js"></script>
 <script type="text/javascript">
-	function contentset(){
-	    document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';
-	}
 </script>
-<script>
-	$(document).on('click','.projectdir_set',function(){
-		var click_this = $(this).attr('id');
-		if(click_this == 'project_total'){
-			$('#projectdir_set').attr('action','content.do').submit();
-		} else if(click_this == 'project_manager'){
-			$('#projectdir_set').attr('action','content_manager.do').submit();
-		} 
-	});
-</script>
+
 </head>
 <body>
 	<form id="projectdir_set">
@@ -40,10 +28,10 @@
 					
 					<div id="content_set" class="content_set">
 						<div>
-						<h4>보기 설정</h4>
-							<a>바둑판형 보기</a><br>
-							<a>리스트형 보기</a><br>
-						</div>
+							<h4>보기 설정</h4>
+								<a>바둑판형 보기</a><br>
+								<a>리스트형 보기</a><br>
+							</div>
 						<div>
 						<h4>정렬 기준</h4>
 							<a id="newarticle_total" class="projectdir_set">최신 글/댓글 순 (전체)</a><br>
@@ -63,10 +51,9 @@
 			</div>
 			
 			<div class="컨텐츠"  style="z-index: 1; display: inline-block; width: 100%;">
-				
 				<c:forEach var="projectdir" items="${projectDirList}">
 					<div class="pro" >
-						<input class="title_btn" type="button" value="즐">
+						<input class="title_btn" id="star_btn" type="button">
 						<div class="title_box">
 							<span>${projectdir.projectname}</span>
 						</div>

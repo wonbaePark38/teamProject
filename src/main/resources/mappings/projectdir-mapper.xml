@@ -13,25 +13,12 @@
 		<collection property="project_lookup" resultMap="project_lookup"></collection>
 	</resultMap>
 	
-	<!-- 프로젝트 조회 맵 -->
-	<resultMap type="projectlookup" id="projectlookup">
-		<id property="lookupnum" column="LOOKUPNUM"/>
-		<result property="projectname" column="PROJECTNAME"/>
-		<result property="username" column="USERNAME"/>
-		<result property="projectmanager" column="PROJECTMANAGER" />
-		<result property="joindate" column="JOINDATE"/>
-	</resultMap>
-	
 	<!-- 프로젝트 생성 -->	
 	<insert id="projectDirInsert" parameterType="projectdir">
 		INSERT INTO projectdir (projectnum, projectname, projectcontent, projecttype)
 		VALUES((select nvl(max(projectnum), 0) +1 from projectdir), #{projectname}, #{projectcontent}, #{projecttype})
 	</insert>
 	
-	<insert id="projectLookup" parameterType="projectlookup">
-		INSERT INTO projectlookup (lookupnum, projectname, username, projectmanager)
-		VALUES((select nvl(max(lookupnum), 0) +1 from projectlookup), #{projectname}, #{username}, #{projectmanager})
-	</insert> 
 	
 	<!-- 프로젝트 및 사용자 테이블 -->
 	

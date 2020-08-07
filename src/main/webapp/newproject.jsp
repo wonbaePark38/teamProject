@@ -6,15 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/newproject_css.css">
-<script src="script/newproject.js"></script>
+<script src="script/projectdir.js"></script>
 </head>
 <body>
 <form action="newproject.do" id="newproject" method="post">
-
 <input type="hidden" name="username" value="dnjswhdzld">
 <input type="hidden" name="projectmanager" value="0">
 <input type="hidden" name="projecttype" value="0">
-<div class="background_shadow" style="z-index: 9000;"></div>
+<div class="background_shadow" style="z-index: 9000; position: absolute;"></div>
 	<div class="layerstyle4" style="width: 500px; z-index: 9001" >
 		<div id="projectOptionLayer" class="layerstyle4_po" style="display: block;">
 			<div class="layerstyle4_title">

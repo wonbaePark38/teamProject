@@ -86,4 +86,6 @@ function pro1(url) {
 	});
 	// 페이지 전환
 	papa.submit();
-}
+};
+
+

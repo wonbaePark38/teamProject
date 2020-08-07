@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,35 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
+<script>
+	$(document).ready(function(){
+		alert(${param.name});
+		var return_url = "mainPage.jsp";
+		<c:if test="${pageContext.request.method=='POST'}">
+			return_url = "content.jsp"
+		// ajax option
+			return_url = "content.jsp"
+			var ajaxOption = {
+				url : return_url,
+				async : true,
+				type : "POST",
+				dataType : "html",
+				cache : false
+			};
+	
+			$.ajax(ajaxOption).done(function(data) {
+				// Contents 영역 삭제
+				$('#ch2').children().remove();
+				// Contents 영역 교체
+				$('#ch2').html(data);
+			});
+		</c:if>
+		<c:if test="${pageContext.request.method=='GET'}">
+		
+		</c:if>
+		// ajax option
+	});
+</script>
 
 </head>
 <style>
@@ -64,6 +94,7 @@
 
 
 				</div>
+
 			</div>
 
 		</div>
@@ -73,7 +104,6 @@
 
 		<div class="centerArea" id="ch">
 			<!--중앙영역-->
-
 			<!--   <div class="leftContainer">-->
 
 			<div class="sidebarContainer">
@@ -96,7 +126,7 @@
 						class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
 					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
-					<a onclick="acyncMovePage('task.jsp')" class="list-group-item"
+					<a onclick="acyncMovePage(content.jsp)" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 업무</a> <a href="calendar.jsp"
 						class="list-group-item" style="padding: .5rem 1.25rem;">전체 일정</a>
 					<a href="totalFile.html" class="list-group-item"
@@ -379,7 +409,7 @@
 
 					<!-- 게시글 넣는곳 -->
 
-					<jsp:include page="mainPage_article.jsp"></jsp:include>
+					<%-- <jsp:include page="mainPage_article.jsp"></jsp:include> --%>
 
 
 					<!-- //게시글 넣는곳 -->

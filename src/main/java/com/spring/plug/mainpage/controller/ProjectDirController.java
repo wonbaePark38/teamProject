@@ -37,4 +37,12 @@ public class ProjectDirController {
 		return "content.jsp";
 	}
 	
+	@RequestMapping(value="/start.do", method = RequestMethod.POST)
+	public String getStart() {
+		return "mainPage.jsp";
+	}
+	@RequestMapping(value="/start.do", method = RequestMethod.GET)
+	public String getStart2() {
+		return "content.jsp";
+	}
 }

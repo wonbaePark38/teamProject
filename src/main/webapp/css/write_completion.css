@@ -134,7 +134,7 @@
 .pro {
 	box-sizing: border-box;
 	margin: 0 10px 22px 10px;
-	padding: 25px 20px 0;
+	padding: 15px 22px 0;
 	float: left;
 	background-color: gray;
 	width: 185px;
@@ -157,8 +157,22 @@
 
 .title_btn {
 	position: absolute;
-	right: 25px;
-	bottom: 22px;
+	width: 30px;
+    height: 30px;
+    border: 0px;
+	right: 17px;
+	bottom: 19px;
+	background: url(../images/ico_star.png) no-repeat 0 -30px;
+}
+.title_btn_check{
+	position: absolute;
+	width: 30px;
+    height: 30px;
+    border: 0px;
+	right: 17px;
+	bottom: 19px;
+	background-position: 0 0 !important;
+	background: url(../images/ico_star.png) no-repeat 0 -30px;
 }
 
 <!--
