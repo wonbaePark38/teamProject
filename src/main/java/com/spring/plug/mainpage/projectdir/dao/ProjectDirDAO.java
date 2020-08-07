@@ -25,14 +25,11 @@ public class ProjectDirDAO {
 		sqlSessionTemplate.insert("ProjectDirDAO.projectLookup", vo);
 	}
 	
-	public List<ProjectDirVO> getProjectDirList(ProjectDirVO vo){
+	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo){
 		System.out.println("dao : "+vo.toString());
-		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirList",vo);
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotalList",vo);
 	}
-	public List<ProjectDirVO> getProjectDirTotal(ProjectDirVO vo){
-		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotal",vo);
-	}
-	public List<ProjectDirVO> getProjectDirDescending(ProjectDirVO vo){
-		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirDescending",vo);
+	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo){
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirManagerList",vo);
 	}
 }

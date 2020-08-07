@@ -10,7 +10,6 @@ public class ProjectDirVO {
 	private String projectcontent;
 	private String projecttype;
 	private Date createdate;
-	private int usernum;
 	
 	// 프로젝트 조회 정보
 	private int lookupnum;
@@ -72,17 +71,10 @@ public class ProjectDirVO {
 	public void setJoindate(Date joindate) {
 		this.joindate = joindate;
 	}
-	public int getUsernum() {
-		return usernum;
-	}
-	public void setUsernum(int usernum) {
-		this.usernum = usernum;
-	}
 	@Override
 	public String toString() {
 		return "ProjectDirVO [projectnum=" + projectnum + ", projectname=" + projectname + ", projectcontent="
-				+ projectcontent + ", projecttype=" + projecttype + ", createdate=" + createdate + ", usernum="
-				+ usernum + ", lookupnum=" + lookupnum + ", username=" + username + ", projectmanager=" + projectmanager
+				+ projectcontent + ", projecttype=" + projecttype + ", createdate=" + createdate + ", lookupnum=" + lookupnum + ", username=" + username + ", projectmanager=" + projectmanager
 				+ ", joindate=" + joindate + "]";
 	}
 	

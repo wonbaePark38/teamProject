@@ -24,25 +24,16 @@ public class ProjectDirController {
 	}
 	
 	@RequestMapping(value="/content.do", method = RequestMethod.GET)
-	public String getProjectDirList(ProjectDirVO vo, Model model) {
-		model.addAttribute("projectDirList",projectDirService.getProjectDirList(vo));
+	public String getProjectDirTotalList(ProjectDirVO vo, Model model) {
+		vo.setUsername("dnjswhdzld");
+		model.addAttribute("projectDirList",projectDirService.getProjectDirTotalList(vo));
 		return "content.jsp";
 	}
 	
-	@RequestMapping(value="/content_total.do")
-	public String getProjectDirTotal(ProjectDirVO vo, Model model) {
-		model.addAttribute("projectDirList",projectDirService.getProjectDirTotal(vo));
-		return "content.jsp";
-	}
-
-	@RequestMapping(value="/content_ascending.do")
-	public String getProjectListSetAscending(ProjectDirVO vo, Model model) {
-		model.addAttribute("projectDirList",projectDirService.getProjectDirAscending(vo));
-		return "content.jsp";
-	}
-	@RequestMapping(value="/content_descending.do")
-	public String getProjectListSetDescending(ProjectDirVO vo, Model model) {
-		model.addAttribute("projectDirList",projectDirService.getProjectDirDescending(vo));
+	@RequestMapping(value="/content_manager.do")
+	public String getProjectDirManagerList(ProjectDirVO vo, Model model) {
+		vo.setUsername("dnjswhdzld");
+		model.addAttribute("projectDirList",projectDirService.getProjectDirManagerList(vo));
 		return "content.jsp";
 	}
 	

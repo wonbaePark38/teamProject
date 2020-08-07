@@ -31,24 +31,14 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	}
 
 	@Override
-	public List<ProjectDirVO> getProjectDirList(ProjectDirVO vo) {
-		return projectDirDAO.getProjectDirList(vo);
+	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo) {
+		return projectDirDAO.getProjectDirTotalList(vo);
 	}
 
-	@Override
-	public List<ProjectDirVO> getProjectDirAscending(ProjectDirVO vo) {
-		return projectDirDAO.getProjectDirDescending(vo);
-	}
-	
-	@Override
-	public List<ProjectDirVO> getProjectDirDescending(ProjectDirVO vo) {
-		return projectDirDAO.getProjectDirDescending(vo);
-	}
-	
 
 	@Override
-	public List<ProjectDirVO> getProjectDirTotal(ProjectDirVO vo) {
-		return projectDirDAO.getProjectDirTotal(vo);
+	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo) {
+		return projectDirDAO.getProjectDirManagerList(vo);
 	}
 
 }

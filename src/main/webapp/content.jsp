@@ -13,29 +13,24 @@
 <script type="text/javascript">
 	function contentset(){
 	    document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';
-	  }
+	}
 </script>
 <script>
 	$(document).on('click','.projectdir_set',function(){
 		var click_this = $(this).attr('id');
-		if(click_this == 'newarticle_total'){
-			alert('total 준형이형 DB 조인 해야함');
-		} else if(click_this == 'newarticle_this'){
-			alert('this 준형이형 DB 조인 해야함');
-		} else if(click_this == 'project_ascending'){
-			$('#projectdir_set').attr('action','content_ascending.do').submit();
-		} else if(click_this == 'project_descending'){
-			$('#projectdir_set').attr('action','content_descending.do').submit();
-		} else if(click_this == 'project_total'){
-			$('#projectdir_set').attr('action','content_total.do').submit();
+		if(click_this == 'project_total'){
+			$('#projectdir_set').attr('action','content.do').submit();
 		} else if(click_this == 'project_manager'){
 			$('#projectdir_set').attr('action','content_manager.do').submit();
-		}
+		} 
 	});
 </script>
 </head>
 <body>
-	
+	<form id="projectdir_set">
+		<!-- 계정 데이터 -->
+		<input type="hidden" name="username" value="dnjswhdzld">
+	</form>
 	<div class="contents" style=" position:relative; width: 100%;">
 		<div style="padding-left: 15px;">
 			<div class="컨텐츠 헤더">
@@ -43,8 +38,6 @@
 					<a href="#" onclick="contentset()" style="float: left; padding-right:5px; border-right: 1px solid #eaeaea;">설정</a>
 					<a href="#" style="float: none; padding-left: 5px; ">편집</a>
 					
-					<form id="projectdir_set">
-					</form>
 					<div id="content_set" class="content_set">
 						<div>
 						<h4>보기 설정</h4>

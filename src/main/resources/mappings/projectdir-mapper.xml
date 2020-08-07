@@ -10,7 +10,6 @@
 		<result property="projectcontent" column="PROJECTCONTENT" />
 		<result property="projecttype" column="PROJECTTYPE" />
 		<result property="createdate" column="CREATEDATE"/>
-		<result property="usernum" column="USERNUM"/>
 		<collection property="project_lookup" resultMap="project_lookup"></collection>
 	</resultMap>
 	
@@ -39,22 +38,15 @@
 	<!-- 프로젝트 리스트 -->
 	
 	<!-- 프로젝트 리스트 출력 기본	WHERE 프로젝트 참여자로 바꿔야 함  -->
-	<select id="getProjectDirList" resultType="projectdir" parameterType="projectdir">
-		SELECT * FROM projectlookup look LEFT JOIN projectdir dir ON look.projectname = dir.projectname WHERE look.username = #{username} <!-- ORDER BY dir.projectnum DESC -->
+	<select id="getProjectDirTotalList" resultType="projectdir" parameterType="projectdir">
+		SELECT * FROM projectdir INNER JOIN projectlookup ON projectdir.projectname = projectlookup.projectname 
+		WHERE username = #{username} ORDER BY projectnum DESC
 	</select>
 	
 	
-	<select id="getProjectDirTotal" resultType="projectlookup" parameterType="projectlookup">
-		SELECT * FROM projectlookup WHERE username = dnjswhdzld
-	</select>
-	
-	
-	<select id="getProjectDirAscending" resultType="projectlookup" parameterType="projectlookup">
-		SELECT * FROM projectlookup WHERE projectmanager = #{projectmanager} ORDER BY projectname ASC
-	</select>
-	
-	<select id="getProjectDirDescending" resultType="projectdir" parameterType="projectdir">
-		SELECT * FROM projectdir WHERE projectmanager = #{projectmanager} ORDER BY projectname DESC
+	<select id="getProjectDirManagerList" resultType="projectdir" parameterType="projectdir">
+		SELECT * FROM projectdir INNER JOIN projectlookup ON projectdir.projectname = projectlookup.projectname 
+		WHERE username = #{username} and projectmanager = 1
 	</select>
 	
 	

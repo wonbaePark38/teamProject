@@ -12,8 +12,7 @@
 <form action="newproject.do" id="newproject" method="post">
 
 <input type="hidden" name="username" value="dnjswhdzld">
-<input type="hidden" name="projectmanager" value="1">
-<input type="hidden" name="projectuser" value="1">
+<input type="hidden" name="projectmanager" value="0">
 <input type="hidden" name="projecttype" value="0">
 <div class="background_shadow" style="z-index: 9000;"></div>
 	<div class="layerstyle4" style="width: 500px; z-index: 9001" >
