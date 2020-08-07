@@ -2,7 +2,8 @@ package com.spring.plug.mainpage.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,13 @@ public class MainPageController {
    private String writeForm5_content;
    private String writeForm5_date;
    private String writeForm5_worker;
+   
+   
+   @RequestMapping(value = "/mainpage.do")
+   public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
+	   
+	   return mav;
+   }
    
    @RequestMapping(value = "/writeform1.do")
    public String article1Insert(Article1VO vo) throws IOException{
@@ -84,7 +92,8 @@ public class MainPageController {
 	public String article5Insert(ArticleTodoArrVO article) throws IOException {
 
 		Article1VO vo = new Article1VO();
-
+		
+		
 		System.out.println("controller entrance");
 
 		for (int i = 0; i < article.getWriteForm5_content().length; i++) {
@@ -99,11 +108,11 @@ public class MainPageController {
 			}
 		}
 
-		vo.setProject_id(article.getProject_id());
+		vo.setWriteForm5_project_id(article.getWriteForm5_project_id());
 		vo.setArticle_id(article.getArticle_id());
-		vo.setForm_name(article.getForm_name());
-		vo.setWriter(article.getWriter());
-		vo.setRegDate(article.getRegDate());
+		vo.setWriteForm5_form_name(article.getWriteForm5_form_name());
+		vo.setWriteForm5_writer(article.getWriteForm5_writer());
+		vo.setWriteForm5_regDate(article.getWriteForm5_regDate());
 		vo.setWriteForm5_title(article.getWriteForm5_title());
 		vo.setWriteForm5_content(writeForm5_content);
 		vo.setWriteForm5_date(writeForm5_date);
