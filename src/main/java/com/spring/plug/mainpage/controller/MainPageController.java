@@ -78,18 +78,36 @@ public class MainPageController {
    }
    
    @RequestMapping(value = "/writeform5.do")
-   public String article5Insert(Article1VO vo) throws IOException{
-	   
-	   System.out.println("controller entrance");
-	   
-	   
-	   
-	   
-	   
-	   System.out.println(vo.toString());
-	   
-	   service.insertArticle5(vo);
-	   return "mainPage.jsp";
-   }
+	public String article5Insert(ArticleTodoArrVO article) throws IOException {
+
+		Article1VO vo = new Article1VO();
+
+		System.out.println("controller entrance");
+
+		for (int i = 0; i < article.getWriteForm5_content().length; i++) {
+			if (i == 0) {
+				writeForm5_content = article.getWriteForm5_content()[i];
+				writeForm5_date = article.getWriteForm5_date()[i];
+				writeForm5_worker = article.getWriteForm5_worker()[i];
+			} else {
+				writeForm5_content += ("," + article.getWriteForm5_content()[i]);
+				writeForm5_date += ("," + article.getWriteForm5_date()[i]);
+				writeForm5_worker += ("," + article.getWriteForm5_worker()[i]);
+			}
+		}
+
+		vo.setProject_id(article.getProject_id());
+		vo.setArticle_id(article.getArticle_id());
+		vo.setForm_name(article.getForm_name());
+		vo.setWriter(article.getWriter());
+		vo.setRegDate(article.getRegDate());
+		vo.setWriteForm5_title(article.getWriteForm5_title());
+		vo.setWriteForm5_content(writeForm5_content);
+		vo.setWriteForm5_date(writeForm5_date);
+		vo.setWriteForm5_worker(writeForm5_worker);
+
+		service.insertArticle5(vo);
+		return "mainPage.jsp";
+	}
    
 }
