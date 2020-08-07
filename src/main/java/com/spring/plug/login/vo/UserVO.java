@@ -31,8 +31,6 @@ public class UserVO {
 	public void setSocialCompare(String socialCompare) {
 		this.socialCompare = socialCompare;
 	}
-	
-
 	public String getAuthKey() {
 		return authKey;
 	}

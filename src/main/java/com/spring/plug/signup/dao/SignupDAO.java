@@ -13,13 +13,20 @@ public class SignupDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	public void insertMember(UserVO vo) {
-		System.out.println("insert 기능 처리");
 		System.out.println("dao : " + vo.toString());
 		sqlSessionTemplate.insert("SignupDAO.insertMember", vo);
 	}
 	
 	public void updateAuthkey(UserVO vo) {
 		sqlSessionTemplate.update("SignupDAO.updateAuthkey", vo);
+	}
+
+	public UserVO selectAuthkey(UserVO vo) {
+		return sqlSessionTemplate.selectOne("SignupDAO.selectAuthkey", vo);
+	}
+
+	public void updateAuthstatus(UserVO vo) {
+		sqlSessionTemplate.update("SignupDAO.updateAuthstatus", vo);
 	}
 	
 }
