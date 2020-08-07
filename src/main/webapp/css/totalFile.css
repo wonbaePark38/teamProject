@@ -5,7 +5,7 @@ body{
     background-color:#f2f2f2 ;
     border: 1px solid  #eaeaea;
     font-size: 16px;
-    overflow-y: hidden;
+    overflow-y: scroll;
   }
  /* .centerAreaContainer .fileIconArea .btnLeft ::before{
     content:"123";
@@ -141,8 +141,7 @@ body{
   }
   .centerAreaContainer{
     width:1024px;
-    height:768px;
-    
+   
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -555,13 +554,13 @@ body{
   background-color: white;
 }
   .filetype{
-    
-    height:9%;
-    font-weight: 800;
+    height: 50px;
     width: 100%;
-    border-bottom:1px solid #f2f2f2;
     padding-left: 10px;
-    padding-top: 15px;
+    border-bottom: 1px solid #e7e8e9;
+    font-weight: 800;
+    align-items: center;
+    display: flex;
     
   }
  
@@ -629,12 +628,13 @@ body{
    
   }
   .projectLb{
-    height:6%;
-    width:100%;
+    height: 50px;
+    width: 100%;
     padding-left: 10px;
-    padding-top: 5px;
     border-bottom: 1px solid #e7e8e9;
     font-weight: 800;
+    align-items: center;
+    display: flex;
   }
   .searchProject{
     height: 8%;
@@ -646,6 +646,7 @@ body{
     margin-top:4px;
     background-color: #f2f2f2;
     border: 0;
+    height:40px;
   }
   #projectFolder{
     padding-inline-start: 0;
@@ -653,7 +654,7 @@ body{
   .projectFolderDiv{
     display: flex;
     flex-direction: column;
-    
+    margin-top:20px;
     width: 100%;
     height:100%;
   }
@@ -730,7 +731,7 @@ body{
     display: flex;
     flex-direction: row;
     width: 100%;
-    height:5%;
+    height:40px;
     font-size: 13px;
     
     align-items: center;
@@ -804,7 +805,7 @@ body{
     align-items: center;
     justify-content: center;
     width: 5%;
-    height:100%;
+    height:30px;
   }
   .col1-checkbox{
     width:50%;
@@ -935,7 +936,7 @@ body{
   width: 80%;
   height: 100%;
   display:none;
-
+  
 }
 
 .file-name-sort-baduk{
@@ -951,7 +952,7 @@ body{
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  
+ 
   
 }
 .checkbox-all-baduk{

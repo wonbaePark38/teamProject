@@ -7,11 +7,13 @@
   var updateStatus = 1;
   var node2='';
   var node2style;
-  //movebt=document.getElementById('moveBt');
-  //movebt.disabled = 'disabled';
+ 
   var listViewStats = 0;
   
   $(document).ready(function(){
+    
+	  
+
     $(".downimg").show();
     $(".upimg").hide();
     
@@ -310,5 +312,9 @@ function fold(){
 }
 function searchPress(){
   console.log('클릭');
+}
+
+function foldfiletype(){
+	  document.getElementById('filetypeSelectContainer').style.display=(document.getElementById('filetypeSelectContainer').style.display=='block') ? 'none' : 'block';
 }
 

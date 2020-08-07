@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,9 +33,16 @@ public class FileController {
 	}
 	
 	@RequestMapping("fileSearch.do")
-	public ModelAndView getFileList(FileVO vo,ModelAndView mav) {
-		List<FileVO> projectList = fileService.getProjectList(vo);
-		
+	@ResponseBody
+	public List<FileVO> getFileList(FileVO vo,HttpSession session,ModelAndView mav) {
+		//유저정보 세션으로 세팅 session.get~~ 후 vo에 유저 셋팅
+		String user = "a"; //테스트값
+		List<FileVO> projectList = fileService.getProjectList(user);
+		/*for(FileVO temp : projectList ) {
+			System.out.println("검색된 프로젝트" + temp.getProjectId());
+			System.out.println("검색된 파일" + temp.getFileName());
+		}*/
+		System.out.println(projectList.toString());
 		if(vo.getSearchFileCondition()==null) {
 			vo.setSearchFileCondition("FILENAME");
 		}
@@ -41,9 +51,8 @@ public class FileController {
 			vo.setSearchFileKeyword("");
 		}
 		
-		System.out.println("파일 목록 검색 처리");
-		
-		
-		return mav;
+		//mav.addObject("projectList", projectList);
+		//mav.setViewName("totalFile.jsp");
+		return projectList;
 	}
 }

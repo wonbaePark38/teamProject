@@ -3,12 +3,18 @@ package com.spring.plug.file.vo;
 public class FileVO {
 	private String searchFileCondition;
 	private String searchFileKeyword;
-	private String projectName;
+	private String projectId;
 	private String fileType;
-	private String file_name;
+	private String fileName;
 	private String writer;
+	//private String user;
 	
-	
+	/*public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}*/
 	public String getSearchFileCondition() {
 		return searchFileCondition;
 	}
@@ -18,11 +24,11 @@ public class FileVO {
 	public String getSearchFileKeyword() {
 		return searchFileKeyword;
 	}
-	public String getFile_name() {
-		return file_name;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
+	public void setFile_name(String fileName) {
+		this.fileName = fileName;
 	}
 	public String getWriter() {
 		return writer;
@@ -33,11 +39,12 @@ public class FileVO {
 	public void setSearchFileKeyword(String searchFileKeyword) {
 		this.searchFileKeyword = searchFileKeyword;
 	}
-	public String getProjectName() {
-		return projectName;
+	
+	public String getProjectId() {
+		return projectId;
 	}
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 	public String getFileType() {
 		return fileType;
@@ -48,7 +55,7 @@ public class FileVO {
 	@Override
 	public String toString() {
 		return "FileVO [searchFileCondition=" + searchFileCondition + ", searchFileKeyword=" + searchFileKeyword
-				+ ", projectName=" + projectName + ", fileType=" + fileType + "]";
+				+ ", projectName=" + projectId + ", fileType=" + fileType + "]";
 	}
 	
 	
