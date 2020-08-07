@@ -14,8 +14,8 @@ public class FileServiceImpl implements FileService{
 	private FileDAO fileDAO;
 
 	@Override
-	public List<FileVO> getProjectList(FileVO vo) {
-		return fileDAO.getProjectList(vo);
+	public List<FileVO> getProjectList(String user) {
+		return fileDAO.getProjectList(user);
 	}
 
 }

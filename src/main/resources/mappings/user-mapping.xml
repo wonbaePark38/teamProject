@@ -4,6 +4,7 @@
 
 <mapper namespace="UserDAO">
 	<resultMap id="getUser" type="user" >
+		<result property="name" column="MEMBER_NAME" />
 		<result property="email" column="MEMBER_EMAIL" />
 		<result property="password" column="MEMBER_PASSWORD" />
 	</resultMap>
