@@ -20,6 +20,8 @@ public class ArticleDAO{
       sqlSessionTemplate.insert("ArticleDAO.article1Insert",vo);
    }
    
+
+   
    public void article2_insert(Article1VO vo) {
       System.out.println("article2 insert 기능 처리");
       System.out.println("dao : " + vo.toString());
@@ -43,6 +45,12 @@ public class ArticleDAO{
 	   System.out.println("dao : " + vo.toString()); 
 	   sqlSessionTemplate.insert("ArticleDAO.article5Insert",vo);
 	 
+   }
+   
+   public void article_select(Article1VO vo) {
+	   System.out.println("select 기능 처리");
+	   
+	   sqlSessionTemplate.selectList("ArticleDAO.articleSelectAll", vo);
    }
    
 }
