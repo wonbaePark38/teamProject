@@ -59,6 +59,10 @@ function headerOption(){
     document.getElementById('workForm_div').style.display='none';
     document.getElementById('scheduleForm_div').style.display='none';
     document.getElementById('todoForm_div').style.display='none';
+    document.getElementById('writeForm2_form').reset();
+    document.getElementById('writeForm3_form').reset();
+    document.getElementById('writeForm4_form').reset();
+    document.getElementById('writeForm5_form').reset();
 
   }
 
@@ -68,7 +72,10 @@ function headerOption(){
     document.getElementById('workForm_div').style.display='none';
     document.getElementById('scheduleForm_div').style.display='none';
     document.getElementById('todoForm_div').style.display='none';
-
+    document.getElementById('writeForm1_form').reset();
+    document.getElementById('writeForm3_form').reset();
+    document.getElementById('writeForm4_form').reset();
+    document.getElementById('writeForm5_form').reset();
   }
 
   function workForm(){
@@ -77,7 +84,10 @@ function headerOption(){
     document.getElementById('write20Form_div').style.display='none';
     document.getElementById('scheduleForm_div').style.display='none';
     document.getElementById('todoForm_div').style.display='none';
-
+    document.getElementById('writeForm1_form').reset();
+    document.getElementById('writeForm2_form').reset();
+    document.getElementById('writeForm4_form').reset();
+    document.getElementById('writeForm5_form').reset();
   }
 
   function scheduleForm(){
@@ -86,7 +96,10 @@ function headerOption(){
     document.getElementById('write20Form_div').style.display='none';
     document.getElementById('workForm_div').style.display='none';
     document.getElementById('todoForm_div').style.display='none';
-
+    document.getElementById('writeForm1_form').reset();
+    document.getElementById('writeForm2_form').reset();
+    document.getElementById('writeForm3_form').reset();
+    document.getElementById('writeForm5_form').reset();
   }
 
   function todoForm(){
@@ -95,7 +108,10 @@ function headerOption(){
     document.getElementById('write20Form_div').style.display='none';
     document.getElementById('workForm_div').style.display='none';
     document.getElementById('scheduleForm_div').style.display='none';
-
+    document.getElementById('writeForm1_form').reset();
+    document.getElementById('writeForm2_form').reset();
+    document.getElementById('writeForm3_form').reset();
+    document.getElementById('writeForm4_form').reset();
   }
 
   // work status select
@@ -157,12 +173,22 @@ function headerOption(){
 
   // 업무탭 작업자 추가 및 작업자들 저장
   var workers_name = [];
+  var workers_name_str = "";
   
   function add_worker(obj) {
+	  
 	var worker_name = obj.innerText;
 	
 	
+	workers_name_str = workers_name_str.concat(',' + worker_name);
 	workers_name.push(worker_name);
+	
+	
+	
+	console.log(workers_name_str);
+	
+	
+	document.getElementById('work_workers').value = workers_name_str;
 	
 	var work_workers_value = document.getElementById('work_workers').value; 
 	
@@ -260,46 +286,43 @@ function headerOption(){
 	var todo_worker_value;
   
   
-	var todo_content = [];
-	var todo_date = [];
-	var todo_worker = [];
+	var todo_arr = [];
 	
 	var todo_seq;
 	
-	function writeForm5_onsubmit(){
-		
-		if(todo_content.length != 0 ){
-			alert('할일 입력해');
-		}else if(todo_content.length == todo_seq){
-			return true;
-		}
-		
-		
-	}
+	
   
 	function writeForm5_content_arr(obj,seq) {
 		
 		var obj_value = obj.value;
+		todo_arr[seq-1][0] = obj_value;
 		
-		todo_content[seq] = obj_value;
-		console.log(todo_content);
-		
-		document.getElementById('todo_content_value').value = todo_content;
+		console.log(obj_value);
 	}
 	
 	function writeForm5_date_arr(obj,seq) {
 		
 		var obj_value = obj.value;
+		todo_arr[seq-1][1] = obj_value;
 		
-		todo_date[seq] = obj_value;
-		
-		console.log(todo_date);
-			
-		document.getElementById('todo_date_value').value = todo_date;
+		console.log(obj_value);
 	}
   
+	//리스트에서 작업자 선택
+    function selectWorker(seq,name,id,div){
+    	
+      todo_arr[seq-1][2] = name;
+    	
+		
+	  document.getElementById(id).value = name;
+      document.getElementById(div).style.display = 'none';
+    }
+    
   function todoAppend(){
+	  var todo_content = ["","",""];
+	  todo_arr.push(todo_content);
 	  
+	  console.log(todo_arr);
 	  var seq_num = 'seq_'+startDivNum;
 	  
 	  var todo_seq_input = document.createElement('input');
@@ -334,7 +357,7 @@ function headerOption(){
       inputTag.setAttribute('type','text');
       inputTag.setAttribute('placeholder','할일 입력');
       inputTag.setAttribute('style','border-style: none; width: 70%; margin-left: 3px; margin-right: 5.5px;');
-      inputTag.setAttribute('oninput','writeForm5_content_arr(this,'+todo_seq+')');
+      inputTag.setAttribute('oninput','writeForm5_content_arr(this,'+startDivNum+')');
       todoAppendContent.append(inputTag);
       
       
@@ -352,7 +375,7 @@ function headerOption(){
 	      todoDatePickInput.setAttribute('readOnly','true');
 	      todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
 	      todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "mm/dd"});');
-	      todoDatePickInput.setAttribute('onchange','writeForm5_date_arr(this,'+todo_seq+')');
+	      todoDatePickInput.setAttribute('onchange','writeForm5_date_arr(this,'+startDivNum+')');
 	      
 	      todoDatePickDiv.append(todoDatePickInput);
 	      
@@ -393,7 +416,7 @@ function headerOption(){
           var todoWorkerLi = document.createElement('li');
             var todoWorkerLi_a = document.createElement('a');
             todoWorkerLi_a.setAttribute('id',workerName_a);
-            todoWorkerLi_a.setAttribute('onclick','selectWorker('+ todo_seq +',"'+ workerName_a +'","'+ workerInputId +'","'+ workerSelectEvent +'")');
+            todoWorkerLi_a.setAttribute('onclick','selectWorker('+ startDivNum +',"'+ workerName_a +'","'+ workerInputId +'","'+ workerSelectEvent +'")');
             todoWorkerLi.append(todoWorkerLi_a);
             todoWorkerLi_a.innerHTML= i;
             
@@ -412,19 +435,7 @@ function headerOption(){
 
     }
 
-    //리스트에서 작업자 선택
-    function selectWorker(seq,name,id,div){
-    	
-      todo_worker[seq] = name;
-	  console.log(todo_worker);
-	  document.getElementById('todo_worker_value').value = todo_worker;
-    	
-    	
-      var test31 =  document.getElementById(name).innerText;
-		
-	  document.getElementById(id).value = name;
-      document.getElementById(div).style.display = 'none';
-    }
+    
 
     // 할일 삭제
     function delete_todo(id){

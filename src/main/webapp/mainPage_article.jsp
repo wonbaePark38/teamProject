@@ -18,7 +18,7 @@
 			<div class="work_report">
 				<div class="work_report_title">
 					<!-- 프로젝트 명 -->
-					<p style="display: inline-block;">프로젝트명</p>
+					<p id="project_name" style="display: inline-block;">프로젝트명</p>
 
 					<a id="work_report_fold" onclick="fold()"> 접기</a>
 
@@ -85,26 +85,54 @@
 
 						<!-- 글 쓰기 -->
 						<form method="post" action="writeform1.do" id="writeForm1_form" enctype="multipart/form-data">
-
-							<input type="hidden" name="writeForm1_form_name" value="nomalWrite">
+							<input type="hidden" name="file_name">
+							<input type="hidden" name="file_size">
+							<input type="hidden" name="img_name">
+							<input type="hidden" name="img_size">
+							<input type="hidden" name="form_name" value="nomalWrite">
 							<div id="writeForm_div">
 
 								<textarea name="writeForm1_content" id="writeForm1_content_text" class="div_text_write"></textarea>
-
+								
+								
+								
 								<!-- 파일 업로드 -->
-								<div id="writeForm1_uploadFile" class="post_file"></div>
+								<div id="writeForm1_uploadFile" class="post_file" style="display: none;">
+									<div style="width: 100%; padding: 10px; border: 1px solid black;">
+										<img src="images/file_icon2_down.png" style="display: inline-block">
+										<div  style="display: inline-block; margin-left: 10px; width:385px;">
+											<p id="writeForm1_uploadFile_name" style="display:block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
+											<p id="writeForm1_uploadFile_size" style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
+										</div>
+										<div style="display: inline-block; text-align:right; padding-bottom: 7px;">
+											<a style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
+										</div>
+									</div>
+								</div>
 								<!-- //파일 업로드 -->
 
 								<!-- 이미지 업로드 -->
-								<div id="writeForm1_uploadImg" class="post_images"></div>
+								<div id="writeForm1_uploadImg" class="post_images" style="display:none; margin-top: 5px; ">
+									<div style="width: 100%; padding: 10px; border: 1px solid black;">
+										<input type="hidden" name="file_name">
+										<img src="images/file_icon2_down.png" style="display: inline-block">
+										<div  style="display: inline-block; margin-left: 10px; width:385px;">
+											<p id="writeForm1_uploadImg_name" style="display:block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
+											<p id="writeForm1_uploadImg_size" style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
+										</div>
+										<div style="display: inline-block; text-align:right; padding-bottom: 7px;">
+											<a style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;"></a>
+										</div>
+									</div>
+								</div>
 								<!-- //이미지 업로드 -->
 
 								<!-- 하단 툴바 -->
 								<hr>
 								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;" onsubmit="attech_file_check()">
 								
-									<input type="file" id="writeForm1_file" name="writeForm_file" onchange="fileCheck(this)" style="display: none;">
-									<input type="file" id="writeForm1_img" name="writeForm_img" onchange="imgCheck(this)" accept="image/gif, image/jpg, image/png" style="display: none;"> 
+									<input type="file" id="writeForm1_file" name="writeForm_file" onchange="fileCheck(this,writeForm1_uploadFile)" style="display: none;">
+									<input type="file" id="writeForm1_img" name="writeForm_img" onchange="imgCheck(this,writeForm1_uploadImg)" accept="image/gif, image/jpg, image/png" style="display: none;"> 
 									
 									<a id="writeForm1_file_add" class="add_file"></a> 
 									<a id="writeForm1_img_add" class="add_pic"></a>
@@ -125,7 +153,11 @@
 
 						<!-- 글쓰기 2.0 -->
 						<form method="post" action="writeform2.do" id="writeForm2_form" enctype="multipart/form-data">
-							<input type="hidden" name="writeForm2_form_name" value="nomalWrite2.0">
+							<input type="hidden" name="file_name">
+							<input type="hidden" name="file_size">
+							<input type="hidden" name="img_name">
+							<input type="hidden" name="img_size">
+							<input type="hidden" name="form_name" value="nomalWrite2.0">
 							<div class="write20_form" id="write20Form_div">
 								<!-- 제목입력 -->
 								<div class="writeForm2_title">
@@ -135,29 +167,50 @@
 								
 								<textarea name="writeForm2_content" id="writeForm2_content_text" class="div_text_write"></textarea>							
 								
-								<!-- 파일 업로드 -->
-								<div id="writeForm2_uploadFile" class="post_file"></div>
-								<!-- //파일 업로드 -->
-
-								<!-- 이미지 업로드 -->
-								<div id="writeForm2_uploadImg" class="post_images"></div>
-								<!-- //이미지 업로드 -->
-								
-								
 								<!-- 지도 영역 -->
 								<div id="location_div">
 									<div id="locationMap"></div>
 								</div>
 								<!-- //지도 영역 -->
-
 								
+								<!-- 파일 업로드 -->
+								<div id="writeForm2_uploadFile" class="post_file" style="display: none;">
+									<div style="width: 100%; padding: 10px; border: 1px solid black;">
+										<img src="images/file_icon2_down.png" style="display: inline-block">
+										<div  style="display: inline-block; margin-left: 10px; width:385px;">
+											<p id="writeForm2_uploadFile_name" style="display:block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
+											<p id="writeForm2_uploadFile_size" style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
+										</div>
+										<div style="display: inline-block; text-align:right; padding-bottom: 7px;">
+											<a style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
+										</div>
+									</div>
+								</div>
+								<!-- //파일 업로드 -->
 
+								<!-- 이미지 업로드 -->
+								<div id="writeForm2_uploadImg" class="post_images" style="display:none; margin-top: 5px; ">
+									<div style="width: 100%; padding: 10px; border: 1px solid black;">
+										<input type="hidden" name="file_name">
+										<img src="images/file_icon2_down.png" style="display: inline-block">
+										<div  style="display: inline-block; margin-left: 10px; width:385px;">
+											<p id="writeForm2_uploadImg_name" style="display:block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
+											<p id="writeForm2_uploadImg_size" style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
+										</div>
+										<div style="display: inline-block; text-align:right; padding-bottom: 7px;">
+											<a style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;"></a>
+										</div>
+									</div>
+								</div>
+								<!-- //이미지 업로드 -->
+								
+								
 								<!-- 하단 툴바 -->
 								<hr>
 								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 								
-									<input type="file" id="writeForm2_file" name="writeForm_file" onchange="fileCheck(this)" style="display: none;">
-									<input type="file" id="writeForm2_img" name="writeForm_img" onchange="imgCheck(this)" accept="image/gif, image/jpg, image/png" style="display: none;"> 
+									<input type="file" id="writeForm2_file" name="writeForm_file" onchange="fileCheck(this,writeForm2_uploadFile)" style="display: none;">
+									<input type="file" id="writeForm2_img" name="writeForm_img" onchange='imgCheck(this,writeForm2_uploadImg)' accept="image/gif, image/jpg, image/png" style="display: none;"> 
 									
 									<a id="writeForm2_file_add" class="add_file"></a> 
 									<a id="writeForm2_img_add" class="add_pic"></a> 
@@ -189,10 +242,14 @@
 
 
 						<!-- 업무 글쓰기 -->
-						<form method="post" action="writeform3.do" id="writeForm3_form">
+						<form method="post" action="writeform3.do" id="writeForm3_form" enctype="multipart/form-data">
+							<input type="hidden" name="file_name">
+							<input type="hidden" name="file_size">
+							<input type="hidden" name="img_name">
+							<input type="hidden" name="img_size">
 							<div class="work_form" id="workForm_div">
 
-								<input type="hidden" name="writeForm3_form_name" value="workWrite">
+								<input type="hidden" name="form_name" value="workWrite">
 								
 								<!-- 업무명 -->
 								<div id="work_form_title">
@@ -233,7 +290,6 @@
 								<div class="work_form_manager">
 									<div>
 										<label id="work_worker_img"></label>
-										
 										<div style="display: inline-block;">
 											<input type="text" id="work_worker_select" onclick="work_workerSelect()" placeholder="담당자 추가">
 										</div>
@@ -242,8 +298,8 @@
 											<ul style="list-style: none; border:1px solid black; background-color: white; padding-left: 0px;">
 												<!-- forEach -->
 												<li><a onclick="add_worker(this)">테스트1</a></li>
-												<li><a>테스트2</a></li>
-												<li><a>테스트3</a></li>
+												<li><a onclick="add_worker(this)">테스트2</a></li>
+												<li><a onclick="add_worker(this)">테스트3</a></li>
 												<!-- //forEach -->
 											</ul>
 										</div>
@@ -338,20 +394,47 @@
 								
 								<!-- //내용 -->
 
+
 								<!-- 파일 업로드 -->
-								<div id="writeForm3_uploadFile" class="post_file"></div>
+								<div id="writeForm3_uploadFile" class="post_file" style="display: none;">
+									<div style="width: 100%; padding: 10px; border: 1px solid black;">
+										<img src="images/file_icon2_down.png" style="display: inline-block">
+										<div  style="display: inline-block; margin-left: 10px; width:385px;">
+											<p id="writeForm3_uploadFile_name" style="display:block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
+											<p id="writeForm3_uploadFile_size" style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
+										</div>
+										<div style="display: inline-block; text-align:right; padding-bottom: 7px;">
+											<a style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
+										</div>
+									</div>
+								</div>
 								<!-- //파일 업로드 -->
 
 								<!-- 이미지 업로드 -->
-								<div id="writeForm3_uploadImg" class="post_images"></div>
+								<div id="writeForm3_uploadImg" class="post_images" style="display: none; margin-top: 5px;">
+									<div style="width: 100%; padding: 10px; border: 1px solid black;">
+										<input type="hidden" name="file_name">
+										<img src="images/file_icon2_down.png" style="display: inline-block">
+										<div  style="display: inline-block; margin-left: 10px; width:385px;">
+											<p style="display:block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
+											<p style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
+										</div>
+										<div style="display: inline-block; text-align:right; padding-bottom: 7px;">
+											<a style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
+										</div>
+									</div>
+								</div>
 								<!-- //이미지 업로드 -->
 
 
 								<!-- 하단 툴바 -->
 								<hr>
 								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
-
-									<a class="add_file"></a> <a class="add_pic"></a>
+									<input type="file" id="writeForm3_file" name="writeForm_file" onchange="fileCheck(this,writeForm3_uploadFile)" style="display: none;">
+									<input type="file" id="writeForm3_img" name="writeForm_img" onchange="imgCheck(this,writeForm3_uploadImg)" accept="image/gif, image/jpg, image/png" style="display: none;"> 
+									
+									<a id="writeForm3_file_add" class="add_file"></a> 
+									<a id="writeForm3_img_add" class="add_pic"></a>
 									<div style="display: inline-block; float: right;">
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
@@ -372,7 +455,7 @@
 
 						<!-- 일정 -->
 						<form method="post" action="writeform4.do" id="writeForm4_form">
-							<input type="hidden" name="writeForm4_form_name" value="scheWrite">
+							<input type="hidden" name="form_name" value="scheWrite">
 							<div class="schedule_form" id="scheduleForm_div">
 								<div>
 									<!-- 일정 제목 -->
@@ -520,7 +603,7 @@
 						<!-- 할일 -->
 						<form method="get" action="writeform5.do" id="writeForm5_form">
 						
-							<input type="hidden" name="writeForm5_form_name" value="todoWrite">
+							<input type="hidden" name="form_name" value="todoWrite">
 							<input type="hidden" name="writeForm5_content" id="todo_content_value">
 							<input type="hidden" name="writeForm5_date" id="todo_date_value">
 							<input type="hidden" name="writeForm5_worker" id="todo_worker_value">
