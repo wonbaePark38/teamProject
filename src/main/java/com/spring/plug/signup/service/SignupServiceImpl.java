@@ -62,7 +62,6 @@ public class SignupServiceImpl implements SignupService {
 
 		// mail 작성 관련 
 		MailUtils sendMail = new MailUtils(mailSender);
-		vo.setEmail("ahncount@gmail.com"); // 테스트 후 삭제할것
 		System.out.println(vo.getEmail());
 		sendMail.setSubject("회원가입 이메일 인증");
 		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")

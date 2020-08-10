@@ -2,8 +2,6 @@ package com.spring.plug.signup.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,13 +36,17 @@ public class SignupController {
 		if(vo.getAuthStatus().equals("0")) {
 			if(authkey.equals(vo.getAuthKey())) {
 				System.out.println("인증키 일치");
+				vo.setAuthStatus("1");
+				signupService.updateAuthstatus(vo);
+				mav.setViewName("authsuccess.jsp");
 			} else {
 				System.out.println("인증키 불일치");
+				mav.setViewName("authfailed.jsp");
 			}
 			
 		} else if(vo.getAuthStatus().equals("1")){
 			System.out.println("인증이 완료된 회원");
-			mav.setViewName("index.jsp");
+			mav.setViewName("alreadyauth.jsp");
 		}
 		return mav;
 	}
