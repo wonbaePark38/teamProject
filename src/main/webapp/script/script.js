@@ -1,29 +1,24 @@
 
 
- var checknumber=0;
-  var filenameStatus = 1;  
-  var filesizeStatus = 1;
-  var writerStatus = 1;
-  var updateStatus = 1;
-  var node2='';
-  var node2style;
  
-  var listViewStats = 0;
-  
   $(document).ready(function(){
     
+	  var checknumber=0;
+	 // var filenameStatus = 1;  
+	  var filesizeStatus = 1;
+	  var writerStatus = 1;
+	  var updateStatus = 1;
+	  var node2='';
+	  var node2style;
+	 
+	  var listViewStats = 0;
 	  
 
-    $(".downimg").show();
-    $(".upimg").hide();
+    //$(".downimg").show();
+    //$(".upimg").hide();
     
     
-    $('.projectNameBt').click(function(){
-      var buttonValue = this.value;
-      $('#changePathArea').text(buttonValue);
-     
-     
-    });
+    
     $('.checkbox-all').click(function(){
       $('.col1-checkbox').prop('checked',this.checked);
     });
@@ -33,37 +28,8 @@
       $('.checkbox-baduk').prop('checked',this.checked);
     });
 
-    $("#listSortBt").click(function(){
-      console.log('리스트버튼');
-      $('#listSortBt').css('backgroundColor','#615cba');
-      $('#badukSortBt').css('backgroundColor','#e4e7eb');
-      $('.baduk-main-article-container').css('display','none');
-      $('.list-main-article-container').css('display','block');
-      
-    });
-  
-    $('#badukSortBt').click(function(){
-      console.log('바둑버튼');
-      $('#listSortBt').css('backgroundColor','#e4e7eb');
-      $('#badukSortBt').css('backgroundColor','#615cba');
-      
-      $('.list-main-article-container').css('display','none');
-      $('.baduk-main-article-container').css('display','block');
-      
-    });
-    $("#namesortbt").click(function(){
-      
-      if(filenameStatus==1){
-        $("#namesortbt .downimg").hide();
-        $("#namesortbt .upimg").show();
-        filenameStatus=0;
-      }else if(filenameStatus==0){
-        $("#namesortbt .downimg").show();
-        $("#namesortbt .upimg").hide();
-        filenameStatus=1;
-      }
-      
-    });
+    
+    
   
     $("#sizesortbt").click(function(){
       
@@ -136,25 +102,6 @@
       
     });
    
-    //히든 메뉴 클릭했을때 열고닫아주는 이벤트
-   
-
-    $('.moreBt').click(function(){
-      
-      var node = $(this).parent().next();
-      
-      style = node.css('display');
-      if( node.css('display') == 'none'){
-        style = 'block';
-        node.css('display','block');
-      }else{
-        style='none';
-        node.css('display','none');
-      }
-
-    });
-
-   
     
     //체크박스 체크 했을때 발생하는 이벤트
     $('.col1-checkbox').on('change',function(){
@@ -185,6 +132,8 @@
       }
     });
     	
+   
+    
     
  });
   
@@ -317,4 +266,5 @@ function searchPress(){
 function foldfiletype(){
 	  document.getElementById('filetypeSelectContainer').style.display=(document.getElementById('filetypeSelectContainer').style.display=='block') ? 'none' : 'block';
 }
+
 

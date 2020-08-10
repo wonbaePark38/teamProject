@@ -52,7 +52,7 @@ public class LoginController{
 				session.setAttribute("userEmail", user.getEmail());
 				session.setAttribute("name", user.getName());
 				mav.addObject("user", user);
-				mav.setViewName("content.jsp");
+				mav.setViewName("totalFile.jsp");
 				
 				return mav;
 			}else {

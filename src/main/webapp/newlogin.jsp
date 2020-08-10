@@ -39,7 +39,7 @@
 		</div>
 	</div>
 
-	<form method="POST" action="fileSearch.do" name="loginBt">
+	<form method="POST" action="login.do" name="loginBt">
 	<div class="signup_box">
 		<div>
 			<ul>

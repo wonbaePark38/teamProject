@@ -17,7 +17,7 @@
 	
 	<mappers>
 		<mapper resource="mappings/user-mapping.xml" />
-		<mapper resource="mappings/article-mapper.xml" />
+		<!-- <mapper resource="mappings/article-mapper.xml" /> -->
 		<mapper resource="mappings/projectdir-mapper.xml"/>
 		<mapper resource="mappings/projectlookup-mapper.xml"/>
 		<mapper resource="mappings/signup-mapper.xml"/>
