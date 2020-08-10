@@ -6,7 +6,7 @@
 
 	
 	
-	<select id="articleSelectAll" resultMap="articleSelectMap">
+	<!-- <select id="articleSelectAll" resultMap="articleSelectMap">
 	SELECT * FORM mainpage_article5
 	FULL JOIN(
 	    SELECT * FROM mainpage_article4 
@@ -18,7 +18,7 @@
 	        ) USING(article_id)
 	    )USING(article_id)
 	)USING(article_id);
-	</select>
+	</select> -->
 
 
    <insert id="article1Insert" useGeneratedKeys="true" parameterType="article1VO">

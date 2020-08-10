@@ -15,11 +15,11 @@ public class ArticleServiceImpl implements ArticleService{
    private ArticleDAO dao;
    
    
-   @Override
-	public List<Article1VO> selectArticle(Article1VO vo) {
-	   
-		return dao.article_select(vo);
-	}
+//   @Override
+//	public List<Article1VO> selectArticle(Article1VO vo) {
+//	   
+//		return dao.article_select(vo);
+//	}
   
    
    

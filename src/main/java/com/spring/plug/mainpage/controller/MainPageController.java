@@ -26,11 +26,11 @@ public class MainPageController {
    private String writeForm5_worker;
    
    
-   @RequestMapping(value = "/mainpage.do")
-   public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
-	   
-	   return mav;
-   }
+//   @RequestMapping(value = "/mainpage.do")
+//   public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
+//	   
+//	   return mav;
+//   }
    
    @RequestMapping(value = "/writeform1.do")
    public String article1Insert(Article1VO vo) throws IOException{

@@ -26,7 +26,6 @@
 <script type="text/javascript" src="script/fileupload.js"></script>
 <script>
 	$(document).ready(function(){
-		alert(${param.name});
 		var return_url = "mainPage.jsp";
 		<c:if test="${pageContext.request.method=='POST'}">
 			return_url = "content.jsp"
@@ -409,7 +408,7 @@
 
 					<!-- 게시글 넣는곳 -->
 
-					<%-- <jsp:include page="mainPage_article.jsp"></jsp:include> --%>
+					<jsp:include page="mainPage_article.jsp"></jsp:include> 
 
 
 					<!-- //게시글 넣는곳 -->
