@@ -10,11 +10,15 @@
 		<result property="password" column="ADMIN_PASSWORD" />
 		<result property="salt" column="SALT" />
 		<result property="email" column="ADMIN_EMAIL" />
-		
 	</resultMap>
 
 	<insert id="insertAdmin" parameterType="adminSignup">
-		INSERT INTO ADMININFO VALUES(admin_seq.nextval, #{username}, #{password}, #{salt}, #{email})
+		INSERT INTO ADMININFO
+		VALUES(admin_seq.nextval, #{username}, #{password}, #{salt}, #{email})
 	</insert>
 
+	<select id="getSaltById" resultMap="signResult">
+		SELECT * FROM ADMININFO WHERE ADMIN_USERNAME=#{username}
+	</select>
+	
 </mapper>

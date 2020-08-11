@@ -76,7 +76,6 @@ function sameEmail(){
 		<script type="text/javascript">
 		sameEmail();
 		</script>
-		
 	</c:if>
 
 	<div class="sign-up-wrap">

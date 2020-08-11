@@ -2,55 +2,44 @@ package com.spring.plug.adminsignup.vo;
 
 public class AdminVO {
 
-	private String adminId;
-	private String adminUsername;
-	private String adminEmail;
-	private String adminPassword;
+	private int seq;
+	private String username;
+	private String email;
+	private String password;
 	private String salt;
-	
-	public String getAdminEmail() {
-		return adminEmail;
+	public int getSeq() {
+		return seq;
 	}
-	
-	public void setAdminEmail(String adminEmail) {
-		this.adminEmail = adminEmail;
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
-	
-	public String getAdminId() {
-		return adminId;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
-	public String getAdminUsername() {
-		return adminUsername;
+	public String getEmail() {
+		return email;
 	}
-
-	public void setAdminUsername(String adminUsername) {
-		this.adminUsername = adminUsername;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public String getAdminPassword() {
-		return adminPassword;
+	public String getPassword() {
+		return password;
 	}
-
-	public void setAdminPassword(String adminPassword) {
-		this.adminPassword = adminPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
 	public String getSalt() {
 		return salt;
 	}
-
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-
 	@Override
 	public String toString() {
-		return "adminVO [adminId=" + adminId + ", adminUsername=" + adminUsername + ", adminPassword=" + adminPassword
+		return "AdminVO [seq=" + seq + ", username=" + username + ", email=" + email + ", password=" + password
 				+ ", salt=" + salt + "]";
 	}
 	

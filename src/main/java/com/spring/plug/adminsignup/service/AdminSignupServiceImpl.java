@@ -17,13 +17,11 @@ public class AdminSignupServiceImpl implements AdminSignupService {
 	@Override
 	@Transactional
 	public void insertAdmin(AdminVO vo) {
-		System.out.println(vo.getAdminPassword());
 		String salt = SHA256Util.generateSalt();
-		String password = vo.getAdminPassword();
+		String password = vo.getPassword();
 		password = SHA256Util.getEncrypt(password, salt);
-		System.out.println(vo.getAdminEmail());
 		vo.setSalt(salt);
-		vo.setAdminPassword(password);
+		vo.setPassword(password);
 		asDAO.insertAdmin(vo);
 	}
 
