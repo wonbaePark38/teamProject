@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<
 <link rel="stylesheet" href="css/newproject_css.css">
 <script src="script/projectdir.js"></script>
-</head>
 <body>
 <form action="newproject.do" id="newproject" method="post">
-<input type="hidden" name="username" value="dnjswhdzld">
-<input type="hidden" name="projectmanager" value="0">
-<input type="hidden" name="projecttype" value="0">
+
+<input type="hidden" name="project_manager" value="0">
+<input type="hidden" name="project_type" value="0">
+
 <div class="background_shadow" style="z-index: 9000; position: absolute;"></div>
 	<div class="layerstyle4" style="width: 500px; z-index: 9001" >
 		<div id="projectOptionLayer" class="layerstyle4_po" style="display: block;">
@@ -25,10 +22,10 @@
 			<div class="newrm_wrap" style="background-color: #fff;">
 				<dl class="nwrtitle_box">
 					<dt>
-						<input name="projectname" id="COLABO_TTL" placeholder="프로젝트 제목을 입력하세요" rows="1" class="autosize" style="max-height: 59px;" maxlength="50">
+						<input name="project_name" id="COLABO_TTL" placeholder="프로젝트 제목을 입력하세요" rows="1" class="autosize" style="max-height: 59px;" maxlength="50">
 					</dt>
 					<dd style="padding: 0; margin: 0px;">
-						<textarea name="projectcontent" id="COLABO_CNTN" placeholder="설명글을 입력할 수 있습니다." rows="1" class="autosize" style="max-height: 90px; overflow: auto; padding: 9px; height: 55px;"></textarea>
+						<textarea name="project_content" id="COLABO_CNTN" placeholder="설명글을 입력할 수 있습니다." rows="1" class="autosize" style="max-height: 90px; overflow: auto; padding: 9px; height: 55px;"></textarea>
 					</dd>
 				</dl>
 				
@@ -66,5 +63,3 @@
 		</div>
 	</div>
 </form>
-</body>
-</html>

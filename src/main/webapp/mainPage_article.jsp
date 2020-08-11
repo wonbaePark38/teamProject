@@ -652,7 +652,7 @@
 
             </div>
             <!-- write_form_border -->
-
+			
 
 
 
@@ -731,7 +731,7 @@
    
       <!-- 게시글 출력하는 곳  -->
       <div id="article_show" style=" width: 100%; margin-top: 10px">
-      
+      		
       </div>
       <!-- 게시글 출력하는 곳 -->
    </div>

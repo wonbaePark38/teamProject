@@ -1,14 +1,19 @@
 package com.spring.plug.mainpage.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.mainpage.projectdir.service.ProjectDirService;
+import com.spring.plug.mainpage.projectdir.service.ProjectLockerService;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
+import com.spring.plug.mainpage.projectdir.vo.ProjectLockerVO;
 
 @Controller
 public class ProjectDirController {
@@ -18,31 +23,22 @@ public class ProjectDirController {
 	
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
 	public String projectDirInsert(ProjectDirVO vo) {
+		vo.setMember_id(1);
 		projectDirService.insertProjectDir(vo);
+		
+		
 		projectDirService.insertProjectLookup(vo);
-		return "mainPage.jsp";
+		return "mainProjectDir.jsp";
 	}
 	
-	@RequestMapping(value="/content.do", method = RequestMethod.GET)
-	public String getProjectDirTotalList(ProjectDirVO vo, Model model) {
-		vo.setUsername("dnjswhdzld");
-		model.addAttribute("projectDirList",projectDirService.getProjectDirTotalList(vo));
-		return "content.jsp";
+	@RequestMapping(value="/projectdir.do", method = RequestMethod.GET)
+	public ModelAndView getProjectDirTotalList(ProjectDirVO vo, ModelAndView mav) {
+		vo.setMember_id(1);
+		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo);
+		
+		mav.addObject("projectDirList",list);
+		mav.setViewName("mainProjectDir.jsp");
+		return mav;
 	}
 	
-	@RequestMapping(value="/content_manager.do")
-	public String getProjectDirManagerList(ProjectDirVO vo, Model model) {
-		vo.setUsername("dnjswhdzld");
-		model.addAttribute("projectDirList",projectDirService.getProjectDirManagerList(vo));
-		return "content.jsp";
-	}
-	
-	@RequestMapping(value="/start.do", method = RequestMethod.POST)
-	public String getStart() {
-		return "mainPage.jsp";
-	}
-	@RequestMapping(value="/start.do", method = RequestMethod.GET)
-	public String getStart2() {
-		return "content.jsp";
-	}
 }

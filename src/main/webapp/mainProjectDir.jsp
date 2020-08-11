@@ -16,7 +16,7 @@
 
 <!-- Custom styles for this template -->
 <link href="css/mainPage.css" rel="stylesheet">
-<link href="css/task.css" rel="stylesheet">
+<link href="css/write_completion.css" rel="stylesheet">
 <link href="css/messanger_css.css" rel="stylesheet">
 <script src="script/page_ajax.js"></script>
 <link href="css/contentPage.css" rel="stylesheet">
@@ -24,32 +24,15 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
+
 <script>
-	$(document).ready(function(){
-		var return_url = "mainPage.jsp";
-		<c:if test="${pageContext.request.method=='POST'}">
-			return_url = "content.jsp"
-		// ajax option
-			return_url = "content.jsp"
-			var ajaxOption = {
-				url : return_url,
-				async : true,
-				type : "POST",
-				dataType : "html",
-				cache : false
-			};
-	
-			$.ajax(ajaxOption).done(function(data) {
-				// Contents 영역 삭제
-				$('#ch2').children().remove();
-				// Contents 영역 교체
-				$('#ch2').html(data);
-			});
-		</c:if>
-		<c:if test="${pageContext.request.method=='GET'}">
-		
-		</c:if>
-		// ajax option
+	$(document).on('click','#main_side',function(){
+		var click_id = $(this).text();
+		if (click_id == '전체') {
+			location.href = "projectdir.do";
+		} else if () {
+			
+		}
 	});
 </script>
 
@@ -58,7 +41,6 @@
 </style>
 
 <body>
-
 
 	<div class="mainWrap">
 		<!-- Navigation -->
@@ -114,43 +96,27 @@
 				</div>
 				<!--사이드바-->
 				<div class="sidebar">
-					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item"
-						style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
-					<a onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;"
-						style="padding: .5rem 1.25rem;">미보관</a> <a
-						onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;">읽지않음</a> <a
-						onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
+					<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">미보관</a> 
+					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">읽지않음</a> 
+					<a onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
 					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
-					<a onclick="acyncMovePage(content.jsp)" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 업무</a> <a href="calendar.jsp"
-						class="list-group-item" style="padding: .5rem 1.25rem;">전체 일정</a>
-					<a href="totalFile.html" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 파일</a> <a
-						onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
-					<a onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;">나를 지정</a>
-					<a onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
+					<a id="main_side" onclick="acyncMovePage(content.jsp)" class="list-group-item" style="padding: .5rem 1.25rem;">전체 업무</a> 
+					<a href="calendar.jsp" class="list-group-item" style="padding: .5rem 1.25rem;">전체 일정</a>
+					<a id="main_side" href="totalFile.html" class="list-group-item" style="padding: .5rem 1.25rem;">전체 파일</a> <a onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
+					<a id="main_side" onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">나를 지정</a>
+					<a id="main_side" onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
 
 					</div>
 					<div class="list-group">
-						<a onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">마케팅</a> <a
-							onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">디자인</a> <a
-							onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">엔지니어링</a>
-						<a onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">숨김</a>
-
+						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">마케팅</a> 
+						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">디자인</a> 
+						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">엔지니어링</a>
+						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">숨김</a>
 					</div>
 
 				</div>
@@ -172,14 +138,8 @@
 
 			</div>
 
-			<!--//사이드바-->
-			<!-- </div> -->
-			<!--// sidebarcontainer-->
-
-			<!--// leftcontainer-->
-
 			<div style="display: inline-block;" id="ch2">
-				<div class="contents" style="float: left;">
+				<div class="contents" style="float: left; width: 848px;">
 					<!-- 센터영역 -->
 
 					<!-- 옵션 영역 -->
@@ -405,144 +365,14 @@
 					</div>
 
 					<!-- //채팅 영역 -->
-
-					<!-- 게시글 넣는곳 -->
-
-					<jsp:include page="mainPage_article.jsp"></jsp:include> 
-
-
-					<!-- //게시글 넣는곳 -->
-
-
-
+					
+					<jsp:include page='content.jsp'></jsp:include>
+					
 				</div>
-				<!-- //센터영역-->
-				<!--오른쪽영역-->
-				<!-- 세영 -->
-				<div class="rightContainer">
-
-
-
-					<div class="aside_wrap">
-						<div>
-							<a href="#" class="btn_listback">이전화면</a>
-						</div>
-
-						<div class="set_wrap col-12">
-							<ul style="padding-inline-start: 0px;">
-								<li><a href="totalFile.html" id="file-box" class="ico1"
-									style="padding-top: 30px; height: 50px;">파일함</a></li>
-								<li><a href="task.jsp" id="task-list" class="ico5"
-									style="padding-top: 30px; height: 50px;">업무</a></li>
-								<li><a href="calendar.jsp" id="schedule-calendar"
-									class="ico4" style="padding-top: 30px; height: 50px;">일정</a></li>
-								<li><a href="#" id="todo-list" class="ico3"
-									style="padding-top: 30px; height: 50px;">할일</a></li>
-							</ul>
-						</div>
-
-						<div>
-							<div class="r_invite_box">
-								<a id="project-invite-btn" class="invite"
-									onclick="invitePop('invitedetail.jsp')">초대하기</a>
-
-							</div>
-							<!-- 참여자목록 -->
-
-							<div class="participant_wrap">
-								<div>
-									<div class="msg_user">
-										<strong>전체 참여자</strong>&nbsp; <strong>2</strong>
-										<!-- 프로젝트 참여인원 db -->
-										<strong>명</strong> <a>전체보기</a>
-									</div>
-								</div>
-
-								<div>
-									<div>
-										<h5>
-											<strong id="msg">관리자</strong> <span id="msg">(1)</span>
-										</h5>
-									</div>
-									<ul>
-										<li class="right-sendience-li">
-											<div class="msgphoto">
-												<img id="uimg" src="images/noimg.gif">
-											</div>
-											<div id="sendience-right-btns" class="btn_right">
-												<a id="sendience-chat" class="btn chat"> <span
-													class="blind">채팅</span>
-												</a>
-											</div>
-											<div class="username" style="cursor: pointer;">
-												<span id="sendience-name" user-id="" use-intt-id="">안세영
-													(나)</span>
-											</div>
-										</li>
-									</ul>
-
-									<div>
-										<h5>
-											<strong id="msg">참여자</strong> <span id="msg">(1)</span>
-										</h5>
-									</div>
-									<ul>
-										<li class="right-sendience-li">
-											<div class="msgphoto">
-												<img id="uimg" src="images/noimg.gif">
-											</div>
-											<div id="sendience-right-btns" class="btn_right">
-												<a id="sendience-chat" class="btn chat"> <span
-													class="blind">채팅</span>
-												</a>
-											</div>
-											<div class="username" style="cursor: pointer;">
-												<span id="sendience-name" user-id="" use-intt-id="">장원종</span>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="btn_prj_chat_box">
-								<a id="project-open-chat" class="btn_prj_chat">프로젝트 채팅</a>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-
-
 			</div>
 			<!--end center-->
 		</div>
-
-		<div id="new_plus" style="display: none; z-index: 1001;">
-			<div
-				style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px 10px 10px 10px; background-color: white;">
-				<div
-					style="text-align: center; margin: auto; padding-bottom: 10px; border-bottom: 1px solid #eaeaea;">
-					<span style="padding-left: 15px; font-size: 20px;">보관함 만들기</span> <a
-						href="#" style="float: right" onclick="new_plus()">X</a>
-				</div>
-				<div style="margin: auto; padding: 20px;">
-					<input type="text" placeholder="보관함명 입력(최대50자)"
-						style="width: 90%; height: 30px;">
-					<div style="padding-top: 15px">
-						<input class="box_btn" type="button" value="취소"
-							onclick="new_plus()"> <input
-							style="background-color: aqua;" class="box_btn" type="button"
-							value="만들기">
-					</div>
-				</div>
-			</div>
-		</div>
-
-
 	</div>
-
-
 </body>
 
 <!-- Bootstrap core JavaScript -->
@@ -559,16 +389,6 @@
 
 
 <script type="text/javascript" src="script/script.js"></script>
-<script type="text/javascript" src="script/task.js"></script>
 
-<!-- 구글지도 -->
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10&callback=initMap"></script>
-<script type="text/javascript" src="script/googleMap.js"></script>
-
-<!-- 구글 차트 -->
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="script/googleChart.js"></script>
 
 </html>

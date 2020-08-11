@@ -5,18 +5,18 @@
 <mapper namespace="ProjectDirDAO">
 	<!-- 프로젝트 생성 맵 -->
 	<resultMap type="projectdir" id="projectdir">
-		<id property="projectnum" column="PROJECTNUM"/>
-		<result property="projectname" column="PROJECTNAME" />
-		<result property="projectcontent" column="PROJECTCONTENT" />
-		<result property="projecttype" column="PROJECTTYPE" />
+		<id property="project_id" column="PROJECT_NUM" />
+		<result property="project_name" column="PROJECT_NAME" />
+		<result property="project_content" column="PROJECT_CONTENT" />
+		<result property="project_type" column="PROJECT_TYPE" />
 		<result property="createdate" column="CREATEDATE"/>
 		<collection property="project_lookup" resultMap="project_lookup"></collection>
 	</resultMap>
 	
 	<!-- 프로젝트 생성 -->	
-	<insert id="projectDirInsert" parameterType="projectdir">
-		INSERT INTO projectdir (projectnum, projectname, projectcontent, projecttype)
-		VALUES((select nvl(max(projectnum), 0) +1 from projectdir), #{projectname}, #{projectcontent}, #{projecttype})
+	<insert id="projectDirInsert" parameterType="projectdir" useGeneratedKeys="true" keyProperty="project_id" keyColumn="project_id"> 
+		INSERT INTO projectdir (project_id, project_name, project_content, project_type)
+		VALUES((select nvl(max(project_id), 0) +1 from projectdir), #{project_name}, #{project_content}, #{project_type})
 	</insert>
 	
 	
@@ -26,15 +26,11 @@
 	
 	<!-- 프로젝트 리스트 출력 기본	WHERE 프로젝트 참여자로 바꿔야 함  -->
 	<select id="getProjectDirTotalList" resultType="projectdir" parameterType="projectdir">
-		SELECT * FROM projectdir INNER JOIN projectlookup ON projectdir.projectname = projectlookup.projectname 
-		WHERE username = #{username} ORDER BY projectnum DESC
+		SELECT * FROM projectdir INNER JOIN project_lookup ON projectdir.project_id = project_lookup.project_id 
+		WHERE member_id = #{member_id} 
+		<!--  ORDER BY project_id DESC -->
 	</select>
 	
-	
-	<select id="getProjectDirManagerList" resultType="projectdir" parameterType="projectdir">
-		SELECT * FROM projectdir INNER JOIN projectlookup ON projectdir.projectname = projectlookup.projectname 
-		WHERE username = #{username} and projectmanager = 1
-	</select>
 	
 	
 </mapper>

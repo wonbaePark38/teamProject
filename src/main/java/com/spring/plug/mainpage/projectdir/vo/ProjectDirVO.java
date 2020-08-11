@@ -5,41 +5,41 @@ import java.sql.Date;
 public class ProjectDirVO {
 	
 	// 프로젝트 생성 정보
-	private int projectnum;
-	private String projectname;
-	private String projectcontent;
-	private String projecttype;
+	private int project_id;
+	private String project_name;
+	private String project_content;
+	private int project_type;
 	private Date createdate;
 	
 	// 프로젝트 조회 정보
-	private int lookupnum;
-	private String username;
-	private int projectmanager;
+	private int lookup_id;
+	private int member_id;
+	// project_id
+	private int project_manager;
 	private Date joindate;
-
-	public int getProjectnum() {
-		return projectnum;
+	public int getProject_id() {
+		return project_id;
 	}
-	public void setProjectnum(int projectnum) {
-		this.projectnum = projectnum;
+	public void setProject_id(int project_id) {
+		this.project_id = project_id;
 	}
-	public String getProjectname() {
-		return projectname;
+	public String getProject_name() {
+		return project_name;
 	}
-	public void setProjectname(String projectname) {
-		this.projectname = projectname;
+	public void setProject_name(String project_name) {
+		this.project_name = project_name;
 	}
-	public String getProjectcontent() {
-		return projectcontent;
+	public String getProject_content() {
+		return project_content;
 	}
-	public void setProjectcontent(String projectcontent) {
-		this.projectcontent = projectcontent;
+	public void setProject_content(String project_content) {
+		this.project_content = project_content;
 	}
-	public String getProjecttype() {
-		return projecttype;
+	public int getProject_type() {
+		return project_type;
 	}
-	public void setProjecttype(String projecttype) {
-		this.projecttype = projecttype;
+	public void setProject_type(int project_type) {
+		this.project_type = project_type;
 	}
 	public Date getCreatedate() {
 		return createdate;
@@ -47,23 +47,23 @@ public class ProjectDirVO {
 	public void setCreatedate(Date createdate) {
 		this.createdate = createdate;
 	}
-	public int getLookupnum() {
-		return lookupnum;
+	public int getLookup_id() {
+		return lookup_id;
 	}
-	public void setLookupnum(int lookupnum) {
-		this.lookupnum = lookupnum;
+	public void setLookup_id(int lookup_id) {
+		this.lookup_id = lookup_id;
 	}
-	public String getUsername() {
-		return username;
+	public int getMember_id() {
+		return member_id;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
 	}
-	public int getProjectmanager() {
-		return projectmanager;
+	public int getProject_manager() {
+		return project_manager;
 	}
-	public void setProjectmanager(int projectmanager) {
-		this.projectmanager = projectmanager;
+	public void setProject_manager(int project_manager) {
+		this.project_manager = project_manager;
 	}
 	public Date getJoindate() {
 		return joindate;
@@ -73,12 +73,11 @@ public class ProjectDirVO {
 	}
 	@Override
 	public String toString() {
-		return "ProjectDirVO [projectnum=" + projectnum + ", projectname=" + projectname + ", projectcontent="
-				+ projectcontent + ", projecttype=" + projecttype + ", createdate=" + createdate + ", lookupnum=" + lookupnum + ", username=" + username + ", projectmanager=" + projectmanager
-				+ ", joindate=" + joindate + "]";
+		return "ProjectDirVO [project_id=" + project_id + ", project_name=" + project_name + ", project_content="
+				+ project_content + ", project_type=" + project_type + ", createdate=" + createdate + ", lookup_id="
+				+ lookup_id + ", member_id=" + member_id + ", project_manager=" + project_manager + ", joindate="
+				+ joindate + "]";
 	}
-	
 
-	
 	
 }
