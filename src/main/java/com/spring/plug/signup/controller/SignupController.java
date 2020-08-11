@@ -2,8 +2,6 @@ package com.spring.plug.signup.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,11 +18,18 @@ public class SignupController {
 	private SignupService signupService;
 	
 	@RequestMapping(value="/signupPost.do", method=RequestMethod.POST)
-	public String joinPost(@ModelAttribute("vo") UserVO vo) throws Exception {
+	public ModelAndView joinPost(@ModelAttribute("vo") UserVO vo, ModelAndView mav) {
 		System.out.println("currnent join member: " + vo.getEmail().toString());
 		vo.setAuthStatus("0");
-		signupService.insertMember(vo);
-		return "newlogin.jsp";
+		try {
+			signupService.insertMember(vo);
+			mav.setViewName("newlogin.jsp");
+		} catch (Exception e) {
+			System.out.println("중복 이메일");
+			mav.addObject("status", "sameEmail");
+			mav.setViewName("signup.jsp");
+		}
+		return mav;
 	}
 	
 	@RequestMapping(value="/signConfirm.do", method=RequestMethod.GET)
@@ -38,13 +43,17 @@ public class SignupController {
 		if(vo.getAuthStatus().equals("0")) {
 			if(authkey.equals(vo.getAuthKey())) {
 				System.out.println("인증키 일치");
+				vo.setAuthStatus("1");
+				signupService.updateAuthstatus(vo);
+				mav.setViewName("authsuccess.jsp");
 			} else {
 				System.out.println("인증키 불일치");
+				mav.setViewName("authfailed.jsp");
 			}
 			
 		} else if(vo.getAuthStatus().equals("1")){
 			System.out.println("인증이 완료된 회원");
-			mav.setViewName("index.jsp");
+			mav.setViewName("alreadyauth.jsp");
 		}
 		return mav;
 	}

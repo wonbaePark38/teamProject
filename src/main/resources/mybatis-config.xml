@@ -12,6 +12,7 @@
 		<typeAlias alias="projectlookup" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
 		<typeAlias alias="signup" type="com.spring.plug.login.vo.UserVO"/>
 		<typeAlias alias="file" type="com.spring.plug.file.vo.FileVO"/>
+		<typeAlias alias="adminSignup" type="com.spring.plug.adminsignup.vo.AdminVO"/>
 	
 	</typeAliases>
 	
@@ -22,5 +23,6 @@
 		<mapper resource="mappings/projectlookup-mapper.xml"/>
 		<mapper resource="mappings/signup-mapper.xml"/>
 		<mapper resource="mappings/file-mapper.xml"/>
+		<mapper resource="mappings/adminsignup-mapper.xml"/>
 	</mappers>
 </configuration>

@@ -23,6 +23,7 @@
     
   </head>
 
+
   <body class="login">
     <div>
       <a class="hiddenanchor" id="signup"></a>
@@ -31,7 +32,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form >
               <h1>Login Form</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" />
@@ -62,35 +63,32 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form action="adminSignup.do" name="signup" method="post">
               <h1>Create Account</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" />
+                <input type="text" name="username" class="form-control" placeholder="Username" value="${ AdminVO.adminUsername }" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email"/>
+                <input type="email" name="email" class="form-control" placeholder="Email" value="${ AdminVO.adminEmail }"/>
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" />
+                <input type="password" name="password" class="form-control" placeholder="Password" value="${ AdminVO.adminPassword }" />
               </div>
               <div>
-                <a class="btn btn-default submit">Submit</a>
+                <a class="btn btn-default submit" href="javascript:signup.submit();">Submit</a>
+                <input class="btn btn-default submit" type="submit">Submit</a>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
                 <p class="change_link">Already a member ?
-                  <a class="to_register"> Log in </a>
+                  <a class="to_register" href="#signin"> Log in </a>
                 </p>
 
                 <div class="clearfix"></div>
                 <br />
 
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
               </div>
             </form>
           </section>
