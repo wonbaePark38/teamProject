@@ -1,12 +1,16 @@
 package com.spring.plug.login.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.common.util.SHA256Util;
@@ -47,22 +51,49 @@ public class LoginController{
 			vo.setPassword(inputPassword);
 			UserVO user = userService.getUser(vo);
 			
-			if(user!=null) {
+			if(user!=null && user.getAuthStatus().equals("1")) {
+				
 				System.out.println("가입된 사용자 이메일" + user.getEmail());
 				session.setAttribute("userEmail", user.getEmail());
 				session.setAttribute("name", user.getName());
 				mav.addObject("user", user);
 				mav.setViewName("totalFile.jsp");
-				
 				return mav;
-			}else {
+			
+			}else if(user != null && user.getAuthStatus().equals("0")) {
+				System.out.println("이메일 인증 하지 않았습니다");
+				mav.addObject("status", "notCheckEmail");
+				mav.setViewName("newlogin.jsp");
+				return mav;
+			}
+			else {
 				System.out.println("비밀번호가 틀렸습니다");
 				mav.setViewName("newlogin.jsp");
 				mav.addObject("status", "passwordFalse");
 				return mav;
 			}
-			
+	}
+	
+	/*
+	 * db에 이메일이 있는지 체크하는 메소드
+	 */
+	@RequestMapping("searchEmail.do")
+	@ResponseBody
+	public UserVO searchEmail(UserVO vo,Model model,HttpServletRequest request) {
 		
+		String checkEmail = request.getParameter("email");
+		vo.setEmail(checkEmail);
+		UserVO check = userService.checkEmail(vo);
+		
+		if(check != null && check.getSocialCompare().equals("N")) {
+			System.out.println("이메일 전송 ㄱㄱ");
+			vo.setEmailCheck("true");
+		}else{
+			System.out.println("일치하는 이메일이 없음");
+			vo.setEmailCheck("false");
+		}
+		model.addAttribute("emailCheck", check);
+		return vo;
 	}
 	
 	

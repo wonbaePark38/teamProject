@@ -142,8 +142,10 @@
 	  var passwordForm = document.getElementById("USER_PW").value;
 	  if (!idForm || !passwordForm) {
 		  alert("아이디와 비밀번호 모두 입력하세요");
-	  }else
-	  document.loginBt.submit();
+	  }else{
+		  document.loginBt.submit();
+	  }
+	  
   }
 
 
@@ -186,6 +188,12 @@ function hiddenMenuFold(thisevent){
   
   function errorPassword(){
 	  alert('비밀번호가 틀렸습니다.');
+	  document.getElementById('USER_PW').value ="";
+  }
+  
+  function errorNotCheckEmail(){
+	  alert('이메일 인증을 하지 않았습니다');
+	  document.getElementById('USER_ID').value ="";
 	  document.getElementById('USER_PW').value ="";
   }
 

@@ -9,10 +9,17 @@ public class UserVO {
 	private String email;
 	private String socialCompare;
 	private Date joinDate;
+	private String emailCheck;
 	private String salt;
 	private String authKey;
 	private String authStatus;
 	
+	public String getEmailCheck() {
+		return emailCheck;
+	}
+	public void setEmailCheck(String emailCheck) {
+		this.emailCheck = emailCheck;
+	}
 	public int getSeq() {
 		return seq;
 	}
