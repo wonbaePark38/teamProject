@@ -30,8 +30,24 @@
 		var click_id = $(this).text();
 		if (click_id == '전체') {
 			location.href = "projectdir.do";
-		} else if () {
-			
+		} else if(click_id == '미보관'){
+			alert('미보관');
+		} else if(click_id == '읽지않음'){
+			alert('읽지않음');
+		} else if(click_id == '즐겨찾기'){
+			alert('즐겨찾기');
+		} else if(click_id == '전체 업무'){
+			alert('전체 업무');
+		} else if(click_id == '전체 일정'){
+			alert('전체 일정');
+		} else if(click_id == '전체 파일'){
+			alert('전체 파일');
+		} else if(click_id == '담아둔 글'){
+			alert('담아둔 글');
+		} else if(click_id == '나를 지정'){
+			alert('나를 지정');
+		} else if(click_id == '내 게시물'){
+			alert('내 게시물');
 		}
 	});
 </script>
@@ -97,26 +113,27 @@
 				<!--사이드바-->
 				<div class="sidebar">
 					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
-					<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">미보관</a> 
-					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">읽지않음</a> 
-					<a onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">미보관</a> 
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">읽지않음</a> 
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
 					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
-					<a id="main_side" onclick="acyncMovePage(content.jsp)" class="list-group-item" style="padding: .5rem 1.25rem;">전체 업무</a> 
-					<a href="calendar.jsp" class="list-group-item" style="padding: .5rem 1.25rem;">전체 일정</a>
-					<a id="main_side" href="totalFile.html" class="list-group-item" style="padding: .5rem 1.25rem;">전체 파일</a> <a onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
-					<a id="main_side" onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">나를 지정</a>
-					<a id="main_side" onclick="acyncMovePage1('content.jsp')" href="#" class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">전체 업무</a> 
+					<a id="main_side" href="calendar.jsp" class="list-group-item" style="padding: .5rem 1.25rem;">전체 일정</a>
+					<a id="main_side" href="totalFile.html" class="list-group-item" style="padding: .5rem 1.25rem;">전체 파일</a> 
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">나를 지정</a>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
 
 					</div>
 					<div class="list-group">
-						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">마케팅</a> 
-						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">디자인</a> 
-						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">엔지니어링</a>
-						<a id="main_side" onclick="acyncMovePage1('content.jsp')" class="list-group-item" style="padding: .5rem 1.25rem;">숨김</a>
+						<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">마케팅</a> 
+						<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">디자인</a> 
+						<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">엔지니어링</a>
+						<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">숨김</a>
 					</div>
 
 				</div>
@@ -124,10 +141,10 @@
 				<div class="clientCenterContainer">
 
 					<ul id="helpMenu_on">
-						<li><a href="#" id="oneToOneBt">1:1 문의</a></li>
-						<li><a href="#" id="helpBt">도움말</a></li>
-						<li><a href="#" id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
-						<li><a href="#" id="newNoticeBt">플로우 새소식</a></li>
+						<li><a id="oneToOneBt">1:1 문의</a></li>
+						<li><a id="helpBt">도움말</a></li>
+						<li><a id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
+						<li><a id="newNoticeBt">플로우 새소식</a></li>
 						<!-- 알림 있을 경우 class on 추가 -->
 					</ul>
 					<div class="helpButtonContainer">
