@@ -2,10 +2,11 @@ package com.spring.plug.signup.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.signup.service.SignupService;
@@ -16,33 +17,47 @@ public class SignupController {
 	@Autowired
 	private SignupService signupService;
 	
-//	@RequestMapping(value = "/signup.do", method = RequestMethod.POST)
-//	public String insertMember(UserVO vo) {
-//		System.out.println("회원가입");
-//		try {
-//			signupService.insertMember(vo);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return "newlogin.jsp";
-//	}
-	
 	@RequestMapping(value="/signupPost.do", method=RequestMethod.POST)
-	public String joinPost(@ModelAttribute("vo") UserVO vo) throws Exception {
-		System.out.println("currnent join member: " + vo.toString());
+	public ModelAndView joinPost(@ModelAttribute("vo") UserVO vo, ModelAndView mav) {
+		System.out.println("currnent join member: " + vo.getEmail().toString());
 		vo.setAuthStatus("0");
-		signupService.insertMember(vo);
-		return "newlogin.jsp";
+		try {
+			signupService.insertMember(vo);
+			mav.setViewName("newlogin.jsp");
+		} catch (Exception e) {
+			System.out.println("중복 이메일");
+			mav.addObject("status", "sameEmail");
+			mav.setViewName("signup.jsp");
+		}
+		return mav;
 	}
 	
-	@RequestMapping(value="/signConfirm", method=RequestMethod.GET)
-	public String emailConfirm(@ModelAttribute("vo") UserVO vo, Model model) throws Exception {
-		System.out.println(vo.getEmail() + ": auth confirmed");
-		vo.setAuthStatus("1");	// authstatus를 1로,, 권한 업데이트
-		signupService.updateAuthstatus(vo);
+	@RequestMapping(value="/signConfirm.do", method=RequestMethod.GET)
+	public ModelAndView emailConfirm(@ModelAttribute("vo") UserVO vo, ModelAndView mav, @RequestParam("email") String email, @RequestParam("authkey") String authkey) throws Exception {
+		UserVO uVo = new UserVO();
+		String uEmail = email;
+		String uAuthkey = authkey;
+		uVo.setEmail(uEmail);
+		vo = signupService.selectAuthkey(uVo);
 		
-		model.addAttribute("auth_check", 1);
-		
-		return "newlogin.jsp";
+		if(vo.getAuthStatus().equals("0")) {
+			if(authkey.equals(vo.getAuthKey())) {
+				System.out.println("인증키 일치");
+				vo.setAuthStatus("1");
+				signupService.updateAuthstatus(vo);
+				mav.setViewName("authsuccess.jsp");
+			} else {
+				System.out.println("인증키 불일치");
+				mav.setViewName("authfailed.jsp");
+			}
+			
+		} else if(vo.getAuthStatus().equals("1")){
+			System.out.println("인증이 완료된 회원");
+			mav.setViewName("alreadyauth.jsp");
+		}
+		return mav;
 	}
+	
+	
+	
 }

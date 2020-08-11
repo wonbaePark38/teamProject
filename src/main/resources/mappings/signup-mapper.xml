@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="SignupDAO">
+
 	<resultMap type="signup" id="signResult">
 		<id property="seq" column="MEMBER_ID" />
 		<result property="email" column="MEMBER_EMAIL" />
@@ -20,7 +21,15 @@
 	</insert>
 	
 	<update id="updateAuthkey" parameterType="signup">
-		UPDATE MEMBERINFO SET AUTHKEY = #{authKey} WHERE MEMBER_ID = #{seq}
+		UPDATE MEMBERINFO SET AUTHKEY = #{authKey} WHERE MEMBER_EMAIL = #{email}
 	</update>
+	
+	<update id="updateAuthstatus" parameterType="signup">
+		UPDATE MEMBERINFO SET AUTHSTATUS = #{authStatus} WHERE MEMBER_EMAIL = #{email}
+	</update>
+	
+	<select id="selectAuthkey" resultMap="signResult">
+		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL = #{email}
+	</select>
 
 </mapper>

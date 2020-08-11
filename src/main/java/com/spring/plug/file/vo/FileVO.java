@@ -1,16 +1,51 @@
 package com.spring.plug.file.vo;
 
+import java.util.Date;
+
 public class FileVO {
 	private String searchFileCondition;
 	private String searchFileKeyword;
-	private String projectName;
+	private String projectId;
+	private String fileName;
 	private String fileType;
-	private String file_name;
 	private String writer;
+	private Date writeDate;
+	private String targetProject;
+	private String user;
+	private String loginUser;
 	
-	
+	public String getLoginUser() {
+		return loginUser;
+	}
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
+	public String getTargetProject() {
+		return targetProject;
+	}
+	public void setTargetProject(String targetProject) {
+		this.targetProject = targetProject;
+	}
+	public Date getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
+	}
 	public String getSearchFileCondition() {
 		return searchFileCondition;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public void setSearchFileCondition(String searchFileCondition) {
 		this.searchFileCondition = searchFileCondition;
@@ -18,12 +53,7 @@ public class FileVO {
 	public String getSearchFileKeyword() {
 		return searchFileKeyword;
 	}
-	public String getFile_name() {
-		return file_name;
-	}
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
-	}
+	
 	public String getWriter() {
 		return writer;
 	}
@@ -33,11 +63,12 @@ public class FileVO {
 	public void setSearchFileKeyword(String searchFileKeyword) {
 		this.searchFileKeyword = searchFileKeyword;
 	}
-	public String getProjectName() {
-		return projectName;
+	
+	public String getProjectId() {
+		return projectId;
 	}
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 	public String getFileType() {
 		return fileType;
@@ -48,8 +79,11 @@ public class FileVO {
 	@Override
 	public String toString() {
 		return "FileVO [searchFileCondition=" + searchFileCondition + ", searchFileKeyword=" + searchFileKeyword
-				+ ", projectName=" + projectName + ", fileType=" + fileType + "]";
+				+ ", projectId=" + projectId + ", fileName=" + fileName + ", fileType=" + fileType + ", writer="
+				+ writer + ", writeDate=" + writeDate + "]";
 	}
+	
+	
 	
 	
 }

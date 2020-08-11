@@ -4,75 +4,36 @@
 
 <mapper namespace="ArticleDAO">
 
-   <insert id="article1Insert" useGeneratedKeys="true" parameterType="article1VO">
-   INSERT INTO mainpage_article1
-   (project_id,article_id,form_name,writeform1_content,writer,regDate,file_name,img_name) 
-   VALUES
-   ( 1 ,article_seq.nextval , #{form_name}, #{writeform1_content}, 'tester', sysdate, #{file_name, jdbcType=VARCHAR}, #{img_name, jdbcType=VARCHAR})
-   </insert>
-
-
-
-
-
-   <insert id="article2Insert" useGeneratedKeys="true" parameterType="article1VO">
-   INSERT INTO mainpage_article2
-   (project_id, article_id, form_name, writeform2_title, writeform2_content, writeform2_latlng, writer, regDate, file_name, img_name) 
-   VALUES
-   ( 1 ,article_seq.nextval , #{form_name}, #{writeForm2_title}, #{writeForm2_content}, #{writeForm2_latlng, jdbcType=VARCHAR}, 'tester', sysdate, #{file_name, jdbcType=VARCHAR}, #{img_name, jdbcType=VARCHAR})
-   </insert>
-
-
-
-   
-   <insert id="article3Insert" useGeneratedKeys="true" parameterType="article1VO">
-   INSERT INTO mainpage_article3
+   <insert id="articleInsert" useGeneratedKeys="true" parameterType="article1VO">
+   INSERT INTO mainpage_article
    (
-   project_id, 
-   article_id, 
-   form_name, 
-   writer, 
-   regDate, 
-   file_name, 
-   img_name, 
-   writeForm3_title, 
-   writeForm3_status, 
-   writeForm3_workersName, 
-   writeForm3_start_date, 
-   writeForm3_end_date, 
-   writeForm3_progress, 
-   writeForm3_order, 
-   writeForm3_content
-   )
-   VALUES
-   (
-   1, 
-   article_seq.nextval, 
-   #{form_name},
-   'tester3',
-   sysdate,
-   #{file_name, jdbcType=VARCHAR},
-   #{img_name, jdbcType=VARCHAR},
-   #{writeForm3_title, jdbcType=VARCHAR},
-   #{writeForm3_status, jdbcType=VARCHAR},
-   #{writeForm3_workersName, jdbcType=VARCHAR},
-   #{writeForm3_start_date, jdbcType=VARCHAR},
-   #{writeForm3_end_date, jdbcType=VARCHAR},
-   #{writeForm3_progress, jdbcType=VARCHAR},
-   #{writeForm3_order, jdbcType=VARCHAR},
-   #{writeForm3_content, jdbcType=VARCHAR}
-   )
-   </insert>
+    project_id,
+   project_name, 
+   article_id,
+   form_name,
+   regDate,
+   file_name,
+   file_size,
+   img_name,
+   img_size,
+   writer,
    
+   writeform1_content,
    
-   <insert id="article4Insert" useGeneratedKeys="true" parameterType="article1VO">
-   INSERT INTO mainpage_article4
-   (
-   project_id, 
-   article_id, 
-   form_name, 
-   writer, 
-   regDate, 
+   writeform2_title,
+   writeform2_content,
+   writeform2_latlng,
+   
+   writeForm3_tasknum,
+   writeForm3_title,
+   writeForm3_status,
+   writeForm3_workersName,
+   writeForm3_start_date,
+   writeForm3_end_date,
+   writeForm3_progress,
+   writeForm3_order,
+   writeForm3_content,
+   
    writeForm4_title,
    writeForm4_start_date,
    writeForm4_start_time,
@@ -80,52 +41,57 @@
    writeForm4_end_time,
    writeForm4_alarm_time,
    writeForm4_content,
-   writeForm4_latlng
-   )
+   writeForm4_latlng,
+   
+   writeForm5_title,
+   writeForm5_content,
+   writeForm5_date,
+   writeForm5_worker
+   ) 
    VALUES
    (
-   1, 
-   article_seq.nextval, 
+   1,
+   'test_project',
+   article_seq.nextval,
    #{form_name},
-   'tester3',
    sysdate,
-   #{writeForm4_title},
-   #{writeForm4_start_date},
-   #{writeForm4_start_time},
-   #{writeForm4_end_date},
-   #{writeForm4_end_time},
-   #{writeForm4_alarm_time},
+   #{file_name, jdbcType=VARCHAR},
+   #{file_size, jdbcType=VARCHAR},
+   #{img_name, jdbcType=VARCHAR},
+   #{img_size, jdbcType=VARCHAR},
+   'test_writer',
+   
+   #{writeForm1_content, jdbcType=VARCHAR},
+   
+   #{writeForm2_title, jdbcType=VARCHAR},
+   #{writeForm2_content, jdbcType=VARCHAR},
+   #{writeForm2_latlng, jdbcType=VARCHAR},
+   
+   #{writeForm3_tasknum, jdbcType=INTEGER},
+   #{writeForm3_title, jdbcType=VARCHAR},
+   #{writeForm3_status, jdbcType=VARCHAR},
+   #{writeForm3_workersName, jdbcType=VARCHAR},
+   #{writeForm3_start_date, jdbcType=VARCHAR},
+   #{writeForm3_end_date, jdbcType=VARCHAR},
+   #{writeForm3_progress, jdbcType=INTEGER},
+   #{writeForm3_order, jdbcType=VARCHAR},
+   #{writeForm3_content, jdbcType=VARCHAR},
+   
+   #{writeForm4_title, jdbcType=VARCHAR},
+   #{writeForm4_start_date, jdbcType=VARCHAR},
+   #{writeForm4_start_time, jdbcType=VARCHAR},
+   #{writeForm4_end_date, jdbcType=VARCHAR},
+   #{writeForm4_end_time, jdbcType=VARCHAR},
+   #{writeForm4_alarm_time, jdbcType=VARCHAR},
    #{writeForm4_content, jdbcType=VARCHAR},
-   #{writeForm4_latlng, jdbcType=VARCHAR}
-   )   
+   #{writeForm4_latlng, jdbcType=VARCHAR},
+   
+   #{writeForm5_title, jdbcType=VARCHAR},
+   #{writeForm5_content, jdbcType=VARCHAR},
+   #{writeForm5_date, jdbcType=VARCHAR},
+   #{writeForm5_worker, jdbcType=VARCHAR}
+   
+   )
    </insert>
 
-
-<!-- 	<insert id="article5Insert" useGeneratedKeys="true" parameterType="article1VO"> -->
-<!-- 	INSERT INTO mainpage_article5 -->
-<!--    ( -->
-<!--    project_id,  -->
-<!--    article_id,  -->
-<!--    form_name,  -->
-<!--    writer,  -->
-<!--    regDate,  -->
-<!--    writeForm5_title, -->
-<!--    writeForm5_content, -->
-<!--    writeForm5_date, -->
-<!--    writeForm5_worker -->
-<!--    ) -->
-<!--    VALUES -->
-<!--    ( -->
-<!--    1,  -->
-<!--    article_seq.nextval,  -->
-<!--    #{form_name}, -->
-<!--    'tester3', -->
-<!--    sysdate, -->
-<!--    #{writeForm5_title}, -->
-<!--    #{writeForm5_content}, -->
-<!--    #{writeForm5_date}, -->
-<!--    #{writeForm5_worker} -->
-<!--    ) -->
-	
-<!-- 	</insert> -->
 </mapper>

@@ -4,12 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.file.service.FileService;
 import com.spring.plug.file.vo.FileVO;
@@ -30,20 +35,40 @@ public class FileController {
 	}
 	
 	@RequestMapping("fileSearch.do")
-	public ModelAndView getFileList(FileVO vo,ModelAndView mav) {
-		List<FileVO> projectList = fileService.getProjectList(vo);
+	@ResponseBody
+	public List<FileVO> getFileList(FileVO vo,HttpSession session,Model model, @RequestParam Map<String,String> param) {
+		//유저정보 세션으로 세팅 session.get~~ 후 vo에 유저 셋팅
+		System.out.println("현재 접속 사용자 " + session.getAttribute("userEmail"));
+		if(param.get("project") == null || param.get("project").equals("전체 프로젝트")) {
+			System.out.println("전체프로젝트 선택");
+			vo.setTargetProject("2");
+		}else {
+			vo.setTargetProject(param.get("project"));
+		}
 		
-		if(vo.getSearchFileCondition()==null) {
+		vo.setLoginUser("a");
+		
+		
+		List<FileVO> projectList = fileService.getProjectList(vo);
+		/*
+		 * private String searchFileCondition;
+		   private String searchFileKeyword;
+		 */
+		
+		System.out.println(projectList.toString());
+		
+		/*if(vo.getSearchFileCondition()==null) {
 			vo.setSearchFileCondition("FILENAME");
 		}
 		
 		if(vo.getSearchFileKeyword()==null) {
 			vo.setSearchFileKeyword("");
-		}
+		}*/
 		
-		System.out.println("파일 목록 검색 처리");
-		
-		
-		return mav;
+		model.addAttribute("projectList", projectList);
+		return projectList;
+		//mav.addObject("projectList", projectList);
+		//mav.setViewName("totalFile.jsp");
+		//return mav;
 	}
 }

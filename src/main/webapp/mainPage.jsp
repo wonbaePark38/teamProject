@@ -24,6 +24,7 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
+<<<<<<< HEAD
 <!-- <script>
 	$(document).ready(function(){
 		var return_url = "mainPage.jsp";
@@ -48,13 +49,12 @@
 	});
 </script> -->
 
+=======
+>>>>>>> refs/remotes/origin/project_0811
 </head>
 <style>
 </style>
-
 <body>
-
-
 	<div class="mainWrap">
 		<!-- Navigation -->
 		<div class="headerContainer">
@@ -404,7 +404,7 @@
 
 					<!-- 게시글 넣는곳 -->
 
-					<%-- <jsp:include page="mainPage_article.jsp"></jsp:include> --%>
+					<jsp:include page="mainPage_article.jsp"></jsp:include> 
 
 
 					<!-- //게시글 넣는곳 -->

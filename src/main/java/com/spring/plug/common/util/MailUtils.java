@@ -34,6 +34,7 @@ public class MailUtils {
     }
     
     public void setTo(String email) throws MessagingException {
+    	System.out.println(email + "======================");
         messageHelper.setTo(email);
     }
     

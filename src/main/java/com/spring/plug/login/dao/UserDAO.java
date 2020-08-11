@@ -34,5 +34,20 @@ public class UserDAO {
 		System.out.println("소셜 로그인 신규 회원 추가");
 		sqlSessionTemplate.insert("UserDAO.addSocialUser", vo);
 	}
+	
+	public UserVO checkEmail(UserVO vo) {
+		System.out.println("-->mybatis로 이메일 있는지 체크 기능");
+		return sqlSessionTemplate.selectOne("UserDAO.checkEmail",vo);
+	}
+	
+	public void updatePasswordAuthKey(UserVO vo) {
+		System.out.println("비밀번호 변경 인증키 db에 추가 기능");
+		sqlSessionTemplate.update("UserDAO.updatePasswordAuthKey", vo);
+	}
+	
+	public void sendPasswordCheckEmail(UserVO vo) {
+		System.out.println("비밀번호 변경 관련 이메일 발송 후 status 변경");
+		sqlSessionTemplate.update("UserDAO.sendPasswordCheckEmail",vo);
+	}
 }
 

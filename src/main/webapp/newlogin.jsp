@@ -33,12 +33,25 @@
 		
 	</c:if>
 	
+	<c:if test="${status eq 'notCheckEmail'}">
+		<script type="text/javascript">
+		errorNotCheckEmail();
+		</script>
+		
+	</c:if>
+	
 	<div>
 		<div class="btn-register">
-			<a href="signup.jsp">회원가입</a>
+            <div class="header-left-menu">
+                <a href="index.jsp">
+                   <img src="images/bi_flow.png" style="vertical-align: middle;">
+                </a>
+            </div>
+			<div>
+                <a href="signup.jsp">회원가입</a>
+            </div>
 		</div>
 	</div>
-
 	<form method="POST" action="login.do" name="loginBt">
 	<div class="signup_box">
 		<div>
@@ -50,14 +63,14 @@
 					<input type="password" id="USER_PW" name="password" placeholder="비밀번호" >
 				</li>
 			</ul>
-			<div>
-				<input type="checkbox">&nbsp;<span>자동 로그인</span>
+			<div class="auto-login-div">
+				<input type="checkbox">&nbsp;&nbsp;<span>자동 로그인</span>
 			</div>
 			<input type="button" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
 			
 		</div>
 		<div class="forgot-password">
-			<a>비밀번호를 잊어버리셨나요?</a>
+			<a href="searchPassword.jsp">비밀번호를 잊어버리셨나요?</a>
 		</div>
 		<div class="line_through">
 			<span>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectDirDAO">
+	<!-- 프로젝트 조회 맵 -->
+	<resultMap type="project_lookup" id="project_lookup">
+		<id property="lookup_id" column="LOOKUP_ID"/>
+		<result property="project_id" column="PROJECT_NAME"/>
+		<result property="member_id" column="USER_NAME"/>
+		<result property="project_manager" column="PROJECT_MANAGER" />
+		<result property="joindate" column="JOINDATE"/>
+	</resultMap>
+
+	<insert id="insertProjectLookup" parameterType="project_lookup">
+		INSERT INTO project_lookup (lookup_id, project_id, member_id, project_manager)
+		VALUES((select nvl(max(lookup_id), 0) +1 from project_lookup), #{project_id}, #{member_id}, #{project_manager})
+	</insert> 
+</mapper>

@@ -1,9 +1,37 @@
 ul {
 	list-style: none;
 }
-
+a{
+	text-decoration: none;
+	color: #5f5ab9;
+   
+    font-size: 20px;
+}
+body {
+	margin: 0 auto;
+	background-color: #e4e6e9;
+	border: 1px solid #eaeaea;
+	font-size: 16px;
+	overflow-y: scroll;
+	min-width: 670px;
+}
 div.btn-register {
-	text-align: right;
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid  #e7e8e9;
+	background-color: #f2f3f4;
+	height: 70px;
+	
+}
+.header-left-menu{
+	display:flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left:100px;
+	
 }
 
 div.btn-register a {
@@ -13,8 +41,8 @@ div.btn-register a {
 	line-height: 44px;
 	font-size: 16px;
 	font-weight: bold;
-	border: 1px solid #5f5ab9;
-	background: #5f5ab9;
+	margin-right:100px;
+	color:#5f5ab9;
 }
 
 .signup_box {
@@ -37,7 +65,18 @@ div.btn-register a {
 	background-color: #cccdd0;
 	cursor:pointer;
 }
+.auto-login-div{
+	margin-bottom: 20px;
+	color:#5f5ab9;
+	display:flex;
+	flex-direction:row;
+	
+}
 
+.auto-login-div input{
+	width:20px;
+	height:20px;
+}
 .line_through span {
 	display: block;
 	position: absolute;
@@ -91,6 +130,7 @@ div.btn-register a {
 
 .forgot-password {
 	text-align: center;
+	margin-top: 8px;
 }
 
 .signup_box ul li {

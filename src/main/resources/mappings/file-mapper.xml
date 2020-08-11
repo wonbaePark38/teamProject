@@ -2,43 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="#package.#mapperinterfacename">
-	<select id="getProjectList" resultType="등록한 vo"> 
-		로그인한 사람의 이메일로 가입되어있는 프로젝트 셀렉트 코드
+<mapper namespace="FileDAO">
+	<resultMap id="fileList" type="file" >
+		<result property="fileName" column="writeform1_file_name" />
+		<result property="projectId" column="writeform1_project_id" />
+		<result property="writer" column="writeform1_writer"/>
+		<result property="writeDate" column="writeform1_regdate"/>
+	</resultMap>
+	
+<select id="getProjectList" resultMap="fileList" parameterType="String"> 
+		
+select writeform1_project_id,writeform1_file_name,writeform1_writer, writeform1_regdate 
+	from (select writeform1_project_id, writeform1_file_name, writeform1_writer, writeform1_regdate from mainpage_article1 
+			where writeform1_file_name is not null
+	union
+		  select writeform2_project_id, writeform2_file_name, writeform2_writer, writeform2_regdate from mainpage_article2 
+			where writeform2_file_name is not null
+	union
+		  select writeform3_project_id, writeform3_file_name, writeform3_writer, writeform3_regdate from mainpage_article3 
+			where writeform3_file_name is not null)
+	where writeform1_project_id
+	in (select distinct projectid from wonbaetest where member_email=#{loginUser})
+</select> 
+	
+	
+		
+	<select id="getFileList" resultType="file">
+		SELECT * FROM  WHERE 1=1
+		<if test="searchFileCondition=='TITLE'">
+			AND title writer '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchFileCondition=='CONTENT'">
+			AND content fileName '%'||#{searchKeyword}||'%'
+		</if>
+		ORDER BY seq DESC
 	</select>
 	
-	<select id="getFileList" resultType="등록한 vo">
-		SELECT * FROM  WHERE 1=1
-		<if test="searchFileCondition=='TITLE'">
-			AND title writer '%'||#{searchKeyword}||'%'
-		</if>
-		<if test="searchFileCondition=='CONTENT'">
-			AND content file_name '%'||#{searchKeyword}||'%'
-		</if>
-		ORDER BY seq DESC
-		UNION
-		
-		SELECT * FROM  WHERE 1=1
-		<if test="searchFileCondition=='TITLE'">
-			AND title writer '%'||#{searchKeyword}||'%'
-		</if>
-		<if test="searchFileCondition=='CONTENT'">
-			AND content file_name '%'||#{searchKeyword}||'%'
-		</if>
-		ORDER BY seq DESC
-		UNION
-		
-		SELECT * FROM  WHERE 1=1
-		<if test="searchFileCondition=='TITLE'">
-			AND title writer '%'||#{searchKeyword}||'%'
-		</if>
-		<if test="searchFileCondition=='CONTENT'">
-			AND content file_name '%'||#{searchKeyword}||'%'
-		</if>
-		ORDER BY seq DESC
-		
-		
-	</select>
+	
 
-
+ <!-- <update id="updateCategory" parameterType="category_m">
+      UPDATE CATEGORY 
+      <set>
+           <if test="CATEGORY_NAME != null">CATEGORY_NAME=#{CATEGORY_NAME},</if>
+           <if test="CATEGORY_USE != null">CATEGORY_USE=#{CATEGORY_USE},</if>
+       </set>
+      WHERE CATEGORY_NO=#{CATEGORY_NO}
+   </update>
+ -->
 </mapper>

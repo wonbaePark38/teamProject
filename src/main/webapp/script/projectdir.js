@@ -10,18 +10,7 @@ function contentset(){
     document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';
 }
 
-// 프로젝트 정렬
-/*$(document).ready(function(){
-	$('#projectdir_set').attr('action','content.do').submit();
-});*/
-$(document).on('click','.projectdir_set',function(){
-	var click_this = $(this).attr('id');
-	if(click_this == 'project_total'){
-		$('#projectdir_set').attr('action','content.do').submit();
-	} else if(click_this == 'project_manager'){
-		$('#projectdir_set').attr('action','content_manager.do').submit();
-	} 
-});
+
 
 // 프로젝트 즐겨찾기
 $(document).on('click','#star_btn',function(){
@@ -31,10 +20,3 @@ $(document).on('click','#star_btn',function(){
 		$(this).attr('class','title_btn');
 	}
 });
-
-
-
-// 보관함 추가하기
-function new_locker(){
-	$('#new_locker').attr('action','newlocker.do').submit();
-}
