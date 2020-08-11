@@ -23,13 +23,15 @@ function acyncMovePage1(url) {
 		url : url,
 		async : true,
 		type : "POST",
-		dataType : "html",
-		cache : false
+		dataType : "text",
+		cache : false,
 	};
-
 	$.ajax(ajaxOption).done(function(data) {
 		// Contents 영역 삭제
 		$('#ch2').children().remove();
+		
+		
+		
 		// Contents 영역 교체
 		$('#ch2').html(data);
 	});

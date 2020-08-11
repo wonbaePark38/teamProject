@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,12 +24,10 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
-<script>
+<!-- <script>
 	$(document).ready(function(){
-		alert(${param.name});
 		var return_url = "mainPage.jsp";
 		<c:if test="${pageContext.request.method=='POST'}">
-			return_url = "content.jsp"
 		// ajax option
 			return_url = "content.jsp"
 			var ajaxOption = {
@@ -47,12 +45,8 @@
 				$('#ch2').html(data);
 			});
 		</c:if>
-		<c:if test="${pageContext.request.method=='GET'}">
-		
-		</c:if>
-		// ajax option
 	});
-</script>
+</script> -->
 
 </head>
 <style>
@@ -180,6 +174,7 @@
 			<!--// leftcontainer-->
 
 			<div style="display: inline-block;" id="ch2">
+			<jsp:include page="content.jsp"></jsp:include>
 				<div class="contents" style="float: left;">
 					<!-- 센터영역 -->
 
@@ -518,7 +513,8 @@
 			</div>
 			<!--end center-->
 		</div>
-
+		<form id="new_locker" method="post" >
+			<input type="hidden" name="dnjswhdzld">	
 		<div id="new_plus" style="display: none; z-index: 1001;">
 			<div
 				style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px 10px 10px 10px; background-color: white;">
@@ -528,17 +524,15 @@
 						href="#" style="float: right" onclick="new_plus()">X</a>
 				</div>
 				<div style="margin: auto; padding: 20px;">
-					<input type="text" placeholder="보관함명 입력(최대50자)"
-						style="width: 90%; height: 30px;">
+					<input type="text" placeholder="보관함명 입력(최대50자)" name="lockername" style="width: 90%; height: 30px;">
 					<div style="padding-top: 15px">
-						<input class="box_btn" type="button" value="취소"
-							onclick="new_plus()"> <input
-							style="background-color: aqua;" class="box_btn" type="button"
-							value="만들기">
+						<input class="box_btn" type="button" value="취소" onclick="new_plus()">
+						<input style="background-color: aqua;" class="box_btn" type="button" value="만들기">
 					</div>
 				</div>
 			</div>
 		</div>
+		</form>
 
 
 	</div>

@@ -16,7 +16,9 @@ public class ProjectDirVO {
 	private String username;
 	private int projectmanager;
 	private Date joindate;
-
+	
+	
+	
 	public int getProjectnum() {
 		return projectnum;
 	}

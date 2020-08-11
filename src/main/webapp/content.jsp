@@ -2,19 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link href="css/write_completion.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
 <script src="script/projectdir.js"></script>
-<script type="text/javascript">
-</script>
-
-</head>
-<body>
+<script type="text/javascript"></script>
 	<form id="projectdir_set">
 		<!-- 계정 데이터 -->
 		<input type="hidden" name="username" value="dnjswhdzld">
@@ -47,7 +38,7 @@
 					</div>
 				</div>
 					
-				<h4>참여중</h4>
+				<h4 class="content_type">참여중</h4>
 			</div>
 			
 			<div class="컨텐츠"  style="z-index: 1; display: inline-block; width: 100%;">
@@ -67,5 +58,3 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>

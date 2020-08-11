@@ -16,6 +16,7 @@ public class ProjectDirController {
 	@Autowired
 	private ProjectDirService projectDirService;
 	
+	// 새 프로젝트 생성하기
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
 	public String projectDirInsert(ProjectDirVO vo) {
 		projectDirService.insertProjectDir(vo);
@@ -23,6 +24,7 @@ public class ProjectDirController {
 		return "mainPage.jsp";
 	}
 	
+	// 가입된 모든 프로젝트 보기
 	@RequestMapping(value="/content.do", method = RequestMethod.GET)
 	public String getProjectDirTotalList(ProjectDirVO vo, Model model) {
 		vo.setUsername("dnjswhdzld");
@@ -30,6 +32,7 @@ public class ProjectDirController {
 		return "content.jsp";
 	}
 	
+	// 내가 관리자인 프로젝트만 보기
 	@RequestMapping(value="/content_manager.do")
 	public String getProjectDirManagerList(ProjectDirVO vo, Model model) {
 		vo.setUsername("dnjswhdzld");
@@ -37,6 +40,7 @@ public class ProjectDirController {
 		return "content.jsp";
 	}
 	
+	// 테스트 인덱스 페이지
 	@RequestMapping(value="/start.do", method = RequestMethod.POST)
 	public String getStart() {
 		return "mainPage.jsp";
@@ -44,5 +48,12 @@ public class ProjectDirController {
 	@RequestMapping(value="/start.do", method = RequestMethod.GET)
 	public String getStart2() {
 		return "content.jsp";
+	}
+	
+	// 보관함 추가하기
+	@RequestMapping(value="/newlocker.do", method = RequestMethod.POST)
+	public String newlocker() {
+		
+		return "mainPage.jsp";
 	}
 }

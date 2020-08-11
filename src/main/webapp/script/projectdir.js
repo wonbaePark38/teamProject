@@ -11,6 +11,9 @@ function contentset(){
 }
 
 // 프로젝트 정렬
+/*$(document).ready(function(){
+	$('#projectdir_set').attr('action','content.do').submit();
+});*/
 $(document).on('click','.projectdir_set',function(){
 	var click_this = $(this).attr('id');
 	if(click_this == 'project_total'){
@@ -28,3 +31,10 @@ $(document).on('click','#star_btn',function(){
 		$(this).attr('class','title_btn');
 	}
 });
+
+
+
+// 보관함 추가하기
+function new_locker(){
+	$('#new_locker').attr('action','newlocker.do').submit();
+}
