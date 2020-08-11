@@ -25,3 +25,17 @@
   });
 
   
+  $('.submit_a').click(function(e) {
+//	  $.ajax({
+//		  type:"POST",
+//		  dataType: "JSON",
+//		  url:"writeform5.do",
+//		  data
+//	  });
+	  
+	  console.log($('#todoContent_external').contents());
+	  
+	  
+  });
+  
+  

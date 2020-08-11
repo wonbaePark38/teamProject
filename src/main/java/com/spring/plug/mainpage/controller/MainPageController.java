@@ -88,10 +88,6 @@ public class MainPageController {
 
 		System.out.println(vo.toString());
 
-		StringTokenizer st = new StringTokenizer(vo.getWriteForm5_content_str(), ",");
-
-		arr = new String[st.countTokens()];
-		
 		
 		
 		

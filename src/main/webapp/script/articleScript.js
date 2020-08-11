@@ -1,14 +1,14 @@
-
-function writeForm_submit5() {
-		var form5 = document.getElementById('writeForm5_form');
-		
-		
-		
-		var writeform5_JSON =  JSON.stringify(todo_arr);
-		
-		console.log(writeform5_JSON);
-		//form5.submit();
-	}
+//
+//function writeForm_submit5() {
+//		var form5 = document.getElementById('writeForm5_form');
+//		
+//		
+//		
+//		var writeform5_JSON =  JSON.stringify(todo_arr);
+//		
+//		console.log(writeform5_JSON);
+//		//form5.submit();
+//	}
 
 //헤더 채팅영역
 function headerChatting(){
