@@ -49,7 +49,7 @@ public class Article1VO {
    private String writeForm4_latlng;
 
    private String writeForm5_title;
-   private List writeForm5_content_str;
+   private List<String> writeForm5_content_str;
    private String writeForm5_content;
    private Date writeForm5_date;
    private String writeForm5_worker;
@@ -350,20 +350,27 @@ public class Article1VO {
       this.img_size = img_size;
    }
 
-   public List getWriteForm5_content_str() {
-      return writeForm5_content_str;
-   }
+	
+   
+	public List getWriteForm5_content_str() {
+	return writeForm5_content_str;
+	}
+	
+	public void setWriteForm5_content_str(List writeForm5_content_str) {
+		this.writeForm5_content_str = writeForm5_content_str;
+	}
 
-   public void setWriteForm5_content_str(List writeForm5_content_str) {
-      this.writeForm5_content_str = writeForm5_content_str;
-   }
+	@Override
+	public String toString() {
+		return "writeForm5_content_str = " + writeForm5_content_str;
+	}
 
-   @Override
-   public String toString() {
-      return "Article1VO [writeForm5_title=" + writeForm5_title + ", writeForm5_content_str=" + writeForm5_content_str
-            + "]";
-   }
+	
+   
+   
+   
 
+	
    
    
    

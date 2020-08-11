@@ -4,11 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -83,14 +90,20 @@ public class MainPageController {
       return "mainPage.jsp";
    }
 
-   @RequestMapping(value = "/writeform5.do")
+   @RequestMapping(value = "/writeform5.do", method=RequestMethod.POST)
+   @ResponseBody
    public String article5Insert(Article1VO vo) throws IOException {
-
-      System.out.println(vo.toString());
-
-      
-      
-      
+	   
+	   System.out.println(vo);
+	   
+	   
+//	 System.out.println(vo.toString());
+//     System.out.println("list : " + vo.getWriteForm5_content_str().size());
+//     
+//     for(int i = 0; i < vo.getWriteForm5_content_str().size(); i++) {
+//    	 System.out.println("list : " + vo.getWriteForm5_content_str().get(i));
+//     }
+     
       
       return "mainPage.jsp";
    }
