@@ -4,8 +4,6 @@
 
 <mapper namespace="ArticleDAO">
 
-
-
    <insert id="articleInsert" useGeneratedKeys="true" parameterType="article1VO">
    INSERT INTO mainpage_article
    (
@@ -96,12 +94,4 @@
    )
    </insert>
 
-
-
-
-
-   
-   
-   
-   
 </mapper>
