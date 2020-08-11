@@ -24,10 +24,42 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
+<script>
+	$(document).ready(function(){
+		var return_url = "mainPage.jsp";
+		<c:if test="${pageContext.request.method=='POST'}">
+			return_url = "content.jsp"
+		// ajax option
+			return_url = "content.jsp"
+			var ajaxOption = {
+				url : return_url,
+				async : true,
+				type : "POST",
+				dataType : "html",
+				cache : false
+			};
+	
+			$.ajax(ajaxOption).done(function(data) {
+				// Contents 영역 삭제
+				$('#ch2').children().remove();
+				// Contents 영역 교체
+				$('#ch2').html(data);
+			});
+		</c:if>
+		<c:if test="${pageContext.request.method=='GET'}">
+		
+		</c:if>
+		// ajax option
+	});
+</script>
+
 </head>
 <style>
 </style>
+
 <body>
+
+
 	<div class="mainWrap">
 		<!-- Navigation -->
 		<div class="headerContainer">

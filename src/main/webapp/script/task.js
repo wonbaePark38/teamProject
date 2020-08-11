@@ -30,6 +30,8 @@ function acyncMovePage1(url) {
 	$.ajax(ajaxOption).done(function(data) {
 		// Contents 영역 삭제
 		$('#ch2').children().remove();
+		
+		
 		// Contents 영역 교체
 		$('#ch2').html(data);
 	});
