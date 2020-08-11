@@ -1,22 +1,51 @@
 package com.spring.plug.file.vo;
 
+import java.util.Date;
+
 public class FileVO {
 	private String searchFileCondition;
 	private String searchFileKeyword;
 	private String projectId;
-	private String fileType;
 	private String fileName;
+	private String fileType;
 	private String writer;
-	//private String user;
+	private Date writeDate;
+	private String targetProject;
+	private String user;
+	private String loginUser;
 	
-	/*public String getUser() {
+	public String getLoginUser() {
+		return loginUser;
+	}
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
+	}
+	public String getUser() {
 		return user;
 	}
 	public void setUser(String user) {
 		this.user = user;
-	}*/
+	}
+	public String getTargetProject() {
+		return targetProject;
+	}
+	public void setTargetProject(String targetProject) {
+		this.targetProject = targetProject;
+	}
+	public Date getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
+	}
 	public String getSearchFileCondition() {
 		return searchFileCondition;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public void setSearchFileCondition(String searchFileCondition) {
 		this.searchFileCondition = searchFileCondition;
@@ -24,12 +53,7 @@ public class FileVO {
 	public String getSearchFileKeyword() {
 		return searchFileKeyword;
 	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFile_name(String fileName) {
-		this.fileName = fileName;
-	}
+	
 	public String getWriter() {
 		return writer;
 	}
@@ -55,8 +79,11 @@ public class FileVO {
 	@Override
 	public String toString() {
 		return "FileVO [searchFileCondition=" + searchFileCondition + ", searchFileKeyword=" + searchFileKeyword
-				+ ", projectName=" + projectId + ", fileType=" + fileType + "]";
+				+ ", projectId=" + projectId + ", fileName=" + fileName + ", fileType=" + fileType + ", writer="
+				+ writer + ", writeDate=" + writeDate + "]";
 	}
+	
+	
 	
 	
 }

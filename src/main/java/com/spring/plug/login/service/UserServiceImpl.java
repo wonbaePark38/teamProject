@@ -34,5 +34,12 @@ public class UserServiceImpl implements UserService{
 		System.out.println("소셜 로그인 회원 추가 호출");
 		userDAO.addSocialUser(vo);
 	}
+
+
+	@Override
+	public UserVO checkEmail(UserVO vo) {
+		System.out.println("이메일체크 서비스임플 호출");
+		return userDAO.checkEmail(vo);
+	}
 	
 }

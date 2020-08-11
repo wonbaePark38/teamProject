@@ -3,11 +3,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="FileDAO">
-
+	<resultMap id="fileList" type="file" >
+		<result property="fileName" column="writeform1_file_name" />
+		<result property="projectId" column="writeform1_project_id" />
+		<result property="writer" column="writeform1_writer"/>
+		<result property="writeDate" column="writeform1_regdate"/>
+	</resultMap>
 	
-	<select id="getProjectList" resultType="file" parameterType="String"> 
-		SELECT DISTINCT PROJECTID FROM WONBAETEST WHERE MEMBER_EMAIL=#{user}
-	</select> 
+<select id="getProjectList" resultMap="fileList" parameterType="String"> 
+		
+select writeform1_project_id,writeform1_file_name,writeform1_writer, writeform1_regdate 
+	from (select writeform1_project_id, writeform1_file_name, writeform1_writer, writeform1_regdate from mainpage_article1 
+			where writeform1_file_name is not null
+	union
+		  select writeform2_project_id, writeform2_file_name, writeform2_writer, writeform2_regdate from mainpage_article2 
+			where writeform2_file_name is not null
+	union
+		  select writeform3_project_id, writeform3_file_name, writeform3_writer, writeform3_regdate from mainpage_article3 
+			where writeform3_file_name is not null)
+	where writeform1_project_id
+	in (select distinct projectid from wonbaetest where member_email=#{loginUser})
+</select> 
+	
 	
 		
 	<select id="getFileList" resultType="file">
@@ -20,6 +37,16 @@
 		</if>
 		ORDER BY seq DESC
 	</select>
+	
+	
 
-
+ <!-- <update id="updateCategory" parameterType="category_m">
+      UPDATE CATEGORY 
+      <set>
+           <if test="CATEGORY_NAME != null">CATEGORY_NAME=#{CATEGORY_NAME},</if>
+           <if test="CATEGORY_USE != null">CATEGORY_USE=#{CATEGORY_USE},</if>
+       </set>
+      WHERE CATEGORY_NO=#{CATEGORY_NO}
+   </update>
+ -->
 </mapper>

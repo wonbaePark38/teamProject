@@ -7,6 +7,7 @@
 		<result property="name" column="MEMBER_NAME" />
 		<result property="email" column="MEMBER_EMAIL" />
 		<result property="password" column="MEMBER_PASSWORD" />
+		<result property="socialCompare" column="MEMBER_ISSOCIAL"/>
 	</resultMap>
 	
 	<select id="getUser" resultMap="getUser"
@@ -30,4 +31,8 @@
 		VALUES
 		((select nvl(max(MEMBER_ID), 0)+1 from MEMBERINFO), #{email}, #{name}, SYSDATE, #{socialCompare})
 	</insert>
+	
+	<select id="checkEmail" resultMap="getUser" parameterType="user">
+		SELECT MEMBER_EMAIL, MEMBER_ISSOCIAL FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
+	</select>
 </mapper>
