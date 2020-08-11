@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,11 +21,38 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-    
+<script>
+function signupok(){
+	  alert('회원가입이 완료되었습니다.\n로그인 후 사용가능합니다.');
+}
+
+function sameEmail(){
+	  alert('아이디 또는 이메일이 이미 사용 중 입니다.\n다른 아이디 또는 이메일을 사용해 주세요.');
+	  location.href="#signup";
+}
+
+function signupsubmit() {
+	document.signup.submit();
+}
+function loginsubmit() {
+	document.login.submit();
+}
+
+</script>  
   </head>
 
 
   <body class="login">
+  	<c:if test="${status eq 'signupok'}">
+		<script type="text/javascript">
+		signupok();
+		</script>
+	</c:if>
+	<c:if test="${status eq 'sameEmail'}">
+		<script type="text/javascript">
+		sameEmail();
+		</script>
+	</c:if>
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
@@ -32,16 +60,16 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form >
+            <form action="adminLogin.do" name="login" method="post">
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" />
+                <input type="text" name="username" class="form-control" placeholder="Username" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" />
+                <input type="password" name="password" class="form-control" placeholder="Password" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="admin-Main.jsp">Log in</a>
+                <a class="btn btn-default submit"  onclick="javascript:loginsubmit()">Log in</a>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
@@ -66,17 +94,16 @@
             <form action="adminSignup.do" name="signup" method="post">
               <h1>Create Account</h1>
               <div>
-                <input type="text" name="username" class="form-control" placeholder="Username" value="${ AdminVO.adminUsername }" />
+                <input type="text"  name="username" class="form-control" placeholder="Username" />
               </div>
               <div>
-                <input type="email" name="email" class="form-control" placeholder="Email" value="${ AdminVO.adminEmail }"/>
+                <input type="email"  name="email" class="form-control" placeholder="Email" />
               </div>
               <div>
-                <input type="password" name="password" class="form-control" placeholder="Password" value="${ AdminVO.adminPassword }" />
+                <input type="password"  name="password" class="form-control" placeholder="Password" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="javascript:signup.submit();">Submit</a>
-                <input class="btn btn-default submit" type="submit">Submit</a>
+                <a class="btn btn-default submit" onclick="javascript:signupsubmit()">Submit</a>
               </div>
 
               <div class="clearfix"></div>
