@@ -94,7 +94,7 @@ public class MainPageController {
    @ResponseBody
    public String article5Insert(Article1VO vo) throws IOException {
 	   
-	   System.out.println(vo);
+	   System.out.println(vo.toString());
 	   
 	   
 //	 System.out.println(vo.toString());

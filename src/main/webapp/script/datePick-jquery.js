@@ -37,7 +37,7 @@
   
   $('.submit_a').click(function(e) {
 	  
-	  
+	  alert('a');
 
 	  
 	  var test =  $('#todoContent_external').contents().each(function(i,e) { 
@@ -73,22 +73,20 @@
 	  //writeForm5_content_str = JSON.stringify(todo_arr);
 	  
 	  console.log( writeForm5_content_str);
-	  var test = JSON.stringify(todo_arr);
-	  alert(todo_arr);
 	  
-	  $.ajax({
-		  type:"POST",
-		  dataType: "JSON",
-		  url:"writeform5.do",
-		  data : todo_arr,
-		  success:function(e){
-			  alert(e);
-		  },
-		  error:function(e){
-			  alert(e);
-		  }
-		  
-	  });
+//	  $.ajax({
+//		  type:"POST",
+//		  dataType: "JSON",
+//		  url:"writeform5.do",
+//		  data : todo_arr,
+//		  success:function(e){
+//			  alert(e);
+//		  },
+//		  error:function(e){
+//			  alert(e);
+//		  }
+//		  
+//	  });
 	  
 	  todo_arr = null;
   });
