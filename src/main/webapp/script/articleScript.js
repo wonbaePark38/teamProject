@@ -363,6 +363,7 @@ function headerOption(){
       //할일 입력창 만들기
       var inputTag = document.createElement('input');
       inputTag.setAttribute('type','text');
+      inputTag.setAttribute('class','todo_content');
       inputTag.setAttribute('placeholder','할일 입력');
       inputTag.setAttribute('style','border-style: none; width: 70%; margin-left: 3px; margin-right: 5.5px;');
       inputTag.setAttribute('oninput','writeForm5_content_arr(this,'+startDivNum+')');
@@ -378,7 +379,7 @@ function headerOption(){
 
          var todoDatePickInput = document.createElement('input');
          todoDatePickInput.setAttribute('type','text');
-         todoDatePickInput.setAttribute('class','todo_date_input_external');
+         todoDatePickInput.setAttribute('class','todo_date');
          todoDatePickInput.setAttribute('placeholder','일자');
          todoDatePickInput.setAttribute('readOnly','true');
          todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
@@ -401,7 +402,7 @@ function headerOption(){
         var todoWorkerPickInput = document.createElement('input');
         todoWorkerPickInput.setAttribute('type','text');
         todoWorkerPickInput.setAttribute('id',workerInputId);
-        todoWorkerPickInput.setAttribute('class','todo_worker_input_external');
+        todoWorkerPickInput.setAttribute('class','todo_worker');
         todoWorkerPickInput.setAttribute('placeholder','인원');
         todoWorkerPickInput.setAttribute('readOnly','true');
         todoWorkerPickInput.setAttribute('style','width: 91%; margin-left: 0px;');

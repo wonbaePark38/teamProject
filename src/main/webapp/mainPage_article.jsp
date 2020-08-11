@@ -603,13 +603,13 @@
                   <!-- 할일 -->
                   <form method="get" action="writeform5.do" id="writeForm5_form">
                   
-                     <input type="hidden" name="form_name" value="todoWrite">
+                     <input type="hidden" id="formName" name="form_name" value="todoWrite">
                      <input type="hidden" name="writeForm5_content_str" id="todo_content_value">
                      
                      <div class="todo_form" id="todoForm_div">
                         <!-- 할일 제목 -->
                         <div>
-                           <input placeholder="할일제목을 입력해 주세요" name="writeForm5_title"
+                           <input id="todo_title" placeholder="할일제목을 입력해 주세요" name="writeForm5_title"
                               style="width: 80%; border-style: none;">
                         </div>
                         <!-- //할일 제목 -->
