@@ -18,11 +18,18 @@ public class SignupController {
 	private SignupService signupService;
 	
 	@RequestMapping(value="/signupPost.do", method=RequestMethod.POST)
-	public String joinPost(@ModelAttribute("vo") UserVO vo) throws Exception {
+	public ModelAndView joinPost(@ModelAttribute("vo") UserVO vo, ModelAndView mav) {
 		System.out.println("currnent join member: " + vo.getEmail().toString());
 		vo.setAuthStatus("0");
-		signupService.insertMember(vo);
-		return "newlogin.jsp";
+		try {
+			signupService.insertMember(vo);
+			mav.setViewName("newlogin.jsp");
+		} catch (Exception e) {
+			System.out.println("중복 이메일");
+			mav.addObject("status", "sameEmail");
+			mav.setViewName("signup.jsp");
+		}
+		return mav;
 	}
 	
 	@RequestMapping(value="/signConfirm.do", method=RequestMethod.GET)

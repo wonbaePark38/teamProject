@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,8 +54,6 @@ function validate() {
         alert("약관에 동의해 주세요.");
         return false;
     }
-    
-    alert("회원가입이 완료되었습니다.");
 }
 
 function check(re, me, message) {
@@ -66,9 +65,19 @@ function check(re, me, message) {
     me.focus();
     //return false;
 }
+
+function sameEmail(){
+	  alert('이미 사용중인 이메일 입니다.\n다른 이메일을 사용해 주세요.');
+}
 </script>
 </head>
 <body>
+	<c:if test="${status eq 'sameEmail'}">
+		<script type="text/javascript">
+		sameEmail();
+		</script>
+		
+	</c:if>
 
 	<div class="sign-up-wrap">
 		<form action="signupPost.do" name="join" method="post" onsubmit="return validate();">
