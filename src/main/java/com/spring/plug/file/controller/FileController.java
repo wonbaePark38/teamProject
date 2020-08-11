@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,14 @@ public class FileController {
 	@ResponseBody
 	public List<FileVO> getFileList(FileVO vo,HttpSession session,Model model, @RequestParam Map<String,String> param) {
 		//유저정보 세션으로 세팅 session.get~~ 후 vo에 유저 셋팅
+		System.out.println("현재 접속 사용자 " + session.getAttribute("userEmail"));
 		if(param.get("project") == null || param.get("project").equals("전체 프로젝트")) {
 			System.out.println("전체프로젝트 선택");
 			vo.setTargetProject("2");
 		}else {
 			vo.setTargetProject(param.get("project"));
 		}
-		//vo.setUser("a");
+		
 		vo.setLoginUser("a");
 		
 		

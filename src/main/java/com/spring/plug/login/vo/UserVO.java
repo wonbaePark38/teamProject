@@ -13,7 +13,21 @@ public class UserVO {
 	private String salt;
 	private String authKey;
 	private String authStatus;
+	private String passwordAuthKey;
+	private String passwordAuthStatus;
 	
+	public String getPasswordAuthStatus() {
+		return passwordAuthStatus;
+	}
+	public void setPasswordAuthStatus(String passwordAuthStatus) {
+		this.passwordAuthStatus = passwordAuthStatus;
+	}
+	public String getPasswordAuthKey() {
+		return passwordAuthKey;
+	}
+	public void setPasswordAuthKey(String passwordAuthKey) {
+		this.passwordAuthKey = passwordAuthKey;
+	}
 	public String getEmailCheck() {
 		return emailCheck;
 	}

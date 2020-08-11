@@ -3,20 +3,34 @@ ul {
 }
 a{
 	text-decoration: none;
+	color: #5f5ab9;
+   
+    font-size: 20px;
+}
+body {
+	margin: 0 auto;
+	background-color: #e4e6e9;
+	border: 1px solid #eaeaea;
+	font-size: 16px;
+	overflow-y: scroll;
+	min-width: 670px;
 }
 div.btn-register {
 	
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	justify-content: space-between;
 	border-bottom: 1px solid  #e7e8e9;
 	background-color: #f2f3f4;
+	height: 70px;
+	
 }
 .header-left-menu{
 	display:flex;
 	flex-direction: row;
 	align-items: center;
-
+	margin-left:100px;
 	
 }
 
@@ -27,8 +41,8 @@ div.btn-register a {
 	line-height: 44px;
 	font-size: 16px;
 	font-weight: bold;
-	
-	
+	margin-right:100px;
+	color:#5f5ab9;
 }
 
 .signup_box {
@@ -53,9 +67,9 @@ div.btn-register a {
 }
 .auto-login-div{
 	margin-bottom: 20px;
-	color:blue;
+	color:#5f5ab9;
 	display:flex;
-	flex-direction:column;
+	flex-direction:row;
 	
 }
 

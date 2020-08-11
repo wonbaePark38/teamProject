@@ -64,7 +64,7 @@
 				</li>
 			</ul>
 			<div class="auto-login-div">
-				<input type="checkbox">&nbsp;<span>자동 로그인</span>
+				<input type="checkbox">&nbsp;&nbsp;<span>자동 로그인</span>
 			</div>
 			<input type="button" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
 			

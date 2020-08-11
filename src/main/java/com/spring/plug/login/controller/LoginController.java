@@ -10,10 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.plug.common.util.MailUtils;
 import com.spring.plug.common.util.SHA256Util;
+import com.spring.plug.common.util.TempKey;
 import com.spring.plug.login.service.UserServiceImpl;
 import com.spring.plug.login.vo.UserVO;
 //회원가입을 직접 한 사람들이 로그인 시도 했을때의 컨트롤러
@@ -86,8 +89,18 @@ public class LoginController{
 		UserVO check = userService.checkEmail(vo);
 		
 		if(check != null && check.getSocialCompare().equals("N")) {
-			System.out.println("이메일 전송 ㄱㄱ");
+			/*이메일 전송 로직*/
+			String authkey = new TempKey().getKey(50, false);//auth키 생성
+			vo.setPasswordAuthKey(authkey);//vo에 셋팅
+			
+			userService.updatePasswordAuthKey(vo); //db에 auth 추가
+			try {
+				userService.sendPasswordCheckEmail(vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} //e메일 보내고 db에 status 저장하는 서비스
 			vo.setEmailCheck("true");
+			
 		}else{
 			System.out.println("일치하는 이메일이 없음");
 			vo.setEmailCheck("false");
@@ -96,7 +109,11 @@ public class LoginController{
 		return vo;
 	}
 	
-	
-	
-
+	@RequestMapping("/passlogin")
+	public ModelAndView loginView(UserVO vo,ModelAndView mav, @RequestParam("email") String email) {
+		System.out.println("리턴 이메일"+ email );
+		
+		mav.setViewName("newlogin.jsp");
+		return mav;
+	}
 }
