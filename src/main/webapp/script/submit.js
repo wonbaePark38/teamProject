@@ -32,9 +32,3 @@ function writeForm_submit4() {
 	form4.submit();
 }
 
-function writeForm_submit5() {
-	var form5 = document.getElementById('writeForm5_form');
-	
-	
-	form5.submit();
-}

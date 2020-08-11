@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,88 +19,84 @@ import com.spring.plug.mainpage.article.service.ArticleService;
 @Controller
 public class MainPageController {
 
-   @Autowired
-   private ArticleService service;
+	@Autowired
+	private ArticleService service;
 
-   
-   @RequestMapping(value = "/mainpage.do")
-   public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
-	   
-	   return mav;
-   }
-   
-   @RequestMapping(value = "/writeform1.do")
-   public String article1Insert(Article1VO vo) throws IOException{
+	private String[] arr;
+	private int count;
 
-      MultipartFile uploadFile = vo.getWriteForm_file();
-      System.out.println("controller" + vo.toString());
-      
-      
-      if(!uploadFile.isEmpty()) {
-         String fileName = uploadFile.getOriginalFilename();
-         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-      }
-      
-      
-      service.insertArticle(vo);
-      
-      return "mainPage.jsp";
-   }
-   
-   
-   
-   @RequestMapping(value="/writeform2.do")
-   public String article2Insert(Article1VO vo) throws IOException{
-      
-      MultipartFile uploadFile = vo.getWriteForm_file();
-      System.out.println("controller" + vo.toString());
-      
-      
-      if(!uploadFile.isEmpty()) {
-         String fileName = uploadFile.getOriginalFilename();
-         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-      }
-      
-      
-      service.insertArticle(vo);
-      return "mainPage.jsp";
-   }
-   
-   
-   @RequestMapping(value = "/writeform3.do")
-   public String article3Insert(Article1VO vo) throws IOException{
-      
-	   MultipartFile uploadFile = vo.getWriteForm_file();
-	   
-	   if(!uploadFile.isEmpty()) {
-	         String fileName = uploadFile.getOriginalFilename();
-	         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-	      }
-	   
-	   service.insertArticle(vo);
-      return "mainPage.jsp";
-   }
-   
-   
-   @RequestMapping(value = "/writeform4.do")
-   public String article4Insert(Article1VO vo) throws IOException{
-	   
-	   service.insertArticle(vo);
-	   return "mainPage.jsp";
-   }
-   
-   @RequestMapping(value = "/writeform5.do")
-	public String article5Insert(ArticleTodoArrVO article) throws IOException {
+	@RequestMapping(value = "/mainpage.do")
+	public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
 
-		Article1VO vo = new Article1VO();
-		
-		
-		
-		
-		
+		return mav;
+	}
 
-		 service.insertArticle(vo);
+	@RequestMapping(value = "/writeform1.do")
+	public String article1Insert(Article1VO vo) throws IOException {
+
+		MultipartFile uploadFile = vo.getWriteForm_file();
+		System.out.println("controller" + vo.toString());
+
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
+		}
+
+		service.insertArticle(vo);
+
 		return "mainPage.jsp";
 	}
-   
+
+	@RequestMapping(value = "/writeform2.do")
+	public String article2Insert(Article1VO vo) throws IOException {
+
+		MultipartFile uploadFile = vo.getWriteForm_file();
+		System.out.println("controller" + vo.toString());
+
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
+		}
+
+		service.insertArticle(vo);
+		return "mainPage.jsp";
+	}
+
+	@RequestMapping(value = "/writeform3.do")
+	public String article3Insert(Article1VO vo) throws IOException {
+
+		MultipartFile uploadFile = vo.getWriteForm_file();
+
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
+		}
+
+		service.insertArticle(vo);
+		return "mainPage.jsp";
+	}
+
+	@RequestMapping(value = "/writeform4.do")
+	public String article4Insert(Article1VO vo) throws IOException {
+
+		service.insertArticle(vo);
+		return "mainPage.jsp";
+	}
+
+	@RequestMapping(value = "/writeform5.do")
+	public String article5Insert(Article1VO vo) throws IOException {
+
+		System.out.println(vo.toString());
+
+		StringTokenizer st = new StringTokenizer(vo.getWriteForm5_content_str(), ",");
+
+		arr = new String[st.countTokens()];
+		
+		
+		
+		
+		
+		return "mainPage.jsp";
+	}
+
 }

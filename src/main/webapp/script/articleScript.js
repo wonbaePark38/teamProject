@@ -1,4 +1,15 @@
 
+function writeForm_submit5() {
+		var form5 = document.getElementById('writeForm5_form');
+		
+		
+		
+		var writeform5_JSON =  JSON.stringify(todo_arr);
+		
+		console.log(writeform5_JSON);
+		//form5.submit();
+	}
+
 //헤더 채팅영역
 function headerChatting(){
   document.getElementById('header_chat_div').style.display=(document.getElementById('header_chat_div').style.display=='block') ? 'none' : 'block';
@@ -281,21 +292,18 @@ function headerOption(){
 
 	var todo_param = "";
   
-	var todo_content_value;
-	var todo_date_value;
-	var todo_worker_value;
-  
-  
-	var todo_arr = [];
-	
 	var todo_seq;
 	
 	
-  
+	
+	
+	
 	function writeForm5_content_arr(obj,seq) {
 		
 		var obj_value = obj.value;
-		todo_arr[seq-1][0] = obj_value;
+		//todo_arr[seq-1][0] = obj_value;
+		
+		
 		
 		console.log(obj_value);
 	}
@@ -303,7 +311,7 @@ function headerOption(){
 	function writeForm5_date_arr(obj,seq) {
 		
 		var obj_value = obj.value;
-		todo_arr[seq-1][1] = obj_value;
+		//todo_arr[seq-1][1] = obj_value;
 		
 		console.log(obj_value);
 	}
@@ -311,7 +319,7 @@ function headerOption(){
 	//리스트에서 작업자 선택
     function selectWorker(seq,name,id,div){
     	
-      todo_arr[seq-1][2] = name;
+      //todo_arr[seq-1][2] = name;
     	
 		
 	  document.getElementById(id).value = name;
@@ -319,20 +327,20 @@ function headerOption(){
     }
     
   function todoAppend(){
-	  var todo_content = ["","",""];
-	  todo_arr.push(todo_content);
 	  
-	  console.log(todo_arr);
 	  var seq_num = 'seq_'+startDivNum;
 	  
-	  var todo_seq_input = document.createElement('input');
-	  todo_seq_input.setAttribute('type','hidden');
-	  todo_seq_input.setAttribute('id',seq_num);
-	  todo_seq_input.setAttribute('value',startDivNum);
+//	  var todo_seq_input = document.createElement('input');
+//	  todo_seq_input.setAttribute('type','hidden');
+//	  todo_seq_input.setAttribute('id',seq_num);
+//	  todo_seq_input.setAttribute('value',startDivNum);
 	  
-	  document.getElementById('todoContent_external').appendChild(todo_seq_input);
+//	  document.getElementById('todoContent_external').appendChild(todo_seq_input);
 	  
-	  todo_seq = document.getElementById(seq_num).value;
+//	  todo_seq = document.getElementById(seq_num).value;
+	  
+	  document.getElementById('todoContent_external').childNodes
+	  
 	  
       // id 만들기
       todo_div = divIdNumCreate('todo_div');
