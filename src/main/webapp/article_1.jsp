@@ -1,33 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="css/write_completion.css">
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-	
-	
-	function content_load(thisevent){	/* 원배형  코드*/
-
-		  var node = $(thisevent).parent().next();
-		  var presentDisplay = node.css('display');
-		 
-		  if(presentDisplay == 'block'){
-		    
-		    node.css('display','none');
-		  }
-		  else{
-		    node.css("display","block");
-		  }
-	}
-	
-</script>
-</head>
-<body style="background-color: gray;">
 	
 	<div class="post_idx">
 		<!-- 탑 -->
@@ -110,9 +83,3 @@
 		</div>
 		<!-- 댓글 -->
 	</div>
-
-
-
-	<!-- 일반글 -->
-</body>
-</html>

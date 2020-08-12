@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,7 +34,7 @@ public class MainPageController {
 	   List<Article1VO> articleList = service.selectArticle(vo);
 	   
 	   for (int i = 0; i < articleList.size(); i++) {
-		System.out.println(articleList.get(i).toString());
+		System.out.println("select : " + articleList.get(i).toString());
 	   }
 	   
 	   mav.addObject("articleList",articleList);
@@ -54,7 +55,7 @@ public class MainPageController {
 
       service.insertArticle(vo);
 
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
    @RequestMapping(value = "/writeform2.do")
@@ -69,7 +70,7 @@ public class MainPageController {
       }
 
       service.insertArticle(vo);
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
    @RequestMapping(value = "/writeform3.do")
@@ -83,14 +84,14 @@ public class MainPageController {
       }
 
       service.insertArticle(vo);
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
    @RequestMapping(value = "/writeform4.do")
    public String article4Insert(Article1VO vo) throws IOException {
 
       service.insertArticle(vo);
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
    @RequestMapping(value = "/writeform5.do")
@@ -102,7 +103,7 @@ public class MainPageController {
 	  
 	  service.insertArticle(vo);
 	  
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
 }

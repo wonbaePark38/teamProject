@@ -25,6 +25,10 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
+<script type="text/javascript">
+
+	
+</script>
 </head>
 <style>
 </style>
@@ -382,7 +386,7 @@
 
 					<!-- //게시글 넣는곳 -->
 
-
+					
 
 				</div>
 				<!-- //센터영역-->

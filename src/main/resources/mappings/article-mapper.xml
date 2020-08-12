@@ -44,7 +44,7 @@
 	</resultMap>
 	
 	<select id="articleSelectAll" resultMap="articleResult">
-	SELECT * FROM mainpage_article
+	SELECT * FROM mainpage_article ORDER BY article_id DESC
 	
 	</select>
 

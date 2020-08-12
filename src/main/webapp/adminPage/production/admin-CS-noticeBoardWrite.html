@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -20,6 +18,7 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
     <link href="css/maps/myCss.css" rel="stylesheet">
+
   </head>
 
   <body class="nav-md">
@@ -38,24 +37,24 @@
                   
                   <li><a><i class="fa fa-edit"></i> 회원<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin-User-management.jsp">회원 관리</a></li>
-                      <li><a href="admin-User-searchUser.jsp">회원 검색</a></li>
-                      <li><a href="admin-User-log.jsp">회원 로그</a></li>
+                      <li><a href="admin-User-management.html">회원 관리</a></li>
+                      <li><a href="admin-User-searchUser.html">회원 검색</a></li>
+                      <li><a href="admin-User-log.html">회원 로그</a></li>
                     </ul>
                   </li>
 
 
                   <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin-Project-article.jsp">게시글</a></li>
-                      <li><a href="admin-Project-project.jsp">프로젝트</a></li>
+                      <li><a href="admin-Project-article.html">게시글</a></li>
+                      <li><a href="admin-Project-project.html">프로젝트</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-bar-chart-o"></i> 매출 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin-Sales-sales.jsp">매출</a></li>
-                      <li><a href="admin-Sales-saleLog.jsp">결제내역</a></li>
+                      <li><a href="admin-Sales-sales.html">매출</a></li>
+                      <li><a href="admin-Sales-saleLog.html">결제내역</a></li>
                     </ul>
                   </li>
 
@@ -63,9 +62,9 @@
 
                   <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
-                      <li><a href="admin-CS-QA.jsp">1:1 문의</a></li>
-                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
+                      <li><a href="admin-CS-FAQ.html">FAQ 관리</a></li>
+                      <li><a href="admin-CS-QA.html">1:1 문의</a></li>
+                      <li><a href="admin-CS-notify.html">신고접수</a></li>
                     </ul>
                   </li>                  
 
@@ -77,7 +76,7 @@
               
 
             </div>
-            <!--  //side bar  -->
+            <!-- /sidebar menu -->
           </div>
         </div>
 
@@ -87,38 +86,62 @@
         <div class="right_col" role="main">
             <div style="width: 100%;">
                 <div>
-                  <span><h1><strong>고객 문의 QA</strong></h1></span>
+                  <span><h1><strong>공지사항</strong></h1></span>
                   <hr>
                 </div>
 
-                <div id="admin_cs_qa_contentArea">
-                    <table>
-                        <tr>
-                            <th class="admin_cs_qa_contentArea_no">번호</th>
-                            <th class="admin_cs_qa_contentArea_writer">작성자</th>
-                            <th class="admin_cs_qa_contentArea_title">제목</th>
-                            <th class="admin_cs_qa_contentArea_regDate">작성일</th>
-                        </tr>
-                        <!-- forEach -->
-                        <tr onclick="location.href='admin-CS-Board.html'">
-                            <td class="admin_cs_qa_contentArea_no"><a>123456789</a></td>
-                            <td class="admin_cs_qa_contentArea_writer"><a>홍길동임</a></td>
-                            <td class="admin_cs_qa_contentArea_title"><a>ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ</a></td>
-                            <td class="admin_cs_qa_contentArea_regDate"><a>2020/02/02</a></td>
-                        </tr>
-                        <!-- //forEach -->
-                    </table>
-                    <div id="admin_cs_qa_contentArea_search">
-                        <select>
-                            <option>글번호</option>
-                            <option>작성자</option>
-                            <option>글제목</option>
-                        </select>
-                        <input type="text">
-                        <button>검색</button>
-                    </div>
+                <div id="admin_cs_notice_contentArea">
+
+                    <form>
+                        <!-- 제목 입력줄 -->
+                        <div style="width: 100%;">
+                            <div id="admin_cs_notice_contentArea_title">
+                                <span>제목 : </span>
+                            </div>
+                            
+                            <div id="admin_cs_notice_contentArea_title_input">
+                                <input type="text">
+                            </div>
+
+                            <div id="admin_cs_notice_contentArea_fileUpload">
+                                <span id="admin_cs_notice_contentArea_fileUpload_img"></span>
+                            </div>
+
+                            <div id="admin_cs_notice_contentArea_picUpload">
+                                <span id="admin_cs_notice_contentArea_picUpload_img"></span>
+                            </div>
+                        </div>
+                        <!-- //제목 입력줄 -->
+
+                        <hr>
+
+                        <!-- 공지사항 내용작성 -->
+                        <div>
+                            <div id="admin_cs_notice_contentArea_divText" contenteditable="true">
+
+
+                            </div>
+                        </div>
+                        <!-- //공지사항 내용작성 -->
+
+                        <!-- 파일첨부 -->
+                        <div>
+
+                        </div>
+                        <!-- //파일첨부 -->
+                        <!-- 이미지첨부 -->
+                        <div>
+                            
+                        </div>
+                        <!-- //이미지첨부 -->
+                        <hr>
+                        <div id="admin_cs_notice_contentArea_lower_btn">
+                            <a href="admin-CS-FAQ.html">취소</a>
+                            <a>등록</a>
+                        </div>
+                    </form>
+
                 </div>
-                
             </div>
         </div>
         <!-- //page content -->

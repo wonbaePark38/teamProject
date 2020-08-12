@@ -126,7 +126,7 @@ function headerOption(){
   }
 
   // work status select
-  function request(){
+  function request(obj){
     document.getElementById('request').style.backgroundColor = '#4aaefb';
     document.getElementById('doing').style.backgroundColor = 'white';
     document.getElementById('feedback').style.backgroundColor = 'white';
@@ -134,6 +134,7 @@ function headerOption(){
     document.getElementById('postpone').style.backgroundColor = 'white';
     
     document.getElementById('work_status').value = 'request';
+    obj.style.color = 'white';
   }
 
   function doing(){

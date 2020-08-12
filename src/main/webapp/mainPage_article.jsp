@@ -254,7 +254,7 @@
                         
                         <!-- 업무명 -->
                         <div id="work_form_title">
-                           <input type="text" name="workForm3_title" placeholder="업무명을 입력해 주세요" style="width: 80%; border-style: none;">
+                           <input type="text" name="writeForm3_title" placeholder="업무명을 입력해 주세요" style="width: 80%; border-style: none;">
                         </div>
                         <!-- //업무명 -->
                         <hr>
@@ -264,10 +264,10 @@
                            <!-- 상태 선택 테이블 -->
                            <div id="status_select_div">
                            
-                              <input type="hidden" name="writeForm3_status" id="work_status">
+                              <input type="hidden" name="writeForm3_status" id="work_status" value="request">
                            
                               <div style="display: inline-block; width: 16%;">
-                                 <span id="request" onclick="request()" style="background-color: #4aaefb;">요청</span>
+                                 <span id="request" onclick="request(this)" style="background-color: #4aaefb;">요청</span>
                               </div>
                               <div style="display: inline-block; width: 16%;">
                                  <span id="doing" onclick="doing()">진행</span>
@@ -602,7 +602,7 @@
 
 
                   <!-- 할일 -->
-                  <form method="get" action="writeform5.do" id="writeForm5_form">
+                  <form method="post" action="writeform5.do" id="writeForm5_form">
                   
                      <input type="hidden" name="form_name" value="todoWrite">
                      <input type="hidden" name="writeForm5_content" id="todo_content_value">
@@ -637,7 +637,7 @@
                               <select style="vertical-align: middle; height: 27px;">
                                  <option></option>
                                  <option></option>
-                              </select> <a class="submit_a">올리기</a>
+                              </select> <a id="writeForm5_submit" class="submit_a">올리기</a>
                               
                            </div>
                         </div>
@@ -734,8 +734,674 @@
       <!-- 게시글 출력하는 곳  -->
       <div id="article_show" style=" width: 100%; margin-top: 10px;">
       
-	      
-      	
+	     <c:forEach var="list" items="${articleList }">
+	     	
+	     	<c:set var="form_name" value="${ list.form_name}" />
+	     	
+	     	<c:choose>
+	     		
+	     		
+	     		
+	     		<c:when test="${form_name eq 'nomalWrite'}" >
+	     			<div class="post_idx">
+						<!-- 탑 -->
+						<div class="top_writer">
+							<div class="photo" style="float: left;">
+								<!-- 스크립트로 실행 -->
+								<img id="user_profile" style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+							</div>
+							<div style="padding-left: 30px; float: left;">
+								<span>${list.writer }</span><br> <span style="font-size: 10px;">${list.regDate }</span><span id="공개범위설정"> <img></span>
+							</div>
+							<div style="margin: -10px 0px 0px 10px;">
+								<div style="float: right; padding-left: 10px;">
+									<a id="set_icon"></a>
+								</div>
+								<div style="float: right;">
+									<a id="pin_icon"></a>
+								</div>
+							</div>
+						</div>
+						<!-- 탑 -->
+				
+						<!-- 글내용 -->
+						<div class="post">
+						<!-- 일반글 -->
+							<!-- 택스트박스 -->
+							<div class="div_text_write" contenteditable="false">
+								<p style="font-size: 15px;">${list.writeForm1_content }</p>
+							</div>
+							
+							
+							<div style="text-align:right; padding-right: 10px;">
+								<span style="font-size:12px;">댓글 n 개</span>&nbsp;<span style="font-size:12px;">읽음 n 명</span>
+							</div>
+						<!-- 일반글 -->
+						</div>
+						<!-- 글내용 -->
+				
+						<!-- 좋아요 담아두기 -->
+				
+						<div class="bottom_lay" style="height: 40px;">
+							<ul class="bottom_list">
+								<li><a id="like_icon">좋아요</a></li>
+								<li><a id="input_btn_icon">댓글작성</a></li>
+								<li><a id="bringIcon">담아두기</a></li>
+							</ul>
+						</div>
+						<!-- 글내용 -->
+						
+<!-- 						댓글 작성 -->
+						<div class="remark_div">
+							
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile_remark">
+							</div>
+							<div class="remark_setting">
+								<span>수정</span><em>|</em><span>삭제</span>
+							</div>
+							<div class="remark_data">
+								<strong>이름</strong>
+								<span>${list.regDate }</span>
+								<a id="remark_like_icon">좋아요</a>
+								<pre>댓글 내용</pre>			
+							</div>
+							
+						</div>
+<!-- 						댓글 작성 -->
+						
+<!-- 						댓글 -->
+						<div class="" style="position: relative; padding-bottom: 10px;">
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+							</div>
+							<div class="remarkcntn">
+								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+								
+							</div>
+							<a class="remark_upload"></a>
+							
+						</div>
+<!-- 						댓글 -->
+					</div>
+	     		</c:when>
+	     		
+	     		<c:when test="${form_name eq 'nomalWrite2.0'}" >
+	     			<div class="post_idx">
+						<!-- 탑 -->
+						<div class="top_writer">
+							<div class="photo" style="float: left;">
+								<!-- 스크립트로 실행 -->
+								<img id="user_profile" style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+							</div>
+							<div style="padding-left: 30px; float: left;">
+								<span>${list.writer }</span><br> <span style="font-size: 10px;">${list.regDate }</span><span id="공개범위설정"> <img></span>
+							</div>
+							<div style="margin: -10px 0px 0px 10px;">
+								<div style="float: right; padding-left: 10px;">
+									<a id="set_icon"></a>
+								</div>
+								<div style="float: right;">
+									<a id="pin_icon"></a>
+								</div>
+							</div>
+						</div>
+						<!-- 탑 -->
+				
+						<!-- 글내용 -->
+						<div class="post">
+						<!-- 일반글 -->
+							<div class="post_title">
+								<strong>${list.writeForm2_title }</strong>
+							</div>
+							<!-- 택스트박스 -->
+							<div class="div_text_write" contenteditable="false">
+								<p style="font-size: 15px;">${list.writeForm2_content }</p>
+							</div>
+							
+							<!-- 지도 찍는곳 -->
+							<div id="writeForm2_map">
+							
+							
+							</div>
+							
+							<!-- 이미지 -->
+							
+							<div id="post_images">
+								
+							</div>
+							<!-- 파일 -->
+							
+							<div id="post_files">
+								
+							</div>
+							
+							<div style="text-align:right; padding-right: 10px;">
+								<span style="font-size:12px;">댓글 n 개</span>&nbsp;<span style="font-size:12px;">읽음 n 명</span>
+							</div>
+						<!-- 일반글 -->
+						
+					
+						
+						
+						</div>
+						<!-- 글내용 -->
+				
+						<!-- 좋아요 담아두기 -->
+				
+						<div class="bottom_lay" style="height: 40px;">
+							<ul class="bottom_list">
+								<li><a id="like_icon">좋아요</a></li>
+								<li><a id="input_btn_icon">댓글작성</a></li>
+								<li><a id="bringIcon">담아두기</a></li>
+							</ul>
+						</div>
+						<!-- 글내용 -->
+						
+						<!-- 						댓글 작성 -->
+						<div class="remark_div">
+							
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile_remark">
+							</div>
+							<div class="remark_setting">
+								<span>수정</span><em>|</em><span>삭제</span>
+							</div>
+							<div class="remark_data">
+								<strong>이름</strong>
+								<span>${list.regDate }</span>
+								<a id="remark_like_icon">좋아요</a>
+								<pre>댓글 내용</pre>			
+							</div>
+							
+						</div>
+<!-- 						댓글 작성 -->
+						
+<!-- 						댓글 -->
+						<div class="" style="position: relative; padding-bottom: 10px;">
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+							</div>
+							<div class="remarkcntn">
+								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+								
+							</div>
+							<a class="remark_upload"></a>
+							
+						</div>
+<!-- 						댓글 -->
+					</div>
+	     		
+	     		</c:when>
+	     		
+	     		
+	     		<c:when test="${form_name eq 'workWrite'}">
+	     			<div class="post_idx">
+						<!-- 탑 -->
+						<div class="top_writer">
+							<div class="photo" style="float: left;">
+								<!-- 스크립트로 실행 -->
+								<img id="user_profile" style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+							</div>
+							<div style="padding-left: 30px; float: left;">
+								<span>${list.writer }</span><br> <span style="font-size: 10px;">${list.regDate }</span><span id="공개범위설정"> <img></span>
+							</div>
+							<div style="margin: -10px 0px 0px 10px;">
+								<div style="float: right; padding-left: 10px;">
+									<a id="set_icon"></a>
+								</div>
+								<div style="float: right;">
+									<a id="pin_icon"></a>
+								</div>
+							</div>
+						</div>
+						<!-- 탑 -->
+				
+						<!-- 글내용 -->
+						<div class="post">
+						<!-- 일반글 -->
+							<div class="post_title">
+								<strong>${list.writeForm2_title }</strong>
+							</div>
+							
+							
+							<!-- 업무 내용 들어가는 곳 -->
+							<div class="div_text_write" contenteditable="false">
+								<!-- 업무명 -->
+								
+		                        <div id="work_form_title">
+		                           <input type="text" readonly="readonly" value="${list.writeForm3_title }" style="width: 80%; border-style: none;">
+		                        </div>
+		                        <!-- //업무명 -->
+		                        <hr>
+		                        <!-- 상태 -->
+		                        <div class="work_form_status">
+		                           <label id="work_status_img"></label>
+		                           
+		                           <!-- 상태 선택 테이블 -->
+		                           <div id="status_select_div">
+		                           
+		                              <input type="hidden" id="work_status">
+		                           
+		                              <div style="display: inline-block; width: 16%;">
+		                                 <span id="request" onclick="request()" style="background-color: #4aaefb;">요청</span>
+		                              </div>
+		                              <div style="display: inline-block; width: 16%;">
+		                                 <span id="doing" onclick="doing()">진행</span>
+		                              </div>
+		                              <div style="display: inline-block; width: 16%;">
+		                                 <span id="feedback" onclick="feedback()">피드백</span>
+		                              </div>
+		                              <div style="display: inline-block; width: 16%;">
+		                                 <span id="complete" onclick="complete()">완료</span>
+		                              </div>
+		                              <div style="display: inline-block; width: 16%;">
+		                                 <span id="postpone" onclick="postpone()">보류</span>
+		                              </div>
+		                           </div>
+		                           <!-- //상태 선택 테이블 -->
+		
+		                        </div>
+		                        <!-- //상태 -->
+		                        
+		                        <hr>
+		                        
+		                        <!-- 담당자 -->
+		                        <div class="work_form_manager">
+<!-- 		                           <div> -->
+<!-- 		                              <label id="work_worker_img"></label> -->
+<!-- 		                              <div style="display: inline-block;"> -->
+<!-- 		                                 <input type="text" id="work_worker_select" onclick="work_workerSelect()" placeholder="담당자 추가"> -->
+<!-- 		                              </div> -->
+		                              
+<!-- 		                              <div id="worker_select_div"> -->
+<!-- 		                                 <ul style="list-style: none; border:1px solid black; background-color: white; padding-left: 0px;"> -->
+<!-- 		                                    forEach -->
+<!-- 		                                    <li><a onclick="add_worker(this)">테스트1</a></li> -->
+<!-- 		                                    <li><a onclick="add_worker(this)">테스트2</a></li> -->
+<!-- 		                                    <li><a onclick="add_worker(this)">테스트3</a></li> -->
+<!-- 		                                    //forEach -->
+<!-- 		                                 </ul> -->
+<!-- 		                              </div> -->
+		                              
+<%-- 		                              <input type="hidden" id="work_workers" value="${list.writeForm3_workersName }"> --%>
+		                              
+<!-- 		                              <div id="worker_append_div" style="margin-left: 26px; margin-top: 5px"></div> -->
+<!-- 		                           </div> -->
+		                        </div>
+		                        <!-- //담당자 -->
+		
+		                        <hr>
+		                        
+		                        <!-- 시작일 -->
+		                           <div>
+		                              <div>
+		                                 <label id="work_start_img"></label>
+		                                 <div style="display: inline;">
+		                                    <input type="text" placeholder="시작일" readonly="readonly" value="${list.writeForm3_start_date }" style="border-style: none;">
+		                                 </div>
+		
+		                              </div>
+		                           </div>
+		                           <!-- 시작일 -->
+		
+		                           <hr>
+		
+		                           <!-- 마감일 -->
+		                           <div>
+		                              <div>
+		                                 <label id="work_end_img"></label>
+		                                 <div style="display: inline;">
+		                                    <input type="text" placeholder="마감일" readonly="readonly" value="${list.writeForm3_end_date }" style="border-style: none;">
+		                                 </div>
+		
+		                              </div>
+		                           </div>
+		                           <!-- 마감일 -->
+		
+		                           <hr>
+		
+		                           <!-- 달성도 -->
+		                           <div>
+		                              <div>
+		                                 <label id="work_progress_img"></label>
+		                                 <input type="hidden" id="work_progress" value="0">
+		                                 <div style="display: inline;">
+		                                    <progress id="progress" value="${list.writeForm3_progress }" max="100"  onclick="progressBar()"></progress>
+		                                 </div>
+		                              </div>
+		                           </div>
+		                           <!-- 달성도 -->
+		
+		                           <hr>
+		
+		                           <!-- 우선순위 -->
+		                           <div>
+		                              <div>
+		                                 <label id="work_order_img"></label>
+		                                 <div style="width: 40%; display: inline-block;">
+		                                    <input type="text"  placeholder="우선순위 선택" readonly="readonly" value="${list.writeForm3_order }" onclick="orderSelectDiv()" style="border-style: none;">
+		                                 </div>
+		                              </div>
+		                           </div>
+		                           <!-- 우선순위 -->
+		                           <div id="order_div">
+		                              <div>
+		                                 <ul>
+		                                    <li><a onclick="orderSelect(this)">낮음</a></li>
+		                                    <li><a onclick="orderSelect(this)">보통</a></li>
+		                                    <li><a onclick="orderSelect(this)">높음</a></li>
+		                                    <li><a onclick="orderSelect(this)">긴급</a></li>
+		                                 </ul>
+		                              </div>
+		                           </div>
+		                           <hr>
+		
+		
+		                       
+		
+		                        <!-- 내용 -->
+		                        <textarea class="div_text_write" readonly="readonly" style="border: none;">${list.writeForm3_content }</textarea>
+		                        
+		                        <!-- //내용 -->
+							
+							</div>
+							<!-- //업무 내용 들어가는 곳 -->
+							
+							<!-- 이미지 -->
+							
+							<div id="post_images">
+								
+							</div>
+							<!-- 파일 -->
+							
+							<div id="post_files">
+								
+							</div>
+							
+							<div style="text-align:right; padding-right: 10px;">
+								<span style="font-size:12px;">댓글 n 개</span>&nbsp;<span style="font-size:12px;">읽음 n 명</span>
+							</div>
+						<!-- 일반글 -->
+						
+					
+						
+						
+						</div>
+						<!-- 글내용 -->
+				
+						<!-- 좋아요 담아두기 -->
+				
+						<div class="bottom_lay" style="height: 40px;">
+							<ul class="bottom_list">
+								<li><a id="like_icon">좋아요</a></li>
+								<li><a id="input_btn_icon">댓글작성</a></li>
+								<li><a id="bringIcon">담아두기</a></li>
+							</ul>
+						</div>
+						<!-- 글내용 -->
+						
+						<!-- 						댓글 작성 -->
+						<div class="remark_div">
+							
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile_remark">
+							</div>
+							<div class="remark_setting">
+								<span>수정</span><em>|</em><span>삭제</span>
+							</div>
+							<div class="remark_data">
+								<strong>이름</strong>
+								<span>${list.regDate }</span>
+								<a id="remark_like_icon">좋아요</a>
+								<pre>댓글 내용</pre>			
+							</div>
+							
+						</div>
+<!-- 						댓글 작성 -->
+						
+<!-- 						댓글 -->
+						<div class="" style="position: relative; padding-bottom: 10px;">
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+							</div>
+							<div class="remarkcntn">
+								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+								
+							</div>
+							<a class="remark_upload"></a>
+							
+						</div>
+<!-- 						댓글 -->
+					</div>
+	     		
+	     		</c:when>
+	     		
+	     		<c:when test="${form_name eq 'scheWrite'}">
+	     			<div class="post_idx">
+						<!-- 탑 -->
+						<div class="top_writer">
+							<div class="photo" style="float: left;">
+								<!-- 스크립트로 실행 -->
+								<img id="user_profile">
+							</div>
+							<div style="padding-left: 30px; float: left;">
+								<span>${list.writer }</span><br> <span style="font-size: 10px;">${list.regDate }</span><span id="공개범위설정"> <img></span>
+							</div>
+							<div style="margin: -10px 0px 0px 10px;">
+								<div style="float: right; padding-left: 10px;">
+									<a id="set_icon"></a>
+								</div>
+								<div style="float: right;">
+									<a id="pin_icon"></a>
+								</div>
+							</div>
+						</div>
+						<!-- 탑 -->
+				
+						<!-- 글내용 -->
+						<div class="post">
+						
+						<!-- 일정 -->
+							<div class="works" style="border: 1px solid #eaeaea;">
+								<!-- 글제목 -->
+								<dl class="work_calendar">
+									<dt class="work_calendar_header" >
+										<span class="work_month">mm월</span><br>
+										<strong class="work_day">dd일</strong>
+									</dt>
+									<dd class="wc_title">제목</dd>
+									<dd class="wc_date">일정</dd>
+								</dl>
+								<!-- 글제목 -->
+								
+								<!-- 지도 -->
+								<div class="work_map" >
+									<span class="map_icon"></span>
+									<span style="margin-left: 25px;">검색 위치</span>
+									<a style="margin-left: 5px;" href="#">지도보기</a>
+								</div>						
+								<div class="work_memo">
+									<span class="memo_icon"></span>
+									<span style="margin-left: 25px;">메모 내용</span>
+								</div>
+								<div class="work_alarm">
+									<span class="alarm_icon"></span>
+									<span style="margin-left: 25px;">알림</span>
+									
+								</div>
+								<!-- 지도 -->
+							</div>
+				
+						<!-- 일정 -->
+						
+						<div style="text-align:right; padding-right: 10px;">
+								<span style="font-size:12px;">댓글 n 개</span>&nbsp;<span style="font-size:12px;">읽음 n 명</span>
+							</div>
+						</div>
+						
+				
+				
+						<!-- 좋아요 담아두기 -->
+				
+						<div class="bottom_lay" >
+							<ul class="bottom_list">
+								<li><a id="like_icon">좋아요</a></li>
+								<li><a id="input_btn_icon">댓글작성</a></li>
+								<li><a id="bringIcon">담아두기</a></li>
+							</ul>
+						</div>
+						<!-- 글내용 -->
+						
+						<!-- 						댓글 작성 -->
+						<div class="remark_div">
+							
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile_remark">
+							</div>
+							<div class="remark_setting">
+								<span>수정</span><em>|</em><span>삭제</span>
+							</div>
+							<div class="remark_data">
+								<strong>이름</strong>
+								<span>${list.regDate }</span>
+								<a id="remark_like_icon">좋아요</a>
+								<pre>댓글 내용</pre>			
+							</div>
+							
+						</div>
+<!-- 						댓글 작성 -->
+						
+<!-- 						댓글 -->
+						<div class="" style="position: relative; padding-bottom: 10px;">
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+							</div>
+							<div class="remarkcntn">
+								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+								
+							</div>
+							<a class="remark_upload"></a>
+							
+						</div>
+<!-- 						댓글 -->
+					</div>
+	     		
+	     		</c:when>
+	     		
+	     		<c:when test="${form_name eq 'todoWrite'}">
+	     			<div class="post_idx">
+						<!-- 탑 -->
+						<div class="top_writer">
+							<div class="photo" style="float: left;">
+								<!-- 스크립트로 실행 -->
+								<img id="user_profile">
+							</div>
+							<div style="padding-left: 30px; float: left;">
+								<span>${list.writer }</span><br> <span style="font-size: 10px;">${list.regDate }</span><span id="공개범위설정"> <img></span>
+							</div>
+							<div style="margin: -10px 0px 0px 10px;">
+								<div style="float: right; padding-left: 10px;">
+									<a id="set_icon"></a>
+								</div>
+								<div style="float: right;">
+									<a id="pin_icon"></a>
+								</div>
+							</div>
+						</div>
+						<!-- 탑 -->
+				
+						<!-- 글내용 -->
+						<div class="post">
+						
+							<div style=" width: 100%; padding:10px 10px 10px 10px; border:1px solid lightgray;">
+							
+								<div style="width: 100%; height: 50px;">
+									<div>
+										<span style="display: inline-block; width: 250px;">${list.writeForm5_title }</span>
+										<span style="display: inline-block; width:80px; font-size: 11px;">100%</span>
+										<span style="display: inline-block;  font-size: 12px;">완료 n건 / 전체 n건</span>
+									</div>
+									<div>
+										<progress value="20" max="100" style="width: 100%;"></progress>
+									</div>
+								</div>
+								
+								<!--  forEach  -->
+								
+								<hr>
+								
+								<div style="height: 50px;">
+									<div style="display: inline-block; vertical-align:middle; width: 5%;">
+										<a style="display: block; width: 18px; height: 18px; background: url(images/btn_todo_checkbox.png) no-repeat 0 0;"></a>
+									</div>
+									<div style="display: inline-block; vertical-align:middle; width: 94%; height: 40px;">
+										<span style="vertical-align: middle; width: 370px; display: inline-block;">할일 내용</span>
+										<img src="images/empty_photo_s.png" style="display: inline-block; vertical-align: middle;">
+									</div>
+								</div>
+								
+								<!--  //forEach  -->
+								
+							</div>
+						
+						<div style="text-align:right; padding-right: 10px;">
+								<span style="font-size:12px;">댓글 n 개</span>&nbsp;<span style="font-size:12px;">읽음 n 명</span>
+							</div>
+						</div>
+						
+				
+				
+						<!-- 좋아요 담아두기 -->
+				
+						<div class="bottom_lay" >
+							<ul class="bottom_list">
+								<li><a id="like_icon">좋아요</a></li>
+								<li><a id="input_btn_icon">댓글작성</a></li>
+								<li><a id="bringIcon">담아두기</a></li>
+							</ul>
+						</div>
+						<!-- 글내용 -->
+						
+						<!-- 						댓글 작성 -->
+						<div class="remark_div">
+							
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile_remark">
+							</div>
+							<div class="remark_setting">
+								<span>수정</span><em>|</em><span>삭제</span>
+							</div>
+							<div class="remark_data">
+								<strong>이름</strong>
+								<span>${list.regDate }</span>
+								<a id="remark_like_icon">좋아요</a>
+								<pre>댓글 내용</pre>			
+							</div>
+							
+						</div>
+<!-- 						댓글 작성 -->
+						
+<!-- 						댓글 -->
+						<div class="" style="position: relative; padding-bottom: 10px;">
+							<div class="photo" style="float: left; padding-left: 10px;">
+								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+							</div>
+							<div class="remarkcntn">
+								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+								
+							</div>
+							<a class="remark_upload"></a>
+							
+						</div>
+<!-- 						댓글 -->
+					</div>
+	     		</c:when>
+	     		
+	     		
+	     		
+	     	</c:choose>
+	     </c:forEach>			
       		
       </div>
       <!-- 게시글 출력하는 곳 -->

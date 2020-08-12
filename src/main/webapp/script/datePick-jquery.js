@@ -36,7 +36,7 @@
 //  private Date regDate;
 //  private String writer;
   
-  $('.submit_a').click(function(e) {
+  $('#writeForm5_submit').click(function(e) {
 	  
 
 	  
@@ -53,19 +53,37 @@
 //				  'writeForm5_worker' : $(e).find('.todo_worker').val()
 //		  } 
 		  
-		  const content = $(e).find('.todo_content').val();
-		  const date = $(e).find('.todo_date').val();
-		  const worker = $(e).find('.todo_worker').val();
-		
+		  var todo_title = $('#todo_title').val();
+		  
+		  if(todo_title == null || todo_title == ''){
+			  $('#todo_title').val('none');
+		  }
+		  
+		  var content = $(e).find('.todo_content').val();
+		  var date = $(e).find('.todo_date').val();
+		  var worker = $(e).find('.todo_worker').val();
+		  
+		  
+		  if(content == '' || content == null){
+			  content = 'none';
+		  }
+		  if(date == '' || date == null){
+			  date = 'none';
+		  }
+		  if(worker == '' || worker == null){
+			  worker = 'none';
+		  }
+		  
+		  
 		  
 		  todo_content_arr.push(content);
 		  todo_date_arr.push(date);
 		  todo_worker_arr.push(worker);
 		  
 		  
-		  console.log(i,$(e).find('.todo_content').val());
-		  console.log(i,$(e).find('.todo_date').val());
-		  console.log(i,$(e).find('.todo_worker').val());
+		  console.log(i,content);
+		  console.log(i,date);
+		  console.log(i,worker);
 		  
 		  
 		  
