@@ -43,6 +43,17 @@ function loginsubmit() {
 
 
   <body class="login">
+  	<c:if test="${checkLogin eq 'false'}">
+		<script type="text/javascript">
+			alert('비밀번호가 일치하지 않습니다.');
+		</script>
+	</c:if>
+	<c:if test="${checkId eq 'false'}">
+		<script type="text/javascript">
+			alert('아이디가 존재하지 않습니다.\n회원가입 후 이용해 주세요.');
+			location.href = "#signup";
+		</script>
+	</c:if>
   	<c:if test="${status eq 'signupok'}">
 		<script type="text/javascript">
 		signupok();
