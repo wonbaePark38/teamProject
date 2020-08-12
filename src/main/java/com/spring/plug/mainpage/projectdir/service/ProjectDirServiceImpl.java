@@ -16,12 +16,12 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	
 	@Override
 	public void insertProjectDir(ProjectDirVO vo) {
-		projectDirDAO.projectDirInsert(vo);
+		projectDirDAO.insertProjectDir(vo);
 	}
 
 	@Override
 	public void insertProjectLookup(ProjectDirVO vo) {
-		projectDirDAO.projectLookup(vo);
+		projectDirDAO.insertProjectLookup(vo);
 	}
 	
 	@Override
@@ -40,5 +40,33 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo) {
 		return projectDirDAO.getProjectDirManagerList(vo);
 	}
+
+
+	
+	// project locker
+
+	@Override
+	public void insertProjectLocker(ProjectDirVO vo) {
+		projectDirDAO.insertProjectLocker(vo);
+	}
+
+	@Override
+	public void updateProjectFavorites(ProjectDirVO vo) {
+		projectDirDAO.projectDirFavorites(vo);
+		
+	}
+
+	@Override
+	public void updateProjectHide(ProjectDirVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateProjectLocker(ProjectDirVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

@@ -10,4 +10,12 @@ public interface ProjectDirService {
 	void getProjectDir(ProjectDirVO vo);
 	List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo);
 	List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo);
+	
+	
+	
+	// project locker
+	void insertProjectLocker(ProjectDirVO vo);
+	void updateProjectFavorites(ProjectDirVO vo);
+	void updateProjectHide(ProjectDirVO vo);
+	void updateProjectLocker(ProjectDirVO vo);
 }

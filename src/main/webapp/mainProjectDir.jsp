@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,13 +26,14 @@
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
 
+<!-- projectdir -->
 <script>
 	$(document).on('click','#main_side',function(){
 		var click_id = $(this).text();
 		if (click_id == '전체') {
 			location.href = "projectdir.do";
 		} else if(click_id == '미보관'){
-			alert('미보관');
+			
 		} else if(click_id == '읽지않음'){
 			alert('읽지않음');
 		} else if(click_id == '즐겨찾기'){
@@ -112,8 +114,8 @@
 				</div>
 				<!--사이드바-->
 				<div class="sidebar">
-					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
-					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">미보관</a> 
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">전체</a>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">미보관</a> 
 					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">읽지않음</a> 
 					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
