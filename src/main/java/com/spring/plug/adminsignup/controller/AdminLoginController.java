@@ -18,6 +18,13 @@ public class AdminLoginController {
 	@Autowired
 	private AdminLoginServiceImpl alService;
 	
+	@RequestMapping(value = "/adminPage/production/adminLogout.do")
+	public ModelAndView logout(ModelAndView mav, HttpSession session) {
+		session.invalidate();
+		mav.setViewName("/adminPage/production/admin-Login.jsp");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/adminPage/production/adminLogin.do", method = RequestMethod.GET)
 	public ModelAndView loginView(AdminVO vo,ModelAndView mav) {
 		mav.setViewName("/adminPage/production/admin-Login.jsp");
@@ -29,9 +36,11 @@ public class AdminLoginController {
 		System.out.println(vo.getUsername());
 		AdminVO dbVO = alService.getSaltById(vo);			
 		System.out.println(dbVO);
+		
 		if(dbVO == null) {
 			System.out.println("아이디 없음");
-			mav.setViewName("redirect:https://www.naver.com");
+			mav.addObject("checkId", "false");
+			mav.setViewName("admin-Login.jsp");
 			return mav;
 		}
 		
@@ -45,11 +54,11 @@ public class AdminLoginController {
 			session.setAttribute("userName", vo.getUsername());
 			mav.addObject("vo", vo);
 			mav.setViewName("admin-Main.jsp");
-			return mav;
 		} else {
 			System.out.println("비번틀림");
+			mav.addObject("checkLogin", "false");
+			mav.setViewName("admin-Login.jsp");
 		}
-		
 		return mav;
 	}
 	
