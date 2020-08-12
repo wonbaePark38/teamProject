@@ -27,12 +27,13 @@ public class ProjectDirDAO {
 	
 	public void projectDirFavorites(ProjectDirVO vo) {
 		sqlSessionTemplate.update("ProjectDirDAO.updateProjectFavorites",vo);
+		System.out.println("favorites DAO");
 	}
 	
 	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo){
 		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotalList",vo);
 	}
 	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo){
-		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirManagerList",vo);
+		return null;
 	}
 }

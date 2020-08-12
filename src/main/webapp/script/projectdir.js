@@ -23,7 +23,6 @@ $(document).on('click','#star_btn',function(){
 	} else {
 		$(this).attr('value','0');
 	}
-	
 	favorites.submit();
 });
 

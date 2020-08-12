@@ -49,22 +49,14 @@ public class ProjectDirController {
 		mav.setViewName("mainProjectDir.jsp");
 		return mav;
 	}
-	// 관리자인 프로젝트만 보기
-	@RequestMapping(value="/projectdir.do")
-	public ModelAndView getProjectDirManagerList(ProjectDirVO vo, ModelAndView mav) {
-		vo.setMember_id(1);
-		vo.setProject_manager(1);
-		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo);
-		mav.addObject("projectDirList",list);
-		mav.setViewName("mainProjectDir.jsp");
-		return mav;
-	}
 
 	// 프로젝트 즐겨찾기
 	@RequestMapping(value = "/projectfavorites.do")
 	public String updateProjectFavorites(ProjectDirVO vo) {
 		vo.setMember_id(1);
-		projectDirService.getProjectDirManagerList(vo);
+		System.out.println(vo.getProject_id());
+		System.out.println(vo.getProject_favorites());
+		projectDirService.updateProjectFavorites(vo);
 		return "projectdir.do";
 	}
 }

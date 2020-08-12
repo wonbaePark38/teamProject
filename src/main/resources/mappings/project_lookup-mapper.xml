@@ -36,23 +36,5 @@
 		USING(project_id)
 		WHERE member_id = #{member_id} 
 	</select>
-	<select id="getProjectDirManagerList" resultType="project_lookup" parameterType="project_lookup">
-		SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, project_manager
-		FROM project_lookup 
-		INNER JOIN 
-		    (
-		    SELECT 
-		    project_id, project_favorites, project_locker, hide_locker, project_name
-		    FROM project_locker 
-		    INNER JOIN(
-		        SELECT 
-		        project_id, project_name 
-		        FROM projectdir
-		        )
-		        USING(project_id)
-		    ) 
-		USING(project_id)
-		WHERE member_id = #{member_id} and project_manager = #{project_manager}
-	</select>
 	 
 </mapper>

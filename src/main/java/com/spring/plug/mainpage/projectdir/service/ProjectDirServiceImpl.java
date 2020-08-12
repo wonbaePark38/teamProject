@@ -38,7 +38,7 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 
 	@Override
 	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo) {
-		return projectDirDAO.getProjectDirManagerList(vo);
+		return null;
 	}
 
 
@@ -53,7 +53,7 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	@Override
 	public void updateProjectFavorites(ProjectDirVO vo) {
 		projectDirDAO.projectDirFavorites(vo);
-		
+		System.out.println("favorites service");
 	}
 
 	@Override
