@@ -54,7 +54,7 @@ public class ProjectDirController {
 	public ModelAndView getProjectDirManagerList(ProjectDirVO vo, ModelAndView mav) {
 		vo.setMember_id(1);
 		vo.setProject_manager(1);
-		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo);
+		List<ProjectDirVO> list = projectDirService.getProjectDirManagerList(vo);
 		mav.addObject("projectDirList",list);
 		mav.setViewName("mainProjectDir.jsp");
 		return mav;
@@ -64,7 +64,7 @@ public class ProjectDirController {
 	@RequestMapping(value = "/projectfavorites.do")
 	public String updateProjectFavorites(ProjectDirVO vo) {
 		vo.setMember_id(1);
-		projectDirService.getProjectDirManagerList(vo);
+		projectDirService.updateProjectFavorites(vo);
 		return "projectdir.do";
 	}
 }

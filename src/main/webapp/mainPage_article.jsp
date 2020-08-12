@@ -1158,9 +1158,9 @@
 							</div>
 							
 						</div>
-<!-- 						댓글 작성 -->
+						<!-- 댓글 작성 -->
 						
-<!-- 						댓글 -->
+						<!-- 댓글 -->
 						<div class="" style="position: relative; padding-bottom: 10px;">
 							<div class="photo" style="float: left; padding-left: 10px;">
 								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
