@@ -527,6 +527,7 @@
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
 <script type="text/javascript" src="script/articleScript.js"></script>
+<script type="text/javascript" src="script/articleSelect.js"></script>
 <script type="text/javascript" src="script/datepicker.js"></script>
 <script type="text/javascript" src="script/datePick-jquery.js"></script>
 
