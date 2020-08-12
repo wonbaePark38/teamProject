@@ -11,16 +11,12 @@ import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.mainpage.article.vo.Article1VO;
-import com.spring.plug.mainpage.article.vo.ArticleTodoArrVO;
 import com.spring.plug.mainpage.article.service.ArticleService;
 
 @Controller
@@ -35,6 +31,14 @@ public class MainPageController {
    @RequestMapping(value = "/mainpage.do")
    public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
 
+	   List<Article1VO> articleList = service.selectArticle(vo);
+	   
+	   for (int i = 0; i < articleList.size(); i++) {
+		System.out.println("select : " + articleList.get(i).toString());
+	   }
+	   
+	   mav.addObject("articleList",articleList);
+	   mav.setViewName("mainPage.jsp");
       return mav;
    }
 
@@ -51,7 +55,7 @@ public class MainPageController {
 
       service.insertArticle(vo);
 
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
    @RequestMapping(value = "/writeform2.do")
@@ -66,7 +70,7 @@ public class MainPageController {
       }
 
       service.insertArticle(vo);
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
    @RequestMapping(value = "/writeform3.do")
@@ -80,32 +84,26 @@ public class MainPageController {
       }
 
       service.insertArticle(vo);
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
    @RequestMapping(value = "/writeform4.do")
    public String article4Insert(Article1VO vo) throws IOException {
 
       service.insertArticle(vo);
-      return "mainPage.jsp";
+      return "mainpage.do";
    }
 
-   @RequestMapping(value = "/writeform5.do", method=RequestMethod.POST)
-   @ResponseBody
+   @RequestMapping(value = "/writeform5.do")
    public String article5Insert(Article1VO vo) throws IOException {
 	   
-	   System.out.println(vo);
-	   
-	   
-//	 System.out.println(vo.toString());
-//     System.out.println("list : " + vo.getWriteForm5_content_str().size());
-//     
-//     for(int i = 0; i < vo.getWriteForm5_content_str().size(); i++) {
-//    	 System.out.println("list : " + vo.getWriteForm5_content_str().get(i));
-//     }
-     
-      
-      return "mainPage.jsp";
+	  System.out.println("test : "+vo.getWriteForm5_content());
+	  System.out.println("test : "+vo.getWriteForm5_date());
+	  System.out.println("test : "+vo.getWriteForm5_worker());
+	  
+	  service.insertArticle(vo);
+	  
+      return "mainpage.do";
    }
 
 }

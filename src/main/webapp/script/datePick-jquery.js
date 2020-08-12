@@ -24,8 +24,9 @@
     $(".todo_date_input_external").datepicker({dateFormat : 'mm/dd'});
   });
 
-  var writeForm5_content_str = new Object();
-  var todo_arr = new Array();
+  var todo_content_arr = new Array();
+  var todo_date_arr = new Array();
+  var todo_worker_arr = new Array();
   
 //  document.getElementById('todoContent_external').childNodes.forEach(function(i, e) { console.log(i, e);});
 	
@@ -35,8 +36,7 @@
 //  private Date regDate;
 //  private String writer;
   
-  $('.submit_a').click(function(e) {
-	  
+  $('#writeForm5_submit').click(function(e) {
 	  
 
 	  
@@ -52,45 +52,68 @@
 //				  'writeForm5_date' : $(e).find('.todo_date').val(),
 //				  'writeForm5_worker' : $(e).find('.todo_worker').val()
 //		  } 
-		  var todo_arr1 = new Object();
 		  
-		  todo_arr1.writeForm5_content = $(e).find('.todo_content').val();
-		  todo_arr1.writeForm5_date = $(e).find('.todo_date').val();
-		  todo_arr1.writeForm5_worker = $(e).find('.todo_worker').val();
-		
+		  var todo_title = $('#todo_title').val();
 		  
-		  todo_arr.push(todo_arr1);
+		  if(todo_title == null || todo_title == ''){
+			  $('#todo_title').val('none');
+		  }
 		  
-		  console.log(i,$(e).find('.todo_content').val());
-		  console.log(i,$(e).find('.todo_date').val());
-		  console.log(i,$(e).find('.todo_worker').val());
+		  var content = $(e).find('.todo_content').val();
+		  var date = $(e).find('.todo_date').val();
+		  var worker = $(e).find('.todo_worker').val();
 		  
-		  console.log(todo_arr);
-
+		  
+		  if(content == '' || content == null){
+			  content = 'none';
+		  }
+		  if(date == '' || date == null){
+			  date = 'none';
+		  }
+		  if(worker == '' || worker == null){
+			  worker = 'none';
+		  }
+		  
+		  
+		  
+		  todo_content_arr.push(content);
+		  todo_date_arr.push(date);
+		  todo_worker_arr.push(worker);
+		  
+		  
+		  console.log(i,content);
+		  console.log(i,date);
+		  console.log(i,worker);
+		  
+		  
+		  
 		  
 	  });
+	  
+	  
+	  $('#todo_content_value').val(todo_content_arr);
+	  $('#todo_date_value').val(todo_date_arr);
+	  $('#todo_worker_value').val(todo_worker_arr);
 	  
 	  //writeForm5_content_str = JSON.stringify(todo_arr);
 	  
-	  console.log( writeForm5_content_str);
-	  var test = JSON.stringify(todo_arr);
-	  alert(todo_arr);
+//	  $.ajax({
+//		  type:"POST",
+//		  dataType: "JSON",
+//		  url:"writeform5.do",
+//		  data : todo_arr,
+//		  success:function(e){
+//			  alert(e);
+//		  },
+//		  error:function(e){
+//			  alert(e);
+//		  }
+//		  
+//	  });
 	  
-	  $.ajax({
-		  type:"POST",
-		  dataType: "JSON",
-		  url:"writeform5.do",
-		  data : todo_arr,
-		  success:function(e){
-			  alert(e);
-		  },
-		  error:function(e){
-			  alert(e);
-		  }
-		  
-	  });
 	  
-	  todo_arr = null;
+	  
+	  $('#writeForm5_form').submit();
   });
   
   

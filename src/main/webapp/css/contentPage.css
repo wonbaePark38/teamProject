@@ -281,14 +281,14 @@ hr {
 
 #status_select_div {
 	display: inline-block;
+	text-align:center;
 	width: 90%;
 }
 
 #status_select_div div span {
-	width: 20%;
+	width: 100%;
+	display:block;
 	border-radius: 3px;
-	border-style: solid 1px black;
-	background-color: white;
 }
 
 #work_worker_select {

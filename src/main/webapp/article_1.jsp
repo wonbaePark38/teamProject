@@ -1,38 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="css/write_completion.css">
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-	function img_load(){
-		$("#post_images").append("<div class='post_image'><div class='post_box'><img class='post_load_img'><input type='button' id='img_close'></div></div>");
-	}
-	
-	function file_load(){
-		$("#post_files").append("<div class='post_file' ><div style='height: 70px; width: 100%; border: 1px solid #eaeaea; position: relative;'><img id='download_icon'><dl class='file_div'><dt><a href='#'>파일 이름</a>	</dt><dd style='margin: 0px;'>파일 크기</dd></dl><div class='down_fil' ><a id='down_logo' style='display: inline-block;color: #555;' href='#'>&nbsp;&nbsp;&nbsp;다운로드</a>	</div></div></div>");
-	}
-	
-	function content_load(thisevent){	/* 원배형  코드*/
-
-		  var node = $(thisevent).parent().next();
-		  var presentDisplay = node.css('display');
-		 
-		  if(presentDisplay == 'block'){
-		    
-		    node.css('display','none');
-		  }
-		  else{
-		    node.css("display","block");
-		  }
-	}
-	
-</script>
-</head>
-<body style="background-color: gray;">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 	<div class="post_idx">
 		<!-- 탑 -->
@@ -42,7 +10,7 @@
 				<img id="user_profile" style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
 			</div>
 			<div style="padding-left: 30px; float: left;">
-				<span>이름</span><br> <span id="공개범위설정">yyyy-mm-dd 24:00 <img></span>
+				<span>이름</span><br> <span id="공개범위설정"> <img></span>
 			</div>
 			<div style="margin: -10px 0px 0px 10px;">
 				<div style="float: right; padding-left: 10px;">
@@ -63,47 +31,11 @@
 				<p>디비에 저장된 글내용</p>
 			</div>
 			
-			<!-- 이미지 -->
-			<input type="button" onclick="img_load()" value="이미지 업로드 버튼">
-			<div id="post_images">
-				<!-- 이미지가 들어갈 영역 -->
-				<!-- 
-				<div class='post_image'>
-					<div class='post_box'>
-						<img class='post_load_img'>
-						<input type='button' id='img_close'>
-					</div>
-				</div>
-				 -->
-			</div>
-			<!-- 파일 -->
-			<input type="button" onclick="file_load()" value="파일 업로드 버튼">
-			<div id="post_files">
-				<!-- 파일이 들어갈 영역 -->
-				<!-- <div class="post_file" >
-					<div style="height: 70px; width: 100%; border: 1px solid #eaeaea; position: relative;">
-						<img id="download_icon">
-							<dl class="file_div">
-								<dt>
-								<a href="#">파일 이름</a>
-							</dt>
-							<dd style="margin: 0px;">파일 크기</dd>
-						</dl>
-						<div class="down_fil" >
-							<a id="down_logo" style="display: inline-block;color: #555;" href="#">&nbsp;&nbsp;&nbsp;다운로드</a>
-						</div>
-					</div>
-				</div> 
-				-->
-			</div>
+			
 			<div style="text-align:right; padding-right: 10px;">
 				<span>댓글 n 개</span>&nbsp;<span>읽음 n 명</span>
 			</div>
 		<!-- 일반글 -->
-		
-	
-		
-		
 		</div>
 		<!-- 글내용 -->
 
@@ -118,7 +50,7 @@
 		</div>
 		<!-- 글내용 -->
 		
-		<!-- 댓글 DB -->
+		<!-- 댓글 작성 -->
 		<div class="remark_div">
 			
 			<div class="photo" style="float: left; padding-left: 10px;">
@@ -135,7 +67,7 @@
 			</div>
 			
 		</div>
-		<!-- 댓글 DB -->
+		<!-- 댓글 작성 -->
 		
 		<!-- 댓글 -->
 		<div class="" style="position: relative; padding-bottom: 10px;">
@@ -147,30 +79,7 @@
 				
 			</div>
 			<a class="remark_upload"></a>
-			<div class="remark_images">
-				<div class="image_box">
-					<!-- 썸네일 153 x 153 -->
-					<img class="remark_load_img">
-					<input type="button" id="img_close">
-				</div>
-			</div>
-			<div class="remark_files">
-				<!-- 파일 등록시 -->
-				<div class="file_box">
-					<img id="remark_down_icon">
-					<dl class="file_div" style="margin:0;">
-						<dt style="padding:5px 5px 0 5px;float: left;"><a href="#">파일 이름</a></dt>
-						<dd style="margin: 0px;padding: 5px 5px 0 0;">파일 크기</dd>
-					</dl>
-					<input type="button" id="file_div_close">
-				</div>
-			</div>
+			
 		</div>
 		<!-- 댓글 -->
 	</div>
-
-
-
-	<!-- 일반글 -->
-</body>
-</html>
