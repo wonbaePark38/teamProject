@@ -757,8 +757,6 @@
 								<div style="float: right; padding-left: 10px;">
 									<a id="set_icon"></a>
 								</div>
-								<div id="test4132" style=" left: 505px; margin-top: 40px; width: 200px;width: 100px; height: 60px; background-color: white; border: 1px solid lightgray; border-radius: 3px; z-index: 99; position: absolute; ">
-								</div>
 								<div style="float: right;">
 									<a id="pin_icon"></a>
 								</div>
@@ -850,7 +848,6 @@
 						</div>
 						<!-- 탑 -->
 				
-						
 						<!-- 글내용 -->
 						<div class="post">
 						<!-- 일반글 -->
@@ -862,21 +859,11 @@
 								<p style="font-size: 15px;">${list.writeForm2_content }</p>
 							</div>
 							
+							<!-- 지도 찍는곳 -->
+							<div id="writeForm2_map">
 							
-							<c:if test="${list.writeForm2_latlng ne null }">
-								<!-- 지도 찍는곳 -->
-								<div id="writeForm2_map">
-									<img src="https://maps.googleapis.com/maps/api/staticmap?
-									center=37.570923,126.992468&
-									zoom=18&
-									marker=color:red%7Clabel:E%7C37.570923,126.992468&
-									scale=1&
-									size=480x300&
-									key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
-								
-								</div>
-								<!-- //지도 찍는곳 -->
-							</c:if>
+							
+							</div>
 							
 							<!-- 이미지 -->
 							
