@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <link href="css/write_completion.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
 <script src="script/projectdir.js"></script>
 
-<form action="projectfavorites.do" name="favorites_form" method="post">
+<form action="projectfavorites.do" id="favorites_form" method="post">
 <div style="padding-left: 15px;">
 	<div class="projectdir_content_header">
 		<div style="float: right;">
@@ -37,13 +36,13 @@
 		<div class="content_type" style="display: none;">
 		<h4 id="content_type_title">즐겨찾기</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
-			<c:if test="${project_lookup.project_favorites ne '0'}">
 			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
+			<c:if test="${project_lookup.project_favorites ne '0'}">
 				<script>
 					$('.content_type').show();	
 				</script>
 				<div class="pro">
-					<input class="title_btn_check" id="star_btn" type="button"name="project_favorites" value="${project_lookup.project_favorites}">
+					<input class="title_btn_check" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
 					<div class="title_box">
 						<span>${project_lookup.project_name}</span>
 					</div>
@@ -74,4 +73,4 @@
 		</c:forEach>
 	</div>
 </div>
-</form>
+	</form>
