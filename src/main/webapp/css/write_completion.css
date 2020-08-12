@@ -156,6 +156,7 @@
 }
 
 .title_btn {
+	font-size:0px;
 	position: absolute;
 	width: 30px;
     height: 30px;
@@ -165,6 +166,7 @@
 	background: url(../images/ico_star.png) no-repeat 0 -30px;
 }
 .title_btn_check{
+	font-size:0px;
 	position: absolute;
 	width: 30px;
     height: 30px;

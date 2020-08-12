@@ -11,7 +11,7 @@
 		
 		<typeAlias alias="projectdir" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
 		<typeAlias alias="project_lookup" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
-		<typeAlias alias="project_locker" type="com.spring.plug.mainpage.projectdir.vo.ProjectLockerVO"/>
+		<typeAlias alias="project_locker" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
 		
 		<typeAlias alias="signup" type="com.spring.plug.login.vo.UserVO"/>
 		<typeAlias alias="file" type="com.spring.plug.file.vo.FileVO"/>

@@ -14,15 +14,19 @@ public class ProjectDirDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public void projectDirInsert(ProjectDirVO vo) {
+	public void insertProjectDir(ProjectDirVO vo) {
 		sqlSessionTemplate.insert("ProjectDirDAO.projectDirInsert", vo);
-		System.out.println("새 프로젝트 생성");
-		System.out.println("dao : "+vo.toString());
 	}
-	public void projectLookup(ProjectDirVO vo) {
+	public void insertProjectLookup(ProjectDirVO vo) {
 		sqlSessionTemplate.insert("ProjectDirDAO.insertProjectLookup", vo);
-		System.out.println("프로젝트 가입자 데이터 저장");
-		System.out.println("dao : "+vo.toString());
+	}
+	
+	public void insertProjectLocker(ProjectDirVO vo) {
+		sqlSessionTemplate.insert("ProjectDirDAO.insertProjectLocker", vo);
+	}
+	
+	public void projectDirFavorites(ProjectDirVO vo) {
+		sqlSessionTemplate.update("ProjectDirDAO.updateProjectFavorites",vo);
 	}
 	
 	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo){

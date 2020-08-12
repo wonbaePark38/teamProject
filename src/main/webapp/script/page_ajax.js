@@ -3,7 +3,7 @@ function projectPage(url) {
 	var ajaxOption = {
 		url : url,
 		async : true,
-		type : "POST",
+		type : "GET",
 		dataType : "html",
 		cache : false
 	};
@@ -21,7 +21,7 @@ function officePop(url) {
 	var ajaxOption = {
 		url : url,
 		async : true,
-		type : "POST",
+		type : "GET",
 		dataType : "html",
 		cache : false
 	};
@@ -37,14 +37,14 @@ function newprojectPop(url) {
 	var ajaxOption = {
 		url : url,
 		async : true,
-		type : "POST",
+		type : "GET",
 		dataType : "html",
 		cache : false
 	};
 
 	$.ajax(ajaxOption).done(function(data) {
 		// Contents 영역 교체
-		$('.mainWrap').append(data);
+		$('.mainWrap').parent().prepend(data);
 	});
 };
 
@@ -53,7 +53,7 @@ function invitePop(url) {
 	var ajaxOption = {
 		url : url,
 		async : true,
-		type : "POST",
+		type : "GET",
 		dataType : "html",
 		cache : false
 	};
@@ -73,7 +73,7 @@ function pro1(url) {
 	var ajaxOption = {
 		url : url,
 		async : true,
-		type : "POST",
+		type : "GET",
 		dataType : "html",
 		cache : false
 	};

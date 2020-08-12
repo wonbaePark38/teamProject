@@ -10,7 +10,7 @@
 		<result property="project_content" column="PROJECT_CONTENT" />
 		<result property="project_type" column="PROJECT_TYPE" />
 		<result property="createdate" column="CREATEDATE"/>
-		<collection property="project_lookup" resultMap="project_lookup"></collection>
+		
 	</resultMap>
 	
 	<!-- 프로젝트 생성 -->	
@@ -20,16 +20,6 @@
 	</insert>
 	
 	
-	<!-- 프로젝트 및 사용자 테이블 -->
-	
-	<!-- 프로젝트 리스트 -->
-	
-	<!-- 프로젝트 리스트 출력 기본	WHERE 프로젝트 참여자로 바꿔야 함  -->
-	<select id="getProjectDirTotalList" resultType="projectdir" parameterType="projectdir">
-		SELECT * FROM projectdir INNER JOIN project_lookup ON projectdir.project_id = project_lookup.project_id 
-		WHERE member_id = #{member_id} 
-		<!--  ORDER BY project_id DESC -->
-	</select>
 	
 	
 	

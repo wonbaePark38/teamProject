@@ -6,26 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.plug.mainpage.projectdir.dao.ProjectDirDAO;
-import com.spring.plug.mainpage.projectdir.dao.ProjectLockerDAO;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
-import com.spring.plug.mainpage.projectdir.vo.ProjectLockerVO;
 
 @Service
 public class ProjectDirServiceImpl implements ProjectDirService{
 
 	@Autowired
 	private ProjectDirDAO projectDirDAO;
-	@Autowired
-	private ProjectLockerDAO projectLockerDAO;
 	
 	@Override
 	public void insertProjectDir(ProjectDirVO vo) {
-		projectDirDAO.projectDirInsert(vo);
+		projectDirDAO.insertProjectDir(vo);
 	}
 
 	@Override
 	public void insertProjectLookup(ProjectDirVO vo) {
-		projectDirDAO.projectLookup(vo);
+		projectDirDAO.insertProjectLookup(vo);
 	}
 	
 	@Override
@@ -45,29 +41,32 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 		return projectDirDAO.getProjectDirManagerList(vo);
 	}
 
+
 	
 	// project locker
-	
 
 	@Override
-	public void insertProjectLocker(ProjectLockerVO vo) {
-		projectLockerDAO.insertProjectLocker(vo);
-	}
-	
-	@Override
-	public void updateProjectFavorites(ProjectLockerVO vo) {
-		projectLockerDAO.projectDirFavorites(vo);
+	public void insertProjectLocker(ProjectDirVO vo) {
+		projectDirDAO.insertProjectLocker(vo);
 	}
 
 	@Override
-	public void updateProjectHide(ProjectLockerVO vo) {
+	public void updateProjectFavorites(ProjectDirVO vo) {
+		projectDirDAO.projectDirFavorites(vo);
+		
+	}
+
+	@Override
+	public void updateProjectHide(ProjectDirVO vo) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateProjectLocker(ProjectLockerVO vo) {
+	public void updateProjectLocker(ProjectDirVO vo) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }

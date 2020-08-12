@@ -11,12 +11,18 @@ public class ProjectDirVO {
 	private int project_type;
 	private Date createdate;
 	
-	// 프로젝트 조회 정보
+	// 프로젝트 사용자 정보
 	private int lookup_id;
 	private int member_id;
-	// project_id
 	private int project_manager;
 	private Date joindate;
+	
+	// 프로젝트 정보
+	private int locker_id;
+	private int project_favorites;
+	private String project_locker;
+	private int hide_locker;
+
 	public int getProject_id() {
 		return project_id;
 	}
@@ -71,13 +77,38 @@ public class ProjectDirVO {
 	public void setJoindate(Date joindate) {
 		this.joindate = joindate;
 	}
+	public int getLocker_id() {
+		return locker_id;
+	}
+	public void setLocker_id(int locker_id) {
+		this.locker_id = locker_id;
+	}
+	public int getProject_favorites() {
+		return project_favorites;
+	}
+	public void setProject_favorites(int project_favorites) {
+		this.project_favorites = project_favorites;
+	}
+	public String getProject_locker() {
+		return project_locker;
+	}
+	public void setProject_locker(String project_locker) {
+		this.project_locker = project_locker;
+	}
+	public int getHide_locker() {
+		return hide_locker;
+	}
+	public void setHide_locker(int hide_locker) {
+		this.hide_locker = hide_locker;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProjectDirVO [project_id=" + project_id + ", project_name=" + project_name + ", project_content="
 				+ project_content + ", project_type=" + project_type + ", createdate=" + createdate + ", lookup_id="
 				+ lookup_id + ", member_id=" + member_id + ", project_manager=" + project_manager + ", joindate="
-				+ joindate + "]";
+				+ joindate + ", locker_id=" + locker_id + ", project_favorites=" + project_favorites
+				+ ", project_locker=" + project_locker + ", hide_locker=" + hide_locker + "]";
 	}
-
 	
 }
