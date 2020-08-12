@@ -50,7 +50,7 @@ public class ProjectDirController {
 		return mav;
 	}
 	// 관리자인 프로젝트만 보기
-	@RequestMapping(value="/projectdir1.do")
+	@RequestMapping(value="/project_manager.do")
 	public ModelAndView getProjectDirManagerList(ProjectDirVO vo, ModelAndView mav) {
 		vo.setMember_id(1);
 		vo.setProject_manager(1);
@@ -61,11 +61,10 @@ public class ProjectDirController {
 	}
 
 	// 프로젝트 즐겨찾기
-	@RequestMapping(value = "/projectfavorites.do")
+	@RequestMapping(value = "/projectfavorites.do", method = RequestMethod.POST)
 	public String updateProjectFavorites(ProjectDirVO vo) {
 		vo.setMember_id(1);
-//		System.out.println(vo.getProject_id());
-//		System.out.println(vo.getProject_favorites());
+		System.out.println(vo.toString());
 		projectDirService.updateProjectFavorites(vo);
 		return "projectdir.do";
 	}

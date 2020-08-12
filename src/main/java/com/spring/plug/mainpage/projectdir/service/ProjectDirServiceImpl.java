@@ -26,7 +26,6 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	
 	@Override
 	public void getProjectDir(ProjectDirVO vo) {
-		// TODO Auto-generated method stub
 		
 	}
 

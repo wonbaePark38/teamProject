@@ -13,29 +13,30 @@
 		<collection property="project_locker" resultMap="project_locker"></collection>
 	</resultMap>
 
-	<insert id="insertProjectLookup" parameterType="project_lookup">
+	<insert id="insertProjectLookup" parameterType="project_lookup" useGeneratedKeys="true" keyProperty="lookup_id" keyColumn="lookup_id">
 		INSERT INTO project_lookup (lookup_id, project_id, member_id, project_manager)
 		VALUES((select nvl(max(lookup_id), 0) +1 from project_lookup), #{project_id}, #{member_id}, #{project_manager})
 	</insert>
 	
 	<select id="getProjectDirTotalList" resultType="project_lookup" parameterType="project_lookup">
-		SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, project_manager
-		FROM project_lookup 
-		INNER JOIN 
-		    (
-		    SELECT 
-		    project_id, project_favorites, project_locker, hide_locker, project_name
-		    FROM project_locker 
-		    INNER JOIN(
-		        SELECT 
-		        project_id, project_name
-		        FROM projectdir
-		        )
-		        USING(project_id)
-		    ) 
-		USING(project_id)
-		WHERE member_id = #{member_id} 
+		SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, project_content
+			FROM project_lookup 
+			INNER JOIN 
+			    (
+			    select 
+			    project_id, project_favorites, project_locker, hide_locker, project_name, project_content
+			    from project_locker 
+			    INNER JOIN(
+			        select 
+			        project_id, project_name, project_content 
+			        FROM projectdir
+			        )
+			        USING(project_id)
+			    ) 
+			USING(project_id)
+		WHERE member_id = #{member_id} ORDER BY project_id DESC
 	</select>
+	
 	<select id="getProjectDirManagerList" resultType="project_lookup" parameterType="project_lookup">
 		SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, project_manager
 		FROM project_lookup 

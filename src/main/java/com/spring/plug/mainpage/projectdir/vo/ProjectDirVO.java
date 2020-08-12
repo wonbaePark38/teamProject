@@ -22,7 +22,6 @@ public class ProjectDirVO {
 	private int project_favorites;
 	private String project_locker;
 	private int hide_locker;
-
 	public int getProject_id() {
 		return project_id;
 	}
@@ -101,7 +100,6 @@ public class ProjectDirVO {
 	public void setHide_locker(int hide_locker) {
 		this.hide_locker = hide_locker;
 	}
-	
 	@Override
 	public String toString() {
 		return "ProjectDirVO [project_id=" + project_id + ", project_name=" + project_name + ", project_content="
