@@ -17,7 +17,31 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1000000" />
 	</bean>
+	
+	
+	<bean id="intercepter" class="com.spring.plug.login.controller.Interceptor"/>
+	 <bean id="autoLoginIntercepter" class="com.spring.plug.login.controller.AutoLoginInterceptor"/>
+      <mvc:interceptors>
+     <mvc:interceptor>
+         <mvc:mapping path="/**/"/>
+         <mvc:exclude-mapping path="/login.do"/>
+         <mvc:exclude-mapping path="/signupPost.do"/>
+         <!-- <mvc:exclude-mapping path="/projectdir.do"/> -->
+         <mvc:exclude-mapping path="/writer/forgot-password.wdo"/>
+         <mvc:exclude-mapping path="/writer/insertWriterData.wdo"/>
+         <mvc:exclude-mapping path="/writer/checkId.wdo"/>
+         <ref bean="intercepter"/>
+      </mvc:interceptor>
+   
 
-
+      <mvc:interceptor>
+         <mvc:mapping path="/**/"/>
+         <ref bean="autoLoginIntercepter"/>
+      </mvc:interceptor>
+     
+     
+    
+   </mvc:interceptors>
+   
 </beans>
 <!-- 인터셉터 선언 -->

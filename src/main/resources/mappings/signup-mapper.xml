@@ -14,10 +14,13 @@
 		<result property="salt" column="SALT" />
 		<result property="authKey" column="AUTHKEY" />
 		<result property="authStatus" column="AUTHSTATUS" />
+		
 	</resultMap>
 
 	<insert id="insertMember" parameterType="signup">
-		INSERT INTO MEMBERINFO VALUES((select nvl(max(MEMBER_ID), 0)+1 from memberinfo), #{email}, #{name}, #{password}, #{socialCompare}, #{joinDate}, #{salt}, #{authKey}, #{authStatus)
+		INSERT INTO MEMBERINFO (MEMBER_ID, MEMBER_EMAIL, MEMBER_NAME, MEMBER_PASSWORD, MEMBER_ISSOCIAL, REGDATE, SALT, AUTHKEY, AUTHSTATUS) VALUES((select nvl(max(MEMBER_ID), 0)+1 from memberinfo), 
+		#{email}, #{name}, #{password}, #{socialCompare}, 
+		#{joinDate}, #{salt}, #{authKey}, #{authStatus})
 	</insert>
 	
 	<update id="updateAuthkey" parameterType="signup">

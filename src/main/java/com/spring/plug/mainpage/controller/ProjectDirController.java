@@ -50,7 +50,7 @@ public class ProjectDirController {
 		return mav;
 	}
 	// 관리자인 프로젝트만 보기
-	@RequestMapping(value="/projectdir.do")
+	@RequestMapping(value="/projectdir1.do")
 	public ModelAndView getProjectDirManagerList(ProjectDirVO vo, ModelAndView mav) {
 		vo.setMember_id(1);
 		vo.setProject_manager(1);

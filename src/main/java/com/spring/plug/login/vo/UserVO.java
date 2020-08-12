@@ -13,9 +13,24 @@ public class UserVO {
 	private String salt;
 	private String authKey;
 	private String authStatus;
+	private boolean useCookie;
 	private String passwordAuthKey;
 	private String passwordAuthStatus;
+	private String sessionId;
 	
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	
+	public boolean isUseCookie() {
+		return useCookie;
+	}
+	public void setUseCookie(boolean useCookie) {
+		this.useCookie = useCookie;
+	}
 	public String getPasswordAuthStatus() {
 		return passwordAuthStatus;
 	}

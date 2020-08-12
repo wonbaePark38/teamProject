@@ -2,6 +2,12 @@ package com.spring.plug.login.dao;
 
 
 
+
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,6 +54,22 @@ public class UserDAO {
 	public void sendPasswordCheckEmail(UserVO vo) {
 		System.out.println("비밀번호 변경 관련 이메일 발송 후 status 변경");
 		sqlSessionTemplate.update("UserDAO.sendPasswordCheckEmail",vo);
+	}
+	public void changePasswordBytempPassword(UserVO vo) {
+		System.out.println("임시 비밀번호 db에 저장");
+		sqlSessionTemplate.update("UserDAO.changePasswordBytempPassword",vo);
+	}
+	
+	public void keepLogin(String email, String sessionId, Date sessionLimit) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("email", email);
+		map.put("sessionId",sessionId);
+		map.put("sessionLimit", sessionLimit);
+		sqlSessionTemplate.update("UserDAO.keepLogin",map);
+	}
+	
+	public UserVO checkUserWithSessionKey(String sessionId) {
+		return sqlSessionTemplate.selectOne("UserDAO.checkUserWithSessionKey", sessionId);
 	}
 }
 
