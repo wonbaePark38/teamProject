@@ -64,6 +64,8 @@ public class ProjectDirController {
 	@RequestMapping(value = "/projectfavorites.do")
 	public String updateProjectFavorites(ProjectDirVO vo) {
 		vo.setMember_id(1);
+//		System.out.println(vo.getProject_id());
+//		System.out.println(vo.getProject_favorites());
 		projectDirService.updateProjectFavorites(vo);
 		return "projectdir.do";
 	}
