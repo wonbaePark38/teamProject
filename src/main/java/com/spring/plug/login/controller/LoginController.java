@@ -60,7 +60,7 @@ public class LoginController{
 			vo.setPassword(inputPassword);
 			UserVO user = userService.getUser(vo);
 			
-			if(user!=null && user.getAuthStatus().equals("1")) {
+			if(user!=null /*&& user.getAuthStatus().equals("1")*/) {
 				System.out.println("컨트롤러 리턴");
 				session.setAttribute("user", user);
 				
