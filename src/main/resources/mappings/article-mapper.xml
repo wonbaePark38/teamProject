@@ -4,6 +4,50 @@
 
 <mapper namespace="ArticleDAO">
 
+	<resultMap type="article1VO" id="articleResult">
+		<id property="article_id" column="ARTICLE_ID"/>
+		<result property="project_id" column="PROJECT_ID"/>
+		<result property="project_name" column="PROJECT_NAME"/>
+		<result property="form_name" column="FORM_NAME"/>
+		<result property="regDate" column="REGDATE"/>
+		<result property="file_name" column="FILE_NAME"/>
+		<result property="file_size" column="FILE_SIZE"/>
+		<result property="img_name" column="IMG_NAME"/>
+		<result property="img_size" column="IMG_SIZE"/>
+		<result property="writer" column="WRITER"/>
+		<result property="writeForm1_content" column="WRITEFORM1_CONTENT"/>
+		<result property="writeForm2_title" column="WRITEFORM2_TITLE"/>
+		<result property="writeForm2_content" column="WRITEFORM2_CONTENT"/>
+		<result property="writeForm2_latlng" column="WRITEFORM2_LATLNG"/>
+		<result property="writeForm3_tasknum" column="WRITEFORM3_TASKNUM"/>
+		<result property="writeForm3_title" column="WRITEFORM3_TITLE"/>
+		<result property="writeForm3_status" column="WRITEFORM3_STATUS"/>
+		<result property="writeForm3_workersName" column="WRITEFORM3_WORKERSNAME"/>
+		<result property="writeForm3_start_date" column="WRITEFORM3_START_DATE"/>
+		<result property="writeForm3_end_date" column="WRITEFORM3_END_DATE"/>
+		<result property="writeForm3_progress" column="WRITEFORM3_PROGRESS"/>
+		<result property="writeForm3_order" column="WRITEFORM3_ORDER"/>
+		<result property="writeForm3_content" column="WRITEFORM3_CONTENT"/>
+		<result property="writeForm4_title" column="WRITEFORM4_TITLE"/>
+		<result property="writeForm4_start_date" column="WRITEFORM4_START_DATE"/>
+		<result property="writeForm4_start_time" column="WRITEFORM4_START_TIME"/>
+		<result property="writeForm4_end_date" column="WRITEFORM4_END_DATE"/>
+		<result property="writeForm4_end_time" column="WRITEFORM4_END_TIME"/>
+		<result property="writeForm4_alarm_time" column="WRITEFORM4_ALARM_TIME"/>
+		<result property="writeForm4_content" column="WRITEFORM4_CONTENT"/>
+		<result property="writeForm4_latlng" column="WRITEFORM4_LATLNG"/>
+		<result property="writeForm5_title" column="WRITEFORM5_TITLE"/>
+		<result property="writeForm5_content" column="WRITEFORM5_CONTENT"/>
+		<result property="writeForm5_date" column="WRITEFORM5_DATE"/>
+		<result property="writeForm5_worker" column="WRITEFORM5_WORKER"/>
+		
+	</resultMap>
+	
+	<select id="articleSelectAll" resultMap="articleResult">
+	SELECT * FROM mainpage_article
+	
+	</select>
+
    <insert id="articleInsert" useGeneratedKeys="true" parameterType="article1VO">
    INSERT INTO mainpage_article
    (

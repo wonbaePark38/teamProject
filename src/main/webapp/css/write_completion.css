@@ -227,13 +227,13 @@
 }
 
 .post_idx {
-	width: 511px;
+	width: 100%;
 	background-color: #ffffff;
 }
 
 .top_writer {
 	display: inline-block;
-	width: 474px;
+	width: 100%;
 	height: 60px;
 	padding: 25px 12px 0px 25px;
 }
@@ -375,7 +375,7 @@
 }
 
 .bottom_list {
-	margin-left: -20px;
+	margin-left: 10px;
 	list-style: none;
 }
 

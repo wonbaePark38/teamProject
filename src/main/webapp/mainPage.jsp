@@ -20,6 +20,7 @@
 <link href="css/messanger_css.css" rel="stylesheet">
 <script src="script/page_ajax.js"></script>
 <link href="css/contentPage.css" rel="stylesheet">
+<link rel="stylesheet" href="css/write_completion.css">
 
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
