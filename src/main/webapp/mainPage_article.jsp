@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 게시글 넣는곳 -->
 <div class="article">
@@ -603,9 +604,10 @@
                   <!-- 할일 -->
                   <form method="get" action="writeform5.do" id="writeForm5_form">
                   
-                     <input type="hidden" id="formName" name="form_name" value="todoWrite">
-                     <input type="hidden" name="writeForm5_content_str" id="todo_content_value">
-                     
+                     <input type="hidden" name="form_name" value="todoWrite">
+                     <input type="hidden" name="writeForm5_content" id="todo_content_value">
+                     <input type="hidden" name="writeForm5_date" id="todo_date_value">
+                     <input type="hidden" name="writeForm5_worker" id="todo_worker_value">
                      <div class="todo_form" id="todoForm_div">
                         <!-- 할일 제목 -->
                         <div>
@@ -730,7 +732,10 @@
       <!-- //상단 고정글 -->
    
       <!-- 게시글 출력하는 곳  -->
-      <div id="article_show" style=" width: 100%; margin-top: 10px">
+      <div id="article_show" style=" width: 100%; margin-top: 10px;">
+      
+	      
+      	
       		
       </div>
       <!-- 게시글 출력하는 곳 -->

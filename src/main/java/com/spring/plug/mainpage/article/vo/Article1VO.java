@@ -1,7 +1,6 @@
 package com.spring.plug.mainpage.article.vo;
 
 import java.sql.Date;
-import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,9 +48,8 @@ public class Article1VO {
    private String writeForm4_latlng;
 
    private String writeForm5_title;
-   private List<String> writeForm5_content_str;
    private String writeForm5_content;
-   private Date writeForm5_date;
+   private String writeForm5_date;
    private String writeForm5_worker;
 
    public MultipartFile getWriteForm_file() {
@@ -310,11 +308,11 @@ public class Article1VO {
       this.writeForm5_title = writeForm5_title;
    }
 
-   public Date getWriteForm5_date() {
+   public String getWriteForm5_date() {
       return writeForm5_date;
    }
 
-   public void setWriteForm5_date(Date writeForm5_date) {
+   public void setWriteForm5_date(String writeForm5_date) {
       this.writeForm5_date = writeForm5_date;
    }
 
@@ -350,26 +348,34 @@ public class Article1VO {
       this.img_size = img_size;
    }
 
+@Override
+public String toString() {
+	return "Article1VO [writeForm_file=" + writeForm_file + ", writeForm_img=" + writeForm_img + ", project_id="
+			+ project_id + ", project_name=" + project_name + ", article_id=" + article_id + ", form_name=" + form_name
+			+ ", regDate=" + regDate + ", file_name=" + file_name + ", file_size=" + file_size + ", img_name="
+			+ img_name + ", img_size=" + img_size + ", writer=" + writer + ", writeForm1_content=" + writeForm1_content
+			+ ", writeForm2_title=" + writeForm2_title + ", writeForm2_content=" + writeForm2_content
+			+ ", writeForm2_latlng=" + writeForm2_latlng + ", writeForm3_tasknum=" + writeForm3_tasknum
+			+ ", writeForm3_title=" + writeForm3_title + ", writeForm3_status=" + writeForm3_status
+			+ ", writeForm3_workersName=" + writeForm3_workersName + ", writeForm3_start_date=" + writeForm3_start_date
+			+ ", writeForm3_end_date=" + writeForm3_end_date + ", writeForm3_progress=" + writeForm3_progress
+			+ ", writeForm3_order=" + writeForm3_order + ", writeForm3_content=" + writeForm3_content
+			+ ", writeForm4_title=" + writeForm4_title + ", writeForm4_start_date=" + writeForm4_start_date
+			+ ", writeForm4_start_time=" + writeForm4_start_time + ", writeForm4_end_date=" + writeForm4_end_date
+			+ ", writeForm4_end_time=" + writeForm4_end_time + ", writeForm4_alarm_time=" + writeForm4_alarm_time
+			+ ", writeForm4_content=" + writeForm4_content + ", writeForm4_latlng=" + writeForm4_latlng
+			+ ", writeForm5_title=" + writeForm5_title + ", writeForm5_content=" + writeForm5_content
+			+ ", writeForm5_date=" + writeForm5_date + ", writeForm5_worker=" + writeForm5_worker + "]";
+}
+
+
+	
 	
    
-	public List getWriteForm5_content_str() {
-	return writeForm5_content_str;
-	}
-	
-	public void setWriteForm5_content_str(List writeForm5_content_str) {
-		this.writeForm5_content_str = writeForm5_content_str;
-	}
-
-	@Override
-	public String toString() {
-		return "writeForm5_content_str = " + writeForm5_content_str;
-	}
 
 	
    
-   
-   
-
+	
 	
    
    

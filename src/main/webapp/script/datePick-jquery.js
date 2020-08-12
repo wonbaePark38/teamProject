@@ -24,8 +24,9 @@
     $(".todo_date_input_external").datepicker({dateFormat : 'mm/dd'});
   });
 
-  var writeForm5_content_str = new Object();
-  var todo_arr = new Array();
+  var todo_content_arr = new Array();
+  var todo_date_arr = new Array();
+  var todo_worker_arr = new Array();
   
 //  document.getElementById('todoContent_external').childNodes.forEach(function(i, e) { console.log(i, e);});
 	
@@ -37,7 +38,6 @@
   
   $('.submit_a').click(function(e) {
 	  
-	  alert('a');
 
 	  
 	  var test =  $('#todoContent_external').contents().each(function(i,e) { 
@@ -52,27 +52,32 @@
 //				  'writeForm5_date' : $(e).find('.todo_date').val(),
 //				  'writeForm5_worker' : $(e).find('.todo_worker').val()
 //		  } 
-		  var todo_arr1 = new Object();
 		  
-		  todo_arr1.writeForm5_content = $(e).find('.todo_content').val();
-		  todo_arr1.writeForm5_date = $(e).find('.todo_date').val();
-		  todo_arr1.writeForm5_worker = $(e).find('.todo_worker').val();
+		  const content = $(e).find('.todo_content').val();
+		  const date = $(e).find('.todo_date').val();
+		  const worker = $(e).find('.todo_worker').val();
 		
 		  
-		  todo_arr.push(todo_arr1);
+		  todo_content_arr.push(content);
+		  todo_date_arr.push(date);
+		  todo_worker_arr.push(worker);
+		  
 		  
 		  console.log(i,$(e).find('.todo_content').val());
 		  console.log(i,$(e).find('.todo_date').val());
 		  console.log(i,$(e).find('.todo_worker').val());
 		  
-		  console.log(todo_arr);
-
+		  
+		  
 		  
 	  });
 	  
-	  //writeForm5_content_str = JSON.stringify(todo_arr);
 	  
-	  console.log( writeForm5_content_str);
+	  $('#todo_content_value').val(todo_content_arr);
+	  $('#todo_date_value').val(todo_date_arr);
+	  $('#todo_worker_value').val(todo_worker_arr);
+	  
+	  //writeForm5_content_str = JSON.stringify(todo_arr);
 	  
 //	  $.ajax({
 //		  type:"POST",
@@ -88,7 +93,9 @@
 //		  
 //	  });
 	  
-	  todo_arr = null;
+	  
+	  
+	  $('#writeForm5_form').submit();
   });
   
   
