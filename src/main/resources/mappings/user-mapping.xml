@@ -43,4 +43,18 @@
 	<update id="sendPasswordCheckEmail" parameterType="user">
 		UPDATE MEMBERINFO SET PASSWORDAUTHSTATUS = #{passwordAuthStatus} WHERE MEMBER_EMAIL = #{email}
 	</update>
+	<update id="changePasswordBytempPassword" parameterType="user">
+		UPDATE MEMBERINFO SET MEMBER_PASSWORD = #{password} WHERE MEMBER_EMAIL = #{email}
+	</update>
+	
+	<update id="keepLogin">
+		UPDATE MEMBERINFO SET SESSIONID = #{sessionId}, SESSIONTIMEOUT = #{sessionLimit} WHERE MEMBER_EMAIL = #{email}
+		
+		
+	</update>
+	
+	<select id="checkUserWithSessionKey" resultType="user">
+		SELECT * FROM MEMBERINFO WHERE SESSIONID = #{sessionId} and SESSIONTIMEOUT > SYSDATE
+	</select>
+	
 </mapper>

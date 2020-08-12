@@ -1,8 +1,14 @@
 package com.spring.plug.login.controller;
 
-import java.util.List;
 
+
+
+
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.plug.common.util.MailUtils;
 import com.spring.plug.common.util.SHA256Util;
 import com.spring.plug.common.util.TempKey;
 import com.spring.plug.login.service.UserServiceImpl;
@@ -26,19 +31,20 @@ public class LoginController{
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@RequestMapping(value="/login.do",method=RequestMethod.GET)
+	/*@RequestMapping(value="/login.do",method=RequestMethod.GET)
 	public ModelAndView loginView(UserVO vo,ModelAndView mav) {
 		mav.setViewName("newlogin.jsp");
+		
 		return mav;
-	}
+	}*/
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
-	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session) {
+	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session, HttpServletResponse response,Model model) {
 			/*
 			 * 입력한 이메일로 db에 저장된 salt값을 가저온 후에
 			 * salt와 입력한 비밀번호를 암호화 시키고
 			 * vo에 값 세팅 후에 유저 정보 db에서 가저옴
-			 * 
+			
 			 */
 			System.out.println("로그인 컨트롤러 진입");
 			String salt = userService.getSaltById(vo.getEmail());
@@ -54,13 +60,25 @@ public class LoginController{
 			vo.setPassword(inputPassword);
 			UserVO user = userService.getUser(vo);
 			
-			if(user!=null && user.getAuthStatus().equals("1")) {
+			if(user!=null /*&& user.getAuthStatus().equals("1")*/) {
+				System.out.println("컨트롤러 리턴");
+				session.setAttribute("user", user);
 				
-				System.out.println("가입된 사용자 이메일" + user.getEmail());
-				session.setAttribute("userEmail", user.getEmail());
-				session.setAttribute("name", user.getName());
-				mav.addObject("user", user);
-				mav.setViewName("totalFile.jsp");
+				if(vo.isUseCookie()) {//자동로그인 체크한 경우
+					Cookie loginCookie = new Cookie("loginCookie",session.getId());
+					loginCookie.setPath("/");
+					int amount = 60*60*24*7;
+					loginCookie.setMaxAge(amount); //7일
+					response.addCookie(loginCookie);
+
+
+					Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
+
+					userService.keepLogin(vo.getEmail(), session.getId(), sessionLimit);
+				}
+				
+				mav.addObject("login", user);
+				mav.setViewName("projectdir.do");
 				return mav;
 			
 			}else if(user != null && user.getAuthStatus().equals("0")) {
@@ -68,8 +86,7 @@ public class LoginController{
 				mav.addObject("status", "notCheckEmail");
 				mav.setViewName("newlogin.jsp");
 				return mav;
-			}
-			else {
+			}else {
 				System.out.println("비밀번호가 틀렸습니다");
 				mav.setViewName("newlogin.jsp");
 				mav.addObject("status", "passwordFalse");
@@ -110,10 +127,13 @@ public class LoginController{
 	}
 	
 	@RequestMapping("/passlogin")
-	public ModelAndView loginView(UserVO vo,ModelAndView mav, @RequestParam("email") String email) {
+	public ModelAndView loginView(UserVO vo,ModelAndView mav,@RequestParam("email") String email, @RequestParam("password") String password) {
 		System.out.println("리턴 이메일"+ email );
-		
-		mav.setViewName("newlogin.jsp");
+		System.out.println("리턴 패스워드"+ password);
+		vo.setEmail(email);
+		vo.setPassword(password);
+		userService.changePasswordBytempPassword(vo);
+		mav.setViewName("settingPassword.jsp");
 		return mav;
 	}
 }

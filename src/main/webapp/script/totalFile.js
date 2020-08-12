@@ -75,6 +75,25 @@ function initFileList() {
       }); //end each
    });
 }
+function getFileList() {
+	   const deffered = $.Deferred();
+	   var list = [];
+	   $.ajax({
+	      url: 'fileSearch.do',
+	      method: 'get',
+	      dataType: 'json'
+	   }).done(function(data) {
+	      $.each(data, function(i, e) {
+	         list.push(e);
+	     });
+	     deffered.resolve(list);
+	   }).fail(function(err) {
+	      alert('카테고리를 불러오는데 실패하였습니다.');
+	      deffered.reject(err);
+	   });
+	   return deffered.promise();
+	}
+
 /*db에서 받아온 파일 리스트 div 추가 함수*/
 function settingList(element){
 	 var date = new Date(element.writeDate);
@@ -188,21 +207,3 @@ function getFormatDate(date){
     return  year + '/' + month + '/' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 }
 /* db에서 데이터 가저오기 */
-function getFileList() {
-   const deffered = $.Deferred();
-   var list = [];
-   $.ajax({
-      url: 'fileSearch.do',
-      method: 'get',
-      dataType: 'json'
-   }).done(function(data) {
-      $.each(data, function(i, e) {
-         list.push(e);
-     });
-     deffered.resolve(list);
-   }).fail(function(err) {
-      alert('카테고리를 불러오는데 실패하였습니다.');
-      deffered.reject(err);
-   });
-   return deffered.promise();
-}
