@@ -39,13 +39,12 @@
 		<h4 id="content_type_title">즐겨찾기</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
 			<c:if test="${project_lookup.project_favorites ne '0'}">
-			<div class="project_div">
 			<script>
 					$('.content_type').show();	
 			</script>
+			<div class="project_div">
 			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
 				<div class="project_select">
-					<input class="title_btn_check" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
 					<div class="title_box">
 						<span>${project_lookup.project_name}</span>
 					</div>
@@ -53,6 +52,7 @@
 						<span></span> <span>명 참여중</span>
 					</div>
 				</div>
+				<input class="title_btn_check" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
 			</div>
 			</c:if>
 		</c:forEach>

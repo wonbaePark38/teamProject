@@ -2,12 +2,15 @@ package com.spring.plug.mainpage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.projectdir.service.ProjectDirService;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 
@@ -23,20 +26,16 @@ public class ProjectDirController {
 	
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
 	public String projectDirInsert(ProjectDirVO vo) {
-		System.out.println(vo.toString());
 		projectDirService.insertProjectDir(vo);	
-		System.out.println(vo.toString());
 		System.out.println("project insert");
 		
 		projectDirService.insertProjectLookup(vo);
-		System.out.println(vo.toString());
 		System.out.println("project lookup insert");
 		
 		vo.setProject_favorites(0);
 		vo.setProject_locker("");
 		vo.setHide_locker(0);
 		projectDirService.insertProjectLocker(vo);
-		System.out.println(vo.toString());
 		System.out.println("project locker insert");
 		
 		return "projectdir.do";
@@ -45,9 +44,10 @@ public class ProjectDirController {
 	// 프로젝트 정렬
 	// 전체보기
 	@RequestMapping(value="/projectdir.do")
-	public ModelAndView getProjectDirTotalList(ProjectDirVO vo, ModelAndView mav) {
-		System.out.println(vo.toString());
-		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo);
+	public ModelAndView getProjectDirTotalList(ProjectDirVO vo, ModelAndView mav, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		
+		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(user.getSeq());
 		mav.addObject("projectDirList",list);
 		mav.setViewName("mainProjectDir.jsp");
 		return mav;

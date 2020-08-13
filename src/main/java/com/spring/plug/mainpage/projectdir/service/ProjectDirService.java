@@ -11,7 +11,7 @@ public interface ProjectDirService {
 	void insertProjectLocker(ProjectDirVO vo);
 	
 	// 프로젝트 정렬
-	List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo);
+	List<ProjectDirVO> getProjectDirTotalList(int member_id);
 	List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo);
 	
 	// 프로젝트 설정

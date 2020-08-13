@@ -31,8 +31,8 @@ public class ProjectDirDAO {
 		sqlSessionTemplate.insert("ProjectDirDAO.insertProjectLocker", vo);
 	}
 	
-	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo){
-		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotalList",vo);
+	public List<ProjectDirVO> getProjectDirTotalList(int member_id){
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotalList",member_id);
 	}
 	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo){
 		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirManagerList",vo);

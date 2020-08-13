@@ -58,10 +58,7 @@
 </style>
 
 <body>
-	<input type="text" id="member_id" name="seq" value="${user.seq}">
-	<input type="text" name="seq" value="${user.email}">
-	<input type="text" name="seq" value="${user.useCookie}">
-	<input type="text" name="seq" value="${user.sessionId}">
+	<input type="hidden" id="member_id" name="seq" value="${user.seq}">
 	
 	<div class="mainWrap">
 		<!-- Navigation -->
