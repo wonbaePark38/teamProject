@@ -10,15 +10,21 @@ function contentset(){
     document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';
 }
 
+function favorites(){
+	alert($(this).attr('value'));
+	
+	alert($(this).parent('input.pid').attr('value'));
+}
+
 // 프로젝트 즐겨찾기
-$(document).on('click','#star_btn',function(){
-	var favorites = document.getElementById('favorites_form');
-	
-	if ($(this).attr('value') == '0') {
-		$(this).attr('value','1');
-	} else {
-		$(this).attr('value','0');
-	}
-	
-	favorites.submit();
-});
+//$(document).on('click','#star_btn',function(){
+//	var favorites = document.getElementById('favorites_form');
+//	
+//	if ($(this).attr('value') == '0') {
+//		$(this).attr('value','1');
+//	} else {
+//		$(this).attr('value','0');
+//	}
+//	
+//	favorites.submit();
+//});
