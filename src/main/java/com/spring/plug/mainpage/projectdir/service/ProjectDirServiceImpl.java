@@ -14,6 +14,10 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	@Autowired
 	private ProjectDirDAO projectDirDAO;
 	
+	public ProjectDirServiceImpl() {
+		System.out.println("project dir service start");
+	}
+	
 	@Override
 	public void insertProjectDir(ProjectDirVO vo) {
 		projectDirDAO.insertProjectDir(vo);
@@ -26,8 +30,7 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	
 	@Override
 	public void getProjectDir(ProjectDirVO vo) {
-		// TODO Auto-generated method stub
-		
+		projectDirDAO.getProjectDir(vo);
 	}
 
 	@Override

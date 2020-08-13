@@ -11,12 +11,18 @@ import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 @Repository
 public class ProjectDirDAO {
 	
+	public ProjectDirDAO() {
+		System.out.println("project dir DAO start");
+	}
+	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	// 프로젝트 생성
 	public void insertProjectDir(ProjectDirVO vo) {
 		sqlSessionTemplate.insert("ProjectDirDAO.projectDirInsert", vo);
 	}
+	
 	public void insertProjectLookup(ProjectDirVO vo) {
 		sqlSessionTemplate.insert("ProjectDirDAO.insertProjectLookup", vo);
 	}
@@ -25,14 +31,18 @@ public class ProjectDirDAO {
 		sqlSessionTemplate.insert("ProjectDirDAO.insertProjectLocker", vo);
 	}
 	
-	public void projectDirFavorites(ProjectDirVO vo) {
-		sqlSessionTemplate.update("ProjectDirDAO.updateProjectFavorites",vo);
-	}
-	
 	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo){
 		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotalList",vo);
 	}
 	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo){
 		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirManagerList",vo);
+	}
+	
+	public void projectDirFavorites(ProjectDirVO vo) {
+		sqlSessionTemplate.update("ProjectDirDAO.updateProjectFavorites",vo);
+	}
+	
+	public void getProjectDir(ProjectDirVO vo) {
+		sqlSessionTemplate.selectOne("ProjectDirDAO.getProjectDir",vo);
 	}
 }

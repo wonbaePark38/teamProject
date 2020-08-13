@@ -54,5 +54,8 @@
 		USING(project_id)
 		WHERE member_id = #{member_id} and project_manager = #{project_manager}
 	</select>
-	 
+
+	<select id="getProjectUser" resultType="project_lookup" parameterType="project_lookup">
+	</select>
+	
 </mapper>

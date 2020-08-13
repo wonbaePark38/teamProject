@@ -3,11 +3,8 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="css/newproject_css.css">
 <script src="script/projectdir.js"></script>
-<form action="newproject.do" id="newproject" method="post">
 
-<input type="hidden" name="project_manager" value="0">
-<input type="hidden" name="project_type" value="0">
-
+<div id="new_project_div"></div>
 <div class="background_shadow" style="z-index: 9000; position: absolute;"></div>
 	<div class="layerstyle4" style="width: 500px; z-index: 9001" >
 		<div id="projectOptionLayer" class="layerstyle4_po" style="display: block;">
@@ -55,9 +52,8 @@
 				</dl>
 				
 				<div class="t_center" style="margin-top:30px;">
-					<a id="flowMakeBtn" type="button" class="new_btnstyle50 on" onclick="newproject()">프로젝트 생성</a>
+					<a id="flowMakeBtn" type="button" class="new_btnstyle50 on" onclick="new_project_form()">프로젝트 생성</a>
 				</div>
 			</div>
 		</div>
 	</div>
-</form>

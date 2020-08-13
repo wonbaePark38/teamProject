@@ -17,33 +17,36 @@ public class ProjectDirController {
 	@Autowired
 	private ProjectDirService projectDirService;
 	
+	public ProjectDirController() {
+		System.out.println("projectdir controller start");
+	}
 	
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
 	public String projectDirInsert(ProjectDirVO vo) {
-		vo.setMember_id(1);
+		System.out.println(vo.toString());
 		projectDirService.insertProjectDir(vo);	
-		System.out.println("ProjectDir 생성");
+		System.out.println(vo.toString());
+		System.out.println("project insert");
 		
 		projectDirService.insertProjectLookup(vo);
-		System.out.println("ProjectLookup 생성");
+		System.out.println(vo.toString());
+		System.out.println("project lookup insert");
 		
 		vo.setProject_favorites(0);
 		vo.setProject_locker("");
 		vo.setHide_locker(0);
 		projectDirService.insertProjectLocker(vo);
 		System.out.println(vo.toString());
-		System.out.println("ProjectLocker 생성");
+		System.out.println("project locker insert");
 		
 		return "projectdir.do";
 	}
-	
 	
 	// 프로젝트 정렬
 	// 전체보기
 	@RequestMapping(value="/projectdir.do")
 	public ModelAndView getProjectDirTotalList(ProjectDirVO vo, ModelAndView mav) {
-		vo.setMember_id(1);
-		vo.setProject_manager(0);
+		System.out.println(vo.toString());
 		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo);
 		mav.addObject("projectDirList",list);
 		mav.setViewName("mainProjectDir.jsp");
@@ -61,12 +64,19 @@ public class ProjectDirController {
 	}
 
 	// 프로젝트 즐겨찾기
-	@RequestMapping(value = "/projectfavorites.do")
+	@RequestMapping(value = "/projectfavorites.do", method = RequestMethod.POST)
 	public String updateProjectFavorites(ProjectDirVO vo) {
-		vo.setMember_id(1);
-//		System.out.println(vo.getProject_id());
-//		System.out.println(vo.getProject_favorites());
 		projectDirService.updateProjectFavorites(vo);
 		return "projectdir.do";
+	}
+	
+	// 프로젝트 선택
+	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
+	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav) {
+		vo.setMember_id(1);
+		
+		mav.addObject("getProject",vo);
+		mav.setViewName("mainpage.do");
+		return mav;
 	}
 }

@@ -7,9 +7,9 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script src="script/projectdir.js"></script>
 
-<form action="projectfavorites.do" id="favorites_form" method="post">
 
-<div style="padding-left: 15px;">
+
+<div style="padding-left: 15px;" id="content_div">
 	<div class="projectdir_content_header">
 		<div style="float: right;">
 			<a onclick="contentset()" style="float: left; padding-right: 5px; border-right: 1px solid #eaeaea;">설정</a>
@@ -39,12 +39,13 @@
 		<h4 id="content_type_title">즐겨찾기</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
 			<c:if test="${project_lookup.project_favorites ne '0'}">
-			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
-				<script>
+			<div class="project_div">
+			<script>
 					$('.content_type').show();	
-				</script>
-				<div class="pro">
-					<input class="title_btn_check" id="star_btn" type="button"name="project_favorites" value="${project_lookup.project_favorites}">
+			</script>
+			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
+				<div class="project_select">
+					<input class="title_btn_check" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
 					<div class="title_box">
 						<span>${project_lookup.project_name}</span>
 					</div>
@@ -52,18 +53,19 @@
 						<span></span> <span>명 참여중</span>
 					</div>
 				</div>
+			</div>
 			</c:if>
 		</c:forEach>
+		
 		</div>
 	</div>
-
 	<div id="project_dir_list" style="z-index: 1; width: 100%; display: inline-block;">
 		<h4 style="padding-bottom: 10px;">참여중</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
-			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
 			<c:if test="${project_lookup.project_favorites eq '0'}">
-				<div class="pro">
-					<input class="title_btn star_btn" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
+			<div class="project_div">
+			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
+				<div class="project_select">
 					<div class="title_box">
 						<span>${project_lookup.project_name}</span>
 					</div>
@@ -71,8 +73,9 @@
 						<span></span> <span>명 참여중</span>
 					</div>
 				</div>
+				<input class="title_btn" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
+			</div>
 			</c:if>
 		</c:forEach>
 	</div>
 </div>
-</form>

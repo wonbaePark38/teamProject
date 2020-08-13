@@ -22,7 +22,10 @@ public class ProjectDirVO {
 	private int project_favorites;
 	private String project_locker;
 	private int hide_locker;
-
+	private int project_user;
+	
+	
+	
 	public int getProject_id() {
 		return project_id;
 	}
@@ -101,14 +104,20 @@ public class ProjectDirVO {
 	public void setHide_locker(int hide_locker) {
 		this.hide_locker = hide_locker;
 	}
-	
+	public int getProject_user() {
+		return project_user;
+	}
+	public void setProject_user(int project_user) {
+		this.project_user = project_user;
+	}
 	@Override
 	public String toString() {
 		return "ProjectDirVO [project_id=" + project_id + ", project_name=" + project_name + ", project_content="
 				+ project_content + ", project_type=" + project_type + ", createdate=" + createdate + ", lookup_id="
 				+ lookup_id + ", member_id=" + member_id + ", project_manager=" + project_manager + ", joindate="
 				+ joindate + ", locker_id=" + locker_id + ", project_favorites=" + project_favorites
-				+ ", project_locker=" + project_locker + ", hide_locker=" + hide_locker + "]";
+				+ ", project_locker=" + project_locker + ", hide_locker=" + hide_locker + ", project_user="
+				+ project_user + "]";
 	}
 	
 }
