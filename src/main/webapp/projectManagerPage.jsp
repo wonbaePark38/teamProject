@@ -97,7 +97,7 @@
 </body>
 
 <script type="text/javascript" src="script/articleScript.js"></script>
-<script type="text/javascript" src="js/page_ajax.js"></script>
+<script type="text/javascript" src="script/page_ajax.js"></script>
 <script src="js/jquery-3.5.1-min.js"></script>	
 <script src="vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="script/projectManagerPage.js"></script> 

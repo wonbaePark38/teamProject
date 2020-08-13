@@ -131,7 +131,7 @@
 		<div class="container main_st">
 			<div class="m_se01" style="margin-top: 50px;">
 				<section>
-					<div class="imgbg"></div>
+					<div class="imgbg" style="width: 837px;"></div>
 					<article>
 
 						<div class="_h1_1" data-langcode="H0"

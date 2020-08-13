@@ -21,4 +21,7 @@
 		SELECT * FROM ADMININFO WHERE ADMIN_USERNAME=#{username}
 	</select>
 	
+	<update id="defaultPassword" parameterType="adminSignup">
+		UPDATE ADMININFO SET ADMIN_PASSWORD = #{password}, SALT = #{salt} WHERE ADMIN_EMAIL = #{email}
+	</update>
 </mapper>
