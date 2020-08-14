@@ -16,7 +16,7 @@
 		<property name="maxUploadSize" value="1000000" />
 	</bean>
 
-	<bean id="intercepter" class="com.spring.plug.login.controller.Interceptor" />
+	<!-- <bean id="intercepter" class="com.spring.plug.login.controller.Interceptor" />
 	<bean id="autoLoginIntercepter"	class="com.spring.plug.login.controller.prohibitController" />
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -33,6 +33,6 @@
 		</mvc:interceptor>
 
 	</mvc:interceptors>
-
+ -->
 </beans>
 <!-- 인터셉터 선언 -->
