@@ -16,7 +16,7 @@
     <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
     <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
  
-    <script type='text/javascript' src='./script/script.js'></script>
+   
     <script type='text/javascript' src='./script/totalFile.js'></script>
     
     <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
@@ -271,7 +271,7 @@
             </div>
         </div>
           
-           
+         
     <!--아이콘+테이블 centerAreaContainer-->
 
     </div>
@@ -282,18 +282,3 @@
 
 </html>
 
-<%--
-     <div class='tableContainer'>
-                    <div class='sorttype'>
-                        <div class='checkSort'>
-                            
-                               
-                            
-                            <input type='checkbox' id='checkbox'>
-                            <a href='javascript:void(0)'; onclick='callfunction(); return false;'>최근 업로드순</a>&nbsp;&nbsp;
-                            <a href='javascript:void(0)'; onclick='callfunction(); return false;'>파일명 순</a>&nbsp;&nbsp;
-                        </div>
-                       
-                    </div>
-                </div>
- --%>

@@ -4,7 +4,7 @@ $(document).ready(function(){
 	  var filesizeStatus = 1;
 	  var writerStatus = 1;
 	  var updateStatus = 1;
-	initFileList();
+	  initFileList();
 	
 	
 	 $(".downimg").show();
@@ -19,10 +19,11 @@ $(document).ready(function(){
          $('.checkbox-baduk').prop('checked',this.checked);
        });
 
-       
-       
+       /*
+        컨테츠 메뉴 td에서 클릭했을때 이벤트
+       */
        $("#namesortbt").click(function(){
-           console.log('클릭~~');
+          /*화살표 방향 바꾸기 */
            if(filenameStatus==1){
              
              $("#namesortbt .downimg").hide();
@@ -107,10 +108,7 @@ $(document).ready(function(){
          
        });
      
-     $(document).on('click','.totalTypeBt',function(){
-    	 console.log($('#filetypeSelectContainer').css('display'));
-    	 $('#filetypeSelectContainer').css('display') == 'none' ? $('#filetypeSelectContainer').css('display','block') : $('#filetypeSelectContainer').css('display','none')
-     });
+    
      
 	 $(document).on('click',"#listSortBt", function(){ //리스트보기 버튼 클릭했을때 바둑판형 가리기
 	      $('#listSortBt').css('backgroundColor','#615cba');
@@ -127,29 +125,37 @@ $(document).ready(function(){
 	      $('.baduk-main-article-container').css('display','block');
 	  });
 	  
-	  
+	     
 	  $(document).on('click',".moreBt", function(){ //리스트형에서 히든메뉴 클릭했을대
-	      console.log('히든 메뉴 클릭');
-	      var node = $(this).parent().next();
-	      
-	      style = node.css('display');
-	      if( node.css('display') == 'none'){
-	        style = 'block';
-	        node.css('display','block');
-	      }else{
-	        style='none';
-	        node.css('display','none');
-	      }
+		  var node = $(this).parent().next();
+		  
+		  node.toggle(
+			function(){node.addClass('show')},
+			function(){node.addClass('hide')}
+		  );
+		
 	});
+	
 	  
+	  $('body').on('click',function(e){ //히든 메뉴 열려있을때 바디 클릭하면 닫히는 이벤트
+		 
+		  var targetPoint = $(e.target);
+		  
+		  var popCallBtn = targetPoint.hasClass('moreBt');//버튼
+		  var popArea = targetPoint.hasClass('moreMenuContainer');
+		  
+		  if(!popArea){
+			  $('.moreMenuContainer').hide();
+		  }
+	  });
 	  
 	  /*사이드바 메뉴에서 프로젝트 클릭할때 div 추가 삭제 함수*/
 	  $(document).on('click',".projectNameBt", function(){
-		  console.log('버튼클릭'+dataObj);
-		  var buttonValue = this.value;
-		  $('#changePathArea').text(buttonValue);
 		  
-		  $('.list-main-article-container').children('.tableRow').remove();
+		  var buttonValue = this.value;
+		  $('#changePathArea').text(buttonValue); //선택 프로젝트 이름 헤더에 출력
+		  
+		  $('.list-main-article-container').children('.tableRow').remove(); //그전에 띄워논거 지움
 		  $('.baduk-sort-div').children('.item-info').remove();
 		  
 		  $.each(dataObj,function(index,element) {//전체 프로젝트가 아닌 프로젝트 이름을 클릭했을때
@@ -157,14 +163,31 @@ $(document).ready(function(){
 				  settingList(element); //클릭한 프로젝트의 내용을 컨텐츠 화면에 출력
 			  }
 			  if(buttonValue == '전체 프로젝트'){ //전체 프로젝트 클릭했다면
-				  $('.list-main-article-container').children('.tableRow').remove(); //그전에 찍어논것 제거하고
-				  $('.baduk-sort-div').children('.item-info').remove();
-				  $.each(dataObj,function(index,element){ //db에서 가저온 파일들 컨텐츠 부분에 모두 세팅
-					  settingList(element);
-				  });
+				  settingList(element);
+				  
 			  }
 		  });
 	  });
+	  
+	  
+	  $(document).on('click','.totalTypeBt',function(){ //
+		  //파일 타입 버튼 div 출력하거나 닫음
+		  $('#filetypeSelectContainer').css('display') == 'none' ? $('#filetypeSelectContainer').css('display','block') : $('#filetypeSelectContainer').css('display','none');
+		  var buttonValue = this.value; //현재 선택한 파일 포맷 buttonValue에 저장		 
+		  console.log(buttonValue);
+		  var selectedProjectName = $('#changePathArea').text(); 
+		  console.log(selectedProjectName);
+		  $('.list-main-article-container').children('.tableRow').remove(); //그전에 띄워논거 지움
+		  $('.baduk-sort-div').children('.item-info').remove();
+		  $.each(dataObj, function(index,element){
+			  if(selectedProjectName == '전체 프로젝트'){
+				  settingList(element);
+			  } 
+		  });
+	      
+	  });
+	  
+	
 });
 
 /* 카테고리 설정 */
@@ -174,9 +197,10 @@ function initFileList() {
 	   var projectList = [];
 	  $.each(data,function(index,element) {
     	  settingList(element); // 메인 아티클에 프로젝트별 파일 목록 삽입 함수 호출
-    	  projectList.push(element.projectName);
+    	  projectList.push(element.projectName); //임시 배열에 프로젝트 이름만 푸쉬
       }); //end each
 	  settingProjectId(projectList);
+	  $('#changePathArea').text('전체 프로젝트');
 	  //사이드바 프로젝트 리스트에 프로젝트 리스트값 삽입 함수 호출 
    });
 }
@@ -315,7 +339,6 @@ function getFileType(fileName){
 	 			break;
 	 			
 	 }
-	 
 	 return filePath;
 }
 function test(){

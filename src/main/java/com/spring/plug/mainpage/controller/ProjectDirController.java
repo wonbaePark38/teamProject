@@ -25,7 +25,10 @@ public class ProjectDirController {
 	}
 	
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
-	public String projectDirInsert(ProjectDirVO vo) {
+	public String projectDirInsert(ProjectDirVO vo, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		
 		projectDirService.insertProjectDir(vo);	
 		System.out.println("project insert");
 		
