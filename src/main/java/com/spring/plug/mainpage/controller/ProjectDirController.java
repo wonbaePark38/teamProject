@@ -46,8 +46,8 @@ public class ProjectDirController {
 	@RequestMapping(value="/projectdir.do")
 	public ModelAndView getProjectDirTotalList(ProjectDirVO vo, ModelAndView mav, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
-		
-		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(user.getSeq());
+		vo.setMember_id(user.getSeq());
+		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo.getMember_id());
 		mav.addObject("projectDirList",list);
 		mav.setViewName("mainProjectDir.jsp");
 		return mav;
@@ -63,7 +63,9 @@ public class ProjectDirController {
 
 	// 프로젝트 즐겨찾기
 	@RequestMapping(value = "/projectfavorites.do", method = RequestMethod.POST)
-	public String updateProjectFavorites(ProjectDirVO vo) {
+	public String updateProjectFavorites(ProjectDirVO vo, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
 		projectDirService.updateProjectFavorites(vo);
 		return "projectdir.do";
 	}

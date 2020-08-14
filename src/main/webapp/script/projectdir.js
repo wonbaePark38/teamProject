@@ -1,13 +1,7 @@
-// 멤버 아이디
-function member_id_search(){
-	var member_id = $('input[id=member_id]').val();
-	return member_id;
-}
 
 // 프로젝트 생성
 function new_project_form(){
 	
-	var member_id = member_id_search();
 	var project_name = $('input[name=project_name]').val();
 	var project_content = $('input[name=project_content]').val();
 	
@@ -19,7 +13,6 @@ function new_project_form(){
 	new_project.attr('action','newproject.do');
 	
 	// form 데이터
-	new_project.append($('<input/>',{type:'hidden', name:'member_id', value:member_id}));
 	new_project.append($('<input/>',{type:'hidden', name:'project_name', value:project_name}));
 	new_project.append($('<input/>',{type:'hidden', name:'project_content', value:project_content}));
 	new_project.append($('<input/>',{type:'hidden', name:'project_manager', value:'0'}));
@@ -63,7 +56,6 @@ $(document).on('click','#star_btn',function(){
 		$(this).attr('value','0');
 	}
 	
-	var member_id = member_id_search();
 	var project_id = $(this).prev().prev().attr('value');
 	var project_favorites = $(this).attr('value');
 	
@@ -74,7 +66,6 @@ $(document).on('click','#star_btn',function(){
 	favorites_form.attr('method','post');
 	favorites_form.attr('action','projectfavorites.do');
 	// form 데이터
-	favorites_form.append($('<input/>',{type:'hidden', name:'member_id', value:member_id}));
 	favorites_form.append($('<input/>',{type:'hidden', name:'project_id', value: project_id}));
 	favorites_form.append($('<input/>',{type:'hidden', name:'project_favorites', value:project_favorites}));
 	

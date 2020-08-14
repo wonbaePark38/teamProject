@@ -58,7 +58,6 @@
 </style>
 
 <body>
-	<input type="hidden" id="member_id" name="seq" value="${user.seq}">
 	
 	<div class="mainWrap">
 		<!-- Navigation -->
