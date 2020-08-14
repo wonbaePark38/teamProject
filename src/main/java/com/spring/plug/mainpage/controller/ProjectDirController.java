@@ -67,7 +67,9 @@ public class ProjectDirController {
 
 	// 프로젝트 즐겨찾기
 	@RequestMapping(value = "/projectfavorites.do", method = RequestMethod.POST)
-	public String updateProjectFavorites(ProjectDirVO vo) {
+	public String updateProjectFavorites(ProjectDirVO vo,  HttpSession session) {
+		System.out.println(vo.getProject_id());
+		System.out.println(vo.getProject_favorites());
 		System.out.println("즐겨찾기");
 		projectDirService.updateProjectFavorites(vo);
 		System.out.println("즐겨찾기 끝");
@@ -77,7 +79,7 @@ public class ProjectDirController {
 	// 프로젝트 선택
 	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
 	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav) {
-		
+
 		mav.addObject("getProject",vo);
 		mav.setViewName("mainpage.do");
 		return mav;

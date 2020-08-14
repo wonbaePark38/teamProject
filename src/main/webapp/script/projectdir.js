@@ -65,6 +65,7 @@ $(document).on('click','#star_btn',function(){
 	favorites_form.attr('method','post');
 	favorites_form.attr('action','projectfavorites.do');
 	// form 데이터
+	
 	favorites_form.append($('<input/>',{type:'hidden', name:'project_id', value: project_id}));
 	favorites_form.append($('<input/>',{type:'hidden', name:'project_favorites', value:project_favorites}));
 	
