@@ -55,8 +55,6 @@ public class ProjectDirController {
 	// 관리자인 프로젝트만 보기
 	@RequestMapping(value="/projectdir1.do")
 	public ModelAndView getProjectDirManagerList(ProjectDirVO vo, ModelAndView mav) {
-		vo.setMember_id(1);
-		vo.setProject_manager(1);
 		List<ProjectDirVO> list = projectDirService.getProjectDirManagerList(vo);
 		mav.addObject("projectDirList",list);
 		mav.setViewName("mainProjectDir.jsp");
@@ -73,8 +71,6 @@ public class ProjectDirController {
 	// 프로젝트 선택
 	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
 	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav) {
-		vo.setMember_id(1);
-		
 		mav.addObject("getProject",vo);
 		mav.setViewName("mainpage.do");
 		return mav;
