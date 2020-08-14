@@ -47,7 +47,7 @@ $(document).on('click','.project_select',function(){
 	project_select_form.attr('action','projectselect.do');
 	
 	// form 데이터
-	project_select_form.append($('<input/>',{type:'hidden', name:'project_id', value: project_id}));
+	project_select_form.append($('<input/>',{type:'hidden', name:'project_id' ,value: project_id}));
 	
 	// form 생성하는 곳
 	project_select_form.appendTo('#content_div');

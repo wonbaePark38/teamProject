@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.mainpage.article.vo.Article1VO;
+import com.spring.plug.mainpage.article.vo.ArticleReplyVO;
+import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
+import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.article.service.ArticleService;
 
 @Controller
@@ -28,19 +33,45 @@ public class MainPageController {
    private String[] arr;
    private int count;
 
+   @RequestMapping(value = "/articlereply.do")
+   public String articleReplyInsert(ArticleReplyVO vo) {
+	   
+	   System.out.println(vo.toString());
+	   
+	   service.insertReply(vo);
+	   
+	   return "mainpage.do";
+   }
+   
+   
    @RequestMapping(value = "/mainpage.do")
-   public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
-
+   public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo ,Article1VO vo, ModelAndView mav, HttpSession session) {
+	   
+	   vo.setProject_id(project.getProject_id());
+	   rvo.setProject_id(project.getProject_id());
+	   
 	   List<Article1VO> articleList = service.selectArticle(vo);
 	   
-	   for (int i = 0; i < articleList.size(); i++) {
-		System.out.println("select : " + articleList.get(i).toString());
+//	   for (int i = 0; i < articleList.size(); i++) {
+//		System.out.println("select : " + articleList.get(i).toString());
+//	   }
+	   
+	   
+	   List<ArticleReplyVO> replyList = service.selectReply(rvo);
+	   
+	   for(int i = 0; i < replyList.size(); i++) {
+		   
+		   System.out.println("댓글 : "+replyList.get(i));
 	   }
 	   
+	   mav.addObject("project", project);
 	   mav.addObject("articleList",articleList);
+	   mav.addObject("replyList",replyList);
 	   mav.setViewName("mainPage.jsp");
       return mav;
    }
+   
+   
 
    @RequestMapping(value = "/writeform1.do")
    public String article1Insert(Article1VO vo) throws IOException {
