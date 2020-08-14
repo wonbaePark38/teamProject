@@ -4,25 +4,24 @@
 
 <mapper namespace="FileDAO">
 	<resultMap id="fileList" type="file" >
-		<result property="fileName" column="writeform1_file_name" />
-		<result property="projectId" column="writeform1_project_id" />
-		<result property="writer" column="writeform1_writer"/>
-		<result property="writeDate" column="writeform1_regdate"/>
+		<result property="projectId" column="PROJECT_ID" />	
+		<result property="projectName" column="PROJECT_NAME"/>
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileSize" column="FILE_SIZE"/>
+		<result property="writer" column="WRITER"/>
+		<result property="writeDate" column="REGDATE"/>
+		
+		
+		
 	</resultMap>
 	
-<select id="getProjectList" resultMap="fileList" parameterType="String"> 
-		
-select writeform1_project_id,writeform1_file_name,writeform1_writer, writeform1_regdate 
-	from (select writeform1_project_id, writeform1_file_name, writeform1_writer, writeform1_regdate from mainpage_article1 
-			where writeform1_file_name is not null
-	union
-		  select writeform2_project_id, writeform2_file_name, writeform2_writer, writeform2_regdate from mainpage_article2 
-			where writeform2_file_name is not null
-	union
-		  select writeform3_project_id, writeform3_file_name, writeform3_writer, writeform3_regdate from mainpage_article3 
-			where writeform3_file_name is not null)
-	where writeform1_project_id
-	in (select distinct projectid from wonbaetest where member_email=#{loginUser})
+<select id="getProjectList" resultMap="fileList" parameterType="int"> 
+SELECT PROJECT_ID, PROJECT_NAME,FILE_NAME, FILE_SIZE, WRITER,REGDATE
+ FROM MAINPAGE_ARTICLE INNER JOIN PROJECT_LOOKUP USING(PROJECT_ID) 
+ WHERE MEMBER_ID=#{loginUser} 
+ AND FILE_NAME IS NOT NULL 
+ OR IMG_NAME IS NOT NULL
+ order by project_id ASC
 </select> 
 	
 	

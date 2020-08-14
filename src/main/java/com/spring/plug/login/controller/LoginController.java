@@ -31,12 +31,12 @@ public class LoginController{
 	@Autowired
 	private UserServiceImpl userService;
 	
-	/*@RequestMapping(value="/login.do",method=RequestMethod.GET)
+	@RequestMapping(value="/login.do",method=RequestMethod.GET)
 	public ModelAndView loginView(UserVO vo,ModelAndView mav) {
 		mav.setViewName("newlogin.jsp");
 		
 		return mav;
-	}*/
+	}
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
 	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session, HttpServletResponse response,Model model) {
@@ -63,7 +63,7 @@ public class LoginController{
 			if(user!=null /*&& user.getAuthStatus().equals("1")*/) {
 				System.out.println("컨트롤러 리턴");
 				session.setAttribute("user", user);
-				
+				System.out.println("저장 세션"+ session.getAttribute("user"));
 				if(vo.isUseCookie()) {//자동로그인 체크한 경우
 					Cookie loginCookie = new Cookie("loginCookie",session.getId());
 					loginCookie.setPath("/");
@@ -78,7 +78,7 @@ public class LoginController{
 				}
 				
 				mav.addObject("login", user);
-				mav.setViewName("projectdir.do");
+				mav.setViewName("totalFile.jsp");
 				return mav;
 			
 			}else if(user != null && user.getAuthStatus().equals("0")) {

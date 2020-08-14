@@ -4,22 +4,22 @@
   $(document).ready(function(){
     
 	  var checknumber=0;
-	 // var filenameStatus = 1;  
+	  /*var filenameStatus = 1;  
 	  var filesizeStatus = 1;
 	  var writerStatus = 1;
 	  var updateStatus = 1;
+	 */
+	 
+	 
+	  
 	  var node2='';
 	  var node2style;
-	 
-	  var listViewStats = 0;
-	  
-
     //$(".downimg").show();
     //$(".upimg").hide();
     
     
     
-    $('.checkbox-all').click(function(){
+    /*$('.checkbox-all').click(function(){
       $('.col1-checkbox').prop('checked',this.checked);
     });
 
@@ -30,7 +30,21 @@
 
     
     
-  
+    $("#namesortbt").click(function(){
+        console.log('클릭~~');
+        if(filenameStatus==1){
+          
+          $("#namesortbt .downimg").hide();
+          $("#namesortbt .upimg").show();
+          filenameStatus=0;
+        }else if(filenameStatus==0){
+          
+          $("#namesortbt .downimg").show();
+          $("#namesortbt .upimg").hide();
+          filenameStatus=1;
+        }
+        
+      });
     $("#sizesortbt").click(function(){
       
       if(filesizeStatus==1){
@@ -100,7 +114,7 @@
         updateStatus=1;
       }
       
-    });
+    });*/
    
     
     //체크박스 체크 했을때 발생하는 이벤트
@@ -271,8 +285,6 @@ function searchPress(){
   console.log('클릭');
 }
 
-function foldfiletype(){
-	  document.getElementById('filetypeSelectContainer').style.display=(document.getElementById('filetypeSelectContainer').style.display=='block') ? 'none' : 'block';
-}
+
 
 

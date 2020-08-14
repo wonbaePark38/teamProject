@@ -13,8 +13,8 @@ public class FileDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public List<FileVO> getProjectList(FileVO vo){
+	public List<FileVO> getProjectList(int loginUser){
 		System.out.println("-->mybatis로 getProjectList()기능처리");
-		return sqlSessionTemplate.selectList("FileDAO.getProjectList", vo);
+		return sqlSessionTemplate.selectList("FileDAO.getProjectList", loginUser);
 	}
 }

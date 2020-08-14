@@ -102,7 +102,10 @@
 			</a>
 		</form>
 	</ul>
-
+	
+	<form action="logout.do" method="get">
+	<input type="submit" name="logoutbt" value="로그아웃"/>
+	</form>
 	</div>
 	
 	

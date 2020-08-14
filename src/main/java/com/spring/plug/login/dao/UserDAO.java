@@ -68,8 +68,8 @@ public class UserDAO {
 		sqlSessionTemplate.update("UserDAO.keepLogin",map);
 	}
 	
-	public UserVO checkUserWithSessionKey(String sessionId) {
-		return sqlSessionTemplate.selectOne("UserDAO.checkUserWithSessionKey", sessionId);
+	public UserVO checkUserWithSessionKey(String sessionkey) {
+		return sqlSessionTemplate.selectOne("UserDAO.checkUserWithSessionKey", sessionkey);
 	}
 }
 

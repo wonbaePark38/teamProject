@@ -104,7 +104,7 @@
                         파일형태
                     </div>
                     <div class='totalBtDiv'>
-                        <button type='button' class="totalTypeBt" onclick='foldfiletype()' value='모든 포맷'>
+                        <button type='button' class="totalTypeBt"  value='모든 포맷'>
                             <i class='fas fa-file-alt'  style='color:#615cba; font-size: 30px; margin-right: 30px;'></i>
                             모든 포맷
                         </button>
@@ -112,11 +112,7 @@
 
                     <div id='filetypeSelectContainer'>
                         <ul class='selectfiletypeDiv'>
-                            <li>
-                                <button type='button' id='cloudBt'>
-                                    <span id='cloudBtSpan'></span>클라우드
-                                </button>
-                            </li>
+                           
                             <button type='button' id='pdfBt'>
                                 <span id='pdfBtSpan'></span>PDF
                             </button>

@@ -13,7 +13,20 @@ public class FileVO {
 	private String targetProject;
 	private String user;
 	private String loginUser;
-	
+	private String projectName;
+	private String fileSize;
+	public String getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+	public String getProjectName() {
+		return projectName;
+	}
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 	public String getLoginUser() {
 		return loginUser;
 	}
