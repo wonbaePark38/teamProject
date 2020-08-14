@@ -5,7 +5,6 @@
 <!-- 게시글 넣는곳 -->
 <div class="article">
    <div class="article_margin">
-
       <!-- 타이틀 -->
       <div class="title_margin">
          <div class="title_border">
@@ -19,7 +18,7 @@
          <div class="work_report">
             <div class="work_report_title">
                <!-- 프로젝트 명 -->
-               <p id="project_name" style="display: inline-block;">프로젝트명</p>
+               <p id="project_name" style="display: inline-block;">Article</p>
 
                <a id="work_report_fold" onclick="fold()"> 접기</a>
 
@@ -91,6 +90,8 @@
                      <input type="hidden" name="img_name">
                      <input type="hidden" name="img_size">
                      <input type="hidden" name="form_name" value="nomalWrite">
+                     <input type="hidden" name="project_id" value="${project.project_id }">
+                     <input type="hidden" name="writer" value="${sessionScope.user.name }">
                      <div id="writeForm_div">
 
                         <textarea name="writeForm1_content" id="writeForm1_content_text" class="div_text_write"></textarea>
@@ -159,6 +160,9 @@
                      <input type="hidden" name="img_name">
                      <input type="hidden" name="img_size">
                      <input type="hidden" name="form_name" value="nomalWrite2.0">
+                     <input type="hidden" name="project_id" value="${project.project_id }">
+                     <input type="hidden" name="writer" value="${sessionScope.user.name }">
+                     
                      <div class="write20_form" id="write20Form_div">
                         <!-- 제목입력 -->
                         <div class="writeForm2_title">
@@ -248,7 +252,11 @@
                      <input type="hidden" name="file_size">
                      <input type="hidden" name="img_name">
                      <input type="hidden" name="img_size">
+                     <input type="hidden" name="project_name">
+                     <input type="hidden" name="project_id" value="${project.project_id }">
+                     <input type="hidden" name="writer" value="${sessionScope.user.name }">
                      <div class="work_form" id="workForm_div">
+                     
 
                         <input type="hidden" name="form_name" value="workWrite">
                         
@@ -457,6 +465,8 @@
                   <!-- 일정 -->
                   <form method="post" action="writeform4.do" id="writeForm4_form">
                      <input type="hidden" name="form_name" value="scheWrite">
+                     <input type="hidden" name="project_id" value="${project.project_id }">
+                     <input type="hidden" name="writer" value="${sessionScope.user.name }">
                      <div class="schedule_form" id="scheduleForm_div">
                         <div>
                            <!-- 일정 제목 -->
@@ -608,6 +618,9 @@
                      <input type="hidden" name="writeForm5_content" id="todo_content_value">
                      <input type="hidden" name="writeForm5_date" id="todo_date_value">
                      <input type="hidden" name="writeForm5_worker" id="todo_worker_value">
+                     <input type="hidden" name="project_id" value="${project.project_id }">
+                     <input type="hidden" name="writer" value="${sessionScope.user.name }">
+                     
                      <div class="todo_form" id="todoForm_div">
                         <!-- 할일 제목 -->
                         <div>
@@ -737,10 +750,8 @@
 	     <c:forEach var="list" items="${articleList }">
 	     	
 	     	<c:set var="form_name" value="${ list.form_name}" />
-	     	
+	     	<c:set var="article_id" value="${list.article_id }"/>
 	     	<c:choose>
-	     		
-	     		
 	     		
 	     		<c:when test="${form_name eq 'nomalWrite'}" >
 	     			<div class="post_idx">
@@ -791,37 +802,49 @@
 						</div>
 						<!-- 글내용 -->
 						
+						
 <!-- 						댓글 작성 -->
-						<div class="remark_div">
+						<c:forEach var="reply" items="${replyList }">
+						
+							<c:set var="reply_article_id" value="${reply.article_id }"/>
 							
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile_remark">
-							</div>
-							<div class="remark_setting">
-								<span>수정</span><em>|</em><span>삭제</span>
-							</div>
-							<div class="remark_data">
-								<strong>이름</strong>
-								<span>${list.regDate }</span>
-								<a id="remark_like_icon">좋아요</a>
-								<pre>댓글 내용</pre>			
-							</div>
-							
-						</div>
+							<c:if test="${article_id eq reply_article_id }">
+								<div class="remark_div">
+									
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile_remark">
+									</div>
+									<div class="remark_setting">
+										<span>수정</span><em>|</em><span>삭제</span>
+									</div>
+									<div class="remark_data">
+										<strong>${reply.reply_writer }</strong>
+										<span>${reply.reply_regdate }</span>
+										<a id="remark_like_icon">좋아요</a>
+										<pre>${reply.reply_content }</pre>			
+									</div>
+									
+								</div>
+							</c:if>
+						</c:forEach>
 <!-- 						댓글 작성 -->
 						
 <!-- 						댓글 -->
-						<div class="" style="position: relative; padding-bottom: 10px;">
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
-							</div>
-							<div class="remarkcntn">
-								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+						<form method="post" action="articlereply.do">
+							<input type="hidden" name="reply_writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_id" value="${project.project_id }">
+							<input type="hidden" name="article_id" value="${list.article_id }">
+							<div style="position: relative; padding-bottom: 10px;">
+								<div class="photo" style="float: left; padding-left: 10px;">
+									<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+								</div>
+								
+								<input name="reply_content" type="text" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="display: inline-block; font-size:13px; margin-left: 5px; width: 83%; height: 32px;" >
+									
+								<a class="remark_upload"></a>
 								
 							</div>
-							<a class="remark_upload"></a>
-							
-						</div>
+						</form>
 <!-- 						댓글 -->
 					</div>
 	     		</c:when>
@@ -899,36 +922,47 @@
 						<!-- 글내용 -->
 						
 						<!-- 						댓글 작성 -->
-						<div class="remark_div">
+						<c:forEach var="reply" items="${replyList }">
+						
+							<c:set var="reply_article_id" value="${reply.article_id }"/>
 							
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile_remark">
-							</div>
-							<div class="remark_setting">
-								<span>수정</span><em>|</em><span>삭제</span>
-							</div>
-							<div class="remark_data">
-								<strong>이름</strong>
-								<span>${list.regDate }</span>
-								<a id="remark_like_icon">좋아요</a>
-								<pre>댓글 내용</pre>			
-							</div>
-							
-						</div>
+							<c:if test="${article_id eq reply_article_id }">
+								<div class="remark_div">
+									
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile_remark">
+									</div>
+									<div class="remark_setting">
+										<span>수정</span><em>|</em><span>삭제</span>
+									</div>
+									<div class="remark_data">
+										<strong>${reply.reply_writer }</strong>
+										<span>${reply.reply_regdate }</span>
+										<a id="remark_like_icon">좋아요</a>
+										<pre>${reply.reply_content }</pre>			
+									</div>
+									
+								</div>
+							</c:if>
+						</c:forEach>
 <!-- 						댓글 작성 -->
 						
 <!-- 						댓글 -->
-						<div class="" style="position: relative; padding-bottom: 10px;">
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
-							</div>
-							<div class="remarkcntn">
-								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+						<form method="post" action="articlereply.do">
+							<input type="hidden" name="reply_writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_id" value="${project.project_id }">
+							<input type="hidden" name="article_id" value="${list.article_id }">
+							<div style="position: relative; padding-bottom: 10px;">
+								<div class="photo" style="float: left; padding-left: 10px;">
+									<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+								</div>
+								
+								<input name="reply_content" type="text" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="display: inline-block; font-size:13px; margin-left: 5px; width: 83%; height: 32px;" >
+									
+								<a class="remark_upload"></a>
 								
 							</div>
-							<a class="remark_upload"></a>
-							
-						</div>
+						</form>
 <!-- 						댓글 -->
 					</div>
 	     		
@@ -1142,36 +1176,47 @@
 						<!-- 글내용 -->
 						
 						<!-- 						댓글 작성 -->
-						<div class="remark_div">
+						<c:forEach var="reply" items="${replyList }">
+						
+							<c:set var="reply_article_id" value="${reply.article_id }"/>
 							
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile_remark">
-							</div>
-							<div class="remark_setting">
-								<span>수정</span><em>|</em><span>삭제</span>
-							</div>
-							<div class="remark_data">
-								<strong>이름</strong>
-								<span>${list.regDate }</span>
-								<a id="remark_like_icon">좋아요</a>
-								<pre>댓글 내용</pre>			
-							</div>
-							
-						</div>
+							<c:if test="${article_id eq reply_article_id }">
+								<div class="remark_div">
+									
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile_remark">
+									</div>
+									<div class="remark_setting">
+										<span>수정</span><em>|</em><span>삭제</span>
+									</div>
+									<div class="remark_data">
+										<strong>${reply.reply_writer }</strong>
+										<span>${reply.reply_regdate }</span>
+										<a id="remark_like_icon">좋아요</a>
+										<pre>${reply.reply_content }</pre>			
+									</div>
+									
+								</div>
+							</c:if>
+						</c:forEach>
 						<!-- 댓글 작성 -->
 						
 						<!-- 댓글 -->
-						<div class="" style="position: relative; padding-bottom: 10px;">
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
-							</div>
-							<div class="remarkcntn">
-								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+						<form method="post" action="articlereply.do">
+							<input type="hidden" name="reply_writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_id" value="${project.project_id }">
+							<input type="hidden" name="article_id" value="${list.article_id }">
+							<div style="position: relative; padding-bottom: 10px;">
+								<div class="photo" style="float: left; padding-left: 10px;">
+									<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+								</div>
+								
+								<input name="reply_content" type="text" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="display: inline-block; font-size:13px; margin-left: 5px; width: 83%; height: 32px;" >
+									
+								<a class="remark_upload"></a>
 								
 							</div>
-							<a class="remark_upload"></a>
-							
-						</div>
+						</form>
 <!-- 						댓글 -->
 					</div>
 	     		
@@ -1254,36 +1299,47 @@
 						<!-- 글내용 -->
 						
 						<!-- 						댓글 작성 -->
-						<div class="remark_div">
+						<c:forEach var="reply" items="${replyList }">
+						
+							<c:set var="reply_article_id" value="${reply.article_id }"/>
 							
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile_remark">
-							</div>
-							<div class="remark_setting">
-								<span>수정</span><em>|</em><span>삭제</span>
-							</div>
-							<div class="remark_data">
-								<strong>이름</strong>
-								<span>${list.regDate }</span>
-								<a id="remark_like_icon">좋아요</a>
-								<pre>댓글 내용</pre>			
-							</div>
-							
-						</div>
+							<c:if test="${article_id eq reply_article_id }">
+								<div class="remark_div">
+									
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile_remark">
+									</div>
+									<div class="remark_setting">
+										<span>수정</span><em>|</em><span>삭제</span>
+									</div>
+									<div class="remark_data">
+										<strong>${reply.reply_writer }</strong>
+										<span>${reply.reply_regdate }</span>
+										<a id="remark_like_icon">좋아요</a>
+										<pre>${reply.reply_content }</pre>			
+									</div>
+									
+								</div>
+							</c:if>
+						</c:forEach>
 <!-- 						댓글 작성 -->
 						
 <!-- 						댓글 -->
-						<div class="" style="position: relative; padding-bottom: 10px;">
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
-							</div>
-							<div class="remarkcntn">
-								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+						<form method="post" action="articlereply.do">
+							<input type="hidden" name="reply_writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_id" value="${project.project_id }">
+							<input type="hidden" name="article_id" value="${list.article_id }">
+							<div style="position: relative; padding-bottom: 10px;">
+								<div class="photo" style="float: left; padding-left: 10px;">
+									<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+								</div>
+								
+								<input name="reply_content" type="text" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="display: inline-block; font-size:13px; margin-left: 5px; width: 83%; height: 32px;" >
+									
+								<a class="remark_upload"></a>
 								
 							</div>
-							<a class="remark_upload"></a>
-							
-						</div>
+						</form>
 <!-- 						댓글 -->
 					</div>
 	     		
@@ -1364,36 +1420,47 @@
 						<!-- 글내용 -->
 						
 						<!-- 						댓글 작성 -->
-						<div class="remark_div">
+						<c:forEach var="reply" items="${replyList }">
+						
+							<c:set var="reply_article_id" value="${reply.article_id }"/>
 							
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile_remark">
-							</div>
-							<div class="remark_setting">
-								<span>수정</span><em>|</em><span>삭제</span>
-							</div>
-							<div class="remark_data">
-								<strong>이름</strong>
-								<span>${list.regDate }</span>
-								<a id="remark_like_icon">좋아요</a>
-								<pre>댓글 내용</pre>			
-							</div>
-							
-						</div>
+							<c:if test="${article_id eq reply_article_id }">
+								<div class="remark_div">
+									
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile_remark">
+									</div>
+									<div class="remark_setting">
+										<span>수정</span><em>|</em><span>삭제</span>
+									</div>
+									<div class="remark_data">
+										<strong>${reply.reply_writer }</strong>
+										<span>${reply.reply_regdate }</span>
+										<a id="remark_like_icon">좋아요</a>
+										<pre>${reply.reply_content }</pre>			
+									</div>
+									
+								</div>
+							</c:if>
+						</c:forEach>
 <!-- 						댓글 작성 -->
 						
 <!-- 						댓글 -->
-						<div class="" style="position: relative; padding-bottom: 10px;">
-							<div class="photo" style="float: left; padding-left: 10px;">
-								<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
-							</div>
-							<div class="remarkcntn">
-								<div class="div_text_write" contenteditable="true" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="min-height: 20px;" ></div>
+						<form method="post" action="articlereply.do">
+							<input type="hidden" name="reply_writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_id" value="${project.project_id }">
+							<input type="hidden" name="article_id" value="${list.article_id }">
+							<div style="position: relative; padding-bottom: 10px;">
+								<div class="photo" style="float: left; padding-left: 10px;">
+									<img id="user_profile" style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat; ">
+								</div>
+								
+								<input name="reply_content" type="text" placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)" style="display: inline-block; font-size:13px; margin-left: 5px; width: 83%; height: 32px;" >
+									
+								<a class="remark_upload"></a>
 								
 							</div>
-							<a class="remark_upload"></a>
-							
-						</div>
+						</form>
 <!-- 						댓글 -->
 					</div>
 	     		</c:when>

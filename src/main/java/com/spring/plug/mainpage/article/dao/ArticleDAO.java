@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.plug.mainpage.article.vo.Article1VO;
+import com.spring.plug.mainpage.article.vo.ArticleReplyVO;
 
 @Repository
 public class ArticleDAO{
@@ -25,6 +26,17 @@ public class ArticleDAO{
       sqlSessionTemplate.insert("ArticleDAO.articleInsert",vo);
    }
    
+   public void reply_insert(ArticleReplyVO vo) {
+	   System.out.println("reply insert 기능 처리");
+	   System.out.println("dao : " + vo.toString());
+	   sqlSessionTemplate.insert("ArticleDAO.replyInsert",vo);
+   }
   
+   public List<ArticleReplyVO> reply_select(ArticleReplyVO rvo){
+	   
+	   System.out.println("댓글 : "+rvo.toString());
+	   
+	   return sqlSessionTemplate.selectList("ArticleDAO.replySelect",rvo);
+   }
 
 }
