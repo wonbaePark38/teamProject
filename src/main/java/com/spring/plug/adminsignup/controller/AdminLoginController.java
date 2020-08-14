@@ -44,11 +44,9 @@ public class AdminLoginController {
 	}
 	
 	@RequestMapping(value = "/adminPage/production/changePassword.do")
-	public ModelAndView changePassword(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("newpassword") String newPassword, ModelAndView mav) {
+	public ModelAndView changePassword(@RequestParam("password") String password, @RequestParam("newpassword") String newPassword, ModelAndView mav, HttpSession session) {
 		System.out.println("관리자 비밀번호 변경");
-		AdminVO vo = new AdminVO();
-		vo.setUsername(username);
-		vo = alService.getSaltById(vo);
+		AdminVO vo = (AdminVO) session.getAttribute("user");
 		
 		String dbSalt = vo.getSalt();
 		String encPassword = SHA256Util.getEncrypt(password, dbSalt);
@@ -89,7 +87,6 @@ public class AdminLoginController {
 	
 	@RequestMapping(value = "/adminPage/production/adminLogin.do", method = RequestMethod.POST)
 	public ModelAndView adminLogin(@ModelAttribute("vo") AdminVO vo, ModelAndView mav, HttpSession session) {
-		System.out.println(vo.getUsername());
 		AdminVO dbVO = alService.getSaltById(vo);			
 		System.out.println(dbVO);
 		
@@ -106,9 +103,8 @@ public class AdminLoginController {
 		
 		if(dbVO.getPassword().equals(vo.getPassword())) {
 			System.out.println("비번 맞음");
-			session.setAttribute("userEmail", vo.getEmail());
-			session.setAttribute("userName", vo.getUsername());
-			mav.addObject("vo", vo);
+			session.setAttribute("user", dbVO);
+			mav.addObject("vo", dbVO);
 			mav.setViewName("admin-Main.jsp");
 		} else {
 			System.out.println("비번틀림");
