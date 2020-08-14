@@ -15,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.mainpage.article.vo.Article1VO;
 import com.spring.plug.mainpage.article.vo.ArticleReplyVO;
+import com.spring.plug.mainpage.article.vo.ArticleWorkerVO;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.article.service.ArticleService;
@@ -47,22 +49,17 @@ public class MainPageController {
    @RequestMapping(value = "/mainpage.do")
    public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo ,Article1VO vo, ModelAndView mav, HttpSession session) {
 	   
+	   
+	   System.out.println("worker : " + vo.getWriteForm3_workersName());
+	   
 	   vo.setProject_id(project.getProject_id());
 	   rvo.setProject_id(project.getProject_id());
 	   
 	   List<Article1VO> articleList = service.selectArticle(vo);
 	   
-//	   for (int i = 0; i < articleList.size(); i++) {
-//		System.out.println("select : " + articleList.get(i).toString());
-//	   }
-	   
-	   
+   
 	   List<ArticleReplyVO> replyList = service.selectReply(rvo);
-	   
-	   for(int i = 0; i < replyList.size(); i++) {
-		   
-		   System.out.println("댓글 : "+replyList.get(i));
-	   }
+
 	   
 	   mav.addObject("project", project);
 	   mav.addObject("articleList",articleList);
@@ -105,15 +102,27 @@ public class MainPageController {
    }
 
    @RequestMapping(value = "/writeform3.do")
+   @ResponseBody
    public String article3Insert(Article1VO vo) throws IOException {
 
+	   System.out.println("pid : " + vo.getProject_id());
+	   System.out.println("worker : " + vo.getWriteForm3_workersName());
+	   
       MultipartFile uploadFile = vo.getWriteForm_file();
 
       if (!uploadFile.isEmpty()) {
          String fileName = uploadFile.getOriginalFilename();
          uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
       }
-
+      
+      ArticleWorkerVO workerVO = new ArticleWorkerVO();
+      workerVO.setProject_id(vo.getProject_id());
+      workerVO.setArticle_id(vo.getArticle_id());
+      
+      
+      
+      
+      
       service.insertArticle(vo);
       return "mainpage.do";
    }

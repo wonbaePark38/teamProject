@@ -28,13 +28,7 @@
   var todo_date_arr = new Array();
   var todo_worker_arr = new Array();
   
-//  document.getElementById('todoContent_external').childNodes.forEach(function(i, e) { console.log(i, e);});
-	
-//  private int project_id;
-//  private String project_name;
-//  private String form_name;
-//  private Date regDate;
-//  private String writer;
+
   
   $('#writeForm5_submit').click(function(e) {
 	  
@@ -42,16 +36,7 @@
 	  
 	  var test =  $('#todoContent_external').contents().each(function(i,e) { 
 		  
-//		  var writeForm5_data = {
-//				  'project_id': 1,
-//				  'project_name':'test proejct',
-//				  'form_name' : $('#formName').val(),
-//				  'writer':'tester',
-//				  'writeForm5_title' : $('#todo_title').val(),
-//				  'writeForm5_content' : $(e).find('.todo_content').val(),
-//				  'writeForm5_date' : $(e).find('.todo_date').val(),
-//				  'writeForm5_worker' : $(e).find('.todo_worker').val()
-//		  } 
+
 		  
 		  var todo_title = $('#todo_title').val();
 		  
@@ -95,25 +80,22 @@
 	  $('#todo_date_value').val(todo_date_arr);
 	  $('#todo_worker_value').val(todo_worker_arr);
 	  
-	  //writeForm5_content_str = JSON.stringify(todo_arr);
-	  
-//	  $.ajax({
-//		  type:"POST",
-//		  dataType: "JSON",
-//		  url:"writeform5.do",
-//		  data : todo_arr,
-//		  success:function(e){
-//			  alert(e);
-//		  },
-//		  error:function(e){
-//			  alert(e);
-//		  }
-//		  
-//	  });
+
 	  
 	  
 	  
 	  $('#writeForm5_form').submit();
   });
   
+  
+  $('#writeForm3_submit').click(function(e) {
+	
+	  
+	  
+	  
+	  
+	  
+	 
+	  
+  });
   

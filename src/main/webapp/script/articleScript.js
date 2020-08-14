@@ -184,30 +184,21 @@ function headerOption(){
   }
 
   // 업무탭 작업자 추가 및 작업자들 저장
-  var workers_name = [];
-  var workers_name_str = "";
+  var workers_name = new Array();
   
   function add_worker(obj) {
      
    var worker_name = obj.innerText;
    
-   
-   workers_name_str = workers_name_str.concat(',' + worker_name);
    workers_name.push(worker_name);
    
+   console.log(workers_name);
    
+   document.getElementById('work_workers').value = workers_name;
    
-   console.log(workers_name_str);
+
    
-   
-   document.getElementById('work_workers').value = workers_name_str;
-   
-   var work_workers_value = document.getElementById('work_workers').value; 
-   
-   work_workers_value = workers_name;
-   
-   console.log(work_workers_value);
-   
+   // 작업자 띄우기
    var worker_append = document.createElement('div');
    worker_append.setAttribute('style','display:inline-block; width: 100px; background-color: #efeff9; margin-top: 3px; margin-right: 3px; height: 30px; border-radius: 3px;');
       

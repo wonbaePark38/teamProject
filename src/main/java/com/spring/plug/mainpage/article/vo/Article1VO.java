@@ -51,6 +51,7 @@ public class Article1VO {
    private String writeForm5_content;
    private String writeForm5_date;
    private String writeForm5_worker;
+   
 
    public MultipartFile getWriteForm_file() {
       return writeForm_file;
