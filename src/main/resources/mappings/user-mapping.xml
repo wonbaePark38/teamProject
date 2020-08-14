@@ -54,7 +54,7 @@
 		
 	</update>
 	
-	<select id="checkUserWithSessionKey" resultType="user">
+	<select id="checkUserWithSessionKey" parameterType="String" resultMap="getUser">
 		SELECT * FROM MEMBERINFO WHERE SESSIONID = #{sessionId} and SESSIONTIMEOUT > SYSDATE
 	</select>
 	

@@ -17,5 +17,5 @@ public interface UserService {
 	void changePasswordBytempPassword(UserVO vo);
 	public void keepLogin(String email, String sessionId, Date sessionLimit);
 	public UserVO checkLoginBefore(String sessionId) throws Exception;
-	public UserVO checkUserWithSessionKey(String sessionId);
+	public UserVO checkUserWithSessionKey(String sessionkey);
 }

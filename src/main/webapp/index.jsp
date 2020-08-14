@@ -117,7 +117,7 @@
 			</div>
 
 			<div class="hdedit">
-				<a href="newlogin.jsp" data-langcode="H76">로그인</a>
+				<a href="/plugProject/login.do" data-langcode="H76">로그인</a>
 				<a href="signup.jsp" id="sign-up" class="btn_type00 ht34" data-langcode="H77">회원가입</a>
 			</div>
 			<a class="btn_mobileMenu"><img

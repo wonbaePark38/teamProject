@@ -5,9 +5,7 @@ body {
 	font-size: 16px;
 	overflow-y: scroll;
 }
-button{
-	outline:none;
-}
+
 input{
 	outline:none;
 }
@@ -25,7 +23,12 @@ a {
 
 button {
 	border: 0;
+	outline:none;
 	background-color: white;
+}
+
+button:hover{
+	background-color: #f2f2f2;
 }
 
 a:hover {
@@ -325,26 +328,6 @@ a:hover {
 	z-index: 1000;
 }
 
-#cloudBt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 0;
-	width: 100%;
-	background-color: white;
-}
-
-#cloudBt:hover {
-	background-color: whitesmoke;
-}
-
-#cloudBtSpan {
-	background: url('../images/filemoa_ico02.png') no-repeat;
-	cursor: pointer;
-	width: 33px;
-	height: 33px;
-	margin-top: 10px;
-}
 
 #pdfBt {
 	display: flex;
@@ -355,9 +338,7 @@ a:hover {
 	background-color: white;
 }
 
-#pdfBt:hover {
-	background-color: whitesmoke;
-}
+
 
 #pdfBtSpan {
 	background: url('../images/filemoa_ico03.png') no-repeat;
@@ -376,9 +357,6 @@ a:hover {
 	background-color: white;
 }
 
-#wordBt:hover {
-	background-color: whitesmoke;
-}
 
 #wordBtSpan {
 	background: url('../images/filemoa_ico04.png') no-repeat;
@@ -397,9 +375,6 @@ a:hover {
 	background-color: white;
 }
 
-#excelBt:hover {
-	background-color: whitesmoke;
-}
 
 #excelBtSpan {
 	background: url('../images/filemoa_ico05.png') no-repeat;
@@ -418,9 +393,7 @@ a:hover {
 	background-color: white;
 }
 
-#hangeulBt:hover {
-	background-color: whitesmoke;
-}
+
 
 #hangeulBtSpan {
 	background: url('../images/filemoa_ico12.png') no-repeat;
@@ -439,9 +412,6 @@ a:hover {
 	background-color: white;
 }
 
-#pptBt:hover {
-	background-color: whitesmoke;
-}
 
 #pptBtSpan {
 	background: url('../images/filemoa_ico06.png') no-repeat;
@@ -460,9 +430,7 @@ a:hover {
 	background-color: white;
 }
 
-#imgBt:hover {
-	background-color: whitesmoke;
-}
+
 
 #imgBtSpan {
 	background: url('../images/filemoa_ico07.png') no-repeat;
@@ -481,9 +449,6 @@ a:hover {
 	background-color: white;
 }
 
-#multimediaBt:hover {
-	background-color: whitesmoke;
-}
 
 #multimediaBtSpan {
 	background: url('../images/filemoa_ico08.png') no-repeat;
@@ -502,9 +467,6 @@ a:hover {
 	background-color: white;
 }
 
-#htmlBt:hover {
-	background-color: whitesmoke;
-}
 
 #htmlBtSpan {
 	background: url('../images/filemoa_ico09.png') no-repeat;
@@ -523,9 +485,6 @@ a:hover {
 	background-color: white;
 }
 
-#cadBt:hover {
-	background-color: whitesmoke;
-}
 
 #cadBtSpan {
 	background: url('../images/filemoa_ico10.png') no-repeat;
@@ -544,9 +503,6 @@ a:hover {
 	background-color: white;
 }
 
-#archiveBt:hover {
-	background-color: whitesmoke;
-}
 
 #archiveBtSpan {
 	background: url('../images/filemoa_ico11.png') no-repeat;
@@ -881,11 +837,18 @@ a:hover {
 	padding-left: 20px;
 }
 
+.hiddenMenu button{
+	outline:none;
+}
+
+
 .moreMenuDownloadBt {
 	display: flex;
 	align-items: center;
 	height: 30%;
 	width: 100%;
+	border: 0;
+	outline:none;
 }
 
 .moreMenuDownloadSpan {
@@ -894,6 +857,7 @@ a:hover {
 	width: 33px;
 	height: 33px;
 	margin-top: 10px;
+	
 }
 
 .moreMenuOpenBt {

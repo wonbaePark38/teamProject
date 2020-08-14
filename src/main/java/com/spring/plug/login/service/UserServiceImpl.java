@@ -106,9 +106,9 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public UserVO checkUserWithSessionKey(String sessionId) {
+	public UserVO checkUserWithSessionKey(String sessionkey) {
 		System.out.println("세션키 체크");
-		return userDAO.checkUserWithSessionKey(sessionId);
+		return userDAO.checkUserWithSessionKey(sessionkey);
 	}
 
 
