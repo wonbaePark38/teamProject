@@ -22,4 +22,14 @@ public class AdminLoginDAO {
 		return sqlSessionTemplate.selectOne("AdminSignupDAO.getSaltById", vo);
 	}
 	
+	public void defaultPassword(AdminVO vo) {
+		System.out.println("패스워드 초기화 처리");
+		sqlSessionTemplate.update("AdminSignupDAO.defaultPassword", vo);
+	}
+
+	public void changePassword(AdminVO vo) {
+		System.out.println("패스워드 변경 처리");
+		sqlSessionTemplate.update("AdminSignupDAO.defaultPassword", vo);
+	}
+	
 }
