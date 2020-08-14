@@ -7,8 +7,6 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script src="script/projectdir.js"></script>
 
-
-
 <div style="padding-left: 15px;" id="content_div">
 	<div class="projectdir_content_header">
 		<div style="float: right;">

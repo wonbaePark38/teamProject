@@ -58,7 +58,7 @@
 </style>
 
 <body>
-	<input type="hidden" id="member_id" name="seq" value="${user.seq}">
+	<input type="hidden" id="member_id" name="seq" value="">
 	
 	<div class="mainWrap">
 		<!-- Navigation -->
@@ -157,7 +157,7 @@
 
 			</div>
 
-			<div style="display: inline-block;" id="ch2">
+			<div style="display: inline-block;">
 				<div class="contents" style="float: left; width: 848px;">
 					<!-- 센터영역 -->
 
@@ -385,8 +385,9 @@
 
 					<!-- //채팅 영역 -->
 					
-					<jsp:include page='content.jsp'></jsp:include>
-					
+					<div id="ch2">
+						<jsp:include page='content.jsp'></jsp:include>
+					</div>
 				</div>
 			</div>
 			<!--end center-->

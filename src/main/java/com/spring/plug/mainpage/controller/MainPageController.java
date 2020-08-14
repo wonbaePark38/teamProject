@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.mainpage.article.vo.Article1VO;
+import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 import com.spring.plug.mainpage.article.service.ArticleService;
 
 @Controller
@@ -30,7 +31,6 @@ public class MainPageController {
 
    @RequestMapping(value = "/mainpage.do")
    public ModelAndView articleSelect(Article1VO vo, ModelAndView mav) {
-
 	   List<Article1VO> articleList = service.selectArticle(vo);
 	   
 	   for (int i = 0; i < articleList.size(); i++) {

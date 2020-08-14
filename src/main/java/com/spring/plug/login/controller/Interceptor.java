@@ -40,7 +40,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
     			  return true;
     		  }
     	  }
-    	  response.sendRedirect("/plugProject/login.jsp");
+    	  response.sendRedirect("/plugProject/login.do");
 		  return false;
     	  
       }
