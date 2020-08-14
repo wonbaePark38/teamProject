@@ -78,7 +78,7 @@ public class LoginController{
 				}
 				
 				mav.addObject("login", user);
-				mav.setViewName("projectdir.do");
+				mav.setViewName("totalFileView.do");
 				return mav;
 			
 			}else if(user != null && user.getAuthStatus().equals("0")) {

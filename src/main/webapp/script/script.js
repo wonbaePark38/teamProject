@@ -4,118 +4,10 @@
   $(document).ready(function(){
     
 	  var checknumber=0;
-	  /*var filenameStatus = 1;  
-	  var filesizeStatus = 1;
-	  var writerStatus = 1;
-	  var updateStatus = 1;
-	 */
 	 
-	 
-	  
 	  var node2='';
 	  var node2style;
-    //$(".downimg").show();
-    //$(".upimg").hide();
     
-    
-    
-    /*$('.checkbox-all').click(function(){
-      $('.col1-checkbox').prop('checked',this.checked);
-    });
-
-    $('.checkbox-all-baduk').click(function(){
-     
-      $('.checkbox-baduk').prop('checked',this.checked);
-    });
-
-    
-    
-    $("#namesortbt").click(function(){
-        console.log('클릭~~');
-        if(filenameStatus==1){
-          
-          $("#namesortbt .downimg").hide();
-          $("#namesortbt .upimg").show();
-          filenameStatus=0;
-        }else if(filenameStatus==0){
-          
-          $("#namesortbt .downimg").show();
-          $("#namesortbt .upimg").hide();
-          filenameStatus=1;
-        }
-        
-      });
-    $("#sizesortbt").click(function(){
-      
-      if(filesizeStatus==1){
-        
-        $("#sizesortbt .downimg").hide();
-        $("#sizesortbt .upimg").show();
-        filesizeStatus=0;
-      }else if(filesizeStatus==0){
-        
-        $("#sizesortbt .downimg").show();
-        $("#sizesortbt .upimg").hide();
-        filesizeStatus=1;
-      }
-      
-    });
-    $("#personsortbt").click(function(){
-      
-      if(writerStatus==1){
-        $("#personsortbt .downimg").hide();
-        $("#personsortbt .upimg").show();
-        writerStatus=0;
-      }else if(writerStatus==0){
-        $("#personsortbt .downimg").show();
-        $("#personsortbt .upimg").hide();
-        writerStatus=1;
-      }
-      
-    });
-  
-    $("#updatesortbt").click(function(){
-      console.log('화살표버튼 클릭');
-      if(updateStatus==1){
-        $("#updatesortbt .downimg").hide();
-        $("#updatesortbt .upimg").show();
-        updateStatus=0;
-      }else if(updateStatus==0){
-        $("#updatesortbt .downimg").show();
-        $("#updatesortbt .upimg").hide();
-        updateStatus=1;
-      }
-      
-    });
-
-    $("#updatesortbt-baduk").click(function(){
-      console.log('화살표버튼 클릭');
-      if(updateStatus==1){
-        $("#updatesortbt-baduk .downimg").hide();
-        $("#updatesortbt-baduk .upimg").show();
-        updateStatus=0;
-      }else if(updateStatus==0){
-        $("#updatesortbt-baduk .downimg").show();
-        $("#updatesortbt-baduk .upimg").hide();
-        updateStatus=1;
-      }
-      
-    });
-
-    $("#namesortbt-baduk").click(function(){
-      console.log('화살표버튼 클릭');
-      if(updateStatus==1){
-        $("#namesortbt-baduk .downimg").hide();
-        $("#namesortbt-baduk .upimg").show();
-        updateStatus=0;
-      }else if(updateStatus==0){
-        $("#namesortbt-baduk .downimg").show();
-        $("#namesortbt-baduk .upimg").hide();
-        updateStatus=1;
-      }
-      
-    });*/
-   
     
     //체크박스 체크 했을때 발생하는 이벤트
     $('.col1-checkbox').on('change',function(){
@@ -163,36 +55,7 @@
   }
 
 
-function hiddenMenuFold(thisevent){
-  
-  var node = $(thisevent).parent().next();
-  
-  console.log('스크립트' + node2style);
-  var presentDisplay = node.css('display');
- 
-  if(node2style == 'block'){
-    node2.css('display','none');
-    node2style = node.css('display');
-  }
-  else{
-    node2.css("display","block");
-    node2style = node.css('display');
-  }
-}
 
-  function badukListhiddenMenuFold(thisevent){
-    
-    var node = $(thisevent).parent().next();
-     
-    var presentDisplay = node.css('display');
-    if(presentDisplay == 'block'){
-      node.css('display','none');
-    }
-    else{
-      node.css("display","block");
-      
-    }
-  }
   function errorEmail(){
 	  
 	  alert('없는 이메일 입니다.');

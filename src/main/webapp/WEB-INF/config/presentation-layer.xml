@@ -23,6 +23,7 @@
 			<mvc:mapping path="/**/" />
 			<mvc:exclude-mapping path="/login.do" />
 			<mvc:exclude-mapping path="/logout.do" />
+			<mvc:exclude-mapping path="/adminPage/production/**"/>
 			<ref bean="intercepter" />
 		</mvc:interceptor>
 

@@ -35,7 +35,7 @@ public class FileController {
 		conditionMap.put("올린사람","UPLOADER");
 		return conditionMap;
 	}
-	@RequestMapping(value="/totalFileView.do", method=RequestMethod.POST)
+	@RequestMapping(value="/totalFileView.do", method ={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView totalFileView(FileVO vo,ModelAndView mav) {
 		mav.setViewName("totalFile.jsp");
 		System.out.println("토탈파일 get방식 메소드 호출");
@@ -50,37 +50,15 @@ public class FileController {
 		System.out.println("현재 접속 사용자 " + session.getAttribute("user"));
 		UserVO sessionVO = (UserVO)session.getAttribute("user");
 		System.out.println("세션 저장값" + sessionVO.getSeq());
-		if(param.get("project") == null || param.get("project").equals("전체 프로젝트")) {
-			System.out.println("전체프로젝트 선택");
-			vo.setTargetProject("2");
-		}else {
-			vo.setTargetProject(param.get("project"));
-		}
+	
 		int loginUser = sessionVO.getSeq();
-		//vo.setLoginUser("a");
-		
 		
 		List<FileVO> projectList = fileService.getProjectList(loginUser);
 		
-		/*
-		 * private String searchFileCondition;
-		   private String searchFileKeyword;
-		 */
 		
-		
-		
-		/*if(vo.getSearchFileCondition()==null) {
-			vo.setSearchFileCondition("FILENAME");
-		}
-		
-		if(vo.getSearchFileKeyword()==null) {
-			vo.setSearchFileKeyword("");
-		}*/
 		
 		model.addAttribute("projectList", projectList);
 		return projectList;
-		//mav.addObject("projectList", projectList);
-		//mav.setViewName("totalFile.jsp");
-		//return mav;
+		
 	}
 }
