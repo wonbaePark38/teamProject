@@ -63,7 +63,27 @@
 		<result property="reply_regdate" column="REPLY_REGDATE" />
 		<result property="reply_content" column="REPLY_CONTENT" />
 	</resultMap>
+	
+	<resultMap type="articleWorkerVO" id="workerResult">
+		<id property="article_id" column="ARTICLE_ID"/>
+		<result property="worker_name" column="WORKER_NAME"/>
+	</resultMap>
 
+	<insert id="workerInsert" parameterType="articleWorkerVO">
+		INSERT INTO article_worker
+		(
+		project_id
+		article_id
+		worker_name
+		)
+		VALUES
+		(
+		#{project_id}
+		#{article_id}
+		#{worekr_name}
+		)
+		
+	</insert>
 
 	<select id="replySelect" resultMap="replyResult">
 		SELECT * FROM article_reply WHERE project_id = #{project_id} ORDER BY article_id DESC

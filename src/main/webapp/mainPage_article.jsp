@@ -304,7 +304,7 @@
                               </div>
                               
                               <div id="worker_select_div">
-                                 <ul style="list-style: none; border:1px solid black; background-color: white; padding-left: 0px;">
+                                 <ul style="list-style: none; border:1px solid lightgray; background-color: white; padding-left: 0px;">
                                     <!-- forEach -->
                                     <li><a onclick="add_worker(this)">테스트1</a></li>
                                     <li><a onclick="add_worker(this)">테스트2</a></li>
@@ -448,7 +448,7 @@
                               <select style="vertical-align: middle; height: 27px;">
                                  <option></option>
                                  <option></option>
-                              </select> <a class="submit_a" onclick="writeForm_submit3()">올리기</a>
+                              </select> <a id="writeForm3_submit" class="submit_a" >올리기</a>
                            </div>
                         </div>
 
@@ -884,8 +884,15 @@
 							
 							<!-- 지도 찍는곳 -->
 							<div id="writeForm2_map">
+								<img src="https://maps.googleapis.com/maps/api/staticmap?
+								center=${list.writeForm2_latlng }
+								&zoom=18
+								&size=480x300
+								&maptype=roadmap
+								&markers=color:red%7Clabel:C%7C${list.writeForm2_latlng }
+								&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
 							
-							
+								
 							</div>
 							
 							<!-- 이미지 -->
@@ -1042,26 +1049,14 @@
 		                        
 		                        <!-- 담당자 -->
 		                        <div class="work_form_manager">
-<!-- 		                           <div> -->
-<!-- 		                              <label id="work_worker_img"></label> -->
-<!-- 		                              <div style="display: inline-block;"> -->
-<!-- 		                                 <input type="text" id="work_worker_select" onclick="work_workerSelect()" placeholder="담당자 추가"> -->
-<!-- 		                              </div> -->
+		                           <div>
+		                              <label id="work_worker_img"></label>
 		                              
-<!-- 		                              <div id="worker_select_div"> -->
-<!-- 		                                 <ul style="list-style: none; border:1px solid black; background-color: white; padding-left: 0px;"> -->
-<!-- 		                                    forEach -->
-<!-- 		                                    <li><a onclick="add_worker(this)">테스트1</a></li> -->
-<!-- 		                                    <li><a onclick="add_worker(this)">테스트2</a></li> -->
-<!-- 		                                    <li><a onclick="add_worker(this)">테스트3</a></li> -->
-<!-- 		                                    //forEach -->
-<!-- 		                                 </ul> -->
-<!-- 		                              </div> -->
 		                              
-<%-- 		                              <input type="hidden" id="work_workers" value="${list.writeForm3_workersName }"> --%>
+		                              <input type="text" id="test4321" value="${list.writeForm3_workersName }">
 		                              
-<!-- 		                              <div id="worker_append_div" style="margin-left: 26px; margin-top: 5px"></div> -->
-<!-- 		                           </div> -->
+		                              <div id="worker_append_div" style="margin-left: 26px; margin-top: 5px"></div>
+		                           </div>
 		                        </div>
 		                        <!-- //담당자 -->
 		
