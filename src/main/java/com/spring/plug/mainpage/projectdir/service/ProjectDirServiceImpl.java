@@ -14,9 +14,6 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	@Autowired
 	private ProjectDirDAO projectDirDAO;
 	
-	public ProjectDirServiceImpl() {
-		System.out.println("project dir service start");
-	}
 	
 	@Override
 	public void insertProjectDir(ProjectDirVO vo) {
@@ -38,12 +35,9 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 		return projectDirDAO.getProjectDirTotalList(member_id);
 	}
 
-
-	@Override
-	public List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo) {
-		return projectDirDAO.getProjectDirManagerList(vo);
+	public List<ProjectDirVO> getLockerList(int member_id) {
+		return projectDirDAO.getLockerList(member_id);
 	}
-
 
 	
 	// project locker
@@ -52,24 +46,30 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	public void insertProjectLocker(ProjectDirVO vo) {
 		projectDirDAO.insertProjectLocker(vo);
 	}
-
+	@Override
+	public void insertLockerList(ProjectDirVO vo) {
+		projectDirDAO.insertLockerList(vo);
+	}
 	@Override
 	public void updateProjectFavorites(ProjectDirVO vo) {
 		projectDirDAO.projectDirFavorites(vo);
-		
 	}
-
 	@Override
 	public void updateProjectHide(ProjectDirVO vo) {
 		// TODO Auto-generated method stub
-		
 	}
-
 	@Override
 	public void updateProjectLocker(ProjectDirVO vo) {
 		// TODO Auto-generated method stub
-		
 	}
+
+	@Override
+	public void deleteLocker(ProjectDirVO vo) {
+		projectDirDAO.deleteLocker(vo);
+	}
+	
+	
+	
 
 
 }

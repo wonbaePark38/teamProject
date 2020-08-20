@@ -25,7 +25,7 @@ function new_project_form(){
 }
 
 // 프로젝트 세팅 메뉴
-function contentset(){
+function lockerset(){
     document.getElementById('content_set').style.display=(document.getElementById('content_set').style.display=='block') ? 'none' : 'block';
 }
 
@@ -73,5 +73,6 @@ $(document).on('click','#star_btn',function(){
 	favorites_form.appendTo('#content_div');
 	favorites_form.submit();
 });
+
 
 

@@ -42,6 +42,24 @@ function new_plus() {
 	document.getElementById('new_plus').style.display = (document.getElementById('new_plus').style.display == 'block') ? 'none'	: 'block';
 }
 
+// 보관함 만들기
+$(document).on('click','#locker_add',function(){
+	var locker_name = $('#locker_name').val();
+	// form 생성
+	var locker_form = $('<form></form>');
+	
+	// form 설정
+	locker_form.attr('method','post');
+	locker_form.attr('action','insertlocker.do');
+	// form 데이터
+	locker_form.append($('<input/>',{type:'hidden', name:'locker_name', value:locker_name}));
+	
+	// form 생성하는 곳
+	locker_form.appendTo('.mainWrap');
+	locker_form.submit();
+	
+});
+
 // 이미지 업로드
 function img_load(){
 	$("#post_images").append("<div class='post_image'><div class='post_box'><img class='post_load_img'><input type='button' id='img_close'></div></div>");

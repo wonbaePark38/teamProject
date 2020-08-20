@@ -17,6 +17,11 @@ public class ProjectDirVO {
 	private int project_manager;
 	private Date joindate;
 	
+	// 프로젝트 정렬 세팅
+	private int clist_type;
+	private int sort_type;
+	private int manager_type;
+	
 	// 프로젝트 정보
 	private int locker_id;
 	private int project_favorites;
@@ -24,7 +29,9 @@ public class ProjectDirVO {
 	private int hide_locker;
 	private int project_user;
 	
-	
+	// 보관함 리스트
+	private int locker_list_id;
+	private String locker_name;
 	
 	public int getProject_id() {
 		return project_id;
@@ -110,12 +117,43 @@ public class ProjectDirVO {
 	public void setProject_user(int project_user) {
 		this.project_user = project_user;
 	}
+	public int getClist_type() {
+		return clist_type;
+	}
+	public void setClist_type(int clist_type) {
+		this.clist_type = clist_type;
+	}
+	public int getSort_type() {
+		return sort_type;
+	}
+	public void setSort_type(int sort_type) {
+		this.sort_type = sort_type;
+	}
+	public int getManager_type() {
+		return manager_type;
+	}
+	public void setManager_type(int manager_type) {
+		this.manager_type = manager_type;
+	}
+	public int getLocker_list_id() {
+		return locker_list_id;
+	}
+	public void setLocker_list_id(int locker_list_id) {
+		this.locker_list_id = locker_list_id;
+	}
+	public String getLocker_name() {
+		return locker_name;
+	}
+	public void setLocker_name(String locker_name) {
+		this.locker_name = locker_name;
+	}
 	@Override
 	public String toString() {
 		return "ProjectDirVO [project_id=" + project_id + ", project_name=" + project_name + ", project_content="
 				+ project_content + ", project_type=" + project_type + ", createdate=" + createdate + ", lookup_id="
 				+ lookup_id + ", member_id=" + member_id + ", project_manager=" + project_manager + ", joindate="
-				+ joindate + ", locker_id=" + locker_id + ", project_favorites=" + project_favorites
+				+ joindate + ", clist_type=" + clist_type + ", sort_type=" + sort_type + ", manager_type="
+				+ manager_type + ", locker_id=" + locker_id + ", project_favorites=" + project_favorites
 				+ ", project_locker=" + project_locker + ", hide_locker=" + hide_locker + ", project_user="
 				+ project_user + "]";
 	}

@@ -294,7 +294,8 @@ button:focus {
 	font-weight: 500;
 	width: 100%;
 }
-
+.list-group-item :hover{
+}
 .leftContainer {
 	display: flex;
 	margin-left: 10px;

@@ -12,13 +12,18 @@ public interface ProjectDirService {
 	
 	// 프로젝트 정렬
 	List<ProjectDirVO> getProjectDirTotalList(int member_id);
-	List<ProjectDirVO> getProjectDirManagerList(ProjectDirVO vo);
+	List<ProjectDirVO> getLockerList(int member_id);
 	
 	// 프로젝트 설정
+	void insertLockerList(ProjectDirVO vo);
 	void updateProjectFavorites(ProjectDirVO vo);
 	void updateProjectHide(ProjectDirVO vo);
 	void updateProjectLocker(ProjectDirVO vo);
 
 	// 프로젝트 선택
 	void getProjectDir(ProjectDirVO vo);
+	
+	// 삭제
+	void deleteLocker(ProjectDirVO vo);
+	
 }

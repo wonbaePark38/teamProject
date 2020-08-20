@@ -20,9 +20,6 @@ public class ProjectDirController {
 	@Autowired
 	private ProjectDirService projectDirService;
 	
-	public ProjectDirController() {
-		System.out.println("projectdir controller start");
-	}
 	
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
 	public String projectDirInsert(ProjectDirVO vo, HttpSession session) {
@@ -38,6 +35,7 @@ public class ProjectDirController {
 		vo.setProject_favorites(0);
 		vo.setProject_locker("");
 		vo.setHide_locker(0);
+		
 		projectDirService.insertProjectLocker(vo);
 		System.out.println("project locker insert");
 		
@@ -50,16 +48,19 @@ public class ProjectDirController {
 	public ModelAndView getProjectDirTotalList(ProjectDirVO vo, ModelAndView mav, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
+		
+		// 임시
+		vo.setClist_type(0);
+		vo.setSort_type(2);
+		vo.setManager_type(0);
+		
 		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo.getMember_id());
+		List<ProjectDirVO> locker_list = projectDirService.getLockerList(vo.getMember_id());
+
+		System.out.println(locker_list);
+		mav.addObject(vo);
 		mav.addObject("projectDirList",list);
-		mav.setViewName("mainProjectDir.jsp");
-		return mav;
-	}
-	// 관리자인 프로젝트만 보기
-	@RequestMapping(value="/projectdir1.do")
-	public ModelAndView getProjectDirManagerList(ProjectDirVO vo, ModelAndView mav) {
-		List<ProjectDirVO> list = projectDirService.getProjectDirManagerList(vo);
-		mav.addObject("projectDirList",list);
+		mav.addObject("projectLockerList",locker_list);
 		mav.setViewName("mainProjectDir.jsp");
 		return mav;
 	}
@@ -79,5 +80,25 @@ public class ProjectDirController {
 		mav.addObject("getProject",vo);
 		mav.setViewName("mainpage.do");
 		return mav;
+	}
+	
+	// 보관함 만들기
+	@RequestMapping(value = "/insertlocker.do", method = RequestMethod.POST)
+	public String insertLockerList(ProjectDirVO vo, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		
+		projectDirService.insertLockerList(vo);
+		
+		return "projectdir.do";
+	}
+	
+	// 보관함 삭제
+	@RequestMapping(value ="/deletelocker.do", method = RequestMethod.POST)
+	public String deleteLocker(ProjectDirVO vo, HttpSession session) {
+		
+		projectDirService.deleteLocker(vo);
+		
+		return "projectdir.do";
 	}
 }
