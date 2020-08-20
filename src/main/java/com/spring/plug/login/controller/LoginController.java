@@ -76,8 +76,8 @@ public class LoginController{
 				
 				mav.addObject("login", user);
 				// 시작화면
-			/* mav.setViewName("projectdir.do"); */
-				mav.setViewName("accountInfo.do");
+				mav.setViewName("projectdir.do");
+			/* mav.setViewName("accountInfo.do"); */
 				return mav;
 			
 			}else if(user != null && user.getAuthStatus().equals("0")) {
