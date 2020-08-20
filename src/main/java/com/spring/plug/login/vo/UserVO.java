@@ -107,6 +107,12 @@ public class UserVO {
 	}
 	@Override
 	public String toString() {
-		return "UserVO [password=" + password + ", name=" + name + ", email=" + email + "]";
+		return "UserVO [seq=" + seq + ", password=" + password + ", name=" + name + ", email=" + email
+				+ ", socialCompare=" + socialCompare + ", joinDate=" + joinDate + ", emailCheck=" + emailCheck
+				+ ", salt=" + salt + ", authKey=" + authKey + ", authStatus=" + authStatus + ", useCookie=" + useCookie
+				+ ", passwordAuthKey=" + passwordAuthKey + ", passwordAuthStatus=" + passwordAuthStatus + ", sessionId="
+				+ sessionId + "]";
 	}
+	
+	
 }

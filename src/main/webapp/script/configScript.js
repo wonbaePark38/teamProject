@@ -5,8 +5,8 @@ $(document).ready(function () {
     var check = $("input[id='alram1']");
     var check2 = $("input[id='alram2']");
     var lock = $("input[id='lock']");
+    
     check.click(function(){
-       
         $("p").toggle();
         var status =$('#alram1');
         if($('input:checkbox[id="alram1"]').is(":checked")){
@@ -19,8 +19,6 @@ $(document).ready(function () {
     });
 
     check2.click(function(){
-        
-    
         $("p").toggle();
         var status =$('#alram2');
         if($('input:checkbox[id="alram2"]').is(":checked")){
@@ -49,220 +47,45 @@ $(document).ready(function () {
         }
     });
 
-
-
-    $('#account-info').click(function () {
-        console.log('접속');
-       
-        $.ajax({
-           
-            url :'accountInfo.jsp',
-            type :'POST',
-            cache:false,
-            dataType:"html",
-            beforeSend:function(){
-                $('<link rel="stylesheet" type="text/css" href="'+'css/accountInfo.css'+'" >')
-                .appendTo("head");
-            },
-            success:function(data){
-              $('#ajaxpagecontainer').children().remove();  
-              $('#ajaxpagecontainer').html(data);
-              console.log(data);
-            },
-            error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
-                alert('통신실패');
-            }
-         
-        });
-    });
-
-    $("#password-setting").click(function () {
-        console.log('접속');
-       
-        $.ajax({
-           
-            url :'settingPassword.jsp',
-            type :'POST',
-            cache:false,
-            dataType:"html",
-            beforeSend:function(){
-                $('<link rel="stylesheet" type="text/css" href="'+'css/settingPassword.css'+'" >')
-                .appendTo("head");
-            },
-            success:function(data){
-            $('#ajaxpagecontainer').children().remove();
-            $('#ajaxpagecontainer').html(data);
-            console.log(data);
-            },
-            error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
-                alert('통신실패');
-            }
-         
-        });
-    });
-
-    $('#push-alram-setting').click(function () {
-        console.log('접속');
-       
-        $.ajax({
-           
-            url :'pushAlramSetting.jsp',
-            type :'POST',
-            cache:false,
-            dataType:"html",
-            beforeSend:function(){
-                $('<link rel="stylesheet" type="text/css" href="'+'css/accountInfo.css'+'" >')
-                .appendTo("head");
-            },
-            success:function(data){
-                $('#ajaxpagecontainer').children().remove();  
-              $('#ajaxpagecontainer').html(data);
-              console.log(data);
-            },
-            error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
-                alert('통신실패');
-            }
-         
-        });
-    });
-
-    $('#lock-mode-setting').click(function () {
-        console.log('접속');
-       
-        $.ajax({
-           
-            url :'lockModeConfig.jsp',
-            type :'POST',
-            cache:false,
-            dataType:"html",
-            beforeSend:function(){
-                $('<link rel="stylesheet" type="text/css" href="'+'css/lockModeConfig.css'+'" >')
-                .appendTo("head");
-            },
-            success:function(data){
-                $('#ajaxpagecontainer').children().remove(); 
-              $('#ajaxpagecontainer').html(data);
-              console.log(data);
-            },
-            error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
-                alert('통신실패');
-            }
-         
-        });
-    });
-
-    $('#favorites-setting').click(function () {
-        console.log('접속');
-       
-        $.ajax({
-           
-            url :'favoritesSetting.jsp',
-            type :'POST',
-            cache:false,
-            dataType:"html",
-            beforeSend:function(){
-                $('<link rel="stylesheet" type="text/css" href="'+'css/favoritesSetting.css'+'" >')
-                .appendTo("head");
-            },
-            success:function(data){
-                $('#ajaxpagecontainer').children().remove();  
-              $('#ajaxpagecontainer').html(data);
-              console.log(data);
-            },
-            error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
-                alert('통신실패');
-            }
-         
-        });
-
-        
-    });
-
-   
-
-
-    $('#language-setting').click(function () {
-        console.log('접속');
-       
-        $.ajax({
-           
-            url :'languageSetting.jsp',
-            type :'POST',
-            cache:false,
-            dataType:"html",
-            beforeSend:function(){
-                $('<link rel="stylesheet" type="text/css" href="'+'css/languageSetting.css'+'" >')
-                .appendTo("head");
-            },
-            success:function(data){
-                $('#ajaxpagecontainer').children().remove();  
-              $('#ajaxpagecontainer').html(data);
-              console.log(data);
-            },
-            error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
-                alert('통신실패');
-            }
-         
-        });
-    
-         
-    });
-
-    $('#connect-device-setting').click(function () {
-        console.log('접속페이지');
-       
-        $.ajax({
-           
-            url :'connectManage.jsp',
-            type :'POST',
-            cache:false,
-            dataType:"html",
-            beforeSend:function(){
-                $('<link rel="stylesheet" type="text/css" href="'+'css/languageSetting.css'+'" >')
-                .appendTo("head");
-            },
-            success:function(data){
-                $('#ajaxpagecontainer').children().remove();  
-              $('#ajaxpagecontainer').html(data);
-              console.log(data);
-            },
-            error:function(err1, err2, err3){
-                console.log(err1);
-                console.log(err2, "2");
-                console.log(err3, "3");
-                alert('통신실패');
-            }
-         
-        });
-    
-         
-    });
-    
-    
-
-   
-
 });
-
-
+/*
+ * settingPassword.jsp에서 쓰는 함수
+ */
+function passwordCheck(){
+	var getCheck= RegExp(/^[a-zA-Z0-9]{6,16}$/);
+	// 비밀번호 공백 확인
+	if ($("#password1").val() == "") {
+		alert("패스워드가 입력되지 않았습니다");
+		$("#password1").focus();
+		return false;
+	}
+	// 비밀번호 유효성검사
+	if (!getCheck.test($("#password1").val())) {
+		alert("형식에 맞게 입력해주세요");
+		$("#password1").val("");
+		$("#password1").focus();
+		return false;
+	}
+	// 비밀번호 확인란 공백 확인
+	if ($("#password2").val() == "") {
+		alert("비밀번호 확인란이 비었습니다.");
+		$("#password2").focus();
+		return false;
+	}
+	// 비밀번호 서로확인
+	if ($("#password1").val() != $("#password2").val()) {
+		alert("비밀번호가 서로 같아야 합니다.");
+		$("#password1").val("");
+		$("#password2").val("");
+		$("#password1").focus();
+		return false;
+	} 
+	return true;
+}
+/////////////////////////////////////////////////////////////////////////////////////
+/*
+ * favoritesSetting.jsp에서 쓰는 함수
+ */
 function reset(){
 	
     var modal = document.getElementById('modal');
@@ -282,7 +105,7 @@ function settingConfirm(){
     var confirmCancel = document.getElementById("confirm-cancel");                                          
     modal.style.display="none";
 }
-
+//////////////////////////////////////////////////////////////////////////////////////
 function removeDevice(){
     alert('제거버튼 클릭');
 }

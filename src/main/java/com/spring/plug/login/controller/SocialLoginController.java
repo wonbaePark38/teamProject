@@ -20,24 +20,18 @@ public class SocialLoginController{
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@RequestMapping(value="/slogin.do",method=RequestMethod.GET)
-	public ModelAndView loginView(UserVO vo,ModelAndView mav) {
-		mav.setViewName("newlogin.jsp");
-		return mav;
-	}
 	
-	@RequestMapping(value="/slogin.do",method=RequestMethod.POST)
+	@RequestMapping(value="/slogin.do",method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session,HttpServletRequest request) {
 		
 			System.out.println("소셜 컨트롤러 진입");
-			
+			System.out.println(vo.toString());
 			UserVO user = userService.getSocialUser(vo);
-			
-			session.setAttribute("userEmail",vo.getEmail()); //이메일 세션 저장
-			session.setAttribute("userName", vo.getName()); //이름 세션 저장
+			System.out.println(user.toString());
+			session.setAttribute("user", user);
 			if(user != null) { // 이미 소셜 이메일로 로그인 이력 있던 사람
 				System.out.println("소셜 로그인 로그인 이력있는 사람");
-				mav.setViewName("content.jsp");
+				mav.setViewName("totalFileView.do");
 				mav.addObject("user" , user);
 				return mav;
 			}else {//소셜 이메일로 처음 로그인 시도 한 사람
@@ -45,7 +39,7 @@ public class SocialLoginController{
 				userService.addSocialUser(vo);
 			}
 			
-			mav.setViewName("content.jsp");
+			mav.setViewName("totalFileView.do");
 			return mav;
 	}
 }

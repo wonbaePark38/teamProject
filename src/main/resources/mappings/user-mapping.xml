@@ -18,7 +18,7 @@
 	
 	<select id="getSocialUser" resultMap="getUser"
 		parameterType="user">
-		SELECT MEMBER_EMAIL FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
+		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
 	<select id="getSaltById" resultType="String"

@@ -16,29 +16,16 @@
 	</resultMap>
 	
 <select id="getProjectList" resultMap="fileList" parameterType="int"> 
-SELECT PROJECT_ID, PROJECT_NAME,FILE_NAME, FILE_SIZE, WRITER,REGDATE
+SELECT PROJECT_ID, PROJECT_NAME,LOWER(FILE_NAME) FILE_NAME, FILE_SIZE,LOWER(WRITER) WRITER,REGDATE
  FROM MAINPAGE_ARTICLE INNER JOIN PROJECT_LOOKUP USING(PROJECT_ID) 
  WHERE MEMBER_ID=#{loginUser} 
  AND FILE_NAME IS NOT NULL 
  OR IMG_NAME IS NOT NULL
- order by project_id ASC
+ ORDER BY FILE_NAME ASC
 </select> 
 	
 	
 		
-	<select id="getFileList" resultType="file">
-		SELECT * FROM  WHERE 1=1
-		<if test="searchFileCondition=='TITLE'">
-			AND title writer '%'||#{searchKeyword}||'%'
-		</if>
-		<if test="searchFileCondition=='CONTENT'">
-			AND content fileName '%'||#{searchKeyword}||'%'
-		</if>
-		ORDER BY seq DESC
-	</select>
-	
-	
-
  <!-- <update id="updateCategory" parameterType="category_m">
       UPDATE CATEGORY 
       <set>

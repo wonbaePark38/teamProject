@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserSettingDAO">
+	
+	<resultMap id="getUserConfig" type="configInfo" >
+		<result property="name" column="MEMBER_NAME" />
+		<result property="email" column="MEMBER_EMAIL" />
+		<result property="profileFileName" column="PROFILEIMG" />
+		
+	</resultMap>
+	
+	<select id="userConfig" resultMap="getUserConfig" parameterType="int">
+		SELECT A.MEMBER_NAME, A.MEMBER_ID, A.MEMBER_EMAIL, A.MEMBER_PASSWORD, 
+			   B.COMPANYNAME, B.DEPARTMENT, B.MYPOSITION, B.COMPANYCALLNUMBER, B.PROFILEIMG
+		FROM MEMBERINFO A LEFT OUTER JOIN USERSETTING B ON A.MEMBER_ID = B.MEMBER_ID 
+		WHERE B.MEMBER_ID=#{id}
+	</select>
+	
+	<update id="updateProfileImg" parameterType="configInfo">
+		UPDATE USERSETTING SET PROFILEIMG = #{profileFileName} WHERE MEMBER_ID = #{id}
+	</update>
+
+</mapper>

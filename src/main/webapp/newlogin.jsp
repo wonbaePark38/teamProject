@@ -66,7 +66,7 @@
 			<div class="auto-login-div">
 				<input type="checkbox" name="useCookie">&nbsp;&nbsp;<span>자동 로그인</span>
 			</div>
-			<input type="button" onclick="loginErrchk()" class="signup_btn_st1"  disabled=disabled value="로그인">
+			<input type="submit" class="signup_btn_st1"  disabled=disabled value="로그인">
 			
 		</div>
 		<div class="forgot-password">
@@ -80,7 +80,7 @@
 		</form>
 
 	<ul class="another_id">
-		<form method="POST" action="slogin.do" name="googleSubmit">
+		 <form method="POST" action="slogin.do" name="googleSubmit">
 			<a href='javascript:void(0);' onclick="startGoogleLogin()">
 			<input type="hidden" id="googleInfo" name="email">
 			<input type="hidden" id="googleName" name="name">
@@ -103,9 +103,7 @@
 		</form>
 	</ul>
 	
-	<form action="logout.do" method="get">
-	<input type="submit" name="logoutbt" value="로그아웃"/>
-	</form>
+	
 	</div>
 	
 	

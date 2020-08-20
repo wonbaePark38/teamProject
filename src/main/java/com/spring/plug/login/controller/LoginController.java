@@ -1,9 +1,6 @@
 package com.spring.plug.login.controller;
 
 
-
-
-
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -59,7 +56,7 @@ public class LoginController{
 			String inputPassword = SHA256Util.getEncrypt(vo.getPassword(), salt);
 			vo.setPassword(inputPassword);
 			UserVO user = userService.getUser(vo);
-			
+			System.out.println("userId" + user.getSeq());
 			if(user!=null /*&& user.getAuthStatus().equals("1")*/) {
 				System.out.println("컨트롤러 리턴");
 				session.setAttribute("user", user);
@@ -78,7 +75,9 @@ public class LoginController{
 				}
 				
 				mav.addObject("login", user);
-				mav.setViewName("projectdir.do");
+				// 시작화면
+			/* mav.setViewName("projectdir.do"); */
+				mav.setViewName("accountInfo.do");
 				return mav;
 			
 			}else if(user != null && user.getAuthStatus().equals("0")) {

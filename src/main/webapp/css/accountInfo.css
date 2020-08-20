@@ -28,8 +28,7 @@ label {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	width: 800px;
-	height: 700px;
+	
 }
 
 header {
@@ -38,7 +37,20 @@ header {
 	font-size: 30px;
 	border-bottom: 3px solid #6862c3;;
 }
-
+.centerArea {
+    display: flex;
+    width: 1024px;
+    height: 768px;
+    flex-direction: row;
+    position: relative;
+    padding-top: 60pt;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+}
+.article{
+	width: 824px;
+    margin-left: 250px;
+}
 .text-area {
 	height: 2%;
 	padding-top: 25px;
@@ -81,11 +93,15 @@ header {
 	width: 40px;
 	height: 40px;
 	position: absolute;
-	margin-left: 30px;
-	margin-top: 50px;
+	margin-left: -30px;
+    margin-top: 50px;
 	background-image: url('../images/ico_camera.png');
 }
-
+#uploadBt{
+	margin-top: 100px;
+    margin-left: -65px;
+    display:none;
+}
 .profile-photo-upload {
 	height: 40px;
 	margin: 0;
