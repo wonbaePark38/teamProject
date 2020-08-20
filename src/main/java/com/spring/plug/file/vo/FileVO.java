@@ -3,8 +3,7 @@ package com.spring.plug.file.vo;
 import java.util.Date;
 
 public class FileVO {
-	private String searchFileCondition;
-	private String searchFileKeyword;
+	
 	private String projectId;
 	private String fileName;
 	private String fileType;
@@ -51,30 +50,21 @@ public class FileVO {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
-	public String getSearchFileCondition() {
-		return searchFileCondition;
-	}
+	
 	public String getFileName() {
 		return fileName;
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public void setSearchFileCondition(String searchFileCondition) {
-		this.searchFileCondition = searchFileCondition;
-	}
-	public String getSearchFileKeyword() {
-		return searchFileKeyword;
-	}
+	
+	
 	
 	public String getWriter() {
 		return writer;
 	}
 	public void setWriter(String writer) {
 		this.writer = writer;
-	}
-	public void setSearchFileKeyword(String searchFileKeyword) {
-		this.searchFileKeyword = searchFileKeyword;
 	}
 	
 	public String getProjectId() {
@@ -91,8 +81,8 @@ public class FileVO {
 	}
 	@Override
 	public String toString() {
-		return "FileVO [searchFileCondition=" + searchFileCondition + ", searchFileKeyword=" + searchFileKeyword
-				+ ", projectId=" + projectId + ", fileName=" + fileName + ", fileType=" + fileType + ", writer="
+		return "FileVO [searchFileCondition=" + ", searchFileKeyword=" +
+				", projectId=" + projectId + ", fileName=" + fileName + ", fileType=" + fileType + ", writer="
 				+ writer + ", writeDate=" + writeDate + "]";
 	}
 	

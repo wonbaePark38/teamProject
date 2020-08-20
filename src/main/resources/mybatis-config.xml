@@ -17,7 +17,8 @@
 		<typeAlias alias="signup" type="com.spring.plug.login.vo.UserVO"/>
 		<typeAlias alias="file" type="com.spring.plug.file.vo.FileVO"/>
 		<typeAlias alias="adminSignup" type="com.spring.plug.adminsignup.vo.AdminVO"/>
-	
+		
+		<typeAlias alias="configInfo" type="com.spring.plug.user.accountinfo.vo.UserSettingVO"/> 
 	</typeAliases>
 	
 	<mappers>
@@ -31,5 +32,7 @@
 		<mapper resource="mappings/signup-mapper.xml"/>
 		<mapper resource="mappings/file-mapper.xml"/>
 		<mapper resource="mappings/adminsignup-mapper.xml"/>
+		
+		<mapper resource="mappings/userConfig-mapper.xml"/>
 	</mappers>
 </configuration>

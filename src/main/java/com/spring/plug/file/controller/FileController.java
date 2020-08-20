@@ -28,13 +28,7 @@ public class FileController {
 	@Autowired
 	FileService fileService;
 	
-	@ModelAttribute("conditionMap")
-	public Map<String,String> searchConditionMap(){
-		Map<String, String> conditionMap = new HashMap<String,String>();
-		conditionMap.put("파일이름", "FILENAME");
-		conditionMap.put("올린사람","UPLOADER");
-		return conditionMap;
-	}
+	
 	@RequestMapping(value="/totalFileView.do", method ={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView totalFileView(FileVO vo,ModelAndView mav) {
 		mav.setViewName("totalFile.jsp");
@@ -52,10 +46,8 @@ public class FileController {
 		System.out.println("세션 저장값" + sessionVO.getSeq());
 	
 		int loginUser = sessionVO.getSeq();
-		
+		System.out.println("로그인 아이디" + loginUser);
 		List<FileVO> projectList = fileService.getProjectList(loginUser);
-		
-		
 		
 		model.addAttribute("projectList", projectList);
 		return projectList;

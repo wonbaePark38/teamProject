@@ -7,7 +7,7 @@
 	 
 	  var node2='';
 	  var node2style;
-    
+	 
     
     //체크박스 체크 했을때 발생하는 이벤트
     $('.col1-checkbox').on('change',function(){
@@ -43,17 +43,7 @@
     
  });
   
-  function loginErrchk(){
-	  var idForm = document.getElementById("USER_ID").value;
-	  var passwordForm = document.getElementById("USER_PW").value;
-	  if (!idForm || !passwordForm) {
-		  alert("아이디와 비밀번호 모두 입력하세요");
-	  }else{
-		  document.loginBt.submit();
-	  }
-	  
-  }
-
+ 
 
 
   function errorEmail(){

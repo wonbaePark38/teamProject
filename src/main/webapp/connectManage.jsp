@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,33 +9,39 @@
 <script type="text/javascript" src="script/configScript.js"></script>
 </head>
 <body>
-	  <div class="wrap">
-        <header>
-            접속 기기 관리
-        </header>
+	<div class="wrap">
+		<jsp:include page="privateConfigHeader.jsp" flush="true" />
+		<div class="centerArea">
+			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+			<div class="article">
+				<header> 접속 기기 관리 </header>
 
 
-        <!-- for문 들어올 자리-->
-        <div class="table-row">
-            <div class="table-left">
-                <strong>pc_chrome~~~</strong>
-                <span class="last-use">마지막 사용: ~~~~</span>
-                <span class="first-use">최초 등록: ~~~~</span>
-            </div>
-            <div class="table-right">
-                <button type="button" id="not-using-device" onclick="removeDevice()" style="display: none;">
-                    <span>제거</span>
-                </button>
+				<!-- for문 들어올 자리-->
+				<div class="table-row">
+					<div class="table-left">
+						<strong>pc_chrome~~~</strong> <span class="last-use">마지막
+							사용: ~~~~</span> <span class="first-use">최초 등록: ~~~~</span>
+					</div>
+					<div class="table-right">
+						<button type="button" id="not-using-device"
+							onclick="removeDevice()" style="display: none;">
+							<span>제거</span>
+						</button>
 
 
-                <label id="using-device" style="display: block;">
-                    <span>접속 기기</span>
-                </label>
-            </div>
+						<label id="using-device" style="display: block;"> <span>접속
+								기기</span>
+						</label>
+					</div>
 
-        </div>
+				</div>
 
-        <!--end for문 -->
-    </div>
+				<!--end for문 -->
+			</div>
+			<!-- end article -->
+		</div>
+		<!-- end centerArea -->
+	</div>
 </body>
 </html>

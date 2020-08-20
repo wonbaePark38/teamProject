@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset='UTF-8'>
+
 <title>전체 파일</title>
     <!-- Bootstrap core CSS -->
     <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
@@ -16,7 +17,7 @@
     <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
     <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
  
-   
+   <script type='text/javascript' src='./script/script.js'></script>
     <script type='text/javascript' src='./script/totalFile.js'></script>
     
     <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
@@ -35,11 +36,10 @@
                     </div>
                     <div id='searchArea'>
 
-                        <form style='width:100%' action='#' name=search method='POST'>
+                       
 
-                            <input type='text' id='inputkeyword' value='텍스트입력' onfocus='this.value='';'>
-                            <input type='submit' value='검색' onclick='searchPress()'>
-                        </form>
+                    <input type='text' id='inputkeyword' placeholder='키워드를 입력하세요'>
+                       
                     </div>
 
                 </div>
@@ -54,7 +54,7 @@
             <!--headerwrap-->
         </div>
         <!--headercontainer-->
-+
+
 
         <div class='centerAreaContainer'>
             <div class='fileIconArea'>
@@ -74,7 +74,7 @@
                         <i class='fas fa-arrows-alt' style='color:#615cba; font-size: 25px;'></i> 이동
                     </button>
 
-                    <button id='downloadBt' type='button' onclick='test()' alt='다운로드' >
+                    <button id='downloadAllBt' type='button'  alt='다운로드' >
                         <i class='fas fa-download' style='color:#615cba; font-size: 25px;'></i> 다운로드
 
                     </button>
@@ -92,7 +92,7 @@
                     <button id='badukSortBt' type='button' >
                         <i class='fab fa-microsoft' style='color: white; font-size: 25px;'></i>
                     </button>
-                    <input type='button' onclick='' value='닫기' id='closeBt'>
+                    <input type='button'  value='닫기' id='closeBt'>
                     </div>
                 </div>
                 <!--end btnRight-->
@@ -197,16 +197,18 @@
                     <div class='title-container'>
                         <div class='checkbox-all-div'>
                             <input type='checkbox' class='checkbox-all'>
-                        </div>
+                    </div>
+                        
+                     
 
-                        <div class='file-name-sort'>
+					<div class='file-name-sort'>
                             <button type='button' id='namesortbt'>
                                 파일명
                                 <img class='downimg' src='images/btn_arrdw.png' style='padding-bottom: 3px;'>
                                 <img class='upimg' src='images/btn_arrup.png' style='padding-bottom: 3px;'>
                             </button>   
                         </div>
-
+				
                         <div class='file-size-sort'>
                             <button type='button' id='sizesortbt'>
                                 크기
@@ -267,8 +269,9 @@
 						<!-- db에서 받아온 들어올 자리 -->
                 	</div>    
                 </section>
-               
-            </div>
+				<div class="modal">
+				</div><!-- //modal -->
+			</div>
         </div>
           
          

@@ -16,12 +16,15 @@
 		<property name="maxUploadSize" value="1000000" />
 	</bean>
 
-	<!-- <bean id="intercepter" class="com.spring.plug.login.controller.Interceptor" />
-	<bean id="autoLoginIntercepter"	class="com.spring.plug.login.controller.prohibitController" />
-	<mvc:interceptors>
+	 <bean id="intercepter" class="com.spring.plug.login.controller.Interceptor" />
+	<bean id="loginHistoryIntercepter"	class="com.spring.plug.login.controller.prohibitController" />
+	
+    
+	<!-- <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/" />
 			<mvc:exclude-mapping path="/login.do" />
+			<mvc:exclude-mapping path="/slogin.do" />
 			<mvc:exclude-mapping path="/logout.do" />
 			<mvc:exclude-mapping path="/adminPage/production/**"/>
 			<ref bean="intercepter" />
@@ -29,10 +32,10 @@
 
 		<mvc:interceptor>
 			<mvc:mapping path="/login.do" />
-			<ref bean="autoLoginIntercepter" />
+			<ref bean="loginHistoryIntercepter" />
 		</mvc:interceptor>
 
-	</mvc:interceptors> -->
+	</mvc:interceptors>  -->
 
 </beans>
 <!-- 인터셉터 선언 -->
