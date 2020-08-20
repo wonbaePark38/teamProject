@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +41,6 @@ public class UserSettingController {
 		System.out.println("파일이름 >" + infoVo.getProfileFileName());
 		String uploadPath = "C:\\testFile\\"+strId +"\\" + infoVo.getProfileFileName();
 		
-		System.out.println(uploadPath);
 		vo.setProfileFileName(uploadPath);
 		mav.setViewName("accountInfo.jsp");
 		mav.addObject("vo",infoVo);
@@ -80,7 +77,7 @@ public class UserSettingController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/display", method=RequestMethod.GET)
+	@RequestMapping(value="/display.do", method=RequestMethod.GET)
 	public void displayFile(HttpServletResponse res,HttpSession session) throws Exception{
 		UserVO user = (UserVO)session.getAttribute("user");
 		int id = user.getSeq();
@@ -88,10 +85,11 @@ public class UserSettingController {
 		UserSettingVO infoVo = userSettingService.getConfigUserInfo(id);
 		String filePath = infoVo.getProfileFileName();
 		
-		String realFile = "C:\\testFile\\";
-		String fileNm = "2";
-		String ext = "png";
-
+		String realFile = "C:\\testFile\\"+strId+"\\"+infoVo.getProfileFileName();
+		int pos = filePath.lastIndexOf(".");
+		String fileNm = filePath.substring(0, pos);
+		String ext = filePath.substring(pos+1); 
+		
 		BufferedOutputStream out = null;
 		InputStream in = null;
 

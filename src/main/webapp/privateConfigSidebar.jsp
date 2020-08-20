@@ -22,7 +22,7 @@
 				<!--사이드바-->
 				<div class="sidebar">
 					<div style="font-size: 10pt; color: #C0C0C0">계정</div>
-					<a href="accountInfo.jsp" class="list-group-item" id="account-info">계정 정보</a>
+					<a href="accountInfo.do" class="list-group-item" id="account-info">계정 정보</a>
 					<a href="settingPassword.jsp" class="list-group-item" id="password-setting">비밀번호 설정</a>
 				
 					<hr>

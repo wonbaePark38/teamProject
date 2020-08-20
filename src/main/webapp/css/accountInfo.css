@@ -80,6 +80,12 @@ header {
 	width: 90px;
 	height: 90px;
 	border-radius: 90px;
+	overflow: hidden;
+}
+
+.photo-area img{
+	width:90px;
+	height:90px;
 }
 
 .info-container {

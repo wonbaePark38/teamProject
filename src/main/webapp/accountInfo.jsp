@@ -32,11 +32,7 @@
 
 					<div class="photo-area-container">
 						<div class="photo-area">
-						  <img src="<c:url value='/img/${vo.profileFileName}' />" alt="상품이미지" />
-							<!-- <img src="<spring:url value='/img/2.png'/>" /> -->
-							<!-- <img src='/display.do?name=${vo.profileFileName}'/>-->
-							<!--<img width="90" height="90" src="file/{{commentImages.0.fileId}}"> -->
-							
+						  <img src="<c:url value='/display.do?name=${vo.profileFileName }'/>" alt="상품이미지" />
 						</div>
 						<form action="profileImgChange.do" method="POST" enctype="multipart/form-data"> 
 						

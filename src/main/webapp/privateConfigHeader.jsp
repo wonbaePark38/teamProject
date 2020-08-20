@@ -24,7 +24,7 @@
 			<div class="headerWrap">
 				<div class="headerLeft">
 					<div class="headLogo">
-						<a href="#"><img src="images/logo_top.png"></a>
+						<a href="projectdir.do"><img src="images/logo_top.png"></a>
 					</div>
 					
 
