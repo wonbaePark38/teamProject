@@ -1,11 +1,11 @@
-body {
+/*body {
 	margin: 0 auto;
 	background-color: #f2f2f2;
 	border: 1px solid #eaeaea;
 	overflow-x: hidden;
 	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
 		sans-serif;
-}
+}*/
 
 a {
 	cursor: pointer;
@@ -14,23 +14,23 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
+/*a:hover {
 	background-color: #e7e8e9;
 	text-decoration: none;
 }
 
 li:hover {
 	background-color: #e7e8e9;
-}
+}*/
 
-.mainWrap {
+/*.mainWrap {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
 	flex-wrap: nowrap;
 	background-color: #f2f2f2;
-}
+}*/
 
 .headerContainer {
 	border-bottom: 2px solid #e7e8e9;
@@ -185,7 +185,7 @@ li:hover {
 	display: flex;
 	position: fixed;
 	flex-direction: column;
-	height: 100%;
+	
 	width: 200px;
 	background-color: #f2f2f2;
 }

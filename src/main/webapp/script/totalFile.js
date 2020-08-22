@@ -8,6 +8,8 @@ $(document).ready(function(){
 	  var updateStatus = 1;
 	  initFileList();
 	  var idx;
+	  
+	  $('.searchArea').css('display','block');
 	  /* 받아온 데이터 설정  */
 	  function initFileList() {
 		  getFileList().done(function(data) {

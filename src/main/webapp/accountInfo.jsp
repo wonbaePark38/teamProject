@@ -32,7 +32,8 @@
 
 					<div class="photo-area-container">
 						<div class="photo-area">
-						  <img src="<c:url value='/display.do?name=${vo.profileFileName }'/>" alt="상품이미지" />
+						  <img src="images/empty_photo.png"/>
+						  <!-- <img src="<c:url value='/display.do?name=${vo.profileFileName }'/>" alt="상품이미지" /> -->
 						</div>
 						<form action="profileImgChange.do" method="POST" enctype="multipart/form-data"> 
 						

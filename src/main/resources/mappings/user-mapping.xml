@@ -9,11 +9,12 @@
 		<result property="email" column="MEMBER_EMAIL" />
 		<result property="password" column="MEMBER_PASSWORD" />
 		<result property="socialCompare" column="MEMBER_ISSOCIAL"/>
+		
 	</resultMap>
 	
 	<select id="getUser" resultMap="getUser"
 		parameterType="user">
-		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email} and MEMBER_PASSWORD=#{password}
+		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
 	<select id="getSocialUser" resultMap="getUser"
@@ -21,10 +22,6 @@
 		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
-	<select id="getSaltById" resultType="String"
-		parameterType="String">
-		SELECT SALT FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
-	</select>
 	
 	<insert id="addSocialUser" parameterType="user">
 		INSERT INTO MEMBERINFO 
@@ -50,8 +47,6 @@
 	
 	<update id="keepLogin">
 		UPDATE MEMBERINFO SET SESSIONID = #{sessionId}, SESSIONTIMEOUT = #{sessionLimit} WHERE MEMBER_EMAIL = #{email}
-		
-		
 	</update>
 	
 	<select id="checkUserWithSessionKey" parameterType="String" resultMap="getUser">

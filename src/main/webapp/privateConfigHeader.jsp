@@ -26,7 +26,9 @@
 					<div class="headLogo">
 						<a href="projectdir.do"><img src="images/logo_top.png"></a>
 					</div>
-					
+					 <div id='searchArea'>
+                    	<input type='text' id='inputkeyword' placeholder='키워드를 입력하세요'>
+                     </div>
 
 				</div>
 				<div class="headerRight">
@@ -60,7 +62,7 @@
 				<div style="margin-left: 10px;">
 				   <div style="margin-top: 10px;">
 					  <img src="images/pf_ico1_off.png">
-					  <a href="accountInfo.jsp">환경설정</a>
+					  <a href="accountInfo.do">환경설정</a>
 				   </div>
 				   <div style="margin-top: 10px;">
 					  <img src="images/pf_ico5_off.png">

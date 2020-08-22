@@ -1,6 +1,8 @@
 body {
 	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
 		sans-serif;
+	margin-top: 0;	
+	overflow: hidden;
 }
 
 a {
