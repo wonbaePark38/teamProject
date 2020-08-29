@@ -177,7 +177,7 @@
 						 <a>alarmOn</a>
 					  </div>
 					  <div style="display: inline-block; margin-top: 3px;">
-					  <a href="javascript:void(0);" onclick ="test()" style="margin-left: 10px; vertical-align: middle;">
+					  <a href="javascript:void(0);" onclick ="makeChatRoom()" style="margin-left: 10px; vertical-align: middle;">
 					  	<img src="images/icon_newchat.png" style="padding-top: 5px;">
 					  	</a>
 					  </div>
