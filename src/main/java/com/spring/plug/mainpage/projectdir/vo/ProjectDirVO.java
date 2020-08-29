@@ -28,10 +28,14 @@ public class ProjectDirVO {
 	private String project_locker;
 	private int hide_locker;
 	private int project_user;
+	private int joinuser;
 	
 	// 보관함 리스트
 	private int locker_list_id;
 	private String locker_name;
+	
+	// 리스트
+	private String project_id_list;
 	
 	public int getProject_id() {
 		return project_id;
@@ -146,6 +150,19 @@ public class ProjectDirVO {
 	}
 	public void setLocker_name(String locker_name) {
 		this.locker_name = locker_name;
+	}
+	public int getJoinuser() {
+		return joinuser;
+	}
+	public void setJoinuser(int joinuser) {
+		this.joinuser = joinuser;
+	}
+	
+	public String getProject_id_list() {
+		return project_id_list;
+	}
+	public void setProject_id_list(String project_id_list) {
+		this.project_id_list = project_id_list;
 	}
 	@Override
 	public String toString() {

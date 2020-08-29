@@ -10,7 +10,7 @@
 		<result property="member_id" column="USER_NAME"/>
 		<result property="project_manager" column="PROJECT_MANAGER" />
 		<result property="joindate" column="JOINDATE"/>
-		<collection property="project_locker" resultMap="project_locker"></collection>
+		<collection property="project_locker" resultMap="PROJECT_LOCKER"></collection>
 	</resultMap>
 
 	<insert id="insertProjectLookup" parameterType="project_lookup">
@@ -18,44 +18,32 @@
 		VALUES((select nvl(max(lookup_id), 0) +1 from project_lookup), #{project_id}, #{member_id}, #{project_manager})
 	</insert>
 	
+	
+	
+	
+	
+	
 	<select id="getProjectDirTotalList" resultType="project_lookup" parameterType="project_lookup">
-		SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, project_manager
+		SELECT lookup_id, project_id, member_id, project_favorites, project_locker, hide_locker, project_manager, project_name, joinuser
 		FROM project_lookup 
 		INNER JOIN 
 		    (
-		    SELECT 
-		    project_id, project_favorites, project_locker, hide_locker, project_name
-		    FROM project_locker 
-		    INNER JOIN(
-		        SELECT 
-		        project_id, project_name
-		        FROM projectdir
-		        )
-		        USING(project_id)
-		    ) 
-		USING(project_id)
-		WHERE member_id = #{member_id} 
-	</select>
-	<select id="getProjectDirManagerList" resultType="project_lookup" parameterType="project_lookup">
-		SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, project_manager
-		FROM project_lookup 
-		INNER JOIN 
-		    (
-		    SELECT 
-		    project_id, project_favorites, project_locker, hide_locker, project_name
-		    FROM project_locker 
-		    INNER JOIN(
-		        SELECT 
-		        project_id, project_name 
-		        FROM projectdir
-		        )
-		        USING(project_id)
-		    ) 
-		USING(project_id)
-		WHERE member_id = #{member_id} and project_manager = #{project_manager}
-	</select>
-
-	<select id="getProjectUser" resultType="project_lookup" parameterType="project_lookup">
+		    SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, joinuser
+		    FROM project_locker
+            INNER JOIN
+                (
+                    SELECT project_id, project_name, joinuser
+                    FROM projectdir 
+                    INNER JOIN 
+                    	(
+    						SELECT project_id, count(*) as joinuser from project_lookup group by project_id
+						)
+						USING(project_id)
+                )	
+                USING(project_id)
+            )
+		USING(project_id, member_id)
+		WHERE member_id = #{member_id} ORDER BY project_id ASC
 	</select>
 	
 </mapper>

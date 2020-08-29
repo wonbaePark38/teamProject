@@ -29,9 +29,9 @@
 <!-- projectdir -->
 <script>
 	$(document).on('click', '#main_side', function() {
-		var click_menu = $(this).text();
+		var click_menu = $(this).text().trim();
+		$('#none_project').show();
 		if (click_menu == '전체') {
-			location.href = "projectdir.do";
 			$('.content_type').hide();
 			$('#project_dir_list1').show();
 		} else if (click_menu == '미보관') {
@@ -55,26 +55,58 @@
 			alert('나를 지정');
 		} else if (click_menu == '내 게시물') {
 			alert('내 게시물');
-		} else {
-
+		} else if (click_menu == '숨김') {
 			$('.content_type').hide();
 			$('#locker_n').text(click_menu);
-			$('#locker_load').css('display', 'inline-block');
+			$('#hide_load').css('display', 'inline-block');
+			
+		} else {
+			// 보관함 선택
+			$('.content_type').hide();
+			$('#locker_n').text(click_menu);
+			$('div[id='+click_menu+']').css('display', 'inline-block');
 		}
 	});
-
+	
+	// 보관함 설정
 	$(document).on('click', '.locker_setbtn', function() {
 		if ($(this).attr('id') == 'locker_list') {
 			$('.locker_list_set').toggle();
 		} else if ($(this).attr('id') == 'locker_hide') {
-			alert('hide');
+			// 프로젝트 숨기기
+			// 선택된 프로젝트
+			var select_project = "";
+			$("input:button[class=div_btn_on]").each(function(){
+				select_project += ($(this).next().val())+",";
+			});
+			
+			select_project = select_project.substr(0, select_project.length-1);
+			
+			var hide_locker = 1;
+			
+			// form 생성
+			var hide_locker_set_name = $('<form></form>');
+
+			// form 설정
+			hide_locker_set_name.attr('method', 'post');
+			hide_locker_set_name.attr('action', 'hidelocker.do');
+
+			// form 데이터
+			hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
+			hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'hide_locker', value :hide_locker}));
+
+			// form 생성하는 곳
+			hide_locker_set_name.appendTo('.mainWrap');
+
+			hide_locker_set_name.submit();
 		}
 	});
-
+	
+	// 보관함 삭제
 	$(document).on('click', '#locker_del', function() {
 
-		/* var locker_del_name = $(this).next().val(); */
 		var locker_del_name = $(this).parent().prev().val();
+		
 		// form 생성
 		var locker_del = $('<form></form>');
 
@@ -90,6 +122,45 @@
 
 		locker_del.submit();
 	});
+	
+	// 복관함에 프로젝트 추가
+	$(document).on('click','#locker_btn',function(){
+		
+		// 선택된 프로젝트
+		var select_project = "";
+		$("input:button[class=div_btn_on]").each(function(){
+			select_project += ($(this).next().val())+",";
+		});
+		
+		select_project = select_project.substr(0, select_project.length-1);
+		
+		
+		// 체크된 보관함
+		var lock_list = "";
+		$("input:checkbox[id=locker_cbox]:checked").each(function() {
+			lock_list += ($(this).parent().text().trim())+",";
+		});
+		
+		lock_list = lock_list.substr(0, lock_list.length-1);
+		
+		
+		// form 생성
+		var locker_set_name = $('<form></form>');
+
+		// form 설정
+		locker_set_name.attr('method', 'post');
+		locker_set_name.attr('action', 'updatelocker.do');
+
+		// form 데이터
+		locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
+		locker_set_name.append($('<input/>', {type : 'hidden', name :'project_locker', value :lock_list}));
+
+		// form 생성하는 곳
+		locker_set_name.appendTo('.mainWrap');
+
+		locker_set_name.submit();
+	});
+	
 </script>
 </head>
 <style>
@@ -100,9 +171,10 @@
 		<!-- Navigation -->
 		<div class="headerContainer">
 			<div class="dir_set_bar" style="display: none;">
-				<span class="locker_setbtn" id="locker_list">보관함 설정</span> <span
-					class="locker_setbtn" id="locker_hide">숨기기</span> <span
-					style="float: right; color: blue;"><span class="select_num"></span>
+				<span class="locker_setbtn" id="locker_list">보관함 설정</span> 
+				<span class="locker_setbtn" id="locker_hide">숨기기</span> 
+				<span style="float: right; color: blue;">
+				<span class="select_num"></span>
 					개의 프로젝트 선택 됨</span>
 			</div>
 			<div class="headerWrap">
@@ -181,11 +253,14 @@
 					<div class="list-group">
 						<c:forEach var="locker_list" items="${projectLockerList}">
 							<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id}">
-							<span id="main_side" class="list-group-item"
+							<a id="main_side" class="list-group-item"
 								style="padding: .5rem 1.25rem;">${locker_list.locker_name}
-								<a id="locker_del" style="float: right; background-color: ping; width: 15px; height: 15px; z-index: 300;"></a>
-							</span>
+								<span id="locker_del" style="float: right; background-color: ping; width: 15px; height: 15px; z-index: 300;"></span>
+							</a>
 						</c:forEach>
+							<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">
+								숨김 <span id="locker_del" style="float: right; background-color: ping; width: 15px; height: 15px; z-index: 300;"></span>
+							</a>
 					</div>
 
 				</div>
@@ -449,10 +524,14 @@
 				<div class="locker_save_list">
 					<ul>
 						<c:forEach var="locker_list" items="${projectLockerList}">
-							<li><label><input type="checkbox">${locker_list.locker_name}</label><br>
+							<li>
+								<label><input id="locker_cbox" type="checkbox">${locker_list.locker_name}</label><br>
 							</li>
 						</c:forEach>
 					</ul>
+				</div>
+				<div class="locker_set_div" style="width: 100%; font-size: 20px; height: 40px;">
+					<span id="locker_btn" style="padding: 5px 55px;">확인</span><span style="padding: 5px 55px;">취소</span>
 				</div>
 			</div>
 		</div>

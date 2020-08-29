@@ -56,20 +56,18 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	}
 	@Override
 	public void updateProjectHide(ProjectDirVO vo) {
-		// TODO Auto-generated method stub
+		projectDirDAO.projectUpdateHide(vo);
 	}
 	@Override
 	public void updateProjectLocker(ProjectDirVO vo) {
-		// TODO Auto-generated method stub
+		projectDirDAO.projectUpdateLocker(vo);
 	}
 
 	@Override
 	public void deleteLocker(ProjectDirVO vo) {
 		projectDirDAO.deleteLocker(vo);
 	}
-	
-	
-	
+
 
 
 }

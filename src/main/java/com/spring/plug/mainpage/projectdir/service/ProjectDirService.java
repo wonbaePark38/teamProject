@@ -18,12 +18,15 @@ public interface ProjectDirService {
 	void insertLockerList(ProjectDirVO vo);
 	void updateProjectFavorites(ProjectDirVO vo);
 	void updateProjectHide(ProjectDirVO vo);
-	void updateProjectLocker(ProjectDirVO vo);
-
+	
+	
 	// 프로젝트 선택
 	void getProjectDir(ProjectDirVO vo);
 	
-	// 삭제
+	
+	// 보관함
+	void updateProjectLocker(ProjectDirVO vo);
 	void deleteLocker(ProjectDirVO vo);
+	
 	
 }

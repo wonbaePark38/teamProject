@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProjectDirDAO">
-	<resultMap type="project_locker" id="project_locker">
+	<resultMap type="project_locker" id="PROJECT_LOCKER">
 		<id property="locker_id" column="LOCKER_ID"/>
 		<result property="member_id" column="MEMBER_ID"/>
 		<result property="project_id" column="PROJECT_ID"/>
@@ -22,4 +22,15 @@
 		UPDATE project_locker SET project_favorites = #{project_favorites}
 		WHERE member_id = #{member_id} AND project_id = #{project_id}
 	</update>
+	
+	<update id="updateProjectLocker" parameterType="project_locker">
+		UPDATE project_locker SET project_locker = #{project_locker}
+		WHERE member_id = #{member_id} AND project_id = #{project_id}
+	</update>
+
+	<update id="updateProjectHide" parameterType="project_locker">
+		UPDATE project_locker SET hide_locker = #{hide_locker}
+		WHERE member_id = #{member_id} AND project_id = #{project_id}
+	</update>
+	
 </mapper>
