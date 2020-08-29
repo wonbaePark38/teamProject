@@ -13,7 +13,7 @@
     <title>계정 정보</title>
     <link href='css/accountInfo.css' rel='stylesheet' />
     <script src="vendor/jquery/jquery.min.js"></script>
-   <script type="text/javascript" src="script/accountInfo.js"></script>
+    <script type="text/javascript" src="script/accountInfo.js"></script>
     <script type="text/javascript" src="script/configScript.js"></script>
 
     

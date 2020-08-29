@@ -69,3 +69,35 @@ function connect(){
 		};
 }
 
+//헤더 채팅영역
+function headerChatting(){
+  document.getElementById('header_chat_div').style.display=(document.getElementById('header_chat_div').style.display=='block') ? 'none' : 'block';
+}
+
+  function headerChattingRoom(){
+    document.getElementById('header_chat_chattingRoom').style.display = 'block';
+    document.getElementById('header_chat_contactAddress').style.display = 'none';
+  }
+
+  function headerContactAddresss(){
+    document.getElementById('header_chat_contactAddress').style.display = 'block';
+    document.getElementById('header_chat_chattingRoom').style.display = 'none';
+  }
+
+
+
+//헤더 알람영역
+function headerAlarm(){
+  document.getElementById('header_alarm_div').style.display=(document.getElementById('header_alarm_div').style.display=='block') ? 'none' : 'block';
+  
+}
+
+//헤더 옵션영역
+function headerOption(){
+  document.getElementById('header_option_div').style.display=(document.getElementById('header_option_div').style.display=='block') ? 'none' : 'block';
+}
+
+function test(){
+	var url = "chatting.do?roomId=" + roomId + "&projectId=" + projectId + "&chatroomName=" + chatroom_name;
+	window.open(url,"newwindow","height=700, width=500, resizable=yes");
+}

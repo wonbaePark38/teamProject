@@ -23,7 +23,7 @@
 					<div class="headLogo">
 						<a href="projectdir.do"><img src="images/logo_top.png"></a>
 					</div>
-					 <div id='searchArea'>
+					 <div id="searchArea" >
                     	<input type='text' id='inputkeyword' placeholder='키워드를 입력하세요'>
                      </div>
 
@@ -176,9 +176,10 @@
 					  <div style="display: inline-block;">
 						 <a>alarmOn</a>
 					  </div>
-					  <div style="display: inline-block;">
-					  <a href="javascript:void(0);" style="margin-left: 10px;">
-					  	채팅방 개설</a>
+					  <div style="display: inline-block; margin-top: 3px;">
+					  <a href="javascript:void(0);" onclick ="test()" style="margin-left: 10px; vertical-align: middle;">
+					  	<img src="images/icon_newchat.png" style="padding-top: 5px;">
+					  	</a>
 					  </div>
 					  
 					  

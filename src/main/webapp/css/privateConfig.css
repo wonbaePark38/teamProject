@@ -202,7 +202,9 @@ a {
 	font-weight: 500;
 	width: 100%;
 }
-
+#searchArea{
+	display:block;
+}
 .clientCenterContainer {
 	display: flex;
 	flex-direction: column;
