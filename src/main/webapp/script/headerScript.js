@@ -97,7 +97,7 @@ function headerOption(){
   document.getElementById('header_option_div').style.display=(document.getElementById('header_option_div').style.display=='block') ? 'none' : 'block';
 }
 
-function test(){
-	var url = "chatting.do?roomId=" + roomId + "&projectId=" + projectId + "&chatroomName=" + chatroom_name;
+function makeChatRoom(){
+	var url = "makeChatting.do";
 	window.open(url,"newwindow","height=700, width=500, resizable=yes");
 }
