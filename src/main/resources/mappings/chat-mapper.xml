@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChatDAO">
+
+	<resultMap id="chatList" type="chatVO">
+		<result property="projectId" column="PROJECTID" />
+		<result property="chatRoomName" column="CHATROOMNAME" />
+		<result property="projectName" column="PROJECTNAME" />
+	</resultMap>
+	
+	<resultMap id="chatHistory" type="msgVO">
+		<result property="message_sender" column="MESSAGE_SENDER"/>
+		<result property="message_content" column="MESSAGE_CONTENT"/>
+		<result property="message_sendTime" column="MESSAGE_SENDTIME"/>
+	</resultMap>
+
+	<select id="getChatList" resultMap="chatList" parameterType="int">
+		SELECT A.PROJECTID, A.PROJECTNAME, A.CHATROOMNAME,
+		A.CHATROOMID
+		FROM CHATROOM A INNER JOIN PROJECT_LOOKUP B
+		ON A.PROJECTID = B.PROJECT_ID WHERE B.MEMBER_ID=#{userId}
+	</select>
+	
+	<insert id="insertMessage" parameterType="msgVO">
+	
+		INSERT INTO MESSAGE (MESSAGE_SENDER, MESSAGE_CONTENT,
+		CHATROOM_ID,MESSAGE_SENDTIME)
+		VALUES( #{message_sender}, #{message_content}, #{chatroom_id},
+		#{message_sendTime})
+	</insert>
+	
+	 <select id="loadChatHistory" resultMap="chatHistory" parameterType="msgVO" >
+		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatroom_id} ORDER BY MESSAGE_SENDTIME
+	</select>
+
+</mapper>

@@ -17,7 +17,22 @@ public class UserVO {
 	private String passwordAuthKey;
 	private String passwordAuthStatus;
 	private String sessionId;
+	private String lockSwitchStatus;
+	private int lockTime;
 	
+	
+	public String getLockSwitchStatus() {
+		return lockSwitchStatus;
+	}
+	public void setLockSwitchStatus(String lockSwitchStatus) {
+		this.lockSwitchStatus = lockSwitchStatus;
+	}
+	public int getLockTime() {
+		return lockTime;
+	}
+	public void setLockTime(int lockTime) {
+		this.lockTime = lockTime;
+	}
 	public String getSessionId() {
 		return sessionId;
 	}
@@ -111,8 +126,9 @@ public class UserVO {
 				+ ", socialCompare=" + socialCompare + ", joinDate=" + joinDate + ", emailCheck=" + emailCheck
 				+ ", salt=" + salt + ", authKey=" + authKey + ", authStatus=" + authStatus + ", useCookie=" + useCookie
 				+ ", passwordAuthKey=" + passwordAuthKey + ", passwordAuthStatus=" + passwordAuthStatus + ", sessionId="
-				+ sessionId + "]";
+				+ sessionId + ", lockSwitchStatus=" + lockSwitchStatus + ", lockTime=" + lockTime + "]";
 	}
+	
 	
 	
 }

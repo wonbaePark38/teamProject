@@ -14,6 +14,8 @@ $(document).ready(function(){
     		$("#adminEmail").focus();
     		return false;
     	}
+
+   		
     	/*ajax 실행*/
     	$.ajax({
     	       url: 'searchEmail.do',
@@ -26,9 +28,7 @@ $(document).ready(function(){
     	       	if(data.emailCheck === 'false'){
     	       		var target = $('.email-check-div');
     	       		target.css('display','block');
-    	       	}
-    	       	else{
-    	       		
+    	       	}else{
     	       		alert('이메일을 발송하였습니다');
     	       	}
     	       },

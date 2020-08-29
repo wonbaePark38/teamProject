@@ -9,14 +9,15 @@
 <title>즐겨찾기 설정</title>
 <link href="css/favoritesSetting.css" rel="stylesheet" />
 <script type="text/javascript" src="script/favoritesSetting.js"></script>
+<script src="vendor/jquery/configScript.js"></script>
 <script src="script/jquery-3.5.1-min.js"></script>
 </head>
 
 <body>
 	<div class="wrap">
-		<jsp:include page="privateConfigHeader.jsp" flush="true" />
+		
 		<div class="centerArea">
-			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+			
 			<div class="article">
 				<header> 프로젝트 즐겨찾기 설정 </header>
 				<div class="text-area">프로젝트 즐겨찾기 시, 프로젝트를 상단에 고정할 수 있도록 설정할 수

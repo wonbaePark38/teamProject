@@ -26,36 +26,8 @@
 
 <body>
     <div class='mainWrap'>
-
-        <div class='headerContainer'>
-
-            <div class='headerWrap'>
-                <div class='headerLeft'>
-                    <div class='headLogo'>
-                        <a href='#'><img src='images/logo_top.png'></a>
-                    </div>
-                    <div id='searchArea'>
-
-                       
-
-                    <input type='text' id='inputkeyword' placeholder='키워드를 입력하세요'>
-                       
-                    </div>
-
-                </div>
-                <div class='headerRight'>
-                    <button id='serviceUpgradeBt' onclick='test()'>서비스 업그레이드</button>
-                    <input type='button' id='headerChatBt' onclick='test()'>
-                    <input type='button' id='headerIconAlram'>
-                    <input type='button' id='headerUserInfoBt'>
-                </div>
-                <!--//end headerRight-->
-            </div>
-            <!--headerwrap-->
-        </div>
-        <!--headercontainer-->
-
-
+	
+       
         <div class='centerAreaContainer'>
             <div class='fileIconArea'>
                 <div id='btnLeft'>

@@ -13,7 +13,37 @@ public class UserSettingVO {
 	private String myPosition;
 	private String companyCallNumber;
 	private String profileFileName;
+	private String connectDevice;
+	private String loginDate;
+	
+	public String getConnectDevice() {
+		return connectDevice;
+	}
+	public void setConnectDevice(String connectDevice) {
+		this.connectDevice = connectDevice;
+	}
+	public String getLoginDate() {
+		return loginDate;
+	}
+	public void setLoginDate(String loginDate) {
+		this.loginDate = loginDate;
+	}
+	//private String lockSwitchStatus;
+	//private int lockTime;
 	private MultipartFile profileImg;
+	
+	/*public int getLockTime() {
+		return lockTime;
+	}
+	public void setLockTime(int lockTime) {
+		this.lockTime = lockTime;
+	}
+	public String getLockSwitchStatus() {
+		return lockSwitchStatus;
+	}
+	public void setLockSwitchStatus(String lockSwitchStatus) {
+		this.lockSwitchStatus = lockSwitchStatus;
+	}*/
 	
 	public int getId() {
 		return id;
@@ -27,9 +57,6 @@ public class UserSettingVO {
 	public void setProfileFileName(String profileFileName) {
 		this.profileFileName = profileFileName;
 	}
-	
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -86,10 +113,11 @@ public class UserSettingVO {
 	}
 	@Override
 	public String toString() {
-		return "UserSettingVO [name=" + name + ", email=" + email + ", changePassword=" + changePassword
+		return "UserSettingVO [id=" + id + ", name=" + name + ", email=" + email + ", changePassword=" + changePassword
 				+ ", phoneNumber=" + phoneNumber + ", companyName=" + companyName + ", department=" + department
-				+ ", myPosition=" + myPosition + ", companyCallNumber=" + companyCallNumber + ", profileImg="
-				+ profileImg + "]";
+				+ ", myPosition=" + myPosition + ", companyCallNumber=" + companyCallNumber + ", profileFileName="
+				+ profileFileName + ", lockSwitchStatus=" + ", lockTime="
+				+ ", profileImg=" + profileImg + "]";
 	}
 	
 	

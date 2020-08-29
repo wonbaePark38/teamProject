@@ -29,4 +29,8 @@ public class SignupDAO {
 		sqlSessionTemplate.update("SignupDAO.updateAuthstatus", vo);
 	}
 	
+	public void addUserInfo(UserVO vo) {
+		sqlSessionTemplate.update("SignupDAO.addUserInfo", vo);
+	}
+	
 }

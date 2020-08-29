@@ -19,27 +19,25 @@
 
 </head>
 <body>
-	<c:if test="${status eq 'passwordFalse'}">
-		<script type="text/javascript">
-			errorPassword();
-		</script>
-		
-	</c:if>
-	
-	<c:if test="${status eq 'notJoin'}">
-		<script type="text/javascript">
-			errorEmail();
-		</script>
-		
-	</c:if>
-	
-	<c:if test="${status eq 'notCheckEmail'}">
-		<script type="text/javascript">
-		errorNotCheckEmail();
-		</script>
-		
-	</c:if>
-	
+	<c:choose>
+		<c:when test="${status eq 'passwordFalse'}">
+			<script type="text/javascript">
+				errorPassword();
+			</script>
+		</c:when>
+
+		<c:when test="${status eq 'notJoin'}">
+			<script type="text/javascript">
+				errorEmail();
+			</script>
+		</c:when>
+
+		<c:when test="${status eq 'notCheckEmail'}">
+			<script type="text/javascript">
+				errorNotCheckEmail();
+			</script>
+		</c:when>
+	</c:choose>
 	<div>
 		<div class="btn-register">
             <div class="header-left-menu">

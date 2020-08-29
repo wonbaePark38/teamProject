@@ -1,6 +1,8 @@
 body {
 	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
 		sans-serif;
+	background-color: #f2f2f2;
+	margin-top: 0;
 }
 
 a {
@@ -8,26 +10,25 @@ a {
 }
 
 .centerArea {
-    display: flex;
-    width: 1024px;
+        display: flex;
     height: 768px;
     flex-direction: row;
-    position: relative;
-    padding-top: 60pt;
     margin: 0 auto;
+    padding-left: 30px;
     background-color: #f2f2f2;
+padding-top: 20px;
 }
+
+
 
 .wrap {
-    display: flex;
+	display: flex;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 0 auto;	
 }
-
 
 .article{
 	width: 824px;
-    margin-left: 250px;
 }
 
 header {

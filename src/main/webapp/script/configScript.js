@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
   
+	$('#searchArea').css('display','none');
 
     var check = $("input[id='alram1']");
     var check2 = $("input[id='alram2']");
@@ -33,21 +34,15 @@ $(document).ready(function () {
         }
     });
 
-    lock.click(function(){
-    	
-        $("p").toggle();
-        var status =$('#lock');
-        if($('input:checkbox[id="lock"]').is(":checked")){
-            console.log('락체크됨');
-           $('.lock-select').attr('disabled',false);
-        }else{
-            $('.lock-select').attr('disabled',true);
-            console.log('락체크해제');
-            
-        }
-    });
+    
+    
+	
 
+    
 });
+
+		
+
 /*
  * settingPassword.jsp에서 쓰는 함수
  */
@@ -86,25 +81,25 @@ function passwordCheck(){
 /*
  * favoritesSetting.jsp에서 쓰는 함수
  */
-function reset(){
-	
-    var modal = document.getElementById('modal');
-    modal.style.display = "block";
-}
-function settinCancel(){
+//function reset(){
+//	
+//    var modal = document.getElementById('modal');
+//    modal.style.display = "block";
+//}
+/*function settinCancel(){
  
     var modal = document.getElementById('modal');
     var confirmCancel = document.getElementById("confirm-cancel");                                          
     modal.style.display="none";
-}
+}*/
 
-function settingConfirm(){
+/*function settingConfirm(){
  
     var modal = document.getElementById('modal');
     var confirm = document.getElementById("confirm");
     var confirmCancel = document.getElementById("confirm-cancel");                                          
     modal.style.display="none";
-}
+}*/
 //////////////////////////////////////////////////////////////////////////////////////
 function removeDevice(){
     alert('제거버튼 클릭');

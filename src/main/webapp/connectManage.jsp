@@ -9,10 +9,12 @@
 <script type="text/javascript" src="script/configScript.js"></script>
 </head>
 <body>
+
+<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 	<div class="wrap">
-		<jsp:include page="privateConfigHeader.jsp" flush="true" />
+	
 		<div class="centerArea">
-			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+			
 			<div class="article">
 				<header> 접속 기기 관리 </header>
 
@@ -20,8 +22,12 @@
 				<!-- for문 들어올 자리-->
 				<div class="table-row">
 					<div class="table-left">
-						<strong>pc_chrome~~~</strong> <span class="last-use">마지막
-							사용: ~~~~</span> <span class="first-use">최초 등록: ~~~~</span>
+						<strong>접속 PC 이름: ${vo.connectDevice}</strong>
+						<span class="last-use">로그인한 시간: ${vo.loginDate }
+						</span>
+						<%--<span class="first-use">최초 등록: ~~~~
+						</span>
+						 --%>
 					</div>
 					<div class="table-right">
 						<button type="button" id="not-using-device"

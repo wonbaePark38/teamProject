@@ -240,7 +240,7 @@
 						style="padding: .5rem 1.25rem;">전체 업무</a> <a id="main_side"
 						href="calendar.jsp" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 일정</a> <a id="main_side"
-						href="totalFile.html" class="list-group-item"
+						href="totalFileView.do" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 파일</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
 					<a id="main_side" class="list-group-item"
@@ -308,7 +308,7 @@
 						<div style="margin-left: 10px;">
 							<div style="margin-top: 10px;">
 								<img src="images/pf_ico1_off.png"> <a
-									href="privateConfig.jsp">환경설정</a>
+									href="accountInfo.do">환경설정</a>
 							</div>
 							<div style="margin-top: 10px;">
 								<img src="images/pf_ico5_off.png"> <a>도움말</a>

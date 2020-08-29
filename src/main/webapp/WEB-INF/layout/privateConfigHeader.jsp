@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -10,23 +11,21 @@
 <title>개인환경 설정</title>
 
 <link href="css/privateConfig.css" rel="stylesheet">
-<script type="text/javascript" src="script/articleScript.js"></script>
-
-<script src="vendor/jquery/jquery.min.js"></script>
-
-<script type="text/javascript" src="script/configScript.js"></script>
+<script src="script/jquery-3.5.1-min.js"></script>
+<script src="script/headerScript.js"></script>
 
 <body>
 
-
-	
+	 
 		<div class="headerContainer">
 			<div class="headerWrap">
 				<div class="headerLeft">
 					<div class="headLogo">
-						<a href="#"><img src="images/logo_top.png"></a>
+						<a href="projectdir.do"><img src="images/logo_top.png"></a>
 					</div>
-					
+					 <div id='searchArea'>
+                    	<input type='text' id='inputkeyword' placeholder='키워드를 입력하세요'>
+                     </div>
 
 				</div>
 				<div class="headerRight">
@@ -60,7 +59,7 @@
 				<div style="margin-left: 10px;">
 				   <div style="margin-top: 10px;">
 					  <img src="images/pf_ico1_off.png">
-					  <a href="accountInfo.jsp">환경설정</a>
+					  <a href="Layout.jsp">환경설정</a>
 				   </div>
 				   <div style="margin-top: 10px;">
 					  <img src="images/pf_ico5_off.png">
@@ -68,8 +67,8 @@
 				   </div>
 				   <div style="margin-top: 10px;">
 				    
-				   <form action="logout.do" method="GET">
-				   	   <button type="submit">
+				   <form action="logout.do" method="POST">
+				   	   <button type="submit" onclick='signOut()'>
 				   	   		<img src="images/pf_ico3_off.png">
 				   	   		로그아웃
 				   	   </button>
@@ -178,8 +177,11 @@
 						 <a>alarmOn</a>
 					  </div>
 					  <div style="display: inline-block;">
-						 <a style="margin-left: 10px;">새채팅</a>
+					  <a href="javascript:void(0);" style="margin-left: 10px;">
+					  	채팅방 개설</a>
 					  </div>
+					  
+					  
 				   </div>
 				</div>
 
@@ -192,23 +194,12 @@
 					  <input type="text" style=" width: 100%;" placeholder="채팅방 또는 이름 검색">
 				   </div>
 
-				   <!-- forEach -->
-				   <div style="vertical-align: middle;">
-					  <div style="display: inline-block;">
-						 <img src="images/empty_photo_s.png" style="margin-bottom: 20px;">
-					  </div>
-					  <div style="width: 75%; display: inline-block;">
-						 <div>
-							<span style="font-size: 9px; max-width: 155px;">채팅방이름</span>
-							<span style="font-size: 9px;">인원수</span>
-							<span style="font-size: 9px; float: right; margin-top: 9px;">마지막채팅시간</span>
-						 </div>
-						 <div>
-							<span style="font-size: 12px;">채팅내용</span>
-						 </div>
-					  </div>
+				 
+				   <div class="chatting-list-div">
+				   <!-- 개설된 채팅방 뿌려주는 영역 -->
+					
 				   </div>
-				   <!-- //forEach -->
+				  
 				</div>
 				<!-- //채팅방 -->
 
@@ -270,18 +261,8 @@
 			</div><!-- headerwrap -->
 
 		</div><!-- headercontainer -->
-
-
-					
-	
-			
-
-
-
-
+		
 
 </body>
-
-
 
 </html>

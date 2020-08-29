@@ -34,5 +34,9 @@
 	<select id="selectAuthkey" resultMap="signResult">
 		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL = #{email}
 	</select>
+	
+	<update id="addUserInfo" parameterType="signup">
+		INSERT INTO USERSETTING (MEMBER_ID) VALUES((select MAX(MEMBER_ID) from MEMBERINFO))
+	</update>
 
 </mapper>

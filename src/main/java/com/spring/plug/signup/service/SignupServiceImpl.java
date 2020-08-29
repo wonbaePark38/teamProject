@@ -87,4 +87,9 @@ public class SignupServiceImpl implements SignupService {
 		return signupDAO.selectAuthkey(vo);
 	}
 
+	@Override
+	public void addUserInfo(UserVO vo) {
+		signupDAO.addUserInfo(vo);
+	}
+
 }

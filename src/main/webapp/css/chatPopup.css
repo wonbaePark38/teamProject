@@ -1,0 +1,83 @@
+body{
+    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
+    font-size: 13px;
+   margin: 0;
+}
+#chat-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:100%;
+    height:600px;
+    
+}
+
+#chat-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height:50px;
+    background-color:#5f5ab9;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;  
+}
+
+#view-chat-msg{
+	display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 90%;
+    margin: 10px 10px 10px 10px;
+    outline: none;
+    resize: none;
+    border:none;
+    
+}
+
+#chat-content{
+	display:flex;
+	justify-content:center;
+	height:100%;
+}
+#input-msg-div{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid #d3d4d6;
+    width: 100%;
+    height:80px;
+    align-items: center;
+   
+    bottom: 0;
+    background-color: white;
+}
+
+#input-chat-msg{
+    
+    width: 85%;
+    height: 80%;
+    overflow: hidden;
+    border: none;
+    margin-left: 10px;
+    resize: none;
+    outline: none;
+}
+
+#send-bt{
+  
+   width: 60px;
+   height: 60px;
+   background-color: #4d4d4d;
+   color: white;
+   margin-right: 10px;
+
+}
+
+#view-chat-msg{
+    display: flex;
+    flex-direction: column;
+}
+

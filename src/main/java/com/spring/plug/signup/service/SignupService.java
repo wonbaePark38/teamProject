@@ -8,5 +8,5 @@ public interface SignupService {
 	void updateAuthkey(UserVO vo);
 	void updateAuthstatus(UserVO vo);
 	UserVO selectAuthkey(UserVO vo);
-	
+	void addUserInfo(UserVO vo);
 }

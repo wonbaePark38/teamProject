@@ -8,12 +8,11 @@
 		<result property="name" column="MEMBER_NAME" />
 		<result property="email" column="MEMBER_EMAIL" />
 		<result property="profileFileName" column="PROFILEIMG" />
-		
 	</resultMap>
 	
 	<select id="userConfig" resultMap="getUserConfig" parameterType="int">
 		SELECT A.MEMBER_NAME, A.MEMBER_ID, A.MEMBER_EMAIL, A.MEMBER_PASSWORD, 
-			   B.COMPANYNAME, B.DEPARTMENT, B.MYPOSITION, B.COMPANYCALLNUMBER, B.PROFILEIMG
+			  B.*
 		FROM MEMBERINFO A LEFT OUTER JOIN USERSETTING B ON A.MEMBER_ID = B.MEMBER_ID 
 		WHERE B.MEMBER_ID=#{id}
 	</select>
@@ -21,5 +20,18 @@
 	<update id="updateProfileImg" parameterType="configInfo">
 		UPDATE USERSETTING SET PROFILEIMG = #{profileFileName} WHERE MEMBER_ID = #{id}
 	</update>
-
+	
+	<update id="changePassword" parameterType="user">
+		UPDATE MEMBERINFO SET MEMBER_PASSWORD =#{password}, PASSWORDAUTHSTATUS =#{passwordAuthStatus}
+		WHERE MEMBER_ID = #{seq}
+	</update>
+	
+	<update id="changeLockSetting" parameterType="user">
+		UPDATE MEMBERINFO SET LOCKMODESTATUS =#{lockSwitchStatus}, LOCKTIME =#{lockTime}
+		WHERE MEMBER_ID = #{seq}
+	</update>
+	
+<!-- 	<select id="getSettings" resultType="user" parameterType="int">
+		SELECT * FROM USERSETTING WHERE MEMBER_ID = #{id}
+	</select> -->
 </mapper>

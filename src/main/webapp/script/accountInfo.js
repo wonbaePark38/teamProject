@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 	
-	
+	$('#searchArea').css('display','none');
 	
 	$(document).on('change','.profile-photo-upload',function(){
 		var splitFile = $('.profile-photo-upload').val().split('\\');
@@ -19,5 +19,8 @@ $(document).ready(function(){
 		}
 		$('#uploadBt').css('display','block');
 	});
+	
+	
 
 });
+

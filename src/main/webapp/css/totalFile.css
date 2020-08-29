@@ -1,6 +1,9 @@
 html{
 	height:100%;
 }
+input{
+	background-color: white;
+}
 body {
 	
 margin: 0 auto;
@@ -39,9 +42,9 @@ button {
 	background-color: white;
 }
 
-button:hover{
+/*button:hover{
 	background-color: #f2f2f2;
-}
+}*/
 
 a:hover {
 	text-decoration: none;
@@ -656,6 +659,10 @@ a:hover {
 	height: 30px;
 	align-items: center;
 }
+.totalProjectDiv input:hover{
+	background-color:  #e7e8e9;
+}
+
 
 #totalProjectButton {
 	display: flex;

@@ -31,11 +31,6 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getSocialUser(vo);
 	}
 
-	@Override
-	public String getSaltById(String email) {
-		System.out.println("서비스임플 호출");
-		return userDAO.getSaltById(email);
-	}
 	
 	@Override
 	public void addSocialUser(UserVO vo) {
@@ -115,6 +110,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserVO checkLoginBefore(String sessionId) throws Exception {
 		return userDAO.checkUserWithSessionKey(sessionId);
+	}
+
+
+	@Override
+	public void writeLoginDate(int id, String hostName) {
+		userDAO.writeLoginDate(id,hostName);
 	}
 	
 }
