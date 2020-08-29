@@ -28,5 +28,9 @@ public class ChatDAO {
 		sqlSessionTemplate.insert("ChatDAO.insertMessage", msgVO);
 	}
 	
+	public List<MessageVO> loadChatHistory(MessageVO msgVO){
+		System.out.println("-->mybatis로 loadChatHistory 기능 처리");
+		return sqlSessionTemplate.selectList("ChatDAO.loadChatHistory", msgVO);
+	}
 	
 }

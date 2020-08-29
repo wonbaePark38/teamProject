@@ -8,8 +8,8 @@ $(document).ready(function(){
 	$(document).on('click','#chat-row',function(){
 		var roomId = $(this).val();
 		var projectId = $(this).children().next().next().next().next().val();
-		
-		var url = "chatting.do?roomId=" + roomId + "&projectId=" + projectId;
+		var chatroom_name = $(this).children().next().next().text();
+		var url = "chatting.do?roomId=" + roomId + "&projectId=" + projectId + "&chatroomName=" + chatroom_name;
 		window.open(url,"newwindow","height=700, width=500, resizable=yes");
 	});
 	

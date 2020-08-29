@@ -4,29 +4,35 @@
 
 <mapper namespace="ChatDAO">
 
-	<resultMap id="chatList" type="chat" >
+	<resultMap id="chatList" type="chatVO">
 		<result property="projectId" column="PROJECTID" />
-		<result property="chatRoomName"	column="CHATROOMNAME"/>
-		<result property="projectName" column="PROJECTNAME"/>
-		
+		<result property="chatRoomName" column="CHATROOMNAME" />
+		<result property="projectName" column="PROJECTNAME" />
+	</resultMap>
+	
+	<resultMap id="chatHistory" type="msgVO">
+		<result property="message_sender" column="MESSAGE_SENDER"/>
+		<result property="message_content" column="MESSAGE_CONTENT"/>
+		<result property="message_sendTime" column="MESSAGE_SENDTIME"/>
 	</resultMap>
 
 	<select id="getChatList" resultMap="chatList" parameterType="int">
-		SELECT A.PROJECTID, A.PROJECTNAME, A.CHATROOMNAME, A.CHATROOMID
-		FROM CHATROOM A INNER JOIN PROJECT_LOOKUP B 
+		SELECT A.PROJECTID, A.PROJECTNAME, A.CHATROOMNAME,
+		A.CHATROOMID
+		FROM CHATROOM A INNER JOIN PROJECT_LOOKUP B
 		ON A.PROJECTID = B.PROJECT_ID WHERE B.MEMBER_ID=#{userId}
 	</select>
 	
+	<insert id="insertMessage" parameterType="msgVO">
 	
-	 <insert id="insertMessage" parameterType="msgVO">
-	 
-	 	 <selectKey keyColumn="MESSAGE_SENDTIME" keyProperty="message_sendTime" order="BEFORE" resultType="String">
-          SELECT TO_CHAR(SYSDATE,'YYYY-MM-DD HH:MI:SS') AS MESSAGE_SENDTIME FROM DUAL
-       </selectKey>
-	 
 		INSERT INTO MESSAGE (MESSAGE_SENDER, MESSAGE_CONTENT,
-		CHATROOM_ID,MESSAGE_SENDTIME) 
-		VALUES( #{message_sender}, #{message_content}, #{chatroom_id}, #{message_sendTime})
+		CHATROOM_ID,MESSAGE_SENDTIME)
+		VALUES( #{message_sender}, #{message_content}, #{chatroom_id},
+		#{message_sendTime})
 	</insert>
-	 
+	
+	 <select id="loadChatHistory" resultMap="chatHistory" parameterType="msgVO" >
+		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatroom_id} ORDER BY MESSAGE_SENDTIME
+	</select>
+
 </mapper>

@@ -24,4 +24,9 @@ public class ChatServiceImpl implements ChatService{
 		chatDAO.insertMessage(msgVO);
 	}
 
+	@Override
+	public List<MessageVO> loadChatHistory(MessageVO msgVO) {
+		return chatDAO.loadChatHistory(msgVO);
+	}
+
 }

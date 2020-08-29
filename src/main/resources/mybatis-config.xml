@@ -22,7 +22,7 @@
 		
 		<typeAlias alias="configInfo" type="com.spring.plug.user.accountinfo.vo.UserSettingVO"/>
 		<typeAlias alias="msgVO" type="com.spring.plug.chat.vo.MessageVO"/>
-		<typeAlias alias="chat" type="com.spring.plug.chat.vo.ChatRoomVO"/>  
+		<typeAlias alias="chatVO" type="com.spring.plug.chat.vo.ChatRoomVO"/>  
 	
 	
 	</typeAliases>
