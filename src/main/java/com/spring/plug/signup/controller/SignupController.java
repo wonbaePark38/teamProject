@@ -23,6 +23,7 @@ public class SignupController {
 		vo.setAuthStatus("0");
 		try {
 			signupService.insertMember(vo);
+			signupService.addUserInfo(vo);
 			mav.setViewName("newlogin.jsp");
 		} catch (Exception e) {
 			System.out.println("중복 이메일");

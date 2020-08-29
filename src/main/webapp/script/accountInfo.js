@@ -19,5 +19,8 @@ $(document).ready(function(){
 		}
 		$('#uploadBt').css('display','block');
 	});
+	
+	
 
 });
+

@@ -9,17 +9,18 @@
 <link href="css/settingPassword.css" rel="stylesheet">
 
 <script src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="script/configScript.js"></script>
 
 
 </head>
 
 <body>
 
-
+	<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 	<div class="wrap">
-		<jsp:include page="privateConfigHeader.jsp" flush="true" />
+		
 		<div class="centerArea">
-			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+			
 			<div class="article">
 
 				<header> 비밀번호 설정 </header>
@@ -31,22 +32,29 @@
 					<div>비밀번호는 공백 없이 영문, 숫자 포함 6자리 이상이어야 합니다.</div>
 				</div>
 				<div class="form-container">
-					<form method="POST" action="#" onsubmit="return passwordCheck()">
+					<form method="POST" action="changePassword.do" onsubmit="return passwordCheck()">
 						<div class="input-password">
-							<label> 비밀번호 </label> <input type="password" id="password1">
-
+							<label> 비밀번호 </label>
+							<input type="password" id="password1" name="password">
 						</div>
 						<div class="check-password">
-							<label> 비밀번호 확인 </label> <input type="password" id="password2">
+							<label> 비밀번호 확인 </label>
+							<input type="password" id="password2">
 							<input class="change-button" type="submit" value="변경">
 						</div>
 					</form>
 
 				</div>
+				
+				
 			</div>
 		</div>
 		<!-- end centerarea -->
 	</div>
 	<!--wrap-->
+	
 </body>
+ 
+
+
 </html>

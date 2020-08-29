@@ -1,8 +1,8 @@
 body {
 	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
 		sans-serif;
-	margin-top: 0;	
-	overflow: hidden;
+	background-color: #f2f2f2;
+    margin-top: 0;
 }
 
 a {
@@ -28,9 +28,9 @@ label {
 
 .wrap {
 	display: flex;
-	flex-direction: column;
-	margin: 0 auto;
-	
+    flex-direction: column;
+    margin: 0 auto;
+  
 }
 
 header {
@@ -40,18 +40,17 @@ header {
 	border-bottom: 3px solid #6862c3;;
 }
 .centerArea {
-    display: flex;
-    width: 1024px;
+     display: flex;
     height: 768px;
     flex-direction: row;
-    position: relative;
-    padding-top: 60pt;
     margin: 0 auto;
+    padding-left: 30px;
     background-color: #f2f2f2;
+     padding-top: 20px;
 }
 .article{
 	width: 824px;
-    margin-left: 250px;
+   
 }
 .text-area {
 	height: 2%;

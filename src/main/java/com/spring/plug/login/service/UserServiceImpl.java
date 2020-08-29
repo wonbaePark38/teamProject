@@ -111,5 +111,11 @@ public class UserServiceImpl implements UserService{
 	public UserVO checkLoginBefore(String sessionId) throws Exception {
 		return userDAO.checkUserWithSessionKey(sessionId);
 	}
+
+
+	@Override
+	public void writeLoginDate(int id, String hostName) {
+		userDAO.writeLoginDate(id,hostName);
+	}
 	
 }

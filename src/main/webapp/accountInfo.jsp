@@ -13,16 +13,26 @@
     <title>계정 정보</title>
     <link href='css/accountInfo.css' rel='stylesheet' />
     <script src="vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="script/accountInfo.js"></script>
+   <script type="text/javascript" src="script/accountInfo.js"></script>
+    <script type="text/javascript" src="script/configScript.js"></script>
+
+    
 </head>
+   
+   
 <body>
-
-
+	
+	<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+	<c:if test="${user.lockSwitchStatus eq 'on'}">
+		<jsp:include page="lock.jsp" flush="true" />
+		<input type="hidden" name="user" id="session" value='${user.lockTime}'/>
+	</c:if>
+	
 	<div class="wrap">
-		<jsp:include page="privateConfigHeader.jsp" flush="true" />
-
+	
 		<div class="centerArea">
-			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+			
+			
 			<div class="article">
 				<header> 계정 정보 </header>
 				<!--end header-->
@@ -32,8 +42,15 @@
 
 					<div class="photo-area-container">
 						<div class="photo-area">
-						  <img src="images/empty_photo.png"/>
-						  <!-- <img src="<c:url value='/display.do?name=${vo.profileFileName }'/>" alt="상품이미지" /> -->
+							<c:choose>
+								<c:when test="${empty vo.profileFileName}">
+									<img src="images/empty_photo.png" />
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value='/display.do?name=${vo.profileFileName }'/>" alt="상품이미지" /> 
+								</c:otherwise>
+							</c:choose>
+							
 						</div>
 						<form action="profileImgChange.do" method="POST" enctype="multipart/form-data"> 
 						
@@ -115,14 +132,14 @@
 				</div>
 				<!--end myprofile-->
 			</div>
+			<!-- <input type = "text" id="msg">
+				<input type ="button" id="btnSend" value="전송버튼"/>
+				 -->
 		</div>
 		<!-- centerArea -->
-
-
-
-
-
+		
 	</div>
 	<!-- end wrap -->
 </body>
+
 </html>

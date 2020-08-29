@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +10,11 @@
 <script type="text/javascript" src="script/articleScript.js"></script>
 
 <script src="vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="script/script.js"></script>
-<script type="text/javascript" src="script/configScript.js"></script>
+
+
 </head>
 <body>
+
 	<div class="sidebarContainer">
 
 				<div class="go-back-container">
@@ -22,21 +24,20 @@
 				<!--사이드바-->
 				<div class="sidebar">
 					<div style="font-size: 10pt; color: #C0C0C0">계정</div>
-					<a href="accountInfo.do" class="list-group-item" id="account-info">계정 정보</a>
-					<a href="settingPassword.jsp" class="list-group-item" id="password-setting">비밀번호 설정</a>
-				
+					<a href="accountInfo.do" class="list-group-item" id="connect-device-setting">계정 정보</a>
+					
+					<c:if test="${user.socialCompare eq 'N'}">
+						<a href="settingPassword.do" class="list-group-item" id="password-setting">비밀번호 설정</a>
+					</c:if>
 					<hr>
 					<div style="font-size: 10pt; color: #C0C0C0">설정</div>
 					<a href="pushAlramSetting.jsp" class="list-group-item" id="push-alram-setting">푸쉬 알림 설정</a>
 					
 					<a href="favoritesSetting.jsp" class="list-group-item" id="favorites-setting">프로젝트 즐겨찾기 설정</a>
-					<a href="connectManage.jsp" class="list-group-item" id="connect-device-setting">접속 기기 관리</a>
+					<a href="connectManage.do" class="list-group-item" id="connect-device-setting">접속 기기 관리</a>
 					<a href="languageSetting.jsp" class="list-group-item" id="language-setting">언어 및 타임존 설정</a>
-					<a href="lockModeConfig.jsp" class="list-group-item" id="lock-mode-setting">잠금모드</a>
+					<a href="lockModeConfig.do" class="list-group-item" id="lock-mode-setting">잠금모드</a>
 					<hr>
-
-			
-				
 
 				</div>
 				<div class="clientCenterContainer">
@@ -48,13 +49,10 @@
 						<li><a href="#" id="newNoticeBt">플로우 새소식</a></li>
 						<!-- 알림 있을 경우 class on 추가 -->
 					</ul>
-					<div class="helpButtonContainer">
-						<div id="helpMenuImg"></div>
-						<button id="helpMenuBt" onclick="clientCenterFold()">고객센터</button>
-					</div>
+					
 				</div>
 
 			</div> <!--// sidebarcontainer-->
-	
+
 </body>
 </html>

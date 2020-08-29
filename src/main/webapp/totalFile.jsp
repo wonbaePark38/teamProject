@@ -26,7 +26,7 @@
 
 <body>
     <div class='mainWrap'>
-	<jsp:include page="privateConfigHeader.jsp" flush="true" />
+	
        
         <div class='centerAreaContainer'>
             <div class='fileIconArea'>

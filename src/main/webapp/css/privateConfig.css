@@ -1,11 +1,4 @@
-/*body {
-	margin: 0 auto;
-	background-color: #f2f2f2;
-	border: 1px solid #eaeaea;
-	overflow-x: hidden;
-	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
-		sans-serif;
-}*/
+
 
 a {
 	cursor: pointer;
@@ -14,23 +7,7 @@ a {
 	text-decoration: none;
 }
 
-/*a:hover {
-	background-color: #e7e8e9;
-	text-decoration: none;
-}
 
-li:hover {
-	background-color: #e7e8e9;
-}*/
-
-/*.mainWrap {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	flex-wrap: nowrap;
-	background-color: #f2f2f2;
-}*/
 
 .headerContainer {
 	border-bottom: 2px solid #e7e8e9;
@@ -93,10 +70,11 @@ li:hover {
 	border-radius: 5px;
 	border-style: 1px solid black;
 	background-color: white;
-	z-index: 99;
+	z-index: 2;
 	position: absolute;
 	top: 62px;
-	right: 40px
+	right: 40px;
+	overflow-y:scroll;
 }
 
 #header_alarm_div {
@@ -183,11 +161,9 @@ li:hover {
 
 .sidebarContainer {
 	display: flex;
-	position: fixed;
-	flex-direction: column;
-	
-	width: 200px;
-	background-color: #f2f2f2;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f2f2f2;
 }
 
 .sidebar {
@@ -270,3 +246,27 @@ li:hover {
 	padding-bottom: 50px;
 }
 
+.chatting-list-div{
+	display:flex;
+	flex-direction:column;
+	
+	width:100%;
+	height:100%;
+	
+}
+
+#chat-row{
+	width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    text-align: left;
+    padding-left: 20px;
+    border: none;
+    background-color: aliceblue;
+}
+
+.center-area{
+	width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+}

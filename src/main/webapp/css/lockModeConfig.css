@@ -1,6 +1,8 @@
 body {
 	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
 		sans-serif;
+	background-color: #f2f2f2;
+	margin-top: 0;
 }
 
 a {
@@ -8,26 +10,23 @@ a {
 }
 
 .centerArea {
-    display: flex;
-    width: 1024px;
-    height: 768px;
-    flex-direction: row;
-    position: relative;
-    padding-top: 60pt;
-    margin: 0 auto;
-    background-color: #f2f2f2;
+	display: flex;
+	height: 768px;
+	flex-direction: row;
+	margin: 0 auto;
+	padding-left: 30px;
+	background-color: #f2f2f2;
+	padding-top: 20px;
 }
 
 .wrap {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
 }
 
-
-.article{
+.article {
 	width: 824px;
-    margin-left: 250px;
 }
 
 header {
@@ -54,6 +53,13 @@ header {
 
 /* Hide default HTML checkbox */
 .lock-switch input {
+	display: none;
+}
+
+#change-lock-settingBt {
+	width: 80px;
+	height: 40px;
+	margin-left: 20px;
 	display: none;
 }
 
