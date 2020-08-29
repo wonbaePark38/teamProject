@@ -30,12 +30,10 @@
 			<mvc:exclude-mapping path="/adminPage/production/**"/>
 			<ref bean="intercepter" />
 		</mvc:interceptor>
-
 		<mvc:interceptor>
 			<mvc:mapping path="/login.do" />
 			<ref bean="loginHistoryIntercepter" />
 		</mvc:interceptor>
-
 	</mvc:interceptors>  -->
 	<bean id="echoHandler" class="com.spring.plug.chat.handler.ReplyEchochoHandler" />
 	<bean id="chatHandler" class="com.spring.plug.chat.handler.ChatWebSocketHandler" />

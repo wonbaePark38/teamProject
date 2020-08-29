@@ -22,7 +22,7 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 	@Override //연결됐을때
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("afterConnectionEstablished" + session);
-		sessions.add(session); //웹소켓 세션 리스트에 추가
+		sessions.add(session); //웹소켓 세션 리스트에 추가	
 		String senderId = getId(session);
 		userSessions.put(senderId, session);
 	}
