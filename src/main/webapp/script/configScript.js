@@ -1,8 +1,6 @@
 
 $(document).ready(function () {
   
-	$('#searchArea').css('display','none');
-
     var check = $("input[id='alram1']");
     var check2 = $("input[id='alram2']");
     var lock = $("input[id='lock']");

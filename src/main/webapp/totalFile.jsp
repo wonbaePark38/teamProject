@@ -19,7 +19,8 @@
  
    <script type='text/javascript' src='./script/script.js'></script>
     <script type='text/javascript' src='./script/totalFile.js'></script>
-    
+       <script type="text/javascript" src="script/accountInfo.js"></script>
+    <script type="text/javascript" src="script/configScript.js"></script>
     <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
     
 </head>
