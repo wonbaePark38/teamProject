@@ -10,11 +10,11 @@
 </head>
 <body>
 
-<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+
 	<div class="wrap">
-	
+	<jsp:include page="privateConfigHeader.jsp" flush="true" />
 		<div class="centerArea">
-			
+			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 			<div class="article">
 				<header> 접속 기기 관리 </header>
 

@@ -22,7 +22,7 @@ public class LogoutController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@RequestMapping(value="/logout.do", method=RequestMethod.POST)
+	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public ModelAndView logout(UserVO vo,ModelAndView mav, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		
 		vo = (UserVO)session.getAttribute("user");

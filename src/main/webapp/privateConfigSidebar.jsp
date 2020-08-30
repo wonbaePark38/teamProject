@@ -32,8 +32,6 @@
 					<hr>
 					<div style="font-size: 10pt; color: #C0C0C0">설정</div>
 					<a href="pushAlramSetting.jsp" class="list-group-item" id="push-alram-setting">푸쉬 알림 설정</a>
-					
-					<a href="favoritesSetting.jsp" class="list-group-item" id="favorites-setting">프로젝트 즐겨찾기 설정</a>
 					<a href="connectManage.do" class="list-group-item" id="connect-device-setting">접속 기기 관리</a>
 					<a href="languageSetting.jsp" class="list-group-item" id="language-setting">언어 및 타임존 설정</a>
 					<a href="lockModeConfig.do" class="list-group-item" id="lock-mode-setting">잠금모드</a>

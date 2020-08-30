@@ -68,7 +68,7 @@
 				   </div>
 				   <div style="margin-top: 10px;">
 				    
-				   <form action="logout.do" method="POST">
+				   <form action="logout.do" method="GET">
 				   	   <button type="submit" onclick='signOut()'>
 				   	   		<img src="images/pf_ico3_off.png">
 				   	   		로그아웃

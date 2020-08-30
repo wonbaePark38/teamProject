@@ -121,7 +121,7 @@ public class UserSettingController {
 	/*비밀번호 변경 페이지 */
 	@RequestMapping(value="settingPassword.do")
 	public ModelAndView settingPasswordView(UserVO vo, HttpSession session, ModelAndView mav) {
-		mav.setViewName("settingPassword.page");
+		mav.setViewName("settingPassword.jsp");
 		return mav;
 	}
 	//비밀번호 변경 컨트롤러
@@ -144,7 +144,7 @@ public class UserSettingController {
 	public ModelAndView lockModeView(UserVO vo, HttpSession session,ModelAndView mav) {
 		vo = (UserVO)session.getAttribute("user");
 		mav.addObject("setting",vo);
-		mav.setViewName("lockModeConfig.page");
+		mav.setViewName("lockModeConfig.jsp");
 		return mav;
 	}
 	//잠금모드 설정 변경 적용 컨트롤러
@@ -210,7 +210,7 @@ public class UserSettingController {
 		
 		UserSettingVO infoVo = userSettingService.getConfigUserInfo(id);
 		
-		mav.setViewName("connectManage.page");
+		mav.setViewName("connectManage.jsp");
 		mav.addObject("vo",infoVo);
 		return mav;
 	}

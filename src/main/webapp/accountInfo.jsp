@@ -21,17 +21,17 @@
    
    
 <body>
-	<jsp:include page="privateConfigHeader.jsp" flush="true" />
-	<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+	
+	
 	<c:if test="${user.lockSwitchStatus eq 'on'}">
 		<jsp:include page="lock.jsp" flush="true" />
 		<input type="hidden" name="user" id="session" value='${user.lockTime}'/>
 	</c:if>
 	
 	<div class="wrap">
-	
+	<jsp:include page="privateConfigHeader.jsp" flush="true" />
 		<div class="centerArea">
-			
+			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 			
 			<div class="article">
 				<header> 계정 정보 </header>

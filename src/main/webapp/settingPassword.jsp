@@ -16,11 +16,11 @@
 
 <body>
 
-	<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+	
 	<div class="wrap">
-		
+		<jsp:include page="privateConfigHeader.jsp" flush="true" />
 		<div class="centerArea">
-			
+			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 			<div class="article">
 
 				<header> 비밀번호 설정 </header>

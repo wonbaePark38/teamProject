@@ -17,12 +17,12 @@
 		<input type="hidden" name="user" id="session" value='${setting.lockSwitchStatus}'/>
 		
 	</c:if>
-	<jsp:include page="privateConfigSidebar.jsp" flush="true" />
+	
 	<div class="wrap">
-		
+		<jsp:include page="privateConfigHeader.jsp" flush="true" />
 		
 		<div class="centerArea">
-			
+			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 			<div class="article">
 
 				<header>

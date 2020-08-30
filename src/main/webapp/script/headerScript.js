@@ -28,7 +28,7 @@ $(document).ready(function(){
 				}
 			}
 				var url = "chatting.do?roomId=" + roomId + "&projectId=" + data.projectId + "&chatroomName=" + data.chatRoomName;
-				window.open(url,"newwindow","height=700, width=500, resizable=yes");
+				window.open(url,chatroom_name,"height=700, width=500, resizable=yes");
 			
 		}).fail(function(err){
 			alert('통신 에러');
