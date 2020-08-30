@@ -56,12 +56,17 @@ public class ChattingController {
 		chatService.insertMessage(msgVO);
 	}
 	
-	//채팅창 켰을때 메시지 히스토리 가저오는 컨트롤러
+	//채팅창 켰을때 메시지 히스토리 가저오고 접속 시간 로그 남김 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="/loadMessage.do", method = RequestMethod.POST)
-	public List<MessageVO> loadChatHistory(MessageVO msgVO) {
-		
+	public List<MessageVO> loadChatHistory(MessageVO msgVO, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		/*
+		 * 로그 남기는 로직 처리
+		 */
 		List<MessageVO> chatHistoryList = chatService.loadChatHistory(msgVO);
+		
+		
 		return chatHistoryList;
 	}
 	
@@ -95,4 +100,15 @@ public class ChattingController {
 		return roomInfo;
 	}
 	
+	//접속 로그 업데이트
+	@ResponseBody
+	@RequestMapping(value="/updateConnectTime.do", method=RequestMethod.POST)
+	public void updateConnectTime(ChatRoomVO roomVO, HttpSession session) {
+		
+		UserVO user = (UserVO)session.getAttribute("user");
+		roomVO.setJoinedUserId(user.getSeq());
+		System.out.println("업데이트 로그 로직 컨트롤러");
+		System.out.println(roomVO.toString());
+		chatService.updateConnectTime(roomVO);
+	}
 }

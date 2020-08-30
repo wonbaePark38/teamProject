@@ -31,14 +31,14 @@
 	
 	<insert id="insertMessage" parameterType="msgVO">
 	
-		INSERT INTO MESSAGE (MESSAGE_SENDER, MESSAGE_CONTENT,
+		INSERT INTO MESSAGE (MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
 		CHATROOM_ID,MESSAGE_SENDTIME)
-		VALUES( #{message_sender}, #{message_content}, #{chatroom_id},
+		VALUES( #{message_sender}, #{senderId}, #{message_content}, #{chatroom_id},
 		#{message_sendTime})
 	</insert>
 	
 	 <select id="loadChatHistory" resultMap="chatHistory" parameterType="msgVO" >
-		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatroom_id} ORDER BY MESSAGE_SENDTIME
+		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatroom_id} ORDER BY MESSAGE_SENDTIME ASC
 	</select>
 	
 	<select id="getJoinProjectList" resultMap="projectList" parameterType="int">
@@ -56,4 +56,14 @@
 	<select id="getChatRoomInfo" resultMap="chatList" parameterType="roomVO">
 		SELECT * FROM CHATROOM WHERE CHATROOMID = #{chatRoomId}
 	</select>
+	
+	<update id="updateConnectTime" parameterType="roomVO">
+		MERGE INTO CHATLOG A USING DUAL
+			ON (A.MEMBER_ID = #{joinedUserId} AND A.CHATROOMID = #{chatRoomId})
+			WHEN MATCHED THEN
+				UPDATE SET A.CONNECTTIME = #{connectTime}
+			WHEN NOT MATCHED THEN
+				INSERT (A.MEMBER_ID , A.CHATROOMID, A.CONNECTTIME)
+				VALUES(#{joinedUserId}, #{chatRoomId}, #{connectTime})	
+	</update> 
 </mapper>

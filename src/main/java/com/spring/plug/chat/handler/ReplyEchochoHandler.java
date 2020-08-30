@@ -39,6 +39,7 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 		
 		//protocol: cmd, 댓글 작성자, 게시글 작성자,bno (ex: reply, user2, user1, 234)
 		String msg = message.getPayload();
+		
 		if(StringUtils.isNotEmpty(msg)) {
 			String[] strs = message.getPayload().split(",");
 			if(strs != null && strs.length == 4) {

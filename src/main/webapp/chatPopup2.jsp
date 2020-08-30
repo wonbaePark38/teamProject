@@ -49,23 +49,26 @@ var socket = null;
 
 $(document).ready(function() {
 	
-	
+	window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
 	var sendData = { //현재 방 id값 세팅
 			chatroom_id : '${roomId}',
 	}
 	var headerName = '${chatRoomName}';
-	console.log(headerName);
-	$('.header').text(headerName);
-	//채팅 내역 로드
+	$('.header').text(headerName); //채팅방 헤더에 채팅방 이름 세팅
+	
+	let today = new Date();   
+	var connectTime = today.toLocaleString();
+	
+	var sendLogData = {
+			chatRoomId : '${roomId}',
+			connectTime : connectTime,
+	}
+	//접속 로그 업데이트
 	$.ajax({
 			type : "POST",
-			url : 'loadMessage.do',
-			data : sendData,
+			url : 'updateConnectTime.do',
+			data : sendLogData,
 			success : function(data) {
-				console.log(data);
-				$.each(data,function(index,element){
-					msgHistoryPosition(element);
-				});
 			},
 			fail : function(err) {
 				alert('에러발생');
@@ -73,6 +76,24 @@ $(document).ready(function() {
 		});
 	
 		connect();
+		
+	$.ajax({ //채팅 내역 로드
+		type : "POST",
+		url : 'loadMessage.do',
+		data : sendData,
+		success : function(data) {
+			console.log(data);
+			$.each(data,function(index,element){
+				msgHistoryPosition(element); //화면에 뿌려줌
+				console.log(data)
+			});
+		},
+		fail : function(err) {
+			alert('에러발생');
+		}
+			
+	})	
+	
 		$(document).on('keydown', '#message', function(e) { //엔터 이벤트
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13' && !e.shiftKey) {
@@ -85,6 +106,7 @@ $(document).ready(function() {
 	});
 	//웹소켓 접속
 	function connect() {
+		
 		var ws = new WebSocket("ws://localhost:8080/plugProject/chat.do");
 		socket = ws;
 
@@ -121,7 +143,7 @@ $(document).ready(function() {
 			message.message_sender = '${user.name}';
 			message.chatroom_id = '${roomId}';
 			message.message_sendTime = inputDate;
-			
+			message.senderId = '${user.seq}';
 			socket.send(JSON.stringify(message));
 			insertMessageInfo(message); //db에 저장할 메시지 정보
 			$("#message").val("");
@@ -129,14 +151,14 @@ $(document).ready(function() {
 
 	}
 	function msgHistoryPosition(obj){ //db에서 뽑아논 메시지 위치 정하는 함수
-		var myName = '${user.name}';
-		const LR = (obj.message_sender != myName) ? "left" : "right";
+		var myName = '${user.seq}';
+		const LR = (obj.senderId != myName) ? "left" : "right";
 		appendMessageTag(LR, obj.message_sender, obj.message_content, obj.message_sendTime);
 	}
 	
 	function msgPositionSelect(presentMessage) { //유저가 입력한 메시지 위치 정하는 함수
-		var myName = '${user.name}';
-		const LR = (presentMessage.message_sender != myName) ? "left" : "right";
+		var myName = '${user.seq}';
+		const LR = (presentMessage.senderId != myName) ? "left" : "right";
 		appendMessageTag(LR, presentMessage.message_sender, presentMessage.message_content, presentMessage.message_sendTime);
 
 	}

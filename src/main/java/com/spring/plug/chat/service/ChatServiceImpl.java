@@ -43,6 +43,11 @@ public class ChatServiceImpl implements ChatService{
 	public ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO) {
 		return chatDAO.getChatRoomInfo(roomVO);
 	}
+
+	@Override
+	public void updateConnectTime(ChatRoomVO roomVO) {
+		chatDAO.updateConnectTime(roomVO);
+	}
 	
 	
 

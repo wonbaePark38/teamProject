@@ -12,4 +12,5 @@ public interface ChatService {
 	List<ChatRoomVO> getJoinProjectList(int myId);
 	void createRoom(ChatRoomVO roomVO);
 	ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO);
+	void updateConnectTime(ChatRoomVO roomVO);
 }

@@ -45,4 +45,9 @@ public class ChatDAO {
 		System.out.println("-->mybatis로 getChatRoomInfo 기능 처리");
 		return sqlSessionTemplate.selectOne("ChatDAO.getChatRoomInfo", roomVO);
 	}
+	
+	public void updateConnectTime(ChatRoomVO roomVO) {
+		System.out.println("-->mybatis로 updateConnectTime 기능 처리");
+		sqlSessionTemplate.update("ChatDAO.updateConnectTime", roomVO);
+	}
 }
