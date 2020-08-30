@@ -36,15 +36,4 @@
     <definition name="*/*.jsp" extends="baseEmpty">
         <put-attribute name="body" value="/{1}/{2}.jsp" />
     </definition>
-     <definition name="*/*.do" extends="baseEmpty">
-        <put-attribute name="body" value="/{1}/{2}.do" />
-    </definition>
-    
-	<definition name="*/*/*.jsp" extends="baseEmpty">
-        <put-attribute name="body" value="/{1}/{2}/{3}.jsp" />
-    </definition>
-     <definition name="*/*/*.do" extends="baseEmpty">
-        <put-attribute name="body" value="/{1}/{2}/{3}.do" />
-    </definition>
-    
 </tiles-definitions>
