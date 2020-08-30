@@ -21,7 +21,7 @@
    
    
 <body>
-	
+	<jsp:include page="privateConfigHeader.jsp" flush="true" />
 	<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 	<c:if test="${user.lockSwitchStatus eq 'on'}">
 		<jsp:include page="lock.jsp" flush="true" />

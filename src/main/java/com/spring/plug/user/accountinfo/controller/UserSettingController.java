@@ -43,7 +43,7 @@ public class UserSettingController {
 		String uploadPath = "C:\\testFile\\"+strId +"\\" + infoVo.getProfileFileName();
 		
 		vo.setProfileFileName(uploadPath);
-		mav.setViewName("accountInfo.page");
+		mav.setViewName("accountInfo.jsp");
 		mav.addObject("vo",infoVo);
 		mav.addObject("user", user);
 		return mav;
