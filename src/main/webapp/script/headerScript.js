@@ -6,11 +6,35 @@ var socket = null;
 $(document).ready(function(){
 	
 	$(document).on('click','#chat-row',function(){
+		
 		var roomId = $(this).val();
 		var projectId = $(this).children().next().next().next().next().val();
 		var chatroom_name = $(this).children().next().next().text();
-		var url = "chatting.do?roomId=" + roomId + "&projectId=" + projectId + "&chatroomName=" + chatroom_name;
-		window.open(url,"newwindow","height=700, width=500, resizable=yes");
+		
+		sendData = {
+			chatRoomId : roomId	
+		}
+		$.ajax({
+			url:'getChatRoomInfo.do',
+			type : 'POST',
+			data : sendData
+		}).done(function(data){
+			console.log(data);
+			if(data.roomPassword){
+				var inputPassword = prompt('비밀방입니다. 비밀번호를 입력하세요');
+				if(inputPassword != data.roomPassword){
+					alert('비밀번호가 틀렸습니다');
+					return false;
+				}
+			}
+				var url = "chatting.do?roomId=" + roomId + "&projectId=" + data.projectId + "&chatroomName=" + data.chatRoomName;
+				window.open(url,"newwindow","height=700, width=500, resizable=yes");
+			
+		}).fail(function(err){
+			alert('통신 에러');
+		});
+		
+		
 	});
 	
 	connect();
@@ -22,6 +46,7 @@ $(document).ready(function(){
 		console.log(data);
 		$.each(data,function(index,element){
 			settingChatList(element);//채팅방 리스트 클릭
+			
 		});
 	}).fail(function(err){
 		alert('통신오류');
@@ -41,6 +66,14 @@ function settingChatList(element){
 			"</button>"
 			
 	);
+	
+	if(element.roomPassword){
+		var parent = $('.chatting-list-div>').next().last();
+	$('.chatting-list-div>').next().last().append(
+			"<i class='fas fa-lock' style='font-size:15px; color:#6862c3; margin-left:10px;'></i>"
+		);
+	}
+	
 }
 
 
@@ -98,6 +131,6 @@ function headerOption(){
 }
 
 function makeChatRoom(){
-	var url = "makeChatting.do";
-	window.open(url,"newwindow","height=700, width=500, resizable=yes");
+	var url = "makeChatRoomView.do";
+	window.open(url,"newwindow","height=500, width=500, resizable=no");
 }

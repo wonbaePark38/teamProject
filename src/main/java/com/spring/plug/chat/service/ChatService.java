@@ -9,4 +9,7 @@ public interface ChatService {
 	List<ChatRoomVO> getChatList(int userId);
 	void insertMessage(MessageVO msgVO);
 	List<MessageVO> loadChatHistory(MessageVO msgVO);
+	List<ChatRoomVO> getJoinProjectList(int myId);
+	void createRoom(ChatRoomVO roomVO);
+	ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO);
 }

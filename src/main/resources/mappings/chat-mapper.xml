@@ -4,10 +4,12 @@
 
 <mapper namespace="ChatDAO">
 
-	<resultMap id="chatList" type="chatVO">
+	<resultMap id="chatList" type="roomVO">
 		<result property="projectId" column="PROJECTID" />
 		<result property="chatRoomName" column="CHATROOMNAME" />
 		<result property="projectName" column="PROJECTNAME" />
+		<result property="roomPassword" column="ROOMPASSWORD"/>
+		<result property="chatRoomId" column="CHATROOMID"/>
 	</resultMap>
 	
 	<resultMap id="chatHistory" type="msgVO">
@@ -15,10 +17,14 @@
 		<result property="message_content" column="MESSAGE_CONTENT"/>
 		<result property="message_sendTime" column="MESSAGE_SENDTIME"/>
 	</resultMap>
-
+	
+	<resultMap id="projectList" type="roomVO">
+		<result property="projectId" column="PROJECT_ID"/>
+		<result property="projectName" column="PROJECT_NAME"/>
+	</resultMap>
 	<select id="getChatList" resultMap="chatList" parameterType="int">
 		SELECT A.PROJECTID, A.PROJECTNAME, A.CHATROOMNAME,
-		A.CHATROOMID
+		A.CHATROOMID, A.ROOMPASSWORD
 		FROM CHATROOM A INNER JOIN PROJECT_LOOKUP B
 		ON A.PROJECTID = B.PROJECT_ID WHERE B.MEMBER_ID=#{userId}
 	</select>
@@ -34,5 +40,20 @@
 	 <select id="loadChatHistory" resultMap="chatHistory" parameterType="msgVO" >
 		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatroom_id} ORDER BY MESSAGE_SENDTIME
 	</select>
-
+	
+	<select id="getJoinProjectList" resultMap="projectList" parameterType="int">
+		SELECT PROJECT_ID, PROJECT_NAME FROM PROJECTDIR 
+		INNER JOIN (SELECT PROJECT_ID FROM PROJECT_LOOKUP 
+		WHERE MEMBER_ID=#{myId}) USING (PROJECT_ID)
+	</select>
+	
+	<insert id="createChatRoom" parameterType="roomVO">
+		INSERT INTO CHATROOM (ROOMPASSWORD, PROJECTID, PROJECTNAME, CHATROOMNAME, CHATROOMID)
+		VALUES( #{roomPassword}, #{projectId}, #{projectName}, #{chatRoomName}, 
+		(select nvl(max(CHATROOMID), 0)+1 from CHATROOM))
+	</insert>
+	
+	<select id="getChatRoomInfo" resultMap="chatList" parameterType="roomVO">
+		SELECT * FROM CHATROOM WHERE CHATROOMID = #{chatRoomId}
+	</select>
 </mapper>

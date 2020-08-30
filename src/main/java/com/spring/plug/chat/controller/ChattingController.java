@@ -23,6 +23,7 @@ public class ChattingController {
 	
 	@Autowired 
 	ChatService chatService;
+	
 	//채팅방 목록 불러오는 컨트롤러
 	@ResponseBody 
 	@RequestMapping(value="/getChattingList.do",method=RequestMethod.POST)
@@ -34,12 +35,12 @@ public class ChattingController {
 	//채팅 팝업창에서 쓸 정보 저장하는 컨트롤러
 	@RequestMapping("/chatting.do")
 	public ModelAndView chatting(MessageVO msgVO, HttpServletRequest request, ModelAndView mav,HttpSession session) {
-		UserVO user = (UserVO)session.getAttribute("user");
+
 		String roomId = request.getParameter("roomId");
 		String projectId = request.getParameter("projectId");
 		String chatroomName = request.getParameter("chatroomName");
-		System.out.println("컨트롤러 헤더 네임" + chatroomName);
 		session.setAttribute("roomId", roomId);
+		
 		mav.addObject("user");
 		mav.addObject("roomId", roomId);
 		mav.addObject("projectId", projectId);
@@ -62,6 +63,36 @@ public class ChattingController {
 		
 		List<MessageVO> chatHistoryList = chatService.loadChatHistory(msgVO);
 		return chatHistoryList;
+	}
+	
+	@RequestMapping(value="/makeChatRoomView.do")
+	public ModelAndView createRoomView(ModelAndView mav) {
+		mav.setViewName("makeChatRoom.jsp");
+		return mav;
+	}
+	
+	//내가 가입한 프로젝트 리스트 가저오기
+	@ResponseBody
+	@RequestMapping(value="/getProjectList.do", method = RequestMethod.POST)
+	public List<ChatRoomVO> getJoinProjectList(ChatRoomVO vo, HttpSession session){
+		UserVO user = (UserVO)session.getAttribute("user");
+		List<ChatRoomVO> getJoinProjectList = chatService.getJoinProjectList(user.getSeq());
+		return getJoinProjectList;
+	}
+	
+	//채팅방 만드는 컨트롤러
+	@ResponseBody
+	@RequestMapping(value="/createRoom.do", method = RequestMethod.POST)
+	public void createChatRoom(ChatRoomVO roomVO) {
+		chatService.createRoom(roomVO);
+	}
+	
+	//선택 채팅방 정보 가저오는 컨트롤러
+	@ResponseBody
+	@RequestMapping(value="/getChatRoomInfo.do", method=RequestMethod.POST)
+	public ChatRoomVO getRoomInfo(ChatRoomVO roomVO) {
+		ChatRoomVO roomInfo = chatService.getChatRoomInfo(roomVO);
+		return roomInfo;
 	}
 	
 }

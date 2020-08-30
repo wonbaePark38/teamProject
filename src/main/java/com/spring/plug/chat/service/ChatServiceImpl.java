@@ -29,4 +29,21 @@ public class ChatServiceImpl implements ChatService{
 		return chatDAO.loadChatHistory(msgVO);
 	}
 
+	@Override
+	public List<ChatRoomVO> getJoinProjectList(int myId) {
+		return chatDAO.getJoinProjectList(myId);
+	}
+
+	@Override
+	public void createRoom(ChatRoomVO roomVO) {
+		chatDAO.createRoom(roomVO);
+	}
+
+	@Override
+	public ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO) {
+		return chatDAO.getChatRoomInfo(roomVO);
+	}
+	
+	
+
 }

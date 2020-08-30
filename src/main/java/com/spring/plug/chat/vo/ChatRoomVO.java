@@ -1,12 +1,25 @@
 package com.spring.plug.chat.vo;
 
 public class ChatRoomVO {
-	private int projectId;
+	private String projectId;
 	private int joinedUserId;
 	private String projectName;
 	private String chatRoomName;
 	private int chatRoomId;
-	
+	private String roomPassword;
+	private String radioSelect;
+	public String getRoomPassword() {
+		return roomPassword;
+	}
+	public void setRoomPassword(String roomPassword) {
+		this.roomPassword = roomPassword;
+	}
+	public String getRadioSelect() {
+		return radioSelect;
+	}
+	public void setRadioSelect(String radioSelect) {
+		this.radioSelect = radioSelect;
+	}
 	public int getChatRoomId() {
 		return chatRoomId;
 	}
@@ -19,10 +32,11 @@ public class ChatRoomVO {
 	public void setJoinedUserId(int joinedUserId) {
 		this.joinedUserId = joinedUserId;
 	}
-	public int getProjectId() {
+	
+	public String getProjectId() {
 		return projectId;
 	}
-	public void setProjectId(int projectId) {
+	public void setProjectId(String projectId) {
 		this.projectId = projectId;
 	}
 	public String getProjectName() {
@@ -41,7 +55,8 @@ public class ChatRoomVO {
 	@Override
 	public String toString() {
 		return "ChatRoomVO [projectId=" + projectId + ", joinedUserId=" + joinedUserId + ", projectName=" + projectName
-				+ ", chatroomName=" + chatRoomName + "]";
+				+ ", chatRoomName=" + chatRoomName + ", chatRoomId=" + chatRoomId + ", roomPassword=" + roomPassword
+				+ ", radioSelect=" + radioSelect + "]";
 	}
 	
 	

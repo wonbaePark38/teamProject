@@ -12,6 +12,7 @@
 
 <link href="css/privateConfig.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
+ <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
 <script src="script/headerScript.js"></script>
 
 <body>

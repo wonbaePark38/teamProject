@@ -21,8 +21,6 @@ public class ChatDAO {
 		return sqlSessionTemplate.selectList("ChatDAO.getChatList", userId);
 	}
 	
-	
-	
 	public void insertMessage(MessageVO msgVO) {
 		System.out.println("-->mybatis로 insesrt메시지 기능처리");
 		sqlSessionTemplate.insert("ChatDAO.insertMessage", msgVO);
@@ -33,4 +31,18 @@ public class ChatDAO {
 		return sqlSessionTemplate.selectList("ChatDAO.loadChatHistory", msgVO);
 	}
 	
+	public List<ChatRoomVO> getJoinProjectList(int myId){
+		System.out.println("-->mybatis로 getJoinProjectList 기능처리");
+		return sqlSessionTemplate.selectList("ChatDAO.getJoinProjectList", myId);
+	}
+	
+	public void createRoom(ChatRoomVO roomVO) {
+		System.out.println("-->mybatis로 createRoom 기능 처리");
+		sqlSessionTemplate.insert("ChatDAO.createChatRoom", roomVO);
+	}
+	
+	public ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO) {
+		System.out.println("-->mybatis로 getChatRoomInfo 기능 처리");
+		return sqlSessionTemplate.selectOne("ChatDAO.getChatRoomInfo", roomVO);
+	}
 }
