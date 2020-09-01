@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -65,7 +67,7 @@
                   <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
-                      <li><a href="admin-CS-QA.jsp">1:1 문의</a></li>
+                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
                       <li><a href="admin-CS-notify.jsp">신고접수</a></li>
                     </ul>
                   </li>                  
@@ -100,23 +102,26 @@
                             <th class="admin_cs_qa_contentArea_title">제목</th>
                             <th class="admin_cs_qa_contentArea_regDate">작성일</th>
                         </tr>
-                        <!-- forEach -->
-                        <tr onclick="location.href='admin-CS-Board.html'">
-                            <td class="admin_cs_qa_contentArea_no"><a>123456789</a></td>
-                            <td class="admin_cs_qa_contentArea_writer"><a>홍길동임</a></td>
-                            <td class="admin_cs_qa_contentArea_title"><a>ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ</a></td>
-                            <td class="admin_cs_qa_contentArea_regDate"><a>2020/02/02</a></td>
-                        </tr>
-                        <!-- //forEach -->
+                        <c:forEach var="board" items="${boardList }">
+							<tr>
+								<td class="admin_cs_qa_contentArea_no">${board.seq }</td>
+								<td class="admin_cs_qa_contentArea_writer">${board.writer }</td>
+								<td class="admin_cs_qa_contentArea_title"><a href="getBoard.do?seq=${board.seq }">${board.title }</a></td>
+								<td class="admin_cs_qa_contentArea_regDate"><fmt:formatDate value="${board.time }" pattern="yyyy-MM-dd"/></td>
+							</tr>
+						</c:forEach>
+                        
                     </table>
                     <div id="admin_cs_qa_contentArea_search">
-                        <select>
-                            <option>글번호</option>
-                            <option>작성자</option>
-                            <option>글제목</option>
-                        </select>
-                        <input type="text">
-                        <button>검색</button>
+                        <form action="qnaBoardList.do" method="post">
+								<select name="searchCondition">
+									<c:forEach items="${conditionMap }" var="option">
+										<option value="${option.value }">${option.key }</option>
+									</c:forEach>
+								</select>
+								<input type="text" name="searchKeyword" />
+								<input type="submit" value="검색" />
+						</form>
                     </div>
                 </div>
                 

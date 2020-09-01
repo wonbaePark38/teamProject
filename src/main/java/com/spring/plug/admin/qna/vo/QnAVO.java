@@ -9,6 +9,35 @@ public class QnAVO {
 	private String writer;
 	private String content;
 	private Date time;
+	private String searchCondition;
+	private String searchKeyword;
+	private String email;
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 
 	public int getSeq() {
 		return seq;
