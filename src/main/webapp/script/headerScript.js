@@ -27,7 +27,7 @@ $(document).ready(function(){
 					return false;
 				}
 			}
-				var url = "chatting.do?roomId=" + roomId + "&projectId=" + data.projectId + "&chatroomName=" + data.chatRoomName;
+				var url = "chatting.do?roomId=" + encodeURI(roomId) + "&projectId=" + encodeURI(data.projectId) + "&chatroomName=" + encodeURI(data.chatRoomName);
 				window.open(url,chatroom_name,"height=700, width=500, resizable=yes");
 			
 		}).fail(function(err){
@@ -54,15 +54,14 @@ $(document).ready(function(){
 	
 });
 
-
+//채팅 리스트 화면에 출력하는 함수
 function settingChatList(element){
 	$('.chatting-list-div').append(
 			
-			"<button type='button' id='chat-row' value='" + element.chatRoomId + "'>" +
-				"<span style='font-size=7px'>"+ element.projectName + "</span><br>" +
-				"<span>"+ element.chatRoomName +"</span>" +
+			"<button type='button' id='chat-row'>" +
+					"<span>" +element.chatRoomId + "<span>" +
+//			"<span>"+ element.chatRoomName +"</span>" +
 				"<input type='hidden' class='room' value='" + element.chatRoomId +"'/>" +
-				"<input type='hidden' class='projectId' value='" + element.projectId +"'/>" +
 			"</button>"
 			
 	);

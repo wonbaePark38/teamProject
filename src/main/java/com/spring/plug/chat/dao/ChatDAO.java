@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.plug.chat.vo.ChatRoomVO;
 import com.spring.plug.chat.vo.MessageVO;
+import com.spring.plug.login.vo.UserVO;
 
 @Repository
 public class ChatDAO {
@@ -31,9 +32,9 @@ public class ChatDAO {
 		return sqlSessionTemplate.selectList("ChatDAO.loadChatHistory", msgVO);
 	}
 	
-	public List<ChatRoomVO> getJoinProjectList(int myId){
+	public List<UserVO> getFriendList(int myId){
 		System.out.println("-->mybatis로 getJoinProjectList 기능처리");
-		return sqlSessionTemplate.selectList("ChatDAO.getJoinProjectList", myId);
+		return sqlSessionTemplate.selectList("ChatDAO.getFriendList", myId);
 	}
 	
 	public void createRoom(ChatRoomVO roomVO) {
@@ -49,5 +50,15 @@ public class ChatDAO {
 	public void updateConnectTime(ChatRoomVO roomVO) {
 		System.out.println("-->mybatis로 updateConnectTime 기능 처리");
 		sqlSessionTemplate.update("ChatDAO.updateConnectTime", roomVO);
+	}
+	
+	public List<ChatRoomVO> getJoinedMember(ChatRoomVO roomVO) {
+		System.out.println("-->mybatis로 getJoinedMember기능처리");
+		return sqlSessionTemplate.selectList("ChatDAO.getJoinedMember", roomVO);
+	}
+	
+	public void updateDisconnectTime(MessageVO msgVO) {
+		System.out.println("-->mybatis로updateDisconnectTime기능처리");
+		sqlSessionTemplate.update("ChatDAO.updateDisconnectTime", msgVO);
 	}
 }

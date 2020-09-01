@@ -1,27 +1,31 @@
 package com.spring.plug.chat.vo;
 
-import java.util.Date;
-
-import com.google.gson.Gson;
 import com.spring.plug.chat.handler.MessageType;
 
 public class MessageVO {
 	
 	private String message_sender;
-	private String senderId;
+	private int senderId;
 	private String message_content;
 	private String message_sendTime;
 	private String chatroom_id;
 	private String chatroomName;
 	private int projectId;
 	private String userName;
-	
+	private int unReadCount;
 	private String projectName;
 	private MessageType type;
-	public String getSenderId() {
+	
+	public int getUnReadCount() {
+		return unReadCount;
+	}
+	public void setUnReadCount(int unReadCount) {
+		this.unReadCount = unReadCount;
+	}
+	public int getSenderId() {
 		return senderId;
 	}
-	public void setSenderId(String senderId) {
+	public void setSenderId(int senderId) {
 		this.senderId = senderId;
 	}
 	public String getMessage_sender() {

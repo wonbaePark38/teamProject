@@ -6,9 +6,39 @@ public class ChatRoomVO {
 	private String projectName;
 	private String chatRoomName;
 	private int chatRoomId;
+	private int userId;
 	private String roomPassword;
 	private String radioSelect;
 	private String connectTime;
+	private String userName;
+	private String userEmail;
+	private String inviteUser;
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getInviteUser() {
+		return inviteUser;
+	}
+	public void setInviteUser(String inviteUser) {
+		this.inviteUser = inviteUser;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	
 	public String getRoomPassword() {
 		return roomPassword;
 	}
@@ -64,7 +94,9 @@ public class ChatRoomVO {
 	public String toString() {
 		return "ChatRoomVO [projectId=" + projectId + ", joinedUserId=" + joinedUserId + ", projectName=" + projectName
 				+ ", chatRoomName=" + chatRoomName + ", chatRoomId=" + chatRoomId + ", roomPassword=" + roomPassword
-				+ ", radioSelect=" + radioSelect + ", connectTime=" + connectTime + "]";
+				+ ", radioSelect=" + radioSelect + ", connectTime=" + connectTime + ", userName=" + userName
+				+ ", userEmail=" + userEmail + ", inviteUser=" + inviteUser + "]";
 	}
+
 	
 }
