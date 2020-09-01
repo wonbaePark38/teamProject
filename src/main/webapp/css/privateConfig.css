@@ -259,13 +259,16 @@ a {
 #chat-row{
 	width: 100%;
     height: 60px;
-    margin-top: 10px;
     text-align: left;
     padding-left: 20px;
     border: none;
     background-color: aliceblue;
 }
 
+.invite-checkbox{
+	width:20px;
+	height:20px;
+}
 .center-area{
 	width: 1024px;
     height: 100%;

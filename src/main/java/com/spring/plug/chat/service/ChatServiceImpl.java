@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.plug.chat.dao.ChatDAO;
 import com.spring.plug.chat.vo.ChatRoomVO;
 import com.spring.plug.chat.vo.MessageVO;
+import com.spring.plug.login.vo.UserVO;
 
 @Service
 public class ChatServiceImpl implements ChatService{
@@ -30,8 +31,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ChatRoomVO> getJoinProjectList(int myId) {
-		return chatDAO.getJoinProjectList(myId);
+	public List<UserVO> getFriendList(int myId) {
+		return chatDAO.getFriendList(myId);
 	}
 
 	@Override
@@ -43,7 +44,21 @@ public class ChatServiceImpl implements ChatService{
 	public ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO) {
 		return chatDAO.getChatRoomInfo(roomVO);
 	}
-	
-	
+
+	@Override
+	public void updateConnectTime(ChatRoomVO roomVO) {
+		chatDAO.updateConnectTime(roomVO);
+	}
+
+	@Override
+	public List<ChatRoomVO> getJoinedMember(ChatRoomVO roomVO) {
+		return chatDAO.getJoinedMember(roomVO);
+	}
+
+	@Override
+	public void updateDisconnectTime(MessageVO msgVO) {
+		chatDAO.updateDisconnectTime(msgVO);
+		
+	}
 
 }

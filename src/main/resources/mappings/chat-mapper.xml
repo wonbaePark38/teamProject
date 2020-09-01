@@ -18,42 +18,80 @@
 		<result property="message_sendTime" column="MESSAGE_SENDTIME"/>
 	</resultMap>
 	
-	<resultMap id="projectList" type="roomVO">
-		<result property="projectId" column="PROJECT_ID"/>
-		<result property="projectName" column="PROJECT_NAME"/>
+	<resultMap id="projectList" type="user">
+		<result property="seq" column="MEMBER_ID"/>
+		<result property="email" column="MEMBER_EMAIL"/>
+		<result property="name" column="MEMBER_NAME"/>
 	</resultMap>
+	
+	<resultMap id="getJoinedList" type="roomVO">
+		<result property="chatRoomId" column="CHATROOMID"/>
+		<result property="joinedUserId" column="MEMBER_ID"/>
+		<result property="connectTime" column="CONNECTTIME"/>
+		<result property="userName" column="MEMBER_NAME"/>
+		<result property="userEmail" column="MEMBER_EMAIL"/>
+	</resultMap>
+	
 	<select id="getChatList" resultMap="chatList" parameterType="int">
-		SELECT A.PROJECTID, A.PROJECTNAME, A.CHATROOMNAME,
-		A.CHATROOMID, A.ROOMPASSWORD
-		FROM CHATROOM A INNER JOIN PROJECT_LOOKUP B
-		ON A.PROJECTID = B.PROJECT_ID WHERE B.MEMBER_ID=#{userId}
+		SELECT * FROM CHATLOG WHERE MEMBER_ID = #{userId}
 	</select>
 	
 	<insert id="insertMessage" parameterType="msgVO">
 	
-		INSERT INTO MESSAGE (MESSAGE_SENDER, MESSAGE_CONTENT,
+		INSERT INTO MESSAGE (MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
 		CHATROOM_ID,MESSAGE_SENDTIME)
-		VALUES( #{message_sender}, #{message_content}, #{chatroom_id},
+		VALUES( #{message_sender}, #{senderId}, #{message_content}, #{chatroom_id},
 		#{message_sendTime})
 	</insert>
 	
 	 <select id="loadChatHistory" resultMap="chatHistory" parameterType="msgVO" >
-		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatroom_id} ORDER BY MESSAGE_SENDTIME
+		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatroom_id} ORDER BY MESSAGE_SENDTIME ASC
 	</select>
 	
-	<select id="getJoinProjectList" resultMap="projectList" parameterType="int">
+	<!-- <select id="getFriendList" resultMap="projectList" parameterType="int">
 		SELECT PROJECT_ID, PROJECT_NAME FROM PROJECTDIR 
 		INNER JOIN (SELECT PROJECT_ID FROM PROJECT_LOOKUP 
 		WHERE MEMBER_ID=#{myId}) USING (PROJECT_ID)
 	</select>
-	
+	 -->
+	<select id="getFriendList" resultMap="projectList" parameterType="int">
+		SELECT DISTINCT C.MEMBER_ID, C.MEMBER_EMAIL, C.MEMBER_NAME FROM MEMBERINFO C 
+		RIGHT OUTER JOIN 
+		(SELECT B.MEMBER_ID , B.PROJECT_ID FROM PROJECT_LOOKUP A 
+        RIGHT OUTER JOIN (SELECT * FROM PROJECT_LOOKUP) B 
+    ON A.PROJECT_ID = B.PROJECT_ID WHERE A.MEMBER_ID = #{myId}) D 
+    ON C.MEMBER_ID = D.MEMBER_ID WHERE C.MEMBER_ID IS NOT NULL AND  NOT C.MEMBER_ID IN #{myId} 
+
+	</select>
+	 
 	<insert id="createChatRoom" parameterType="roomVO">
-		INSERT INTO CHATROOM (ROOMPASSWORD, PROJECTID, PROJECTNAME, CHATROOMNAME, CHATROOMID)
-		VALUES( #{roomPassword}, #{projectId}, #{projectName}, #{chatRoomName}, 
-		(select nvl(max(CHATROOMID), 0)+1 from CHATROOM))
+		INSERT INTO CHATROOM (JOINUSER, CHATROOMNAME, CHATROOMID) VALUES( #{inviteUser}, #{userName}, (SELECT NVL(MAX(CHATROOMID), 0)+1 FROM CHATROOM))
+		<selectKey keyProperty="chatRoomId" resultType="int" order="AFTER">
+			SELECT MAX(CHATROOMID) FROM CHATROOM
+		</selectKey>
 	</insert>
 	
 	<select id="getChatRoomInfo" resultMap="chatList" parameterType="roomVO">
 		SELECT * FROM CHATROOM WHERE CHATROOMID = #{chatRoomId}
 	</select>
+	
+	<update id="updateConnectTime" parameterType="roomVO">
+		MERGE INTO CHATLOG A USING DUAL
+			ON (A.MEMBER_ID = #{joinedUserId} AND A.CHATROOMID = #{chatRoomId})
+			WHEN MATCHED THEN
+				UPDATE SET A.CONNECTTIME = #{connectTime}
+			WHEN NOT MATCHED THEN
+				INSERT (A.MEMBER_ID , A.CHATROOMID, A.CONNECTTIME)
+				VALUES(#{joinedUserId}, #{chatRoomId}, #{connectTime})	
+	</update> 
+	
+	<select id="getJoinedMember" resultMap="getJoinedList" parameterType="roomVO">
+		SELECT MEMBER_NAME,MEMBER_EMAIL FROM MEMBERINFO INNER JOIN (
+			SELECT MEMBER_ID FROM CHATLOG WHERE CHATROOMID = #{chatRoomId})
+				USING(MEMBER_ID)
+	</select>
+	
+	<update id="updateDisconnectTime" parameterType="msgVO">
+		UPDATE CHATLOG SET DISCONNECTTIME= #{message_sendTime} WHERE CHATROOMID = #{chatroom_id} AND MEMBER_ID = #{senderId}  
+	</update>
 </mapper>

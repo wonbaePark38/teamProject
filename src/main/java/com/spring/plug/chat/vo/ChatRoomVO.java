@@ -6,13 +6,56 @@ public class ChatRoomVO {
 	private String projectName;
 	private String chatRoomName;
 	private int chatRoomId;
+	private int userId;
 	private String roomPassword;
 	private String radioSelect;
+	private String connectTime;
+	private String userName;
+	private String userEmail;
+	private String inviteUser;
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getInviteUser() {
+		return inviteUser;
+	}
+	public void setInviteUser(String inviteUser) {
+		this.inviteUser = inviteUser;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	
 	public String getRoomPassword() {
 		return roomPassword;
 	}
 	public void setRoomPassword(String roomPassword) {
 		this.roomPassword = roomPassword;
+	}
+	public int getJoinedUserId() {
+		return joinedUserId;
+	}
+	public void setJoinedUserId(int joinedUserId) {
+		this.joinedUserId = joinedUserId;
+	}
+	public String getConnectTime() {
+		return connectTime;
+	}
+	public void setConnectTime(String connectTime) {
+		this.connectTime = connectTime;
 	}
 	public String getRadioSelect() {
 		return radioSelect;
@@ -26,12 +69,7 @@ public class ChatRoomVO {
 	public void setChatRoomId(int chatRoomId) {
 		this.chatRoomId = chatRoomId;
 	}
-	public int getJoinedUserId() {
-		return joinedUserId;
-	}
-	public void setJoinedUserId(int joinedUserId) {
-		this.joinedUserId = joinedUserId;
-	}
+	
 	
 	public String getProjectId() {
 		return projectId;
@@ -56,8 +94,9 @@ public class ChatRoomVO {
 	public String toString() {
 		return "ChatRoomVO [projectId=" + projectId + ", joinedUserId=" + joinedUserId + ", projectName=" + projectName
 				+ ", chatRoomName=" + chatRoomName + ", chatRoomId=" + chatRoomId + ", roomPassword=" + roomPassword
-				+ ", radioSelect=" + radioSelect + "]";
+				+ ", radioSelect=" + radioSelect + ", connectTime=" + connectTime + ", userName=" + userName
+				+ ", userEmail=" + userEmail + ", inviteUser=" + inviteUser + "]";
 	}
-	
+
 	
 }

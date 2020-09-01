@@ -24,7 +24,7 @@ public class prohibitController extends HandlerInterceptorAdapter{
     	  
     	  String uri = request.getRequestURI(); 
     	  System.out.println("uri 체크" + uri);
-    	  if(uri.equals("/plugProject/login.do") || uri.equals("/plugProject/slogin.do")) { //uri 비교해서 로그인 요청이면
+    	  if(uri.equals("/plugProject/login.do") || uri.equals("/plugProject/slogin.do")) { //uri 비교해서  로그인 요청이면
     		  System.out.println("uri 체크 if체크");
     		  response.sendRedirect("/plugProject/projectdir.do");
     	  }

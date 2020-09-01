@@ -16,8 +16,6 @@
 <script src="script/headerScript.js"></script>
 
 <body>
-
-	 
 		<div class="headerContainer">
 			<div class="dir_set_bar" style="display: none;">
 				<span class="locker_setbtn" id="locker_list">보관함 설정</span> 
@@ -67,7 +65,7 @@
 				<div style="margin-left: 10px;">
 				   <div style="margin-top: 10px;">
 					  <img src="images/pf_ico1_off.png">
-					  <a href="Layout.jsp">환경설정</a>
+					  <a href="accountInfo.do">환경설정</a>
 				   </div>
 				   <div style="margin-top: 10px;">
 					  <img src="images/pf_ico5_off.png">

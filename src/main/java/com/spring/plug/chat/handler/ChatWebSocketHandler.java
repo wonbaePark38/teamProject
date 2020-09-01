@@ -1,19 +1,33 @@
 package com.spring.plug.chat.handler;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.plug.chat.dao.ChatDAO;
+import com.spring.plug.chat.service.ChatService;
+import com.spring.plug.chat.vo.ChatRoomVO;
 import com.spring.plug.chat.vo.MessageVO;
+import com.spring.plug.login.vo.UserVO;
+	
 
 public class ChatWebSocketHandler extends TextWebSocketHandler{
+	
+	@Autowired
+	ChatService chatService;
+	
 	List<WebSocketSession> sessions = new ArrayList<>();
 	Map<WebSocketSession,String> userSessions = new HashMap<WebSocketSession,String>();
 	private final ObjectMapper objectMapper = new ObjectMapper();
@@ -41,14 +55,32 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		Date time = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String disconnectTime = format.format(time);
+		UserVO user = getUserId(session);
+		int id = user.getSeq();
+		String roomId = getRoomId(session);
+		MessageVO vo = new MessageVO();
+		vo.setSenderId(id);
+		vo.setChatroom_id(roomId);
+		vo.setMessage_sendTime(disconnectTime);
+		chatService.updateDisconnectTime(vo);
 		sessions.remove(session);
 		userSessions.remove(session);
+		
 	}
 
 	private String getRoomId(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
 		String roomId = (String)httpSession.get("roomId");
 		return roomId;
+	}
+	
+	private UserVO getUserId(WebSocketSession session) {
+		Map<String,Object> httpSession = session.getAttributes();
+		UserVO user = (UserVO)httpSession.get("user");
+		return user;
 	}
 
 }
