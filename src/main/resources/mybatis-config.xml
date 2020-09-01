@@ -19,6 +19,7 @@
 		<typeAlias alias="signup" type="com.spring.plug.login.vo.UserVO"/>
 		<typeAlias alias="file" type="com.spring.plug.file.vo.FileVO"/>
 		<typeAlias alias="adminSignup" type="com.spring.plug.adminsignup.vo.AdminVO"/>
+		<typeAlias alias="adminQnA" type="com.spring.plug.admin.qna.vo.QnAVO"/>
 		
 		<typeAlias alias="configInfo" type="com.spring.plug.user.accountinfo.vo.UserSettingVO"/>
 		<typeAlias alias="msgVO" type="com.spring.plug.chat.vo.MessageVO"/>
@@ -39,6 +40,7 @@
 		<mapper resource="mappings/signup-mapper.xml"/>
 		<mapper resource="mappings/file-mapper.xml"/>
 		<mapper resource="mappings/adminsignup-mapper.xml"/>
+		<mapper resource="mappings/adminqna-mapper.xml"/>
 		
 		<mapper resource="mappings/userConfig-mapper.xml"/>
 		<mapper resource="mappings/chat-mapper.xml"/>

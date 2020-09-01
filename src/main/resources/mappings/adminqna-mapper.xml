@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnADAO">
+
+	<resultMap type="adminQnA" id="qnaResult">
+		<id property="seq" column="SEQ" />
+		<result property="content" column="CONTENT" />
+		<result property="time" column="REGDATE" />
+		<result property="title" column="TITLE" />
+		<result property="writer" column="WRITER" />
+	</resultMap>
+
+	<insert id="insertBoard" parameterType="adminQnA">
+		INSERT INTO ADMIN_QNA 
+		VALUES(admin_qna_seq.nextval, #{content}, #{time}, #{title}, #{writer})
+	</insert>
+
+	<select id="getBoardList" resultMap="qnaResult">
+		SELECT * FROM ADMIN_QNA WHERE 1=1 
+		<if test="searchCondition == 'TITLE'">
+			AND TITLE LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		<if test="searchCondition == 'WRITER'">
+			AND WRITER LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		ORDER BY SEQ DESC
+	</select>
+	
+	<select id="getBoard" resultMap="qnaResult">
+		SELECT * FROM ADMIN_QNA WHERE SEQ=#{seq}
+	</select>
+	
+	<update id="defaultPassword" parameterType="adminQnA">
+		UPDATE ADMININFO SET ADMIN_PASSWORD = #{password}, SALT = #{salt} WHERE ADMIN_EMAIL = #{email}
+	</update>
+</mapper>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,6 +22,13 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
     <link href="css/maps/myCss.css" rel="stylesheet">
+    <script src="../../script/jquery-3.5.1-min.js"></script>
+    <script>
+   	
+     $(document).on('click','#reply',function(){
+        alert('a');
+     });
+    </script>
 
   </head>
 
@@ -66,7 +75,7 @@
                   <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
-                      <li><a href="admin-CS-QA.jsp">1:1 문의</a></li>
+                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
                       <li><a href="admin-CS-notify.jsp">신고접수</a></li>
                     </ul>
                   </li>                  
@@ -96,26 +105,31 @@
 
                 <div id="admin_cs_article_contentArea">
 
-                    <form>
                       <div>
-                          <span id="admin_cs_article_contentArea_no">글번호</span>
-                          <span id="admin_cs_article_contentArea_title">문의글 제목</span>
-                          <span id="admin_cs_article_contentArea_writer">홍길동</span>
-                          <span id="admin_cs_article_contentArea_regDate">2020/02/02</span>
+                          <span id="admin_cs_article_contentArea_no">${ board.seq }</span>
+                          <span id="admin_cs_article_contentArea_title">${ board.title }</span>
+                          <span id="admin_cs_article_contentArea_writer">${ board.writer }</span>
+                          <span id="admin_cs_article_contentArea_regDate">${ board.time }</span>
+                      </div>
+
+						<hr>
+
+                      <div>
+                          <div class="client_reply" id="admin_cs_article_contentArea_divText" contenteditable="false">${ board.content }</div>
                       </div>
 
                       <hr>
+                      <hr>
 
                       <div>
-                          <div id="admin_cs_article_contentArea_divText" contenteditable="true"></div>
+                          <div class="admin_reply" id="admin_cs_article_contentArea_divText" contenteditable="true"></div>
                       </div>
 
                       <hr>
                       <div id="admin_cs_article_contentArea_lower_btn">
-                        <a href="admin-CS-QA.jsp">취소</a>
-                        <a>답변하기</a>
+                        <a href="qnaBoardList.do">취소</a>
+                        <a id="reply" >답변하기</a>
                       </div>
-                    </form>
 
                 </div>
             </div>
@@ -132,6 +146,7 @@
     <script src="../vendors/DateJS/build/date.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+	
 	
   </body>
 </html>
