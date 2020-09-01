@@ -35,42 +35,7 @@
 <body>
 	<div class="mainWrap">
 		<!-- Navigation -->
-		<div class="headerContainer">
-			<div class="headerWrap">
-				<div class="headerLeft">
-					<div class="headLogo">
-						<a href="#"><img src="images/logo_top.png"></a>
-					</div>
-					<div id="searchArea">
-
-						<form style="width: 100%" action="#" name=search method="POST">
-
-							<select class="searchButton" name="category">
-								<option value="menu1">전체</option>
-								<option value="menu2">프로젝트</option>
-								<option value="menu3">글</option>
-								<option value="menu4">댓글</option>
-								<option value="menu5">참여자</option>
-							</select> <input type="text" id="inputkeyword" value="텍스트입력"
-								onfocus="this.value='';"> <input type="submit"
-								value="검색" onclick="searchPress()">
-						</form>
-					</div>
-
-				</div>
-				<div class="headerRight">
-					<button id="serviceUpgradeBt" onclick="test()">서비스 업그레이드</button>
-					<input type="button" id="headerChatBt" onclick="headerChatting()">
-					<input type="button" id="headerIconAlram" onclick="headerAlarm()">
-					<input type="button" id="headerUserInfoBt" onclick="headerOption()">
-
-
-				</div>
-
-			</div>
-
-		</div>
-
+		<jsp:include page='privateConfigHeader.jsp'></jsp:include>
 		<!--end navigation-->
 
 
@@ -87,54 +52,48 @@
 				</div>
 				<!--사이드바-->
 				<div class="sidebar">
-					<a onclick="acyncMovePage1('content.jsp')" class="list-group-item"
-						style="padding: .5rem 1.25rem;" style="padding: .5rem 1.25rem;">전체</a>
-					<a onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;"
-						style="padding: .5rem 1.25rem;">미보관</a> <a
-						onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;">읽지않음</a> <a
-						onclick="acyncMovePage1('content.jsp')" href="#"
+					<a id="main_side" class="list-group-item"
+						style="padding: .5rem 1.25rem;">전체</a> <a id="main_side"
+						class="list-group-item" style="padding: .5rem 1.25rem;">미보관</a> <a
+						id="main_side" class="list-group-item"
+						style="padding: .5rem 1.25rem;">읽지않음</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
 					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
-					<a onclick="acyncMovePage(content.jsp)" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 업무</a> <a href="calendar.jsp"
-						class="list-group-item" style="padding: .5rem 1.25rem;">전체 일정</a>
-					<a href="totalFile.html" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 파일</a> <a
-						onclick="acyncMovePage1('content.jsp')" href="#"
+					<a id="main_side" class="list-group-item"
+						style="padding: .5rem 1.25rem;">전체 업무</a> <a id="main_side"
+						href="calendar.jsp" class="list-group-item"
+						style="padding: .5rem 1.25rem;">전체 일정</a> <a id="main_side"
+						href="totalFileView.do" class="list-group-item"
+						style="padding: .5rem 1.25rem;">전체 파일</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
-					<a onclick="acyncMovePage1('content.jsp')" href="#"
-						class="list-group-item" style="padding: .5rem 1.25rem;">나를 지정</a>
-					<a onclick="acyncMovePage1('content.jsp')" href="#"
+					<a id="main_side" class="list-group-item"
+						style="padding: .5rem 1.25rem;">나를 지정</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
-
 					</div>
-					<div class="list-group">
-						<a onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">마케팅</a> <a
-							onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">디자인</a> <a
-							onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">엔지니어링</a>
-						<a onclick="acyncMovePage1('content.jsp')" href="#"
-							class="list-group-item" style="padding: .5rem 1.25rem;">숨김</a>
-
-					</div>
+					<c:forEach var="locker_list" items="${projectLockerList}">
+						<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id}">
+						<span id="locker_del" style="position:absolute; background-color: pink; width: 15px; height: 15px; z-index: 300; right: 15px; margin-top: 12px;"></span>
+						<a id="main_side" class="list-group-item"
+							style="padding: .5rem 1.25rem;">${locker_list.locker_name}
+						</a>
+					</c:forEach>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">
+						숨김
+					</a>
 
 				</div>
 				<!--sidebar-->
 				<div class="clientCenterContainer">
 
 					<ul id="helpMenu_on">
-						<li><a href="#" id="oneToOneBt">1:1 문의</a></li>
-						<li><a href="#" id="helpBt">도움말</a></li>
-						<li><a href="#" id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
-						<li><a href="#" id="newNoticeBt">플로우 새소식</a></li>
+						<li><a id="oneToOneBt">1:1 문의</a></li>
+						<li><a id="helpBt">도움말</a></li>
+						<li><a id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
+						<li><a id="newNoticeBt">플로우 새소식</a></li>
 						<!-- 알림 있을 경우 class on 추가 -->
 					</ul>
 					<div class="helpButtonContainer">

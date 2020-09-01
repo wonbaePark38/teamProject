@@ -18,11 +18,6 @@
 		VALUES((select nvl(max(lookup_id), 0) +1 from project_lookup), #{project_id}, #{member_id}, #{project_manager})
 	</insert>
 	
-	
-	
-	
-	
-	
 	<select id="getProjectDirTotalList" resultType="project_lookup" parameterType="project_lookup">
 		SELECT lookup_id, project_id, member_id, project_favorites, project_locker, hide_locker, project_manager, project_name, joinuser
 		FROM project_lookup 
@@ -36,7 +31,8 @@
                     FROM projectdir 
                     INNER JOIN 
                     	(
-    						SELECT project_id, count(*) as joinuser from project_lookup group by project_id
+    						SELECT project_id, count(*) AS joinuser 
+    						FROM project_lookup group BY project_id
 						)
 						USING(project_id)
                 )	

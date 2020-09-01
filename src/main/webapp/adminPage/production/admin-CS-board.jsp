@@ -20,7 +20,6 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
     <link href="css/maps/myCss.css" rel="stylesheet">
-
   </head>
 
   <body class="nav-md">

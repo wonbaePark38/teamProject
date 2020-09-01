@@ -19,6 +19,13 @@
 
 	 
 		<div class="headerContainer">
+			<div class="dir_set_bar" style="display: none;">
+				<span class="locker_setbtn" id="locker_list">보관함 설정</span> 
+				<span class="locker_setbtn" id="locker_hide">숨기기</span> 
+				<span style="float: right; color: blue;">
+				<span class="select_num"></span>
+					개의 프로젝트 선택 됨</span>
+			</div>
 			<div class="headerWrap">
 				<div class="headerLeft">
 					<div class="headLogo">

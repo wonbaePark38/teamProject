@@ -28,30 +28,58 @@
 		
 		$(document).on('click','#dir_setting',function(){
 			$('.div_btn_on').attr('class','div_btn');
-			
 			// 편집 버튼 누를 때
-			if ($(this).attr('class') == 'dir_set') {
-				project_select_num = 0;
-				$('.select_num').text(project_select_num);
-				// 세팅 바
-				$('.headerWrap').hide();
-				$('.dir_set_bar').show();
-				// 프로젝트 선택 css
-				$(this).attr('class','dir_set_on');
-				$('.project_div').attr('class','project_div_on');
-				$('.div_btn').show();
-			// 편집 취소할 때
-			} else if ($(this).attr('class') == 'dir_set_on') {
-				// 세팅 바
-				$('.dir_set_bar').hide();
-				$('.headerWrap').show();
-				
-				// 프로젝트 선택css
-				$(this).attr('class','dir_set');
-				$('.project_div_on').attr('class','project_div');
-				$('.div_btn').hide();
-				$('.div_btn_on').hide();
-				
+			if ($('.setting_div').attr('id') != 'setting_hide' &&  $('.setting_div').attr('id') != 'setting_locker') {
+
+				if ($(this).attr('class') == 'dir_set') {
+					$('.content_type').hide();
+					$('#project_dir_list2').css('display', 'inline-block');
+					project_select_num = 0;
+					$('.select_num').text(project_select_num);
+					// 세팅 바
+					$('.headerWrap').hide();
+					$('.dir_set_bar').show();
+					// 프로젝트 선택 css
+					$(this).attr('class','dir_set_on');
+					$('.project_div').attr('class','project_div_on');
+					$('.div_btn').show();
+				// 편집 취소할 때
+				} else if ($(this).attr('class') == 'dir_set_on') {
+					// 세팅 바
+					$('.dir_set_bar').hide();
+					$('.headerWrap').show();
+					
+					// 프로젝트 선택css
+					$(this).attr('class','dir_set');
+					$('.project_div_on').attr('class','project_div');
+					$('.div_btn').hide();
+					$('.div_btn_on').hide();
+					
+				}
+			} else {
+				if ($(this).attr('class') == 'dir_set') {
+					project_select_num = 0;
+					$('.select_num').text(project_select_num);
+					// 세팅 바
+					$('.headerWrap').hide();
+					$('.dir_set_bar').show();
+					// 프로젝트 선택 css
+					$(this).attr('class','dir_set_on');
+					$('.project_div').attr('class','project_div_on');
+					$('.div_btn').show();
+				// 편집 취소할 때
+				} else if ($(this).attr('class') == 'dir_set_on') {
+					// 세팅 바
+					$('.dir_set_bar').hide();
+					$('.headerWrap').show();
+					
+					// 프로젝트 선택css
+					$(this).attr('class','dir_set');
+					$('.project_div_on').attr('class','project_div');
+					$('.div_btn').hide();
+					$('.div_btn_on').hide();
+					
+				}
 			}
 		});
 		
@@ -70,12 +98,12 @@
 	});
 	
 	
-	
+		
 	
 </script>
 <div style="padding-left: 15px;" id="content_div">
 	<div class="projectdir_content_header">
-		<div style="float: right;">
+		<div class="setting_div" id="setting_" style="float: right;">
 			<a onclick="lockerset()" style="float: left; padding-right: 5px; border-right: 1px solid #eaeaea;">설정</a>
 			<a id="dir_setting" class="dir_set">편집</a>
 
@@ -108,13 +136,14 @@
 		<div id="total_favorites" style="display: none;">
 		<h4 id="content_type_title">즐겨찾기</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
-			<c:if test="${project_lookup.project_favorites ne '0'}">
+			<c:if test="${project_lookup.project_favorites ne '0' and project_lookup.hide_locker eq '0'}">
 			<script>
 					$('#total_favorites').show();	
 			</script>
 			<div class="project_div">
 			<input class="div_btn" id="div_button" type="button">
 			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
+			
 				<div class="project_select">
 					<div class="title_box">
 						<span>${project_lookup.project_name}</span>
@@ -131,7 +160,7 @@
 		<div style="z-index: 1; width: 100%; display: inline-block;">
 			<h4 style="padding-bottom: 10px;">참여중</h4>
 			<c:forEach var="project_lookup" items="${projectDirList}">
-				<c:if test="${project_lookup.project_favorites eq '0'}">
+				<c:if test="${project_lookup.project_favorites eq '0' and project_lookup.hide_locker eq '0'}">
 				<div class="project_div">
 				<input class="div_btn" id="div_button" type="button" >
 				<input type="hidden" name="project_id" value="${project_lookup.project_id}">
@@ -156,7 +185,7 @@
 	<div id="project_dir_list2" class="content_type" style="z-index: 1; width: 100%; display: inline-block;">
 		<h4 style="padding-bottom: 10px;">미보관</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
-			<c:if test="${project_lookup.project_locker eq null}">
+			<c:if test="${project_lookup.project_locker eq null and project_lookup.hide_locker eq '0'}">
 				<c:choose>
 					<c:when test="${project_lookup.project_favorites ne '0'}">
 						<div class="project_div">
@@ -173,7 +202,7 @@
 							<input class="title_btn_check" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
 						</div>
 					</c:when>
-					<c:when test="${project_lookup.project_favorites eq '0'}">
+					<c:when test="${project_lookup.project_favorites eq '0' and project_lookup.hide_locker eq '0'}">
 						<div class="project_div">
 						<input class="div_btn" id="div_button" type="button" >
 						<input type="hidden" name="project_id" value="${project_lookup.project_id}">
@@ -199,7 +228,7 @@
 		<h4 style="padding-bottom: 10px;">읽지않음</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
 			<c:choose>
-				<c:when test="${project_lookup.project_favorites ne '0'}">
+				<c:when test="${project_lookup.project_favorites ne '0' and project_lookup.hide_locker eq '0'}">
 					<div class="project_div">
 					<input class="div_btn" id="div_button" type="button" >
 					<input type="hidden" name="project_id" value="${project_lookup.project_id}">
@@ -214,7 +243,7 @@
 						<input class="title_btn_check" id="star_btn" type="button" name="project_favorites" value="${project_lookup.project_favorites}">
 					</div>
 				</c:when>
-				<c:when test="${project_lookup.project_favorites eq '0'}">
+				<c:when test="${project_lookup.project_favorites eq '0' and project_lookup.hide_locker eq '0'}">
 					<div class="project_div">
 					<input class="div_btn" id="div_button" type="button" >
 					<input type="hidden" name="project_id" value="${project_lookup.project_id}">
@@ -239,7 +268,7 @@
 	<div id="project_dir_list4" class="content_type">
 		<h4 id="content_type_title">즐겨찾기</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
-			<c:if test="${project_lookup.project_favorites ne '0'}">
+			<c:if test="${project_lookup.project_favorites ne '0' and project_lookup.hide_locker eq '0'}">
 			<div class="project_div">
 			<input class="div_btn" id="div_button" type="button" >
 			<input type="hidden" name="project_id" value="${project_lookup.project_id}">
@@ -260,7 +289,7 @@
 	
 	<!-- 보관함 -->
 	<c:forEach var="locker_list" items="${projectLockerList}">
-		<c:if test="${locker_list.locker_name ne null or locker_list.locker_name ne ''}">
+		<c:if test="${project_lookup.hide_locker eq '0' and locker_list.locker_name ne null or locker_list.locker_name ne ''}">
 			<div id="${locker_list.locker_name}" class="content_type" style="z-index: 1; width: 100%; display: inline-block;">
 			<h4 style="padding-bottom: 10px;"><span id="locker_n">${locker_list.locker_name}</span> 보관함</h4>
 				<c:forEach var="project_lookup" items="${projectDirList}">
@@ -268,7 +297,7 @@
 					
 					<c:choose>
 						<c:when test="${project_lookup.project_favorites ne '0'}">
-							<div class="project_div">
+							<div class="project_div" id="${project_lookup.project_locker}">
 							<input class="div_btn" id="div_button" type="button" >
 							<input type="hidden" name="project_id" value="${project_lookup.project_id}">
 								<div class="project_select">
@@ -283,7 +312,7 @@
 							</div>
 						</c:when>
 						<c:when test="${project_lookup.project_favorites eq '0'}">
-							<div class="project_div">
+							<div class="project_div"id="${project_lookup.project_locker}">
 							<input class="div_btn" id="div_button" type="button" >
 							<input type="hidden" name="project_id" value="${project_lookup.project_id}">
 								<div class="project_select">
@@ -309,7 +338,7 @@
 	<!-- 숨김 -->
 	
 	<div id="hide_load" class="content_type" style="z-index: 1; width: 100%; display: inline-block;">
-		<h4 style="padding-bottom: 10px;"><span id="locker_n"></span> 보관함</h4>
+		<h4 style="padding-bottom: 10px;"><span>숨김</span> 보관함</h4>
 		<c:forEach var="project_lookup" items="${projectDirList}">
 		<c:if test="${project_lookup.hide_locker eq '1'}">
 			<c:choose>

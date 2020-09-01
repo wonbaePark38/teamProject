@@ -75,10 +75,6 @@ public class ProjectDirController {
 		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo.getMember_id());
 		List<ProjectDirVO> locker_list = projectDirService.getLockerList(vo.getMember_id());
 		
-		List<ProjectDirVO> locker_data;
-		for (ProjectDirVO data_list : locker_list) {
-			System.out.println(data_list.getLocker_name());
-		}
 		mav.addObject(vo);
 		mav.addObject("projectDirList", list);
 		mav.addObject("projectLockerList", locker_list);

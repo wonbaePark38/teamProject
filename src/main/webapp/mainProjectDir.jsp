@@ -23,13 +23,30 @@
 <link href="css/contentPage.css" rel="stylesheet">
 
 <script src="script/jquery-3.5.1-min.js"></script>
-<script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
 <script type="text/javascript" src="script/task.js"></script>
 <!-- projectdir -->
 <script>
+	function init(){
+		$('#locker_list').text('보관함');
+		$('#locker_hide').text('숨기기');
+		$('.dir_set_bar').hide();
+		$('.headerWrap').show();
+		
+		// 프로젝트 선택css
+		$('.setting_div').attr('id','setting_');
+		$('.dir_set_on').attr('class','dir_set');
+		$(this).attr('class','dir_set');
+		$('.project_div_on').attr('class','project_div');
+		$('.div_btn').hide();
+		$('.div_btn_on').hide();
+	}
+
 	$(document).on('click', '#main_side', function() {
+		init();
+		
 		var click_menu = $(this).text().trim();
+		
 		$('#none_project').show();
 		if (click_menu == '전체') {
 			$('.content_type').hide();
@@ -57,55 +74,81 @@
 			alert('내 게시물');
 		} else if (click_menu == '숨김') {
 			$('.content_type').hide();
+			$('.setting_div').attr('id','setting_hide');
+			$('#locker_hide').text('숨기기 해제');
 			$('#locker_n').text(click_menu);
 			$('#hide_load').css('display', 'inline-block');
 			
 		} else {
 			// 보관함 선택
 			$('.content_type').hide();
-			$('#locker_n').text(click_menu);
+			$('.setting_div').attr('id','setting_locker');
+			$('#locker_list').text('보관함 해제');
 			$('div[id='+click_menu+']').css('display', 'inline-block');
 		}
 	});
 	
 	// 보관함 설정
 	$(document).on('click', '.locker_setbtn', function() {
+		// 선택된 프로젝트
+		var select_project = "";
+		var select_btn = false;
+		
+		// 프로젝트 선택 여부
+		$("input:button[class=div_btn_on]").each(function(){
+			select_project += ($(this).next().val())+",";
+		});
+		
+		// 보관함 추가
 		if ($(this).attr('id') == 'locker_list') {
-			$('.locker_list_set').toggle();
+			if (select_project == null || select_project == '') {
+				alert('프로젝트를 선택해 주세요.')
+			} else {
+				$('.locker_list_set').toggle();	
+			}
+			
+		// 프로젝트 숨기기
 		} else if ($(this).attr('id') == 'locker_hide') {
-			// 프로젝트 숨기기
-			// 선택된 프로젝트
-			var select_project = "";
-			$("input:button[class=div_btn_on]").each(function(){
-				select_project += ($(this).next().val())+",";
-			});
+
+			var hide_locker = null;
+
+			// 숨김 여부
+			if ($('#locker_hide').text() == '숨기기') {
+				hide_locker = 1;
+			} else if($('#locker_hide').text() == '숨기기 해제') {
+				hide_locker = 0;
+			} 
 			
-			select_project = select_project.substr(0, select_project.length-1);
-			
-			var hide_locker = 1;
-			
-			// form 생성
-			var hide_locker_set_name = $('<form></form>');
-
-			// form 설정
-			hide_locker_set_name.attr('method', 'post');
-			hide_locker_set_name.attr('action', 'hidelocker.do');
-
-			// form 데이터
-			hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
-			hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'hide_locker', value :hide_locker}));
-
-			// form 생성하는 곳
-			hide_locker_set_name.appendTo('.mainWrap');
-
-			hide_locker_set_name.submit();
+			// 프로젝트 선택 여부
+			if (select_project == null || select_project == '') {
+				alert('프로젝트를 선택해 주세요.')
+			} else {
+				select_project = select_project.substr(0, select_project.length-1);
+				
+				
+				// form 생성
+				var hide_locker_set_name = $('<form></form>');
+	
+				// form 설정
+				hide_locker_set_name.attr('method', 'post');
+				hide_locker_set_name.attr('action', 'hidelocker.do');
+	
+				// form 데이터
+				hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
+				hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'hide_locker', value :hide_locker}));
+	
+				// form 생성하는 곳
+				hide_locker_set_name.appendTo('.mainWrap');
+	
+				hide_locker_set_name.submit();
+			}
 		}
 	});
 	
 	// 보관함 삭제
 	$(document).on('click', '#locker_del', function() {
 
-		var locker_del_name = $(this).parent().prev().val();
+		var locker_del_name = $(this).prev().val();
 		
 		// form 생성
 		var locker_del = $('<form></form>');
@@ -123,43 +166,47 @@
 		locker_del.submit();
 	});
 	
-	// 복관함에 프로젝트 추가
-	$(document).on('click','#locker_btn',function(){
+	// 보관함에 프로젝트 추가
+	$(document).on('click','#locker_success',function(){
 		
 		// 선택된 프로젝트
 		var select_project = "";
 		$("input:button[class=div_btn_on]").each(function(){
 			select_project += ($(this).next().val())+",";
 		});
-		
 		select_project = select_project.substr(0, select_project.length-1);
-		
-		
-		// 체크된 보관함
-		var lock_list = "";
-		$("input:checkbox[id=locker_cbox]:checked").each(function() {
-			lock_list += ($(this).parent().text().trim())+",";
-		});
-		
-		lock_list = lock_list.substr(0, lock_list.length-1);
-		
-		
-		// form 생성
-		var locker_set_name = $('<form></form>');
 
-		// form 설정
-		locker_set_name.attr('method', 'post');
-		locker_set_name.attr('action', 'updatelocker.do');
-
-		// form 데이터
-		locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
-		locker_set_name.append($('<input/>', {type : 'hidden', name :'project_locker', value :lock_list}));
-
-		// form 생성하는 곳
-		locker_set_name.appendTo('.mainWrap');
-
-		locker_set_name.submit();
-	});
+		// 선택된 보관함
+		var select_locker = "";
+		
+		if ($('#locker_list').text() == '보관함 설정') {
+			select_locker = $('input[name="locker_cbox"]:checked').val();
+		} else if ($('#locker_list').text() == '보관함 해제') {
+			select_locker = null;
+		}
+		
+		alert(select_locker);
+		
+		if (select_project == null || select_project == '') {
+			alert('프로젝트를 선택해 주세요.')
+		} else{
+			
+			
+			// form 생성
+			var locker_set_name = $('<form></form>');
+				// form 설정
+			locker_set_name.attr('method', 'post');
+			locker_set_name.attr('action', 'updatelocker.do');
+				// form 데이터
+			locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
+			locker_set_name.append($('<input/>', {type : 'hidden', name :'project_locker', value :select_locker}));
+			// form 생성하는 곳
+			locker_set_name.appendTo('.mainWrap');
+		
+			locker_set_name.submit();
+		}
+	}); 
+	
 	
 </script>
 </head>
@@ -169,49 +216,8 @@
 <body>
 	<div class="mainWrap">
 		<!-- Navigation -->
-		<div class="headerContainer">
-			<div class="dir_set_bar" style="display: none;">
-				<span class="locker_setbtn" id="locker_list">보관함 설정</span> 
-				<span class="locker_setbtn" id="locker_hide">숨기기</span> 
-				<span style="float: right; color: blue;">
-				<span class="select_num"></span>
-					개의 프로젝트 선택 됨</span>
-			</div>
-			<div class="headerWrap">
-				<div class="headerLeft">
-					<div class="headLogo">
-						<a><img src="images/logo_top.png"></a>
-					</div>
-					<div id="searchArea">
-
-						<form style="width: 100%" name=search method="POST">
-
-							<select class="searchButton" name="category">
-								<option value="menu1">전체</option>
-								<option value="menu2">프로젝트</option>
-								<option value="menu3">글</option>
-								<option value="menu4">댓글</option>
-								<option value="menu5">참여자</option>
-							</select> <input type="text" id="inputkeyword" value="텍스트입력"
-								onfocus="this.value='';"> <input type="submit"
-								value="검색" onclick="searchPress()">
-						</form>
-					</div>
-
-				</div>
-				<div class="headerRight">
-					<button id="serviceUpgradeBt" onclick="test()">서비스 업그레이드</button>
-					<input type="button" id="headerChatBt" onclick="headerChatting()">
-					<input type="button" id="headerIconAlram" onclick="headerAlarm()">
-					<input type="button" id="headerUserInfoBt" onclick="headerOption()">
-
-
-				</div>
-
-			</div>
-
-		</div>
-
+		
+		<jsp:include page='privateConfigHeader.jsp'></jsp:include>
 		<!--end navigation-->
 
 
@@ -250,18 +256,16 @@
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
 					</div>
-					<div class="list-group">
-						<c:forEach var="locker_list" items="${projectLockerList}">
-							<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id}">
-							<a id="main_side" class="list-group-item"
-								style="padding: .5rem 1.25rem;">${locker_list.locker_name}
-								<span id="locker_del" style="float: right; background-color: ping; width: 15px; height: 15px; z-index: 300;"></span>
-							</a>
-						</c:forEach>
-							<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">
-								숨김 <span id="locker_del" style="float: right; background-color: ping; width: 15px; height: 15px; z-index: 300;"></span>
-							</a>
-					</div>
+					<c:forEach var="locker_list" items="${projectLockerList}">
+						<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id}">
+						<span id="locker_del" style="position:absolute; background-color: pink; width: 15px; height: 15px; z-index: 300; right: 15px; margin-top: 12px;"></span>
+						<a id="main_side" class="list-group-item"
+							style="padding: .5rem 1.25rem;">${locker_list.locker_name}
+						</a>
+					</c:forEach>
+					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">
+						숨김
+					</a>
 
 				</div>
 				<!--sidebar-->
@@ -525,13 +529,14 @@
 					<ul>
 						<c:forEach var="locker_list" items="${projectLockerList}">
 							<li>
-								<label><input id="locker_cbox" type="checkbox">${locker_list.locker_name}</label><br>
+								<label><input name="locker_cbox" type="radio" value="${locker_list.locker_name}">${locker_list.locker_name}</label><br>
 							</li>
 						</c:forEach>
 					</ul>
 				</div>
 				<div class="locker_set_div" style="width: 100%; font-size: 20px; height: 40px;">
-					<span id="locker_btn" style="padding: 5px 55px;">확인</span><span style="padding: 5px 55px;">취소</span>
+					<span id="locker_success" style="padding: 5px 55px;">확인</span>
+					<span class="locker_list_set" style="padding: 5px 55px;">취소</span>
 				</div>
 			</div>
 		</div>
