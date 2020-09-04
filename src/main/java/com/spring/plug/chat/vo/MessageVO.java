@@ -11,11 +11,24 @@ public class MessageVO {
 	private String chatroom_id;
 	private String chatroomName;
 	private int projectId;
+	private int userId;
 	private String userName;
 	private int unReadCount;
 	private String projectName;
-	private MessageType type;
+	private String messageType;
 	
+	public String getMessageType() {
+		return messageType;
+	}
+	public void setMessageType(String messageType) {
+		this.messageType = messageType;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public int getUnReadCount() {
 		return unReadCount;
 	}
@@ -31,12 +44,7 @@ public class MessageVO {
 	public String getMessage_sender() {
 		return message_sender;
 	}
-	public MessageType getType() {
-		return type;
-	}
-	public void setType(MessageType type) {
-		this.type = type;
-	}
+	
 	public void setMessage_sender(String message_sender) {
 		this.message_sender = message_sender;
 	}
@@ -87,9 +95,11 @@ public class MessageVO {
 	public String toString() {
 		return "MessageVO [message_sender=" + message_sender + ", senderId=" + senderId + ", message_content="
 				+ message_content + ", message_sendTime=" + message_sendTime + ", chatroom_id=" + chatroom_id
-				+ ", chatroomName=" + chatroomName + ", projectId=" + projectId + ", userName=" + userName
-				+ ", projectName=" + projectName + ", type=" + type + "]";
+				+ ", chatroomName=" + chatroomName + ", projectId=" + projectId + ", userId=" + userId + ", userName="
+				+ userName + ", unReadCount=" + unReadCount + ", projectName=" + projectName + ", messageType="
+				+ messageType + "]";
 	}
+	
 	
 	
 }

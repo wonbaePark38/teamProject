@@ -1,6 +1,7 @@
 package com.spring.plug.chat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,15 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO) {
-		return chatDAO.getChatRoomInfo(roomVO);
+	public void createRoomStatus(ChatRoomVO roomVO) {
+		chatDAO.createRoomStatus(roomVO);
+	}
+	
+	
+	
+	@Override
+	public ChatRoomVO getChatRoomInfo(String chatRoomId) {
+		return chatDAO.getChatRoomInfo(chatRoomId);
 	}
 
 	@Override
@@ -59,6 +67,39 @@ public class ChatServiceImpl implements ChatService{
 	public void updateDisconnectTime(MessageVO msgVO) {
 		chatDAO.updateDisconnectTime(msgVO);
 		
+	}
+
+	@Override
+	public void insertMember(Map<String, Object> infoData) {
+		chatDAO.insertMember(infoData);
+	}
+
+	public void addUserChatRoom(ChatRoomVO roomVO) {
+		chatDAO.addUserChatRoom(roomVO);
+	}
+	
+	public void addUserChatRoomStatus(Map<String, Object> infoData) {
+		chatDAO.addUserChatRoomStatus(infoData);
+	}
+
+	@Override
+	public void updateChatRoomStatus(MessageVO vo) {
+		chatDAO.updateChatRoomStatus(vo);
+	}
+
+	@Override
+	public void updateChatRoomName(ChatRoomVO roomVO) {
+		chatDAO.updateChatRoomName(roomVO);
+	}
+
+	@Override
+	public void updateChatRoom(ChatRoomVO roomVO) {
+		chatDAO.updateChatRoom(roomVO);
+	}
+
+	@Override
+	public void deleteChatUser(ChatRoomVO roomVO) {
+		chatDAO.deleteChatUser(roomVO);
 	}
 
 }

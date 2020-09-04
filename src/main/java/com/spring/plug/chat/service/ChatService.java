@@ -1,6 +1,7 @@
 package com.spring.plug.chat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.spring.plug.chat.vo.ChatRoomVO;
 import com.spring.plug.chat.vo.MessageVO;
@@ -12,8 +13,16 @@ public interface ChatService {
 	List<MessageVO> loadChatHistory(MessageVO msgVO);
 	List<UserVO> getFriendList(int myId);
 	void createRoom(ChatRoomVO roomVO);
-	ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO);
+	void createRoomStatus(ChatRoomVO roomVO);
+	void insertMember(Map<String, Object> infoData);
+	ChatRoomVO getChatRoomInfo(String chatRoomId);
 	void updateConnectTime(ChatRoomVO roomVO);
 	List<ChatRoomVO> getJoinedMember(ChatRoomVO roomVO);
 	void updateDisconnectTime(MessageVO msgVO);
+	void addUserChatRoom(ChatRoomVO roomVO);
+	void addUserChatRoomStatus(Map<String, Object> infoData);
+	void updateChatRoomStatus(MessageVO vo);
+	void updateChatRoomName(ChatRoomVO roomVO);
+	void updateChatRoom(ChatRoomVO roomVO);
+	void deleteChatUser(ChatRoomVO roomVO);
 }

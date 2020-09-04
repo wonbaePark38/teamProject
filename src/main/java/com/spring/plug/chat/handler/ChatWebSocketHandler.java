@@ -29,7 +29,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	ChatService chatService;
 	
 	List<WebSocketSession> sessions = new ArrayList<>();
-	Map<WebSocketSession,String> userSessions = new HashMap<WebSocketSession,String>();
+	Map<WebSocketSession,String> roomSessions = new HashMap<WebSocketSession,String>();
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
@@ -37,16 +37,17 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		System.out.println("afterConnectionEstablished" + session);
 		sessions.add(session); //웹소켓 세션 리스트에 추가
 		String sessionRoomId = getRoomId(session);
-		userSessions.put(session,sessionRoomId);
+		roomSessions.put(session,sessionRoomId);
 	}
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String msg = message.getPayload();
+		System.out.println("서버메시지" + msg);
 		MessageVO messageVO = objectMapper.readValue(msg, MessageVO.class);
 		System.out.println(messageVO.getChatroom_id());
 		
 		for(WebSocketSession sess : sessions){
-			if(messageVO.getChatroom_id().equals(userSessions.get(sess))) {
+			if(messageVO.getChatroom_id().equals(roomSessions.get(sess))) {
 				sess.sendMessage(new TextMessage(message.getPayload()));
 			}
 			
@@ -67,7 +68,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		vo.setMessage_sendTime(disconnectTime);
 		chatService.updateDisconnectTime(vo);
 		sessions.remove(session);
-		userSessions.remove(session);
+		roomSessions.remove(session);
 		
 	}
 

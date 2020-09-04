@@ -11,15 +11,15 @@
 <link href='css/chatPopup2.css' rel='stylesheet' />
 <script src="script/jquery-3.5.1-min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.js"></script>
 
 </head>
 <body>
-	<div class="chat_wrap" >
+	<div class="chat_wrap">
 		<div class="header">
 			<label></label>
-			<button id='more-bt'>
-			</button>
+			<button id='more-bt'></button>
 		</div>
 		<div class="chat">
 			<ul id="chat-ul">
@@ -42,25 +42,46 @@
 					<div class="message">
 						<span></span>
 					</div>
-	
+
 
 				</li>
 			</ul>
 		</div>
 		<div class='hidden'>
-            <div class='hidden-header'>
-                <label>참여자 목록</label>
-            </div>
-            <div class="member-list">
-                <ul>
-        			<li>
-					</li>
+			<div class='hidden-header'>
+				<label>참여자 목록</label>
+				<div style="display: inline-block; margin-top: 3px;">
+					<a href="javascript:void(0);" onclick="makeChatRoom()" style="margin-left: 10px; vertical-align: middle;">
+					<img src="images/icon_newchat.png" style="padding-top: 5px;">
+					</a>
+				</div>
+			</div>
+			<div class="member-list">
+				<ul>
+					<!-- 
+						참여자 목록 들어올 자리
+					 -->
+
+				</ul>
+			</div>
 			
-                </ul>
-            </div>
-          
-        </div>
-		
+			<div class="hidden-footer">
+				<div>
+					<a href="javascript:void(0);" onclick="exitChatRoom()" id="exit-bt">
+						<img src="images/icon-exitchat-on.png" style="padding-top: 5px;">
+						나가기
+					</a>
+					
+				</div>
+				<div>
+					<a href="javascript:void(0);" onclick="changeChatRoomName()" id="change-chatroom-name">
+						<img src="images/icon_chatSet3.png" style="padding-top: 5px;">
+					</a>
+				</div>
+			</div>
+
+		</div>
+
 	</div>
 
 </body>
@@ -69,25 +90,23 @@ var socket = null;
 
 $(document).ready(function() {
 	
-	window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
+	
 	var sendData = { //현재 방 id값 세팅
-			chatroom_id : '${roomId}',
+			param : '${roomInfo.chatRoomId}',
 	}
-	var headerName = '${chatRoomName}';
+	var headerName = '${roomInfo.chatRoomName}';
 	$('.header label').text(headerName); //채팅방 헤더에 채팅방 이름 세팅
 	
 	let today = new Date();   
 	var connectTime = date_to_str(today);
 	
-	var sendLogData = {
-			chatRoomId : '${roomId}',
-			connectTime : connectTime,
-	}
+	
+	joinedMember(); //참여자 목록 화면에 출력
 	//접속 로그 업데이트
 	$.ajax({
 			type : "POST",
 			url : 'updateConnectTime.do',
-			data : sendLogData,
+			data : sendData,
 			success : function(data) {
 				//joinedMember(data); //참여자 목록 세팅
 			},
@@ -109,16 +128,28 @@ $(document).ready(function() {
 				
 				var myName = '${user.seq}';
 				var LR = (element.senderId != myName) ? "left" : "right";
-				
-				if(LR == 'left'){ //메시지 div 와 날짜 div 위치 변경
+				if(element.senderId == 0){
+					LR = 'center';
+				}
+				if(LR == 'left' && LR != 'center'){ //메시지 div 와 날짜 div 위치 변경
 					var target = $('#chat-ul').children().last();
 					var message = $(target).children().last();
 					var date = $(message).prev();
 					$(message).css('margin-left','20px');
 					$(date).insertAfter(message);
+				} else if(LR == 'center'){
+					
+					var target = $('#chat-ul').children().last();
+					var message = $(target).children().last();
+					var date = $(message).prev();
+					$(message).css('background-color', '#888');
+					$(message).css('font-weight','bold');
+					$(message).css('color','white');
+						
 				}
 				
 			});
+			window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
 			data = null;
 		},
 		fail : function(err) {
@@ -163,9 +194,15 @@ $(document).ready(function() {
 		socket.onmessage = function(evt) {
 
 			var data = evt.data;
+			
 			data = JSON.parse(data);
-			msgPositionSelect(data); 
 			var myName = '${user.seq}';
+			if(data.senderId == 0){
+				 location.reload();
+			}
+			msgPositionSelect(data); 
+			
+			//if(data,senderId != myName && )
 			var LR = (data.senderId != myName) ? "left" : "right";
 			
 			if(LR == 'left'){
@@ -230,6 +267,10 @@ $(document).ready(function() {
 			var target = $(chatLi).children('.message');
 			target.css('background-color','#5f5ab9');
 			target.css('color','white');
+		} else if(LR_className == 'admin'){
+			var target = $(chatLi).children('.message');
+			target.css('background-color','#5f5ab9');
+			target.css('color','white');
 		}
 	
 
@@ -254,12 +295,15 @@ $(document).ready(function() {
 	}
 
 	function insertMessageInfo(message) { //메시지 db에 저장
-
+		
 		$.ajax({
 			type : "POST",
 			url : 'insertMessage.do',
 			data : message,
 			success : function(result) {
+				if(message.messageType == 'exit'){
+					self.close();
+				}
 			},
 			fail : function(err) {
 				alert('에러발생');
@@ -271,15 +315,18 @@ $(document).ready(function() {
 		$('.hidden').show();
 	}
 
-	/*function joinedMember(data){ //참여자 목록 띄우기
-		$.each(data,function(index,element){
+	function joinedMember(){ //참여자 목록 띄우기
+		
+		var listData = '${roomInfo.inviteUser}'.split(',');
+		
+		$.each(listData,function(index,element){
 			$('.member-list').children().append(
-			"<li>"+element.userName+" ("+element.userEmail+")</li>"
+			"<li>"+element+"</li>"
 			);	
 		});
-	}*/
+	}
 	
-	function date_to_str(format)
+	function date_to_str(format) //날짜 형식 변환
 
 	{
 	    var year = format.getFullYear();
@@ -296,6 +343,123 @@ $(document).ready(function() {
 	    return year + "-" + month + "-" + date + " " + hour + ":" + min + ":" + sec;
 
 	}
+	
+	//초대 가능한 사람 목록팝업창 띄우기
+	function makeChatRoom(){
+	
+	var popupWidth = 300;
+	var popupHeight = 500;
+	var popupX = (window.screen.width/2) - (popupWidth/2);
+	var popupY= (window.screen.height/2) - (popupHeight/2);
+	
+	var url = "inviteChatting.jsp?param="+'${roomInfo.chatRoomId}';
+	window.open(url,"invitewindow", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
 
+	}
+	
+	function friendAddMessage(invitedUserInfo){
+		var inviteUsers = "";
+		$.each(invitedUserInfo, function(index,element){
+			inviteUsers += "," + element.userName;
+		});
+		
+		inviteUsers = inviteUsers.substring(1);
+		let today = new Date();   
+		var inputDate = date_to_str(today);
+		message = {};
+		message.message_content = inviteUsers + " 님이 초대되었습니다";
+		message.message_sender = 'admin';
+		message.chatroom_id = '${roomInfo.chatRoomId}';
+		message.message_sendTime = inputDate;
+		message.senderId = 0;
+		socket.send(JSON.stringify(message));
+		insertMessageInfo(message); //db에 저장할 메시지 정보
+	
+	}
+	
+	function getRoomId(){
+		var roomId= '${roomInfo.chatRoomId}';
+		return roomId;	
+	}
+	function changeChatRoomName(){
+		var userInput = prompt("채팅방 이름을 설정하세요");
+		
+		if(userInput){
+			var sendData = {
+					chatRoomId : '${roomInfo.chatRoomId}',
+					chatRoomName : userInput
+				}
+			
+				$.ajax({
+					type : "POST",
+					url : 'changeChatRoomName.do',
+					data : sendData,
+					success : function(data) {
+						changeRoomName(userInput)
+					},
+					fail : function(err) {
+						alert('에러발생');
+					}
+				});
+					
+		} //end if
+		
+	}
+	
+	function changeRoomName(roomName){ //채팅방 이름 변경
+		
+		let today = new Date();   
+		var inputDate = date_to_str(today);
+		message = {};
+		message.message_content = roomName+ " 으로 방이름이 변경되었습니다";
+		message.message_sender = 'admin';
+		message.chatroom_id = '${roomInfo.chatRoomId}';
+		message.message_sendTime = inputDate;
+		message.senderId = 0;
+		socket.send(JSON.stringify(message));
+		insertMessageInfo(message); //db에 저장할 메시지 정보
+	}
+	
+	function exitChatRoom(){
+		var input = confirm('채팅방에서 나가시겠습니까?');
+		if(input){
+		
+			
+			var sendData = {
+					chatRoomName : '${roomInfo.chatRoomName}',
+					chatRoomId : '${roomInfo.chatRoomId}',
+					inviteUser : '${roomInfo.inviteUser}',
+					inviteUserId : '${roomInfo.inviteUserId}',
+					joinNumber : '${roomInfo.joinNumber}',
+					roomNameChange : '${roomInfo.roomNameChange}'
+				}
+			$.ajax({
+				type : "POST",
+				url : 'exitChatRoom.do',
+				data : sendData,
+				dataType:"json",
+				success : function(data) {
+					
+				},
+				fail : function(err) {
+					alert('에러발생');
+				}
+			})
+		let today = new Date();   
+		var inputDate = date_to_str(today);
+		var name = '${user.name}';
+		message = {};
+		message.message_content = name+ " 님이 채팅방에서 나갔습니다";
+		message.message_sender = 'admin';
+		message.chatroom_id = '${roomInfo.chatRoomId}';
+		message.message_sendTime = inputDate;
+		message.senderId = 0;
+		message.messageType = 'exit';
+		socket.send(JSON.stringify(message));
+		insertMessageInfo(message); //db에 저장할 메시지 정보
+			
+		}//end if
+		
+	}
 </script>
 </html>
