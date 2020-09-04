@@ -110,6 +110,14 @@
     width: 100px; 
     text-align: center;
 }
+.admin_cs_qa_contentArea_regDate{
+    width: 100px; 
+    text-align: center;
+}
+.admin_cs_qa_contentArea_reply{
+    width: 100px; 
+    text-align: center;
+}
 
 #admin_cs_qa_contentArea_search{
     text-align: right;

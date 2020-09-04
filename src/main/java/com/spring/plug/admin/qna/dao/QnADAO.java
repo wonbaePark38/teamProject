@@ -19,10 +19,10 @@ public class QnADAO {
 		sqlSessionTemplate.insert("QnADAO.insertBoard", vo);
 	}
 	
-//	public void updateBoard(BoardVO vo) {
-//		System.out.println("---> MyBatis로 updateBoard() 기능 처리");
-//		sqlSessionTemplate.update("BoardDAO.updateBoard", vo);
-//	}
+	public void updateBoard(QnAVO vo) {
+		System.out.println("---> MyBatis로 updateBoard() 기능 처리");
+		sqlSessionTemplate.update("QnADAO.updateBoard", vo);
+	}
 //	
 //	public void deleteBoard(BoardVO vo) {
 //		System.out.println("---> MyBatis로 deleteBoard() 기능 처리");

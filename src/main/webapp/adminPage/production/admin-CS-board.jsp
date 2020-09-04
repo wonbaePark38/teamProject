@@ -22,17 +22,39 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
     <link href="css/maps/myCss.css" rel="stylesheet">
-<<<<<<< HEAD
-=======
     <script src="../../script/jquery-3.5.1-min.js"></script>
     <script>
    	
      $(document).on('click','#reply',function(){
-        alert('a');
+    	   
+         // 답변글 입력 여부 확인
+            // form 태그 생성
+            var article_form = $('<form></form>');
+            
+            // form 설정  ( 태그 변수 , 설정값 )
+            article_form.attr('method','post');
+            article_form.attr('action','qnaReply.do');
+            
+            article_form.append($('<input/>', {type : 'hidden', name : 'seq', value : '${ board.seq }'}));
+            article_form.append($('<input/>', {type : 'hidden', name : 'title', value : '${ board.title }'}));
+            // 보낼 데이터
+            var board_content_client = $('.client_reply').text(); // 클라이언트 요청글 div
+            article_form.append($('<input/>', {type : 'hidden', name : 'content', value : board_content_client}));
+            
+            var board_content_admin = $('.admin_reply').text(); // 클라이언트 요청글 div
+            article_form.append($('<input/>', {type : 'hidden', name : 'replycontent', value : board_content_admin}));
+            
+            article_form.append($('<input/>', {type : 'hidden', name : 'email', value : '${ board.email }'}));
+            article_form.append($('<input/>', {type : 'hidden', name : 'reply', value : 'Y'}));
+            
+            // form 태그 위치
+            article_form.appendTo('body');
+            
+            article_form.submit();
+
      });
     </script>
 
->>>>>>> refs/remotes/origin/ahnse00830
   </head>
 
   <body class="nav-md">

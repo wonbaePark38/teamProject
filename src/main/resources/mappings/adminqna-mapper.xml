@@ -10,11 +10,15 @@
 		<result property="time" column="REGDATE" />
 		<result property="title" column="TITLE" />
 		<result property="writer" column="WRITER" />
+		<result property="email" column="EMAIL" />
+		<result property="reply" column="REPLY" />
+		<result property="replycontent" column="REPLYCONTENT" />
+		<result property="replytime" column="REPLYTIME" />
 	</resultMap>
 
 	<insert id="insertBoard" parameterType="adminQnA">
 		INSERT INTO ADMIN_QNA 
-		VALUES(admin_qna_seq.nextval, #{content}, #{time}, #{title}, #{writer})
+		VALUES(admin_qna_seq.nextval, #{content}, #{time}, #{title}, #{writer}, #{email}, #{reply}, #{replycontent})
 	</insert>
 
 	<select id="getBoardList" resultMap="qnaResult">
@@ -32,7 +36,9 @@
 		SELECT * FROM ADMIN_QNA WHERE SEQ=#{seq}
 	</select>
 	
-	<update id="defaultPassword" parameterType="adminQnA">
-		UPDATE ADMININFO SET ADMIN_PASSWORD = #{password}, SALT = #{salt} WHERE ADMIN_EMAIL = #{email}
+	<update id="updateBoard" parameterType="adminQnA">
+		UPDATE ADMIN_QNA SET REPLY = #{reply}, REPLYCONTENT = #{replycontent}, REPLYTIME = SYSDATE WHERE SEQ = #{seq}
 	</update>
+	
+	
 </mapper>

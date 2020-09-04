@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectDirDAO">
+	<!-- 프로젝트 생성 맵 -->
+	<resultMap type="projectdir" id="projectdir">
+		<id property="project_id" column="PROJECT_NUM" />
+		<result property="project_name" column="PROJECT_NAME" />
+		<result property="project_content" column="PROJECT_CONTENT" />
+		<result property="project_type" column="PROJECT_TYPE" />
+		<result property="createdate" column="CREATEDATE"/>
+		
+	</resultMap>
+	
+	<!-- 프로젝트 생성 -->	
+	<insert id="projectDirInsert" parameterType="projectdir" useGeneratedKeys="true" keyProperty="project_id" keyColumn="project_id"> 
+		INSERT INTO projectdir (project_id, project_name, project_content, project_type)
+		VALUES((select nvl(max(project_id), 0) +1 from projectdir), #{project_name}, #{project_content}, #{project_type})
+	</insert>
+	
+	
+	
+	
+	
+</mapper>

@@ -101,6 +101,7 @@
                             <th class="admin_cs_qa_contentArea_writer">작성자</th>
                             <th class="admin_cs_qa_contentArea_title">제목</th>
                             <th class="admin_cs_qa_contentArea_regDate">작성일</th>
+                            <th class="admin_cs_qa_contentArea_reply">답변여부</th>
                         </tr>
                         <c:forEach var="board" items="${boardList }">
 							<tr>
@@ -108,6 +109,7 @@
 								<td class="admin_cs_qa_contentArea_writer">${board.writer }</td>
 								<td class="admin_cs_qa_contentArea_title"><a href="getBoard.do?seq=${board.seq }">${board.title }</a></td>
 								<td class="admin_cs_qa_contentArea_regDate"><fmt:formatDate value="${board.time }" pattern="yyyy-MM-dd"/></td>
+								<td class="admin_cs_qa_contentArea_reply">${board.reply }</td>
 							</tr>
 						</c:forEach>
                         
