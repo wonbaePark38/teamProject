@@ -5,45 +5,11 @@
 var socket = null;
 $(document).ready(function(){
 	
-	$(document).on('click','#chat-row',function(){
-		
-		var roomId = $(this).val();
-		var projectId = $(this).children().next().next().next().next().val();
-		var chatroom_name = $(this).children().next().next().text();
-		
-		sendData = {
-			chatRoomId : roomId	
-		}
-		$.ajax({
-			url:'getChatRoomInfo.do',
-			type : 'POST',
-			data : sendData
-		}).done(function(data){
-			console.log(data);
-			if(data.roomPassword){
-				var inputPassword = prompt('비밀방입니다. 비밀번호를 입력하세요');
-				if(inputPassword != data.roomPassword){
-					alert('비밀번호가 틀렸습니다');
-					return false;
-				}
-			}
-				var url = "chatting.do?roomId=" + encodeURI(roomId) + "&projectId=" + encodeURI(data.projectId) + "&chatroomName=" + encodeURI(data.chatRoomName);
-				window.open(url,chatroom_name,"height=700, width=500, resizable=yes");
-			
-		}).fail(function(err){
-			alert('통신 에러');
-		});
-		
-		
-	});
-	
-	connect();
-	/*만들어진 채팅방 리스트 가저오는 이벤트*/
+	//만들어진 채팅방 리스트 가저오는 이벤트
 	$.ajax({
 		url:'getChattingList.do',
 		method:'POST',
 	}).done(function(data){
-		console.log(data);
 		$.each(data,function(index,element){
 			settingChatList(element);//채팅방 리스트 클릭
 			
@@ -52,26 +18,54 @@ $(document).ready(function(){
 		alert('통신오류');
 	});
 	
+	
+	$(document).on('click','#chat-row',function(){
+		var roomId = $(this).children('.room').val();
+		/*var roomId = $(this).val();
+		var projectId = $(this).children().next().next().next().next().val();
+		var chatroom_name = $(this).children().next().next().text();*/
+		console.log('채팅방 id '+roomId);
+		sendData = {
+			chatRoomId : roomId	
+		}
+		/*$.ajax({
+			url:'getChatRoomInfo.do',
+			type : 'POST',
+			data : sendData
+		}).done(function(data){
+			console.log(data);
+			openChatPopup(roomId);
+		}).fail(function(err){
+			alert('통신 에러');
+		});*/
+		openChatPopup(roomId);
+		
+	});
+	
+	connect();
+	
 });
 
 //채팅 리스트 화면에 출력하는 함수
 function settingChatList(element){
+	
 	$('.chatting-list-div').append(
 			
 			"<button type='button' id='chat-row'>" +
-					"<span>" +element.chatRoomId + "<span>" +
+					"<div class='row-label'>" +element.chatRoomName + "</div>" +
+					"<span class='chat-user-number'>"+element.joinNumber+"</span>"+
 //			"<span>"+ element.chatRoomName +"</span>" +
 				"<input type='hidden' class='room' value='" + element.chatRoomId +"'/>" +
 			"</button>"
 			
 	);
 	
-	if(element.roomPassword){
+	/*if(element.roomPassword){
 		var parent = $('.chatting-list-div>').next().last();
 	$('.chatting-list-div>').next().last().append(
 			"<i class='fas fa-lock' style='font-size:15px; color:#6862c3; margin-left:10px;'></i>"
 		);
-	}
+	}*/
 	
 }
 
@@ -129,7 +123,28 @@ function headerOption(){
   document.getElementById('header_option_div').style.display=(document.getElementById('header_option_div').style.display=='block') ? 'none' : 'block';
 }
 
+//방만들기 버튼 눌렀을때 팝업창 띄우기
 function makeChatRoom(){
+	
+	var popupWidth = 300;
+	var popupHeight = 500;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	
 	var url = "makeChatRoomView.do";
-	window.open(url,"newwindow","height=500, width=500, resizable=no");
+	window.open(url,"newwindow", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+
+}
+
+//채팅 팝업창 띄우기
+function openChatPopup(chatRoomId){
+	var popupWidth = 500;
+	var popupHeight = 700;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	
+	
+	var url = "chatting.do?param=" + chatRoomId;
+	window.open(url,"_blank", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+	
 }

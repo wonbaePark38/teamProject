@@ -36,4 +36,5 @@ public class UserSettingDAO {
 		System.out.println("-->mybatis로 환경설정값 모두 가저오는 기능 처리");
 		return sqlSessionTemplate.selectOne("UserSettingDAO.getSettings",id);
 	}
+	
 }

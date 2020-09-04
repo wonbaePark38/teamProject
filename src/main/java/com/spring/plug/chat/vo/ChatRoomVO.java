@@ -1,30 +1,55 @@
 package com.spring.plug.chat.vo;
 
 public class ChatRoomVO {
-	private String projectId;
+	
 	private int joinedUserId;
-	private String projectName;
 	private String chatRoomName;
 	private int chatRoomId;
 	private int userId;
-	private String roomPassword;
-	private String radioSelect;
 	private String connectTime;
 	private String userName;
 	private String userEmail;
 	private String inviteUser;
+	private String inviteUserId;
+	private String status;
+	private int joinNumber;
+	private String roomNameChange;
 	
+	public String getRoomNameChange() {
+		return roomNameChange;
+	}
+	public void setRoomNameChange(String roomNameChange) {
+		this.roomNameChange = roomNameChange;
+	}
+	public int getJoinedUserId() {
+		return joinedUserId;
+	}
+	public void setJoinedUserId(int joinedUserId) {
+		this.joinedUserId = joinedUserId;
+	}
+	public String getChatRoomName() {
+		return chatRoomName;
+	}
+	public void setChatRoomName(String chatRoomName) {
+		this.chatRoomName = chatRoomName;
+	}
+	public int getChatRoomId() {
+		return chatRoomId;
+	}
+	public void setChatRoomId(int chatRoomId) {
+		this.chatRoomId = chatRoomId;
+	}
 	public int getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getInviteUser() {
-		return inviteUser;
+	public String getConnectTime() {
+		return connectTime;
 	}
-	public void setInviteUser(String inviteUser) {
-		this.inviteUser = inviteUser;
+	public void setConnectTime(String connectTime) {
+		this.connectTime = connectTime;
 	}
 	public String getUserName() {
 		return userName;
@@ -38,65 +63,37 @@ public class ChatRoomVO {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	
-	public String getRoomPassword() {
-		return roomPassword;
+	public String getInviteUser() {
+		return inviteUser;
 	}
-	public void setRoomPassword(String roomPassword) {
-		this.roomPassword = roomPassword;
+	public void setInviteUser(String inviteUser) {
+		this.inviteUser = inviteUser;
 	}
-	public int getJoinedUserId() {
-		return joinedUserId;
+	public String getInviteUserId() {
+		return inviteUserId;
 	}
-	public void setJoinedUserId(int joinedUserId) {
-		this.joinedUserId = joinedUserId;
+	public void setInviteUserId(String inviteUserId) {
+		this.inviteUserId = inviteUserId;
 	}
-	public String getConnectTime() {
-		return connectTime;
+	public String getStatus() {
+		return status;
 	}
-	public void setConnectTime(String connectTime) {
-		this.connectTime = connectTime;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public String getRadioSelect() {
-		return radioSelect;
+	public int getJoinNumber() {
+		return joinNumber;
 	}
-	public void setRadioSelect(String radioSelect) {
-		this.radioSelect = radioSelect;
-	}
-	public int getChatRoomId() {
-		return chatRoomId;
-	}
-	public void setChatRoomId(int chatRoomId) {
-		this.chatRoomId = chatRoomId;
-	}
-	
-	
-	public String getProjectId() {
-		return projectId;
-	}
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
-	}
-	public String getProjectName() {
-		return projectName;
-	}
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-	
-	public String getChatRoomName() {
-		return chatRoomName;
-	}
-	public void setChatRoomName(String chatRoomName) {
-		this.chatRoomName = chatRoomName;
+	public void setJoinNumber(int joinNumber) {
+		this.joinNumber = joinNumber;
 	}
 	@Override
 	public String toString() {
-		return "ChatRoomVO [projectId=" + projectId + ", joinedUserId=" + joinedUserId + ", projectName=" + projectName
-				+ ", chatRoomName=" + chatRoomName + ", chatRoomId=" + chatRoomId + ", roomPassword=" + roomPassword
-				+ ", radioSelect=" + radioSelect + ", connectTime=" + connectTime + ", userName=" + userName
-				+ ", userEmail=" + userEmail + ", inviteUser=" + inviteUser + "]";
+		return "ChatRoomVO [joinedUserId=" + joinedUserId + ", chatRoomName=" + chatRoomName + ", chatRoomId="
+				+ chatRoomId + ", userId=" + userId + ", connectTime=" + connectTime + ", userName=" + userName
+				+ ", userEmail=" + userEmail + ", inviteUser=" + inviteUser + ", inviteUserId=" + inviteUserId
+				+ ", status=" + status + ", joinNumber=" + joinNumber + ", roomNameChange=" + roomNameChange + "]";
 	}
-
 	
+
 }

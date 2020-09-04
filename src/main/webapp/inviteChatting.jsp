@@ -1,13 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link href="css/makeChatRoom2.css" rel="stylesheet">
         <script src="vendor/jquery/jquery.min.js"></script>
-        <!--<script type="text/javascript" src="script/makeChatRoom.js"></script>
-        -->
+       <script type="text/javascript" src="script/inviteChatting.js"></script>
+     
     </head>
     <body>
         <div class="wrap">
@@ -17,10 +19,7 @@
           <div class="input-form">
           
             <ul>
-                <li>
-                    <label>박원배 (deux38.naver@com)</label>
-                    <input type="checkbox">
-                </li>  
+               
                
                 
             </ul>
@@ -29,7 +28,7 @@
           <div class="footer">
             <button type="button" id="cancel" >취소</button>
             <button type="button" id="confirm" >초대</button>
-          
+            
           
           </div>
           

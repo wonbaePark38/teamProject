@@ -257,14 +257,40 @@ a {
 }
 
 #chat-row{
+	display: flex;
+    align-items: center;
 	width: 100%;
     height: 60px;
     text-align: left;
     padding-left: 20px;
-    border: none;
-    background-color: aliceblue;
+    border:none;
+    border-bottom: 1px solid #e8e8e8;
+    background-color: white;
+}
+.row-label{
+	
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 190px;
+    font-size: 13px;
+    margin-left: -10px;
 }
 
+.chat-user-number{
+	vertical-align: bottom;
+    display: inline-block;
+    margin-left: 4px;
+    padding: 0 6px 0 19px;
+    height: 16px;
+    line-height: 16px;
+    text-align: left;
+    font-size: 13px;
+    color: #fefefe;
+    font-weight: 700;
+    border-radius: 8px;
+    background: #a9adb1 url(../images/icon_s_usernum.png?4) no-repeat 6px 3px;
+}
 .invite-checkbox{
 	width:20px;
 	height:20px;

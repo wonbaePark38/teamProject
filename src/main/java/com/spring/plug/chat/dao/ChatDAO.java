@@ -2,7 +2,9 @@ package com.spring.plug.chat.dao;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,47 +20,69 @@ public class ChatDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public List<ChatRoomVO> getChatList(int userId){ 
-		System.out.println("-->mybatis로 getChatList 기능처리");
 		return sqlSessionTemplate.selectList("ChatDAO.getChatList", userId);
 	}
 	
 	public void insertMessage(MessageVO msgVO) {
-		System.out.println("-->mybatis로 insesrt메시지 기능처리");
 		sqlSessionTemplate.insert("ChatDAO.insertMessage", msgVO);
 	}
 	
 	public List<MessageVO> loadChatHistory(MessageVO msgVO){
-		System.out.println("-->mybatis로 loadChatHistory 기능 처리");
 		return sqlSessionTemplate.selectList("ChatDAO.loadChatHistory", msgVO);
 	}
 	
 	public List<UserVO> getFriendList(int myId){
-		System.out.println("-->mybatis로 getJoinProjectList 기능처리");
 		return sqlSessionTemplate.selectList("ChatDAO.getFriendList", myId);
 	}
 	
 	public void createRoom(ChatRoomVO roomVO) {
-		System.out.println("-->mybatis로 createRoom 기능 처리");
 		sqlSessionTemplate.insert("ChatDAO.createChatRoom", roomVO);
 	}
 	
-	public ChatRoomVO getChatRoomInfo(ChatRoomVO roomVO) {
-		System.out.println("-->mybatis로 getChatRoomInfo 기능 처리");
-		return sqlSessionTemplate.selectOne("ChatDAO.getChatRoomInfo", roomVO);
+	public void createRoomStatus(ChatRoomVO roomVO) {
+		sqlSessionTemplate.insert("ChatDAO.createRoomStatus", roomVO);
+	}
+	
+	public void insertMember(Map<String, Object> infoData) {
+		sqlSessionTemplate.insert("ChatDAO.insertMember", infoData);
+	}
+	public ChatRoomVO getChatRoomInfo(String chatRoomId) {
+		return sqlSessionTemplate.selectOne("ChatDAO.getChatRoomInfo", chatRoomId);
 	}
 	
 	public void updateConnectTime(ChatRoomVO roomVO) {
-		System.out.println("-->mybatis로 updateConnectTime 기능 처리");
 		sqlSessionTemplate.update("ChatDAO.updateConnectTime", roomVO);
 	}
 	
 	public List<ChatRoomVO> getJoinedMember(ChatRoomVO roomVO) {
-		System.out.println("-->mybatis로 getJoinedMember기능처리");
 		return sqlSessionTemplate.selectList("ChatDAO.getJoinedMember", roomVO);
 	}
 	
 	public void updateDisconnectTime(MessageVO msgVO) {
-		System.out.println("-->mybatis로updateDisconnectTime기능처리");
 		sqlSessionTemplate.update("ChatDAO.updateDisconnectTime", msgVO);
+	}
+	
+	public void addUserChatRoom(ChatRoomVO roomVO) {
+		sqlSessionTemplate.update("ChatDAO.addUserChatRoom",roomVO);
+	}
+	
+	public void addUserChatRoomStatus(Map<String, Object> infoData) {
+		sqlSessionTemplate.update("ChatDAO.addUserChatRoomStatus",infoData);
+	}
+	
+	public void updateChatRoomStatus(MessageVO vo) {
+		sqlSessionTemplate.update("ChatDAO.updateChatRoomStatus",vo);
+	}
+	
+	public void updateChatRoomName(ChatRoomVO roomVO) {
+		sqlSessionTemplate.update("ChatDAO.updateChatRoomName",roomVO);
+	}
+	
+	public void updateChatRoom(ChatRoomVO roomVO) {
+		sqlSessionTemplate.update("ChatDAO.updateChatRoom",roomVO);
+	}
+	
+	public void deleteChatUser(ChatRoomVO roomVO) {
+		sqlSessionTemplate.delete("ChatDAO.deleteChatUser", roomVO);
 	}
 }

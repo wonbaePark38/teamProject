@@ -1,61 +1,46 @@
 $(document).ready(function(){
-	//같은 프로젝트 가입된 사람 불러오기
-	$.ajax({
-		url:'getFriendList.do',
-		method:'POST',
-	}).done(function(data){
-		console.log(data);
-		$.each(data,function(index,element){
-			settingFriendList(element);//채팅방 리스트 클릭
-		});
-		
-	}).fail(function(err){
-		alert('통신오류');
-	});
 	
-	  // 라디오버튼 클릭시 이벤트 발생
-   $("input:radio[name=radioSelect]").click(function(){
-    	
-        if($("input[name=radioSelect]:checked").val() == "y"){
-        	console.log('예')
-            $("#password-input").attr("disabled",false);
-            $("#password-input-re").attr("disabled",false);
-            // radio 버튼의 value 값이 1이라면 활성화
- 
-        }else if($("input[name=radioSelect]:checked").val() == "n"){
-        	console.log('아니오');
-              $("#password-input").attr("disabled",true);
-              $("#password-input-re").attr("disabled",true);
-              $('#password-input').val("");
-              $("#password-input-re").val("");
-              
-            // radio 버튼의 value 값이 0이라면 비활성화
-        }
-    });
+	
+		//같은 프로젝트 가입된 사람 불러오기
+			$.ajax({
+				url:'getFriendList.do',
+				method:'POST',
+			}).done(function(data){
+				console.log(data);
+				$.each(data,function(index,element){
+					settingFriendList(element);//초대 가능한 목록 뿌려줌
+				});
+				
+			}).fail(function(err){
+				alert('통신오류');
+			});
+			
     
    //만들기 버튼 클릭
     $('#confirm').on('click',function(){
-    	var invitedUserId = [];
-    	var invitedUserName = [];
+    	var invitedUserInfo = [];
     	//for문 돌면서 체크값 배열에 저장
     	$("input[name='user']:checked").each(function(i){
-    		invitedUserId.push($(this).val());
-    		var labelValue = $(this).prev().text();
-    		invitedUserName.push(labelValue);
+    		
+    		joinMemberData = {};
+    		joinMemberData.joinedUserId = $(this).val();
+    		joinMemberData.userName = $(this).prev().text();
+    		invitedUserInfo.push(joinMemberData);
     	});
+    	
+    	
     	var sendData={
-    		"invitedId" : invitedUserId,
-    		"invitedName" : invitedUserName
+    		"info" : JSON.stringify(invitedUserInfo)
     	};
         	$.ajax({
         		url:'createRoom.do',
         		method:'POST',
         		data : sendData,
+        		
         	}).done(function(data){
-        		alert('채팅방 만들기 성공');
-        		window.open("about:blank","_self").close();
+        		openChatPopup(data); //채팅 팝업 띄우기
         	}).fail(function(err){
-        		alert('통신오류');
+        		alert('통신""오류');
         	});
     	
     
@@ -72,7 +57,7 @@ $(document).ready(function(){
 function settingFriendList(element){
 	$('.input-form ul').append(
 			"<li>" +
-				"<label>" + element.name + " ( " +element.email + " )" +
+				"<label>" + element.name +
 				"</label>" +
 				"<input type='checkbox' name='user' value="+element.seq+">" +
 			"</li>"
@@ -80,5 +65,19 @@ function settingFriendList(element){
 			);
 }
 
+
+function openChatPopup(chatRoomId){
+	var popupWidth = 500;
+	var popupHeight = 700;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	
+	
+	var url = "chatting.do?param=" + chatRoomId;
+	window.open(url,"_blank", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+	
+	window.open("about:blank","_self").close();
+
+}
 
 

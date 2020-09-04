@@ -1,8 +1,9 @@
    	  *{ margin: 0; padding: 0; }
  /*#5f5ab9*/
- .chat_wrap .chat {
-	margin-top: 50px;
+.chat {
+	margin-top: 70px;
 }
+
 .header label{
 	display: flex;
     text-align: center;
@@ -14,6 +15,16 @@
 .header a{
 	margin-right: 20px;
 	cursor: pointer;
+}
+
+#exit-bt{
+margin-left: 30px; 
+	ertical-align: middle;
+	text-decoration: none;
+}
+#change-chatroom-name{
+	margin-left: 150px;
+	vertical-align: middle;
 }
 .more-bt{
 	border: none;
@@ -61,11 +72,11 @@
 
 .hidden-header{
 	border-bottom: 1px solid #5f5ab9;
-	background-color: lightgray;
+	background-color: #f2f2f2;
 	width: 100%;
 	height: 53px;
 	display: flex;
-	
+	justify-content: space-around;
 	align-items: center;
 }
 .hidden-header label{
@@ -135,5 +146,16 @@ photo-area-container {
 	line-height: 40px;
 	opacity: 0;
 	cursor: pointer;
+}
+
+.hidden-footer{
+	background-color: #f2f2f2;
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    align-items: center;
 }
 
