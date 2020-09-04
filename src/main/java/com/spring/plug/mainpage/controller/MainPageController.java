@@ -105,8 +105,8 @@ public class MainPageController {
    @ResponseBody
    public String article3Insert(Article1VO vo) throws IOException {
 
-	   System.out.println("pid : " + vo.getProject_id());
-	   System.out.println("worker : " + vo.getWriteForm3_workersName());
+	  System.out.println("pid : " + vo.getProject_id());
+	  System.out.println("worker : " + vo.getWriteForm3_workersName());
 	   
       MultipartFile uploadFile = vo.getWriteForm_file();
 
@@ -118,10 +118,6 @@ public class MainPageController {
       ArticleWorkerVO workerVO = new ArticleWorkerVO();
       workerVO.setProject_id(vo.getProject_id());
       workerVO.setArticle_id(vo.getArticle_id());
-      
-      
-      
-      
       
       service.insertArticle(vo);
       return "mainpage.do";
