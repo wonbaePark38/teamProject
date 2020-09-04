@@ -33,7 +33,7 @@
 	</resultMap>
 	
 	<select id="getChatList" resultMap="chatList" parameterType="int">
-		SELECT * FROM CHATLOG WHERE MEMBER_ID = #{userId}
+		SELECT * FROM CHATROOMSTATUS WHERE MEMBER_ID = #{userId}
 	</select>
 	
 	<insert id="insertMessage" parameterType="msgVO">
@@ -76,7 +76,7 @@
 	</select>
 	
 	<update id="updateConnectTime" parameterType="roomVO">
-		MERGE INTO CHATLOG A USING DUAL
+		MERGE INTO CHATROOMSTATUS A USING DUAL
 			ON (A.MEMBER_ID = #{joinedUserId} AND A.CHATROOMID = #{chatRoomId})
 			WHEN MATCHED THEN
 				UPDATE SET A.CONNECTTIME = #{connectTime}
@@ -87,11 +87,11 @@
 	
 	<select id="getJoinedMember" resultMap="getJoinedList" parameterType="roomVO">
 		SELECT MEMBER_NAME,MEMBER_EMAIL FROM MEMBERINFO INNER JOIN (
-			SELECT MEMBER_ID FROM CHATLOG WHERE CHATROOMID = #{chatRoomId})
+			SELECT MEMBER_ID FROM CHATROOMSTATUS WHERE CHATROOMID = #{chatRoomId})
 				USING(MEMBER_ID)
 	</select>
 	
 	<update id="updateDisconnectTime" parameterType="msgVO">
-		UPDATE CHATLOG SET DISCONNECTTIME= #{message_sendTime} WHERE CHATROOMID = #{chatroom_id} AND MEMBER_ID = #{senderId}  
+		UPDATE CHATROOMSTATUS SET DISCONNECTTIME= #{message_sendTime} WHERE CHATROOMID = #{chatroom_id} AND MEMBER_ID = #{senderId}  
 	</update>
 </mapper>
