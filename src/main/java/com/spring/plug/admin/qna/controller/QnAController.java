@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.admin.qna.service.QnAService;
 import com.spring.plug.admin.qna.vo.QnAVO;
+import com.spring.plug.common.util.MailUtils;
 
 @Controller
 public class QnAController {
 
 	@Autowired
 	private QnAService qnaService;
+	@Autowired
+	private JavaMailSender mailSender;	
 	
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
@@ -48,12 +52,21 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/adminPage/production/qnaReply.do")
-	public ModelAndView replyBoard(QnAVO vo, ModelAndView mav) {
-		System.out.println(vo.getEmail());
-		System.out.println(vo.getContent());
-		System.out.println(vo.getTitle());
+	public ModelAndView replyBoard(QnAVO vo, ModelAndView mav) throws Exception {
 		
-		mav.setViewName("admin-CS-board.jsp");
+		MailUtils sendMail = new MailUtils(mailSender);
+		
+		sendMail.setSubject("[답변 완료] " + vo.getTitle());
+		sendMail.setText(new StringBuffer()
+				.append("<p> 문의 내용 : <br>" + vo.getContent() +  " </p>")
+				.append("<hr>")
+				.append("<p> 답변 내용 : <br>" + vo.getReplycontent() +  " </p>")
+				.toString());
+		sendMail.setFrom("admin@wkddnjswhd.com", "원종띠");
+		sendMail.setTo(vo.getEmail());
+		sendMail.send();
+		qnaService.updateBoard(vo);
+		mav.setViewName("qnaBoardList.do");
 		return mav;
 	}
 }

@@ -33,5 +33,11 @@ public class QnAServiceImpl implements QnAService {
 	public List<QnAVO> getBoardList(QnAVO vo) {
 		return qnaDAO.getBoardList(vo);
 	}
+
+	@Override
+	public void updateBoard(QnAVO vo) {
+		qnaDAO.updateBoard(vo);
+		
+	}
 	
 }

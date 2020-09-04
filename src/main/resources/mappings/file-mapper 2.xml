@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FileDAO">
+	<resultMap id="fileList" type="file" >
+		<result property="projectId" column="PROJECT_ID" />	
+		<result property="projectName" column="PROJECT_NAME"/>
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileSize" column="FILE_SIZE"/>
+		<result property="writer" column="WRITER"/>
+		<result property="writeDate" column="REGDATE"/>
+		
+		
+		
+	</resultMap>
+	
+<select id="getProjectList" resultMap="fileList" parameterType="int"> 
+SELECT PROJECT_ID, PROJECT_NAME,LOWER(FILE_NAME) FILE_NAME, FILE_SIZE,LOWER(WRITER) WRITER,REGDATE
+ FROM MAINPAGE_ARTICLE INNER JOIN PROJECT_LOOKUP USING(PROJECT_ID) 
+ WHERE MEMBER_ID=#{loginUser} 
+ AND FILE_NAME IS NOT NULL 
+ OR IMG_NAME IS NOT NULL
+ ORDER BY FILE_NAME ASC
+</select> 
+	
+	
+		
+ <!-- <update id="updateCategory" parameterType="category_m">
+      UPDATE CATEGORY 
+      <set>
+           <if test="CATEGORY_NAME != null">CATEGORY_NAME=#{CATEGORY_NAME},</if>
+           <if test="CATEGORY_USE != null">CATEGORY_USE=#{CATEGORY_USE},</if>
+       </set>
+      WHERE CATEGORY_NO=#{CATEGORY_NO}
+   </update>
+ -->
+</mapper>

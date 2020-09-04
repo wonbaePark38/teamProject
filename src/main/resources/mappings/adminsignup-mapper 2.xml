@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminSignupDAO">
+
+	<resultMap type="adminSignup" id="signResult">
+		<id property="seq" column="ADMIN_ID" />
+		<result property="username" column="ADMIN_USERNAME" />
+		<result property="password" column="ADMIN_PASSWORD" />
+		<result property="salt" column="SALT" />
+		<result property="email" column="ADMIN_EMAIL" />
+	</resultMap>
+
+	<insert id="insertAdmin" parameterType="adminSignup">
+		INSERT INTO ADMININFO
+		VALUES(admin_seq.nextval, #{username}, #{password}, #{salt}, #{email})
+	</insert>
+
+	<select id="getSaltById" resultMap="signResult">
+		SELECT * FROM ADMININFO WHERE ADMIN_USERNAME=#{username}
+	</select>
+	
+	<update id="defaultPassword" parameterType="adminSignup">
+		UPDATE ADMININFO SET ADMIN_PASSWORD = #{password}, SALT = #{salt} WHERE ADMIN_EMAIL = #{email}
+	</update>
+</mapper>

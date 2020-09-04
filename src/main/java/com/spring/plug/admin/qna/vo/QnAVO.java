@@ -12,8 +12,36 @@ public class QnAVO {
 	private String searchCondition;
 	private String searchKeyword;
 	private String email;
+	private String reply;
+	private String replycontent;
+	private Date replytime;
 	
 	
+	
+
+	public Date getReplytime() {
+		return replytime;
+	}
+
+	public void setReplytime(Date replytime) {
+		this.replytime = replytime;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+
+	public String getReplycontent() {
+		return replycontent;
+	}
+
+	public void setReplycontent(String replycontent) {
+		this.replycontent = replycontent;
+	}
 
 	public String getEmail() {
 		return email;
@@ -82,8 +110,11 @@ public class QnAVO {
 	@Override
 	public String toString() {
 		return "QnAVO [seq=" + seq + ", title=" + title + ", writer=" + writer + ", content=" + content + ", time="
-				+ time + "]";
+				+ time + ", searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + ", email="
+				+ email + ", reply=" + reply + ", replycontent=" + replycontent + "]";
 	}
+
+	
 	
 	
 }
