@@ -14,7 +14,14 @@ public class ChatRoomVO {
 	private String status;
 	private int joinNumber;
 	private String roomNameChange;
+	private int unReadCount;
 	
+	public int getUnReadCount() {
+		return unReadCount;
+	}
+	public void setUnReadCount(int unReadCount) {
+		this.unReadCount = unReadCount;
+	}
 	public String getRoomNameChange() {
 		return roomNameChange;
 	}
@@ -92,7 +99,8 @@ public class ChatRoomVO {
 		return "ChatRoomVO [joinedUserId=" + joinedUserId + ", chatRoomName=" + chatRoomName + ", chatRoomId="
 				+ chatRoomId + ", userId=" + userId + ", connectTime=" + connectTime + ", userName=" + userName
 				+ ", userEmail=" + userEmail + ", inviteUser=" + inviteUser + ", inviteUserId=" + inviteUserId
-				+ ", status=" + status + ", joinNumber=" + joinNumber + ", roomNameChange=" + roomNameChange + "]";
+				+ ", status=" + status + ", joinNumber=" + joinNumber + ", roomNameChange=" + roomNameChange
+				+ ", unReadCount=" + unReadCount + "]";
 	}
 	
 

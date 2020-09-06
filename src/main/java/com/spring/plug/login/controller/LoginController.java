@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.common.util.SHA256Util;
+import com.spring.plug.common.util.TempKey;
 import com.spring.plug.login.service.UserServiceImpl;
 import com.spring.plug.login.vo.UserVO;
 //회원가입을 직접 한 사람들이 로그인 시도 했을때의 컨트롤러
@@ -55,10 +56,10 @@ public class LoginController{
 		}
 		
 		String inputPassword = vo.getPassword();
-		if(!user.getPasswordAuthStatus().equals("0")) { //임시비밀번호가 아닌 사람
+		if(!user.getPasswordAuthStatus().equals("0") && user.getSocialCompare().equals("N")) { //임시비밀번호가 아닌 사람
 			inputPassword = SHA256Util.getEncrypt(vo.getPassword(), user.getSalt()); //사용자가 입력한 비밀번호 암호화
 		}
-		System.out.println(inputPassword);
+		
 		//db에 이메일은 있음
 		
 		if(inputPassword.equals(user.getPassword()) && user.getAuthStatus().equals("0")) { //정보는 맞지만 이메일 인증 하지않은 회원
@@ -91,7 +92,6 @@ public class LoginController{
 			//UserSettingVO settings = settingService.getSettings(id); //개인 환경 설정 셋팅값 가저오기
 			//session.setAttribute("settings", settings); //세션에 저장
 			if(vo.isUseCookie()) {//자동로그인 체크한 경우
-				System.out.println("맞냐?");
 				Cookie loginCookie = new Cookie("loginCookie",session.getId());
 				loginCookie.setPath("/");
 				int amount = 60*60*24*7;
@@ -100,8 +100,13 @@ public class LoginController{
 				Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount)); 
 				userService.keepLogin(vo.getEmail(), session.getId(), sessionLimit);
 			}
+			
+			if(!user.getPasswordAuthStatus().equals("0")) {//로그인 성공한 사람중에 임시 비밀번호가 아닌사람은 이쪽
+				mav.setViewName("projectdir.do");
+			}else { //임시 비밀번호로 로그인 성공한 사람은 이쪽
+				mav.setViewName("settingPassword.do");
+			}
 			mav.addObject("login", user);
-			mav.setViewName("projectdir.do");
 			return mav;
 		}
 	}//end login.do
@@ -109,35 +114,29 @@ public class LoginController{
 	/*
 	 * db에 이메일이 있는지 체크하는 메소드
 	 */
-	@RequestMapping("searchEmail.do")
+	@RequestMapping(value="/searchEmail.do", method=RequestMethod.POST)
 	@ResponseBody
 	public UserVO searchEmail(UserVO vo,Model model,HttpServletRequest request) {
-
-		String checkEmail = request.getParameter("email");
-		vo.setEmail(checkEmail);
+		//String checkEmail = request.getParameter("email");
+		String checkEmail = vo.getEmail();
 		UserVO check = userService.checkEmail(vo);
 
 		if(check != null && check.getSocialCompare().equals("N")) {
-			/*이메일 전송 로직*/
-			//String authkey = new TempKey().getKey(50, false);//auth키 생성
-			//vo.setPasswordAuthKey(authkey);//vo에 셋팅
-
-			//userService.updatePasswordAuthKey(vo); //db에 auth 추가
-			try {
+		
+			try {//e메일 보내고 db에 status 저장하는 서비스
 				userService.sendPasswordCheckEmail(vo);
 			} catch (Exception e) {
 				e.printStackTrace();
-			} //e메일 보내고 db에 status 저장하는 서비스
+			} 
 			vo.setEmailCheck("true");
 
 		}else{
-			System.out.println("일치하는 이메일이 없음");
 			vo.setEmailCheck("false");
 		}
 		return vo;
 	}
 
-	@RequestMapping("/passlogin")
+	@RequestMapping("/passlogin.do")
 	public ModelAndView loginView(UserVO vo,ModelAndView mav,@RequestParam("email") String email, @RequestParam("password") String password) {
 		System.out.println("임시비밀번호" + password);
 		vo.setEmail(email);

@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 	
-	$('#searchArea').css('display','block');
+	$('#searchArea').css('display','none');
 	
 	$(document).on('change','.profile-photo-upload',function(){
 		var splitFile = $('.profile-photo-upload').val().split('\\');
@@ -20,7 +20,43 @@ $(document).ready(function(){
 		$('#uploadBt').css('display','block');
 	});
 	
+	$('.edit').click(function(){
+		target = $(this).prev();
+			
+		$(this).prev().css('border-bottom','1px solid black');
+		$(this).prev().removeAttr("readonly");
+		$('#confirm').css('display','block');
+	});
 	
-
+	$('#info-cancle').click(function(){
+		$('#confirm').css('display','none');
+	})
+	
+	$('#info-confirm').click(function(){
+		var sendData = {
+				phoneNumber : $('#user-phone-number').val(),
+				companyName : $('#company-name').val(),
+				department : $('#department').val(),
+				myPosition : $('#position').val(),
+				companyCallNumber : $('#company-call-number').val()
+		}
+		
+		$.ajax({
+			type:'POST',
+			data:sendData,
+			url : 'updateAccountInfo.do'
+		}).done(function(data){
+			$('#hidden-status').css('display','block');
+			setTimeout(function() {
+				$('#hidden-status').css('display','none');
+				}, 3000);
+			
+		}).fail(function(err){
+			alert('통신에러');
+		});
+		
+	})
+	
+	
 });
 

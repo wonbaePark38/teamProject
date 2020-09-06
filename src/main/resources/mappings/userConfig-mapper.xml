@@ -31,6 +31,11 @@
 		WHERE MEMBER_ID = #{seq}
 	</update>
 	
+	<update id="updateAccountInfo" parameterType="configInfo">
+		UPDATE USERSETTING SET PHONENUMBER = #{phoneNumber}, COMPANYNAME = #{companyName}, DEPARTMENT = #{department}, 
+		MYPOSITION = #{myPosition}, COMPANYCALLNUMBER =#{companyCallNumber}
+		WHERE MEMBER_ID = #{id}
+	</update>
 <!-- 	<select id="getSettings" resultType="user" parameterType="int">
 		SELECT * FROM USERSETTING WHERE MEMBER_ID = #{id}
 	</select> -->

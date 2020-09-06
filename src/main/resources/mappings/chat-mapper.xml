@@ -7,6 +7,7 @@
 	<resultMap id="chatList" type="roomVO">
 		<result property="chatRoomName" column="CHATROOMNAME" />
 		<result property="chatRoomId" column="CHATROOMID"/>
+		<result property="unReadCount" column="UNREADCOUNT"/>
 	</resultMap>
 	
 	<resultMap id="chatHistory" type="msgVO">
@@ -40,8 +41,21 @@
 		<result property="roomNameChange" column="ROOMNAMECHANGE"/>
 	</resultMap>
 	
+	<resultMap id="unReadUser" type="msgVO">
+		<result property="unReadCount" column="UNREADCOUNT"/>
+		<result property="userId" column="MEMBER_ID"/>
+		<result property="chatroom_id" column="CHATROOMID"/>
+		<result property="userName" column="MEMBER_NAME"/>
+	</resultMap>
+	
+	<select id="getUnreadUser" resultMap="unReadUser" parameterType="msgVO">
+		SELECT UNREADCOUNT, MEMBER_ID, CHATROOMID, MEMBER_NAME
+		FROM CHATROOMSTATUS
+		WHERE CHATROOMID = #{chatroom_id} AND CONNECTTIME IS NULL
+	</select>
+	
 	<select id="getChatList" resultMap="chatList" parameterType="int">
-		SELECT A.JOINNUMBER, A.CHATROOMNAME , A.CHATROOMID FROM CHATROOM A INNER JOIN CHATROOMSTATUS B ON A.CHATROOMID = B.CHATROOMID
+		SELECT A.JOINNUMBER, A.CHATROOMNAME , A.CHATROOMID, B.UNREADCOUNT FROM CHATROOM A INNER JOIN CHATROOMSTATUS B ON A.CHATROOMID = B.CHATROOMID
 		WHERE B.MEMBER_ID = #{userId} AND B.CHATSTATUS = 'y'
 	</select>
 	
@@ -99,7 +113,7 @@
 	</select>
 	
 	 <update id="updateConnectTime" parameterType="roomVO">
-		UPDATE CHATROOMSTATUS SET CONNECTTIME = #{connectTime} WHERE MEMBER_ID = #{joinedUserId} AND CHATROOMID = #{chatRoomId}
+		UPDATE CHATROOMSTATUS SET UNREADCOUNT = 0, CONNECTTIME = #{connectTime} WHERE MEMBER_ID = #{joinedUserId} AND CHATROOMID = #{chatRoomId}
 	</update>
 	
 	<select id="getJoinedMember" resultMap="getJoinedList" parameterType="roomVO">
@@ -109,7 +123,7 @@
 	</select>
 	
 	<update id="updateDisconnectTime" parameterType="msgVO">
-		UPDATE CHATROOMSTATUS SET DISCONNECTTIME= #{message_sendTime} WHERE CHATROOMID = #{chatroom_id} AND MEMBER_ID = #{senderId}  
+		UPDATE CHATROOMSTATUS SET CONNECTTIME = NULL, DISCONNECTTIME= #{message_sendTime} WHERE CHATROOMID = #{chatroom_id} AND MEMBER_ID = #{senderId}  
 	</update>
 	
 	<update id="addUserChatRoom" parameterType="roomVO">
@@ -121,6 +135,9 @@
 		UPDATE CHATROOMSTATUS SET JOINTIME= #{message_sendTime}, CHATSTATUS='y' WHERE CHATSTATUS = 'n' AND CHATROOMID = #{chatroom_id}
 	</update>
 	
+	<update id="updateUnreadCount" parameterType="msgVO">
+		UPDATE CHATROOMSTATUS SET UNREADCOUNT = UNREADCOUNT+1 WHERE CONNECTTIME IS NULL AND CHATROOMID= #{chatroom_id}
+	</update>
 	<update id="updateChatRoomName" parameterType="roomVO">
 		UPDATE CHATROOM SET CHATROOMNAME= #{chatRoomName}, ROOMNAMECHANGE = 'y' WHERE CHATROOMID = #{chatRoomId}
 	</update>

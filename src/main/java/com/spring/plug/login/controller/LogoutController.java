@@ -22,12 +22,9 @@ public class LogoutController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
+	@RequestMapping(value="/logout.do", method=RequestMethod.POST)
 	public ModelAndView logout(UserVO vo,ModelAndView mav, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		
 		vo = (UserVO)session.getAttribute("user");
-		session.removeAttribute("user");
-		session.invalidate();
 		
 		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 		if(loginCookie !=null) {
@@ -37,6 +34,8 @@ public class LogoutController {
 			Date sessionLimit = new Date(System.currentTimeMillis());
 			userService.keepLogin(vo.getEmail(), session.getId(), sessionLimit); //db에 반영
 		}
+		session.removeAttribute("user");
+		session.invalidate();
 		System.out.println("로그아웃");
 		mav.setViewName("newlogin.jsp");
 		return mav;

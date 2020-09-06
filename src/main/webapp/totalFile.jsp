@@ -17,10 +17,7 @@
     <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
     <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
  
-   <script type='text/javascript' src='./script/script.js'></script>
     <script type='text/javascript' src='./script/totalFile.js'></script>
-       <script type="text/javascript" src="script/accountInfo.js"></script>
-    <script type="text/javascript" src="script/configScript.js"></script>
     <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
     
 </head>
@@ -43,7 +40,7 @@
                     <span class='checkbox-number'></span>    
                 </div>
                 <div class='rightBtCollection'>
-                    <button id='moveBt' type='button' onclick='test()' alt='이동'>
+                    <button id='moveBt' type='button' onclick='' alt='이동'>
                         <i class='fas fa-arrows-alt' style='color:#615cba; font-size: 25px;'></i> 이동
                     </button>
 
@@ -51,11 +48,11 @@
                         <i class='fas fa-download' style='color:#615cba; font-size: 25px;'></i> 다운로드
 
                     </button>
-                    <button id='deleteFolderBt' type='button' onclick='test()' alt='폴더삭제' >
+                    <button id='deleteFolderBt' type='button' onclick='' alt='폴더삭제' >
                         <i class='far fa-trash-alt'  style='color:#615cba; font-size: 25px;'></i> 폴더 삭제
 
                     </button>
-                    <button id='newFolderBt' type='button' onclick='test()' alt='새폴더' >
+                    <button id='newFolderBt' type='button' onclick='' alt='새폴더' >
                         <i class='fas fa-folder-plus'  style='color:#615cba; font-size: 25px;'></i> 새폴더
                     </button>
 

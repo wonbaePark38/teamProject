@@ -102,4 +102,14 @@ public class ChatServiceImpl implements ChatService{
 		chatDAO.deleteChatUser(roomVO);
 	}
 
+	@Override
+	public void updateUnreadCount(MessageVO vo) {
+		chatDAO.updateUnreadCount(vo);
+	}
+
+	@Override
+	public List<MessageVO> getUnreadUser(MessageVO vo) {
+		return chatDAO.getUnreadUser(vo);
+	}
+
 }

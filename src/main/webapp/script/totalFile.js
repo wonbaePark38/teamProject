@@ -707,6 +707,10 @@ $(document).ready(function(){
 		  }//end else
 
 	  });//end event
+	  
+	  $('#closeBt').click(function(){
+		  location.href='projectdir.do';
+	  })
 
 });
 fnSleep = function (delay){

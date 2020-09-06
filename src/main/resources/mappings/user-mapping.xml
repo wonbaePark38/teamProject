@@ -34,15 +34,8 @@
 		SELECT MEMBER_EMAIL, MEMBER_ISSOCIAL FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
-	<update id="updatePasswordAuthKey" parameterType="user">
-		UPDATE MEMBERINFO SET PASSWORDAUTHKEY = #{passwordAuthKey} WHERE MEMBER_EMAIL = #{email}
-	</update>
-	
 	<update id="sendPasswordCheckEmail" parameterType="user">
 		UPDATE MEMBERINFO SET PASSWORDAUTHSTATUS = #{passwordAuthStatus} WHERE MEMBER_EMAIL = #{email}
-	</update>
-	<update id="changePasswordBytempPassword" parameterType="user">
-		UPDATE MEMBERINFO SET MEMBER_PASSWORD = #{password} WHERE MEMBER_EMAIL = #{email}
 	</update>
 	
 	<update id="keepLogin">

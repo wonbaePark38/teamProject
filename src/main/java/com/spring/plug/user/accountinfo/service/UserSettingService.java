@@ -10,4 +10,6 @@ public interface UserSettingService {
 	void changePassword(UserVO vo);
 	void changeLockSetting(UserVO vo);
 	UserSettingVO getSettings(int id);
+	void updateAccountInfo(UserSettingVO vo);
+	
 }

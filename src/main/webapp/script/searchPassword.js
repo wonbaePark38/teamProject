@@ -5,7 +5,6 @@ $(document).ready(function(){
     	target.css('display', 'none');
     	
         var userInputEmail = $('#email-input').val();
-        console.log('인풋이메일'+userInputEmail);
         
         /*이메일 유효성 체크*/
     	if (!getMail.test($("#email-input").val())) {
@@ -19,18 +18,13 @@ $(document).ready(function(){
     	/*ajax 실행*/
     	$.ajax({
     	       url: 'searchEmail.do',
-    	       method:'GET',
-    	       dataType:'json',
+    	       method:'POST',
     	       data:{
     	           email:userInputEmail,
     	       },
     	       success : function(data){
-    	       	if(data.emailCheck === 'false'){
     	       		var target = $('.email-check-div');
     	       		target.css('display','block');
-    	       	}else{
-    	       		alert('이메일을 발송하였습니다');
-    	       	}
     	       },
     	       error : function(err){
     	       	alert("통신에러발생");

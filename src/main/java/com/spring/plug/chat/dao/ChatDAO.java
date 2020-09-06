@@ -85,4 +85,11 @@ public class ChatDAO {
 	public void deleteChatUser(ChatRoomVO roomVO) {
 		sqlSessionTemplate.delete("ChatDAO.deleteChatUser", roomVO);
 	}
+	public void updateUnreadCount(MessageVO vo) {
+		sqlSessionTemplate.update("ChatDAO.updateUnreadCount", vo);
+	}
+	public List<MessageVO> getUnreadUser(MessageVO vo){
+		return sqlSessionTemplate.selectList("ChatDAO.getUnreadUser", vo);
+	}
+	
 }

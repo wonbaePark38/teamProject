@@ -4,7 +4,13 @@ body {
 	background-color: #f2f2f2;
     margin-top: 0;
 }
-
+.info-container input{
+	background-color: #f2f2f2;
+	outline: none;
+	readonly:true;
+	padding-right: 20px;
+	border: 0;
+}
 a {
 	cursor: pointer;
 }
@@ -141,3 +147,37 @@ header {
 	height: 100%;
 	border-bottom: 1px solid #e7e8e9;
 }
+.edit-div{
+	width:80%;
+	height:100%;
+}
+
+#info-confirm{
+	width: 100px;
+    height: 30px;
+    border: none;
+    background-color: #6862c3;
+    color: white;
+    margin-left: 60px;
+}
+
+#info-cancle{
+	width: 100px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+#hidden-status{
+	width: 300px;
+    background-color: #6862c3;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-left: 40px;
+    display:none;
+}
+
+#confirm{
+	display:none;
+}
+

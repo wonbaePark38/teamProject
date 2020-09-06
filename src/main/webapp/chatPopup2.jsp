@@ -295,12 +295,15 @@ $(document).ready(function() {
 	}
 
 	function insertMessageInfo(message) { //메시지 db에 저장
+		var name = '${vo.name}';
 		
 		$.ajax({
 			type : "POST",
 			url : 'insertMessage.do',
 			data : message,
 			success : function(result) {
+				
+				opener.parent.chatAlert(result, message); //?????????????????
 				if(message.messageType == 'exit'){
 					self.close();
 				}
@@ -461,5 +464,7 @@ $(document).ready(function() {
 		}//end if
 		
 	}
+	
+	
 </script>
 </html>

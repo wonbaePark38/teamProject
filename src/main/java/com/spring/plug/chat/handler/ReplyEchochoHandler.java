@@ -30,16 +30,16 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 	@Override //소켓에 메시지 보냈을때
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		System.out.println("handleTextMessage" + session + " : " + message);
-		
-		String senderId = getId(session);
-		/*for(WebSocketSession sess : sessions) {
-			sess.sendMessage(new TextMessage(senderId + ": " +message.getPayload()));
-		}*/
-		
-		//protocol: cmd, 댓글 작성자, 게시글 작성자,bno (ex: reply, user2, user1, 234)
+		//System.out.println("받은 메시지" + session + " : " + message);
 		String msg = message.getPayload();
 		
+		for(WebSocketSession sess : sessions) {
+			sess.sendMessage(new TextMessage(message.getPayload()));
+		}
+		
+		//protocol: cmd, 댓글 작성자, 게시글 작성자,bno (ex: reply, user2, user1, 234)
+		/*String msg = message.getPayload();
+		System.out.println("받은 메시지 " + msg);
 		if(StringUtils.isNotEmpty(msg)) {
 			String[] strs = message.getPayload().split(",");
 			if(strs != null && strs.length == 4) {
@@ -55,7 +55,7 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 				} //end if"reply"
 			}//end if strs
 			
-		}//end if stringusils
+		}//end if stringusils*/
 		
 	}//end handletextmessage
 
@@ -67,7 +67,9 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 		if(loginUser == null) {
 			return session.getId();
 		}else {
-			return loginUser.getEmail();
+			int id = loginUser.getSeq();
+			String myId = Integer.toString(id); 
+			return myId;
 		}
 	}
 

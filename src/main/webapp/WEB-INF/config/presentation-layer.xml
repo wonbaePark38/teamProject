@@ -27,7 +27,12 @@
 			<mvc:exclude-mapping path="/login.do" />
 			<mvc:exclude-mapping path="/slogin.do" />
 			<mvc:exclude-mapping path="/logout.do" />
+			<mvc:exclude-mapping path="/signupPost.do"/>
+			<mvc:exclude-mapping path="/signConfirm.do"/>
 			<mvc:exclude-mapping path="/adminPage/production/**"/>
+			<mvc:exclude-mapping path="/searchEmail.do"/>
+			<mvc:exclude-mapping path="/passlogin.do"/>
+			
 			<ref bean="intercepter" />
 		</mvc:interceptor>
 

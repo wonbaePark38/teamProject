@@ -37,4 +37,8 @@ public class UserSettingDAO {
 		return sqlSessionTemplate.selectOne("UserSettingDAO.getSettings",id);
 	}
 	
+	public void updateAccountInfo(UserSettingVO vo) {
+		sqlSessionTemplate.update("UserSettingDAO.updateAccountInfo",vo);
+	}
+	
 }

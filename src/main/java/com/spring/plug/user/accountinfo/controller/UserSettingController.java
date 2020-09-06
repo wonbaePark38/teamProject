@@ -37,12 +37,17 @@ public class UserSettingController {
 		UserSettingVO infoVo = userSettingService.getConfigUserInfo(id);
 		//session.setAttribute("userInfo", infoVo);
 		
-		if(user.getSocialCompare().equals("y")) {
-			infoVo.setEmail(user.getEmail()+" (SOCIAL)");
+		if(user.getSocialCompare().equals("Google")) {
+			infoVo.setEmail(user.getEmail()+" (Google)");
+		}else if(user.getSocialCompare().equals("Kakao")){
+			infoVo.setEmail(user.getEmail()+" (Kakao)");
 		}
-		String uploadPath = "C:\\testFile\\"+strId +"\\" + infoVo.getProfileFileName();
 		
-		vo.setProfileFileName(uploadPath);
+		if(infoVo.getProfileFileName() != null) {
+			String uploadPath = "C:\\testFile\\"+strId +"\\" + infoVo.getProfileFileName();
+			vo.setProfileFileName(uploadPath);
+		}
+		
 		mav.setViewName("accountInfo.jsp");
 		mav.addObject("vo",infoVo);
 		mav.addObject("user", user);
@@ -199,7 +204,6 @@ public class UserSettingController {
 	@RequestMapping(value="getSettings.do",method=RequestMethod.POST)
 	public UserVO getSettings(UserSettingVO vo,HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
-		
 		return user;
 	}
 	
@@ -213,5 +217,15 @@ public class UserSettingController {
 		mav.setViewName("connectManage.jsp");
 		mav.addObject("vo",infoVo);
 		return mav;
+	}
+	
+	//개인정보 업데이트 컨트롤러
+	@ResponseBody
+	@RequestMapping(value="updateAccountInfo.do",method=RequestMethod.POST)
+	public void updateAccountInfo(UserSettingVO vo, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setId(user.getSeq());
+		System.out.println(vo.toString());
+		userSettingService.updateAccountInfo(vo);
 	}
 }

@@ -35,6 +35,11 @@ public class UserSettingServiceImpl implements UserSettingService{
 	public UserSettingVO getSettings(int id) {
 		return userSettingDAO.getSettings(id);
 	}
+
+	@Override
+	public void updateAccountInfo(UserSettingVO vo) {
+		userSettingDAO.updateAccountInfo(vo);
+	}
 	
 	
 }

@@ -42,7 +42,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String msg = message.getPayload();
-		System.out.println("서버메시지" + msg);
+		//System.out.println("서버메시지" + msg);
 		MessageVO messageVO = objectMapper.readValue(msg, MessageVO.class);
 		System.out.println(messageVO.getChatroom_id());
 		

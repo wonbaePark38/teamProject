@@ -38,11 +38,14 @@ $(document).ready(function(){
         		data : sendData,
         		
         	}).done(function(data){
+        		console.log(data);
+        		 //reloadChatList();
         		openChatPopup(data); //채팅 팝업 띄우기
+        		
         	}).fail(function(err){
         		alert('통신""오류');
         	});
-    	
+        
     
     });
     	
@@ -67,6 +70,7 @@ function settingFriendList(element){
 
 
 function openChatPopup(chatRoomId){
+	
 	var popupWidth = 500;
 	var popupHeight = 700;
 	var popupX = (window.screen.width / 2) - (popupWidth / 2);
@@ -75,7 +79,6 @@ function openChatPopup(chatRoomId){
 	
 	var url = "chatting.do?param=" + chatRoomId;
 	window.open(url,"_blank", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
-	
 	window.open("about:blank","_self").close();
 
 }

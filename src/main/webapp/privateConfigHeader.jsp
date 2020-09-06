@@ -7,14 +7,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<meta name="google-signin-client_id" content='198753219443-qhctu45a6g5mv2o4rp7f0evfr9gfni0t.apps.googleusercontent.com'>
 <title>개인환경 설정</title>
 
 <link href="css/privateConfig.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
- <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
+<script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
 <script src="script/headerScript.js"></script>
-
+<script src="script/script.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+ <script>
+        function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+        }
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <body>
 		<div class="headerContainer">
 			<div class="dir_set_bar" style="display: none;">
@@ -36,8 +46,13 @@
 				</div>
 				<div class="headerRight">
 					<button id="serviceUpgradeBt" onclick="test()">서비스 업그레이드</button>
-					<input type="button" id="headerChatBt" onclick="headerChatting()">
+					<div id="chatbt-div">
+						<input type="button" id="headerChatBt" onclick="headerChatting()">
+						<span></span>
+					</div>
 					<input type="button" id="headerIconAlram" onclick="headerAlarm()">
+						
+						
 					<input type="button" id="headerUserInfoBt" onclick="headerOption()">
 		
 
@@ -50,7 +65,7 @@
 				   </div>
 				   <div style="text-align: center;">
 					  <span>
-						 <strong>${vo.name} 님</strong>
+						 <strong>${user.name} 님</strong>
 					  </span>
 				   </div>
 				   <div style="text-align: center;">
@@ -71,18 +86,19 @@
 					  <img src="images/pf_ico5_off.png">
 					  <a>도움말</a>
 				   </div>
-				   <div style="margin-top: 10px;">
-				    
-				   <form action="logout.do" method="GET">
-				   	   <button type="submit" onclick='signOut()'>
-				   	   		<img src="images/pf_ico3_off.png">
-				   	   		로그아웃
-				   	   </button>
-				  </form>
-				   
-					  
-					 
-				   </div>
+
+						<form action="logout.do" method="POST">
+							<div style="margin-top: 10px;">
+								<button type="submit"
+									onclick="signOut('${user.socialCompare}');">
+									<img src="images/pf_ico3_off.png"> 로그아웃
+								</button>
+							</div>
+						</form>
+
+
+
+					</div>
 				</div>
 
 				<!-- //옵션 -->
@@ -259,17 +275,255 @@
 				<!-- //연락처 -->
 			 </div>
 			 <!-- //채팅 영역 -->
-
-
-
-
-
 				</div><!-- header right -->
 			</div><!-- headerwrap -->
 
 		</div><!-- headercontainer -->
-		
-
+		<div id="socketChatAlert" class="alert alert-primary">
+			
+		</div>
+	
 </body>
 
+<script>
+
+/**
+ * 헤더 아이콘 관련 자바스크립트파일
+ */
+
+var socket = null;
+$(document).ready(function(){
+	
+	//만들어진 채팅방 리스트 가저오는 이벤트
+	$.ajax({
+		url:'getChattingList.do',
+		method:'POST',
+	}).done(function(data){
+		if(data.length == 0){ //채팅방 개설 안된 사람
+			$('#headerChatBt').next().css('display','none');
+		}
+		var unreadCount = 0;
+		$.each(data,function(index,element){
+			settingChatList(element);//채팅방 리스트 클릭
+			roomUnreadCount = parseInt(element.unReadCount); 
+			unreadCount += roomUnreadCount;
+		});
+		if(unreadCount == 0){
+			$('#headerChatBt').next().css('display','none');
+		}
+		$('#headerChatBt').next().text(unreadCount);
+		
+	}).fail(function(err){
+		alert('통신오류');
+	});
+
+	// 리스트에서 채팅방 클릭했을때 채팅방 입장 이벤트
+	$(document).on('click','.chat-row',function(){
+		var totalUnreadCount = $('#headerChatBt').next().text();
+		var totalUnreadCount = parseInt(totalUnreadCount);
+		
+		var roomId = $(this).children('.room').val();
+		var count = $(this).children('.bdg').text();
+		count = parseInt(count);
+		totalUnreadCount -= count;
+		
+		$('#headerChatBt').next().text(totalUnreadCount);
+		
+		if(totalUnreadCount == 0){
+			$('#headerChatBt').next().css('display','none');
+		}
+		$(this).children('.bdg').text("0");
+		$(this).children('.bdg').css('display','none');
+		sendData = {
+			chatRoomId : roomId	
+		}
+		openChatPopup(roomId);
+	});
+	
+	connect();
+	
+});
+
+//채팅 리스트 화면에 출력하는 함수
+function settingChatList(element){
+	var chatUnreadCount = parseInt(element.unReadCount);
+
+	$('.chatting-list-div').append(
+			
+			"<button type='button' class='chat-row' id=" + element.chatRoomId + ">" + 
+			
+					"<div class='row-label'>" +element.chatRoomName +"</div>" +
+					 "<strong class='bdg'>"+element.unReadCount+"</strong>"+
+					"<span class='chat-user-number'>"+element.joinNumber+"</span>"+
+				"<input type='hidden' class='room' value='" + element.chatRoomId +"'/>" +
+			"</button>"
+	);
+	if(chatUnreadCount == 0){
+		$('#'+element.chatRoomId).children('.bdg').css('display','none');
+	}
+	
+	
+	
+}
+
+
+
+
+var socket = null;
+
+function connect(){
+	 var ws = new WebSocket("ws://localhost:8080/plugProject/echo.do");
+	 socket = ws;
+		ws.onopen = function(){
+			console.log('Info: connection opened');
+		};
+		
+		ws.onmessage = function(event){
+			var data = event.data;
+			data = JSON.parse(data);
+			/*
+			접속하지 않은 채팅방에서 채팅이 올때 안읽은 메시지 카운트 추가 시켜주는 로직
+			*/
+			myId = '${user.seq}';
+			var unreaders = data.unReaderId;
+			
+			var chatRoomId = data.chatroom_id;
+			var unreaderArray = unreaders.split(",");
+			
+			$.each(unreaderArray,function(index,element){
+				
+				if(element === myId){
+					let $socketChatAlert = $('div#socketChatAlert'); 
+					
+					$('div#socketChatAlert').append(
+							"<span>" + data.message_sender + "님의 메시지 <br>"+
+							data.message_content +"<br>" +
+							" 보낸 시간" + data.message_sendTime +
+							"</span><br>");
+					$socketChatAlert.css('display','block');
+					setTimeout(function() {
+						$socketChatAlert.css('display','none');
+						
+						$('div#socketChatAlert').text("");
+						}, 5000);
+					
+					//settingChatAlramCount(chatRoomId);
+			}
+				
+			}); 
+		};
+		
+		ws.onclose = function(event) {
+			console.log('Info: connection closed.');
+			ws = null;
+			
+		};
+		ws.onerror = function(err) {console.log('Error: ',err);
+			socket.close();
+		};
+}
+
+function settingChatAlramCount(chatRoomId){
+	totalUnreadCount = $('#headerChatBt').next().text();
+	totalUnreadCount = parseInt(totalUnreadCount);
+	console.log(chatRoomId);
+	$('#headerChatBt').next().css('display','block');
+	var target = $('#'+chatRoomId).children('.bdg');
+
+	var count = $(target).text();
+	if(!count){
+		count = 0;
+	}
+	var count = parseInt(count);
+	
+	count += 1;
+	totalUnreadCount += 1;
+	
+	if(count == 1){
+		console.log(target);
+		$(target).css('display','block');
+	}
+	if(totalUnreadCount == 1){
+		$('#headerChatBt').next().css('display','block');
+	}
+	
+	$(target).text(count);
+	$('#headerChatBt').next().text(totalUnreadCount); //헤더 카운트 반영
+	
+	$(target).text(count); // 목록에 있는 방번호에 카운트 반영
+}
+//헤더 채팅영역
+function headerChatting(){
+  document.getElementById('header_chat_div').style.display=(document.getElementById('header_chat_div').style.display=='block') ? 'none' : 'block';
+}
+
+  function headerChattingRoom(){
+    document.getElementById('header_chat_chattingRoom').style.display = 'block';
+    document.getElementById('header_chat_contactAddress').style.display = 'none';
+  }
+
+  function headerContactAddresss(){
+    document.getElementById('header_chat_contactAddress').style.display = 'block';
+    document.getElementById('header_chat_chattingRoom').style.display = 'none';
+  }
+
+
+
+//헤더 알람영역
+function headerAlarm(){
+  document.getElementById('header_alarm_div').style.display=(document.getElementById('header_alarm_div').style.display=='block') ? 'none' : 'block';
+  
+}
+
+//헤더 옵션영역
+function headerOption(){
+  document.getElementById('header_option_div').style.display=(document.getElementById('header_option_div').style.display=='block') ? 'none' : 'block';
+}
+
+//방만들기 버튼 눌렀을때 팝업창 띄우기
+function makeChatRoom(){
+	
+	var popupWidth = 300;
+	var popupHeight = 500;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	
+	var url = "makeChatRoomView.do";
+	window.open(url,"newwindow", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+	
+}
+
+//채팅 팝업창 띄우기
+function openChatPopup(chatRoomId){
+	var popupWidth = 500;
+	var popupHeight = 700;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	
+	
+	var url = "chatting.do?param=" + chatRoomId;
+	window.open(url,"_blank", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+	
+}
+
+function chatAlert(result,message){
+	
+	var unreader = "";
+	var chatRoomId = "";
+	
+	$.each(result,function(index,element){
+		unreader += element.userId +",";
+		chatRoomId = element.chatroom_id;
+	});
+	unreader = unreader.substr(0, unreader.length -1);
+	message.unReaderId = unreader;
+	console.log(message);
+	socket.send(JSON.stringify(message));
+}
+function reloadChatList(){
+	location.reload();
+	$('#header_chat_div').css('display','block');
+}
+
+</script>
 </html>

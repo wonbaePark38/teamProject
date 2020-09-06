@@ -25,4 +25,6 @@ public interface ChatService {
 	void updateChatRoomName(ChatRoomVO roomVO);
 	void updateChatRoom(ChatRoomVO roomVO);
 	void deleteChatUser(ChatRoomVO roomVO);
+	void updateUnreadCount(MessageVO vo);
+	List<MessageVO> getUnreadUser(MessageVO vo);
 }
