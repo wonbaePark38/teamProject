@@ -267,7 +267,7 @@
 	<!-- 즐겨찾기 -->
 	<div id="project_dir_list4" class="content_type">
 		<h4 id="content_type_title">즐겨찾기</h4>
-		<c:forEach var="project_lookup" items="${projectDirList}">
+			<c:forEach var="project_lookup" items="${projectDirList}">
 			<c:if test="${project_lookup.project_favorites ne '0' and project_lookup.hide_locker eq '0'}">
 			<div class="project_div">
 			<input class="div_btn" id="div_button" type="button" >
@@ -290,6 +290,7 @@
 	<!-- 보관함 -->
 	<c:forEach var="locker_list" items="${projectLockerList}">
 		<c:if test="${project_lookup.hide_locker eq '0' and locker_list.locker_name ne null or locker_list.locker_name ne ''}">
+			<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id }">
 			<div id="${locker_list.locker_name}" class="content_type" style="z-index: 1; width: 100%; display: inline-block;">
 			<h4 style="padding-bottom: 10px;"><span id="locker_n">${locker_list.locker_name}</span> 보관함</h4>
 				<c:forEach var="project_lookup" items="${projectDirList}">

@@ -28,7 +28,7 @@
 <!-- projectdir -->
 <script>
 	function init(){
-		$('#locker_list').text('보관함');
+		$('#locker_list').text('보관함 설정');
 		$('#locker_hide').text('숨기기');
 		$('.dir_set_bar').hide();
 		$('.headerWrap').show();
@@ -101,10 +101,14 @@
 		
 		// 보관함 추가
 		if ($(this).attr('id') == 'locker_list') {
-			if (select_project == null || select_project == '') {
-				alert('프로젝트를 선택해 주세요.')
-			} else {
-				$('.locker_list_set').toggle();	
+			if ($('#locker_list').text() == '보관함 설정') {
+				if (select_project == null || select_project == '') {
+					alert('프로젝트를 선택해 주세요.')
+				} else {
+					$('.locker_list_set').toggle();	
+				} 
+			} else if ($('#locker_list').text() == '보관함 해제') {
+				alert('2');
 			}
 			
 		// 프로젝트 숨기기
@@ -147,8 +151,13 @@
 	
 	// 보관함 삭제
 	$(document).on('click', '#locker_del', function() {
-
-		var locker_del_name = $(this).prev().val();
+		
+		var locker_del_list = '';
+		var locker_del_name = $(this).next().text();
+		var locker_del_id = $(this).prev().val();
+		
+		$('div[id=test]').children('input[name=project_id]').each(function(){alert($(this).val())}); 
+		
 		
 		// form 생성
 		var locker_del = $('<form></form>');
@@ -158,7 +167,8 @@
 		locker_del.attr('action', 'deletelocker.do');
 
 		// form 데이터
-		locker_del.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_del_name}));
+		locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
+		locker_del.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_del_id}));
 
 		// form 생성하는 곳
 		locker_del.appendTo('.mainWrap');
@@ -200,6 +210,7 @@
 				// form 데이터
 			locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
 			locker_set_name.append($('<input/>', {type : 'hidden', name :'project_locker', value :select_locker}));
+			
 			// form 생성하는 곳
 			locker_set_name.appendTo('.mainWrap');
 		
@@ -207,7 +218,40 @@
 		}
 	}); 
 	
-	
+	$(document).on('click','#locker_add',function(){
+		// 특수문자 구분
+		var blank_pattern = /[\s]/g;
+		var locker_name = $('#locker_name').val();
+		var locker_name_check = null;
+		$('a[id=main_side]').each(function(){
+			if ($(this).text().trim() == locker_name) {
+				locker_name_check = true;
+			}
+		});
+		
+		if (locker_name_check == true) {
+			alert("중복된 보관함이 있습니다."); 
+		} else if(locker_name == '' || locker_name == null) {
+			alert("보관함 이름을 입력해주세요."); 
+		} else if(blank_pattern.test(locker_name) != true ) { 
+			// form 생성
+			var locker_form = $('<form></form>');
+			
+			// form 설정
+			locker_form.attr('method','post');
+			locker_form.attr('action','insertlocker.do');
+			// form 데이터
+			locker_form.append($('<input/>',{type:'hidden', name:'locker_name', value:locker_name}));
+			
+			// form 생성하는 곳
+			locker_form.appendTo('.mainWrap');
+			locker_form.submit();
+		} else {
+			alert("공백이나 특수문자는 사용할 수 없습니다."); 
+			
+		}
+		
+	});
 </script>
 </head>
 <style>
@@ -529,6 +573,7 @@
 					<ul>
 						<c:forEach var="locker_list" items="${projectLockerList}">
 							<li>
+								<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id }"/>
 								<label><input name="locker_cbox" type="radio" value="${locker_list.locker_name}">${locker_list.locker_name}</label><br>
 							</li>
 						</c:forEach>

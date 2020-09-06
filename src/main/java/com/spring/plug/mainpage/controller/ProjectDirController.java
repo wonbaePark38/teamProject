@@ -113,9 +113,13 @@ public class ProjectDirController {
 	// 보관함 삭제
 	@RequestMapping(value = "/deletelocker.do", method = RequestMethod.POST)
 	public String deleteLocker(ProjectDirVO vo, HttpSession session) {
-
+		UserVO user = (UserVO) session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		System.out.println(vo.getLocker_list_id());
+		System.out.println(vo.getLocker_name());
+		System.out.println(vo.getProject_locker());
+		projectDirService.deleteProjectLocker(vo);
 		projectDirService.deleteLocker(vo);
-
 		return "projectdir.do";
 	}
 	

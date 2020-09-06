@@ -56,6 +56,10 @@ public class ProjectDirDAO {
 	public void deleteLocker(ProjectDirVO vo) {
 		sqlSessionTemplate.delete("ProjectDirDAO.deleteLocker",vo);
 	}
+	// 프로젝트에 등록 보관함 삭제
+	public void deleteProjectLocker(ProjectDirVO vo) {
+		sqlSessionTemplate.update("ProjectDirDAO.deleteProjectLocker",vo);
+	}
 	
 	// 즐겨찾기 추가
 		public void projectDirFavorites(ProjectDirVO vo) {

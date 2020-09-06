@@ -68,6 +68,11 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 		projectDirDAO.deleteLocker(vo);
 	}
 
+	@Override
+	public void deleteProjectLocker(ProjectDirVO vo) {
+		projectDirDAO.deleteProjectLocker(vo);
+	}
+
 
 
 }

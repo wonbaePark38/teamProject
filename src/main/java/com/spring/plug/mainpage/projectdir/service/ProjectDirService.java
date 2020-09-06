@@ -26,6 +26,7 @@ public interface ProjectDirService {
 	
 	// 보관함
 	void updateProjectLocker(ProjectDirVO vo);
+	void deleteProjectLocker(ProjectDirVO vo);
 	void deleteLocker(ProjectDirVO vo);
 	
 	

@@ -156,7 +156,7 @@
 		(
 		#{project_id},
 		'test_project',
-		article_seq.nextval,
+		(select nvl(max(article_id), 0) +1 from mainpage_article),
 		#{form_name},
 		sysdate,
 		#{file_name, jdbcType=VARCHAR},

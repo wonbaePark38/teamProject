@@ -7,11 +7,13 @@
 		<id property="locker_id" column="LOCKER_ID"/>
 		<result property="member_id" column="MEMBER_ID"/>
 		<result property="project_id" column="PROJECT_ID"/>
+		<result property="locker_list_id" column="LOCKER_LIST_ID"/>
 		<result property="project_favorites" column="PROJECT_FAVORITES"/>
 		<result property="project_locker" column="PROJECT_LOCKER"/>
 		<result property="hide_locker" column="HIDE_LOCKER"/>
 	</resultMap>
-
+	
+	
 	<!-- 프로젝트 세팅 정보 생성 -->	
 	<insert id="insertProjectLocker" parameterType="project_locker" useGeneratedKeys="true" keyProperty="project_id" keyColumn="project_id">
 		INSERT INTO project_locker (locker_id, member_id, project_id, project_favorites, project_locker, hide_locker)
@@ -33,4 +35,8 @@
 		WHERE member_id = #{member_id} AND project_id = #{project_id}
 	</update>
 	
+	<update id="deleteProjectLocker" parameterType="project_locker">
+		UPDATE project_locker SET project_locker = null
+		WHERE member_id = #{member_id} AND project_id = #{project_id}
+	</update>
 </mapper>

@@ -26,6 +26,8 @@ public class ProjectDirVO {
 	private int locker_id;
 	private int project_favorites;
 	private String project_locker;
+	private String locker_change;
+	
 	private int hide_locker;
 	private int project_user;
 	private int joinuser;
@@ -37,6 +39,13 @@ public class ProjectDirVO {
 	// 리스트
 	private String project_id_list;
 	
+	
+	public String getLocker_change() {
+		return locker_change;
+	}
+	public void setLocker_change(String locker_change) {
+		this.locker_change = locker_change;
+	}
 	public int getProject_id() {
 		return project_id;
 	}

@@ -45,4 +45,5 @@
 		<mapper resource="mappings/userConfig-mapper.xml"/>
 		<mapper resource="mappings/chat-mapper.xml"/>
 	</mappers>
+	
 </configuration>
