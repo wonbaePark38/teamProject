@@ -115,11 +115,26 @@ public class ProjectDirController {
 	public String deleteLocker(ProjectDirVO vo, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
-		System.out.println(vo.getLocker_list_id());
-		System.out.println(vo.getLocker_name());
-		System.out.println(vo.getProject_locker());
-		projectDirService.deleteProjectLocker(vo);
+		String[] del_project_id_list = vo.getProject_id_list().split(",");
+		for (String project_id : del_project_id_list) {
+			vo.setProject_id(Integer.parseInt(project_id));
+			projectDirService.deleteProjectLocker(vo);
+		}
 		projectDirService.deleteLocker(vo);
+		return "projectdir.do";
+	}
+	
+	// 보관함 해제
+	@RequestMapping(value = "/deletelockername.do", method = RequestMethod.POST)
+
+	public String deleteLockerListName(ProjectDirVO vo, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		String[] del_project_id_list = vo.getProject_id_list().split(",");
+		for (String project_id : del_project_id_list) {
+			vo.setProject_id(Integer.parseInt(project_id));
+			projectDirService.deleteProjectLocker(vo);
+		}
 		return "projectdir.do";
 	}
 	

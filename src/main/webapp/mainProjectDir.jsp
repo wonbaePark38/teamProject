@@ -47,7 +47,6 @@
 		
 		var click_menu = $(this).text().trim();
 		
-		$('#none_project').show();
 		if (click_menu == '전체') {
 			$('.content_type').hide();
 			$('#project_dir_list1').show();
@@ -108,7 +107,43 @@
 					$('.locker_list_set').toggle();	
 				} 
 			} else if ($('#locker_list').text() == '보관함 해제') {
-				alert('2');
+				if (select_project == null || select_project == '') {
+					alert('프로젝트를 선택해 주세요.')
+				} else {
+					var locker_del_list = "";
+					var locker_del_name = "";
+					// 선택된 보관함 이름 찾음
+					$('.content_type').each(function(){ 
+						if($(this).css('display') == 'inline-block'){
+							locker_del_name = ($(this).attr('id'));
+						}
+					});
+					// 선택한 보관함 안에 프로젝트 리스트 찾음
+					var search_name = 'div[id='+locker_del_name+']';
+					$(search_name).find('input[class=div_btn_on]').each(function(){
+						locker_del_list += ($(this).next().val())+",";
+					}); 
+					alert(locker_del_list);
+					if (locker_del_list == null || locker_del_list == '') {
+						alert('보관함에 프로젝트가 없습니다.');
+					} else {
+						// form 생성
+						var locker_del = $('<form></form>');
+				
+						// form 설정
+						locker_del.attr('method', 'post');
+						locker_del.attr('action', 'deletelockername.do');
+				
+						// form 데이터
+						locker_del.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_del_list}));
+						locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
+				
+						// form 생성하는 곳
+						locker_del.appendTo('.mainWrap');
+				
+						locker_del.submit();
+					}
+				} 
 			}
 			
 		// 프로젝트 숨기기
@@ -152,29 +187,36 @@
 	// 보관함 삭제
 	$(document).on('click', '#locker_del', function() {
 		
-		var locker_del_list = '';
+		var locker_del_list = "";
 		var locker_del_name = $(this).next().text();
 		var locker_del_id = $(this).prev().val();
-		
-		$('div[id=test]').children('input[name=project_id]').each(function(){alert($(this).val())}); 
-		
-		
-		// form 생성
-		var locker_del = $('<form></form>');
-
-		// form 설정
-		locker_del.attr('method', 'post');
-		locker_del.attr('action', 'deletelocker.do');
-
-		// form 데이터
-		locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
-		locker_del.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_del_id}));
-
-		// form 생성하는 곳
-		locker_del.appendTo('.mainWrap');
-
-		locker_del.submit();
+		var search_name = 'div[id='+locker_del_name+']';
+		$(search_name).children('input[name=project_id]').each(function(){
+			locker_del_list += ($(this).val())+",";
+		}); 
+		if (locker_del_list == null || locker_del_list == '') {
+			alert('보관함에 프로젝트가 없습니다.')
+		} else {
+			// form 생성
+			var locker_del = $('<form></form>');
+	
+			// form 설정
+			locker_del.attr('method', 'post');
+			locker_del.attr('action', 'deletelocker.do');
+	
+			// form 데이터
+			locker_del.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_del_list}));
+			locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
+			locker_del.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_del_id}));
+	
+			// form 생성하는 곳
+			locker_del.appendTo('.mainWrap');
+	
+			locker_del.submit();
+		}
 	});
+	
+	
 	
 	// 보관함에 프로젝트 추가
 	$(document).on('click','#locker_success',function(){
@@ -218,6 +260,7 @@
 		}
 	}); 
 	
+	// 보관함 생성
 	$(document).on('click','#locker_add',function(){
 		// 특수문자 구분
 		var blank_pattern = /[\s]/g;

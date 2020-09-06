@@ -138,7 +138,8 @@
 		<c:forEach var="project_lookup" items="${projectDirList}">
 			<c:if test="${project_lookup.project_favorites ne '0' and project_lookup.hide_locker eq '0'}">
 			<script>
-					$('#total_favorites').show();	
+					$('#total_favorites').show();
+					$('#none_project').hide();
 			</script>
 			<div class="project_div">
 			<input class="div_btn" id="div_button" type="button">
@@ -161,6 +162,9 @@
 			<h4 style="padding-bottom: 10px;">참여중</h4>
 			<c:forEach var="project_lookup" items="${projectDirList}">
 				<c:if test="${project_lookup.project_favorites eq '0' and project_lookup.hide_locker eq '0'}">
+				<script>
+					$('#none_project').hide();
+				</script>
 				<div class="project_div">
 				<input class="div_btn" id="div_button" type="button" >
 				<input type="hidden" name="project_id" value="${project_lookup.project_id}">
