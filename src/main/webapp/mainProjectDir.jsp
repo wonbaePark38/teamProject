@@ -61,7 +61,7 @@
 						style="padding: .5rem 1.25rem;">읽지않음</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
-					<div style="font-size: 10pt; color: #C0C0C0">모아보기</div>
+					<div style="font-size: 13px; color: #000000; font-weight: bold; padding: 1px 0px 1px 10px; border-top: 1px solid #e7e8e9; margin: 22px 0 10px 0;">모아보기</div>
 					<a id="main_side" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 업무</a> <a id="main_side"
 						href="calendar.jsp" class="list-group-item"
