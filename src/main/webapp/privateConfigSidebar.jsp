@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="css/privateConfig.css" rel="stylesheet">
+<link href="css/privateSidebar.css" rel="stylesheet">
 
 
 <script src="vendor/jquery/jquery.min.js"></script>
