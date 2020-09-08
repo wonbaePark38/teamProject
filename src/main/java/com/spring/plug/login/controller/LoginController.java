@@ -91,16 +91,19 @@ public class LoginController{
 			}
 		    deviceList.add(0,hostName);
 		    logList.add(0,loginDate);
+		    if(prevLoginTime != null) {
+		    	String[] deviceArr = prevConnectDevice.split(",");
+			    String[] logTime = prevLoginTime.split(",");
+			    deviceList.add(deviceArr[0]); //이전 접속된값 최신값을 리스트에 넣어줌
+			    logList.add(logTime[0]);
+		    }
 		    
-		    String[] deviceArr = prevConnectDevice.split(",");
-		    String[] logTime = prevLoginTime.split(",");
-		    
-		    deviceList.add(deviceArr[0]); //이전 접속된값 최신값을 리스트에 넣어줌
-		    logList.add(logTime[0]);
-		    
-		    if(deviceList.get(1) != null) {
+		    if(deviceList.size() > 1) {
 		    	hostName += ","+deviceList.get(1);
 		    	loginDate += ","+logList.get(1);
+		    }else {
+		    	hostName = deviceList.get(0);
+		    	loginDate = deviceList.get(0);
 		    }
 		    
 		    vo.setSeq(id);
