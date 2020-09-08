@@ -40,6 +40,16 @@ public class UserSettingServiceImpl implements UserSettingService{
 	public void updateAccountInfo(UserSettingVO vo) {
 		userSettingDAO.updateAccountInfo(vo);
 	}
+
+	@Override
+	public void updatePushAlram(UserVO vo) {
+		userSettingDAO.updatePushAlram(vo);
+	}
+
+	@Override
+	public void changeChatAlarm(UserVO vo) {
+		userSettingDAO.changeChatAlarm(vo);
+	}
 	
 	
 }

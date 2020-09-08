@@ -11,6 +11,8 @@
 </head>
 <body>
     <div class="mainWrap">
+    <jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
+    <div style="margin-left:50px">
         <div class="header">
            	 플로우 사용 통계        
         </div>
@@ -118,6 +120,7 @@
                 </tr>
             </tbody><!--for문 들어올 자리-->
         </table>
+    </div>
     </div>
 </body>
 </html>

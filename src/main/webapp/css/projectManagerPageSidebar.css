@@ -32,22 +32,23 @@ li:hover {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	background-color: #f2f2f2;
-	margin: 0 auto;
+	
 }
 
 .sidebarContainer {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	width: 250px;
+	width:280px;
 	background-color: #4f545d;
+
 }
 
 .sidebar {
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
-	width: 100%;
+	width:280px;
 }
 
 .title-text {
@@ -131,8 +132,3 @@ li:hover {
 	padding-bottom: 50px;
 }
 
-#ajaxpagecontainer {
-	width: 75%;
-	height: 100%;
-	padding-left: 20px;
-}

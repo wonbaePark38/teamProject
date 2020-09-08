@@ -9,7 +9,7 @@
 <link href="css/settingPassword.css" rel="stylesheet">
 
 <script src="vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="script/configScript.js"></script>
+<script type="text/javascript" src="script/settingPassword.js"></script>
 
 
 </head>
@@ -30,23 +30,26 @@
 						<h3>비밀번호 재설정이 가능합니다.</h3>
 					</div>
 					<div>비밀번호는 공백 없이 영문, 숫자 포함 6자리 이상이어야 합니다.</div>
+				
 				</div>
 				<div class="form-container">
-					<form method="POST" action="changePassword.do" onsubmit="return passwordCheck()">
-						<div class="input-password">
-							<label> 비밀번호 </label>
-							<input type="password" id="password1" name="password">
-						</div>
-						<div class="check-password">
-							<label> 비밀번호 확인 </label>
-							<input type="password" id="password2">
-							<input class="change-button" type="submit" value="변경">
-						</div>
-					</form>
-
+					
+					<div class="input-password">
+						<label> 비밀번호 </label>
+						<input type="password" id="password1" name="password">
+					</div>
+					<div class="check-password">
+						<label> 비밀번호 확인 </label>
+						<input type="password" id="password2">
+						<input class="change-button" type="submit" value="변경">
+					</div>
+					<div id="hidden-status">
+							변경되었습니다
+					</div>
+				
+				
 				</div>
-				
-				
+					
 			</div>
 		</div>
 		<!-- end centerarea -->

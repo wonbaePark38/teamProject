@@ -84,7 +84,7 @@ public class UserSettingController {
 		return mav;
 	}
 	
-	//프로필 파일 페이지 로드됐을때 로컬에서 가저와서 화면엥 뿌려주는 컨트롤러
+	//프로필 파일 페이지 로드됐을때 서버에서 가저와서 화면엥 뿌려주는 컨트롤러
 	@RequestMapping(value="/display.do", method=RequestMethod.GET) //저장된 프로필 사진 불러오는 컨트롤러 
 	public void displayFile(HttpServletResponse res,HttpSession session) throws Exception{
 		UserVO user = (UserVO)session.getAttribute("user");
@@ -130,21 +130,18 @@ public class UserSettingController {
 		return mav;
 	}
 	//비밀번호 변경 컨트롤러
+	@ResponseBody
 	@RequestMapping(value="changePassword.do", method=RequestMethod.POST)//비밀번호 변경 컨트롤러
-	public ModelAndView changePassword(UserVO vo, HttpSession session,ModelAndView mav) {
+	public void changePassword(UserVO vo, HttpSession session,ModelAndView mav) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		String inputPassword =  SHA256Util.getEncrypt(vo.getPassword(), user.getSalt());
 		user.setPassword(inputPassword);
 		user.setPasswordAuthStatus("1");//임시 비밀번호인 사람 상태값 변경
-		//vo.setSeq(user.getSeq());
-		//vo.setPassword(inputPassword);
 		userSettingService.changePassword(user);
 		session.setAttribute("user", user);
-		mav.setViewName("projectdir.do");
-		return mav;
 	}
 	
-	//잠금모드 세팅값 화면에 반영
+	//페이지 로드 됐을때 기존에 설정해논 잠금모드 세팅값 화면에 반영
 	@RequestMapping(value="lockModeConfig.do")
 	public ModelAndView lockModeView(UserVO vo, HttpSession session,ModelAndView mav) {
 		vo = (UserVO)session.getAttribute("user");
@@ -152,24 +149,17 @@ public class UserSettingController {
 		mav.setViewName("lockModeConfig.jsp");
 		return mav;
 	}
+	
 	//잠금모드 설정 변경 적용 컨트롤러
+	@ResponseBody
 	@RequestMapping(value="lockSetting.do", method=RequestMethod.POST) //잠금모드 세팅하는 컨트롤러
-	public ModelAndView settingLockMode(UserVO vo, HttpSession session, ModelAndView mav) {
+	public void settingLockMode(UserVO vo, HttpSession session, ModelAndView mav) {
 		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setSeq(user.getSeq());
+		userSettingService.changeLockSetting(vo);
 		user.setLockTime(vo.getLockTime());
-		
-		vo.setSeq(user.getSeq()); //vo에 id 세팅
-		if(vo.getLockSwitchStatus() == null) {//스위치 껐을때
-			user.setLockSwitchStatus("off");
-			
-		} else { //스위치 켰을때
-			user.setLockSwitchStatus("on");
-		}
+		user.setLockSwitchStatus(vo.getLockSwitchStatus());
 		session.setAttribute("user", user); //세션 새로 저장
-		
-		userSettingService.changeLockSetting(user);
-		mav.setViewName("projectdir.do");
-		return mav;
 	}
 	
 	//잠금모드에서 입력한 비밀번호 체크 컨트롤러
@@ -199,6 +189,7 @@ public class UserSettingController {
 		
 	}
 	
+	//pushAlramSetting.do
 	//스크립트로 데이터 세팅값 넣어주는 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="getSettings.do",method=RequestMethod.POST)
@@ -213,9 +204,15 @@ public class UserSettingController {
 		int id = user.getSeq();
 		
 		UserSettingVO infoVo = userSettingService.getConfigUserInfo(id);
+		String devices = infoVo.getConnectDevice();
+		String loginHistory = infoVo.getLoginDate();
+		String[] devicesArr = devices.split(",");
+		String[] logHistoryArr = loginHistory.split(",");
 		
 		mav.setViewName("connectManage.jsp");
 		mav.addObject("vo",infoVo);
+		mav.addObject("connectDevices", devicesArr);
+		mav.addObject("logHistoryArr", logHistoryArr);
 		return mav;
 	}
 	
@@ -227,5 +224,51 @@ public class UserSettingController {
 		vo.setId(user.getSeq());
 		System.out.println(vo.toString());
 		userSettingService.updateAccountInfo(vo);
+	}
+	
+	//푸시 알람 페이지 컨트롤러
+	@RequestMapping(value="pushAlramConfig.do")
+	public ModelAndView pushAlramConfig(UserVO vo, HttpSession session,ModelAndView mav) {
+		vo = (UserVO)session.getAttribute("user");
+		mav.setViewName("pushAlramSetting.jsp");
+		return mav;
+	}
+	//푸시 알람 세팅페이지에서의 업데이트 컨트롤러
+	@ResponseBody
+	@RequestMapping(value="updatePushAlram.do",method=RequestMethod.POST)
+	public void updatePushAlram(UserVO vo, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setSeq(user.getSeq());
+		
+		if(vo.getChatAlram() == null) {
+			vo.setChatAlram("false");
+		}
+		if(vo.getProjectAlram() == null) {
+			vo.setProjectAlram("false");
+		}
+		userSettingService.updatePushAlram(vo);
+		user.setProjectAlram(vo.getProjectAlram());
+		user.setChatAlram(vo.getChatAlram());
+		user.setPushAlram(vo.getPushAlram());
+		
+		session.setAttribute("user", user);
+	}
+	
+	/*채팅창에서 알림버튼 눌렀을때 */
+	@ResponseBody
+	@RequestMapping(value="changeChatAlarm.do", method=RequestMethod.POST)
+	public void changeChatAlarm(UserVO vo,HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		
+		vo.setPushAlram("on"); //푸시알림부터 on으로 변경하고 받아온 값으로 db로 감
+		vo.setSeq(user.getSeq());
+		userSettingService.changeChatAlarm(vo);
+		
+		user.setChatAlram(vo.getChatAlram());
+		System.out.println("------------------------->  " + user.getChatAlram());
+		user.setPushAlram("on");
+		session.removeAttribute("user");
+		session.setAttribute("user", user);
+		System.out.println(user.toString());
 	}
 }

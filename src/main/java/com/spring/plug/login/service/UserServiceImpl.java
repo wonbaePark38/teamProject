@@ -112,8 +112,8 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public void writeLoginDate(int id, String hostName) {
-		userDAO.writeLoginDate(id,hostName);
+	public void writeLoginDate(UserVO vo) {
+		userDAO.writeLoginDate(vo);
 	}
 	
 }

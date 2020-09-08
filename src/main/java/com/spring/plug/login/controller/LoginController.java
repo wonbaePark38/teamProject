@@ -3,6 +3,7 @@ package com.spring.plug.login.controller;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.common.util.SHA256Util;
+import com.spring.plug.common.util.ScanNowTime;
 import com.spring.plug.common.util.TempKey;
 import com.spring.plug.login.service.UserServiceImpl;
 import com.spring.plug.login.vo.UserVO;
@@ -45,7 +47,6 @@ public class LoginController{
 		 * vo에 값 세팅 후에 유저 정보 db에서 가저옴
 
 		 */
-		System.out.println("로그인 컨트롤러 진입");
 		UserVO user = userService.getUser(vo);
 		//db에 가입 정보가 없음
 		if(user == null) { 
@@ -60,7 +61,6 @@ public class LoginController{
 			inputPassword = SHA256Util.getEncrypt(vo.getPassword(), user.getSalt()); //사용자가 입력한 비밀번호 암호화
 		}
 		
-		//db에 이메일은 있음
 		
 		if(inputPassword.equals(user.getPassword()) && user.getAuthStatus().equals("0")) { //정보는 맞지만 이메일 인증 하지않은 회원
 			System.out.println("이메일 인증 하지 않았습니다");
@@ -73,9 +73,14 @@ public class LoginController{
 			mav.addObject("status", "passwordFalse");
 			return mav;
 		}else { //이메일 비번 다 올바르게 입력하고 이메일 인증까지 마친 사람
-			System.out.println("로그인 성공");
+			
 			int id = user.getSeq();
-			String hostName="";
+			String prevConnectDevice = user.getConnectDevice();//이전 접속 기계
+			String prevLoginTime = user.getLoginDate(); //이전 접속 시간
+			String hostName= "";
+			String loginDate = ScanNowTime.nowTime();
+			ArrayList<String>deviceList = new ArrayList<String>(2);
+			ArrayList<String>logList = new ArrayList<String>(2);
 		    try {
 		    	InetAddress addr;
 				addr = InetAddress.getLocalHost();
@@ -84,13 +89,26 @@ public class LoginController{
 				System.out.println("정보가 없는 접속임");
 				e.printStackTrace();
 			}
-		    System.out.println("컨트롤러" + hostName);
-			userService.writeLoginDate(id,hostName);
+		    deviceList.add(0,hostName);
+		    logList.add(0,loginDate);
+		    
+		    String[] deviceArr = prevConnectDevice.split(",");
+		    String[] logTime = prevLoginTime.split(",");
+		    
+		    deviceList.add(deviceArr[0]); //이전 접속된값 최신값을 리스트에 넣어줌
+		    logList.add(logTime[0]);
+		    
+		    if(deviceList.get(1) != null) {
+		    	hostName += ","+deviceList.get(1);
+		    	loginDate += ","+logList.get(1);
+		    }
+		    
+		    vo.setSeq(id);
+		    vo.setConnectDevice(hostName);
+		    vo.setLoginDate(loginDate);
+			userService.writeLoginDate(vo);
 			session.setAttribute("user", user);
 			
-			
-			//UserSettingVO settings = settingService.getSettings(id); //개인 환경 설정 셋팅값 가저오기
-			//session.setAttribute("settings", settings); //세션에 저장
 			if(vo.isUseCookie()) {//자동로그인 체크한 경우
 				Cookie loginCookie = new Cookie("loginCookie",session.getId());
 				loginCookie.setPath("/");
@@ -111,9 +129,7 @@ public class LoginController{
 		}
 	}//end login.do
 
-	/*
-	 * db에 이메일이 있는지 체크하는 메소드
-	 */
+	/*비밀번호 찾을때 db에 이메일이 있는지 체크하는 메소드*/
 	@RequestMapping(value="/searchEmail.do", method=RequestMethod.POST)
 	@ResponseBody
 	public UserVO searchEmail(UserVO vo,Model model,HttpServletRequest request) {
@@ -135,7 +151,8 @@ public class LoginController{
 		}
 		return vo;
 	}
-
+	
+	/*임시 비밀번호 발송된 이메일에서 버튼 클릭하면 임시 비밀번호 db에 저장하는 컨트롤러*/
 	@RequestMapping("/passlogin.do")
 	public ModelAndView loginView(UserVO vo,ModelAndView mav,@RequestParam("email") String email, @RequestParam("password") String password) {
 		System.out.println("임시비밀번호" + password);

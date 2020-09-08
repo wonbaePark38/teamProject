@@ -16,6 +16,8 @@
 </head>
 <body>
     <div class="mainWrap">
+    <jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
+    <div style="margin-left:50px">
         <div class="header">
             접속 통계
         </div>
@@ -112,7 +114,7 @@
                 </table>
             </div>
         </div> <!--end contents-->
-
+		</div>
     </div>
 </body>
 

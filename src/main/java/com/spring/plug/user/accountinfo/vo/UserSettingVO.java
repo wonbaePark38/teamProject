@@ -28,22 +28,8 @@ public class UserSettingVO {
 	public void setLoginDate(String loginDate) {
 		this.loginDate = loginDate;
 	}
-	//private String lockSwitchStatus;
-	//private int lockTime;
-	private MultipartFile profileImg;
 	
-	/*public int getLockTime() {
-		return lockTime;
-	}
-	public void setLockTime(int lockTime) {
-		this.lockTime = lockTime;
-	}
-	public String getLockSwitchStatus() {
-		return lockSwitchStatus;
-	}
-	public void setLockSwitchStatus(String lockSwitchStatus) {
-		this.lockSwitchStatus = lockSwitchStatus;
-	}*/
+	private MultipartFile profileImg;
 	
 	public int getId() {
 		return id;

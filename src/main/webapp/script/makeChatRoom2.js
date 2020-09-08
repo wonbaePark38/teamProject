@@ -39,8 +39,10 @@ $(document).ready(function(){
         		
         	}).done(function(data){
         		console.log(data);
+        		opener.parent.settingChatList(data);
+        		self.close();
         		 //reloadChatList();
-        		openChatPopup(data); //채팅 팝업 띄우기
+        		//(data); //채팅 팝업 띄우기
         		
         	}).fail(function(err){
         		alert('통신""오류');
@@ -69,13 +71,13 @@ function settingFriendList(element){
 }
 
 
-function openChatPopup(chatRoomId){
+function openChatPopup(data){
 	
 	var popupWidth = 500;
 	var popupHeight = 700;
 	var popupX = (window.screen.width / 2) - (popupWidth / 2);
 	var popupY= (window.screen.height / 2) - (popupHeight / 2);
-	
+	chatRoomId = data.chatRoomId;
 	
 	var url = "chatting.do?param=" + chatRoomId;
 	window.open(url,"_blank", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);

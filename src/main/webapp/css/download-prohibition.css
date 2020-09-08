@@ -10,9 +10,10 @@ body {
 
 .mainWrap {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	flex-wrap: nowrap;
 	margin: 0 auto;
+	height : 100%;
 }
 
 header {

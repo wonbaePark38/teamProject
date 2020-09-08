@@ -1,7 +1,6 @@
-#modal {
+#lock-modal {
 	width: 100%;
 	height: 100%;
-	background-color: blueviolet;
 	display: none;
 	position: fixed;
 	z-index: 1000;
@@ -9,12 +8,12 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	overflow: auto;
-	background-color: rgb(0, 0, 0,0.9);
+	background-color: rgb(0, 0, 0,0.95);
+	overflow: hidden;
 }
 
 
-.modal-content {
+.lock-modal-content {
 	text-align: center;
 	background-color: #fefefe;
 	margin: 15% auto;
@@ -23,11 +22,18 @@
 	width: 50%;
 }
 
-.input-password{
-	width: 150px;
-    height: 30px;
+#input-password{
+	height: 30px;
+    border: 1px solid cornflowerblue;
+    outline: none;
+    width: 180px;
 }
 
-#lock-password{
-	height:30px;
+#lock-password-bt{
+	height: 30px;
+    border: none;
+    outline: none;
+    background-color: #6661c1;
+    width: 100px;
+    color: white;
 }

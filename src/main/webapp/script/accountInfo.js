@@ -4,8 +4,8 @@
 
 $(document).ready(function(){
 	
-	$('#searchArea').css('display','none');
-	
+	$('#searchArea').css('display','none'); //헤더 검색창 숨김
+	//프로필 사진 변경됐을때 이벤트
 	$(document).on('change','.profile-photo-upload',function(){
 		var splitFile = $('.profile-photo-upload').val().split('\\');
 		var profileFileName = splitFile[splitFile.length-1];
@@ -20,6 +20,7 @@ $(document).ready(function(){
 		$('#uploadBt').css('display','block');
 	});
 	
+	//편집 버튼 이벤트
 	$('.edit').click(function(){
 		target = $(this).prev();
 			
@@ -32,6 +33,7 @@ $(document).ready(function(){
 		$('#confirm').css('display','none');
 	})
 	
+	//정보 변경 확인 버튼 이벤트
 	$('#info-confirm').click(function(){
 		var sendData = {
 				phoneNumber : $('#user-phone-number').val(),
@@ -49,6 +51,7 @@ $(document).ready(function(){
 			$('#hidden-status').css('display','block');
 			setTimeout(function() {
 				$('#hidden-status').css('display','none');
+				$('#confirm').css('display','none');
 				}, 3000);
 			
 		}).fail(function(err){

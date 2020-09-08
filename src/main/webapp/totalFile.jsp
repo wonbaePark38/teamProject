@@ -19,13 +19,14 @@
  
     <script type='text/javascript' src='./script/totalFile.js'></script>
     <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
-    
+
+    <script src="http://www.writingbazaar.com/js/jquery.gdocsviewer.min.js"></script>
 </head>
 
 <body>
     <div class='mainWrap'>
 	
-       
+       <jsp:include page="privateConfigHeader.jsp" flush="true" />
         <div class='centerAreaContainer'>
             <div class='fileIconArea'>
                 <div id='btnLeft'>
@@ -40,22 +41,13 @@
                     <span class='checkbox-number'></span>    
                 </div>
                 <div class='rightBtCollection'>
-                    <button id='moveBt' type='button' onclick='' alt='이동'>
-                        <i class='fas fa-arrows-alt' style='color:#615cba; font-size: 25px;'></i> 이동
-                    </button>
+                    
 
                     <button id='downloadAllBt' type='button'  alt='다운로드' >
                         <i class='fas fa-download' style='color:#615cba; font-size: 25px;'></i> 다운로드
 
                     </button>
-                    <button id='deleteFolderBt' type='button' onclick='' alt='폴더삭제' >
-                        <i class='far fa-trash-alt'  style='color:#615cba; font-size: 25px;'></i> 폴더 삭제
-
-                    </button>
-                    <button id='newFolderBt' type='button' onclick='' alt='새폴더' >
-                        <i class='fas fa-folder-plus'  style='color:#615cba; font-size: 25px;'></i> 새폴더
-                    </button>
-
+                   
                     <button id='listSortBt' type='button'>
                         <i class='fas fa-list-alt' style='color:white; font-size: 25px;'></i>
                     </button>

@@ -124,3 +124,14 @@ header {
 	width: 10%;
 	height: 40px;
 }
+
+#hidden-status{
+	width: 300px;
+    background-color: #6862c3;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-left: 40px;
+    margin-top: 30px;
+    display:none;
+}

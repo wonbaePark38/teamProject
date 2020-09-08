@@ -12,10 +12,10 @@
 <script type="text/javascript" src="script/lockModeConfig.js"></script>
 </head>
 <body>
-	<c:if test="${setting.lockSwitchStatus eq 'on'}">
+	<c:if test="${user.lockSwitchStatus eq 'on'}">
 	
-		<input type="hidden" name="user" id="session" value='${setting.lockSwitchStatus}'/>
-		
+		<input type="hidden" id="session" value='${user.lockSwitchStatus}'/>
+		<input type="hidden" id="sessionSelect" value='${user.lockTime}'>
 	</c:if>
 	
 	<div class="wrap">
@@ -28,7 +28,7 @@
 				<header>
 					<strong>잠금모드</strong>
 				</header>
-				<form action="lockSetting.do" method="POST">
+				
 				<div class="lock-switch-div">
 					<strong> 잠금모드 설정 </strong>
 					<div class="lock-switch123">
@@ -53,8 +53,12 @@
 						<option value="300">5시간</option>
 						<option value="360">6시간</option>
 					</select>
-					<input type="submit" id="change-lock-settingBt" value="적용"/>
-				</form>
+					<input type="button" id="change-lock-settingBt" value="적용"/>
+					<div id="hidden-status">
+							변경되었습니다
+					</div>
+				
+				
 			</div>
 		</div>
 	</div>

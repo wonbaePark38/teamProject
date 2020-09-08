@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %> 
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -86,18 +86,10 @@
 					  <img src="images/pf_ico5_off.png">
 					  <a>도움말</a>
 				   </div>
-
-						<form action="logout.do" method="POST">
-							<div style="margin-top: 10px;">
-								<button type="submit"
-									onclick="signOut('${user.socialCompare}');">
-									<img src="images/pf_ico3_off.png"> 로그아웃
-								</button>
-							</div>
-						</form>
-
-
-
+					<div style="margin-top: 10px;">
+						<img src="images/pf_ico3_off.png"> 
+							 <a href="javascript:signOut('${user.socialCompare}');">로그아웃</a>
+					</div>
 					</div>
 				</div>
 
@@ -192,11 +184,17 @@
 				   <!-- 채팅방 선택 -->
 				   <a onclick="headerChattingRoom()">채팅</a>
 				   <!-- 연락처 선택 -->
-				   <a onclick="headerContactAddresss()">연락처</a>
-				   <!-- 알람on/off, 새채팅 -->
-				   <div style="margin-left: 80px; display: inline-block;">
+				 
+				   <div style="margin: 10px 0 0 0; display: inline-block;">
 					  <div style="display: inline-block;">
-						 <a>alarmOn</a>
+					  	<c:choose>
+					  		<c:when test="${user.pushAlram eq 'off' || user.chatAlram eq 'false'}">
+							 	<button type="button" id="chat-alram-bt">alarmOn</button>
+					  		</c:when>
+							<c:when test="${user.pushAlram eq 'on' && user.chatAlram eq 'true'}">
+						 		<button type="button" id="chat-alram-bt">alarmOff</button>
+							</c:when>				  	
+					  	</c:choose> 
 					  </div>
 					  <div style="display: inline-block; margin-top: 3px;">
 					  <a href="javascript:void(0);" onclick ="makeChatRoom()" style="margin-left: 10px; vertical-align: middle;">
@@ -214,7 +212,7 @@
 				<!-- 채팅방 -->
 				<div id="header_chat_chattingRoom" style="display: block;">
 				   <div style="padding-left: 6px; padding-right: 6px;">
-					  <input type="text" style=" width: 100%;" placeholder="채팅방 또는 이름 검색">
+					  <input type="text" style=" width: 100%;" id="searchChatRoom" placeholder="채팅방 또는 이름 검색">
 				   </div>
 
 				 
@@ -249,27 +247,7 @@
 				   <!-- //내프로필 -->
 
 				   
-				   <!-- 전체 연락처 -->
-				   <div style="width: 100%;">
-					  <div>
-						 <span style="font-size: 12px;"><stong>전체 연락처</stong></span>
-					  </div>
-					  <!-- forEach -->
-					  <div style="width: 100%;">
-						 <div style="display: inline-block;">
-							<img src="images/empty_photo_s.png">
-						 </div>
-						 <div style="display: inline-block; width: 80px; vertical-align: middle;">
-							<span style="font-size: 11px;"><strong>참여자명</strong></span>
-							<span style="font-size: 10px;">test@test.com</span>
-						 </div>
-						 
-						 <div style="display: inline-block; margin-left: 115px;">
-							<img src="images/chat_ico.png">
-						 </div>
-					  </div>
-					  <!-- //forEach -->
-				   </div>
+			
 				   <!-- //전체 연락처 -->
 				</div>
 				<!-- //연락처 -->
@@ -282,7 +260,7 @@
 		<div id="socketChatAlert" class="alert alert-primary">
 			
 		</div>
-	
+		
 </body>
 
 <script>
@@ -378,39 +356,60 @@ function connect(){
 			console.log('Info: connection opened');
 		};
 		
-		ws.onmessage = function(event){
+		ws.onmessage = function(event){ 
+			
 			var data = event.data;
 			data = JSON.parse(data);
+			
+			if(data.header == 'chatting'){ //채팅 메시지용 알람
+				myId = '${user.seq}';
+				var unreaders = data.unReaderId; //문자열 형태로 읽지 않은 사람 목록 변수 저장
+				
+				var unreaderArray = unreaders.split(","); //읽지 않은 사람 배열로 저장
+				var chatRoomId = data.chatRoomId;
+				
+				$.each(unreaderArray,function(index,element){
+					
+					if(element === myId){ //읽지 않은 사람중에 내가 있을때 alert띠움
+						
+						let $socketChatAlert = $('div#socketChatAlert'); 
+						if('${user.pushAlram}' == 'on'  && '${user.chatAlram}' == 'true'){ //개인 환경에서 알림이 켜져있을때만 알림 div 보여줌
+							$('div#socketChatAlert').empty();
+							$('div#socketChatAlert').append(
+									"<span>" + data.message_sender + "님의 메시지 <br>"+
+									data.message_content +"<br>" +
+									" 보낸 시간" + data.message_sendTime +
+									"</span>");
+							$socketChatAlert.css('display','block');
+						}
+						
+						setTimeout(function() {
+							$socketChatAlert.css('display','none');
+							
+							}, 5000);
+						
+						target = $('#'+data.chatRoomId).children().last();
+						
+						console.log($(target).val());
+						if(!$(target).val()){ //메시지가 왔는데 만들어진 채팅방이 없는 경우
+							settingChatList(data);	//받은 사람 화면에 채팅방 추가
+						}
+						
+						//초대, 나가기, 방이름 변경 메시지이가 아닐 경우
+					
+							settingChatAlramCount(chatRoomId); //알람 띄워줌
+					
+					}
+					
+				}); 
+			}else{ // 댓글 알림
+				
+			}
 			/*
 			접속하지 않은 채팅방에서 채팅이 올때 안읽은 메시지 카운트 추가 시켜주는 로직
 			*/
-			myId = '${user.seq}';
-			var unreaders = data.unReaderId;
 			
-			var chatRoomId = data.chatroom_id;
-			var unreaderArray = unreaders.split(",");
 			
-			$.each(unreaderArray,function(index,element){
-				
-				if(element === myId){
-					let $socketChatAlert = $('div#socketChatAlert'); 
-					
-					$('div#socketChatAlert').append(
-							"<span>" + data.message_sender + "님의 메시지 <br>"+
-							data.message_content +"<br>" +
-							" 보낸 시간" + data.message_sendTime +
-							"</span><br>");
-					$socketChatAlert.css('display','block');
-					setTimeout(function() {
-						$socketChatAlert.css('display','none');
-						
-						$('div#socketChatAlert').text("");
-						}, 5000);
-					
-					//settingChatAlramCount(chatRoomId);
-			}
-				
-			}); 
 		};
 		
 		ws.onclose = function(event) {
@@ -426,7 +425,6 @@ function connect(){
 function settingChatAlramCount(chatRoomId){
 	totalUnreadCount = $('#headerChatBt').next().text();
 	totalUnreadCount = parseInt(totalUnreadCount);
-	console.log(chatRoomId);
 	$('#headerChatBt').next().css('display','block');
 	var target = $('#'+chatRoomId).children('.bdg');
 
@@ -436,49 +434,27 @@ function settingChatAlramCount(chatRoomId){
 	}
 	var count = parseInt(count);
 	
-	count += 1;
+	count += 1; //읽지 않은 메시지 카운트 1씩 증가
 	totalUnreadCount += 1;
 	
-	if(count == 1){
-		console.log(target);
+	if(count == 1){ //리스트에서 안읽은 메시지 있으면 숫자표시
 		$(target).css('display','block');
 	}
-	if(totalUnreadCount == 1){
+	if(totalUnreadCount == 1){//안읽은 메시지 있을때 헤더 아이콘 위에 숫자 표시
 		$('#headerChatBt').next().css('display','block');
 	}
 	
-	$(target).text(count);
+	$(target).text(count); //리스트 카운트 반영
 	$('#headerChatBt').next().text(totalUnreadCount); //헤더 카운트 반영
 	
 	$(target).text(count); // 목록에 있는 방번호에 카운트 반영
 }
 //헤더 채팅영역
-function headerChatting(){
-  document.getElementById('header_chat_div').style.display=(document.getElementById('header_chat_div').style.display=='block') ? 'none' : 'block';
-}
-
-  function headerChattingRoom(){
-    document.getElementById('header_chat_chattingRoom').style.display = 'block';
-    document.getElementById('header_chat_contactAddress').style.display = 'none';
-  }
-
-  function headerContactAddresss(){
-    document.getElementById('header_chat_contactAddress').style.display = 'block';
-    document.getElementById('header_chat_chattingRoom').style.display = 'none';
-  }
 
 
 
-//헤더 알람영역
-function headerAlarm(){
-  document.getElementById('header_alarm_div').style.display=(document.getElementById('header_alarm_div').style.display=='block') ? 'none' : 'block';
-  
-}
 
-//헤더 옵션영역
-function headerOption(){
-  document.getElementById('header_option_div').style.display=(document.getElementById('header_option_div').style.display=='block') ? 'none' : 'block';
-}
+
 
 //방만들기 버튼 눌렀을때 팝업창 띄우기
 function makeChatRoom(){
@@ -502,27 +478,34 @@ function openChatPopup(chatRoomId){
 	
 	
 	var url = "chatting.do?param=" + chatRoomId;
-	window.open(url,"_blank", 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+	window.open(url,chatRoomId, 'status=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
 	
 }
 
+//메시지 왔을때 채팅창에 접속 안했을때 알림 띄워주는 함수
 function chatAlert(result,message){
-	
+	/*쏴줄 정보들 추가*/
 	var unreader = "";
 	var chatRoomId = "";
-	
+	var joinNumber = "";
+	var chatRoomName = "";
+	var unReadCount = "";
 	$.each(result,function(index,element){
+		
 		unreader += element.userId +",";
 		chatRoomId = element.chatroom_id;
+		joinNumber = element.joinNumber;
+		chatRoomName = element.chatRoomName;
+		unReadCount = element.unReadCount;
+
 	});
 	unreader = unreader.substr(0, unreader.length -1);
+	message.header = 'chatting';
 	message.unReaderId = unreader;
-	console.log(message);
-	socket.send(JSON.stringify(message));
-}
-function reloadChatList(){
-	location.reload();
-	$('#header_chat_div').css('display','block');
+	message.joinNumber = joinNumber;
+	message.chatRoomName = chatRoomName;
+	message.unReadCount = unReadCount;
+	socket.send(JSON.stringify(message)); //대화 상대방에게 쏴줌
 }
 
 </script>

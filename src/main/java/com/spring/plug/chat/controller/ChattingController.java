@@ -32,8 +32,7 @@ public class ChattingController {
 	@Autowired 
 	ChatService chatService;
 
-	@Autowired
-	UserSettingService userSettingService;
+	
 	//채팅방 목록 불러오는 컨트롤러
 	@ResponseBody 
 	@RequestMapping(value="/getChattingList.do",method=RequestMethod.POST)
@@ -69,7 +68,7 @@ public class ChattingController {
 			chatService.updateUnreadCount(msgVO);
 		}
 		
-		List<MessageVO> unreadList = chatService.getUnreadUser(msgVO);
+		List<MessageVO> unreadList = chatService.getUnreadUser(msgVO);//현재 방 접속상태 아닌 사람 목록 가저옴
 		return unreadList;
 		
 	}
@@ -81,7 +80,7 @@ public class ChattingController {
 			@RequestParam String param) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		msgVO.setUserId(user.getSeq());
-		msgVO.setChatroom_id(param);
+		msgVO.setChatRoomId(param);
 		/*
 		 * 로그 남기는 로직 처리
 		 */
@@ -214,7 +213,7 @@ public class ChattingController {
 	//채팅방 만드는 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="/createRoom.do", method = RequestMethod.POST)
-	public int createChatRoom(ChatRoomVO roomVO, HttpSession session,
+	public ChatRoomVO createChatRoom(ChatRoomVO roomVO, HttpSession session,
 			@RequestParam String info) {
 		Map<String, Object> infoData = new HashMap<String, Object>();
 		List<Map<String, Object>> result = new Gson().fromJson(String.valueOf(info),
@@ -265,7 +264,7 @@ public class ChattingController {
 		
 		chatService.insertMember(infoData); //참여자들 db에 추가
 		System.out.println(roomVO.toString());
-		return roomVO.getChatRoomId(); //만들어진 방번호 리턴
+		return roomVO; //만들어진 방번호 리턴
 	}
 
 	
@@ -286,12 +285,6 @@ public class ChattingController {
 
 	}
 
-	/*//접속 종료 업데이트 컨트롤러
-	@ResponseBody 
-	@RequestMapping(value="/updateDisconnect.do", method=RequestMethod.POST)
-	public void updateDisconnect(ChatRoomVO roomVO, HttpSession session) {
-		System.out.println(roomVO.toString());
-	}*/
 	
 	//방이름 변경 컨트롤러
 	@ResponseBody

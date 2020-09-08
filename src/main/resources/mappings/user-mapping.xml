@@ -10,16 +10,19 @@
 		<result property="password" column="MEMBER_PASSWORD" />
 		<result property="socialCompare" column="MEMBER_ISSOCIAL"/>
 		<result property="lockSwitchStatus" column="LOCKMODESTATUS"/>
+		<result property="lockTime" column="LOCKTIME"/>
 	</resultMap>
 	
-	<select id="getUser" resultMap="getUser"
-		parameterType="user">
-		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
+	<select id="getUser" resultMap="getUser" parameterType="user">
+		SELECT * FROM MEMBERINFO A INNER JOIN USERSETTING B
+		ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
-	<select id="getSocialUser" resultMap="getUser"
-		parameterType="user">
-		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
+	<select id="getSocialUser" resultMap="getUser" parameterType="user">
+		SELECT * FROM MEMBERINFO A INNER JOIN USERSETTING B
+		ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
 	
@@ -47,7 +50,6 @@
 	</select>
 	
 	<update id="writeLoginDate">
-		UPDATE USERSETTING SET LOGINDATE=
-			(SELECT TO_CHAR(SYSDATE,'YYYY-MM-DD HH:MI:SS')FROM DUAL), CONNECTDEVICE =#{hostName} WHERE MEMBER_ID =#{id}
+		UPDATE USERSETTING SET LOGINDATE= #{loginDate}, CONNECTDEVICE =#{connectDevice} WHERE MEMBER_ID =#{seq}
 	</update>
 </mapper>

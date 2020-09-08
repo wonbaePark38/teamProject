@@ -17,5 +17,5 @@ public interface UserService {
 	void keepLogin(String email, String sessionId, Date sessionLimit);
 	UserVO checkLoginBefore(String sessionId) throws Exception;
 	UserVO checkUserWithSessionKey(String sessionkey);
-	void writeLoginDate(int id, String hostName);
+	void writeLoginDate(UserVO vo);
 }

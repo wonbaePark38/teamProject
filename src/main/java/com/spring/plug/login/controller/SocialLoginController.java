@@ -15,7 +15,7 @@ import com.spring.plug.signup.service.SignupService;
 import com.spring.plug.user.accountinfo.service.UserSettingServiceImpl;
 import com.spring.plug.user.accountinfo.vo.UserSettingVO;
 
-/*소셜 로그인 한 사람들이 로그인 클릭 했을때의 컨트롤러*/
+/*소셜 버튼으로  로그인 클릭 했을때의 컨트롤러*/
 
 @Controller
 public class SocialLoginController{
@@ -35,9 +35,6 @@ public class SocialLoginController{
 	
 	@RequestMapping(value="/slogin.do",method = RequestMethod.POST)
 	public ModelAndView login(UserVO vo,ModelAndView mav, HttpSession session,HttpServletRequest request) {
-		
-		System.out.println("소셜 컨트롤러 진입");
-		System.out.println(vo.toString());
 		UserVO user = userService.getSocialUser(vo);
 		
 		if(user == null) { // 소셜 로그인으로 처음 로그인한 사람
@@ -46,6 +43,7 @@ public class SocialLoginController{
 			signupService.addUserInfo(vo); //usersetting 테이블에 정보 insert
 			user = userService.getSocialUser(vo);
 		}
+		
 		session.setAttribute("user", user);
 		mav.addObject("user" , user);
 		mav.setViewName("projectdir.do");

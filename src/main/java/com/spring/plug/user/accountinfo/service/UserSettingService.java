@@ -11,5 +11,6 @@ public interface UserSettingService {
 	void changeLockSetting(UserVO vo);
 	UserSettingVO getSettings(int id);
 	void updateAccountInfo(UserSettingVO vo);
-	
+	void updatePushAlram(UserVO vo);
+	void changeChatAlarm(UserVO vo);
 }

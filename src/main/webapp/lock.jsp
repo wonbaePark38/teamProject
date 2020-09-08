@@ -12,12 +12,14 @@
 </head>
 <body>
 
-	<div id="modal">
-					<div class="modal-content">
-						<h5>잠금 모드입니다 꼬우면 비번 입력하등가~</h5>
-						<h5>소셜 로그인한 사람은 이메일을 입력하도록!!!</h5>
-						<input type="password" name="password" id="input-password" placeholder="비밀번호 입력">
-						<button type="button" id="lock-passwordBt" onclick="settingConfirm()">확인</button>
+	<div id="lock-modal">
+					<div class="lock-modal-content">
+						<h5>잠금 모드입니다. 풀려면 비밀번호를 입력하세요</h5>
+						<h5>소셜 로그인한 사람은 이메일을 입력해주세요!!!</h5>
+						<br>
+						<br>
+						<input type="password" id="input-password" placeholder="비밀번호 입력">
+						<button type="button" id="lock-password-bt" >확인</button>
 						<button type="button" id="logoutBt">로그아웃</button>
 					</div>
 	</div>
