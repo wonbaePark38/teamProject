@@ -105,7 +105,7 @@ public class AdminLoginController {
 			System.out.println("비번 맞음");
 			session.setAttribute("user", dbVO);
 			mav.addObject("vo", dbVO);
-			mav.setViewName("admin-Main.jsp");
+			mav.setViewName("LoginSuccess.do");
 		} else {
 			System.out.println("비번틀림");
 			mav.addObject("checkLogin", "false");
