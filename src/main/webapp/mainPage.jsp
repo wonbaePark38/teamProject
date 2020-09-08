@@ -25,10 +25,6 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
-<script type="text/javascript">
-
-	
-</script>
 </head>
 <style>
 </style>
@@ -357,7 +353,7 @@
 
 					<div class="aside_wrap">
 						<div>
-							<a href="#" class="btn_listback">이전화면</a>
+							<a class="btn_listback" href="mainProjectDir.jsp">이전화면</a>
 						</div>
 
 						<div class="set_wrap col-12">

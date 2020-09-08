@@ -17,8 +17,8 @@
 	</resultMap>
 
 	<insert id="insertBoard" parameterType="adminQnA">
-		INSERT INTO ADMIN_QNA 
-		VALUES(admin_qna_seq.nextval, #{content}, #{time}, #{title}, #{writer}, #{email}, #{reply}, #{replycontent})
+		INSERT INTO ADMIN_QNA (seq, email, title, content, writer)
+		VALUES((select nvl(max(seq), 0) +1 from ADMIN_QNA), #{email}, #{title}, #{content}, #{writer})
 	</insert>
 
 	<select id="getBoardList" resultMap="qnaResult">

@@ -1,21 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script>
+	$(document).on('click','#pin_icon',function(){
+		if ($(this).attr('value') == '0') {
+			$(this).attr('value','1');
+		} else {
+			$(this).attr('value','0');
+		}
+		
+		// pixed
+		var article_pixed = $(this).attr('value');
+		// article_id
+		var article_id = $(this).parent().parent().parent().parent().attr('id');
+		// project_name
+		var project_name = $('p[id=title]').text();
+		// project_id
+		var project_id = $(this).next('input[name=project_id]').val();
+		alert(project_id);
+		
+		var article_pix = $('<form></form>');
+		// form 설정
+		article_pix.attr('method','post');
+		article_pix.attr('action','articlepix.do');
+													
+		// form 데이터
+		article_pix.append($('<input/>',{type:'hidden', name:'project_name' ,value: project_name}));
+		article_pix.append($('<input/>',{type:'hidden', name:'project_id' ,value: project_id}));
+		article_pix.append($('<input/>',{type:'hidden', name:'article_pix' ,value: article_pixed}));
+		article_pix.append($('<input/>',{type:'hidden', name:'article_id' ,value: article_id}));
+													
+		// form 생성하는 곳
+		article_pix.appendTo('body');
+		article_pix.submit();
+	});
+</script>
 <!-- 게시글 넣는곳 -->
 <div class="article">
 	<div class="article_margin">
 		<!-- 타이틀 -->
 		<div class="title_margin">
 			<div class="title_border">
-				<p id="title">Article</p>
+				<p id="title">${project.project_name}</p>
 			</div>
 		</div>
 		<!-- 타이틀 -->
-
 		<!-- 업무 리포트 -->
 		<c:if test=""></c:if>
-		<div class="work_report_border">
+		<div class="work_report_border" style="display: none;">
 			<div class="work_report">
 				<div class="work_report_title">
 					<!-- 프로젝트 명 -->
@@ -86,13 +118,14 @@
 						<!-- 글 쓰기 -->
 						<form method="post" action="writeform1.do" id="writeForm1_form"
 							enctype="multipart/form-data">
-							<input type="hidden" name="file_name"> <input
-								type="hidden" name="file_size"> <input type="hidden"
-								name="img_name"> <input type="hidden" name="img_size">
+							<input type="hidden" name="file_name"> 
+							<input type="hidden" name="file_size"> 
+							<input type="hidden" name="img_name"> 
+							<input type="hidden" name="img_size">
 							<input type="hidden" name="form_name" value="nomalWrite">
-							<input type="hidden" name="project_id"
-								value="${project.project_id }"> <input type="hidden"
-								name="writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_id" value="${project.project_id}"> 
+							<input type="hidden" name="project_name" value="${project.project_name}"> 
+							<input type="hidden" name="writer" value="${sessionScope.user.name}">
 							<div id="writeForm_div">
 
 								<textarea name="writeForm1_content" id="writeForm1_content_text"
@@ -179,13 +212,13 @@
 						<!-- 글쓰기 2.0 -->
 						<form method="post" action="writeform2.do" id="writeForm2_form"
 							enctype="multipart/form-data">
-							<input type="hidden" name="file_name"> <input
-								type="hidden" name="file_size"> <input type="hidden"
-								name="img_name"> <input type="hidden" name="img_size">
+							<input type="hidden" name="file_name">
+							<input type="hidden" name="file_size"> 
+							<input type="hidden" name="img_name"> <input type="hidden" name="img_size">
 							<input type="hidden" name="form_name" value="nomalWrite2.0">
-							<input type="hidden" name="project_id"
-								value="${project.project_id }"> <input type="hidden"
-								name="writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_id" value="${project.project_id }"> 
+							<input type="hidden" name="project_name" value="${project.project_name}"> 
+							<input type="hidden" name="writer" value="${sessionScope.user.name }">
 
 							<div class="write20_form" id="write20Form_div">
 								<!-- 제목입력 -->
@@ -295,13 +328,14 @@
 						<!-- 업무 글쓰기 -->
 						<form method="post" action="writeform3.do" id="writeForm3_form"
 							enctype="multipart/form-data">
-							<input type="hidden" name="file_name"> <input
-								type="hidden" name="file_size"> <input type="hidden"
-								name="img_name"> <input type="hidden" name="img_size">
-							<input type="hidden" name="project_name"> <input
-								type="hidden" name="project_id" value="${project.project_id }">
-							<input type="hidden" name="writer"
-								value="${sessionScope.user.name }">
+							<input type="hidden" name="form_name" value="taskWrite">
+							<input type="hidden" name="file_name"> 
+							<input type="hidden" name="file_size"> 
+							<input type="hidden" name="img_name"> 
+							<input type="hidden" name="img_size">
+							<input type="hidden" name="project_name" value="${project.project_name}"> 
+							<input type="hidden" name="project_id" value="${project.project_id }">
+							<input type="hidden" name="writer" value="${sessionScope.user.name }">
 							<div class="work_form" id="workForm_div">
 
 
@@ -546,9 +580,9 @@
 						<!-- 일정 -->
 						<form method="post" action="writeform4.do" id="writeForm4_form">
 							<input type="hidden" name="form_name" value="scheWrite">
-							<input type="hidden" name="project_id"
-								value="${project.project_id }"> <input type="hidden"
-								name="writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="project_name" value="${project.project_name}"> 
+							<input type="hidden" name="project_id" value="${project.project_id }"> 
+							<input type="hidden" name="writer" value="${sessionScope.user.name }">
 							<div class="schedule_form" id="scheduleForm_div">
 								<div>
 									<!-- 일정 제목 -->
@@ -701,13 +735,12 @@
 						<form method="post" action="writeform5.do" id="writeForm5_form">
 
 							<input type="hidden" name="form_name" value="todoWrite">
-							<input type="hidden" name="writeForm5_content"
-								id="todo_content_value"> <input type="hidden"
-								name="writeForm5_date" id="todo_date_value"> <input
-								type="hidden" name="writeForm5_worker" id="todo_worker_value">
-							<input type="hidden" name="project_id"
-								value="${project.project_id }"> <input type="hidden"
-								name="writer" value="${sessionScope.user.name }">
+							<input type="hidden" name="writeForm5_content" id="todo_content_value"> 
+							<input type="hidden" name="writeForm5_date" id="todo_date_value"> 
+							<input type="hidden" name="writeForm5_worker" id="todo_worker_value">
+							<input type="hidden" name="project_id" value="${project.project_id }"> 
+							<input type="hidden" name="project_name" value="${project.project_name}"> 
+							<input type="hidden" name="writer" value="${sessionScope.user.name }">
 
 							<div class="todo_form" id="todoForm_div">
 								<!-- 할일 제목 -->
@@ -767,7 +800,8 @@
 		<!-- //글작성 폼 -->
 
 		<!-- 미확인 알람 -->
-		<div id="unread_alarm_div" style="width: 100%;">
+		
+		<div id="unread_alarm_div" style="width: 100%; display: none;">
 			<div style="width: 100%; height: 50px; background-color: white;">
 				<span id="unread_alarm_img"
 					style="display: inline-block; vertical-align: middle; margin-left: 8px; margin-right: 11px; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -44px;"></span>
@@ -775,8 +809,11 @@
 					style="display: inline-block; vertical-align: middle; margin-top: 10px; font-size: 15px;">
 					<strong>미확인 알람</strong>
 				</h5>
+				<!-- 알림이 있을때 -->
 				<span
 					style="display: inline-block; vertical-align: middle; text-align: center; width: 30px; height: 14px; border-radius: 8px; background-color: red; font-size: 12px;">12</span>
+				
+				<!-- 알림 다읽기 -->
 				<span
 					style="display: inline-block; vertical-align: middle; margin-left: 300px; font-size: 13px;"><strong>모두읽음</strong></span>
 			</div>
@@ -799,37 +836,63 @@
 						보기 </span>
 				</div>
 			</div>
+			<div style="text-align: center; vertical-align: middle; background-color: white;">
+				<span style="font-size: 9px;">더보기</span>
+			</div>
 		</div>
 		<!-- //forEach -->
-		<div
-			style="text-align: center; vertical-align: middle; background-color: white;">
-			<span style="font-size: 9px;">더보기</span>
-		</div>
 		<!-- //미확인 알람 -->
 
 		<!-- 상단 고정글 -->
-		<div id="upper_fixed_article" style="margin-top: 10px;">
-			<div
-				style="width: 100%; height: 35px; background-color: white; padding: 5px 5px 5px 5px;">
+		
+		<div id="upper_fixed_article" style="margin-top: 10px; display: none;">
+			<div style="width: 100%; height: 35px; background-color: white; padding: 5px 5px 5px 5px;">
 				<span id="upper_fixed_img"
 					style="display: inline-block; vertical-align: middle; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -66px;"></span>
 				<span style="display: inline-block;">상단 고정글</span> <span
 					style="margin-left: 5px;"><strong>2</strong></span>
 
 			</div>
-			<!-- forEach -->
-			<div style="background-color: white; padding: 5px;">
-				<div style="display: inline-block; width: 270px;">
-					<span style="display: inline-block;">[피드백]</span> <span
-						style="display: inline-block;">글 제목</span>
+			<c:forEach var="pix_list" items="${pixedList}">
+				<!-- forEach -->
+				<div style="background-color: white; padding: 5px;">
+					<div style="display: inline-block; width: 270px;">
+						<c:choose>
+							<c:when test="${pix_list.form_name eq 'nomalWrite'}">
+								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일반</span>]</span> 
+								<span style="display: inline-block;">${pix_list.writeForm1_content}</span>
+							</c:when>
+							<c:when test="${pix_list.form_name eq 'nomalWrite2.0'}">
+								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일반</span>]</span> 
+								<span style="display: inline-block;">${pix_list.writeform2_title}</span>
+							</c:when>
+							<c:when test="${pix_list.form_name eq 'taskWrite'}">
+								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">업무</span>]</span>
+								<span style="display: inline-block;">${pix_list.writeform3_title}</span>
+								<span style="display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 13px; font-size: 10px; border-radius: 5px; background-color: lightblue; margin-left: 170px;">${pix_list.writeform3.status }</span>
+							</c:when>
+							<c:when test="${pix_list.form_name eq 'scheWrite'}">
+								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일정</span>]</span>
+								<span style="display: inline-block;">${pix_list.writeform4_title}</span>
+							</c:when>
+							<c:when test="${pix_list.form_name eq 'todoWrite'}">
+								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">할일</span>]</span>
+								<span style="display: inline-block;">${pix_list.writeform5_title}</span>
+							</c:when>
+						</c:choose>
+					</div>
+					
 				</div>
-				<span
-					style="display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 13px; font-size: 10px; border-radius: 5px; background-color: lightblue; margin-left: 170px;">요청</span>
-			</div>
-			<!-- 누르면 나올 게시물 -->
-			<div style="display: none;"></div>
-			<!-- //누르면 나올 게시물 -->
-			<!-- //forEach -->
+				<!-- 누르면 나올 게시물 -->
+				<div style="display: none;"></div>
+				<!-- //누르면 나올 게시물 -->
+				<!-- //forEach -->
+			</c:forEach>
 		</div>
 		<!-- //상단 고정글 -->
 
@@ -837,14 +900,15 @@
 		<div id="article_show" style="width: 100%; margin-top: 10px;">
 
 			<c:forEach var="list" items="${articleList }">
-
+				
 				<c:set var="form_name" value="${ list.form_name}" />
 				<c:set var="article_id" value="${list.article_id }" />
 				<c:choose>
 
 					<c:when test="${form_name eq 'nomalWrite'}">
-						<div class="post_idx">
+						<div class="post_idx" id="${list.article_id }">
 							<!-- 탑 -->
+							
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
 									<!-- 스크립트로 실행 -->
@@ -861,7 +925,15 @@
 										<a id="set_icon"></a>
 									</div>
 									<div style="float: right;">
-										<a id="pin_icon"></a>
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
 									</div>
 								</div>
 							</div>
@@ -874,7 +946,29 @@
 								<div class="div_text_write" contenteditable="false">
 									<p style="font-size: 15px;">${list.writeForm1_content }</p>
 								</div>
+								<!-- 이미지 -->
+								<div id="post_images">
+									
+								</div>
+								<!-- 파일 -->
+								
+								<div id="post_files">
+									<div class='post_file' >
+										<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
+											<img id='download_icon'>
+												<dl class='file_div'>
+													<dt>
+														<a>${list.file_name}</a>	
+													</dt>
+													<dd style='margin: 0px;'>${list.file_size } byte</dd>
+												</dl>
+										<div class='down_fil' >
+										<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+										</div>
+									</div>
+								</div>
 
+								</div>
 
 								<div style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
@@ -965,7 +1059,15 @@
 										<a id="set_icon"></a>
 									</div>
 									<div style="float: right;">
-										<a id="pin_icon"></a>
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
 									</div>
 								</div>
 							</div>
@@ -1097,7 +1199,15 @@
 										<a id="set_icon"></a>
 									</div>
 									<div style="float: right;">
-										<a id="pin_icon"></a>
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
 									</div>
 								</div>
 							</div>
@@ -1350,8 +1460,16 @@
 									<div style="float: right; padding-left: 10px;">
 										<a id="set_icon"></a>
 									</div>
-									<div style="float: right;">
-										<a id="pin_icon"></a>
+									<<div style="float: right;">
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
 									</div>
 								</div>
 							</div>
@@ -1481,7 +1599,15 @@
 										<a id="set_icon"></a>
 									</div>
 									<div style="float: right;">
-										<a id="pin_icon"></a>
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
 									</div>
 								</div>
 							</div>
@@ -1608,3 +1734,11 @@
 	</div>
 </div>
 <!-- //게시글 넣는곳 -->
+
+<c:forEach var="pixedList" items="${pixedList }">
+	<c:if test="${pixedList.article_pix == '1' }">
+		<script>
+			$('#upper_fixed_article').show();
+		</script>		
+	</c:if>
+</c:forEach>

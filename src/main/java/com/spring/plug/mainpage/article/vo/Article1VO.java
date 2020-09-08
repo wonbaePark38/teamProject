@@ -18,10 +18,11 @@ public class Article1VO {
    private Date regDate;
    private String file_name;
    private String file_size;
+   private String file_path;
    private String img_name;
    private String img_size;
    private String writer;
-
+   private int article_pix;
    private String writeForm1_content;
 
    private String writeForm2_title;
@@ -348,26 +349,43 @@ public class Article1VO {
    public void setImg_size(String img_size) {
       this.img_size = img_size;
    }
+	public int getArticle_pix() {
+		return article_pix;
+	}
+	
+	public void setArticle_pix(int article_pix) {
+		this.article_pix = article_pix;
+	}
 
-@Override
-public String toString() {
-	return "Article1VO [writeForm_file=" + writeForm_file + ", writeForm_img=" + writeForm_img + ", project_id="
-			+ project_id + ", project_name=" + project_name + ", article_id=" + article_id + ", form_name=" + form_name
-			+ ", regDate=" + regDate + ", file_name=" + file_name + ", file_size=" + file_size + ", img_name="
-			+ img_name + ", img_size=" + img_size + ", writer=" + writer + ", writeForm1_content=" + writeForm1_content
-			+ ", writeForm2_title=" + writeForm2_title + ", writeForm2_content=" + writeForm2_content
-			+ ", writeForm2_latlng=" + writeForm2_latlng + ", writeForm3_tasknum=" + writeForm3_tasknum
-			+ ", writeForm3_title=" + writeForm3_title + ", writeForm3_status=" + writeForm3_status
-			+ ", writeForm3_workersName=" + writeForm3_workersName + ", writeForm3_start_date=" + writeForm3_start_date
-			+ ", writeForm3_end_date=" + writeForm3_end_date + ", writeForm3_progress=" + writeForm3_progress
-			+ ", writeForm3_order=" + writeForm3_order + ", writeForm3_content=" + writeForm3_content
-			+ ", writeForm4_title=" + writeForm4_title + ", writeForm4_start_date=" + writeForm4_start_date
-			+ ", writeForm4_start_time=" + writeForm4_start_time + ", writeForm4_end_date=" + writeForm4_end_date
-			+ ", writeForm4_end_time=" + writeForm4_end_time + ", writeForm4_alarm_time=" + writeForm4_alarm_time
-			+ ", writeForm4_content=" + writeForm4_content + ", writeForm4_latlng=" + writeForm4_latlng
-			+ ", writeForm5_title=" + writeForm5_title + ", writeForm5_content=" + writeForm5_content
-			+ ", writeForm5_date=" + writeForm5_date + ", writeForm5_worker=" + writeForm5_worker + "]";
-}
+	public String getFile_path() {
+		return file_path;
+	}
+
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
+	}
+
+	@Override
+	public String toString() {
+		return "Article1VO [writeForm_file=" + writeForm_file + ", writeForm_img=" + writeForm_img + ", project_id="
+				+ project_id + ", project_name=" + project_name + ", article_id=" + article_id + ", form_name="
+				+ form_name + ", regDate=" + regDate + ", file_name=" + file_name + ", file_size=" + file_size
+				+ ", img_name=" + img_name + ", img_size=" + img_size + ", writer=" + writer + ", article_pix="
+				+ article_pix + ", writeForm1_content=" + writeForm1_content + ", writeForm2_title=" + writeForm2_title
+				+ ", writeForm2_content=" + writeForm2_content + ", writeForm2_latlng=" + writeForm2_latlng
+				+ ", writeForm3_tasknum=" + writeForm3_tasknum + ", writeForm3_title=" + writeForm3_title
+				+ ", writeForm3_status=" + writeForm3_status + ", writeForm3_workersName=" + writeForm3_workersName
+				+ ", writeForm3_start_date=" + writeForm3_start_date + ", writeForm3_end_date=" + writeForm3_end_date
+				+ ", writeForm3_progress=" + writeForm3_progress + ", writeForm3_order=" + writeForm3_order
+				+ ", writeForm3_content=" + writeForm3_content + ", writeForm4_title=" + writeForm4_title
+				+ ", writeForm4_start_date=" + writeForm4_start_date + ", writeForm4_start_time="
+				+ writeForm4_start_time + ", writeForm4_end_date=" + writeForm4_end_date + ", writeForm4_end_time="
+				+ writeForm4_end_time + ", writeForm4_alarm_time=" + writeForm4_alarm_time + ", writeForm4_content="
+				+ writeForm4_content + ", writeForm4_latlng=" + writeForm4_latlng + ", writeForm5_title="
+				+ writeForm5_title + ", writeForm5_content=" + writeForm5_content + ", writeForm5_date="
+				+ writeForm5_date + ", writeForm5_worker=" + writeForm5_worker + "]";
+	}
+
 
 	
 

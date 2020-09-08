@@ -276,7 +276,9 @@
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .05);
 }
 
-#pin_icon {
+.pin {
+	font-size:0px;
+	border:0px;
 	margin-top: 3px;
 	cursor: pointer;
 	display: block;
@@ -284,6 +286,18 @@
 	height: 40px;
 	background: url(../images/aln_pin_off.png) no-repeat;
 }
+
+.pin_pixed {
+	font-size:0px;
+	border:0px;
+	margin-top: 3px;
+	cursor: pointer;
+	display: block;
+	width: 30px;
+	height: 40px;
+	background: url(../images/aln_pin_on.png) no-repeat;
+}
+
 
 #set_icon {
 	cursor: pointer;
@@ -295,7 +309,7 @@
 
 #download_icon {
 	float: left;
-	margin: 14px 0 0 17px;
+	margin: 18px 0 0 18px;
 	width: 42px;
 	height: 42px;
 	background: url(../images/file_icon2_down.png) no-repeat;

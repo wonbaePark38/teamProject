@@ -1,5 +1,6 @@
 package com.spring.plug.mainpage.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -30,7 +31,7 @@ public class ProjectDirController {
 
 		projectDirService.insertProjectLookup(vo);
 		System.out.println("project lookup insert");
-
+		vo.setProject_manager(1);
 		vo.setProject_favorites(0);
 		vo.setProject_locker("");
 		vo.setHide_locker(0);
@@ -38,6 +39,14 @@ public class ProjectDirController {
 		projectDirService.insertProjectLocker(vo);
 		System.out.println("project locker insert");
 
+		
+		File file = new File("C:\\plug");
+        if(!file.exists()) {
+            file.mkdir();
+        }
+		String path = "C:\\plug\\"+vo.getProject_id();
+		File folder = new File(path);
+		folder.mkdir();
 		return "projectdir.do";
 	}
 
@@ -51,6 +60,7 @@ public class ProjectDirController {
 		System.out.println("project lookup insert");
 
 		vo.setProject_favorites(0);
+		vo.setProject_manager(0);
 		vo.setProject_locker("");
 		vo.setHide_locker(0);
 
@@ -94,6 +104,7 @@ public class ProjectDirController {
 	// 프로젝트 선택
 	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
 	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav) {
+		System.out.println(vo.toString());
 		mav.addObject("getProject", vo);
 		mav.setViewName("mainpage.do");
 		return mav;

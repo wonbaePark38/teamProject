@@ -8,6 +8,7 @@
 		<id property="article_id" column="ARTICLE_ID" />
 		<result property="project_id" column="PROJECT_ID" />
 		<result property="project_name" column="PROJECT_NAME" />
+		<result property="article_pix" column="ARTICLE_PIX" />
 		<result property="form_name" column="FORM_NAME" />
 		<result property="regDate" column="REGDATE" />
 		<result property="file_name" column="FILE_NAME" />
@@ -15,8 +16,7 @@
 		<result property="img_name" column="IMG_NAME" />
 		<result property="img_size" column="IMG_SIZE" />
 		<result property="writer" column="WRITER" />
-		<result property="writeForm1_content"
-			column="WRITEFORM1_CONTENT" />
+		<result property="writeForm1_content" column="WRITEFORM1_CONTENT" />
 		<result property="writeForm2_title" column="WRITEFORM2_TITLE" />
 		<result property="writeForm2_content"
 			column="WRITEFORM2_CONTENT" />
@@ -118,6 +118,7 @@
 		regDate,
 		file_name,
 		file_size,
+		file_path,
 		img_name,
 		img_size,
 		writer,
@@ -155,12 +156,13 @@
 		VALUES
 		(
 		#{project_id},
-		'test_project',
+		#{project_name},
 		(select nvl(max(article_id), 0) +1 from mainpage_article),
 		#{form_name},
 		sysdate,
 		#{file_name, jdbcType=VARCHAR},
 		#{file_size, jdbcType=VARCHAR},
+		#{file_path, jdbcType=VARCHAR},
 		#{img_name, jdbcType=VARCHAR},
 		#{img_size, jdbcType=VARCHAR},
 		#{writer},
@@ -197,5 +199,14 @@
 
 		)
 	</insert>
-
+	
+	<update id="updateArticlePix" parameterType="article1VO">
+		UPDATE mainpage_article SET article_pix = #{article_pix}
+		WHERE article_id = #{article_id}
+	</update>
+	
+	<select id="getArticlePixedList" parameterType="article1VO" resultMap="articleResult">
+		SELECT * FROM mainpage_article
+		WHERE project_id = #{project_id} AND article_pix = 1
+	</select>
 </mapper>

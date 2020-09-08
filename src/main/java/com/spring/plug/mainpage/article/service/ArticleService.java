@@ -20,4 +20,9 @@ public interface ArticleService {
    
    List<ArticleReplyVO> selectReply(ArticleReplyVO rvo);
    
+   // 고정 게시글
+   void updateArticlePixed(Article1VO vo);
+   
+   // 고정글 리스트
+   List<Article1VO> getArticlePixedList(Article1VO vo);
 }

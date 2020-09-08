@@ -29,117 +29,132 @@ import com.spring.plug.mainpage.article.service.ArticleService;
 @Controller
 public class MainPageController {
 
-   @Autowired
-   private ArticleService service;
+	@Autowired
+	private ArticleService service;
 
-   private String[] arr;
-   private int count;
+	private String[] arr;
+	private int count;
 
-   @RequestMapping(value = "/articlereply.do")
-   public String articleReplyInsert(ArticleReplyVO vo) {
-	   
-	   System.out.println(vo.toString());
-	   
-	   service.insertReply(vo);
-	   
-	   return "mainpage.do";
-   }
-   
-   
-   @RequestMapping(value = "/mainpage.do")
-   public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo ,Article1VO vo, ModelAndView mav, HttpSession session) {
-	   
-	   
-	   System.out.println("worker : " + vo.getWriteForm3_workersName());
-	   
-	   vo.setProject_id(project.getProject_id());
-	   rvo.setProject_id(project.getProject_id());
-	   
-	   List<Article1VO> articleList = service.selectArticle(vo);
-	   
-   
-	   List<ArticleReplyVO> replyList = service.selectReply(rvo);
+	@RequestMapping(value = "/articlereply.do")
+	public String articleReplyInsert(ArticleReplyVO vo, ProjectDirVO project) {
 
-	   
-	   mav.addObject("project", project);
-	   mav.addObject("articleList",articleList);
-	   mav.addObject("replyList",replyList);
-	   mav.setViewName("mainPage.jsp");
-      return mav;
-   }
-   
-   
+		System.out.println(vo.toString());
 
-   @RequestMapping(value = "/writeform1.do")
-   public String article1Insert(Article1VO vo) throws IOException {
+		service.insertReply(vo);
 
-      MultipartFile uploadFile = vo.getWriteForm_file();
-      System.out.println("controller" + vo.toString());
+		return "mainpage.do";
+	}
 
-      if (!uploadFile.isEmpty()) {
-         String fileName = uploadFile.getOriginalFilename();
-         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-      }
+	@RequestMapping(value = "/mainpage.do")
+	public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo, Article1VO vo, ModelAndView mav,
+			HttpSession session) {
 
-      service.insertArticle(vo);
+		System.out.println(project.toString());
 
-      return "mainpage.do";
-   }
+		vo.setProject_id(project.getProject_id());
 
-   @RequestMapping(value = "/writeform2.do")
-   public String article2Insert(Article1VO vo) throws IOException {
+		rvo.setProject_id(project.getProject_id());
 
-      MultipartFile uploadFile = vo.getWriteForm_file();
-      System.out.println("controller" + vo.toString());
+		// 게시글 리스트
+		List<Article1VO> articleList = service.selectArticle(vo);
 
-      if (!uploadFile.isEmpty()) {
-         String fileName = uploadFile.getOriginalFilename();
-         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-      }
+		// 댓글 리스트
+		List<ArticleReplyVO> replyList = service.selectReply(rvo);
 
-      service.insertArticle(vo);
-      return "mainpage.do";
-   }
+		// 상단 고정글 리스트
+		List<Article1VO> pixedList = service.getArticlePixedList(vo);
 
-   @RequestMapping(value = "/writeform3.do")
-   @ResponseBody
-   public String article3Insert(Article1VO vo) throws IOException {
+		mav.addObject("project", project);
+		mav.addObject("articleList", articleList);
+		mav.addObject("replyList", replyList);
+		mav.addObject("pixedList", pixedList);
+		mav.setViewName("mainPage.jsp");
+		return mav;
+	}
 
-	  System.out.println("pid : " + vo.getProject_id());
-	  System.out.println("worker : " + vo.getWriteForm3_workersName());
-	   
-      MultipartFile uploadFile = vo.getWriteForm_file();
+	public void fileSave(Article1VO vo, UserVO user, ProjectDirVO project) throws IOException {
+		MultipartFile uploadFile = vo.getWriteForm_file();
+		String file_path = "";
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			String memberID = Integer.toString(user.getSeq());
+			file_path = "C:\\plug\\"+project.getProject_id()+"\\"+ memberID + "_" + fileName;
+			uploadFile.transferTo(new File(file_path));
+		}
+		vo.setFile_path(file_path);
+		
+	}
+	
+	@RequestMapping(value = "/writeform1.do")
+	public String article1Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+		UserVO user = (UserVO)session.getAttribute("user");
+		
+		fileSave(vo,user,project);
 
-      if (!uploadFile.isEmpty()) {
-         String fileName = uploadFile.getOriginalFilename();
-         uploadFile.transferTo(new File("C:\\testFile\\" + fileName));
-      }
-      
-      ArticleWorkerVO workerVO = new ArticleWorkerVO();
-      workerVO.setProject_id(vo.getProject_id());
-      workerVO.setArticle_id(vo.getArticle_id());
-      
-      service.insertArticle(vo);
-      return "mainpage.do";
-   }
+		service.insertArticle(vo);
 
-   @RequestMapping(value = "/writeform4.do")
-   public String article4Insert(Article1VO vo) throws IOException {
+		return "mainpage.do";
+	}
 
-      service.insertArticle(vo);
-      return "mainpage.do";
-   }
+	@RequestMapping(value = "/writeform2.do")
+	public String article2Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+		UserVO user = (UserVO)session.getAttribute("user");
+		fileSave(vo,user,project);
 
-   @RequestMapping(value = "/writeform5.do")
-   public String article5Insert(Article1VO vo) throws IOException {
-	   
-	  System.out.println("test : "+vo.getWriteForm5_content());
-	  System.out.println("test : "+vo.getWriteForm5_date());
-	  System.out.println("test : "+vo.getWriteForm5_worker());
-	  
-	  service.insertArticle(vo);
-	  
-      return "mainpage.do";
-   }
 
+		service.insertArticle(vo);
+		return "mainpage.do";
+	}
+
+	@RequestMapping(value = "/writeform3.do")
+	@ResponseBody
+	public String article3Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+
+		System.out.println("pid : " + vo.getProject_id());
+		System.out.println("worker : " + vo.getWriteForm3_workersName());
+		UserVO user = (UserVO)session.getAttribute("user");
+		fileSave(vo,user,project);
+
+
+		ArticleWorkerVO workerVO = new ArticleWorkerVO();
+		workerVO.setProject_id(vo.getProject_id());
+		workerVO.setArticle_id(vo.getArticle_id());
+
+		service.insertArticle(vo);
+		return "mainpage.do";
+	}
+
+	@RequestMapping(value = "/writeform4.do")
+	public String article4Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+
+		service.insertArticle(vo);
+		return "mainpage.do";
+	}
+
+	@RequestMapping(value = "/writeform5.do")
+	public String article5Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+
+		System.out.println("test : " + vo.getWriteForm5_content());
+		System.out.println("test : " + vo.getWriteForm5_date());
+		System.out.println("test : " + vo.getWriteForm5_worker());
+
+		service.insertArticle(vo);
+
+		return "mainpage.do";
+	}
+
+	// 상단 고정 게시글
+	@RequestMapping(value = "/articlepix.do")
+	public String updateArticlePix(Article1VO vo, ProjectDirVO project) {
+		System.out.println(vo.toString());
+		service.updateArticlePixed(vo);
+		return "mainpage.do";
+	}
+	
+	// 파일 불러오기
+	public String getFileList(Article1VO vo) {
+		
+		return "mainpage.do";
+	}
+	
 }

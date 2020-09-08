@@ -48,6 +48,28 @@ function newprojectPop(url) {
 	});
 };
 
+function clientQnA() {
+	// ajax option
+	var ajaxOption = {
+			url : "clientQnA.jsp",
+			async : true,
+			type : "GET",
+			dataType : "html",
+			cache : false
+	};
+	
+	$.ajax(ajaxOption).done(function(data) {
+		// Contents 영역 교체
+		$('.mainWrap').parent().prepend(data);
+	});
+};
+
+function clientQnA_Cancel(){
+	
+}
+
+
+
 function invitePop(url) {
 	// ajax option
 	var ajaxOption = {

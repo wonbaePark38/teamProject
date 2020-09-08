@@ -46,5 +46,14 @@ public class ArticleDAO{
 	   
 	   return sqlSessionTemplate.selectList("ArticleDAO.replySelect",rvo);
    }
-
+   
+   // 상단 고정글 저장
+   public void updateArticlePixed(Article1VO vo) {
+	   sqlSessionTemplate.update("ArticleDAO.updateArticlePix",vo);
+   }
+   
+   // 상단 게시글 리스트
+   public List<Article1VO> getArticlePixedList(Article1VO vo){
+	   return sqlSessionTemplate.selectList("ArticleDAO.getArticlePixedList",vo);
+   }
 }

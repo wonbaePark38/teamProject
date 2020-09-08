@@ -46,4 +46,14 @@ public class ArticleServiceImpl implements ArticleService {
 		return dao.reply_select(rvo);
 	}
 
+	@Override
+	public void updateArticlePixed(Article1VO vo) {
+		dao.updateArticlePixed(vo);
+	}
+
+	@Override
+	public List<Article1VO> getArticlePixedList(Article1VO vo) {
+		return dao.getArticlePixedList(vo);
+	}
+
 }

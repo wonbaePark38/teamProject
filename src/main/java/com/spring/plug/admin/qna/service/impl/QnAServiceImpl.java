@@ -19,8 +19,7 @@ public class QnAServiceImpl implements QnAService {
 	
 	@Override
 	public void insertBoard(QnAVO vo) {
-		// TODO Auto-generated method stub
-		
+		qnaDAO.insertBoard(vo);
 	}
 	
 	@Override

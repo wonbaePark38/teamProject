@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.plug.admin.qna.service.QnAService;
 import com.spring.plug.admin.qna.vo.QnAVO;
 import com.spring.plug.common.util.MailUtils;
+import com.spring.plug.login.vo.UserVO;
 
 @Controller
 public class QnAController {
@@ -29,6 +32,17 @@ public class QnAController {
 		conditionMap.put("제목", "TITLE");
 		conditionMap.put("작성자", "WRITER");
 		return conditionMap;
+	}
+	
+	@RequestMapping(value = "/insertQnA.do")
+	public String insertQnA(QnAVO vo, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		
+		vo.setEmail(user.getEmail());
+		vo.setWriter(user.getName());
+		qnaService.insertBoard(vo);
+		
+		return "projectdir.do";
 	}
 	
 	@RequestMapping(value = "/adminPage/production/qnaBoardList.do")

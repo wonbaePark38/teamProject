@@ -4,7 +4,9 @@ function new_plus() {
 	document.getElementById('new_plus').style.display = (document.getElementById('new_plus').style.display == 'block') ? 'none'	: 'block';
 }
 
-// 보관함 만들기
+function btn_listback(){
+	
+}
 
 
 // 이미지 업로드
