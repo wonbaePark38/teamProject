@@ -370,7 +370,7 @@ $(document).ready(function(){
 				$('.div_btn_on').hide();
 				
 			}
-		} /* else {
+		}  else {
 			if ($(this).attr('class') == 'dir_set') {
 				project_select_num = 0;
 				$('.select_num').text(project_select_num);
@@ -394,7 +394,7 @@ $(document).ready(function(){
 				$('.div_btn_on').hide();
 				
 			}
-		} */
+		} 
 	});
 	
 	$(document).on('click','#div_button',function(){
