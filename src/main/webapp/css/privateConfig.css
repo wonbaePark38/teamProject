@@ -268,7 +268,11 @@ button{
     margin-left: 100px;
     font-weight : bold;
 }
-
+#searchArea{
+   display:block;
+   width: 90%;
+    height: 70%;
+}
 
 #go-back-bt{
 	color: white;
