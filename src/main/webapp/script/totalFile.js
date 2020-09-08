@@ -707,6 +707,10 @@ $(document).ready(function(){
 		  }//end else
 
 	  });//end event
+	  
+	  $('#closeBt').click(function(){
+		  location.href='projectdir.do';
+	  })
 
 });
 fnSleep = function (delay){
@@ -732,7 +736,7 @@ function settingList(index,element){
 	 var date = new Date(element.writeDate);
 	  date = getFormatDate(date);
 	  var fileTypeImg = getFileType(element.fileName);
-	  
+	  var fileName = element.filaName;
 	$('.list-main-article-container').append(
 			"<div class='tableRow'>" +
 	  			"<div class='cell col1'>"+
@@ -759,9 +763,14 @@ function settingList(index,element){
 	  					"</button>" +
 	  					"<button class='moreMenuOpenBt' type='button'  alt='열기'>" +
 	  						"<span class='moreMenuOpenSpan'></span>열기" +
+	  						"<div class='iframe-wrap'>"+
+	  						
+	  						"</div>" +
 	  					"</button>" +
 	  					"<button class='moreMenuDetailViewBt' type='button'  alt='상세보기'>" +
-	  						"<span class='moreMenuDetailViewSpan'></span>상세보기" +
+	  						"<span class='moreMenuDetailViewSpan'>" +
+	  						
+	  						"</span>상세보기" +
 	  					"</button>" +
 	  				"</div>" +
 	  			"</div>" +

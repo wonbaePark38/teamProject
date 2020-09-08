@@ -39,7 +39,7 @@
 
                 <div class="email-check-div">
                     <label id="false-email-input-label">
-                        	회원이 아닙니다. 이메일을 확인해주세요.
+                        	이메일을 발송하였습니다.
                     </label>
                 </div>
                 

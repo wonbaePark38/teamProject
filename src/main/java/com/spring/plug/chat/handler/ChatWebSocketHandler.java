@@ -7,24 +7,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.plug.chat.dao.ChatDAO;
 import com.spring.plug.chat.service.ChatService;
-import com.spring.plug.chat.vo.ChatRoomVO;
 import com.spring.plug.chat.vo.MessageVO;
 import com.spring.plug.login.vo.UserVO;
 	
 
 public class ChatWebSocketHandler extends TextWebSocketHandler{
 	
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Autowired
 	ChatService chatService;
 	
@@ -42,12 +40,13 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String msg = message.getPayload();
-		System.out.println("서버메시지" + msg);
+		//System.out.println("서버메시지" + msg);
 		MessageVO messageVO = objectMapper.readValue(msg, MessageVO.class);
-		System.out.println(messageVO.getChatroom_id());
+		System.out.println("핸들러에 메시지 도착");
+		System.out.println(messageVO.getChatRoomId());
 		
 		for(WebSocketSession sess : sessions){
-			if(messageVO.getChatroom_id().equals(roomSessions.get(sess))) {
+			if(messageVO.getChatRoomId().equals(roomSessions.get(sess))) {
 				sess.sendMessage(new TextMessage(message.getPayload()));
 			}
 			
@@ -64,7 +63,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		String roomId = getRoomId(session);
 		MessageVO vo = new MessageVO();
 		vo.setSenderId(id);
-		vo.setChatroom_id(roomId);
+		vo.setChatRoomId(roomId);
 		vo.setMessage_sendTime(disconnectTime);
 		chatService.updateDisconnectTime(vo);
 		sessions.remove(session);

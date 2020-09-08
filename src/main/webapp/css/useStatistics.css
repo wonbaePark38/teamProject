@@ -19,9 +19,10 @@ body {
 
 .mainWrap {
 	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	margin: 0 auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    height: 100%;
 }
 
 .input-div {

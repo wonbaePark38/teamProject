@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="css/privateConfig.css" rel="stylesheet">
-<script type="text/javascript" src="script/articleScript.js"></script>
+<link href="css/privateSidebar.css" rel="stylesheet">
+
 
 <script src="vendor/jquery/jquery.min.js"></script>
 
@@ -17,10 +17,7 @@
 
 	<div class="sidebarContainer">
 
-				<div class="go-back-container">
-					<a id="go-back-bt">&lt; &nbsp; 돌아가기</a>
-
-				</div>
+				<input type="button" class="go-back-container" value="< 돌아가기" onclick="goback();"/>
 				<!--사이드바-->
 				<div class="sidebar">
 					<div style="font-size: 10pt; color: #C0C0C0">계정</div>
@@ -31,9 +28,8 @@
 					</c:if>
 					<hr>
 					<div style="font-size: 10pt; color: #C0C0C0">설정</div>
-					<a href="pushAlramSetting.jsp" class="list-group-item" id="push-alram-setting">푸쉬 알림 설정</a>
+					<a href="pushAlramConfig.do" class="list-group-item" id="push-alram-setting">푸쉬 알림 설정</a>
 					<a href="connectManage.do" class="list-group-item" id="connect-device-setting">접속 기기 관리</a>
-					<a href="languageSetting.jsp" class="list-group-item" id="language-setting">언어 및 타임존 설정</a>
 					<a href="lockModeConfig.do" class="list-group-item" id="lock-mode-setting">잠금모드</a>
 					<hr>
 
@@ -47,10 +43,18 @@
 						<li><a href="#" id="newNoticeBt">플로우 새소식</a></li>
 						<!-- 알림 있을 경우 class on 추가 -->
 					</ul>
-					
+					<div class="helpButtonContainer">
+						<div id="helpMenuImg"></div>
+						<button id="helpMenuBt" onclick="clientCenterFold()">고객센터</button>
+					</div>
 				</div>
 
 			</div> <!--// sidebarcontainer-->
 
 </body>
+<script>
+	function goback(){
+		location.href = "projectdir.do";
+	}
+</script>
 </html>

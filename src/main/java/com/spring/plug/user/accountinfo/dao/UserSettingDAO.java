@@ -37,4 +37,19 @@ public class UserSettingDAO {
 		return sqlSessionTemplate.selectOne("UserSettingDAO.getSettings",id);
 	}
 	
+	public void updateAccountInfo(UserSettingVO vo) {
+		sqlSessionTemplate.update("UserSettingDAO.updateAccountInfo",vo);
+	}
+	
+	public void updatePushAlram (UserVO vo) {
+		System.out.println("--> mybatis로 푸시알림 설정 업데이트 기능처리 ");
+		sqlSessionTemplate.update("UserSettingDAO.updatePushAlram",vo);
+	}
+	
+	public void changeChatAlarm (UserVO vo) {
+		System.out.println("--> mybatis로 채팅 알림설정 업데이트 기능처리 ");
+		sqlSessionTemplate.update("UserSettingDAO.changeChatAlarm",vo);
+	}
+	
+	
 }

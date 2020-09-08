@@ -29,15 +29,18 @@
 	</c:if>
 	
 	<div class="wrap">
+	
 	<jsp:include page="privateConfigHeader.jsp" flush="true" />
 		<div class="centerArea">
 			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 			
 			<div class="article">
+			
 				<header> 계정 정보 </header>
+				
 				<!--end header-->
 				<div class="text-area">내 프로필</div>
-
+				
 				<div class="myprofile">
 
 					<div class="photo-area-container">
@@ -63,7 +66,11 @@
 					</div>
 
 					<div class="info-container">
+					<div id="hidden-status">
+							변경되었습니다
+					</div>
 						<ul class="private-info">
+							
 							<li>
 								<div>
 									<label> 이름 </label> <strong class="ft_bold" id="user-name">${vo.name}</strong>
@@ -80,8 +87,18 @@
 
 							<li>
 								<div>
-									<label> 휴대폰번호 </label> <strong class="ft_bold"
-										id="user-phone-number">${vo.phoneNumber }</strong>
+									<label> 휴대폰번호 </label> 
+									<div class="edit-div">
+										
+										<input type="text" id="user-phone-number" readonly value="${vo.phoneNumber}">
+										<a class="edit">
+											<img src="images/ico_email_edit_over.png" style="vertical-align: middle;">
+										</a>
+									
+										
+									</div>
+									
+									
 								</div>
 
 							</li>
@@ -96,33 +113,69 @@
 						<ul class="company-info">
 							<li>
 								<div>
-									<label> 회사명 </label> <strong class="ft_bold" id="user-name">${vo.companyName }</strong>
+									<label> 회사명 </label> 
+									<div class="edit-div">
+										
+										<input type="text" id="company-name" readonly value="${vo.companyName}">
+										<a class="edit">
+											<img src="images/ico_email_edit_over.png" style="vertical-align: middle;">
+										</a>
+									</div>
 								</div>
 
 							</li>
 
 							<li>
 								<div>
-									<label> 부서명 </label> <strong class="ft_bold" id="user-email">${vo.department }</strong>
+									<label> 부서명 </label>
+									<div class="edit-div">
+										
+										<input type="text" id="department" readonly value="${vo.department}">
+										<a class="edit">
+											<img src="images/ico_email_edit_over.png" style="vertical-align: middle;">
+										</a>
+									</div>
 								</div>
 
 							</li>
 
 							<li>
 								<div>
-									<label> 직책 </label> <strong class="ft_bold"
-										id="user-phone-number">${vo.myPosition }</strong>
+									<label> 직책 </label> 
+									
+									<div class="edit-div">
+										
+										<input type="text" id="position" readonly value="${vo.myPosition}">
+										<a class="edit">
+											<img src="images/ico_email_edit_over.png" style="vertical-align: middle;">
+										</a>
+									</div>
 								</div>
 
 							</li>
 
 							<li>
 								<div>
-									<label> 회사연락처 </label> <strong class="ft_bold"
-										id="user-phone-number">${vo.companyCallNumber }</strong>
+									<label> 회사연락처 </label> 
+									
+									<div class="edit-div">
+										
+										<input type="text" id="company-call-number" readonly value="${vo.companyCallNumber }">
+										<a class="edit">
+											<img src="images/ico_email_edit_over.png" style="vertical-align: middle;">
+										</a>
+									</div>
+									
 								</div>
 
 							</li>
+							<li>
+								<div id="confirm">
+									<button type="button" id="info-confirm">적용하기</button>
+									<button type="button" id="info-cancle">취소하기</button>
+								</div>
+							</li>
+							
 						</ul>
 						<!--end company-info-->
 
@@ -130,11 +183,12 @@
 					</div>
 					<!--info-container-->
 				</div>
+				
 				<!--end myprofile-->
 			</div>
-			<!-- <input type = "text" id="msg">
-				<input type ="button" id="btnSend" value="전송버튼"/>
-				 -->
+			
+				
+				
 		</div>
 		<!-- centerArea -->
 		

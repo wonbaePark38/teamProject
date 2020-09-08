@@ -31,7 +31,7 @@ public class FileController {
 	
 	@RequestMapping(value="/totalFileView.do", method ={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView totalFileView(FileVO vo,ModelAndView mav) {
-		mav.setViewName("totalFile.page");
+		mav.setViewName("totalFile.jsp");
 		return mav;
 	}
 	

@@ -1,22 +1,47 @@
 package com.spring.plug.chat.vo;
 
-import com.spring.plug.chat.handler.MessageType;
-
 public class MessageVO {
 	
 	private String message_sender;
 	private int senderId;
 	private String message_content;
 	private String message_sendTime;
-	private String chatroom_id;
+	private String chatRoomId;
 	private String chatroomName;
 	private int projectId;
 	private int userId;
 	private String userName;
 	private int unReadCount;
+	private String chatRoomName;
 	private String projectName;
 	private String messageType;
+	private int joinNumber;
+	private String header;
 	
+	public int getJoinNumber() {
+		return joinNumber;
+	}
+	public String getHeader() {
+		return header;
+	}
+	public void setHeader(String header) {
+		this.header = header;
+	}
+	public void setJoinNumber(int joinNumber) {
+		this.joinNumber = joinNumber;
+	}
+	public String getChatRoomName() {
+		return chatRoomName;
+	}
+	public void setChatRoomName(String chatRoomName) {
+		this.chatRoomName = chatRoomName;
+	}
+	public String getChatRoomId() {
+		return chatRoomId;
+	}
+	public void setChatRoomId(String chatRoomId) {
+		this.chatRoomId = chatRoomId;
+	}
 	public String getMessageType() {
 		return messageType;
 	}
@@ -61,12 +86,7 @@ public class MessageVO {
 	public void setMessage_sendTime(String message_sendTime) {
 		this.message_sendTime = message_sendTime;
 	}
-	public String getChatroom_id() {
-		return chatroom_id;
-	}
-	public void setChatroom_id(String chatroom_id) {
-		this.chatroom_id = chatroom_id;
-	}
+	
 	public String getChatroomName() {
 		return chatroomName;
 	}
@@ -94,11 +114,12 @@ public class MessageVO {
 	@Override
 	public String toString() {
 		return "MessageVO [message_sender=" + message_sender + ", senderId=" + senderId + ", message_content="
-				+ message_content + ", message_sendTime=" + message_sendTime + ", chatroom_id=" + chatroom_id
+				+ message_content + ", message_sendTime=" + message_sendTime + ", chatRoomId=" + chatRoomId
 				+ ", chatroomName=" + chatroomName + ", projectId=" + projectId + ", userId=" + userId + ", userName="
-				+ userName + ", unReadCount=" + unReadCount + ", projectName=" + projectName + ", messageType="
-				+ messageType + "]";
+				+ userName + ", unReadCount=" + unReadCount + ", chatRoomName=" + chatRoomName + ", projectName="
+				+ projectName + ", messageType=" + messageType + ", joinNumber=" + joinNumber + "]";
 	}
+	
 	
 	
 	

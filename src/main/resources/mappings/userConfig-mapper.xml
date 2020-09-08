@@ -27,11 +27,23 @@
 	</update>
 	
 	<update id="changeLockSetting" parameterType="user">
-		UPDATE MEMBERINFO SET LOCKMODESTATUS =#{lockSwitchStatus}, LOCKTIME =#{lockTime}
+		UPDATE USERSETTING SET LOCKMODESTATUS =#{lockSwitchStatus}, LOCKTIME =#{lockTime}
 		WHERE MEMBER_ID = #{seq}
 	</update>
 	
-<!-- 	<select id="getSettings" resultType="user" parameterType="int">
-		SELECT * FROM USERSETTING WHERE MEMBER_ID = #{id}
-	</select> -->
+	<update id="updateAccountInfo" parameterType="configInfo">
+		UPDATE USERSETTING SET PHONENUMBER = #{phoneNumber}, COMPANYNAME = #{companyName}, DEPARTMENT = #{department}, 
+		MYPOSITION = #{myPosition}, COMPANYCALLNUMBER =#{companyCallNumber}
+		WHERE MEMBER_ID = #{id}
+	</update>
+	
+	<update id="updatePushAlram" parameterType="user">
+		UPDATE USERSETTING SET PUSHALRAM = #{pushAlram}, PROJECTALRAM = #{projectAlram}, CHATALRAM =#{chatAlram}
+		WHERE MEMBER_ID = #{seq}
+	</update>
+	
+	<update id="changeChatAlarm" parameterType="user">
+		UPDATE USERSETTING SET PUSHALRAM = #{pushAlram} , CHATALRAM = #{chatAlram}
+		WHERE MEMBER_ID = #{seq}
+	</update>
 </mapper>

@@ -15,7 +15,7 @@ $(document).ready(function(){
 		method:'POST',
 		data:sendData
 	}).done(function(data){
-		console.log(data);
+		
 		$.each(data,function(index,element){
 			settingFriendList(element);//초대 가능한 목록 뿌려줌
 		});
@@ -74,7 +74,7 @@ function settingFriendList(element){
 			"</label>" +
 			"<input type='checkbox' name='user' value="+element.seq+">" +
 			"</li>"
-
+			
 	);
 }
 

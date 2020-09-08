@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  	
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,27 +18,33 @@
 			<jsp:include page="privateConfigSidebar.jsp" flush="true" />
 			<div class="article">
 				<header> 접속 기기 관리 </header>
-
-
+			
 				<!-- for문 들어올 자리-->
 				<div class="table-row">
 					<div class="table-left">
-						<strong>접속 PC 이름: ${vo.connectDevice}</strong>
-						<span class="last-use">로그인한 시간: ${vo.loginDate }
+						<strong>접속 PC 이름: <c:out value="${connectDevices[0]}"/></strong>
+						<span class="last-use">로그인한 시간: <c:out value='${logHistoryArr[0]}'/>
 						</span>
-						<%--<span class="first-use">최초 등록: ~~~~
-						</span>
-						 --%>
 					</div>
 					<div class="table-right">
-						<button type="button" id="not-using-device"
-							onclick="removeDevice()" style="display: none;">
-							<span>제거</span>
-						</button>
 
+						<label id="using-device" style="display: block;"> 
+							<span>현재 접속 기기</span>
+						</label>
+					</div>
 
-						<label id="using-device" style="display: block;"> <span>접속
-								기기</span>
+				</div>
+				
+				<div class="table-row">
+					<div class="table-left">
+						접속 PC 이름: <c:out value="${connectDevices[1]}"/>
+						<span class="last-use">로그인한 시간: <c:out value='${logHistoryArr[1]}'/>
+						</span>
+					</div>
+					<div class="table-right">
+
+						<label id="using-device" style="display: block;">
+								
 						</label>
 					</div>
 

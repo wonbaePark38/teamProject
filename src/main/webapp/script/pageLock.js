@@ -5,7 +5,7 @@
 $(document).ready(function(){
 	
 	var setTime = $('#session').val();
-	console.log(setTime);
+
 	$.ajax({
 		url:'getSettings.do',
 		method:'POST',
@@ -21,21 +21,20 @@ $(document).ready(function(){
 	
 	
 	/*잠금 화면에서 패스워드 입력했을때 발생하는 이벤트*/
-	$('#lock-passwordBt').click(function(){
+	$('#lock-password-bt').click(function(){
 		var password = $('#input-password').val();
-		console.log(password);
 		
 		$.ajax({
 			url:'lockPassword.do',
 			method:'POST',
-			data:{
+			data : {
 				password:password
 			},
 		}).done(function(data){
 			
 			if(data === 'true'){
-				$('#modal').css('display','none');
-				document.onkeydown = "";
+				$('#lock-modal').css('display','none');
+				
 				resetLock(setTime);
 			}else{
 				setLock();
@@ -80,7 +79,7 @@ initLock = function(setTime) {
 
 //모달창 띄우기
 setLock = function () {
-	var modal = document.getElementById('modal');
+	var modal = document.getElementById('lock-modal');
     $('#input-password').val("");
 	modal.style.display = "block";
     document.onkeydown = doNotReload;

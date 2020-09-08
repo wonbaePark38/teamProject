@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.plug.login.vo.UserVO;
+import com.spring.plug.user.accountinfo.vo.UserSettingVO;
 
 @Repository
 public class UserDAO {
@@ -72,12 +73,10 @@ public class UserDAO {
 		return sqlSessionTemplate.selectOne("UserDAO.checkUserWithSessionKey", sessionkey);
 	}
 	
-	public void writeLoginDate(int id, String hostName) {
+	public void writeLoginDate(UserVO vo) {
 		System.out.println("로그인 시간, 접속 컴퓨터 이름 db에 저장");
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("id", id);
-		map.put("hostName", hostName);
-		sqlSessionTemplate.update("UserDAO.writeLoginDate",map);
+		sqlSessionTemplate.update("UserDAO.writeLoginDate",vo);
 	}
+	
 }
 

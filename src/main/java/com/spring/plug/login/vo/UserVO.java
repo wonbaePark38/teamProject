@@ -19,8 +19,41 @@ public class UserVO {
 	private String sessionId;
 	private String lockSwitchStatus;
 	private int lockTime;
-	
-	
+	private String pushAlram;
+	private String projectAlram;
+	private String chatAlram;
+	private String connectDevice;
+	private String loginDate;
+	public String getLoginDate() {
+		return loginDate;
+	}
+	public void setLoginDate(String loginDate) {
+		this.loginDate = loginDate;
+	}
+	public String getConnectDevice() {
+		return connectDevice;
+	}
+	public void setConnectDevice(String connectDevice) {
+		this.connectDevice = connectDevice;
+	}
+	public String getPushAlram() {
+		return pushAlram;
+	}
+	public void setPushAlram(String pushAlram) {
+		this.pushAlram = pushAlram;
+	}
+	public String getProjectAlram() {
+		return projectAlram;
+	}
+	public void setProjectAlram(String projectAlram) {
+		this.projectAlram = projectAlram;
+	}
+	public String getChatAlram() {
+		return chatAlram;
+	}
+	public void setChatAlram(String chatAlram) {
+		this.chatAlram = chatAlram;
+	}
 	public String getLockSwitchStatus() {
 		return lockSwitchStatus;
 	}
@@ -126,9 +159,8 @@ public class UserVO {
 				+ ", socialCompare=" + socialCompare + ", joinDate=" + joinDate + ", emailCheck=" + emailCheck
 				+ ", salt=" + salt + ", authKey=" + authKey + ", authStatus=" + authStatus + ", useCookie=" + useCookie
 				+ ", passwordAuthKey=" + passwordAuthKey + ", passwordAuthStatus=" + passwordAuthStatus + ", sessionId="
-				+ sessionId + ", lockSwitchStatus=" + lockSwitchStatus + ", lockTime=" + lockTime + "]";
+				+ sessionId + ", lockSwitchStatus=" + lockSwitchStatus + ", lockTime=" + lockTime + ", pushAlram="
+				+ pushAlram + ", projectAlram=" + projectAlram + ", chatAlram=" + chatAlram + "]";
 	}
-	
-	
 	
 }

@@ -9,7 +9,8 @@
 <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
 </head>
 <body>
-
+<div class = "wrap">
+<jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
 	<div class="pj_wrap">
 		<span>
 			<div class="titleh1_style">
@@ -26,31 +27,19 @@
 			<div id="PROJECT_SEARCH" class="titleh2_style" style="margin-top:15px; margin-bottom:15px">
 				<table cellpadding="0" cellspacing="0">
 					<colgroup>
-					<col style="width:310px;">
+					<col style="width:250px;">
 					<col style="width:110px;">
 					<col style="width:310px;">
 					<col>
 					</colgroup>
 					<tbody><tr>
 						<td>
-							<input id="project_srch_word" type="text" placeholder="프로젝트명을 적어주세요" style="width:280px;">
+							<input id="project_srch_word" type="text" placeholder="프로젝트명을 적어주세요" style="width:200px;">
 						</td>
-						<th scope="row">
-							<select style="width:100px;">
-								<option data="activity-date">최근활동일</option>
-								<option data="write-date" style="display: none;">게시물등록일</option>
-							</select>
-						</th>
-						<td>
-							<input type="text" id="USE_SCHD_STTG_DT" class="SCHD_STTG_DT hasDatepicker" style="width:130px;" autocomplete="off" sttg_dt="20200129">
-							<input type="text" id="USE_SCHD_FNSH_DT" class="SCHD_FNSH_DT hasDatepicker" style="width:130px;" autocomplete="off" fnsh_dt="20200729">
-						</td>
-						<td><a id="PROJECT_SRCH_BTN" class="btn srchbtn_style" >검색</a></td>
+										<td><a id="PROJECT_SRCH_BTN" class="btn srchbtn_style" >검색</a></td>
 					</tr>
 				</tbody></table>
-				<div class="right">
-					 <button id="PROJECTExcel" class="btn_icodown" >엑셀내려받기</button>
-				</div>
+				
 			</div>
 			<!-- // 검색 테이블 -->
 			
@@ -80,7 +69,6 @@
 							<th scope="col"><div><span>채팅수</span><a data="CHAT_CNT"></a></div></th>
 							<th scope="col"><div><span>일정수</span><a data="SCHD_CNT"></a></div></th>
 							<th scope="col"><div><span>업무수</span><a data="TASK_CNT"></a></div></th>
-							<th scope="col"><div><span>최근활동일</span><a data="EDTR_DTTM"></a></div></th>
 							<th scope="col"><div><span>개설일</span><a data="RGSN_DTTM"></a></div></th>
 						</tr>
 					</thead>
@@ -101,7 +89,19 @@
 							<col style="">
 							<col style="">
 						</colgroup>
-						<tbody><tr style="cursor: pointer; background-color: rgb(255, 255, 255);"><td>'wevevvedvsadwef' 업무공유방</td><td>안세영</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2020-07-29 13:08</td><td>2020-07-29 13:08</td></tr></tbody>
+						<tbody>
+							<tr style="cursor: pointer; background-color: rgb(255, 255, 255);">
+								<td>'wevevvedvsadwef' 업무공유방</td>
+								<td>안세영</td>
+								<td>1</td>
+								<td>1</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+								<td>2020-07-29 13:08</td>
+							</tr>
+						</tbody>
 					</table>
 				</div><div id="mCSB_13_scrollbar_vertical" class="mCSB_scrollTools mCSB_13_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><a href="#" class="mCSB_buttonUp" oncontextmenu="return false;"></a><div class="mCSB_draggerContainer"><div id="mCSB_13_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; height: 0px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div><a href="#" class="mCSB_buttonDown" oncontextmenu="return false;"></a></div></div></div>
 				<!-- //scroll -->
@@ -312,7 +312,7 @@
 			
 		</span>
 	</div>
-
+</div>
 </body>
 <script>
 
