@@ -97,50 +97,14 @@
             <div id="admin_user_management_content_info" style="margin-bottom: 20px;">
               <table>
                 <tr>
-                  <th>오늘 가입한 회원수</th>
-                  <th>어제 가입한 회원수</th>
                   <th>총 회원 수</th>
                 </tr>
                 <tr>
-                  <td>1</td>
-                  <td>2</td>
-                  <td>3</td>
+                  <td>${ vo.getUsercount() }</td>
                 </tr>
               </table>
             </div>
 
-            <!-- 탈퇴한 회원 -->
-            <div>
-              <div>
-                <span>회원탈퇴</span>
-              </div>
-              <div id="admin_user_management_content_statics1"></div>
-            </div>
-            <!-- //탈퇴한 회원 -->
-
-            <hr>
-
-            <!-- 회원 분포, 성비 -->
-            <div>
-              
-              <div style="display: inline-block;">
-                <div>
-                  <span>연령대별 사용자</span>
-                </div>
-                <!-- 연령대별 사용자수 -->
-                <div id="admin_user_management_content_statics2"></div>
-              </div>
-
-              <div style="display: inline-block;">
-                <div>
-                  <span>사용자 성비</span>
-                </div>
-                <!-- 연령대별 사용자수 -->
-                <div id="admin_user_management_content_statics3"></div>
-              </div>
-              
-            </div>
-            <!-- //회원 분포, 성비 -->
 
             <hr>
 

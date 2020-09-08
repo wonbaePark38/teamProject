@@ -41,7 +41,7 @@
 	                  
 	                  <li><a><i class="fa fa-edit"></i> 회원<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
-	                      <li><a href="admin-User-management.jsp">회원 관리</a></li>
+	                      <li><a href="getUserManager.do">회원 관리</a></li>
 	                      <li><a href="admin-User-searchUser.jsp">회원 검색</a></li>
 	                      <li><a href="admin-User-log.jsp">회원 로그</a></li>
 	                    </ul>
@@ -107,7 +107,7 @@
                     <tr>
                         <td style="width: 150px;">1</td>
                         <td style="width: 150px;">2</td>
-                        <td style="width: 150px;">3</td>
+                        <td style="width: 150px;">${ vo.getUsercount() }</td>
                     </tr>
                     </table>
 
