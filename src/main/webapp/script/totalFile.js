@@ -8,7 +8,7 @@ $(document).ready(function(){
 	  var updateStatus = 1;
 	  initFileList();
 	  var idx;
-	  
+	 
 	  
 	  /* 받아온 데이터 설정  */
 	  function initFileList() {
@@ -769,6 +769,7 @@ function settingList(index,element){
 	  					"</button>" +
 	  					"<button class='moreMenuDetailViewBt' type='button'  alt='상세보기'>" +
 	  						"<span class='moreMenuDetailViewSpan'>" +
+	  						
 	  						
 	  						"</span>상세보기" +
 	  					"</button>" +

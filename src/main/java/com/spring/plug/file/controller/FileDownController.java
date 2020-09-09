@@ -21,7 +21,8 @@ public class FileDownController {
 		String fileName = request.getParameter("fileName");
 		String realFileName = "";
 		System.out.println(fileName);
-		
+		System.out.println(request.getRequestURI());
+
 		String browser = request.getHeader("User-Agent");
 		try {
 			if(browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {

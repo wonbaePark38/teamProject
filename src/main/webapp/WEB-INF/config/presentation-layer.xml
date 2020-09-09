@@ -17,11 +17,11 @@
 		<property name="maxUploadSize" value="1000000" />
 	</bean>
 
-	 <!-- <bean id="intercepter" class="com.spring.plug.login.controller.Interceptor" /> -->
-	<!-- <bean id="loginHistoryIntercepter"	class="com.spring.plug.login.controller.prohibitController" /> -->
+	  <bean id="intercepter" class="com.spring.plug.login.controller.Interceptor" /> 
+	<bean id="loginHistoryIntercepter"	class="com.spring.plug.login.controller.prohibitController" /> 
 	
     
-	<!--  <mvc:interceptors>
+  	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/" />
 			<mvc:exclude-mapping path="/login.do" />
@@ -41,7 +41,7 @@
 			<ref bean="loginHistoryIntercepter" />
 		</mvc:interceptor>
 
-	</mvc:interceptors>   -->
+	</mvc:interceptors> 
 	<bean id="echoHandler" class="com.spring.plug.chat.handler.ReplyEchochoHandler" />
 	<bean id="chatHandler" class="com.spring.plug.chat.handler.ChatWebSocketHandler" />
 	
