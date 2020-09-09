@@ -19,8 +19,7 @@
  
     <script type='text/javascript' src='./script/totalFile.js'></script>
     <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
-	<script type="text/javascript" src="script/jquery.gdocsviewer.js"></script>
-	
+    
 </head>
 
 <body>
@@ -195,12 +194,13 @@
                             </button>
                         </div>
                     </div><!--end titleContainer-->
-               
+                    
                    <!-- 테이블로우 -->
-<!--             
+                    
+                  
+               		
                 </section><!--end listmainarticleContainer-->
-     		 <a href="" class="embed" style="text-align:center; display:block;">보기</a>
-             
+                
                 
                 <section class='baduk-main-article-container'>
                     <div class='title-container'>

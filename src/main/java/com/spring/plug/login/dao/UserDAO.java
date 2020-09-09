@@ -78,5 +78,15 @@ public class UserDAO {
 		sqlSessionTemplate.update("UserDAO.writeLoginDate",vo);
 	}
 	
+	public void insertConnectionLog(int userId) {
+		System.out.println("로그인 로그 기록 남김");
+		sqlSessionTemplate.insert("UserDAO.insertConnectionLog",userId);
+	}
+	
+	public void updateDisconnectionLog(int userId) {
+		System.out.println("로그아웃 로그 기록 남김");
+		sqlSessionTemplate.update("UserDAO.updateDisconnectionLog", userId);
+	}
+	
 }
 

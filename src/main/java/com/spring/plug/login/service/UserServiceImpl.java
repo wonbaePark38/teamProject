@@ -115,5 +115,17 @@ public class UserServiceImpl implements UserService{
 	public void writeLoginDate(UserVO vo) {
 		userDAO.writeLoginDate(vo);
 	}
+
+
+	@Override
+	public void updateDisconnectionLog(int userId) {
+		userDAO.updateDisconnectionLog(userId);
+	}
+
+
+	@Override
+	public void insertConnectionLog(int userId) {
+		userDAO.insertConnectionLog(userId);
+	}
 	
 }

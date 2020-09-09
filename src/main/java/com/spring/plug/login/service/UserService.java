@@ -18,4 +18,6 @@ public interface UserService {
 	UserVO checkLoginBefore(String sessionId) throws Exception;
 	UserVO checkUserWithSessionKey(String sessionkey);
 	void writeLoginDate(UserVO vo);
+	void updateDisconnectionLog(int userId);
+	void insertConnectionLog(int userId);
 }

@@ -1091,3 +1091,12 @@ a:hover {
 	margin-top: 20px;
 }
 
+#down-status-label{
+	width: 300px;
+    background-color: #6862c3;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-left: 40px;
+    display:none;
+}

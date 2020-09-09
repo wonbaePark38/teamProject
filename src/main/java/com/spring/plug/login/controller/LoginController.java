@@ -89,6 +89,7 @@ public class LoginController{
 				System.out.println("정보가 없는 접속임");
 				e.printStackTrace();
 			}
+		    //접속 정보 db에 저장
 		    deviceList.add(0,hostName);
 		    logList.add(0,loginDate);
 		    if(prevLoginTime != null) {
@@ -103,15 +104,15 @@ public class LoginController{
 		    	loginDate += ","+logList.get(1);
 		    }else {
 		    	hostName = deviceList.get(0);
-		    	loginDate = deviceList.get(0);
+		    	loginDate = logList.get(0);
 		    }
 		    
 		    vo.setSeq(id);
 		    vo.setConnectDevice(hostName);
 		    vo.setLoginDate(loginDate);
-			userService.writeLoginDate(vo);
+			userService.writeLoginDate(vo);//유저접속 정보 usersetting 테이블에 업데이트
 			session.setAttribute("user", user);
-			
+			userService.insertConnectionLog(id); //로그 기록 남김
 			if(vo.isUseCookie()) {//자동로그인 체크한 경우
 				Cookie loginCookie = new Cookie("loginCookie",session.getId());
 				loginCookie.setPath("/");

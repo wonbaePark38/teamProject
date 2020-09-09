@@ -14,6 +14,14 @@ public class FileVO {
 	private String loginUser;
 	private String projectName;
 	private String fileSize;
+	private String downProhibition;
+	
+	public String getDownProhibition() {
+		return downProhibition;
+	}
+	public void setDownProhibition(String downProhibition) {
+		this.downProhibition = downProhibition;
+	}
 	public String getFileSize() {
 		return fileSize;
 	}

@@ -34,6 +34,7 @@ public class LogoutController {
 			Date sessionLimit = new Date(System.currentTimeMillis());
 			userService.keepLogin(vo.getEmail(), session.getId(), sessionLimit); //db에 반영
 		}
+		userService.updateDisconnectionLog(vo.getSeq());
 		session.removeAttribute("user");
 		session.invalidate();
 		System.out.println("로그아웃");

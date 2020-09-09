@@ -41,7 +41,7 @@ $(document).ready(function(){
 			  });
 			  deffered.resolve(list);
 		  }).fail(function(err) {
-			  alert('카테고리를 불러오는데 실패하였습니다.');
+			  alert('파일 목록을 불러오는데 실패하였습니다.');
 			  deffered.reject(err);
 		  });
 		  return deffered.promise();
@@ -333,23 +333,31 @@ $(document).ready(function(){
 			  }
 	  });
 	  
-	  $(document).on('click','#downloadAllBt',function(){
+	  $(document).on('click','#downloadAllBt',function(){ //헤더의 다운로드 버튼 눌렀을때 이벤트
 
 		  var obj = document.getElementsByName('box');
 		  var objBaduk = document.getElementsByName('box-baduk');
 		  
-		  if($(".baduk-main-article-container").css('display') == 'block'){
+		  if($(".baduk-main-article-container").css('display') == 'block'){ //바둑판 형태일때
 			 
 			  $.each(presentList,function(index,element){
-				  
-				  if(obj[index + presentList.length].checked == true){
+				 
+				  if(obj[index + presentList.length].checked == true){//체크박스 체크된 파일중에서
+					  if(element.downProhibition == 'y'){//다운로드 금지 상태인 파일
+						  alert('다운로드 금지된 파일이 있습니다.'+ element.fileName);
+						  return false;
+					  }
 					  location.href = 'fileDownload.do?fileName='+element.fileName;
 					  fnSleep(100);
 				  }
 			  });
-		  }else{
-			  $.each(presentList,function(index,element){
-				  if(obj[index].checked == true){
+		  }else{//리스트 형태일때
+			  $.each(presentList,function(index,element){ 
+				  if(obj[index].checked == true){ //체크박스 체크된 파일중에서
+					  if(element.downProhibition == 'y'){  //다운로드 금지 상태인 파일
+						  alert('다운로드 금지된 파일이 있습니다.'+ element.fileName);
+						  return false;
+					  }
 					  location.href = 'fileDownload.do?fileName='+element.fileName;
 					  fnSleep(1000);
 				  }
@@ -372,9 +380,13 @@ $(document).ready(function(){
 		  $.each(presentList,function(index,element){
 				 if(idx == index){
 					 selectedElement = element;
-					 return false;
+					 return true;
 				 }
 			 });
+		  if(selectedElement.downProhibition == 'y'){ //download 컨트롤러에 가기전에 다운 금지 파일인지 체크
+			  alert('해당 파일은 다운이 금지되어 있습니다 ' + selectedElement.fileName);
+			  return false;
+		  }
 		  window.location = 'fileDownload.do?fileName='+selectedElement.fileName;
 		
 	  });
@@ -387,7 +399,10 @@ $(document).ready(function(){
 					 return false;
 				 }
 		  });
-		  
+		  if(selectedModalElement.downProhibition == 'y'){ //download 컨트롤러에 가기전에 다운 금지 파일인지 체크
+			  alert('해당 파일은 다운이 금지되어 있습니다 ' + selectedModalElement.fileName);
+			  return false;
+		  }
 		  location.href = 'fileDownload.do?fileName='+selectedModalElement.fileName;
 		  
 	  });
@@ -732,13 +747,19 @@ function removeFileList(){ //버튼 클릭했을때 그전에 있던 리스트 �
 
 /*db에서 받아온 파일 리스트 div 추가 함수*/
 function settingList(index,element){
-	
+	console.log(element);
+	 /*if(element.downProhibition == 'y'){
+		 $('#downloadAllBt').css('display','none');
+		 $('#down-status-label').css('display','block');
+	 }*/
+	 
 	 var date = new Date(element.writeDate);
 	  date = getFormatDate(date);
 	  var fileTypeImg = getFileType(element.fileName);
 	  var fileName = element.filaName;
 	$('.list-main-article-container').append(
 			"<div class='tableRow'>" +
+				"<input type='hidden' class='download-status' value=" + element.downProhibition + ">" +
 	  			"<div class='cell col1'>"+
 	  				"<input type='checkbox' name='box' class='col1-checkbox'>" +
 	  			"</div>" +
@@ -782,6 +803,7 @@ function settingList(index,element){
 	  $('.baduk-sort-div').append(
 			  "<div class=item-info>" +
 			  	"<div class='check-box-baduk'>" +
+			  		"<input type='hidden' class='download-status' value=" + element.downProhibition + ">" +
 			  		"<input type='checkbox' name='box' class='checkbox-baduk' style='margin-left: 5px;'>" +
 			  		"<button class='moreBt'>" +
 			  			"<img src='images/more_color_select_on.png'>" +
