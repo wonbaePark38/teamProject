@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectDirDAO">
+	
+	<resultMap type="project_connection" id="project_connection">
+		<id property="project_connection_seq" column="PROJECT_CONNECTION_SEQ"></id>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="project_id" column="PROJECT_ID"/>
+		<result property="project_connection_start" column="PROJECT_CONNECTION_START"/>
+	</resultMap>
+	
+	<insert id="insertProject_ConnectionLog" parameterType="project_connection">
+		INSERT INTO project_connection (project_connection_seq, member_id, project_id)
+		VALUES((select nvl(max(project_connection_seq), 0) +1 from project_connection), #{member_id}, #{project_id})
+	</insert>
+
+</mapper>

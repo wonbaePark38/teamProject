@@ -72,7 +72,10 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	public void deleteProjectLocker(ProjectDirVO vo) {
 		projectDirDAO.deleteProjectLocker(vo);
 	}
-
-
+	
+	@Override
+	public void insertProject_ConnectionLog(ProjectDirVO vo) {
+		projectDirDAO.insertProjectConnectionLog(vo);
+	}
 
 }

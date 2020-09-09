@@ -15,6 +15,7 @@
 		<typeAlias alias="project_lookup" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
 		<typeAlias alias="project_locker" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
 		<typeAlias alias="project_locker_list" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
+		<typeAlias alias="project_connection" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
 		
 		<typeAlias alias="signup" type="com.spring.plug.login.vo.UserVO"/>
 		<typeAlias alias="file" type="com.spring.plug.file.vo.FileVO"/>
@@ -37,6 +38,7 @@
 		<mapper resource="mappings/project_lookup-mapper.xml"/>
 		<mapper resource="mappings/project_locker-mapper.xml"/>
 		<mapper resource="mappings/project_locker_list-mapper.xml"/>
+		<mapper resource="mappings/project_connection_log-mapper.xml"/>
 		
 		<mapper resource="mappings/signup-mapper.xml"/>
 		<mapper resource="mappings/file-mapper.xml"/>

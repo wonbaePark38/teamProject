@@ -29,5 +29,7 @@ public interface ProjectDirService {
 	void deleteProjectLocker(ProjectDirVO vo);
 	void deleteLocker(ProjectDirVO vo);
 	
-	
+	// 로그
+	public void insertProject_ConnectionLog(ProjectDirVO vo);
+
 }

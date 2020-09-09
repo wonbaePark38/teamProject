@@ -75,4 +75,10 @@ public class ProjectDirDAO {
 	public void projectUpdateHide(ProjectDirVO vo) {
 		sqlSessionTemplate.update("ProjectDirDAO.updateProjectHide",vo);
 	}
+	
+	// 로그
+		public void insertProjectConnectionLog(ProjectDirVO vo) {
+			sqlSessionTemplate.insert("ProjectDirDAO.insertProject_ConnectionLog",vo);
+			System.out.println("프로젝트 로그");
+		}
 }
