@@ -49,7 +49,6 @@ public class MainPageController {
 	public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo, Article1VO vo, ModelAndView mav,
 			HttpSession session) {
 
-		System.out.println(project.toString());
 
 		vo.setProject_id(project.getProject_id());
 
@@ -88,8 +87,11 @@ public class MainPageController {
 	@RequestMapping(value = "/writeform1.do")
 	public String article1Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
-		
-		fileSave(vo,user,project);
+		String file_name = vo.getFile_name().substring(0,vo.getFile_name().length()-1);
+		 
+		if (file_name != null) {
+			fileSave(vo,user,project);
+		}
 
 		service.insertArticle(vo);
 
@@ -113,7 +115,7 @@ public class MainPageController {
 		System.out.println("pid : " + vo.getProject_id());
 		System.out.println("worker : " + vo.getWriteForm3_workersName());
 		UserVO user = (UserVO)session.getAttribute("user");
-		fileSave(vo,user,project);
+		fileSave(vo,user,project); 	
 
 
 		ArticleWorkerVO workerVO = new ArticleWorkerVO();

@@ -41,7 +41,7 @@
 		<!-- 타이틀 -->
 		<div class="title_margin">
 			<div class="title_border">
-				<p id="title">${project.project_name}</p>
+				<p id="title">${projectdir.project_name}</p>
 			</div>
 		</div>
 		<!-- 타이틀 -->
@@ -118,10 +118,10 @@
 						<!-- 글 쓰기 -->
 						<form method="post" action="writeform1.do" id="writeForm1_form"
 							enctype="multipart/form-data">
-							<input type="hidden" name="file_name"> 
-							<input type="hidden" name="file_size"> 
-							<input type="hidden" name="img_name"> 
-							<input type="hidden" name="img_size">
+							<input type="hidden" name="file_name" value=""> 
+							<input type="hidden" name="file_size" value=""> 
+							<input type="hidden" name="img_name" value=""> 
+							<input type="hidden" name="img_size" value="">
 							<input type="hidden" name="form_name" value="nomalWrite">
 							<input type="hidden" name="project_id" value="${project.project_id}"> 
 							<input type="hidden" name="project_name" value="${project.project_name}"> 
@@ -951,7 +951,7 @@
 									
 								</div>
 								<!-- 파일 -->
-								
+								<c:if test="${list.file_name ne null or list.file_name ne ''}">
 								<div id="post_files">
 									<div class='post_file' >
 										<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
@@ -962,13 +962,13 @@
 													</dt>
 													<dd style='margin: 0px;'>${list.file_size } byte</dd>
 												</dl>
-										<div class='down_fil' >
-										<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											<div class='down_fil' >
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											</div>
 										</div>
 									</div>
 								</div>
-
-								</div>
+								</c:if>
 
 								<div style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
