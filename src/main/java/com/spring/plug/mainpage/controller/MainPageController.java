@@ -79,6 +79,7 @@ public class MainPageController {
 			String fileName = uploadFile.getOriginalFilename();
 			String memberID = Integer.toString(user.getSeq());
 			file_path = "C:\\plug\\"+project.getProject_id()+"\\"+ memberID + "_" + fileName;
+			file_path.substring(0, file_path.length()-1);
 			uploadFile.transferTo(new File(file_path));
 		}
 		vo.setFile_path(file_path);
