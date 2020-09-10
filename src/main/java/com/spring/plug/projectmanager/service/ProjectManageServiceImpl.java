@@ -1,5 +1,7 @@
 package com.spring.plug.projectmanager.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,11 @@ public class ProjectManageServiceImpl implements ProjectManageService{
 	@Override
 	public void changeDownProhibitionSetting(ProjectManageVO pmVO) {
 		pmDAO.changeDownProhibitionSetting(pmVO);
+	}
+
+	@Override
+	public List<ProjectManageVO> getUseStatistics(int projectId) {
+		return pmDAO.getUseStatistics(projectId);
 	}
 
 }

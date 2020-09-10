@@ -1,5 +1,7 @@
 package com.spring.plug.projectmanager.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,19 @@ public class ProjectManageController {
 		int projectId = (int)session.getAttribute("projectId");
 		vo.setProjectId(projectId);
 		pmService.changeDownProhibitionSetting(vo);
+	}
+	
+	@RequestMapping(value="/getUseStatisticsView.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView useStatisticsView(ModelAndView mav) {
+		mav.setViewName("useStatistics.jsp");
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getUseStatistics.do", method=RequestMethod.POST)
+	public List<ProjectManageVO> getUseStatistics(HttpSession session){
+		ProjectDirVO vo = (ProjectDirVO)session.getAttribute("projectdir");
+		List<ProjectManageVO> useList = pmService.getUseStatistics(vo.getProject_id());
+		return useList;
 	}
 }

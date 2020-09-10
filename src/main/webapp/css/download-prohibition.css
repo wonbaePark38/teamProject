@@ -9,11 +9,12 @@ body {
 }
 
 .mainWrap {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	margin: 0 auto;
-	height : 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+    height: 100%;
+    padding-top: 60px;
 }
 
 header {
@@ -26,6 +27,10 @@ header {
 	border-bottom: 1px solid grey;
 }
 
+#main-contents{
+	margin-left: 50px;
+	width: 70%;
+}
 .contents {
 	display: flex;
 	flex-direction: row;

@@ -35,7 +35,7 @@ public class LoginController{
 	@RequestMapping(value="/login.do",method=RequestMethod.GET)
 	public ModelAndView loginView(UserVO vo,ModelAndView mav) {
 		mav.setViewName("newlogin.jsp");
-
+		
 		return mav;
 	}
 
@@ -166,4 +166,11 @@ public class LoginController{
 		mav.setViewName("newlogin.jsp");
 		return mav;
 	}
+	
+	/*@ResponseBody
+	@RequestMapping(value="updateLogoutTime.do", method=RequestMethod.POST)
+	public void updateLogoutTime(HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		
+	}*/
 }
