@@ -13,12 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.admin.manager.service.ManagerServiceImpl;
 import com.spring.plug.admin.manager.vo.ManagerVO;
+import com.spring.plug.login.service.UserService;
+import com.spring.plug.login.vo.UserVO;
 
 @Controller
 public class ManagerController {
 
 	@Autowired
 	private ManagerServiceImpl managerService;
+	
+	@Autowired 
+	private UserService user_service; 
+	
 	
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
@@ -31,6 +37,13 @@ public class ManagerController {
 	
 	@RequestMapping(value = "/adminPage/production/getUserManager.do")
 	public ModelAndView getUserInfo(ModelAndView mav) {
+		// 시간대별 유저
+		List<UserVO> connlist = user_service.userConnectionTime();
+		for (UserVO user : connlist) {
+			System.out.println("시간대 : "+user.getConnection_times());
+			System.out.println("유저수 : "+user. getUser_time()); 
+		}
+		
 		ManagerVO dbVO = managerService.getUser();
 		mav.addObject("vo", dbVO);
 		mav.setViewName("admin-User-management.jsp");

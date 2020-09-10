@@ -37,14 +37,7 @@ public class MainPageController {
 	@Autowired 
 	private ProjectDirService project_service;
 	
-	/*
-	 * @Autowired private UserService user_service; List<UserVO> connlist =
-	 * user_service.userConnectionTime(); for (UserVO user : connlist) {
-	 * System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+user.
-	 * getConnection_times());
-	 * System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+user.
-	 * getUser_time()); }
-	 */
+	
 	
 	
 	private String[] arr;
