@@ -28,6 +28,7 @@ public class QnAController {
 	
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
+		System.out.println("컨디션맵");
 		Map<String, String> conditionMap = new HashMap<String, String>();
 		conditionMap.put("제목", "TITLE");
 		conditionMap.put("작성자", "WRITER");
