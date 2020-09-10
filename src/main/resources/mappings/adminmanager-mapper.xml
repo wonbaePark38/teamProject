@@ -8,6 +8,9 @@
 		<!-- <id property="seq" column="SEQ" /> -->
 		<result property="usercount" column="USERCOUNT" />
 		<result property="procount" column="PROCOUNT" />
+		<result property="userName" column="MEMBER_NAME" />
+		<result property="userEmail" column="MEMBER_EMAIL" />
+		<result property="regDate" column="REGDATE" />
 	</resultMap>
 	
 	<select id="getUser" resultMap="managerResult">
@@ -17,6 +20,18 @@
 	<select id="getProject" resultMap="managerResult">
 		SELECT COUNT(*) as "PROCOUNT" FROM PROJECTDIR
 	</select>
-	
+
+	<select id="getUserList" resultMap="managerResult">
+		<if test="searchCondition == 'NAME'">
+			SELECT * FROM MEMBERINFO WHERE 1=1 
+			AND MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		<if test="searchCondition == 'PROJECTNAME'">
+			select member_name, member_email, project_name, regdate
+			from memberinfo join project_lookup using(member_id) join projectdir using(project_id) where 1=1
+			AND project_name LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		ORDER BY MEMBER_ID ASC
+	</select>
 	
 </mapper>
