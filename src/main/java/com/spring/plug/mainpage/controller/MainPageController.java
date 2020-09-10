@@ -36,8 +36,9 @@ public class MainPageController {
 	private int count;
 
 	@RequestMapping(value = "/articlereply.do")
-	public String articleReplyInsert(ArticleReplyVO vo, ProjectDirVO project) {
-
+	public String articleReplyInsert(ArticleReplyVO vo, ProjectDirVO project, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
 		System.out.println(vo.toString());
 
 		service.insertReply(vo);
@@ -88,9 +89,8 @@ public class MainPageController {
 	@RequestMapping(value = "/writeform1.do")
 	public String article1Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
-		
+		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
-
 		service.insertArticle(vo);
 
 		return "mainpage.do";
@@ -100,7 +100,7 @@ public class MainPageController {
 	public String article2Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
 		fileSave(vo,user,project);
-
+		vo.setMember_id(user.getSeq());
 
 		service.insertArticle(vo);
 		return "mainpage.do";
@@ -109,10 +109,10 @@ public class MainPageController {
 	@RequestMapping(value = "/writeform3.do")
 	@ResponseBody
 	public String article3Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
-
+		UserVO user = (UserVO)session.getAttribute("user");
 		System.out.println("pid : " + vo.getProject_id());
 		System.out.println("worker : " + vo.getWriteForm3_workersName());
-		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
 
 
@@ -126,18 +126,20 @@ public class MainPageController {
 
 	@RequestMapping(value = "/writeform4.do")
 	public String article4Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
-
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
 		service.insertArticle(vo);
 		return "mainpage.do";
 	}
 
 	@RequestMapping(value = "/writeform5.do")
 	public String article5Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
-
 		System.out.println("test : " + vo.getWriteForm5_content());
 		System.out.println("test : " + vo.getWriteForm5_date());
 		System.out.println("test : " + vo.getWriteForm5_worker());
-
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+	
 		service.insertArticle(vo);
 
 		return "mainpage.do";

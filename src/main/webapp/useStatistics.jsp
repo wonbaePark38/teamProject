@@ -56,24 +56,13 @@
                     <th scope="col">
                         계정
                     </th>
-                    <th scope="col">
-                        참여 프로젝트
-                    </th>
-
+        
                     <th scope="col">
                         게시물수
                     </th>
 
                     <th scope="col">
                         댓글수
-                    </th>
-
-                    <th scope="col">
-                        채팅방수
-                    </th>
-
-                    <th scope="col">
-                        채팅메세지수
                     </th>
                 </tr>
             </thead>
@@ -96,12 +85,10 @@
                         
                     </td>
 
-                    <td style="display:flex; flex-wrap:wrap;">
+                    <td>
                         deux38@naver.com
                     </td>
-                    <td>
-                        2개
-                    </td>
+                 
                     <td>
                         5개
                     </td>
@@ -110,13 +97,6 @@
                         5개
                     </td>
 
-                    <td>
-                        1개
-                    </td>
-
-                    <td>
-                        50개
-                    </td>
                 </tr>
             </tbody><!--for문 들어올 자리-->
         </table>

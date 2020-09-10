@@ -25,7 +25,8 @@
 		<typeAlias alias="configInfo" type="com.spring.plug.user.accountinfo.vo.UserSettingVO"/>
 		<typeAlias alias="msgVO" type="com.spring.plug.chat.vo.MessageVO"/>
 		<typeAlias alias="roomVO" type="com.spring.plug.chat.vo.ChatRoomVO"/>  
-	
+		
+		<typeAlias alias="pmVO" type="com.spring.plug.projectmanager.vo.ProjectManageVO"/> 
 	
 	</typeAliases>
 	
@@ -46,6 +47,8 @@
 		
 		<mapper resource="mappings/userConfig-mapper.xml"/>
 		<mapper resource="mappings/chat-mapper.xml"/>
+		<mapper resource="mappings/projectManage-mapper.xml"/>
+		
 	</mappers>
 	
 </configuration>

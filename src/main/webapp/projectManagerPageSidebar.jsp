@@ -44,7 +44,7 @@
                         
                         <strong class="title-text">보안설정</strong>
                         <div class="security-menu">
-                            <a href="download-prohibition.jsp" class="list-group-item" id="download-contorl">파일 다운로드 제한</a>
+                            <a href="downProhibitionView.do" class="list-group-item" id="download-contorl">파일 다운로드 제한</a>
                         </div>
                        
                     </div>

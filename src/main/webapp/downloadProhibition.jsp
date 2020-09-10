@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>다운로드 제한</title>
     <link href="css/download-prohibition.css" rel="stylesheet">
+     <script src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="script/download-prohibition.js"></script>
 </head>
 <body>
 
@@ -33,11 +35,17 @@
                             <input type="checkbox" id="prohibition-switch">
                             <span class="slider round"></span>
                     	</label>
+                   
                 	</div>
+                	 	<div id="hidden-status">
+							변경되었습니다
+					</div>
+                
             	</div>
             	<div class="img-div">
                 	<img src="images/img_nodownload.gif">
             	</div>
+            		
         	</div>
 
         	<div class="text-area">
@@ -45,6 +53,8 @@
             	<br><br>
            		 파일 업로드만 가능하며, 다운로드 기능이 일체 차단됩니다.
         	</div>
+        	
+        	
     	</div>
     </div>        
 </body>
