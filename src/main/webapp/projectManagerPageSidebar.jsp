@@ -21,40 +21,35 @@
                     <div class="sidebar">
                         <strong class="title-text">회사</strong>
                         <div class="company-menu">
-                            <a href="#" class="list-group-item" id="company-info" onclick="projectPage('office_data.jsp')">회사 정보</a>
-                            <a href="#" class="list-group-item" id="user-manage" onclick="projectPage('office_user_data.jsp')">사용자 관리</a>
-                            <a href="#" class="list-group-item" id="user-invite" onclick="projectPage('invite.jsp')">사용자 초대</a>
+                            <a href="#"  id="company-info" onclick="projectPage('office_data.jsp')">회사 정보</a>
+                            <a href="#" id="user-manage" onclick="projectPage('office_user_data.jsp')">사용자 관리</a>
+                            <a href="#" id="user-invite" onclick="projectPage('invite.jsp')">사용자 초대</a>
                         </div> 
                         
                         <strong class="title-text">프로젝트</strong>
                         <div class="project-menu">
-                            <a href="#" class="list-group-item" id="project-manage" onclick="projectPage('admin_project.jsp')">프로젝트 관리</a>
+                            <a href="#" id="project-manage" onclick="projectPage('admin_project.jsp')">프로젝트 관리</a>
                         
-                            <a href="#" class="list-group-item" id="company-project-manage" onclick="projectPage('admin_project2.jsp')">회사 프로젝트 관리</a>
-                            <a href="#" class="list-group-item" id="open-project-manage" onclick="projectPage('admin_project3.jsp')">공개 프로젝트 관리</a>
-                            <a href="#" class="list-group-item" id="open-project-category" onclick="projectPage('admin_project4.jsp')">공개 프로젝트 카테고리</a>
+                            <a href="#" id="company-project-manage" onclick="projectPage('admin_project2.jsp')">회사 프로젝트 관리</a>
+                            <a href="#" id="open-project-manage" onclick="projectPage('admin_project3.jsp')">공개 프로젝트 관리</a>
+                            <a href="#" id="open-project-category" onclick="projectPage('admin_project4.jsp')">공개 프로젝트 카테고리</a>
                             
                         </div>
                         
                         <strong class="title-text">통계/리포트</strong>
                         <div class="report-menu">
-                            <a href="connectionStatistics.jsp" class="list-group-item" id="connect-statistics">접속 통계</a>
-                            <a href="useStatistics.jsp" class="list-group-item" id="use-statistics" >사용 통계</a>
+                            <a href="connectionStatistics.jsp" id="connect-statistics">접속 통계</a>
+                            <a href="getUseStatisticsView.do" id="use-statistics" >사용 통계</a>
                         </div>
                         
                         <strong class="title-text">보안설정</strong>
                         <div class="security-menu">
-                            <a href="downProhibitionView.do" class="list-group-item" id="download-contorl">파일 다운로드 제한</a>
+                            <a href="downProhibitionView.do" id="download-contorl">파일 다운로드 제한</a>
                         </div>
                        
                     </div>
                     
-                   <!--  <div class="manager-helper-container">
-                       <button id="helpMenuBt">
-                        <span></span>관리자 도움말
-                       </button>
-                    </div>
-                     -->
+             
     
                 </div> <!--// sidebarcontainer-->
                 

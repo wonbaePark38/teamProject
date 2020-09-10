@@ -67,9 +67,8 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 	
 	@Override //커넥션 끊켰을때
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		int id = getId(session);
-		userService.updateDisconnectionLog(id);
-		
+		int myId = getId(session);
+		userService.updateDisconnectionLog(myId);
 		sessions.remove(session);
 		userSessions.remove(session);
 		

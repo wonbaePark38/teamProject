@@ -15,9 +15,10 @@
 
 </head>
 <body>
+<jsp:include page="privateConfigHeader.jsp" flush="true" />
     <div class="mainWrap">
     <jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
-    <div style="margin-left:50px">
+    <div id="main-contents">
         <div class="header">
             접속 통계
         </div>

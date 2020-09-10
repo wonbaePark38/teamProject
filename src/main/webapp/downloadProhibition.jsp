@@ -14,7 +14,7 @@
 
     <div class="mainWrap">
     	<jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
-    	<div style="margin-left:50px">
+    	<div id="main-contents" style="margin-left:50px">
         	<header>
            		 파일 다운로드 제한
        		 </header>

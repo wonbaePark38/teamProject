@@ -18,17 +18,21 @@ body {
 }
 
 .mainWrap {
-	display: flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    margin: 0 auto;
+   
     height: 100%;
+    padding-top: 60px;
 }
 
+#main-contents{
+	margin-left: 50px;
+	width: 70%;
+}
 .input-div {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	height: 70px;
 	width: 800px;
 	align-items: center;
@@ -46,10 +50,10 @@ select {
 }
 
 .search-keyword {
-	height: 30px;
-	width: 200px;
-	margin-right: 30px;
-	border: 1px solid #e1e1e2;
+	height: 35px;
+    width: 200px;
+    margin-left: 20px;
+    border: 1px solid #e1e1e2;
 }
 
 .submit-bt {
@@ -87,6 +91,6 @@ tr {
 	min-width:600px;
 	empty-cells: show;
 	border-collapse: collapse;
-	
+	text-align : center;
 	border-color: grey;
 }

@@ -14,7 +14,6 @@ $(document).ready(function(){
 	 //검색기능 이벤트
 	  $("#searchChatRoom").keyup(function(e){
 		  var keyword = $(this).val();
-		  console.log(keyword);
 		  $(".chat-row").hide();
 		  var listDiv = $(".row-label:contains('" + keyword + "')");
 		  $(listDiv).parent().show();
