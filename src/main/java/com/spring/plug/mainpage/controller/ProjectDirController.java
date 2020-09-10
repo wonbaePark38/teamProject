@@ -103,12 +103,11 @@ public class ProjectDirController {
 
 	// 프로젝트 선택
 	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
-	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav, HttpSession session) {
+	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav,HttpSession session) {
 		UserVO uvo = (UserVO) session.getAttribute("user");
 		vo.setMember_id(uvo.getSeq());
 		session.setAttribute("projectdir", vo);
 		
-		System.out.println(vo.toString());
 		mav.addObject("getProject", vo);
 		mav.setViewName("mainpage.do");
 		projectDirService.insertProject_ConnectionLog(vo);

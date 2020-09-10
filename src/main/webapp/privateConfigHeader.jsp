@@ -45,7 +45,9 @@
 
 				</div>
 				<div class="headerRight">
-					<button id="serviceUpgradeBt" onclick="test()">서비스 업그레이드</button>
+				
+						<a href="downProhibitionView.do" id="project-manage-bt">프로젝트 관리</a>
+					
 					<div id="chatbt-div">
 						<input type="button" id="headerChatBt" onclick="headerChatting()">
 						<span></span>

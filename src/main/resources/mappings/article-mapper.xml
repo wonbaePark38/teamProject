@@ -92,6 +92,7 @@
 	<insert id="replyInsert" parameterType="articleReplyVO">
 		INSERT INTO article_reply
 		(
+		member_id,
 		project_id,
 		article_id,
 		reply_writer,
@@ -99,7 +100,7 @@
 		reply_content
 		)
 		VALUES
-		( #{project_id}, #{article_id}, #{reply_writer},sysdate ,#{reply_content} )
+		( #{member_id}, #{project_id}, #{article_id}, #{reply_writer},sysdate ,#{reply_content} )
 	</insert>
 
 
@@ -111,6 +112,7 @@
 		parameterType="article1VO">
 		INSERT INTO mainpage_article
 		(
+		member_id,
 		project_id,
 		project_name,
 		article_id,
@@ -155,6 +157,7 @@
 		)
 		VALUES
 		(
+		#{member_id},
 		#{project_id},
 		#{project_name},
 		(select nvl(max(article_id), 0) +1 from mainpage_article),
