@@ -134,7 +134,6 @@ function headerOption(){
     document.getElementById('postpone').style.backgroundColor = 'white';
     
     document.getElementById('work_status').value = 'request';
-    obj.style.color = 'white';
   }
 
   function doing(){

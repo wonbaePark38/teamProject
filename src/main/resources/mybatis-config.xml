@@ -7,6 +7,7 @@
 	
 	<typeAliases>
 		<typeAlias alias="user" type="com.spring.plug.login.vo.UserVO"></typeAlias>
+		<typeAlias alias="getUserConnection" type="com.spring.plug.login.vo.UserVO"></typeAlias>
 		<typeAlias alias="article1VO" type="com.spring.plug.mainpage.article.vo.Article1VO" ></typeAlias>
 		<typeAlias alias="articleReplyVO" type="com.spring.plug.mainpage.article.vo.ArticleReplyVO"/>
 		<typeAlias alias="articleWorkerVO" type="com.spring.plug.mainpage.article.vo.ArticleWorkerVO"/>

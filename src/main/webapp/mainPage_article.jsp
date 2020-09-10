@@ -187,8 +187,8 @@
 
 									<input type="file" id="writeForm1_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm1_uploadFile)"
-										style="display: none;"> <input type="file"
-										id="writeForm1_img" name="writeForm_img"
+										style="display: none;"> 
+									<input type="file" id="writeForm1_img" name="writeForm_img"
 										onchange="imgCheck(this,writeForm1_uploadImg)"
 										accept="image/gif, image/jpg, image/png"
 										style="display: none;"> <a id="writeForm1_file_add"
@@ -393,6 +393,8 @@
 											<ul
 												style="list-style: none; border: 1px solid lightgray; background-color: white; padding-left: 0px;">
 												<!-- forEach -->
+												<c:forEach var="pix_list" items="${pixedList}">
+												</c:forEach>
 												<li><a onclick="add_worker(this)">테스트1</a></li>
 												<li><a onclick="add_worker(this)">테스트2</a></li>
 												<li><a onclick="add_worker(this)">테스트3</a></li>
@@ -951,24 +953,25 @@
 									
 								</div>
 								<!-- 파일 -->
-								
-								<div id="post_files">
-									<div class='post_file' >
-										<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
-											<img id='download_icon'>
-												<dl class='file_div'>
-													<dt>
-														<a>${list.file_name}</a>	
-													</dt>
-													<dd style='margin: 0px;'>${list.file_size } byte</dd>
-												</dl>
-										<div class='down_fil' >
-										<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+								<c:if test="${list.file_name ne null or list.file_name ne ''}">
+									<div id="post_files">
+										<div class='post_file' >
+											<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
+												<img id='download_icon'>
+													<dl class='file_div'>
+														<dt>
+															<a>${list.file_name}</a>	
+														</dt>
+														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+													</dl>
+											<div class='down_fil' >
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											</div>
 										</div>
 									</div>
-								</div>
-
-								</div>
+	
+									</div>
+								</c:if>
 
 								<div style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span

@@ -6,6 +6,7 @@ package com.spring.plug.login.dao;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -88,5 +89,8 @@ public class UserDAO {
 		sqlSessionTemplate.update("UserDAO.updateDisconnectionLog", userId);
 	}
 	
+	public List<UserVO> userConnectionTime() {
+		return sqlSessionTemplate.selectList("UserDAO.userConnectionTime");
+	}
 }
 

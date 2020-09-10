@@ -3,6 +3,7 @@ package com.spring.plug.login.service;
 
 
 import java.util.Date;
+import java.util.List;
 
 import com.spring.plug.login.vo.UserVO;
 
@@ -20,4 +21,6 @@ public interface UserService {
 	void writeLoginDate(UserVO vo);
 	void updateDisconnectionLog(int userId);
 	void insertConnectionLog(int userId);
+	
+	List<UserVO> userConnectionTime();
 }

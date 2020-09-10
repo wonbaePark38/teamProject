@@ -42,4 +42,15 @@
 		WHERE member_id = #{member_id} ORDER BY project_id ASC
 	</select>
 	
+	<select id="getProjectDirUser" resultType="project_lookup" parameterType="project_lookup">
+		SELECT project_id, member_id, member_name, member_email 
+		FROM project_lookup 
+		INNER JOIN
+			(
+				SELECT member_id, member_name, member_email FROM memberinfo
+			)
+        USING(member_id)
+        WHERE project_id = #{project_id}
+	</select>
+	
 </mapper>

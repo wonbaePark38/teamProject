@@ -3,6 +3,7 @@ package com.spring.plug.login.service;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -126,6 +127,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void insertConnectionLog(int userId) {
 		userDAO.insertConnectionLog(userId);
+	}
+
+	
+	@Override
+	public List<UserVO> userConnectionTime() {
+		return userDAO.userConnectionTime();
+		
 	}
 	
 }

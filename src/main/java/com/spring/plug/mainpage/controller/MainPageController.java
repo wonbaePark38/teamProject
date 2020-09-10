@@ -22,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.plug.mainpage.article.vo.Article1VO;
 import com.spring.plug.mainpage.article.vo.ArticleReplyVO;
 import com.spring.plug.mainpage.article.vo.ArticleWorkerVO;
+import com.spring.plug.mainpage.projectdir.service.ProjectDirService;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
+import com.spring.plug.login.service.UserService;
 import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.article.service.ArticleService;
 
@@ -32,6 +34,19 @@ public class MainPageController {
 	@Autowired
 	private ArticleService service;
 
+	@Autowired 
+	private ProjectDirService project_service;
+	
+	/*
+	 * @Autowired private UserService user_service; List<UserVO> connlist =
+	 * user_service.userConnectionTime(); for (UserVO user : connlist) {
+	 * System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+user.
+	 * getConnection_times());
+	 * System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+user.
+	 * getUser_time()); }
+	 */
+	
+	
 	private String[] arr;
 	private int count;
 
@@ -49,7 +64,7 @@ public class MainPageController {
 	@RequestMapping(value = "/mainpage.do")
 	public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo, Article1VO vo, ModelAndView mav,
 			HttpSession session) {
-
+		
 		System.out.println(project.toString());
 
 		vo.setProject_id(project.getProject_id());
@@ -65,6 +80,9 @@ public class MainPageController {
 		// 상단 고정글 리스트
 		List<Article1VO> pixedList = service.getArticlePixedList(vo);
 
+		// 프로젝트 사용자 리스트
+//		List<ProjectDirVO> project_user = project_service.get
+		
 		mav.addObject("project", project);
 		mav.addObject("articleList", articleList);
 		mav.addObject("replyList", replyList);
@@ -75,19 +93,19 @@ public class MainPageController {
 
 	public void fileSave(Article1VO vo, UserVO user, ProjectDirVO project) throws IOException {
 		MultipartFile uploadFile = vo.getWriteForm_file();
-		String file_path = "";
 		if (!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
 			String memberID = Integer.toString(user.getSeq());
-			file_path = "C:\\plug\\"+project.getProject_id()+"\\"+ memberID + "_" + fileName;
+			vo.setFile_name(uploadFile.getOriginalFilename());
+			String file_path = "C:\\plug\\"+project.getProject_id()+"\\"+ memberID + "_" + vo.getFile_name();
 			uploadFile.transferTo(new File(file_path));
+			vo.setFile_path(file_path);
 		}
-		vo.setFile_path(file_path);
 		
 	}
 	
 	@RequestMapping(value = "/writeform1.do")
 	public String article1Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+		
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
@@ -99,9 +117,8 @@ public class MainPageController {
 	@RequestMapping(value = "/writeform2.do")
 	public String article2Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
-		fileSave(vo,user,project);
 		vo.setMember_id(user.getSeq());
-
+		fileSave(vo,user,project);
 		service.insertArticle(vo);
 		return "mainpage.do";
 	}

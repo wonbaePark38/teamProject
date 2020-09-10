@@ -24,6 +24,22 @@ public class UserVO {
 	private String chatAlram;
 	private String connectDevice;
 	private String loginDate;
+	
+	private String connection_times;
+	private String user_time;
+	
+	public String getConnection_times() {
+		return connection_times;
+	}
+	public void setConnection_times(String connection_times) {
+		this.connection_times = connection_times;
+	}
+	public String getUser_time() {
+		return user_time;
+	}
+	public void setUser_time(String user_time) {
+		this.user_time = user_time;
+	}
 	public String getLoginDate() {
 		return loginDate;
 	}

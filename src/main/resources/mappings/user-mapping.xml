@@ -13,6 +13,13 @@
 		<result property="lockTime" column="LOCKTIME"/>
 	</resultMap>
 	
+	<resultMap type="getUserConnection" id="getUserConnection">
+		<id property="connection_set" column="connection_set"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="connection_start" column="CONNECTION_START"/>
+		<result property="connection_end" column="CONNECTION_END"/>
+	</resultMap>
+	
 	<select id="getUser" resultMap="getUser" parameterType="user">
 		SELECT * FROM MEMBERINFO A INNER JOIN USERSETTING B
 		ON A.MEMBER_ID = B.MEMBER_ID
@@ -61,4 +68,9 @@
 	<update id="updateDisconnectionLog" parameterType="int">
 		UPDATE USER_CONNECTION SET CONNECTION_END = SYSDATE WHERE MEMBER_ID = #{userId} AND CONNECTION_END IS NULL  
 	</update>
+	
+	<select id="userConnectionTime" parameterType="getUserConnection" resultMap="getUserConnection">
+		SELECT (TO_CHAR(connection_start,'HH24')) AS connection_times, COUNT(*) AS user_time 
+		FROM user_connection GROUP BY (TO_CHAR(connection_start,'HH24')) order by (TO_CHAR(connection_start,'HH24'))
+	</select>
 </mapper>
