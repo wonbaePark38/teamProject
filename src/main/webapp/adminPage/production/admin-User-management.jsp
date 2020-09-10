@@ -20,6 +20,89 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
     <link href="css/maps/myCss.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      
+      google.load("visualization", "1", {'packages':["corechart"]});    
+
+      google.setOnLoadCallback(drawChart);	// bar
+
+
+
+      function drawChart() {    
+
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', '시간');
+
+        data.addColumn('number', '접속자');
+
+        //data.addColumn('number', '취소');
+
+              data.addRows([
+                ['00', 124],
+                ['01', 442],
+                ['02', 321],
+                ['03', 0],
+                ['04', 0],
+                ['05', 0],
+                ['06', 0],
+                ['07', 0],
+                ['08', 524],
+                ['09', 257],
+                ['10', 352],
+                ['11', 279],
+                ['12', 279],
+                ['13', 279],
+                ['14', 279],
+                ['15', 279],
+                ['16', 279],
+                ['17', 279],
+                ['18', 279],
+                ['19', 279],
+                ['20', 279],
+                ['21', 279],
+                ['22', 279],
+                ['23', 389]
+              ]);
+
+        var options = {     
+
+          title: '시간대별 접속자수',
+
+          fontSize: '12',
+
+          fontName: '굴림체',
+
+          hAxis: {
+
+            title: '기간', 
+
+            titleTextStyle: {color: 'red', fontName: '명조체'}
+
+          } ,      
+
+          vAxis: {
+
+            title: '접속자수', 
+
+            titleTextStyle: {color: 'blue', fontName: '명조체'}
+
+          } ,
+
+          
+        };        
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('admin_user_management_content_statics4'));
+
+        chart.draw(data, options);   
+
+        data = null;
+
+        chart = null;
+      }
+
+    </script>
   </head>
 
   <body class="nav-md">
@@ -41,7 +124,7 @@
                     <ul class="nav child_menu">
                       <li><a href="getUserManager.do">회원 관리</a></li>
                       <li><a href="searchUser.do">회원 검색</a></li>
-                      <li><a href="admin-User-log.jsp">회원 로그</a></li>
+                      <li><a href="getUserLog.do">회원 로그</a></li>
                     </ul>
                   </li>
 

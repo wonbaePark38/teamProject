@@ -8,4 +8,6 @@ public interface ManagerService {
 	ManagerVO getUser();
 	ManagerVO getProject();
 	List<ManagerVO> getUserList(ManagerVO vo);
+	List<ManagerVO> getTimeLog(ManagerVO vo);
+	List<ManagerVO> getConnLog(ManagerVO vo);
 }

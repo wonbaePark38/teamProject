@@ -11,6 +11,8 @@
 		<result property="userName" column="MEMBER_NAME" />
 		<result property="userEmail" column="MEMBER_EMAIL" />
 		<result property="regDate" column="REGDATE" />
+		<result property="startTime" column="START_TIME" />
+		<result property="endTime" column="END_TIME" />
 	</resultMap>
 	
 	<select id="getUser" resultMap="managerResult">
@@ -32,6 +34,27 @@
 			AND PROJECT_NAME LIKE '%'||#{searchKeyword}||'%' 
 		</if>
 		ORDER BY MEMBER_ID ASC
+	</select>
+	
+	<select id="getTimeLog" resultMap="managerResult">
+		<if test="searchKeyword == null">
+			SELECT MEMBER_NAME, MEMBER_EMAIL, TO_CHAR(CONNECTION_START, 'yyyy-mm-dd hh24:mi:ss') AS "START_TIME", 
+			TO_CHAR(CONNECTION_END, 'yyyy-mm-dd hh24:mi:ss') AS "END_TIME" 
+			FROM USER_CONNECTION JOIN MEMBERINFO USING(MEMBER_ID)
+		</if>
+		<if test="searchKeyword != null">
+			SELECT MEMBER_NAME, MEMBER_EMAIL, TO_CHAR(CONNECTION_START, 'yyyy-mm-dd hh24:mi:ss') AS "START_TIME", 
+			TO_CHAR(CONNECTION_END, 'yyyy-mm-dd hh24:mi:ss') AS "END_TIME" 
+			FROM USER_CONNECTION JOIN MEMBERINFO USING(MEMBER_ID) WHERE TO_CHAR(CONNECTION_START, 'mm') = #{searchKeyword}
+		</if>
+		ORDER BY CONNECTION_SEQ ASC
+	</select>
+	
+	<select id="getConnLog" resultMap="managerResult">
+		SELECT (TO_CHAR(CONNECTION_START, 'HH24')) AS HOUR, COUNT(*) AS CNT
+		FROM USER_CONNECTION
+		GROUP BY (TO_CHAR(CONNECTION_START, 'HH24'))
+		ORDER BY (TO_CHAR(CONNECTION_START, 'HH24'))
 	</select>
 	
 </mapper>

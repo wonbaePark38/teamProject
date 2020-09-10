@@ -31,5 +31,17 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<ManagerVO> getUserList(ManagerVO vo) {
 		return managerDAO.getUserList(vo);
 	}
+	
+	@Override
+	@Transactional
+	public List<ManagerVO> getTimeLog(ManagerVO vo) {
+		return managerDAO.getTimeLog(vo);
+	}
 
+	@Override
+	@Transactional
+	public List<ManagerVO> getConnLog(ManagerVO vo) {
+		return managerDAO.getConnLog(vo);
+	}
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plug.admin.manager.service.ManagerServiceImpl;
@@ -51,6 +52,19 @@ public class ManagerController {
 		List<ManagerVO> userList = managerService.getUserList(vo);
 		mav.addObject("userList", userList);
 		mav.setViewName("admin-User-searchUser.jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/adminPage/production/getUserLog.do")
+	public ModelAndView getTimeLog(ManagerVO vo, ModelAndView mav, @RequestParam(value = "month", required = false) String keyword) {
+		if(keyword != null) {
+			vo.setSearchKeyword(keyword);
+		} else {
+			vo.setSearchKeyword(null);
+		}
+		List<ManagerVO> userTime = managerService.getTimeLog(vo);
+		mav.addObject("userTime", userTime);
+		mav.setViewName("admin-User-log.jsp");
 		return mav;
 	}
 	
