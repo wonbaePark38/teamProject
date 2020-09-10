@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -41,7 +43,7 @@
                     <ul class="nav child_menu">
                       <li><a href="getUserManager.do">회원 관리</a></li>
                       <li><a href="searchUser.do">회원 검색</a></li>
-                      <li><a href="admin-User-log.jsp">회원 로그</a></li>
+                      <li><a href="getUserLog.do">회원 로그</a></li>
                     </ul>
                   </li>
 
@@ -87,42 +89,45 @@
 
           <div>
             <div>
-              <select name="" style="display: inline-block; height: 25px;">
-                <option>1월</option>
-                <option>2월</option>
-                <option>3월</option>
-                <option>4월</option>
-                <option>5월</option>
-                <option>6월</option>
-                <option>7월</option>
-                <option>8월</option>
-                <option>9월</option>
-                <option>10월</option>
-                <option>11월</option>
-                <option>12월</option>
+            <form action="getUserLog.do" method="post">
+              <select name="month" style="display: inline-block; height: 25px;">
+                <option value="01">1월</option>
+                <option value="02">2월</option>
+                <option value="03">3월</option>
+                <option value="04">4월</option>
+                <option value="05">5월</option>
+                <option value="06">6월</option>
+                <option value="07">7월</option>
+                <option value="08">8월</option>
+                <option value="09">9월</option>
+                <option value="10">10월</option>
+                <option value="11">11월</option>
+                <option value="12">12월</option>
               </select>
               <div style="display: inline-block; vertical-align: middle;">
-                <input type="text" placeholder="시작일">
-                <span>~</span>
-                <input type="text" placeholder="종료일">
-                <button>검색</button>
+                <input type="submit" value="검색" />
               </div>
+              
             </div>
-
+			</form>
 
             <div style="margin-top: 20px;">
               <table>
                 <tr>
                   <th style="width: 150px;">아이디</th>
+                  <th style="width: 150px;">이메일</th>
                   <th style="width: 200px;">접속일자</th>
-                  <th style="width: 1200px;">로그아웃</th>
+                  <th style="width: 200px;">로그아웃</th>
                 </tr>
                 <!-- forEach -->
-                <tr>
-                  <td style="width: 150px;">abc123456</td>
-                  <td style="width: 100px;">2020/02/02 13:32:12</td>
-                  <td style="width: 100px;">2020/02/02 17:32:12</td>
-                </tr>
+                <c:forEach var="time" items="${ userTime }">
+					<tr>
+						<td style="width: 150px;">${ time.userName }</td>
+						<td style="width: 150px;">${ time.userEmail }</td>
+						<td style="width: 200px;">${ time.startTime }</td>
+						<td style="width: 200px;">${ time.endTime }</td>
+					</tr>
+				</c:forEach>
                 <!-- //forEach -->
               </table>
               <!-- 페이징처리 -->

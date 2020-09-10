@@ -29,4 +29,14 @@ public class ManagerDAO {
 		return sqlSessionTemplate.selectList("ManagerDAO.getUserList", vo);
 	}
 	
+	public List<ManagerVO> getTimeLog(ManagerVO vo) {
+		System.out.println("사용자 로그 불러오기");
+		return sqlSessionTemplate.selectList("ManagerDAO.getTimeLog", vo);
+	}
+	
+	public List<ManagerVO> getConnLog(ManagerVO vo) {
+		System.out.println("사용자 접속 로그");
+		return sqlSessionTemplate.selectList("ManagerDAO.getConnLog", vo);
+	}
+	
 }

@@ -42,7 +42,7 @@
                     <ul class="nav child_menu">
                       <li><a href="getUserManager.do">회원 관리</a></li>
                       <li><a href="searchUser.do">회원 검색</a></li>
-                      <li><a href="admin-User-log.jsp">회원 로그</a></li>
+                      <li><a href="getUserLog.do">회원 로그</a></li>
                     </ul>
                   </li>
 
