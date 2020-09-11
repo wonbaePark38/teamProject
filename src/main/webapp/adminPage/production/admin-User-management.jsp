@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -40,30 +42,7 @@
         //data.addColumn('number', '취소');
 
               data.addRows([
-                ['00', 124],
-                ['01', 442],
-                ['02', 321],
-                ['03', 0],
-                ['04', 0],
-                ['05', 0],
-                ['06', 0],
-                ['07', 0],
-                ['08', 524],
-                ['09', 257],
-                ['10', 352],
-                ['11', 279],
-                ['12', 279],
-                ['13', 279],
-                ['14', 279],
-                ['15', 279],
-                ['16', 279],
-                ['17', 279],
-                ['18', 279],
-                ['19', 279],
-                ['20', 279],
-                ['21', 279],
-                ['22', 279],
-                ['23', 389]
+                ${ result }
               ]);
 
         var options = {     
@@ -193,12 +172,6 @@
                 <div id="admin_user_management_content_statics4"></div>
               </div>
               
-              <div style="display: inline-block;">
-                <div>
-                  <span>평균 접속시간</span>
-                </div>
-                <div id="admin_user_management_content_statics5"></div>
-              </div>
 
             </div>
             <!-- //접속시간 -->

@@ -22,5 +22,5 @@ public interface UserService {
 	void updateDisconnectionLog(int userId);
 	void insertConnectionLog(int userId);
 	
-	List<UserVO> userConnectionTime();
+	List<UserVO> userConnectionTime(UserVO vo);
 }

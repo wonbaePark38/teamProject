@@ -13,6 +13,7 @@
 		<result property="regDate" column="REGDATE" />
 		<result property="startTime" column="START_TIME" />
 		<result property="endTime" column="END_TIME" />
+		<result property="searchDay" column="SEARCH_DAY" />
 	</resultMap>
 	
 	<select id="getUser" resultMap="managerResult">
@@ -52,7 +53,7 @@
 	
 	<select id="getConnLog" resultMap="managerResult">
 		SELECT (TO_CHAR(CONNECTION_START, 'HH24')) AS HOUR, COUNT(*) AS CNT
-		FROM USER_CONNECTION
+		FROM USER_CONNECTION WHERE TO_CHAR(CONNECTION_START, 'yyyy-mm-dd') = #{searchDay}
 		GROUP BY (TO_CHAR(CONNECTION_START, 'HH24'))
 		ORDER BY (TO_CHAR(CONNECTION_START, 'HH24'))
 	</select>

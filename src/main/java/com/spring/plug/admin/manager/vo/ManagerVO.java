@@ -13,7 +13,18 @@ public class ManagerVO {
 	private Date regDate;
 	private String startTime;
 	private String endTime;
+	private String searchDay;
 	
+	
+	
+	public String getSearchDay() {
+		return searchDay;
+	}
+
+	public void setSearchDay(String searchDay) {
+		this.searchDay = searchDay;
+	}
+
 	public String getStartTime() {
 		return startTime;
 	}

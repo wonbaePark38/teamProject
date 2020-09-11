@@ -89,8 +89,8 @@ public class UserDAO {
 		sqlSessionTemplate.update("UserDAO.updateDisconnectionLog", userId);
 	}
 	
-	public List<UserVO> userConnectionTime() {
-		return sqlSessionTemplate.selectList("UserDAO.userConnectionTime");
+	public List<UserVO> userConnectionTime(UserVO vo) {
+		return sqlSessionTemplate.selectList("UserDAO.userConnectionTime", vo);
 	}
 }
 
