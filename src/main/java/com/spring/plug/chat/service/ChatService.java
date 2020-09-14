@@ -27,4 +27,5 @@ public interface ChatService {
 	void deleteChatUser(ChatRoomVO roomVO);
 	void updateUnreadCount(MessageVO vo);
 	List<MessageVO> getUnreadUser(MessageVO vo);
+	List<MessageVO> getProjectList(int userId);
 }

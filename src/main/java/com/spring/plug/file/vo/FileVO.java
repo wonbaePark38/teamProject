@@ -15,7 +15,14 @@ public class FileVO {
 	private String projectName;
 	private String fileSize;
 	private String downProhibition;
+	private int articleId;
 	
+	public int getArticleId() {
+		return articleId;
+	}
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
+	}
 	public String getDownProhibition() {
 		return downProhibition;
 	}

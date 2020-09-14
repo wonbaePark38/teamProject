@@ -85,7 +85,6 @@ public class UserDAO {
 	}
 	
 	public void updateDisconnectionLog(int userId) {
-		System.out.println("로그아웃 로그 기록 남김");
 		sqlSessionTemplate.update("UserDAO.updateDisconnectionLog", userId);
 	}
 	

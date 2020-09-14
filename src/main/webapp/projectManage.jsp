@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +8,17 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/admin_project.css">
 <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="script/projectManage.js"></script>
+
 </head>
 <body>
+<jsp:include page="privateConfigHeader.jsp" flush="true" />
+<script>
+    	$('.headerWrap').css('width','100%');
+		$('.headerWrap').css('border','0');
+		$('#inputkeyword').css('display','none');
+    </script>
+
 <div class = "wrap">
 <jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
 	<div class="pj_wrap">
@@ -32,13 +42,10 @@
 					<col style="width:310px;">
 					<col>
 					</colgroup>
-					<tbody><tr>
-						<td>
-							<input id="project_srch_word" type="text" placeholder="프로젝트명을 적어주세요" style="width:200px;">
-						</td>
-										<td><a id="PROJECT_SRCH_BTN" class="btn srchbtn_style" >검색</a></td>
-					</tr>
-				</tbody></table>
+					<tbody>
+					
+				</tbody>
+				</table>
 				
 			</div>
 			<!-- // 검색 테이블 -->
@@ -66,7 +73,6 @@
 							<th scope="col"><div><span>참여자수</span><a data="JOIN_CNT"></a></div></th>
 							<th scope="col"><div><span>게시물수</span><a data="PROJECT_CNT"></a></div></th>
 							<th scope="col"><div><span>댓글수</span><a data="REMARK_CNT"></a></div></th>
-							<th scope="col"><div><span>채팅수</span><a data="CHAT_CNT"></a></div></th>
 							<th scope="col"><div><span>일정수</span><a data="SCHD_CNT"></a></div></th>
 							<th scope="col"><div><span>업무수</span><a data="TASK_CNT"></a></div></th>
 							<th scope="col"><div><span>개설일</span><a data="RGSN_DTTM"></a></div></th>
@@ -91,15 +97,14 @@
 						</colgroup>
 						<tbody>
 							<tr style="cursor: pointer; background-color: rgb(255, 255, 255);">
-								<td>'wevevvedvsadwef' 업무공유방</td>
-								<td>안세영</td>
-								<td>1</td>
-								<td>1</td>
+								<td>${projectInfo.projectName} </td>
+								<td id='manager-name'>${projectInfo.name}</td>
+								<td>${projectInfo.accompanyCount}</td>
+								<td>${projectInfo.writeCount}</td>
+								<td>${projectInfo.replyCount}</td>
 								<td>0</td>
 								<td>0</td>
-								<td>0</td>
-								<td>0</td>
-								<td>2020-07-29 13:08</td>
+								<td>${projectInfo.createDate}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -111,11 +116,14 @@
 			
 			
 			<!-- 모달창 -->
-			<div id="addProjLayer2" class="bgmodal_wrap" style="position: fixed; top: 50%; left: 50%; margin-top: -469.5px; margin-left: -730px; display: none;">
+			<div id="addProjLayer2" class="bgmodal_wrap" style="position: fixed; top: 0; left: 0; display: none;">
 
-			<div class="lyaer_popup_wrap" style="width:900px;margin-top:-370px;margin-left:-450px;">
+			<div class="lyaer_popup_wrap" style="width:900px; height:400px;">
 				<div class="lyaer_popup_top">
-					<h1><span>프로젝트 정보</span><input style="cursor:pointer" type="button" class="pop_close" title="닫기"></h1>
+					<h1>
+						<span>프로젝트 정보</span>
+						<input style="cursor:pointer" type="button" class="modal_pop_close" title="닫기">
+					</h1>
 				</div>
 				<div class="lyaer_popup_cont">
 					<div class="srch_table mgt10">
@@ -123,13 +131,7 @@
 							<colgroup>
 							<col style="width:150px;"><col>
 							</colgroup>
-							<tbody><tr>
-								<th scope="row">프로젝트명</th>
-								<td><input name="proj_name" type="text" placeholder="프로젝트명을 입력하세요" style="width:98.5%;" maxlength="100"></td>
-							</tr>
-							
-							
-							
+							<tbody>
 		                    <tr>
 		                        <th scope="row">관리자</th>
 		                        <td>
@@ -156,11 +158,12 @@
 											<thead>
 												<tr>
 													<th scope="col"><div>사용자명</div></th>
-													<th scope="col"><div>아이디</div></th>
-													<!-- <th scope="col"><div>회사</div></th> --> 
-													<th scope="col"><div>부서</div></th>
 													<th scope="col"><div>이메일</div></th>
 													<th scope="col"><div>휴대폰번호</div></th>
+													<th scope="col"><div>회사</div></th>
+													<th scope="col"><div>부서</div></th>
+													
+													
 													<th scope="col" class="add_exp"><div>관리자</div></th>
 												</tr>
 											</thead>
@@ -178,7 +181,9 @@
 													<col style="width:13%;">
 													<col class="add_exp">
 												</colgroup>
-												<tbody id="mngr_tbody2"><tr><td name="username">안세영</td><td><span class="user_ids" data-userid="ahncount@gmail.com">ahncount@gmail.com</span></td><td></td><td></td><td></td><td>&nbsp;<a class="out_bt tbold_uline admin-release" value="destory">관리자[해제]</a></td></tr></tbody>
+												<tbody id="mngr_tbody2">
+												</tbody>
+												
 											</table>
 										</div><div id="mCSB_14_scrollbar_vertical" class="mCSB_scrollTools mCSB_14_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><a href="#" class="mCSB_buttonUp" oncontextmenu="return false;"></a><div class="mCSB_draggerContainer"><div id="mCSB_14_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div><a href="#" class="mCSB_buttonDown" oncontextmenu="return false;"></a></div></div></div>	
 										<!-- //scroll -->
@@ -187,34 +192,7 @@
 								</td>
 							</tr>	
 										
-							<tr>
-							    <th scope="row">글 / 댓글 작성 권한</th>
-								<td>
-							        <div class="radiobox">
-										<label class="on"><input type="radio" name="comprj_mngr_wr_yn" value="N" checked="">&nbsp;<span style="cursor:pointer">전체</span></label>&nbsp;&nbsp;
-										<label class="on"><input type="radio" name="comprj_mngr_wr_yn" value="Y">&nbsp;<span style="cursor:pointer">관리자만 글/댓글 작성 가능</span></label>
-									</div>
-							    </td>
-							</tr>
-							<tr>
-							    <th scope="row">글 조회 권한</th>
-								<td>
-							        <div class="radiobox">
-										<label class="on"><input type="radio" name="comprj_srch_auth_yn" value="N" checked="">&nbsp;<span style="cursor:pointer">전체</span></label>&nbsp;&nbsp;
-										<label class="on"><input type="radio" name="comprj_srch_auth_yn" value="Y">&nbsp;<span style="cursor:pointer" >관리자 + 글 작성 본인만 조회 가능</span></label>
-										<!-- <span id="mngrAlert2" style="color:red" data-langcode="FA1456">※ 프로젝트 생성 후 권한 변경 불가 </span > -->
-									</div> 
-							    </td>
-							</tr>
-							<tr>
-							    <th scope="row">파일 다운로드 권한</th>
-								<td>
-							        <div class="radiobox">
-										<label class="on"><input type="radio" name="comprj_prj_auth" value="N" checked="">&nbsp;<span style="cursor:pointer" >전체</span></label>&nbsp;&nbsp;
-										<label class="on"><input type="radio" name="comprj_prj_auth" value="Y">&nbsp;<span style="cursor:pointer">관리자 + 글 작성 본인만 다운로드 가능  <span style="color: red">(*문서 및 이미지 조회도 차단됩니다)</span></span></label>
-									</div>
-							    </td>
-							</tr>
+							
 							<tr id="dbOfficialAppoint" style="display: none;">
 							    <th scope="row">공식 프로젝트 지정</th>
 								<td>
@@ -228,15 +206,13 @@
 					<!-- // -->
 		
 					<div class="t_center mgt15 btn_wrap">
-						<div class="left"><a id="del_proj2" style="cursor:pointer" class="btn btn_popstyle2 bgred" >삭제</a></div>
-						<a id="save-or-edit2" style="cursor:pointer" class="btn btn_popstyle1 bgblue" >수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a style="cursor:pointer" class="btn btn_popstyle1 pop_close" >취소</a>
+						<div class="left"><a id="del_proj2" style="cursor:pointer" class="btn btn_popstyle2 bgred" >프로젝트 삭제</a></div>
 					</div>
 				</div>
 			</div>
 			
 			<!-- 관리자페이지 -->
-			<div id="proj_mngr_layer2" class="layer_popup_wrap" style="z-index: 1001; width: 570px; min-height: 180px; padding-bottom: 20px; margin-top: -300px; margin-left: -285px; display: none;">
+			<div id="proj_mngr_layer2" class="layer_popup_wrap" style="z-index: 1001; width: 570px; min-height: 180px; padding-bottom: 20px; display: none;">
 				<div class="layer_popup_top">
 				<h1 >관리자 선택</h1> 
 					<a style="cursor:pointer" class="pop_close"><img src="images/btn_popclose.gif" alt="닫기"></a>
@@ -290,7 +266,13 @@
 								<col style="">
 								<col style="width:20%">
 								</colgroup>
-								<tbody id="comm_user_tbody2"><tr><td>안세영</td><td>ahncount@gmail.com</td><td>&nbsp;<a class="out_bt tbold_uline admin-release">관리자[해제]</a></td></tr></tbody>
+								<tbody id="comm_user_tbody2">
+									<tr>
+										<td>안세영</td>
+										<td>ahncount@gmail.com</td>
+										<td>&nbsp;<a class="out_bt tbold_uline admin-release">관리자[해제]</a></td>
+									</tr>
+								</tbody>
 							</table>
 						</div><div id="mCSB_15_scrollbar_vertical" class="mCSB_scrollTools mCSB_15_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><a href="#" class="mCSB_buttonUp" oncontextmenu="return false;"></a><div class="mCSB_draggerContainer"><div id="mCSB_15_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div><a href="#" class="mCSB_buttonDown" oncontextmenu="return false;"></a></div></div></div>
 						<!-- //scroll -->
@@ -298,15 +280,12 @@
 					<!-- //리스트테이블 -->
 				</div>		
 				
-				<div class="t_center mgt15 btn_wrap">
-					<a style="cursor:pointer" class="btn btn_popstyle1 bgblue">확인</a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a style="cursor:pointer" class="btn btn_popstyle1 pop_close">취소</a>
-				</div>
+				
 						
 			</div>
 			<div class="bgmodal" style="display: none;"></div>
-		
-			
+			<input type="hidden" id="my-id" value="${user.seq}">
+			<input type="hidden" id="my-email" value="${user.email}">
 		</div>
 			
 			
@@ -314,25 +293,5 @@
 	</div>
 </div>
 </body>
-<script>
 
-
-$("#mCSB_13_container > table > tbody > tr").click(function() {
-	$(".bgmodal_wrap").css("display", "block");
-})
-
-$(".pop_close").click(function() {
-	if($(".bgmodal").css("display") == "block") {
-		$(".bgmodal").css("display", "none");
-		$(".layer_popup_wrap").css("display", "none");	
-	} else if($(".bgmodal_wrap").css("display") == "block") {
-		$(".bgmodal_wrap").css("display", "none");
-	}
-});
-
-$("#mngrAdd2").click(function() {
-	$(".bgmodal").css("display", "block");
-	$(".layer_popup_wrap").css("display", "block");
-});
-</script>
 </html>

@@ -25,11 +25,22 @@ select {
 button, a {
 	cursor: pointer;
 }
-
+.invite-header{
+	display:flex;
+}
 .admin_contents {
-	
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: #f2f2f2;
+    padding-top: 60px;
+    height:100%;
 }
 
+.invite-div{
+	margin-left: 30px;
+	width: 70%;
+}
 header {
 	display: flex;
 	align-items: center;
@@ -38,6 +49,7 @@ header {
 	box-sizing: border-box;
 	border-bottom: 1px solid grey;
 }
+
 
 element.style {
 	width: 190px;
@@ -439,4 +451,17 @@ input[type=text] {
 	border: 1px solid #e6e6e6;
 	border-radius: 1px;
 	box-sizing: border-box;
+}
+.status-div{
+	display:flex;
+}
+#hidden-status{
+	display: inline-block;
+	width: 300px;
+    background-color: #6862c3;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-left: 40px;
+    display:none;
 }

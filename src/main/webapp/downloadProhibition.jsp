@@ -11,13 +11,18 @@
     <script type="text/javascript" src="script/download-prohibition.js"></script>
 </head>
 <body>
-
+<jsp:include page="privateConfigHeader.jsp" flush="true" />
+ 	<script>
+    	$('.headerWrap').css('width','100%');
+		$('.headerWrap').css('border','0');
+		$('#inputkeyword').css('display','none');
+    </script>
     <div class="mainWrap">
     	<jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
     	<div id="main-contents" style="margin-left:50px">
-        	<header>
+        	<div class="header">
            		 파일 다운로드 제한
-       		 </header>
+       		 </div>
 
         	<div class="contents">
             	<div class="setting">

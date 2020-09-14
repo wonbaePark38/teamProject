@@ -50,6 +50,18 @@
 		<result property="chatRoomName" column="CHATROOMNAME"/>
 	</resultMap>
 	
+	<resultMap type="msgVO" id="getProjectId">
+		<result property="projectId" column="PROJECT_ID"/>
+		<result property="projectName" column="PROJECT_NAME"/>
+	</resultMap>
+	
+	<select id="getProjectList" resultMap="getProjectId" parameterType="int">
+		SELECT A.PROJECT_ID, B.PROJECT_NAME 
+			FROM PROJECT_LOOKUP A 
+			INNER JOIN PROJECTDIR B 
+			ON A.PROJECT_ID = B.PROJECT_ID 
+			WHERE MEMBER_ID = #{userId}
+	</select>
 	<select id="getUnreadUser" resultMap="unReadUser" parameterType="msgVO">
 		SELECT A.UNREADCOUNT, A.MEMBER_ID, A.CHATROOMID, A.MEMBER_NAME, B.CHATROOMNAME, B.JOINNUMBER
 		FROM CHATROOMSTATUS A INNER JOIN CHATROOM B ON(A.CHATROOMID = B.CHATROOMID) 

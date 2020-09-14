@@ -1,18 +1,111 @@
 package com.spring.plug.projectmanager.vo;
 
+
+
 public class ProjectManageVO {
 	private String downProhibition;
 	private int projectId;
+	private String projectName;
 	private int userId;
 	private String name;
 	private String companyName;
 	private String department;
 	private String myPosition;
 	private String companyCallNumber;
+	private String phoneNumber;
 	private String email;
 	private int writeCount;
 	private int replyCount;
+	private int connectionCount;
+	private String searchTerm;
+	private String connectionDate;
+	private int accompanyCount;
+	private String createDate;
+	private int managerStatus;
+	private int changedProjectId;
+	private int lookup_id;
 	
+	public int getLookup_id() {
+		return lookup_id;
+	}
+
+	public void setLookup_id(int lookup_id) {
+		this.lookup_id = lookup_id;
+	}
+
+	public int getChangedProjectId() {
+		return changedProjectId;
+	}
+
+	public void setChangedProjectId(int changedProjectId) {
+		this.changedProjectId = changedProjectId;
+	}
+
+	public int getManagerStatus() {
+		return managerStatus;
+	}
+
+	public void setManagerStatus(int managerStatus) {
+		this.managerStatus = managerStatus;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public int getAccompanyCount() {
+		return accompanyCount;
+	}
+	
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+
+	public void setAccompanyCount(int accompanyCount) {
+		this.accompanyCount = accompanyCount;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getConnectionDate() {
+		return connectionDate;
+	}
+
+	public void setConnectionDate(String connectionDate) {
+		this.connectionDate = connectionDate;
+	}
+
+	public String getSearchTerm() {
+		return searchTerm;
+	}
+
+	public void setSearchTerm(String searchTerm) {
+		this.searchTerm = searchTerm;
+	}
+
+	public int getConnectionCount() {
+		return connectionCount;
+	}
+
+	public void setConnectionCount(int connectionCount) {
+		this.connectionCount = connectionCount;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -103,12 +196,15 @@ public class ProjectManageVO {
 
 	@Override
 	public String toString() {
-		return "ProjectManageVO [downProhibition=" + downProhibition + ", projectId=" + projectId + ", userId=" + userId
-				+ ", name=" + name + ", companyName=" + companyName + ", department=" + department + ", myPosition="
-				+ myPosition + ", companyCallNumber=" + companyCallNumber + ", email=" + email + ", writeCount="
-				+ writeCount + ", replyCount=" + replyCount + "]";
+		return "ProjectManageVO [downProhibition=" + downProhibition + ", projectId=" + projectId + ", projectName="
+				+ projectName + ", userId=" + userId + ", name=" + name + ", companyName=" + companyName
+				+ ", department=" + department + ", myPosition=" + myPosition + ", companyCallNumber="
+				+ companyCallNumber + ", phoneNumber=" + phoneNumber + ", email=" + email + ", writeCount=" + writeCount
+				+ ", replyCount=" + replyCount + ", connectionCount=" + connectionCount + ", searchTerm=" + searchTerm
+				+ ", connectionDate=" + connectionDate + ", accompanyCount=" + accompanyCount + ", createDate="
+				+ createDate + ", managerStatus=" + managerStatus + "]";
 	}
 
-
+	
 
 }

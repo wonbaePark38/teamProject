@@ -91,5 +91,8 @@ public class ChatDAO {
 	public List<MessageVO> getUnreadUser(MessageVO vo){
 		return sqlSessionTemplate.selectList("ChatDAO.getUnreadUser", vo);
 	}
+	public List<MessageVO> getProjectList(int userId){
+		return sqlSessionTemplate.selectList("ChatDAO.getProjectList", userId);
+	}
 	
 }

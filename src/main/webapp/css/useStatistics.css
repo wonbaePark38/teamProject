@@ -16,7 +16,14 @@ body {
         box-sizing: border-box;
         border-bottom: 1px solid grey;
 }
-
+.headerWrap {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
 .mainWrap {
     display: flex;
     flex-direction: row;
