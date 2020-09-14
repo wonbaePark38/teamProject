@@ -28,7 +28,7 @@ function writeForm_submit3() {
 
 function writeForm_submit4() {
 	var form4 = document.getElementById('writeForm4_form');
-	if ($('#writeForm4_title').attr('value') == null) {
+	if ($('#writeForm4_title').val() == null) {
 		alert('제목을 입력해주세요.');
 	} else if ($('#sche_start_date').attr('value') == null || $('#sche_end_date').attr('value') != null) {
 		alert('일정을 선택해주세요.');
@@ -38,29 +38,30 @@ function writeForm_submit4() {
 	
 }
 
-function writeForm_submit5() {
+$(document).on('click','#writeForm5_submit',function(){
+	
 	var form5 = document.getElementById('writeForm5_form');
 	
-	if ($('#todo_title').attr('value') == null) {
+	if ($('#todo_title').val() == null) {
 		alert('제목을 입력해주세요');
-	} else if ($('#todo_content').attr('value') == null) {
+	} else if ($('.todo_content').val() == null) {
 		alert('할일을 입력해주세요.');
-	} else if ($('#todo_date').attr('value') == null) {
+	} else if ($('.todo_date').val() == null) {
 		alert('일자를 정해주세요.')
-	} else if ($('#workerInputId').attr('value') == null) {
+	} else if ($('.todo_worker').val() == null) {
 		alert('담당자를 정해주세요.')
 	} else {
 		var contents = null; 
 		$('.todo_content').each(function(){
-			contents += ($(this).attr('value'))+',';
+			contents += ($(this).val())+',';
 		});
 		var dates = null;
 		$('.todo_date').each(function(){
-			dates += ($(this).attr('value'))+',';
+			dates += ($(this).val())+',';
 		});
 		var workers = null;
 		$('.workerInputId').each(function(){
-			workers = ($(this).attr('value'))+','; 
+			workers = ($(this).val())+','; 
 		});
 		
 		contents = contents.slice(0,-1);
@@ -72,5 +73,5 @@ function writeForm_submit5() {
 		
 		form5.submit();
 	}
+});
 	
-}

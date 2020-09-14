@@ -90,14 +90,8 @@ public class UserDAO {
 		sqlSessionTemplate.update("UserDAO.updateDisconnectionLog", userId);
 	}
 	
-<<<<<<< HEAD
-	// 유저 사용시간
-	public List<UserVO> userConnectionTime() {
-		return sqlSessionTemplate.selectList("UserDAO.userConnectionTime");
-=======
 	public List<UserVO> userConnectionTime(UserVO vo) {
 		return sqlSessionTemplate.selectList("UserDAO.userConnectionTime", vo);
->>>>>>> refs/remotes/origin/ahnse0-0911
 	}
 	
 }
