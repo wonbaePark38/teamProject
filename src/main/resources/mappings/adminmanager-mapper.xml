@@ -20,6 +20,9 @@
 		<result property="projectname" column="PROJECT_NAME" />
 		<result property="projectusercount" column="PROJECT_COUNT" />
 		<result property="projectrank" column="RANK" />
+		<result property="createmonth" column="CREATE_MONTH" />
+		<result property="daycount" column="DAY_COUNT" />
+		<result property="createyear" column="CREATE_YEAR" />
 	</resultMap>
 	
 	<select id="getUser" resultMap="managerResult">
@@ -75,5 +78,40 @@
 		ORDER BY PROJECT_COUNT DESC
 	</select>
 	
+	<select id="getProjectDay" resultMap="managerResult">
+		SELECT (TO_CHAR(CREATEDATE, 'DD')) AS CREATE_MONTH,
+		COUNT(*) AS DAY_COUNT 
+		FROM PROJECTDIR
+		WHERE (TO_CHAR(CREATEDATE, 'YYYY-MM')) = #{searchDay}
+		GROUP BY (TO_CHAR(CREATEDATE, 'DD'))
+		ORDER BY (TO_CHAR(CREATEDATE, 'DD')) ASC
+	</select>
+	
+	<select id="getArticleDay" resultMap="managerResult">
+		SELECT (TO_CHAR(REGDATE, 'DD')) AS CREATE_MONTH,
+		COUNT(*) AS DAY_COUNT 
+		FROM MAINPAGE_ARTICLE
+		WHERE (TO_CHAR(REGDATE, 'YYYY-MM')) = #{searchDay}
+		GROUP BY (TO_CHAR(REGDATE, 'DD'))
+		ORDER BY (TO_CHAR(REGDATE, 'DD')) ASC
+	</select>
+	
+	<select id="getProjectYear" resultMap="managerResult">
+		SELECT (TO_CHAR(CREATEDATE, 'MM')) AS CREATE_YEAR,
+		COUNT(*) AS DAY_COUNT 
+		FROM PROJECTDIR
+		WHERE (TO_CHAR(CREATEDATE, 'YYYY')) = #{searchDay}
+		GROUP BY (TO_CHAR(CREATEDATE, 'MM'))
+		ORDER BY (TO_CHAR(CREATEDATE, 'MM')) ASC
+	</select>
+	
+	<select id="getArticleYear" resultMap="managerResult">
+		SELECT (TO_CHAR(REGDATE, 'MM')) AS CREATE_YEAR,
+		COUNT(*) AS DAY_COUNT 
+		FROM MAINPAGE_ARTICLE
+		WHERE (TO_CHAR(REGDATE, 'YYYY')) = #{searchDay}
+		GROUP BY (TO_CHAR(REGDATE, 'MM'))
+		ORDER BY (TO_CHAR(REGDATE, 'MM')) ASC
+	</select>
 	
 </mapper>

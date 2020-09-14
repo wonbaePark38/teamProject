@@ -20,10 +20,37 @@ public class ManagerVO {
 	private String projectname;
 	private int projectusercount;
 	private int projectrank;
+	private String createmonth;
+	private int daycount;
+	private String createyear;
 	
 	
 	
 	
+	public String getCreateyear() {
+		return createyear;
+	}
+
+	public void setCreateyear(String createyear) {
+		this.createyear = createyear;
+	}
+
+	public String getCreatemonth() {
+		return createmonth;
+	}
+
+	public void setCreatemonth(String createmonth) {
+		this.createmonth = createmonth;
+	}
+
+	public int getDaycount() {
+		return daycount;
+	}
+
+	public void setDaycount(int daycount) {
+		this.daycount = daycount;
+	}
+
 	public int getProjectrank() {
 		return projectrank;
 	}

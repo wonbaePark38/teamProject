@@ -14,4 +14,8 @@ public interface ManagerService {
 	ManagerVO getArticleToday(ManagerVO vo);
 	ManagerVO getProjectToday(ManagerVO vo);
 	List<ManagerVO> getProjectRank();
+	List<ManagerVO> getProjectDay(ManagerVO vo);
+	List<ManagerVO> getArticleDay(ManagerVO vo);
+	List<ManagerVO> getProjectYear(ManagerVO vo);
+	List<ManagerVO> getArticleYear(ManagerVO vo);
 }

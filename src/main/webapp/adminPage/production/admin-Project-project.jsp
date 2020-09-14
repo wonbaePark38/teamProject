@@ -31,25 +31,13 @@
       function drawChart() {    
         var data = new google.visualization.DataTable();
         data.addColumn('string', '시간');
-        data.addColumn('number', '게시글');
+        data.addColumn('number', '프로젝트');
         //data.addColumn('number', '취소');
               data.addRows([
-                ['00', 124],
-                ['01', 442],
-                ['02', 321],
-                ['03', 0],
-                ['04', 0],
-                ['05', 0],
-                ['06', 0],
-                ['07', 0],
-                ['08', 524],
-                ['09', 257],
-                ['10', 352],
-                ['11', 279],
-                ['12', 389]
+                ${ result }
               ]);
         var options = {     
-          title: '게시글수',
+          title: '프로젝트',
           fontSize: '12',
           fontName: '굴림체',
           hAxis: {
@@ -57,7 +45,7 @@
             titleTextStyle: {color: 'red', fontName: '명조체'}
           } ,      
           vAxis: {
-            title: '게시글수', 
+            title: '프로젝트', 
             titleTextStyle: {color: 'blue', fontName: '명조체'}
           } ,
         };        
@@ -75,15 +63,11 @@
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales', 'Expenses', 'test'],
-        ['2004',  1000,      400,	200],
-        ['2005',  1170,      460,	500],
-        ['2006',  660,       1120,	1000],
-        ['2007',  1030,      540,	1010]
+        ${ result2 }
       ]);
 
       var options = {
-        title: 'Company Performance',
+        title: '프로젝트 수',
         curveType: 'function',
         legend: { position: 'bottom' }
       };
@@ -129,9 +113,8 @@
 	                  <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
 	                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
-	                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
 	                    </ul>
-	                  </li>                
+	                  </li>                 
 
                   
                   
@@ -207,21 +190,23 @@
                     </div>
                     <!-- 날짜 선택 관련 -->
                     <div id="statics_mothly_create_article_select_date">
-                      <select>
-                        <option>1월</option>
-                        <option>2월</option>
-                        <option>3월</option>
-                        <option>4월</option>
-                        <option>5월</option>
-                        <option>6월</option>
-                        <option>7월</option>
-                        <option>8월</option>
-                        <option>9월</option>
-                        <option>10월</option>
-                        <option>11월</option>
-                        <option>12월</option>
+                    <form action="projectInfo.do" method="post">
+                      <select name="month">
+                        <option value="01">1월</option>
+                        <option value="02">2월</option>
+                        <option value="03">3월</option>
+                        <option value="04">4월</option>
+                        <option value="05">5월</option>
+                        <option value="06">6월</option>
+                        <option value="07">7월</option>
+                        <option value="08">8월</option>
+                        <option value="09">9월</option>
+                        <option value="10">10월</option>
+                        <option value="11">11월</option>
+                        <option value="12">12월</option>
                       </select>
-                      
+                      <input type="submit" value="검색" />
+                      </form>
                     </div>
                     <!-- //날짜 선택 관련 -->
                     <div>

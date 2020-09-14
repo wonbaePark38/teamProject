@@ -23,6 +23,58 @@
 
     <!-- googleChart -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.load("visualization", "1", {'packages':["corechart"]});    
+      google.setOnLoadCallback(drawChart);	// bar
+      function drawChart() {    
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '시간');
+        data.addColumn('number', '게시글');
+        //data.addColumn('number', '취소');
+              data.addRows([
+            	  ${ result }
+              ]);
+        var options = {     
+          title: '게시글수',
+          fontSize: '12',
+          fontName: '굴림체',
+          hAxis: {
+            title: '기간', 
+            titleTextStyle: {color: 'red', fontName: '명조체'}
+          } ,      
+          vAxis: {
+            title: '게시글수', 
+            titleTextStyle: {color: 'blue', fontName: '명조체'}
+          } ,
+        };        
+        var chart = new google.visualization.ColumnChart(document.getElementById('admin_article_content_statics2'));
+        chart.draw(data, options);   
+        data = null;
+        chart = null;
+      }
+
+
+    </script>
+	<script type="text/javascript">
+	    google.charts.load('current', {'packages':['corechart']});
+	    google.charts.setOnLoadCallback(drawChart);
+	
+	    function drawChart() {
+	      var data = google.visualization.arrayToDataTable([
+	    	  ${ result2 }
+	      ]);
+	
+	      var options = {
+	        title: '프로젝트 수',
+	        curveType: 'function',
+	        legend: { position: 'bottom' }
+	      };
+	
+	      var chart = new google.visualization.LineChart(document.getElementById('admin_article_content_statics3'));
+	
+	      chart.draw(data, options);
+	    }
+	</script>
     
   </head>
 
@@ -61,16 +113,11 @@
 	                  <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
 	                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
-	                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
 	                    </ul>
-	                  </li>               
+	                  </li>                 
 	
-	                  
-	                  
 	                </ul>
 	              </div>
-	
-	              
 	
 	            </div>
 	            <!--  //side bar  -->
@@ -112,8 +159,6 @@
                   </div>
                  
                   <hr>
-
-                    
                   
                   <div style="margin-bottom: 20px;">
                     <span>기간별 게시글 작성수</span>
@@ -122,26 +167,23 @@
                   <!-- 날짜 선택 관련 -->
                   <div>
                     <div id="admin_article_content_datepick">
-                      <select>
-                        <option>1월</option>
-                        <option>2월</option>
-                        <option>3월</option>
-                        <option>4월</option>
-                        <option>5월</option>
-                        <option>6월</option>
-                        <option>7월</option>
-                        <option>8월</option>
-                        <option>9월</option>
-                        <option>10월</option>
-                        <option>11월</option>
-                        <option>12월</option>
+                   	<form action="projectArticle.do" method="post">
+                      <select name="month">
+                        <option value="01">1월</option>
+                        <option value="02">2월</option>
+                        <option value="03">3월</option>
+                        <option value="04">4월</option>
+                        <option value="05">5월</option>
+                        <option value="06">6월</option>
+                        <option value="07">7월</option>
+                        <option value="08">8월</option>
+                        <option value="09">9월</option>
+                        <option value="10">10월</option>
+                        <option value="11">11월</option>
+                        <option value="12">12월</option>
                       </select>
-                      
-                      <input id="articleDatepicker1" type="text">
-                      <span>~</span>
-                      <input id="articleDatepicker2" type="text">
-                      <button>검색</button>
-                      
+                      <input type="submit" value="검색" />
+                      </form>
                     </div>
                     <!-- //날짜 선택 관련 -->
                   </div>

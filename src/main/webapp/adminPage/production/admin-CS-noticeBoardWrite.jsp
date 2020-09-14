@@ -57,9 +57,8 @@
 	                  <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
 	                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
-	                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
 	                    </ul>
-	                  </li>                
+	                  </li>                  
 
                   
                   
