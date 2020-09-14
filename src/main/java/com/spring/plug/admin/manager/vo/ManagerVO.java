@@ -6,6 +6,9 @@ public class ManagerVO {
 
 	private int usercount;
 	private int procount;
+	private int articlecount;
+	private int articletoday;
+	private int protodaycount;
 	private String searchCondition;
 	private String searchKeyword;
 	private String userName;
@@ -14,9 +17,61 @@ public class ManagerVO {
 	private String startTime;
 	private String endTime;
 	private String searchDay;
+	private String projectname;
+	private int projectusercount;
+	private int projectrank;
 	
 	
 	
+	
+	public int getProjectrank() {
+		return projectrank;
+	}
+
+	public void setProjectrank(int projectrank) {
+		this.projectrank = projectrank;
+	}
+
+	public String getProjectname() {
+		return projectname;
+	}
+
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
+	}
+
+	public int getProjectusercount() {
+		return projectusercount;
+	}
+
+	public void setProjectusercount(int projectusercount) {
+		this.projectusercount = projectusercount;
+	}
+
+	public int getProtodaycount() {
+		return protodaycount;
+	}
+
+	public void setProtodaycount(int protodaycount) {
+		this.protodaycount = protodaycount;
+	}
+
+	public int getArticletoday() {
+		return articletoday;
+	}
+
+	public void setArticletoday(int articletoday) {
+		this.articletoday = articletoday;
+	}
+
+	public int getArticlecount() {
+		return articlecount;
+	}
+
+	public void setArticlecount(int articlecount) {
+		this.articlecount = articlecount;
+	}
+
 	public String getSearchDay() {
 		return searchDay;
 	}

@@ -50,8 +50,8 @@
 	
 	                  <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
-	                      <li><a href="admin-Project-article.jsp">게시글</a></li>
-	                      <li><a href="admin-Project-project.jsp">프로젝트</a></li>
+	                      <li><a href="projectArticle.do">게시글</a></li>
+	                      <li><a href="projectInfo.do">프로젝트</a></li>
 	                    </ul>
 	                  </li>
 	                  
@@ -95,61 +95,17 @@
                         <th style="width: 150px;">가입한 회원수</th>
                     </tr>
                     <tr>
-                        <td style="width: 150px;">1</td>
-                        <td style="width: 150px;">2</td>
+                        <td style="width: 150px;">${ vo.getArticlecount() }</td>
+                        <td style="width: 150px;">${ vo.getProcount() }</td>
                         <td style="width: 150px;">${ vo.getUsercount() }</td>
                     </tr>
                     </table>
 
-                    <table style="margin-top: 20px;">
-                        <tr>
-                            <th style="width: 150px;">신고된 게시글 수</th>
-                            <th style="width: 150px;">신고된 프로젝트수</th>
-                            <th style="width: 150px;">탈퇴한 회원수</th>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px;">4</td>
-                            <td style="width: 150px;">5</td>
-                            <td style="width: 150px;">6</td>
-                        </tr>
-                        </table>
                 </div>
-
-                <div style="margin-top: 20px; width: 1150px;">
-
-                    <div style="display: inline-block;">
-                        <div>
-                            <span>회원 유형 비율</span>
-                        </div>
-                        <div style="display: inline-block; width: 350px; height: 350px; background: cadetblue;"></div>
-                    </div>
-
-                    <div style="display: inline-block;">
-                        <div>
-                            <span>회원 성비</span>
-                        </div>
-                        <div style="display: inline-block; width: 350px; height: 350px; background: cadetblue;"></div>
-                    </div>
-
-                    <div style="display: inline-block;">
-                        <div>
-                            <span>프로젝트 카테고리 비율</span>
-                        </div>
-                        <div style="display: inline-block; width: 350px; height: 350px; background: cadetblue;"></div>
-                    </div>
-
-                </div>
-                
-
 
 
             </div>
             <!-- //page content -->
-
-
-
-
-
         </div>
         <!-- main container -->
     </div>

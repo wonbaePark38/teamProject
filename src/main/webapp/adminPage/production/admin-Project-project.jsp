@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,23 +26,13 @@
     <!-- googleChart -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-      
       google.load("visualization", "1", {'packages':["corechart"]});    
-
       google.setOnLoadCallback(drawChart);	// bar
-
-
-
       function drawChart() {    
-
         var data = new google.visualization.DataTable();
-
         data.addColumn('string', '시간');
-
         data.addColumn('number', '게시글');
-
         //data.addColumn('number', '취소');
-
               data.addRows([
                 ['00', 124],
                 ['01', 442],
@@ -56,45 +48,51 @@
                 ['11', 279],
                 ['12', 389]
               ]);
-
         var options = {     
-
           title: '게시글수',
-
           fontSize: '12',
-
           fontName: '굴림체',
-
           hAxis: {
-
             title: '기간', 
-
             titleTextStyle: {color: 'red', fontName: '명조체'}
-
           } ,      
-
           vAxis: {
-
             title: '게시글수', 
-
             titleTextStyle: {color: 'blue', fontName: '명조체'}
-
           } ,
-
-          
         };        
-
         var chart = new google.visualization.ColumnChart(document.getElementById('statics_mothly_create_article_static'));
-
         chart.draw(data, options);   
-
         data = null;
-
         chart = null;
       }
 
-    </script>
 
+    </script>
+	<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Year', 'Sales', 'Expenses', 'test'],
+        ['2004',  1000,      400,	200],
+        ['2005',  1170,      460,	500],
+        ['2006',  660,       1120,	1000],
+        ['2007',  1030,      540,	1010]
+      ]);
+
+      var options = {
+        title: 'Company Performance',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('statics_mothly_create_article_pastyear_static'));
+
+      chart.draw(data, options);
+    }
+	</script>
   </head>
 
   <body class="nav-md">
@@ -113,31 +111,27 @@
                 <ul class="nav side-menu">
                   
                   <li><a><i class="fa fa-edit"></i> 회원<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="getUserManager.do">회원 관리</a></li>
-                      <li><a href="searchUser.do">회원 검색</a></li>
-                      <li><a href="getUserLog.do">회원 로그</a></li>
-                    </ul>
-                  </li>
-
-
-                  <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="admin-Project-article.jsp">게시글</a></li>
-                      <li><a href="admin-Project-project.jsp">프로젝트</a></li>
-                    </ul>
-                  </li>
-
-
-                  
-
-                  <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
-                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
-                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
-                    </ul>
-                  </li>                  
+	                    <ul class="nav child_menu">
+	                      <li><a href="getUserManager.do">회원 관리</a></li>
+	                      <li><a href="searchUser.do">회원 검색</a></li>
+	                      <li><a href="getUserLog.do">회원 로그</a></li>
+	                    </ul>
+	                  </li>
+	
+	
+	                  <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="projectArticle.do">게시글</a></li>
+	                      <li><a href="projectInfo.do">프로젝트</a></li>
+	                    </ul>
+	                  </li>
+	                  
+	                  <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
+	                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
+	                    </ul>
+	                  </li>                
 
                   
                   
@@ -175,8 +169,8 @@
                         <th>총 프로젝트 수</th>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>2</td>
+                        <td>${ vo.getProtodaycount() }</td>
+                        <td>${ vo.getProcount() }</td>
                       </tr>
                     </table>
                     <br>
@@ -186,18 +180,12 @@
                         <th>이용자수</th>
                       </tr>
                       <!-- forEach -->
-                      <tr>
-                        <td>프로젝트1</td>
-                        <td>123</td>
-                      </tr>
-                      <tr>
-                        <td>프로젝트2</td>
-                        <td>110</td>
-                      </tr>
-                      <tr>
-                        <td>프로젝트3</td>
-                        <td>100</td>
-                      </tr>
+                      <c:forEach var="project" items="${ projectList }" begin="0" end="2">
+	                      <tr>
+	                        <td>${ project.getProjectname() }</td>
+	                        <td>${ project.getProjectusercount() }</td>
+	                      </tr>
+                      </c:forEach>
                       <!-- //forEach -->
                     </table>
                   </div>
@@ -210,16 +198,6 @@
 
                   <hr>
 
-                  <!-- 프로젝트 통계 관련 div -->
-                  <div>
-                    <div style="margin-bottom: 20px;">
-                      <span>전일 대비 프로젝트 수</span>
-                    </div>
-                    <div id="statics_compare_yesterday"></div>
-
-                  </div>
-
-                  <hr>
                   
                   
                   <div>
@@ -243,12 +221,6 @@
                         <option>11월</option>
                         <option>12월</option>
                       </select>
-
-                      <div id="statics_mothly_create_article_datepicker">
-                        <input id="statics_mothly_create_article_datepicker1" type="text">
-                        <span>~</span>
-                        <input id="statics_mothly_create_article_datepicker2" type="text">
-                      </div>
                       
                     </div>
                     <!-- //날짜 선택 관련 -->
@@ -269,37 +241,11 @@
 
                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   </div>
                   <!-- //프로젝트 통계 관련 div -->
 
                 </div>
               </div>
-
-
-
-
-
-
-
-
-
 
             </div>
             

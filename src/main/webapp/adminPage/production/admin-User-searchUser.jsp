@@ -45,31 +45,28 @@
 						<div class="menu_section">
 							<ul class="nav side-menu">
 
-								<li><a><i class="fa fa-edit"></i> 회원<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="getUserManager.do">회원 관리</a></li>
-										<li><a href="searchUser.do">회원 검색</a></li>
-										<li><a href="getUserLog.do">회원 로그</a></li>
-									</ul></li>
-
-
-								<li><a><i class="fa fa-desktop"></i> 프로젝트<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="admin-Project-article.jsp">게시글</a></li>
-										<li><a href="admin-Project-project.jsp">프로젝트</a></li>
-									</ul></li>
-
-
-
-								<li><a><i class="fa fa-sitemap"></i> CS <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
-										<li><a href="qnaBoardList.do">1:1 문의</a></li>
-										<li><a href="admin-CS-notify.jsp">신고접수</a></li>
-									</ul></li>
+								<li><a><i class="fa fa-edit"></i> 회원<span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="getUserManager.do">회원 관리</a></li>
+	                      <li><a href="searchUser.do">회원 검색</a></li>
+	                      <li><a href="getUserLog.do">회원 로그</a></li>
+	                    </ul>
+	                  </li>
+	
+	
+	                  <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="projectArticle.do">게시글</a></li>
+	                      <li><a href="projectInfo.do">프로젝트</a></li>
+	                    </ul>
+	                  </li>
+	                  
+	                  <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
+	                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
+	                    </ul>
+	                  </li>
 
 
 

@@ -82,6 +82,8 @@ public class ManagerController {
 	@RequestMapping(value = "/adminPage/production/LoginSuccess.do")
 	public ModelAndView getMain(ModelAndView mav) {
 		ManagerVO dbVO = managerService.getUser();
+		dbVO.setProcount(managerService.getProject().getProcount());
+		dbVO.setArticlecount(managerService.getArticle().getArticlecount());
 		mav.addObject("vo", dbVO);
 		mav.setViewName("admin-Main.jsp");
 		return mav;
@@ -109,5 +111,34 @@ public class ManagerController {
 		mav.setViewName("admin-User-log.jsp");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/adminPage/production/projectArticle.do")
+	public ModelAndView getProjectArticle(ModelAndView mav, ManagerVO vo) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String day = sdf.format(new Date());
+		vo.setSearchDay(day.toString());
+		ManagerVO dbVO = managerService.getUser();
+		dbVO.setArticlecount(managerService.getArticle().getArticlecount());
+		dbVO.setArticletoday(managerService.getArticleToday(vo).getArticletoday());
+		mav.addObject("vo", dbVO);
+		mav.setViewName("admin-Project-article.jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/adminPage/production/projectInfo.do")
+	public ModelAndView getProjectInfo(ModelAndView mav, ManagerVO vo) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String day = sdf.format(new Date());
+		vo.setSearchDay(day.toString());
+		ManagerVO dbVO = managerService.getUser();
+		dbVO.setProcount(managerService.getProject().getProcount());
+		dbVO.setProtodaycount(managerService.getProjectToday(vo).getProtodaycount());
+		List<ManagerVO> projectList = managerService.getProjectRank();
+		mav.addObject("vo", dbVO);
+		mav.addObject("projectList", projectList);
+		mav.setViewName("admin-Project-project.jsp");
+		return mav;
+	}
+	
 	
 }
