@@ -8,11 +8,18 @@
 		<!-- <id property="seq" column="SEQ" /> -->
 		<result property="usercount" column="USERCOUNT" />
 		<result property="procount" column="PROCOUNT" />
+		<result property="articlecount" column="ARTCOUNT" />
+		<result property="articletoday" column="ARTTODAYCOUNT" />
+		<result property="protodaycount" column="PROTODAYCOUNT" />
 		<result property="userName" column="MEMBER_NAME" />
 		<result property="userEmail" column="MEMBER_EMAIL" />
 		<result property="regDate" column="REGDATE" />
 		<result property="startTime" column="START_TIME" />
 		<result property="endTime" column="END_TIME" />
+		<result property="searchDay" column="SEARCH_DAY" />
+		<result property="projectname" column="PROJECT_NAME" />
+		<result property="projectusercount" column="PROJECT_COUNT" />
+		<result property="projectrank" column="RANK" />
 	</resultMap>
 	
 	<select id="getUser" resultMap="managerResult">
@@ -21,6 +28,18 @@
 	
 	<select id="getProject" resultMap="managerResult">
 		SELECT COUNT(*) as "PROCOUNT" FROM PROJECTDIR
+	</select>
+	
+	<select id="getArticle" resultMap="managerResult">
+		SELECT COUNT(*) as "ARTCOUNT" FROM MAINPAGE_ARTICLE
+	</select>
+	
+	<select id="getArticleToday" resultMap="managerResult">
+		SELECT COUNT(*) as "ARTTODAYCOUNT" FROM MAINPAGE_ARTICLE WHERE TO_CHAR(REGDATE, 'yyyy-mm-dd') = #{searchDay}
+	</select>
+
+	<select id="getProjectToday" resultMap="managerResult">
+		SELECT COUNT(*) as "PROTODAYCOUNT" FROM PROJECTDIR WHERE TO_CHAR(CREATEDATE, 'yyyy-mm-dd') = #{searchDay}
 	</select>
 
 	<select id="getUserList" resultMap="managerResult">
@@ -50,11 +69,11 @@
 		ORDER BY CONNECTION_SEQ ASC
 	</select>
 	
-	<select id="getConnLog" resultMap="managerResult">
-		SELECT (TO_CHAR(CONNECTION_START, 'HH24')) AS HOUR, COUNT(*) AS CNT
-		FROM USER_CONNECTION
-		GROUP BY (TO_CHAR(CONNECTION_START, 'HH24'))
-		ORDER BY (TO_CHAR(CONNECTION_START, 'HH24'))
+	<select id="getProjectRank" resultMap="managerResult">
+		SELECT PROJECT_ID, PROJECT_NAME, COUNT(PROJECT_ID) AS PROJECT_COUNT, DENSE_RANK() OVER (ORDER BY COUNT(PROJECT_ID) DESC) AS RANK FROM PROJECT_LOOKUP JOIN
+		PROJECTDIR USING(PROJECT_ID) GROUP BY PROJECT_ID, PROJECT_NAME 
+		ORDER BY PROJECT_COUNT DESC
 	</select>
+	
 	
 </mapper>

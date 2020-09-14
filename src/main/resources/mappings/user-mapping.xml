@@ -74,6 +74,6 @@
 	
 	<select id="userConnectionTime" parameterType="getUserConnection" resultMap="getUserConnection">
 		SELECT (TO_CHAR(connection_start,'HH24')) AS connection_times, COUNT(*) AS user_time 
-		FROM user_connection GROUP BY (TO_CHAR(connection_start,'HH24')) order by (TO_CHAR(connection_start,'HH24'))
+		FROM user_connection WHERE TO_CHAR(CONNECTION_START, 'yyyy-mm-dd') = #{searchDay} GROUP BY (TO_CHAR(connection_start,'HH24')) order by (TO_CHAR(connection_start,'HH24'))
 	</select>
 </mapper>

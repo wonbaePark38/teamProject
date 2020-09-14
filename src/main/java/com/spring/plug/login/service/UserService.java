@@ -23,6 +23,5 @@ public interface UserService {
 	void updateDisconnectionLog(int userId);
 	void insertConnectionLog(int userId);
 	
-	List<UserVO> userConnectionTime();	// 사용자 접속시간
-	
+	List<UserVO> userConnectionTime(UserVO vo); // 사용자 접속시간
 }

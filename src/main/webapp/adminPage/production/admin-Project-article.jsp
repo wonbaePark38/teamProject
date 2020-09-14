@@ -53,19 +53,17 @@
 	
 	                  <li><a><i class="fa fa-desktop"></i> 프로젝트<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
-	                      <li><a href="admin-Project-article.jsp">게시글</a></li>
-	                      <li><a href="admin-Project-project.jsp">프로젝트</a></li>
+	                      <li><a href="projectArticle.do">게시글</a></li>
+	                      <li><a href="projectInfo.do">프로젝트</a></li>
 	                    </ul>
 	                  </li>
-	
-	
+	                  
 	                  <li><a><i class="fa fa-sitemap"></i> CS <span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
-	                      <li><a href="admin-CS-FAQ.jsp">FAQ 관리</a></li>
 	                      <li><a href="qnaBoardList.do">1:1 문의</a></li>
 	                      <li><a href="admin-CS-notify.jsp">신고접수</a></li>
 	                    </ul>
-	                  </li>                  
+	                  </li>               
 	
 	                  
 	                  
@@ -100,8 +98,8 @@
                           <th>총 게시글 수</th>
                       </tr>
                       <tr>
-                          <td>1</td>
-                          <td>2</td>
+                          <td>${ vo.getArticletoday() }</td>
+                          <td>${ vo.getArticlecount() }</td>
                       </tr>
                       </table>
                   </div>
@@ -115,18 +113,6 @@
                  
                   <hr>
 
-                  <div>
-
-                    <div style="margin-bottom: 20px;">
-                      <span>전일 대비 게시글 작성수</span>
-                    </div>
-
-                    <div id="admin_article_content_statics1"></div>
-                    
-
-                  </div>
-
-                  <hr>
                     
                   
                   <div style="margin-bottom: 20px;">

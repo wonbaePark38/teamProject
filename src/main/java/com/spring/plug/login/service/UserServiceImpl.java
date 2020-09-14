@@ -132,8 +132,8 @@ public class UserServiceImpl implements UserService{
 
 	
 	@Override
-	public List<UserVO> userConnectionTime() {
-		return userDAO.userConnectionTime();
+	public List<UserVO> userConnectionTime(UserVO vo) {
+		return userDAO.userConnectionTime(vo);
 		
 	}
 

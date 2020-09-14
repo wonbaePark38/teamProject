@@ -27,6 +27,11 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
+	public ManagerVO getArticle() {
+		return managerDAO.getArticle();
+	}
+	
+	@Override
 	@Transactional
 	public List<ManagerVO> getUserList(ManagerVO vo) {
 		return managerDAO.getUserList(vo);
@@ -44,4 +49,18 @@ public class ManagerServiceImpl implements ManagerService {
 		return managerDAO.getConnLog(vo);
 	}
 	
+	@Override
+	public ManagerVO getArticleToday(ManagerVO vo) {
+		return managerDAO.getArticleToday(vo);
+	}
+	
+	@Override
+	public ManagerVO getProjectToday(ManagerVO vo) {
+		return managerDAO.getProjectToday(vo);
+	}
+	
+	@Override
+	public List<ManagerVO> getProjectRank() {
+		return managerDAO.getProjectRank();
+	}
 }

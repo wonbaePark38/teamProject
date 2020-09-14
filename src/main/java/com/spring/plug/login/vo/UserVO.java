@@ -27,7 +27,16 @@ public class UserVO {
 	
 	private String connection_times;
 	private String user_time;
+	private String searchDay;
 	
+	
+	
+	public String getSearchDay() {
+		return searchDay;
+	}
+	public void setSearchDay(String searchDay) {
+		this.searchDay = searchDay;
+	}
 	public String getConnection_times() {
 		return connection_times;
 	}

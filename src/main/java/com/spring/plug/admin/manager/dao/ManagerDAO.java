@@ -24,6 +24,11 @@ public class ManagerDAO {
 		return sqlSessionTemplate.selectOne("ManagerDAO.getProject");
 	}
 	
+	public ManagerVO getArticle() {
+		System.out.println("총게시글 불러오기");
+		return sqlSessionTemplate.selectOne("ManagerDAO.getArticle");
+	}
+	
 	public List<ManagerVO> getUserList(ManagerVO vo) {
 		System.out.println("사용자 리스트 불러오기");
 		return sqlSessionTemplate.selectList("ManagerDAO.getUserList", vo);
@@ -38,5 +43,21 @@ public class ManagerDAO {
 		System.out.println("사용자 접속 로그");
 		return sqlSessionTemplate.selectList("ManagerDAO.getConnLog", vo);
 	}
+	
+	public ManagerVO getArticleToday(ManagerVO vo) {
+		System.out.println("오늘 게시글 불러오기");
+		return sqlSessionTemplate.selectOne("ManagerDAO.getArticleToday", vo);
+	}
+	
+	public ManagerVO getProjectToday(ManagerVO vo) {
+		System.out.println("오늘 게시글 불러오기");
+		return sqlSessionTemplate.selectOne("ManagerDAO.getProjectToday", vo);
+	}
+	
+	public List<ManagerVO> getProjectRank() {
+		System.out.println("프로젝트 순위");
+		return sqlSessionTemplate.selectList("ManagerDAO.getProjectRank");
+	}
+	
 	
 }
