@@ -1148,7 +1148,26 @@
 								<div id="post_images"></div>
 								<!-- 파일 -->
 
-								<div id="post_files"></div>
+								<!-- 파일 -->
+								<c:if test="${list.file_name ne null}">
+									<div id="post_files">
+										<div class='post_file' >
+											<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
+												<img id='download_icon'>
+													<dl class='file_div'>
+														<dt>
+															<a>${list.file_name}</a>	
+														</dt>
+														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+													</dl>
+											<div class='down_fil' >
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											</div>
+										</div>
+									</div>
+	
+									</div>
+								</c:if>
 
 								<div style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
@@ -1416,7 +1435,25 @@
 								<div id="post_images"></div>
 								<!-- 파일 -->
 
-								<div id="post_files"></div>
+								<c:if test="${list.file_name ne null}">
+									<div id="post_files">
+										<div class='post_file' >
+											<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
+												<img id='download_icon'>
+													<dl class='file_div'>
+														<dt>
+															<a>${list.file_name}</a>	
+														</dt>
+														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+													</dl>
+											<div class='down_fil' >
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											</div>
+										</div>
+									</div>
+	
+									</div>
+								</c:if>
 
 								<div style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span

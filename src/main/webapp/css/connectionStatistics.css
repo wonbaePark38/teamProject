@@ -92,19 +92,22 @@ label {
 
 .search-keyword {
 	width: 250px;
-	height: 23px;
-	border: 1px solid #e1e1e2;
+	height: 30px;
+	border: none;
+	margin-right: 20px;
 }
 
 #submit-bt {
 	width: 100px;
-	height: 25px;
+	height: 32px;
 	background-color: white;
 	border: 1px solid #e1e1e2;
+	margin-right: 20px;
 }
 
 .table-view-div {
 	min-width:600px;
+	text-align : center;
 }
 
 .statistics {
@@ -121,10 +124,21 @@ label {
 	vertical-align: inherit;
 	border-color: inherit;
 	height: 40px;
+	
+}
+
+.con-statistics-tr td{
+	
+    font-size: 13px;
+    background-color: #f9f9fb;
+    color: blueviolet;
+    font-weight: normal;
+    border: 1px solid #e1e1e2;
+	
 }
 
 .con-statistics-tr th {
-	vertical-align: middle;
+	
 	font-size: 13px;
 	background-color: #f9f9fb;
 	color: blueviolet;
@@ -134,7 +148,10 @@ label {
 
 .statistics-data-row td {
 	font-size: 13px;
-	text-align: center;
+    background-color: #f9f9fb;
+    font-weight: normal;
+    border: 1px solid #e1e1e2;
+    padding: 3px;
 }
 
 

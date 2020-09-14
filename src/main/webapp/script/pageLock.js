@@ -34,7 +34,7 @@ $(document).ready(function(){
 			
 			if(data === 'true'){
 				$('#lock-modal').css('display','none');
-				
+				sessionStorage.removeItem("lock");
 				resetLock(setTime);
 			}else{
 				setLock();
@@ -48,6 +48,7 @@ $(document).ready(function(){
 	
 	
 	$('#logoutBt').click(function(){
+		sessionStorage.removeItem("lock");
 		location.href='logout.do';
 	})
 	$("body").keydown(function (event) {
@@ -83,7 +84,7 @@ setLock = function () {
     $('#input-password').val("");
 	modal.style.display = "block";
     document.onkeydown = doNotReload;
-    
+    sessionStorage.setItem("lock",true);
 }
    
 // 새로고침 막기

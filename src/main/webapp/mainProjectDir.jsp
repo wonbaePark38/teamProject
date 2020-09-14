@@ -34,13 +34,16 @@
 </style>
 
 <body>
+
 	<div class="mainWrap">
 		<!-- Navigation -->
 		
 		<jsp:include page='privateConfigHeader.jsp'></jsp:include>
 		<!--end navigation-->
 
-
+<script>
+	$('#project-manage-bt').css('display','none');
+</script>
 		<div class="centerArea" id="ch">
 			<!--중앙영역-->
 			<!--   <div class="leftContainer">-->

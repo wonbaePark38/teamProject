@@ -15,6 +15,11 @@
 <jsp:include page="privateConfigHeader.jsp" flush="true" />
     <div class="mainWrap">
     <jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
+    <script>
+    	$('.headerWrap').css('width','100%');
+		$('.headerWrap').css('border','0');
+		$('#inputkeyword').css('display','none');
+    </script>
     <div id="main-contents">
         <div class="header">
            	 플로우 사용 통계        

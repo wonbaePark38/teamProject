@@ -35,7 +35,6 @@ $(document).ready(function(){
 			  method: 'GET',
 
 		  }).done(function(data) {
-			  console.log(data);
 			  $.each(data, function(i, e) {
 				  list.push(e);
 			  });
@@ -352,12 +351,15 @@ $(document).ready(function(){
 				  }
 			  });
 		  }else{//리스트 형태일때
+			 
 			  $.each(presentList,function(index,element){ 
+				 
 				  if(obj[index].checked == true){ //체크박스 체크된 파일중에서
 					  if(element.downProhibition == 'y'){  //다운로드 금지 상태인 파일
 						  alert('다운로드 금지된 파일이 있습니다.'+ element.fileName);
 						  return false;
 					  }
+					  console.log(element);
 					  location.href = 'fileDownload.do?fileName='+element.fileName;
 					  fnSleep(1000);
 				  }
@@ -747,7 +749,6 @@ function removeFileList(){ //버튼 클릭했을때 그전에 있던 리스트 �
 
 /*db에서 받아온 파일 리스트 div 추가 함수*/
 function settingList(index,element){
-	console.log(element);
 	 /*if(element.downProhibition == 'y'){
 		 $('#downloadAllBt').css('display','none');
 		 $('#down-status-label').css('display','block');
@@ -875,7 +876,7 @@ function makeDetailView(element){
 			 	"<div>" + element.projectName+
 			 	"</div>" +
 			 	"<div>" +
-			 	"글 바로가기 >>" +
+			 	"<a href=mainpage.do?project_id="+element.projectId+'#'+element.articleId +">> 글 바로가기 >></a>" +
 			 	"</div>" +
 			 "</div>" +
 			"</div>" +

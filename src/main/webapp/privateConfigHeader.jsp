@@ -26,6 +26,10 @@
 </script>
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <body>
+		<c:if test="${user.lockSwitchStatus eq 'on'}">
+		<jsp:include page="lock.jsp" flush="true" />
+		<input type="hidden" name="user" id="session" value='${user.lockTime}'/>
+	</c:if>
 		<div class="headerContainer">
 			<div class="dir_set_bar" style="display: none;">
 				<span class="locker_setbtn" id="locker_list">보관함 설정</span> 
@@ -46,7 +50,7 @@
 				</div>
 				<div class="headerRight">
 				
-						<a href="downProhibitionView.do" id="project-manage-bt">프로젝트 관리</a>
+						<a href="projectManage.do" id="project-manage-bt">프로젝트 관리</a>
 					
 					<div id="chatbt-div">
 						<input type="button" id="headerChatBt" onclick="headerChatting()">

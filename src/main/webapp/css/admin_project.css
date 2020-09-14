@@ -12,12 +12,19 @@ header {
 	box-sizing: border-box;
 	border-bottom: 1px solid grey;
 }
+
+#mngrAdd2{
+	margin-left: -100px;
+    margin-top: -10px;
+    color: blue;
+    font-weight: bold;
+}
 .wrap{
 	display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     background-color: #f2f2f2;
-    width: 1024px;
+    width:90%;
     height: 100%;
 }
 .pj_wrap {
@@ -228,13 +235,14 @@ table {
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.3);
 	overflow: auto;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .lyaer_popup_wrap {
 	z-index: 500;
 	position: absolute;
-	top: 50%;
-	left: 50%;
 	background-color: #fff;
 }
 
@@ -262,11 +270,24 @@ input.pop_close {
 	background: url(../images/btn_popclose.gif) no-repeat center;
 }
 
+.modal_pop_close{
+	display: block;
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	background: url(../images/btn_popclose.gif) no-repeat center;
+}
+
+
 .lyaer_popup_cont {
 	position: relative;
 	padding: 0 30px;
 	margin-bottom: 30px;
 	overflow-y: auto;
+	height: 100%;
 }
 
 .srch_table .htlowtype th, .srch_table .htlowtype td {
@@ -338,11 +359,9 @@ input.pop_close {
 .btn_popstyle2.bgred {
 	min-width: 100px;
 	height: 36px;
-	line-height: 34px;
 	font-size: 16px;
 	color: #fff;
 	background-color: #d03737;
-	border-radius: 2px;
 }
 
 .btn_popstyle1.bgblue {
@@ -374,8 +393,6 @@ input.pop_close {
 .layer_popup_wrap {
 	z-index: 500;
 	position: absolute;
-	top: 49%;
-	left: 50%;
 	background-color: #fff;
 	border-radius: 5px;
 }
@@ -412,6 +429,7 @@ img, label {
 .layer_popup_cont {
 	position: relative;
 	margin: 0 30px;
+	
 }
 
 .bgmodal {

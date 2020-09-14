@@ -6,7 +6,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type : "POST",
-		url : 'getUseStatistics.do',
+		url : 'getUseStatistics.do', //이용자 통계 데이터 가져옴
 	}).done(function(data){
 		console.log(data);
 		$.each(data,function(index,element){

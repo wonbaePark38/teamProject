@@ -1,5 +1,10 @@
 $(document).ready(function(){
 	var reloading = sessionStorage.getItem("reloading"); //알람 온오프 알림창 세션
+	var lock = sessionStorage.getItem("lock");
+	if(lock){
+		console.log('락 발동');
+		$('#lock-modal').css('display','block');
+	}
 	
 	if(reloading){
 		sessionStorage.removeItem("reloading"); //세션 제거

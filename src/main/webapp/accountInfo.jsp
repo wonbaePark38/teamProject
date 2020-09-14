@@ -22,12 +22,6 @@
    
 <body>
 	
-	
-	<c:if test="${user.lockSwitchStatus eq 'on'}">
-		<jsp:include page="lock.jsp" flush="true" />
-		<input type="hidden" name="user" id="session" value='${user.lockTime}'/>
-	</c:if>
-	
 	<div class="wrap">
 	
 	<jsp:include page="privateConfigHeader.jsp" flush="true" />

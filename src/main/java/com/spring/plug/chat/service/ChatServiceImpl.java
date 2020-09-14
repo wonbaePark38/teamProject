@@ -112,4 +112,9 @@ public class ChatServiceImpl implements ChatService{
 		return chatDAO.getUnreadUser(vo);
 	}
 
+	@Override
+	public List<MessageVO> getProjectList(int userId) {
+		return chatDAO.getProjectList(userId);
+	}
+
 }
