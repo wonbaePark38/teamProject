@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.spring.plug.common.util.MailUtils;
 import com.spring.plug.login.dao.UserDAO;
 import com.spring.plug.login.vo.UserVO;
+import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -135,5 +136,6 @@ public class UserServiceImpl implements UserService{
 		return userDAO.userConnectionTime();
 		
 	}
-	
+
+
 }

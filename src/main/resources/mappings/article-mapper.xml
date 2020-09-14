@@ -176,7 +176,7 @@
 		#{writeForm2_content, jdbcType=VARCHAR},
 		#{writeForm2_latlng, jdbcType=VARCHAR},
 
-		#{writeForm3_tasknum, jdbcType=INTEGER},
+		(select nvl(max(writeForm3_tasknum), 0) +1 from mainpage_article),
 		#{writeForm3_title, jdbcType=VARCHAR},
 		#{writeForm3_status, jdbcType=VARCHAR},
 		#{writeForm3_workersName, jdbcType=VARCHAR},
@@ -212,4 +212,11 @@
 		SELECT * FROM mainpage_article
 		WHERE project_id = #{project_id} AND article_pix = 1
 	</select>
+	
+	<select id="getTaskList" parameterType="article1VO" resultMap="articleResult">
+		SELECT writeForm3_tasknum, writeForm3_workersName FROM mainpage_article
+		WHERE project_id = #{project_id}
+	</select>
+	
+	
 </mapper>

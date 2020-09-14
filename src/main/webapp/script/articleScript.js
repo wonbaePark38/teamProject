@@ -1,14 +1,3 @@
-//
-//function writeForm_submit5() {
-//      var form5 = document.getElementById('writeForm5_form');
-//      
-//      
-//      
-//      var writeform5_JSON =  JSON.stringify(todo_arr);
-//      
-//      console.log(writeform5_JSON);
-//      //form5.submit();
-//   }
 
 //헤더 채팅영역
 function headerChatting(){
@@ -133,7 +122,7 @@ function headerOption(){
     document.getElementById('complete').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
     
-    document.getElementById('work_status').value = 'request';
+    document.getElementById('work_status').value = '업무';
   }
 
   function doing(){
@@ -143,7 +132,7 @@ function headerOption(){
     document.getElementById('complete').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
     
-    document.getElementById('work_status').value = 'doing';
+    document.getElementById('work_status').value = '진행';
   }
 
   function feedback(){
@@ -153,7 +142,7 @@ function headerOption(){
     document.getElementById('complete').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
     
-    document.getElementById('work_status').value = 'feedback';
+    document.getElementById('work_status').value = '피드백';
   }
 
   function complete(){
@@ -163,7 +152,7 @@ function headerOption(){
     document.getElementById('feedback').style.backgroundColor = 'white';
     document.getElementById('postpone').style.backgroundColor = 'white';
     
-    document.getElementById('work_status').value = 'complete';
+    document.getElementById('work_status').value = '완료';
   }
 
   function postpone(){
@@ -173,45 +162,13 @@ function headerOption(){
     document.getElementById('feedback').style.backgroundColor = 'white';
     document.getElementById('complete').style.backgroundColor = 'white';
     
-    document.getElementById('work_status').value = 'postpone';
+    document.getElementById('work_status').value = '보류';
   }
 
   // 업무탭 작업자 선택영역
   function work_workerSelect(){
     document.getElementById('worker_select_div').style.display = (document.getElementById('worker_select_div').style.display == 'block')?'none':'block';
     
-  }
-
-  // 업무탭 작업자 추가 및 작업자들 저장
-  var workers_name = new Array();
-  
-  function add_worker(obj) {
-     
-   var worker_name = obj.innerText;
-   
-   workers_name.push(worker_name);
-   
-   console.log(workers_name);
-   
-   document.getElementById('work_workers').value = workers_name;
-   
-
-   
-   // 작업자 띄우기
-   var worker_append = document.createElement('div');
-   worker_append.setAttribute('style','display:inline-block; width: 100px; background-color: #efeff9; margin-top: 3px; margin-right: 3px; height: 30px; border-radius: 3px;');
-      
-      var worker_append_workerName = document.createElement('span');
-      worker_append_workerName.setAttribute('style','display: inline-block; vertical-align:middle; width: 80px; margin-left:5px;');
-      worker_append_workerName.innerText = obj.innerText;
-      worker_append.append(worker_append_workerName);
-   
-      var worker_append_cancle = document.createElement('button');
-      worker_append_cancle.setAttribute('style','vertical-align: middle; display: inline-block; height: 30px; width: 14px; border: none; background: url(images/btn_del_name.png) no-repeat center center;');
-      worker_append.append(worker_append_cancle);
-      
-   
-   document.getElementById('worker_append_div').appendChild(worker_append);
   }
  
 
@@ -241,36 +198,31 @@ function headerOption(){
 
   function divIdNumCreate(id){
       
-    var returnDivID = id + (startDivNum + 1);
-    startDivNum = startDivNum + 1;
+    var returnDivID = id;
     return returnDivID;
   }
 
   function dateIdNumCreate(id){
       
-      var returnDateID = id + (startDateNum + 1);
-      startDateNum = startDateNum + 1;
+      var returnDateID = id;
       return returnDateID;
   }
 
   function workerIdNumCreate(id){
 
-      var returnWorkerID = id + (startWorkerNum + 1);
-      startWorkerNum = startWorkerNum + 1;
+      var returnWorkerID = id;
       return returnWorkerID;
   }
 
   function workerInputIdNumCreate(id){
 
-    var returnWorkerInputID = id + '_' + (startWorkerInputNum + 1);
-    startWorkerInputNum = startWorkerInputNum + 1;
+    var returnWorkerInputID = id;
     return returnWorkerInputID;
   }
 
   function workerNameIdNumCreate(id){
 
-    var returnWorkerNametID = id + '_' + (startWorkerNameNum + 1);
-    startWorkerNameNum = startWorkerNameNum + 1;
+    var returnWorkerNametID = id;
     return returnWorkerNametID;
   }
 
@@ -308,14 +260,14 @@ function headerOption(){
    }
   
    //리스트에서 작업자 선택
-    function selectWorker(seq,name,id,div){
+   /* function selectWorker(seq,name,id,div){
        
       //todo_arr[seq-1][2] = name;
        
       
-     document.getElementById(id).value = name;
+//     document.getElementById(id).value = name;
       document.getElementById(div).style.display = 'none';
-    }
+    }*/
     
   function todoAppend(){
      
@@ -394,10 +346,9 @@ function headerOption(){
         todoWorkerPickInput.setAttribute('type','text');
         todoWorkerPickInput.setAttribute('id',workerInputId);
         todoWorkerPickInput.setAttribute('class','todo_worker');
-        todoWorkerPickInput.setAttribute('placeholder','인원');
+        todoWorkerPickInput.setAttribute('placeholder','담당자');
         todoWorkerPickInput.setAttribute('readOnly','true');
         todoWorkerPickInput.setAttribute('style','width: 91%; margin-left: 0px;');
-        todoWorkerPickInput.setAttribute('onclick','worker_pick("'+ workerSelectEvent +'")');
         
         todoWorkerPicDiv.append(todoWorkerPickInput);
 
@@ -408,20 +359,28 @@ function headerOption(){
         
         var todoWorkerUl = document.createElement('ul');
         todoWorkerUl.setAttribute('style','list-style: none; padding-left: 10px; position: absolute;');
-
-        for(var i = 0; i < 5; i++){
-
-          workerName_a = workerNameIdNumCreate('workerNmae');
-
-          var todoWorkerLi = document.createElement('li');
-            var todoWorkerLi_a = document.createElement('a');
-            todoWorkerLi_a.setAttribute('id',workerName_a);
-            todoWorkerLi_a.setAttribute('onclick','selectWorker('+ startDivNum +',"'+ workerName_a +'","'+ workerInputId +'","'+ workerSelectEvent +'")');
-            todoWorkerLi.append(todoWorkerLi_a);
-            todoWorkerLi_a.innerHTML= i;
-            
-          todoWorkerUl.append(todoWorkerLi);
-        }
+        
+    
+        $('#project_user').each(function(){
+        	var member_name = $(this).attr('name');
+        	var member_id = $(this).attr('value');
+        	
+        	workerName_a = workerNameIdNumCreate('workerNmae');
+        	
+        	var todoWorkerLi = document.createElement('li');
+        	var todoWorkerLi_a = document.createElement('a');
+        	var todoWorkerLi_input = document.createElement('input');
+        	todoWorkerLi_a.setAttribute('id','member_a');
+        	todoWorkerLi_a.setAttribute('name',member_name);
+        	todoWorkerLi.append(todoWorkerLi_a);
+        	todoWorkerLi_a.innerHTML= member_name;
+        	todoWorkerLi_input.setAttribute('id','member_li_input');
+        	todoWorkerLi_input.setAttribute('value',member_id);
+        	todoWorkerLi_input.setAttribute('type','hidden');
+        	todoWorkerLi.append(todoWorkerLi_input);
+        	
+        	todoWorkerUl.append(todoWorkerLi);
+        });
 
         todoWorkerSelectDiv.append(todoWorkerUl);
         
@@ -443,11 +402,10 @@ function headerOption(){
     }
 
     // 작업자 선택 영역 펼치기
-    function worker_pick(id){
+    $(document).on('click','#workerInputId',function(){
+    	$(this).next().css('display','block');
+    });
       
-     document.getElementById(id).style.display = (document.getElementById(id).style.display == 'block')? 'none':'block';
-      
-    }
 
     
     //todo worker select

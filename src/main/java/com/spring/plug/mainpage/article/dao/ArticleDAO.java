@@ -56,4 +56,9 @@ public class ArticleDAO{
    public List<Article1VO> getArticlePixedList(Article1VO vo){
 	   return sqlSessionTemplate.selectList("ArticleDAO.getArticlePixedList",vo);
    }
+   
+   // 업무 담당자
+   public List<Article1VO> getTaskList(Article1VO vo){
+	   return sqlSessionTemplate.selectList("ArticleDAO.getTaskList",vo);
+   }
 }

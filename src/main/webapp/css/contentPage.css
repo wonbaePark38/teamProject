@@ -20,9 +20,8 @@ hr {
 }
 
 .div_text_write {
-	font-size: 12px;
+	font-size: 14px;
 	width: 100%;
-	min-height: 100px;
 }
 
 #header_chat_div {
@@ -484,6 +483,5 @@ hr {
 #search_location_div {
 	display: none;
 	z-index: 90;
-	position: absolute;
 	bottom: 205px;
 }

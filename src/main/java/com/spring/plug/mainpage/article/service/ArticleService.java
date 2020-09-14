@@ -25,4 +25,7 @@ public interface ArticleService {
    
    // 고정글 리스트
    List<Article1VO> getArticlePixedList(Article1VO vo);
+   
+   // 업무 담당자
+   List<Article1VO> getTaskList(Article1VO vo);
 }

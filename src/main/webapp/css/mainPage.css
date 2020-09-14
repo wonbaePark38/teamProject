@@ -6,8 +6,8 @@
 /*mainPage css*/
 body {
 	margin: 0 auto;
-	background-color: #f2f2f2;
 	border: 1px solid #eaeaea;
+	background-color: rgb(242, 242, 242);
 	overflow-x: hidden;
 }
 
@@ -382,7 +382,7 @@ a.btn_listback {
 	border-right: 1px solid #ececec;
 	border-bottom: 1px solid #e0e0e0;
 	border-radius: 3px;
-	background-image: url(../img_rn/btn/btn_listback.gif?2);
+	background-image: url(../images/btn_listback.gif);
 	background-repeat: no-repeat;
 	background-position: 19px 20px;
 	background-color: #fff;

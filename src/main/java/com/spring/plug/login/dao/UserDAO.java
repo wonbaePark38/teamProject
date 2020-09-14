@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.plug.login.vo.UserVO;
+import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 import com.spring.plug.user.accountinfo.vo.UserSettingVO;
 
 @Repository
@@ -89,8 +90,10 @@ public class UserDAO {
 		sqlSessionTemplate.update("UserDAO.updateDisconnectionLog", userId);
 	}
 	
+	// 유저 사용시간
 	public List<UserVO> userConnectionTime() {
 		return sqlSessionTemplate.selectList("UserDAO.userConnectionTime");
 	}
+	
 }
 

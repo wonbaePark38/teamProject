@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 
 @Repository
@@ -77,8 +78,13 @@ public class ProjectDirDAO {
 	}
 	
 	// 로그
-		public void insertProjectConnectionLog(ProjectDirVO vo) {
-			sqlSessionTemplate.insert("ProjectDirDAO.insertProject_ConnectionLog",vo);
-			System.out.println("프로젝트 로그");
-		}
+	public void insertProjectConnectionLog(ProjectDirVO vo) {
+		sqlSessionTemplate.insert("ProjectDirDAO.insertProject_ConnectionLog",vo);
+		System.out.println("프로젝트 로그");
+	}
+	
+	// 업무 사용자 리스트
+	public List<ProjectDirVO> getTaskUser(ProjectDirVO vo){
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getTaskUser",vo);
+	}
 }

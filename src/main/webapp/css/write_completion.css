@@ -245,6 +245,7 @@
 	width: 100%;
 	background-color: #ffffff;
 	margin-bottom: 10px;
+	border: lightgray solid 1px;
 }
 
 .top_writer {

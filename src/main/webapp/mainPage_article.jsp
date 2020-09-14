@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script>
+
 	$(document).on('click','#pin_icon',function(){
 		if ($(this).attr('value') == '0') {
 			$(this).attr('value','1');
@@ -34,8 +36,50 @@
 		article_pix.appendTo('body');
 		article_pix.submit();
 	});
+	
+	
+		
+	// 업무탭 작업자 추가 및 작업자들 저장
+  $(document).on('click','#task_User',function(){
+	var workers_name = $('#work_workers').val();
+	  var worker_name = $(this).text();
+	  workers_name += (worker_name + ',');
+	 
+	  $('#work_workers').attr('value',workers_name);
+	  // 작업자 띄우기
+	   var worker_append = document.createElement('div');
+	   worker_append.setAttribute('style','display:inline-block; width: 100px; background-color: #efeff9; margin-top: 3px; margin-right: 3px; height: 30px; border-radius: 3px;');
+	      
+	      var worker_append_workerName = document.createElement('span');
+	      worker_append_workerName.setAttribute('style','display: inline-block; vertical-align:middle; width: 80px; margin-left:5px;');
+	      worker_append_workerName.innerText = worker_name;
+	      worker_append.append(worker_append_workerName);
+	   
+	      var worker_append_cancle = document.createElement('button');
+	      worker_append_cancle.setAttribute('style','vertical-align: middle; display: inline-block; height: 30px; width: 14px; border: none; background: url(images/btn_del_name.png) no-repeat center center;');
+	      worker_append.append(worker_append_cancle);
+	      
+	   
+	   document.getElementById('worker_append_div').appendChild(worker_append);
+	 
+  });
+	
+  
+  
+  
+  $(document).on('click','#member_a',function(){
+	  var value = $(this).attr('name');
+	  $(this).parent().parent().parent().prev().val(value);
+	  
+	  $('.todo_worker_select_div').css('display','none');
+  });
 </script>
 <!-- 게시글 넣는곳 -->
+<div>
+	<c:forEach var="userList" items="${userList }">
+		<input type="hidden" id="project_user" name="${userList.member_name }" value="${userList.member_id }"/>
+	</c:forEach>
+</div>
 <div class="article">
 	<div class="article_margin">
 		<!-- 타이틀 -->
@@ -129,7 +173,7 @@
 							<div id="writeForm_div">
 
 								<textarea name="writeForm1_content" id="writeForm1_content_text"
-									class="div_text_write"></textarea>
+									class="div_text_write" placeholder="내용을 입력해주세요."></textarea>
 
 
 
@@ -196,10 +240,7 @@
 										class="add_pic"></a>
 
 									<div style="display: inline-block; float: right;">
-										<select style="vertical-align: middle; height: 27px;">
-											<option></option>
-											<option></option>
-										</select> <a class="submit_a" onclick="writeForm_submit1()">올리기</a>
+										<a class="submit_a" onclick="writeForm_submit1()">올리기</a>
 									</div>
 								</div>
 								<!-- //하단 툴바 -->
@@ -230,8 +271,12 @@
 								<hr>
 
 								<textarea name="writeForm2_content" id="writeForm2_content_text"
-									class="div_text_write"></textarea>
-
+									class="div_text_write" placeholder="내용을 입력해주세요."></textarea>
+									<!-- 툴바 장소 검색 -->
+									<div id="search_location_div">
+										<input id="search_location" type="text" placeholder="주소를 입력해주세요." name="location_name">
+									</div>
+									<!-- //툴바 장소 검색 -->
 								<!-- 지도 영역 -->
 								<div id="location_div">
 									<div id="locationMap"></div>
@@ -309,11 +354,7 @@
 									</div>
 
 
-									<!-- 툴바 장소 검색 -->
-									<div id="search_location_div">
-										<input id="search_location" type="text" name="location_name">
-									</div>
-									<!-- //툴바 장소 검색 -->
+								
 
 								</div>
 
@@ -337,9 +378,6 @@
 							<input type="hidden" name="project_id" value="${project.project_id }">
 							<input type="hidden" name="writer" value="${sessionScope.user.name }">
 							<div class="work_form" id="workForm_div">
-
-
-								<input type="hidden" name="form_name" value="workWrite">
 
 								<!-- 업무명 -->
 								<div id="work_form_title">
@@ -393,11 +431,12 @@
 											<ul
 												style="list-style: none; border: 1px solid lightgray; background-color: white; padding-left: 0px;">
 												<!-- forEach -->
-												<c:forEach var="pix_list" items="${pixedList}">
+												<c:forEach var="userList" items="${userList}">
+													<li>
+														<input type="hidden" name="member_id" value="${userList.member_id }"/>
+														<a id="task_User">${userList.member_name}</a>
+													</li>
 												</c:forEach>
-												<li><a onclick="add_worker(this)">테스트1</a></li>
-												<li><a onclick="add_worker(this)">테스트2</a></li>
-												<li><a onclick="add_worker(this)">테스트3</a></li>
 												<!-- //forEach -->
 											</ul>
 										</div>
@@ -405,8 +444,10 @@
 										<input type="hidden" id="work_workers"
 											name="writeForm3_workersName">
 
-										<div id="worker_append_div"
-											style="margin-left: 26px; margin-top: 5px"></div>
+										<div id="worker_append_div" style="margin-left: 26px; margin-top: 5px">
+
+										</div>
+											
 									</div>
 								</div>
 								<!-- //담당자 -->
@@ -565,7 +606,7 @@
 										<select style="vertical-align: middle; height: 27px;">
 											<option></option>
 											<option></option>
-										</select> <a id="writeForm3_submit" class="submit_a">올리기</a>
+										</select> <a class="submit_a" onclick="writeForm_submit3()">올리기</a>
 									</div>
 								</div>
 
@@ -589,9 +630,7 @@
 								<div>
 									<!-- 일정 제목 -->
 									<div>
-										<input type="text" name="writeForm4_title"
-											style="width: 100%; border-style: none;"
-											placeholder="일정 제목을 입력해주세요">
+										<input type="text" id="writeForm4_title" name="writeForm4_title" style="width: 100%; border-style: none;" placeholder="일정 제목을 입력해주세요">
 									</div>
 									<!-- //일정 제목 -->
 									<div>
@@ -609,7 +648,8 @@
 												<div style="display: inline-block; width: 80%;">
 													<input type="text" name="writeForm4_start_date"
 														id="sche_start_date" placeholder="오늘날자"
-														readonly="readonly" style="width: 20%;">&nbsp; <select
+														readonly="readonly" style="width: 20%;">&nbsp; 
+														<select
 														name="writeForm4_start_time" id="start_time_select">
 														<option value="00">00:00</option>
 														<option value="01">01:00</option>
@@ -635,7 +675,8 @@
 														<option value="21">21:00</option>
 														<option value="22">22:00</option>
 														<option value="23">23:00</option>
-													</select> &nbsp;~&nbsp; <input type="text"
+													</select> &nbsp;~&nbsp; 
+													<input type="text"
 														name="writeForm4_end_date" id="sche_end_date"
 														readonly="readonly" placeholder="종료날자" style="width: 20%;">&nbsp;
 													<select name="writeForm4_end_time" id="end_time_select">
@@ -686,8 +727,9 @@
 											<hr>
 
 											<!-- 몇분전에 알람줄지 -->
-											<li>
-												<!-- 알람 -->
+											
+											<!-- <li>
+												알람
 												<div class="schedule_alarm">
 
 													<span id="sche_alarm_img"></span> <select
@@ -699,7 +741,7 @@
 														<option value="720">12시간전</option>
 													</select>
 												</div>
-											</li>
+											</li>  -->
 											<!-- //몇분전에 알람줄지 -->
 
 											<hr>
@@ -737,9 +779,9 @@
 						<form method="post" action="writeform5.do" id="writeForm5_form">
 
 							<input type="hidden" name="form_name" value="todoWrite">
-							<input type="hidden" name="writeForm5_content" id="todo_content_value"> 
-							<input type="hidden" name="writeForm5_date" id="todo_date_value"> 
-							<input type="hidden" name="writeForm5_worker" id="todo_worker_value">
+							<input type="hidden" name="writeForm5_content" > 
+							<input type="hidden" name="writeForm5_date"> 
+							<input type="hidden" name="writeForm5_worker">
 							<input type="hidden" name="project_id" value="${project.project_id }"> 
 							<input type="hidden" name="project_name" value="${project.project_name}"> 
 							<input type="hidden" name="writer" value="${sessionScope.user.name }">
@@ -747,7 +789,7 @@
 							<div class="todo_form" id="todoForm_div">
 								<!-- 할일 제목 -->
 								<div>
-									<input id="todo_title" placeholder="할일제목을 입력해 주세요"
+									<input id="todo_title" placeholder="제목을 입력해 주세요"
 										name="writeForm5_title"
 										style="width: 80%; border-style: none;">
 								</div>
@@ -765,7 +807,8 @@
 
 								</div>
 								<!-- //할일 추가 -->
-
+								
+								
 								<!-- 하단 툴바 -->
 								<hr>
 								<div
@@ -858,7 +901,7 @@
 			<c:forEach var="pix_list" items="${pixedList}">
 				<!-- forEach -->
 				<div style="background-color: white; padding: 5px;">
-					<div style="display: inline-block; width: 270px;">
+					<div style="display: inline-block; width: 100%;">
 						<c:choose>
 							<c:when test="${pix_list.form_name eq 'nomalWrite'}">
 								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
@@ -868,23 +911,23 @@
 							<c:when test="${pix_list.form_name eq 'nomalWrite2.0'}">
 								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일반</span>]</span> 
-								<span style="display: inline-block;">${pix_list.writeform2_title}</span>
+								<span style="display: inline-block;">${pix_list.writeForm2_title}</span>
 							</c:when>
 							<c:when test="${pix_list.form_name eq 'taskWrite'}">
 								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">업무</span>]</span>
-								<span style="display: inline-block;">${pix_list.writeform3_title}</span>
-								<span style="display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 13px; font-size: 10px; border-radius: 5px; background-color: lightblue; margin-left: 170px;">${pix_list.writeform3.status }</span>
+								<span style="display: inline-block;">${pix_list.writeForm3_title}</span>
+								<span style="margin-top: 8px; float: right; display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 20px; font-size: 12px; border-radius: 5px; background-color: lightblue; margin-right: 10px;">${pix_list.writeForm3_status }</span>
 							</c:when>
 							<c:when test="${pix_list.form_name eq 'scheWrite'}">
 								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일정</span>]</span>
-								<span style="display: inline-block;">${pix_list.writeform4_title}</span>
+								<span style="display: inline-block;">${pix_list.writeForm4_title}</span>
 							</c:when>
 							<c:when test="${pix_list.form_name eq 'todoWrite'}">
 								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">할일</span>]</span>
-								<span style="display: inline-block;">${pix_list.writeform5_title}</span>
+								<span style="display: inline-block;">${pix_list.writeForm5_title}</span>
 							</c:when>
 						</c:choose>
 					</div>
@@ -919,7 +962,7 @@
 								</div>
 								<div style="padding-left: 30px; float: left;">
 									<span>${list.writer }</span><br> <span
-										style="font-size: 10px;">${list.regDate }</span><span
+										style="font-size: 12px;">${list.regDate }</span><span
 										id="공개범위설정"> <img></span>
 								</div>
 								<div style="margin: -10px 0px 0px 10px;">
@@ -953,7 +996,7 @@
 									
 								</div>
 								<!-- 파일 -->
-								<c:if test="${list.file_name ne null or list.file_name ne ''}">
+								<c:if test="${list.file_name ne null}">
 									<div id="post_files">
 										<div class='post_file' >
 											<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
@@ -1044,7 +1087,7 @@
 					</c:when>
 
 					<c:when test="${form_name eq 'nomalWrite2.0'}">
-						<div class="post_idx">
+						<div class="post_idx"id="${list.article_id }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
@@ -1088,18 +1131,17 @@
 								</div>
 
 								<!-- 지도 찍는곳 -->
-								<div id="writeForm2_map">
-									<img
-										src="https://maps.googleapis.com/maps/api/staticmap?
-								center=${list.writeForm2_latlng }
-								&zoom=18
-								&size=480x300
-								&maptype=roadmap
-								&markers=color:red%7Clabel:C%7C${list.writeForm2_latlng }
-								&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
-
-
-								</div>
+								<c:if test="${list.writeForm2_latlng ne null}">
+									<div id="writeForm2_map">
+										<img src="https://maps.googleapis.com/maps/api/staticmap?
+									center=${list.writeForm2_latlng }
+									&zoom=18
+									&size=480x300
+									&maptype=roadmap
+									&markers=color:red%7Clabel:C%7C${list.writeForm2_latlng }
+									&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
+									</div>
+								</c:if>
 
 								<!-- 이미지 -->
 
@@ -1183,19 +1225,18 @@
 					</c:when>
 
 
-					<c:when test="${form_name eq 'workWrite'}">
-						<div class="post_idx">
+					<c:when test="${form_name eq 'taskWrite'}">
+						<div class="post_idx"id="${list.article_id }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
 									<!-- 스크립트로 실행 -->
-									<img id="user_profile"
-										style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+									<img id="user_profile" style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
 								</div>
 								<div style="padding-left: 30px; float: left;">
-									<span>${list.writer }</span><br> <span
-										style="font-size: 10px;">${list.regDate }</span><span
-										id="공개범위설정"> <img></span>
+									<span>${list.writer }</span><br> 
+									<span style="font-size: 10px;">${list.regDate }</span>
+									<span id="공개범위설정"> <img></span>
 								</div>
 								<div style="margin: -10px 0px 0px 10px;">
 									<div style="float: right; padding-left: 10px;">
@@ -1220,7 +1261,7 @@
 							<div class="post">
 								<!-- 일반글 -->
 								<div class="post_title">
-									<strong>${list.writeForm2_title }</strong>
+									<strong>${list.writeForm3_title }</strong>
 								</div>
 
 
@@ -1228,11 +1269,6 @@
 								<div class="div_text_write" contenteditable="false">
 									<!-- 업무명 -->
 
-									<div id="work_form_title">
-										<input type="text" readonly="readonly"
-											value="${list.writeForm3_title }"
-											style="width: 80%; border-style: none;">
-									</div>
 									<!-- //업무명 -->
 									<hr>
 									<!-- 상태 -->
@@ -1245,20 +1281,19 @@
 											<input type="hidden" id="work_status">
 
 											<div style="display: inline-block; width: 16%;">
-												<span id="request" onclick="request()"
-													style="background-color: #4aaefb;">요청</span>
+												<span id="request" style="background-color: #4aaefb;">요청</span>
 											</div>
 											<div style="display: inline-block; width: 16%;">
-												<span id="doing" onclick="doing()">진행</span>
+												<span id="doing" >진행</span>
 											</div>
 											<div style="display: inline-block; width: 16%;">
-												<span id="feedback" onclick="feedback()">피드백</span>
+												<span id="feedback">피드백</span>
 											</div>
 											<div style="display: inline-block; width: 16%;">
-												<span id="complete" onclick="complete()">완료</span>
+												<span id="complete">완료</span>
 											</div>
 											<div style="display: inline-block; width: 16%;">
-												<span id="postpone" onclick="postpone()">보류</span>
+												<span id="postpone">보류</span>
 											</div>
 										</div>
 										<!-- //상태 선택 테이블 -->
@@ -1266,23 +1301,38 @@
 									</div>
 									<!-- //상태 -->
 
-									<hr>
-
+									<c:if test="${list.writeForm3_workersName ne null}">
+									<hr>	
 									<!-- 담당자 -->
 									<div class="work_form_manager">
 										<div>
-											<label id="work_worker_img"></label> <input type="text"
-												id="test4321" value="${list.writeForm3_workersName }">
-
+											<label id="work_worker_img" style="margin-right: 5px;"></label> 
+											<div style="display: inline-flex;">
+											<c:set var="taskNum" value="${list.writeForm3_tasknum }"/>
+											<!-- 담당자 들어갈곳 -->
+											<c:forEach var="taskList" items="${taskList }">
+												<c:if test="${taskNum eq  taskList.writeForm3_tasknum}">
+													<c:set var="workerName" value="${fn:split(taskList.writeForm3_workersName,',')}"/>
+													<c:forEach var="names" items="${workerName}">
+														<input type="button" value="${names}" />
+													</c:forEach>
+												</c:if>
+											</c:forEach>
+											
+											
+											</div>
 											<div id="worker_append_div"
 												style="margin-left: 26px; margin-top: 5px"></div>
 										</div>
 									</div>
+									</c:if>
 									<!-- //담당자 -->
 
-									<hr>
 
 									<!-- 시작일 -->
+									<c:if test="${list.writeForm3_start_date ne null}">
+									<hr>
+									
 									<div>
 										<div>
 											<label id="work_start_img"></label>
@@ -1294,11 +1344,13 @@
 
 										</div>
 									</div>
+									</c:if>
 									<!-- 시작일 -->
 
-									<hr>
 
 									<!-- 마감일 -->
+									<c:if test="${list.writeForm3_end_date ne null}">
+									<hr>
 									<div>
 										<div>
 											<label id="work_end_img"></label>
@@ -1310,11 +1362,13 @@
 
 										</div>
 									</div>
+									</c:if>
 									<!-- 마감일 -->
 
-									<hr>
 
 									<!-- 달성도 -->
+									<c:if test="${list.writeForm3_progress ne null}">
+									<hr>
 									<div>
 										<div>
 											<label id="work_progress_img"></label> <input type="hidden"
@@ -1325,11 +1379,13 @@
 											</div>
 										</div>
 									</div>
+									</c:if>
 									<!-- 달성도 -->
 
-									<hr>
 
 									<!-- 우선순위 -->
+									<c:if test="${list.writeForm3_order ne null}">
+									<hr>
 									<div>
 										<div>
 											<label id="work_order_img"></label>
@@ -1340,26 +1396,16 @@
 											</div>
 										</div>
 									</div>
+									</c:if>
 									<!-- 우선순위 -->
-									<div id="order_div">
-										<div>
-											<ul>
-												<li><a onclick="orderSelect(this)">낮음</a></li>
-												<li><a onclick="orderSelect(this)">보통</a></li>
-												<li><a onclick="orderSelect(this)">높음</a></li>
-												<li><a onclick="orderSelect(this)">긴급</a></li>
-											</ul>
-										</div>
-									</div>
 									<hr>
 
-
-
-
 									<!-- 내용 -->
+									<c:if test="${list.writeForm3_content ne null}">
 									<textarea class="div_text_write" readonly="readonly"
 										style="border: none;">${list.writeForm3_content }</textarea>
 
+									</c:if>
 									<!-- //내용 -->
 
 								</div>
@@ -1447,7 +1493,7 @@
 					</c:when>
 
 					<c:when test="${form_name eq 'scheWrite'}">
-						<div class="post_idx">
+						<div class="post_idx"id="${list.article_id }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
@@ -1463,7 +1509,7 @@
 									<div style="float: right; padding-left: 10px;">
 										<a id="set_icon"></a>
 									</div>
-									<<div style="float: right;">
+									<div style="float: right;">
 										<c:choose>
 											<c:when test="${list.article_pix eq '0'}">
 												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
@@ -1486,29 +1532,50 @@
 									<!-- 글제목 -->
 									<dl class="work_calendar">
 										<dt class="work_calendar_header">
-											<span class="work_month">mm월</span><br> <strong
-												class="work_day">dd일</strong>
+											<c:set var="start_date" value="${list.writeForm4_start_date}" />
+											<span class="work_month">${fn:substring(start_date,5,7)} 월</span><br> <strong
+												class="work_day">${fn:substring(start_date,9,11)}일</strong>
 										</dt>
 										<dd class="wc_title">제목</dd>
-										<dd class="wc_date">일정</dd>
+										<c:choose>
+											<c:when test="${list .writeForm4_start_date eq list.writeForm4_end_date} ">
+												<dd class="wc_date">${list.writeForm4_start_date}, ${list.writeForm4_start_time}:00  ~  ${list.writeForm4_end_time}:00</dd>
+											</c:when>
+											<c:otherwise>
+												<dd class="wc_date">${list.writeForm4_start_date} ${list.writeForm4_start_time}:00  ~  ${list.writeForm4_end_date} ${list.writeForm4_end_time}:00</dd>
+											</c:otherwise>
+										</c:choose>
 									</dl>
 									<!-- 글제목 -->
 
 									<!-- 지도 -->
-									<div class="work_map">
-										<span class="map_icon"></span> <span
-											style="margin-left: 25px;">검색 위치</span> <a
-											style="margin-left: 5px;" href="#">지도보기</a>
-									</div>
+									<c:if test="${list.writeForm4_latlng ne null}">
+										<div class="work_map">
+											<span class="map_icon"></span> <span
+												style="margin-left: 25px;">검색 위치</span> 
+												<div id="writeForm2_map">
+													<img src="https://maps.googleapis.com/maps/api/staticmap?
+												center=${list.writeForm4_latlng }
+												&zoom=18
+												&size=480x300
+												&maptype=roadmap
+												&markers=color:red%7Clabel:C%7C${list.writeForm4_latlng }
+												&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
+												</div>
+										</div>
+									</c:if>
 									<div class="work_memo">
 										<span class="memo_icon"></span> <span
-											style="margin-left: 25px;">메모 내용</span>
+											style="margin-left: 25px;">${list.writeForm4_content }</span>
 									</div>
-									<div class="work_alarm">
-										<span class="alarm_icon"></span> <span
-											style="margin-left: 25px;">알림</span>
+									<!-- 알람 -->
+									<!-- <div class="work_alarm">
+										<span class="alarm_icon"></span> 
+										<span style="margin-left: 25px;">알림</span>
 
-									</div>
+									</div> -->
+									<!-- 알람 -->
+									
 									<!-- 지도 -->
 								</div>
 
@@ -1585,7 +1652,7 @@
 					</c:when>
 
 					<c:when test="${form_name eq 'todoWrite'}">
-						<div class="post_idx">
+						<div class="post_idx" id="${list.article_id }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">

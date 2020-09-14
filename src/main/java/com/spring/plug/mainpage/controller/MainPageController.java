@@ -2,31 +2,24 @@ package com.spring.plug.mainpage.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.plug.login.vo.UserVO;
+import com.spring.plug.mainpage.article.service.ArticleService;
 import com.spring.plug.mainpage.article.vo.Article1VO;
 import com.spring.plug.mainpage.article.vo.ArticleReplyVO;
 import com.spring.plug.mainpage.article.vo.ArticleWorkerVO;
 import com.spring.plug.mainpage.projectdir.service.ProjectDirService;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
-import com.spring.plug.login.service.UserService;
-import com.spring.plug.login.vo.UserVO;
-import com.spring.plug.mainpage.article.service.ArticleService;
 
 @Controller
 public class MainPageController {
@@ -74,8 +67,13 @@ public class MainPageController {
 		List<Article1VO> pixedList = service.getArticlePixedList(vo);
 
 		// 프로젝트 사용자 리스트
-//		List<ProjectDirVO> project_user = project_service.get
+		List<ProjectDirVO> userList = project_service.getTaskUser(project);
 		
+		// 업무 담당자
+		List<Article1VO> taskList = service.getTaskList(vo);
+		
+		mav.addObject("taskList",taskList);
+		mav.addObject("userList",userList);
 		mav.addObject("project", project);
 		mav.addObject("articleList", articleList);
 		mav.addObject("replyList", replyList);
@@ -92,6 +90,8 @@ public class MainPageController {
 			String file_path = "C:\\plug\\"+project.getProject_id()+"\\"+ memberID + "_" + vo.getFile_name();
 			uploadFile.transferTo(new File(file_path));
 			vo.setFile_path(file_path);
+		} else {
+			vo.setFile_name(null);
 		}
 		
 	}
@@ -117,14 +117,16 @@ public class MainPageController {
 	}
 
 	@RequestMapping(value = "/writeform3.do")
-	@ResponseBody
 	public String article3Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
-		System.out.println("pid : " + vo.getProject_id());
-		System.out.println("worker : " + vo.getWriteForm3_workersName());
+		if (vo.getWriteForm3_workersName() != null || vo.getWriteForm3_workersName() != "") {
+			
+			String workerMembers = vo.getWriteForm3_workersName();
+			vo.setWriteForm3_workersName(workerMembers.substring(0,workerMembers.length()-1));
+		}
+		
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
-
 
 		ArticleWorkerVO workerVO = new ArticleWorkerVO();
 		workerVO.setProject_id(vo.getProject_id());

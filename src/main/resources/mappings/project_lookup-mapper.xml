@@ -42,12 +42,12 @@
 		WHERE member_id = #{member_id} ORDER BY project_id ASC
 	</select>
 	
-	<select id="getProjectDirUser" resultType="project_lookup" parameterType="project_lookup">
-		SELECT project_id, member_id, member_name, member_email 
+	<select id="getTaskUser" resultType="project_lookup" parameterType="project_lookup">
+		SELECT project_id, member_id, member_name 
 		FROM project_lookup 
 		INNER JOIN
 			(
-				SELECT member_id, member_name, member_email FROM memberinfo
+				SELECT member_id, member_name FROM memberinfo
 			)
         USING(member_id)
         WHERE project_id = #{project_id}

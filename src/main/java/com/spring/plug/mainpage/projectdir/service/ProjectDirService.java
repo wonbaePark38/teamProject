@@ -2,6 +2,7 @@ package com.spring.plug.mainpage.projectdir.service;
 
 import java.util.List;
 
+import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 
 public interface ProjectDirService {
@@ -32,4 +33,6 @@ public interface ProjectDirService {
 	// 로그
 	public void insertProject_ConnectionLog(ProjectDirVO vo);
 
+	// 업무 리스트
+	List<ProjectDirVO> getTaskUser(ProjectDirVO vo);
 }

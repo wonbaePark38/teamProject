@@ -56,4 +56,9 @@ public class ArticleServiceImpl implements ArticleService {
 		return dao.getArticlePixedList(vo);
 	}
 
+	@Override
+	public List<Article1VO> getTaskList(Article1VO vo) {
+		return dao.getTaskList(vo);
+	}
+
 }

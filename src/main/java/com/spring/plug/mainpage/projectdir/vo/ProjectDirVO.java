@@ -16,6 +16,7 @@ public class ProjectDirVO {
 	private int member_id;
 	private int project_manager;
 	private Date joindate;
+	private String member_name;
 	
 	// 프로젝트 정렬 세팅
 	private int clist_type;
@@ -172,6 +173,13 @@ public class ProjectDirVO {
 	}
 	public void setProject_id_list(String project_id_list) {
 		this.project_id_list = project_id_list;
+	}
+	
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
 	}
 	@Override
 	public String toString() {

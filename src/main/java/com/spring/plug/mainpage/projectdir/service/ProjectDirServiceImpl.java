@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.projectdir.dao.ProjectDirDAO;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 
@@ -78,4 +79,10 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 		projectDirDAO.insertProjectConnectionLog(vo);
 	}
 
+
+	@Override
+	public List<ProjectDirVO> getTaskUser(ProjectDirVO vo) {
+		return projectDirDAO.getTaskUser(vo);
+	}
+	
 }

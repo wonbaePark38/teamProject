@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.spring.plug.login.vo.UserVO;
+import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
 
 public interface UserService {
 	UserVO getUser(UserVO vo);
@@ -22,5 +23,6 @@ public interface UserService {
 	void updateDisconnectionLog(int userId);
 	void insertConnectionLog(int userId);
 	
-	List<UserVO> userConnectionTime();
+	List<UserVO> userConnectionTime();	// 사용자 접속시간
+	
 }
