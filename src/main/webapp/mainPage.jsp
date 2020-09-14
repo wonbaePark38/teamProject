@@ -353,7 +353,7 @@
 
 					<div class="aside_wrap">
 						<div>
-							<a class="btn_listback" href="mainProjectDir.jsp">이전화면</a>
+							<a class="btn_listback" href="projectdir.do">이전화면</a>
 						</div>
 
 						<div class="set_wrap col-12">
