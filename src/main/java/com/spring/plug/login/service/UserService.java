@@ -22,10 +22,6 @@ public interface UserService {
 	void writeLoginDate(UserVO vo);
 	void updateDisconnectionLog(int userId);
 	void insertConnectionLog(int userId);
-<<<<<<< HEAD
 	
 	List<UserVO> userConnectionTime(UserVO vo); // 사용자 접속시간
-=======
-	List<UserVO> userConnectionTime();
->>>>>>> refs/remotes/origin/wonbae0911
 }
