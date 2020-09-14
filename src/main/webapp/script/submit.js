@@ -30,7 +30,7 @@ function writeForm_submit4() {
 	var form4 = document.getElementById('writeForm4_form');
 	if ($('#writeForm4_title').val() == null) {
 		alert('제목을 입력해주세요.');
-	} else if ($('#sche_start_date').attr('value') == null || $('#sche_end_date').attr('value') != null) {
+	} else if ($('#sche_start_date').val() == null || $('#sche_end_date').val() != null) {
 		alert('일정을 선택해주세요.');
 	} else {
 		form4.submit();
