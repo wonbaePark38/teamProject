@@ -53,13 +53,10 @@
 						<a href="projectManage.do" id="project-manage-bt">프로젝트 관리</a>
 					
 					<div id="chatbt-div">
-						<input type="button" id="headerChatBt" onclick="headerChatting()">
+						<input type="button" id="headerChatBt" >
 						<span></span>
 					</div>
-					<input type="button" id="headerIconAlram" onclick="headerAlarm()">
-						
-						
-					<input type="button" id="headerUserInfoBt" onclick="headerOption()">
+					<input type="button" id="headerUserInfoBt">
 		
 
 		<!-- 옵션 영역 -->

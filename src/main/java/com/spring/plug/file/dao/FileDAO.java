@@ -17,4 +17,14 @@ public class FileDAO {
 		System.out.println("-->mybatis로 getProjectList()기능처리");
 		return sqlSessionTemplate.selectList("FileDAO.getProjectList", loginUser);
 	}
+	
+	public FileVO getFilePath(int articleId) {
+		System.out.println("-->mybatis로 파일 리얼패스 알아옴");
+		return sqlSessionTemplate.selectOne("FileDAO.getFilePath", articleId);
+	}
+	
+	public FileVO getRealPath(int articleId) {
+		System.out.println("--->mybatis로 리얼패스 알아옴");
+		return sqlSessionTemplate.selectOne("FileDAO.getRealPath", articleId);
+	}
 }

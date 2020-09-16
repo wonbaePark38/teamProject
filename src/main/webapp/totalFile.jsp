@@ -16,15 +16,16 @@
    
     <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
     <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
- 
+ 	<script type="text/javascript" src="jquery.gdocsviewer.min.js"></script>
     <script type='text/javascript' src='./script/totalFile.js'></script>
+    
     <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
     
 </head>
 
 <body>
     <div class='mainWrap'>
-	
+		
        <jsp:include page="privateConfigHeader.jsp" flush="true" />
         <div class='centerAreaContainer'>
             <div class='fileIconArea'>
@@ -153,7 +154,7 @@
                         </ul>
                     </div>
                 </div>
-
+				
                 <section class='list-main-article-container'>
                     <div class='title-container'>
                         <div class='checkbox-all-div'>
@@ -230,12 +231,11 @@
 						<!-- db에서 받아온 들어올 자리 -->
                 	</div>    
                 </section>
-				<div class="modal">
-				</div><!-- //modal -->
+				<div class="modal"></div><!-- //modal -->
+				<div class="file-modal"></div>
 			</div>
         </div>
           
-         
     <!--아이콘+테이블 centerAreaContainer-->
 
     </div>

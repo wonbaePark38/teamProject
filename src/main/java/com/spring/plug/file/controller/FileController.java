@@ -1,9 +1,15 @@
 package com.spring.plug.file.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.plug.file.service.FileService;
 import com.spring.plug.file.vo.FileVO;
 import com.spring.plug.login.vo.UserVO;
+import com.spring.plug.user.accountinfo.vo.UserSettingVO;
 
 @Controller
 @SessionAttributes("file")
@@ -38,18 +45,21 @@ public class FileController {
 	@RequestMapping(value="/fileSearch.do",method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public List<FileVO> getFileList(FileVO vo,HttpSession session,Model model, @RequestParam Map<String,String> param) {
-		//유저정보 세션으로 세팅 session.get~~ 후 vo에 유저 셋팅
-		
-		System.out.println("현재 접속 사용자 " + session.getAttribute("user"));
 		UserVO sessionVO = (UserVO)session.getAttribute("user");
-		System.out.println("세션 저장값" + sessionVO.getSeq());
 	
 		int loginUser = sessionVO.getSeq();
-		System.out.println("로그인 아이디" + loginUser);
 		List<FileVO> projectList = fileService.getProjectList(loginUser);
 		
 		model.addAttribute("projectList", projectList);
 		return projectList;
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getRealPath.do", method=RequestMethod.POST)
+	public FileVO getRealPath(FileVO vo, HttpSession session) {
+		FileVO result = fileService.getRealPath(vo.getArticleId());
+		return result;
+	}
+	
 }

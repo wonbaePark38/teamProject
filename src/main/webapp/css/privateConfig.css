@@ -16,6 +16,11 @@ button{
 	outline: none;
 }
 
+.show-chat-div{
+	background-color:aqua;
+	display:block;
+}
+
 #searchArea{
    display:block;
    width: 90%;

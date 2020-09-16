@@ -8,7 +8,6 @@ $(document).ready(function(){
 	  var updateStatus = 1;
 	  initFileList();
 	  var idx;
-	 
 	  
 	  /* 받아온 데이터 설정  */
 	  function initFileList() {
@@ -320,16 +319,18 @@ $(document).ready(function(){
 	  $('body').on('click',function(e){ //히든 메뉴 열려있을때 바디 클릭하면 닫히는 이벤트
 
 		  var targetPoint = $(e.target);
-		  
 		  var popArea = targetPoint.hasClass('moreMenuContainer');
 		  var modal = targetPoint.hasClass('modal');
+		  var fileModal = targetPoint.hasClass('file-modal');
 			  if(!popArea){
 				  $('.moreMenuContainer').hide();
 			  }  
 			  if(modal){
 				  $('.modal').hide();
-				  
 			  }
+		  	  if(fileModal){
+		  		$('.file-modal').hide();
+		  	  }
 	  });
 	  
 	  $(document).on('click','#downloadAllBt',function(){ //헤더의 다운로드 버튼 눌렀을때 이벤트
@@ -346,7 +347,7 @@ $(document).ready(function(){
 						  alert('다운로드 금지된 파일이 있습니다.'+ element.fileName);
 						  return false;
 					  }
-					  location.href = 'fileDownload.do?fileName='+element.fileName;
+					  location.href = 'fileDownload.do?articleId='+element.articleId;
 					  fnSleep(100);
 				  }
 			  });
@@ -359,8 +360,7 @@ $(document).ready(function(){
 						  alert('다운로드 금지된 파일이 있습니다.'+ element.fileName);
 						  return false;
 					  }
-					  console.log(element);
-					  location.href = 'fileDownload.do?fileName='+element.fileName;
+					  location.href = 'fileDownload.do?articleId='+element.articleId;
 					  fnSleep(1000);
 				  }
 			  });
@@ -389,8 +389,7 @@ $(document).ready(function(){
 			  alert('해당 파일은 다운이 금지되어 있습니다 ' + selectedElement.fileName);
 			  return false;
 		  }
-		  window.location = 'fileDownload.do?fileName='+selectedElement.fileName;
-		
+		  window.location = 'fileDownload.do?articleId='+selectedElement.articleId;
 	  });
 	  
 	  $(document).on('click', '.modalDownloadBt',function(e){
@@ -405,7 +404,7 @@ $(document).ready(function(){
 			  alert('해당 파일은 다운이 금지되어 있습니다 ' + selectedModalElement.fileName);
 			  return false;
 		  }
-		  location.href = 'fileDownload.do?fileName='+selectedModalElement.fileName;
+		  location.href = 'fileDownload.do?articleId='+selectedModalElement.articleId;
 		  
 	  });
 	  
@@ -728,6 +727,55 @@ $(document).ready(function(){
 	  $('#closeBt').click(function(){
 		  location.href='projectdir.do';
 	  })
+	  
+	  $(document).on('click','.moreMenuOpenBt',function(){
+		  $('.file-modal *').remove();
+		  console.log(this);
+		  var articleId = $(this).children('.articleId').val();
+		  console.log('글 id'+articleId);
+		  var sendData ={
+				  articleId : articleId
+		  }	
+		  var filePath ="";
+		  $.ajax({
+			  type :'POST',
+			  url :'getRealPath.do',
+			  data : sendData
+		  }).done(function(data){
+			  console.log(data);
+			  var fileName = data.fileName;
+			  var filePath = data.filePath;
+			  var fileArr = filePath.split('\\');
+			  var realFileName = fileArr[fileArr.length-1];
+			  var src = "upload/"+data.projectId+"/"+ realFileName;
+
+			  var fileTypeArr = fileName.split('.');
+			  var fileType = fileTypeArr[1];
+			  console.log(src);
+			  if(fileType == 'png' || fileType == 'gif' || fileType == 'jpg'){
+				  $('.file-modal').css('display','block');
+				  $('.file-modal').append(
+						  "<div class='file-modal-content'>" +
+						  "<img src="+ src + ">"+
+						  "</div>"
+				  );
+			  }else if(fileType == 'ppt' || fileType == 'doc' || fileType == 'pdf'){
+				  $('.file-modal').css('display','block');
+				   $('.file-modal').append(
+				"<iframe src='https://docs.google.com/gview?url=https://www.adobe.com/support/ovation/ts/docs/ovation_test_show.ppt&embedded=true' class=file-view>"+
+				"</iframe>"
+				  );
+			  }else{
+				  alert('지원 되지 않는 포맷입니다 ㅈㅅㅈㅅ');
+			  }
+		  }).fail(function(){
+			  alert('경로 받아오기 실패');
+		  });
+		  
+		   
+		 
+		
+	  });
 
 });
 fnSleep = function (delay){
@@ -749,11 +797,6 @@ function removeFileList(){ //버튼 클릭했을때 그전에 있던 리스트 �
 
 /*db에서 받아온 파일 리스트 div 추가 함수*/
 function settingList(index,element){
-	 /*if(element.downProhibition == 'y'){
-		 $('#downloadAllBt').css('display','none');
-		 $('#down-status-label').css('display','block');
-	 }*/
-	 
 	 var date = new Date(element.writeDate);
 	  date = getFormatDate(date);
 	  var fileTypeImg = getFileType(element.fileName);
@@ -784,15 +827,15 @@ function settingList(index,element){
 	  						"<span class='moreMenuDownloadSpan'></span> 다운로드" +
 	  					"</button>" +
 	  					"<button class='moreMenuOpenBt' type='button'  alt='열기'>" +
+	  						"<input type='hidden'class='articleId' value="+element.articleId+">"+
 	  						"<span class='moreMenuOpenSpan'></span>열기" +
+	  						""+
 	  						"<div class='iframe-wrap'>"+
 	  						
 	  						"</div>" +
 	  					"</button>" +
 	  					"<button class='moreMenuDetailViewBt' type='button'  alt='상세보기'>" +
 	  						"<span class='moreMenuDetailViewSpan'>" +
-	  						
-	  						
 	  						"</span>상세보기" +
 	  					"</button>" +
 	  				"</div>" +
@@ -815,8 +858,10 @@ function settingList(index,element){
 			  			"<button class='moreMenuDownloadBt' type='button' alt='다운로드'>" +
 			  				"<span class='moreMenuDownloadSpan'></span> 다운로드" +
 			  			"</button>" +
-			  			"<button class='moreMenuOpenBt' type='button' onclick='test()' alt='열기'>" +
-			  				"<span class='moreMenuOpenSpan'></span>열기" +
+			  			"<button class='moreMenuOpenBt' type='button' alt='열기'>" +
+			  			"<input type='hidden' class='articleId' value="+element.articleId+">"+
+			  				"<span class='moreMenuOpenSpan'>" +
+			  				"</span>열기" +
 			  			"</button>" +
 			  			"<button class='moreMenuDetailViewBt' type='button' alt='상세보기'>" +
 			  				"<span class='moreMenuDetailViewSpan'></span>상세보기" +
@@ -830,6 +875,12 @@ function settingList(index,element){
 			 "</div>" 
 	  );
 	
+}
+//파일 열기 모달창 생성
+function makeOpenFileView(articleId){
+	var winObject = null;
+	console.log(articleId);
+	$('file-modal').css('display','block');
 }
 
 

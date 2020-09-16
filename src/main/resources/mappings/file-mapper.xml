@@ -11,10 +11,14 @@
 		<result property="writer" column="WRITER"/>
 		<result property="writeDate" column="REGDATE"/>
 		<result property="articleId" column="ARTICLE_ID"/>
-		
-		
 	</resultMap>
 	
+	<resultMap id="filePath" type="file">
+		<result property="articleId" column="ARTICLE_ID"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="projectId" column="PROJECT_ID"/>
+	</resultMap>
 <select id="getProjectList" resultMap="fileList" parameterType="int"> 
  SELECT C.ARTICLE_ID,C.PROJECT_ID, C.PROJECT_NAME, LOWER(FILE_NAME) FILE_NAME, C.FILE_SIZE, LOWER(WRITER) WRITER, C.REGDATE, D.DOWNPROHIBITION
  FROM MAINPAGE_ARTICLE C 
@@ -26,15 +30,14 @@
  ORDER BY FILE_NAME ASC
 </select> 
 	
-	
-		
- <!-- <update id="updateCategory" parameterType="category_m">
-      UPDATE CATEGORY 
-      <set>
-           <if test="CATEGORY_NAME != null">CATEGORY_NAME=#{CATEGORY_NAME},</if>
-           <if test="CATEGORY_USE != null">CATEGORY_USE=#{CATEGORY_USE},</if>
-       </set>
-      WHERE CATEGORY_NO=#{CATEGORY_NO}
-   </update>
- -->
+<select id="getFilePath" resultMap="filePath" parameterType="int">
+	SELECT ARTICLE_ID, FILE_NAME, FILE_PATH FROM MAINPAGE_ARTICLE WHERE ARTICLE_ID = #{articleId}
+</select>	
+
+<select id="getRealPath" parameterType="int" resultMap="filePath">
+	SELECT ARTICLE_ID, PROJECT_ID, FILE_NAME, FILE_PATH 
+		FROM MAINPAGE_ARTICLE
+	 	WHERE ARTICLE_ID = #{articleId}
+</select>		
+ 
 </mapper>
