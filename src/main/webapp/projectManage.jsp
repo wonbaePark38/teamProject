@@ -102,8 +102,8 @@
 								<td>${projectInfo.accompanyCount}</td>
 								<td>${projectInfo.writeCount}</td>
 								<td>${projectInfo.replyCount}</td>
-								<td>0</td>
-								<td>0</td>
+								<td>${projectInfo.scheduleCount}</td>
+								<td>${projectInfo.deskCount}</td>
 								<td>${projectInfo.createDate}</td>
 							</tr>
 						</tbody>

@@ -24,7 +24,25 @@ public class ProjectManageVO {
 	private int managerStatus;
 	private int changedProjectId;
 	private int lookup_id;
+	private int deskCount;
+	private int scheduleCount;
 	
+	public int getScheduleCount() {
+		return scheduleCount;
+	}
+
+	public void setScheduleCount(int scheduleCount) {
+		this.scheduleCount = scheduleCount;
+	}
+
+	public int getDeskCount() {
+		return deskCount;
+	}
+
+	public void setDeskCount(int deskCount) {
+		this.deskCount = deskCount;
+	}
+
 	public int getLookup_id() {
 		return lookup_id;
 	}
