@@ -42,21 +42,11 @@
 					</div>
 				</div>
 
-				<div>새로운 글, 댓글 등록 또는 채팅 알림을 실시간으로 알려드립니다.</div>
+				<div>채팅 알림을 실시간으로 알려드립니다.</div>
 
 				<div class="alram-type">
 					<div>
-					<div class="project-alram">
-					<c:choose>
-						<c:when test="${user.projectAlram eq 'true'}">
-								<input type="checkbox" id="project-check" class="checkbox-style one" checked="checked">
-						</c:when>
-						<c:otherwise>
-								<input type="checkbox" id="project-check" class="checkbox-style one">
-						</c:otherwise>
-					</c:choose>
-						<span style="margin-left: 10px;">프로젝트 알림</span>
-					</div>
+					
 
 					<div class="chatting-alram">
 						<c:choose>

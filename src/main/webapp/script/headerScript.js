@@ -24,7 +24,31 @@ $(document).ready(function(){
 		  $(listDiv).parent().show();
 	  });
 	  
-	  $(document).on('click','#chat-alram-bt',function(){ //채팅 리스트 div에서 채팅 알림 온오프 버튼 클릭 이벤트
+	  //헤더 채팅 아이콘 클릭 이벤트
+	  $(document).on('click',"#headerChatBt", function(){
+		  if($('#header_chat_div').css('display') === 'none'){
+			  $('#header_chat_div').css('display','block');
+		  }
+	  });
+	  
+	  $(document).on('click','#headerUserInfoBt',function(){
+		  if($('#header_option_div').css('display') === 'none'){
+			  $('#header_option_div').css('display','block');
+		  }
+	  });
+	  
+	  $('body').on('click',function(e){ //히든 메뉴 열려있을때 바디 클릭하면 닫히는 이벤트
+		  if($('#header_chat_div').css('display') === 'block' ){
+			  $('#header_chat_div').css('display','none');
+		  }
+		  
+		  if($('#header_option_div').css('display') === 'block' ){
+			  $('#header_option_div').css('display','none');
+		  }
+	  });
+	  
+	//채팅 리스트 div에서 채팅 알림 온오프 버튼 클릭 이벤트
+	  $(document).on('click','#chat-alram-bt',function(){ 
 		  $('#socketChatAlert').empty();
 		  var status = $('#chat-alram-bt').text();
 		  
@@ -59,9 +83,7 @@ $(document).ready(function(){
 	  
 });
 
-function headerChatting(){
-  document.getElementById('header_chat_div').style.display=(document.getElementById('header_chat_div').style.display=='block') ? 'none' : 'block';
-}
+
 
   function headerChattingRoom(){
     document.getElementById('header_chat_chattingRoom').style.display = 'block';
@@ -79,9 +101,6 @@ function headerChatting(){
     
   }
 
-  //헤더 옵션영역
-  function headerOption(){
-    document.getElementById('header_option_div').style.display=(document.getElementById('header_option_div').style.display=='block') ? 'none' : 'block';
-  }
+ 
   
  

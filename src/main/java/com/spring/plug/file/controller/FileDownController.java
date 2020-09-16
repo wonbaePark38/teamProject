@@ -9,18 +9,26 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.plug.file.service.FileService;
+import com.spring.plug.file.vo.FileVO;
+
 @Controller
 public class FileDownController {
+	@Autowired
+	FileService fileService;
+	
 	@ResponseBody
 	@RequestMapping(value="fileDownload.do")
-	public void fileDownload(HttpServletRequest request, HttpServletResponse response) {
-		String fileName = request.getParameter("fileName");
-		String realFileName = "";
-		System.out.println(fileName);
+	public void fileDownload(FileVO vo, HttpServletRequest request, HttpServletResponse response) {
+		String articleId = request.getParameter("articleId");
+		int articleNumber = Integer.parseInt(articleId);
+		vo = fileService.getFilePath(articleNumber); 
+		String fileName = vo.getFileName();
 		System.out.println(request.getRequestURI());
 
 		String browser = request.getHeader("User-Agent");
@@ -33,8 +41,7 @@ public class FileDownController {
 		} catch(UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException 에러입니다");
 		}
-		realFileName = "C:\\testFile\\" + fileName;
-		System.out.println(realFileName);
+		String realFileName = vo.getFilePath();
 		
 		File file1 = new File(realFileName);
 		if(!file1.exists()) {

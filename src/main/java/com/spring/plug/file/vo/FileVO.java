@@ -16,7 +16,14 @@ public class FileVO {
 	private String fileSize;
 	private String downProhibition;
 	private int articleId;
+	private String filePath;
 	
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 	public int getArticleId() {
 		return articleId;
 	}
@@ -96,11 +103,12 @@ public class FileVO {
 	}
 	@Override
 	public String toString() {
-		return "FileVO [searchFileCondition=" + ", searchFileKeyword=" +
-				", projectId=" + projectId + ", fileName=" + fileName + ", fileType=" + fileType + ", writer="
-				+ writer + ", writeDate=" + writeDate + "]";
+		return "FileVO [projectId=" + projectId + ", fileName=" + fileName + ", fileType=" + fileType + ", writer="
+				+ writer + ", writeDate=" + writeDate + ", targetProject=" + targetProject + ", user=" + user
+				+ ", loginUser=" + loginUser + ", projectName=" + projectName + ", fileSize=" + fileSize
+				+ ", downProhibition=" + downProhibition + ", articleId=" + articleId + ", filePath=" + filePath + "]";
 	}
-	
+
 	
 	
 	

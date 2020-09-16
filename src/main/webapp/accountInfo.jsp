@@ -44,7 +44,7 @@
 									<img src="images/empty_photo.png" />
 								</c:when>
 								<c:otherwise>
-									<img src="<c:url value='/display.do?name=${vo.profileFileName }'/>" alt="프로필이미지" /> 
+									<img src="<c:url value='/display.do'/>" alt="프로필이미지" /> 
 								</c:otherwise>
 							</c:choose>
 							

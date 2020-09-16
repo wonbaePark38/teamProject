@@ -44,7 +44,7 @@ public class UserSettingController {
 		}
 		
 		if(infoVo.getProfileFileName() != null) {
-			String uploadPath = "C:\\testFile\\"+strId +"\\" + infoVo.getProfileFileName();
+			String uploadPath = "C:\\project\\src\\main\\webapp\\upload\\profileImage\\"+strId +"\\" + infoVo.getProfileFileName();
 			vo.setProfileFileName(uploadPath);
 		}
 		
@@ -58,14 +58,19 @@ public class UserSettingController {
 	@RequestMapping(value="profileImgChange.do",method=RequestMethod.POST)//프로필 이미지 변경 컨트롤러
 	public ModelAndView changeImage(UserSettingVO vo, HttpSession session,ModelAndView mav)  throws IOException{
 		UserVO user = (UserVO)session.getAttribute("user");
+		
+		UserSettingVO infoVo = userSettingService.getConfigUserInfo(user.getSeq());
 		String fileName="";
 		int id = user.getSeq();
-		
 		String strId = Integer.toString(id);
-		String uploadPath = "C:\\testFile\\"+strId +"\\";
+		String uploadPath = "C:\\project\\src\\main\\webapp\\upload\\profileImage\\"+strId +"\\";
 		MultipartFile uploadFile = vo.getProfileImg();
 		
-	
+		String fullFileName = uploadPath + infoVo.getProfileFileName();
+		File file = new File(fullFileName);
+		if(file.exists()) {
+			file.delete();
+		}
 		File destdir = new File(uploadPath);
 		 if(!destdir.exists()) {
 			 destdir.mkdirs();
@@ -78,7 +83,6 @@ public class UserSettingController {
 	      }
 	     vo.setId(id);
 	     vo.setProfileFileName(fileName);
-	     System.out.println("이미지 파일 이름"+fileName);
 	     userSettingService.updateProfileImg(vo);
 	     mav.setViewName("accountInfo.do");
 		return mav;
@@ -87,13 +91,14 @@ public class UserSettingController {
 	//프로필 파일 페이지 로드됐을때 서버에서 가저와서 화면엥 뿌려주는 컨트롤러
 	@RequestMapping(value="/display.do", method=RequestMethod.GET) //저장된 프로필 사진 불러오는 컨트롤러 
 	public void displayFile(HttpServletResponse res,HttpSession session) throws Exception{
+		System.out.println("컨트롤러 진입");
 		UserVO user = (UserVO)session.getAttribute("user");
 		int id = user.getSeq();
 		String strId = Integer.toString(id);
 		UserSettingVO infoVo = userSettingService.getConfigUserInfo(id);
 		String filePath = infoVo.getProfileFileName();
-		
-		String realFile = "C:\\testFile\\"+strId+"\\"+infoVo.getProfileFileName();
+		System.out.println(filePath);
+		String realFile = "C:\\project\\src\\main\\webapp\\upload\\profileImage\\"+strId+"\\"+infoVo.getProfileFileName();
 		int pos = filePath.lastIndexOf(".");
 		String fileNm = filePath.substring(0, pos);
 		String ext = filePath.substring(pos+1); 

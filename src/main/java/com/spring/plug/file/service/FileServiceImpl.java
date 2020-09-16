@@ -18,4 +18,14 @@ public class FileServiceImpl implements FileService{
 		return fileDAO.getProjectList(loginUser);
 	}
 
+	@Override
+	public FileVO getFilePath(int articleId) {
+		return fileDAO.getFilePath(articleId);
+	}
+
+	@Override
+	public FileVO getRealPath(int articleId) {
+		return fileDAO.getRealPath(articleId);
+	}
+
 }

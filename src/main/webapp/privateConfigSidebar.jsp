@@ -34,21 +34,7 @@
 					<hr>
 
 				</div>
-				<div class="clientCenterContainer">
-
-					<ul id="helpMenu_on"  style="list-style: none;">
-						<li><a href="#" id="oneToOneBt">1:1 문의</a></li>
-						<li><a href="#" id="helpBt">도움말</a></li>
-						<li><a href="#" id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
-						<li><a href="#" id="newNoticeBt">플로우 새소식</a></li>
-						<!-- 알림 있을 경우 class on 추가 -->
-					</ul>
-					<div class="helpButtonContainer">
-						<div id="helpMenuImg"></div>
-						<button id="helpMenuBt" onclick="clientCenterFold()">고객센터</button>
-					</div>
-				</div>
-
+				
 			</div> <!--// sidebarcontainer-->
 
 </body>
