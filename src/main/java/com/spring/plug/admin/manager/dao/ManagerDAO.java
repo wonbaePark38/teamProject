@@ -59,5 +59,25 @@ public class ManagerDAO {
 		return sqlSessionTemplate.selectList("ManagerDAO.getProjectRank");
 	}
 	
+	public List<ManagerVO> getProjectDay(ManagerVO vo) {
+		System.out.println("프로젝트 월별 갯수");
+		return sqlSessionTemplate.selectList("ManagerDAO.getProjectDay", vo);
+	}
+	
+	public List<ManagerVO> getArticleDay(ManagerVO vo) {
+		System.out.println("게시글 월별 갯수");
+		return sqlSessionTemplate.selectList("ManagerDAO.getArticleDay", vo);
+	}
+	
+	public List<ManagerVO> getProjectYear(ManagerVO vo) {
+		System.out.println("년 프로젝트");
+		return sqlSessionTemplate.selectList("ManagerDAO.getProjectYear", vo);
+	}
+	
+	public List<ManagerVO> getArticleYear(ManagerVO vo) {
+		System.out.println("년 게시글");
+		return sqlSessionTemplate.selectList("ManagerDAO.getArticleYear", vo);
+	}
+	
 	
 }

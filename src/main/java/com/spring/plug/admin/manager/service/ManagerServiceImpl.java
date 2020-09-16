@@ -63,4 +63,24 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<ManagerVO> getProjectRank() {
 		return managerDAO.getProjectRank();
 	}
+	
+	@Override
+	public List<ManagerVO> getProjectDay(ManagerVO vo) {
+		return managerDAO.getProjectDay(vo);
+	}
+	
+	@Override
+	public List<ManagerVO> getArticleDay(ManagerVO vo) {
+		return managerDAO.getArticleDay(vo);
+	}
+	
+	@Override
+	public List<ManagerVO> getProjectYear(ManagerVO vo) {
+		return managerDAO.getProjectYear(vo);
+	}
+	
+	@Override
+	public List<ManagerVO> getArticleYear(ManagerVO vo) {
+		return managerDAO.getArticleYear(vo);
+	}
 }
