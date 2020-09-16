@@ -485,3 +485,17 @@ hr {
 	z-index: 90;
 	bottom: 205px;
 }
+
+#todo_check {
+	display: block; 
+	width: 18px; 
+	height: 18px; 
+	background: url(../images/btn_todo_checkbox.png) no-repeat 0 0;
+}
+#todo_check_on {	
+	display: block; 
+	width: 18px; 
+	height: 18px; 
+	background: url(../images/btn_todo_checkbox.png) no-repeat 0 0;
+	background-position: 0 -56px;
+}

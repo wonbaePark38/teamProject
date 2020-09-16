@@ -146,7 +146,7 @@ function headerOption(){
   }
 
   function complete(){
-    document.getElementById('complete').style.backgroundColor = '#2e417e';
+    document.getElementById('complete').style.backgroundColor = '#798ed1';
     document.getElementById('request').style.backgroundColor = 'white';
     document.getElementById('doing').style.backgroundColor = 'white';
     document.getElementById('feedback').style.backgroundColor = 'white';
@@ -308,7 +308,7 @@ function headerOption(){
       inputTag.setAttribute('type','text');
       inputTag.setAttribute('class','todo_content');
       inputTag.setAttribute('placeholder','할일 입력');
-      inputTag.setAttribute('style','border-style: none; width: 70%; margin-left: 3px; margin-right: 5.5px;');
+      inputTag.setAttribute('style','border-style: none; width: 63%; margin-left: 3px; margin-right: 5.5px;');
       inputTag.setAttribute('oninput','writeForm5_content_arr(this,'+startDivNum+')');
       todoAppendContent.append(inputTag);
       
@@ -318,15 +318,15 @@ function headerOption(){
 
       var todoDatePickDiv = document.createElement('div');
       todoDatePickDiv.setAttribute('id',datePickId);
-      todoDatePickDiv.setAttribute('style','width: 11%; display: inline-block;');
+      todoDatePickDiv.setAttribute('style','width: 18%; display: inline-block;');
 
          var todoDatePickInput = document.createElement('input');
          todoDatePickInput.setAttribute('type','text');
          todoDatePickInput.setAttribute('class','todo_date');
          todoDatePickInput.setAttribute('placeholder','일자');
          todoDatePickInput.setAttribute('readOnly','true');
-         todoDatePickInput.setAttribute('style','width: 91%; margin-left: 0px;');
-         todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "mm/dd"});');
+         todoDatePickInput.setAttribute('style','width: 96%; margin-left: 0px;');
+         todoDatePickInput.setAttribute('onclick','javascript:$(this).datepicker({dateFormat: "yy/mm/dd"});');
          todoDatePickInput.setAttribute('onchange','writeForm5_date_arr(this,'+startDivNum+')');
          
          todoDatePickDiv.append(todoDatePickInput);
@@ -339,7 +339,7 @@ function headerOption(){
 
       var todoWorkerPicDiv = document.createElement('div');
       todoWorkerPicDiv.setAttribute('id',workerPickId);
-      todoWorkerPicDiv.setAttribute('style','width: 11%; display: inline-block; position: relative;');
+      todoWorkerPicDiv.setAttribute('style','width: 12%; display: inline-block; position: relative;');
 
         
         var todoWorkerPickInput = document.createElement('input');

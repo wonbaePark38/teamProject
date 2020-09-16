@@ -16,6 +16,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleDAO dao;
 
+	
 	@Override
 	public void insertArticle(Article1VO vo) {
 
@@ -24,8 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public void insertWorker(ArticleWorkerVO vo) {
-		dao.worker_insert(vo);
-
+		dao.insertArticleWorker(vo);
 	}
 
 	@Override
@@ -59,6 +59,21 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article1VO> getTaskList(Article1VO vo) {
 		return dao.getTaskList(vo);
+	}
+
+	@Override
+	public List<ArticleWorkerVO> getTodoList(ArticleWorkerVO vo) {
+		return dao.getTodoList(vo);
+	}
+
+	@Override
+	public List<Article1VO> getTaskStatusList(Article1VO vo) {
+		return dao.getTaskStatusList(vo);
+	}
+
+	@Override
+	public void updateTodoSuccess(ArticleWorkerVO wvo) {
+		dao.updateTodoSuccess(wvo);
 	}
 
 }

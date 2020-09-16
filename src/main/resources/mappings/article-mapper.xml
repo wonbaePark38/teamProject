@@ -65,22 +65,36 @@
 	</resultMap>
 	
 	<resultMap type="articleWorkerVO" id="workerResult">
-		<id property="article_id" column="ARTICLE_ID"/>
+		<id property="todo_id" column="TODO_ID"/>
+		<result property="article_id" column="ARTICLE_ID"/>
+		<result property="project_id" column="PROJECT_ID"/>
+		<result property="member_id" column="MEMBER_ID"/>
 		<result property="worker_name" column="WORKER_NAME"/>
+		<result property="worker_content" column="WORKER_CONTENT"/>
+		<result property="worker_date" column="WORKER_DATE"/>
+		<result property="todo_success" column="TODO_SUCCESS"/>
 	</resultMap>
 
 	<insert id="workerInsert" parameterType="articleWorkerVO">
 		INSERT INTO article_worker
 		(
-		project_id
-		article_id
-		worker_name
+		todo_id, 
+		article_id, 
+		project_id, 
+		member_id, 
+		worker_name, 
+		worker_content, 
+		worker_date 
 		)
 		VALUES
 		(
-		#{project_id}
-		#{article_id}
-		#{worekr_name}
+		(SELECT NVL(MAX(todo_id), 0) +1 FROM article_worker),
+		#{article_id},
+		#{project_id},
+		#{member_id},
+		#{worker_name},
+		#{worker_content},
+		#{worker_date}
 		)
 		
 	</insert>
@@ -109,7 +123,7 @@
 	</select>
 
 	<insert id="articleInsert" useGeneratedKeys="true"
-		parameterType="article1VO">
+		parameterType="article1VO" keyProperty="article_id" keyColumn="article_id">
 		INSERT INTO mainpage_article
 		(
 		member_id,
@@ -217,6 +231,22 @@
 		SELECT writeForm3_tasknum, writeForm3_workersName FROM mainpage_article
 		WHERE project_id = #{project_id}
 	</select>
+
 	
+	<select id="getTaskStatusList" parameterType="article1VO" resultMap="articleResult">
+		SELECT writeForm3_status, count(*) AS status_count FROM mainpage_article 
+		WHERE project_id = #{project_id} GROUP BY writeForm3_status
+		
+	</select>
 	
+	<select id="getTodoList" parameterType="articleWorkerVO" resultMap="workerResult">
+		SELECT * FROM article_worker
+		WHERE project_id = #{project_id}
+	</select>
+	
+	<update id="updateTodoSuccess" parameterType="articleWorkerVO">
+		UPDATE article_worker SET todo_success = #{todo_success}
+		WHERE todo_id = #{todo_id} 
+	</update>
+
 </mapper>

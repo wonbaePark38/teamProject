@@ -2,23 +2,33 @@
 
 function writeForm_submit1() {
 	var form1 = document.getElementById('writeForm1_form');
+	if ($('#writeForm1_content_text').val() == '' || $('#writeForm1_content_text').val() == null) {
+		alert('내용을 입력해주세요');
+	} else {
+		form1.submit();
+	}
 	
 	
-	
-	form1.submit();
 }
 
 function writeForm_submit2() {
 	var form2 = document.getElementById('writeForm2_form');
+	if ($('#writeForm2_title').val() == '' || $('#writeForm2_title').val() == null) {
+		alert('제목을 입력해주세요');
+	} else if ($('#writeForm2_content_text').val() == '' || $('#writeForm2_content_text').val() == null) {
+		alert('내용을 입력해주세요');
+	} else {
+		form2.submit();
+	}
 	
 	
-	
-	form2.submit();
 }
 
 function writeForm_submit3() {
 	var form3 = document.getElementById('writeForm3_form');
-	if ($('#work_workers').attr('value')== null) {
+	if ($('#Form3_title').attr('value') == '') {
+		alert('업무명을 입력해주세요.');
+	} else if ($('#work_workers').attr('value')== null) {
 		alert('담당자를 선택해주세요.');
 	} else{
 		form3.submit();
@@ -30,7 +40,7 @@ function writeForm_submit4() {
 	var form4 = document.getElementById('writeForm4_form');
 	if ($('#writeForm4_title').val() == null) {
 		alert('제목을 입력해주세요.');
-	} else if ($('#sche_start_date').val() == null || $('#sche_end_date').val() != null) {
+	} else if ($('#sche_start_date').val() == null || $('#sche_end_date').val() == null) {
 		alert('일정을 선택해주세요.');
 	} else {
 		form4.submit();
@@ -38,7 +48,7 @@ function writeForm_submit4() {
 	
 }
 
-$(document).on('click','#writeForm5_submit',function(){
+/*$(document).on('click','#writeForm5_submit',function(){
 	
 	var form5 = document.getElementById('writeForm5_form');
 	
@@ -73,5 +83,5 @@ $(document).on('click','#writeForm5_submit',function(){
 		
 		form5.submit();
 	}
-});
+});*/
 	

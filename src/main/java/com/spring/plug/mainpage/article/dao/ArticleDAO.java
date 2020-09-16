@@ -16,7 +16,9 @@ public class ArticleDAO{
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
    
-   
+   public void insertArticleWorker(ArticleWorkerVO vo) {
+		sqlSessionTemplate.insert("ArticleDAO.workerInsert",vo);
+	}
 
    public void article1_insert(Article1VO vo) {
       System.out.println("article1 insert 기능 처리");
@@ -30,10 +32,6 @@ public class ArticleDAO{
 	   sqlSessionTemplate.insert("ArticleDAO.replyInsert",vo);
    }
    
-   public void worker_insert(ArticleWorkerVO vo) {
-	   
-	   sqlSessionTemplate.insert("ArticleDAO.workerInsert", vo);
-   }
    
    public List<Article1VO> article_select(Article1VO vo){
 	      
@@ -60,5 +58,20 @@ public class ArticleDAO{
    // 업무 담당자
    public List<Article1VO> getTaskList(Article1VO vo){
 	   return sqlSessionTemplate.selectList("ArticleDAO.getTaskList",vo);
+   }
+   
+   // 할일 리스트
+   public List<ArticleWorkerVO> getTodoList(ArticleWorkerVO vo){
+	   return sqlSessionTemplate.selectList("ArticleDAO.getTodoList",vo);
+   }
+   
+   // 업무 통계
+   public List<Article1VO> getTaskStatusList(Article1VO vo){
+	   return sqlSessionTemplate.selectList("ArticleDAO.getTaskStatusList",vo);
+   }
+   
+   // 할일 업데이트
+   public void updateTodoSuccess(ArticleWorkerVO wvo) {
+	   sqlSessionTemplate.update("ArticleDAO.updateTodoSuccess",wvo);
    }
 }

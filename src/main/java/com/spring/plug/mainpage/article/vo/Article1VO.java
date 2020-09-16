@@ -32,6 +32,7 @@ public class Article1VO {
 
 	private int writeForm3_tasknum;
 	private String writeForm3_title;
+	private int status_count;
 	private String writeForm3_status;
 	private String writeForm3_workersName;
 	private String writeForm3_start_date;
@@ -76,6 +77,14 @@ public class Article1VO {
 
 	public void setWriteForm_img(MultipartFile writeForm_img) {
 		this.writeForm_img = writeForm_img;
+	}
+
+	public int getStatus_count() {
+		return status_count;
+	}
+
+	public void setStatus_count(int status_count) {
+		this.status_count = status_count;
 	}
 
 	public int getProject_id() {

@@ -13,7 +13,7 @@
   }
   
   $(".todo_date_input_external").click(function() {
-    $(".todo_date_input_external").datepicker({dateFormat : 'mm/dd'});
+    $(".todo_date_input_external").datepicker({dateFormat : 'yy/mm/dd'});
   });
 
   

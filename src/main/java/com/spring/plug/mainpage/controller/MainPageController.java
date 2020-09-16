@@ -51,7 +51,8 @@ public class MainPageController {
 	public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo, Article1VO vo, ModelAndView mav,
 			HttpSession session) {
 		
-		System.out.println(project.toString());
+		ArticleWorkerVO wvo = new ArticleWorkerVO();
+		wvo.setProject_id(project.getProject_id());
 
 		vo.setProject_id(project.getProject_id());
 
@@ -72,7 +73,16 @@ public class MainPageController {
 		// 업무 담당자
 		List<Article1VO> taskList = service.getTaskList(vo);
 		
+		// 업무 통계
+		List<Article1VO> taskStatusList = service.getTaskStatusList(vo);
+
+		// 할일 리스트
+		List<ArticleWorkerVO> todoList = service.getTodoList(wvo);
+		
+		
+		mav.addObject("todoList",todoList);
 		mav.addObject("taskList",taskList);
+		mav.addObject("taskStatusList",taskStatusList);
 		mav.addObject("userList",userList);
 		mav.addObject("project", project);
 		mav.addObject("articleList", articleList);
@@ -87,7 +97,7 @@ public class MainPageController {
 		if (!uploadFile.isEmpty()) {
 			String memberID = Integer.toString(user.getSeq());
 			vo.setFile_name(uploadFile.getOriginalFilename());
-			String file_path = "C:\\plug\\"+project.getProject_id()+"\\"+ memberID + "_" + vo.getFile_name();
+			String file_path = "C:\\Users\\97dnj\\OneDrive\\문서\\teamProject\\src\\main\\webapp\\userdatetest\\"+project.getProject_id()+"\\"+ memberID + "_" + vo.getFile_name();
 			uploadFile.transferTo(new File(file_path));
 			vo.setFile_path(file_path);
 		} else {
@@ -128,10 +138,6 @@ public class MainPageController {
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
 
-		ArticleWorkerVO workerVO = new ArticleWorkerVO();
-		workerVO.setProject_id(vo.getProject_id());
-		workerVO.setArticle_id(vo.getArticle_id());
-
 		service.insertArticle(vo);
 		return "mainpage.do";
 	}
@@ -146,20 +152,57 @@ public class MainPageController {
 
 	@RequestMapping(value = "/writeform5.do")
 	public String article5Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
-		System.out.println("test : " + vo.getWriteForm5_content());
-		System.out.println("test : " + vo.getWriteForm5_date());
-		System.out.println("test : " + vo.getWriteForm5_worker());
+		ArticleWorkerVO workerVO = new ArticleWorkerVO();
+
+		System.out.println(vo.getWriteForm5_worker());
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
-	
-		service.insertArticle(vo);
+		String members = "";
+		if (vo.getWriteForm5_content() != "" || vo.getWriteForm5_content() != null) {
+			members = vo.getWriteForm5_content();
+			vo.setWriteForm5_content(members.substring(0,members.length()-1));
+		}
+		String contents = "";
+		if (vo.getWriteForm5_content() != "" || vo.getWriteForm5_content() != null) {
+			contents = vo.getWriteForm5_content();
+			vo.setWriteForm5_content(contents.substring(0,contents.length()-1));
+		}
+		String dates = "";
+		if (vo.getWriteForm5_date() != "" || vo.getWriteForm5_date() != null) {
+			dates = vo.getWriteForm5_date();
+			vo.setWriteForm5_date(dates.substring(0,dates.length()-1));
+		}
+		String workers = "";
+		if (vo.getWriteForm5_worker() != "" || vo.getWriteForm5_worker() != null) {
+			workers = vo.getWriteForm5_worker();
+			vo.setWriteForm5_worker(workers.substring(0,workers.length()-1));
+		}
+		
+		service.insertArticle(vo); // 게시글 등록
+		
+		
+		String[] member = members.split(",");
+		String[] content = contents.split(",");
+		String[] date = dates.split(",");
+		String[] worker = workers.split(",");
+		
+		for (int i = 0; i < member.length; i++) {
+			workerVO.setMember_id(vo.getMember_id());
+			workerVO.setProject_id(vo.getProject_id());
+			workerVO.setArticle_id(vo.getArticle_id());
+			workerVO.setWorker_content(content[i]);
+			workerVO.setWorker_date(date[i]);
+			workerVO.setWorker_name(worker[i]);
+			service.insertWorker(workerVO);
+		}
+		
 
 		return "mainpage.do";
 	}
 
 	// 상단 고정 게시글
 	@RequestMapping(value = "/articlepix.do")
-	public String updateArticlePix(Article1VO vo, ProjectDirVO project) {
+	public String updateArticlePix(Article1VO vo, ProjectDirVO project, HttpSession session) {
 		System.out.println(vo.toString());
 		service.updateArticlePixed(vo);
 		return "mainpage.do";
@@ -171,4 +214,9 @@ public class MainPageController {
 		return "mainpage.do";
 	}
 	
+	@RequestMapping(value = "/todoupdate.do")
+	public String updateTodoSuccess(ArticleWorkerVO wvo, ProjectDirVO project, HttpSession session) {
+		service.updateTodoSuccess(wvo);
+		return "mainpage.do";
+	}
 }

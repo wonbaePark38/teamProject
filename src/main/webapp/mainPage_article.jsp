@@ -73,6 +73,72 @@
 	  
 	  $('.todo_worker_select_div').css('display','none');
   });
+  
+  
+  $(document).on('click','#writeForm5_submit',function(){
+		
+		var form5 = document.getElementById('writeForm5_form');
+		
+		if ($('#todo_title').val() == '' || $('#todo_title').val() == null) {
+			alert('제목을 입력해주세요');
+		} else if ($('.todo_content').val() == '' || $('.todo_content').val() == null) {
+			alert('할일을 입력해주세요.');
+		} else if ($('.todo_date').val() == '' || $('.todo_date').val() == null) {
+			alert('일자를 정해주세요.')
+		} else if ($('.todo_worker').val() == '' || $('.todo_worker').val() == null) {
+			alert('담당자를 정해주세요.')
+		} else {
+			var contents = ""; 
+			$('.todo_content').each(function(){
+				contents += ($(this).val())+',';
+			});
+			var dates = "";
+			$('.todo_date').each(function(){
+				dates += ($(this).val())+',';
+			});
+			var workers = "";
+			$('.todo_worker').each(function(){
+				workers += ($(this).val())+','; 
+			});
+			
+			$('input[name=writeForm5_content]').attr('value',contents);
+			$('input[name=writeForm5_date]').attr('value',dates);
+			$('input[name=writeForm5_worker]').attr('value',workers);
+			
+			form5.submit();
+		}
+	});
+  
+$(document).on('click','.tcheck',function(){
+	
+	var todo_id = $(this).parent().parent().attr('name');
+	var todo_seccess;
+	var p_title = $('p#title').text();
+	var p_id = $('#p_id').val();
+	// form 생성
+	var todo_check = $('<form></form>');
+	
+	// form 설정
+	todo_check.attr('method','post');
+	todo_check.attr('action','todoupdate.do');
+	
+	if ($(this).attr('id') == 'todo_check') {
+		$(this).attr('id','todo_check_on');  
+		todo_check.append($('<input/>',{type:'hidden', name:'todo_success', value: 1}));
+	} else if ($(this).attr('id') == 'todo_check_on') {
+		$(this).attr('id','todo_check');  
+		todo_check.append($('<input/>',{type:'hidden', name:'todo_success', value: 0}));
+	}
+	
+	// form 데이터
+	todo_check.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
+	todo_check.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
+	todo_check.append($('<input/>',{type:'hidden', name:'todo_id', value: todo_id}));
+	
+	// form 생성하는 곳
+	todo_check.appendTo('body');
+	todo_check.submit();
+});
 </script>
 <!-- 게시글 넣는곳 -->
 <div>
@@ -84,13 +150,14 @@
 	<div class="article_margin">
 		<!-- 타이틀 -->
 		<div class="title_margin">
+			<input id="p_id" type="hidden" name="project_id" value="${project.project_id }"/>
 			<div class="title_border">
 				<p id="title">${project.project_name}</p>
 			</div>
 		</div>
 		<!-- 타이틀 -->
 		<!-- 업무 리포트 -->
-		<c:if test=""></c:if>
+		
 		<div class="work_report_border" style="display: none;">
 			<div class="work_report">
 				<div class="work_report_title">
@@ -117,12 +184,14 @@
 								<td>완료</td>
 								<td>보류</td>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
-								<td>4</td>
-								<td>5</td>
+							<tr id='task_status_table'>
+							<c:forEach var="task_status" items="${taskStatusList}">
+								<c:if test="${task_status.writeForm3_status eq '요청' }"><td id="request_count">${task_status.status_count}</td></c:if>
+								<c:if test="${task_status.writeForm3_status eq '진행' }"><td id="doing_count">${task_status.status_count}</td></c:if>
+								<c:if test="${task_status.writeForm3_status eq '피드백' }"><td id="feedback_count">${task_status.status_count}</td></c:if>
+								<c:if test="${task_status.writeForm3_status eq '완료' }"><td id="complate_count">${task_status.status_count}</td></c:if>
+								<c:if test="${task_status.writeForm3_status eq '보류' }"><td id="postpone_count">${task_status.status_count}</td></c:if>
+							</c:forEach>
 							</tr>
 						</table>
 					</div>
@@ -264,7 +333,7 @@
 							<div class="write20_form" id="write20Form_div">
 								<!-- 제목입력 -->
 								<div class="writeForm2_title">
-									<input name="writeForm2_title" type="text"
+									<input name="writeForm2_title" id="writeForm2_title" type="text"
 										placeholder="제목을 입력해 주세요"
 										style="width: 80%; border-style: none;">
 								</div>
@@ -381,8 +450,8 @@
 
 								<!-- 업무명 -->
 								<div id="work_form_title">
-									<input type="text" name="writeForm3_title"
-										placeholder="업무명을 입력해 주세요"
+									<input type="text" id="Form3_title" name="writeForm3_title"
+										placeholder="업무명을 입력해주세요"
 										style="width: 80%; border-style: none;">
 								</div>
 								<!-- //업무명 -->
@@ -394,7 +463,7 @@
 									<div id="status_select_div">
 
 										<input type="hidden" name="writeForm3_status" id="work_status"
-											value="request">
+											value="요청">
 
 										<div style="display: inline-block; width: 16%;">
 											<span id="request" onclick="request(this)"
@@ -648,7 +717,7 @@
 												<div style="display: inline-block; width: 80%;">
 													<input type="text" name="writeForm4_start_date"
 														id="sche_start_date" placeholder="오늘날자"
-														readonly="readonly" style="width: 20%;">&nbsp; 
+														readonly="readonly" style="width: 22%;">&nbsp; 
 														<select
 														name="writeForm4_start_time" id="start_time_select">
 														<option value="00">00:00</option>
@@ -678,7 +747,7 @@
 													</select> &nbsp;~&nbsp; 
 													<input type="text"
 														name="writeForm4_end_date" id="sche_end_date"
-														readonly="readonly" placeholder="종료날자" style="width: 20%;">&nbsp;
+														readonly="readonly" placeholder="종료날자" style="width: 22%;">&nbsp;
 													<select name="writeForm4_end_time" id="end_time_select">
 														<option value="00">00:00</option>
 														<option value="01">01:00</option>
@@ -777,7 +846,7 @@
 
 						<!-- 할일 -->
 						<form method="post" action="writeform5.do" id="writeForm5_form">
-
+						
 							<input type="hidden" name="form_name" value="todoWrite">
 							<input type="hidden" name="writeForm5_content" > 
 							<input type="hidden" name="writeForm5_date"> 
@@ -1298,22 +1367,98 @@
 										<div id="status_select_div">
 
 											<input type="hidden" id="work_status">
+											<c:choose>
+												<c:when test="${list.writeForm3_status eq '요청' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" style="background-color: #4aaefb;">요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" >진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone">보류</span>
+													</div>
+												</c:when>
 
-											<div style="display: inline-block; width: 16%;">
-												<span id="request" style="background-color: #4aaefb;">요청</span>
-											</div>
-											<div style="display: inline-block; width: 16%;">
-												<span id="doing" >진행</span>
-											</div>
-											<div style="display: inline-block; width: 16%;">
-												<span id="feedback">피드백</span>
-											</div>
-											<div style="display: inline-block; width: 16%;">
-												<span id="complete">완료</span>
-											</div>
-											<div style="display: inline-block; width: 16%;">
-												<span id="postpone">보류</span>
-											</div>
+												<c:when test="${list.writeForm3_status eq '진행' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" >요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" style="background-color: #50b766;">진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone">보류</span>
+													</div>
+												</c:when>
+												
+												<c:when test="${list.writeForm3_status eq '피드백' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" >요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing">진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback" style="background-color: #f17a19;">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone">보류</span>
+													</div>
+												</c:when>
+												
+												<c:when test="${list.writeForm3_status eq '완료' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" >요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" >진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete"style="background-color: #2e417e;">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone">보류</span>
+													</div>
+												</c:when>
+												
+												<c:when test="${list.writeForm3_status eq '보류' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" >요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing">진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone" style="background-color: #aeaeae;">보류</span>
+													</div>
+												</c:when>
+												
+											</c:choose>
 										</div>
 										<!-- //상태 선택 테이블 -->
 
@@ -1575,6 +1720,9 @@
 										</dt>
 										<dd class="wc_title">제목</dd>
 										<c:choose>
+											<c:when test="${list .writeForm4_start_time eq null and list.writeForm4_end_time eq null} ">
+												<dd class="wc_date">${list.writeForm4_start_date}  ~  ${list.writeForm4_end_date}</dd>
+											</c:when>
 											<c:when test="${list .writeForm4_start_date eq list.writeForm4_end_date} ">
 												<dd class="wc_date">${list.writeForm4_start_date}, ${list.writeForm4_start_time}:00  ~  ${list.writeForm4_end_time}:00</dd>
 											</c:when>
@@ -1722,41 +1870,65 @@
 
 							<!-- 글내용 -->
 							<div class="post">
-
-								<div
+								<!-- <script>
+									$(document).ready(function(){
+										// 할일 게시글 반복문
+										$('.todo_datas').each(function(){
+											var todo_count = 0;
+											// 할일 게시글 안에 리스트 반복문
+											$(this).children('.tdlist').each(function(){
+												todo_count++;
+												alert(todo_count);
+											});
+											$(this).find('#todo_total').text(todo_count);
+											$(this).find('#set_bar').text(
+											$(this).find('#pgval').val());
+										});
+									});
+								</script>  -->
+								<div class="todo_datas"
 									style="width: 100%; padding: 10px 10px 10px 10px; border: 1px solid lightgray;">
 
 									<div style="width: 100%; height: 50px;">
 										<div>
 											<span style="display: inline-block; width: 250px;">${list.writeForm5_title }</span>
 											<span
-												style="display: inline-block; width: 80px; font-size: 11px;">100%</span>
-											<span style="display: inline-block; font-size: 12px;">완료
-												n건 / 전체 n건</span>
+												style="display: inline-block; width: 80px; font-size: 11px;"><span id="set_bar"></span>%</span>
+											<span class="totalpg" style="display: inline-block; font-size: 12px;">완료
+												<span id="todo_success"></span>건 / 전체 <span id="todo_total"></span>건</span>
 										</div>
 										<div>
-											<progress value="20" max="100" style="width: 100%;"></progress>
+											<progress id="pgval" value="0" max="100" style="width: 100%;"></progress>
 										</div>
 									</div>
 
 									<!--  forEach  -->
-
-									<hr>
-
-									<div style="height: 50px;">
-										<div
-											style="display: inline-block; vertical-align: middle; width: 5%;">
-											<a
-												style="display: block; width: 18px; height: 18px; background: url(images/btn_todo_checkbox.png) no-repeat 0 0;"></a>
+									<c:forEach var="todoList" items="${todoList}">
+										<c:if test="${list.article_id eq todoList.article_id }">
+											
+										<hr style="margin-bottom: 0.6rem;">
+											
+										<div id="todoList" class="tdlist" name="${todoList.todo_id}" style="height: 50px;">
+											<div
+												style="display: inline-block; vertical-align: middle; width: 5%;">
+												<c:choose>
+													<c:when test="${todoList.todo_success eq '0' }">
+														<a id="todo_check" class="tcheck"></a>
+													</c:when>
+													<c:when test="${todoList.todo_success eq '1' }">
+														<a id="todo_check_on"class="tcheck"></a>
+													</c:when>
+												</c:choose>
+											</div>
+											<div
+												style="display: inline-block; vertical-align: middle; width: 94%; height: 40px;">
+												<span style="vertical-align: middle; width: 276px; display: inline-block;">${todoList.worker_content}</span> 
+												<span style="vertical-align: middle; margin-right:10px;">${todoList.worker_date }</span> 
+													<img src="images/empty_photo_s.png" id="${todoList.member_id}" name="${todoList.worker_name }" style="display: inline-block; vertical-align: middle;">
+											</div>
 										</div>
-										<div
-											style="display: inline-block; vertical-align: middle; width: 94%; height: 40px;">
-											<span
-												style="vertical-align: middle; width: 370px; display: inline-block;">할일
-												내용</span> <img src="images/empty_photo_s.png"
-												style="display: inline-block; vertical-align: middle;">
-										</div>
-									</div>
+										</c:if>
+									</c:forEach>
 
 									<!--  //forEach  -->
 
@@ -1841,7 +2013,11 @@
 	</div>
 </div>
 <!-- //게시글 넣는곳 -->
-
+<c:if test="${list.writeForm3_tasknum ne null}">
+	<script>
+		$('.work_report_border').show();
+	</script>		
+</c:if>
 <c:forEach var="pixedList" items="${pixedList }">
 	<c:if test="${pixedList.article_pix == '1' }">
 		<script>

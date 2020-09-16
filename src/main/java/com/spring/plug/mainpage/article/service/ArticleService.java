@@ -28,4 +28,13 @@ public interface ArticleService {
    
    // 업무 담당자
    List<Article1VO> getTaskList(Article1VO vo);
+   
+   // 할일 리스트
+   List<ArticleWorkerVO> getTodoList(ArticleWorkerVO vo);
+   
+   // 업무 카운트
+   List<Article1VO> getTaskStatusList(Article1VO vo);
+   
+   // 할일 업데이트
+   void updateTodoSuccess(ArticleWorkerVO wvo);
 }
