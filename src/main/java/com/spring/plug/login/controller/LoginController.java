@@ -167,10 +167,4 @@ public class LoginController{
 		return mav;
 	}
 	
-	/*@ResponseBody
-	@RequestMapping(value="updateLogoutTime.do", method=RequestMethod.POST)
-	public void updateLogoutTime(HttpSession session) {
-		UserVO user = (UserVO)session.getAttribute("user");
-		
-	}*/
 }

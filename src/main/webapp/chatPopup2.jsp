@@ -307,6 +307,7 @@ $(document).ready(function() {
 				}
 				
 				if(message.messageType == 'exit'){ //메시지 타입이 채팅방 나가기면
+					opener.document.location.reload();
 					self.close(); //채팅 팝업 닫음
 				}
 				

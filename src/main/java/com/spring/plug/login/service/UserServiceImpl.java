@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void sendPasswordCheckEmail(UserVO vo)  throws Exception {
 		System.out.println("비밀번호 변경 관련 이메일 보내기");
-		int randomNumber = (int)(Math.random()*10000)+1000;
+		int randomNumber = (int)(Math.random()*1000000)+100000;
 		String password = Integer.toString(randomNumber);
 		String email = vo.getEmail();
 		// mail 작성 관련 
@@ -65,8 +65,8 @@ public class UserServiceImpl implements UserService{
 				
 				sendMail.setSubject("flow 이메일 인증");
 				sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-						.append("<p>아래 버튼을 클릭하시면 인증이 완료되고 로그인 페이지로 이동합니다.</p>")
-						.append("<p>아래의 비밀번호를 입력하고 로그인 후에 비밀번호 변경해 주시기 바랍니다.</p>")
+						.append("<p>아래 버튼을 클릭해야만 인증이 완료되고 로그인 페이지로 이동합니다.</p>")
+						.append("<p>아래의 비밀번호로 로그인 후에 비밀번호 변경해 주시기 바랍니다.</p>")
 						.append("<p>"+password+"</p>")
 						.append("<form action='http://localhost:8080/plugProject/passlogin.do' method='POST'>")
 						.append("<input type='hidden' name=email value=")
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService{
 						.append("<input type='hidden' name=password value=")
 						.append(password + '>')
 						
-						.append("<input type='submit' value='비밀번호 변경 창으로 이동'>")
+						.append("<input type='submit' value='로그인 페이지로 이동'>")
 						.append("</form")
 						.toString());
 				sendMail.setFrom("admin@wkddnjswhd.com", "원종띠");

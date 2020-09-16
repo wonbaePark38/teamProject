@@ -52,6 +52,10 @@
 		UPDATE MEMBERINFO SET SESSIONID = #{sessionId}, SESSIONTIMEOUT = #{sessionLimit} WHERE MEMBER_EMAIL = #{email}
 	</update>
 	
+	<update id="changePasswordBytempPassword" parameterType="user">
+		UPDATE MEMBERINFO SET MEMBER_PASSWORD = #{password} WHERE MEMBER_EMAIL = #{email}
+	</update>
+	
 	<select id="checkUserWithSessionKey" parameterType="String" resultMap="getUser">
 		SELECT * FROM MEMBERINFO WHERE SESSIONID = #{sessionId} and SESSIONTIMEOUT > SYSDATE
 	</select>
