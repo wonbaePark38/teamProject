@@ -151,16 +151,16 @@
 			<div class="m_se02">
 				<section>
 					<article class="ico_1">
-						<strong class="counter">1</strong><span data-langcode="H14">개설된
+						<strong class="counter">${ vo.getProcount() }</strong><span data-langcode="H14">개설된
 							프로젝트</span>
 					</article>
 					<article class="ico_3">
-						<strong class="counter">1</strong><span data-langcode="H15">공유된
+						<strong class="counter">${ vo.getArticlecount() }</strong><span data-langcode="H15">공유된
 							업무</span>
 					</article>
 					<article class="ico_2">
-						<strong class="counter">1</strong><span data-langcode="H13">사용
-							중인 팀 수</span>
+						<strong class="counter">${ vo.getUsercount() }</strong><span data-langcode="H13">사용
+							중인 사용자 수</span>
 					</article>
 				</section>
 			</div>

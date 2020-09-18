@@ -23,10 +23,18 @@ public class ManagerVO {
 	private String createmonth;
 	private int daycount;
 	private String createyear;
+	private int sharework;
 	
 	
 	
-	
+	public int getSharework() {
+		return sharework;
+	}
+
+	public void setSharework(int sharework) {
+		this.sharework = sharework;
+	}
+
 	public String getCreateyear() {
 		return createyear;
 	}

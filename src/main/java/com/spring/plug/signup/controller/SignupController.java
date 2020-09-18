@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.plug.admin.manager.service.ManagerServiceImpl;
+import com.spring.plug.admin.manager.vo.ManagerVO;
 import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.signup.service.SignupService;
 
@@ -16,6 +18,20 @@ public class SignupController {
 
 	@Autowired
 	private SignupService signupService;
+	
+	@Autowired
+	private ManagerServiceImpl managerService;
+	
+	@RequestMapping(value="/index.do")
+	public ModelAndView index(ManagerVO vo, ModelAndView mav) {
+		System.out.println("인덱스 화면 진입");
+		vo = managerService.getUser();
+		vo.setProcount(managerService.getProject().getProcount());
+		vo.setArticlecount(managerService.getArticle().getArticlecount());
+		mav.addObject("vo", vo);
+		mav.setViewName("index.jsp");
+		return mav;
+	}
 	
 	@RequestMapping(value="/signupPost.do", method=RequestMethod.POST)
 	public ModelAndView joinPost(@ModelAttribute("vo") UserVO vo, ModelAndView mav) {

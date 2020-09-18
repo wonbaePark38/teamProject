@@ -79,5 +79,9 @@ public class ManagerDAO {
 		return sqlSessionTemplate.selectList("ManagerDAO.getArticleYear", vo);
 	}
 	
+	public ManagerVO getShareWork() {
+		System.out.println("공유된 업무 불러오기");
+		return sqlSessionTemplate.selectOne("ManagerDAO.getShareWork");
+	}
 	
 }

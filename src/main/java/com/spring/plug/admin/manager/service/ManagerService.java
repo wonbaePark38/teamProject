@@ -18,4 +18,5 @@ public interface ManagerService {
 	List<ManagerVO> getArticleDay(ManagerVO vo);
 	List<ManagerVO> getProjectYear(ManagerVO vo);
 	List<ManagerVO> getArticleYear(ManagerVO vo);
+	ManagerVO getShareWork();
 }
