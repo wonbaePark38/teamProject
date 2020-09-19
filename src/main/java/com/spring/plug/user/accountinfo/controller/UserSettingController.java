@@ -44,7 +44,7 @@ public class UserSettingController {
 		}
 		
 		if(infoVo.getProfileFileName() != null) {
-			String uploadPath = "C:\\project\\src\\main\\webapp\\upload\\profileImage\\"+strId +"\\" + infoVo.getProfileFileName();
+			String uploadPath = "/usr/local/tomcat/webapps/plugProject/upload/profileImage/"+strId +"/" + infoVo.getProfileFileName();
 			vo.setProfileFileName(uploadPath);
 		}
 		
@@ -63,7 +63,7 @@ public class UserSettingController {
 		String fileName="";
 		int id = user.getSeq();
 		String strId = Integer.toString(id);
-		String uploadPath = "C:\\project\\src\\main\\webapp\\upload\\profileImage\\"+strId +"\\";
+		String uploadPath = "/usr/local/tomcat/webapps/plugProject/upload/profileImage/"+strId +"/";
 		MultipartFile uploadFile = vo.getProfileImg();
 		
 		String fullFileName = uploadPath + infoVo.getProfileFileName();
@@ -98,7 +98,7 @@ public class UserSettingController {
 		UserSettingVO infoVo = userSettingService.getConfigUserInfo(id);
 		String filePath = infoVo.getProfileFileName();
 		System.out.println(filePath);
-		String realFile = "C:\\project\\src\\main\\webapp\\upload\\profileImage\\"+strId+"\\"+infoVo.getProfileFileName();
+		String realFile = "/usr/local/tomcat/webapps/plugProject/upload/profileImage/"+strId +"/"+infoVo.getProfileFileName();
 		int pos = filePath.lastIndexOf(".");
 		String fileNm = filePath.substring(0, pos);
 		String ext = filePath.substring(pos+1); 

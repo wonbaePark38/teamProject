@@ -306,12 +306,6 @@ $(document).ready(function() {
 					opener.parent.chatAlert(result, message); //알림 쏴주는 메시지 호출
 				}
 				
-				if(message.messageType == 'exit'){ //메시지 타입이 채팅방 나가기면
-					opener.document.location.reload();
-					self.close(); //채팅 팝업 닫음
-				}
-				
-				
 			},
 			fail : function(err) {
 				alert('에러발생');
@@ -470,7 +464,12 @@ $(document).ready(function() {
 		message.messageType = 'exit';
 		socket.send(JSON.stringify(message));
 		insertMessageInfo(message); //db에 저장할 메시지 정보
-			
+		
+		
+		var roomId = ${roomInfo.chatRoomId};
+		opener.parent.resetCharList(roomId);
+		console.log(roomId);
+		self.close(); //채팅 팝업 닫음
 		}//end if
 		
 	}

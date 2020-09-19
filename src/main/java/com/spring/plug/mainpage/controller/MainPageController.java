@@ -99,7 +99,12 @@ public class MainPageController {
 		if (!uploadFile.isEmpty()) {
 			String memberID = Integer.toString(user.getSeq());
 			vo.setFile_name(uploadFile.getOriginalFilename());
-			String file_path = "C:\\Users\\97dnj\\OneDrive\\문서\\teamProject\\src\\main\\webapp\\userdatetest\\"+project.getProject_id()+"\\"+ memberID + "_" + vo.getFile_name();
+			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/"+project.getProject_id()+"/"+ memberID + "_" + vo.getFile_name();
+			File destdir = new File(file_path);
+			 if(!destdir.exists()) {
+				 destdir.mkdirs();
+			 }
+			
 			uploadFile.transferTo(new File(file_path));
 			vo.setFile_path(file_path);
 		} else {

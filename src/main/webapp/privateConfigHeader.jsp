@@ -343,8 +343,6 @@ function settingChatList(element){
 		$('#'+element.chatRoomId).children('.bdg').css('display','none');
 	}
 	
-	
-	
 }
 
 
@@ -511,5 +509,9 @@ function chatAlert(result,message){
 	socket.send(JSON.stringify(message)); //대화 상대방에게 쏴줌
 }
 
+function resetCharList(roomId){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
+	var target = $('.chatting-list-div').children('#'+roomId);
+	target.remove();
+}
 </script>
 </html>
