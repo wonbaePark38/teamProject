@@ -23,12 +23,12 @@
                     
                     <strong class="title-text">프로젝트</strong>
                         <div class="project-menu">
-                            <a href="projectManage.do" id="project-manage" onclick="projectPage('admin_project.jsp')">프로젝트 관리</a>
+                            <a href="projectManage.do" id="project-manage" >프로젝트 관리</a>
                         </div>
                         
                         <strong class="title-text">회사</strong>
                         <div class="company-menu">
-                            <a href="sendInvteMailView.do" id="user-invite" onclick="projectPage('invite.jsp')">사용자 초대</a>
+                            <a href="sendInvteMailView.do" id="user-invite" >사용자 초대</a>
                         </div> 
                         
                         

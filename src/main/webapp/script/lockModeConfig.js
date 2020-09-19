@@ -59,6 +59,9 @@ $(document).ready(function(){
 				$('#hidden-status').css('display','none');
 				$('#change-lock-settingBt').css('display','none');
 				}, 3000);
+			setTimeout(function() {
+				location.reload();
+				}, 3000);
 		}).fail(function(){
 			alert('변경 실패');
 		});

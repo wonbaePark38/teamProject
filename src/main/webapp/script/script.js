@@ -7,8 +7,11 @@ $(document).ready(function(){
 
 	var node2='';
 	var node2style;
-
-
+	 var ctrlDown = false,
+     ctrlKey = 17,
+     vKey = 86;
+    
+	
 	//체크박스 체크 했을때 발생하는 이벤트
 	$('.col1-checkbox').on('change',function(){
 		var checkedNumberNode = document.querySelector('.check-message-container');
@@ -27,18 +30,36 @@ $(document).ready(function(){
 
 	});
 
-	$("#USER_PW").keypress(function(event){
+	$("#USER_PW").keydown(function(e){
 
 		var passwordLength=$('#USER_PW').val();
 		var str = passwordLength.length+1;
 
-		if(str>0){
+		if((e.keyCode == ctrlKey && e.keyCode == vKey) || str>0){
+			ctrlDown = true;
 			$('.signup_btn_st1').css('background-color','#5a53d0');
 			$('.signup_btn_st1').attr('disabled',false);
 		}
+	}).keyup(function(e){
+    	if(e.keyCode == ctrlKey){
+    		ctrlDown = false;
+    	}
 	});
 
-
+	/*$(document).keydown(function(e) {
+		var passwordLength=$('#USER_PW').val();
+		var str = passwordLength.length;
+		
+        if (e.keyCode == ctrlKey && str>0){
+        	ctrlDown = true;
+        	$('.signup_btn_st1').css('background-color','#5a53d0');
+			$('.signup_btn_st1').attr('disabled',false);
+        }
+    }).keyup(function(e){
+    	if(e.keyCode == ctrlKey){
+    		ctrlDown = false;
+    	}
+    });*/
 
 
 });

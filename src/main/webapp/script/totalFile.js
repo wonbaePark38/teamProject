@@ -751,7 +751,6 @@ $(document).ready(function(){
 
 			  var fileTypeArr = fileName.split('.');
 			  var fileType = fileTypeArr[1];
-			  console.log(src);
 			  if(fileType == 'png' || fileType == 'gif' || fileType == 'jpg'){
 				  $('.file-modal').css('display','block');
 				  $('.file-modal').append(
@@ -762,7 +761,7 @@ $(document).ready(function(){
 			  }else if(fileType == 'ppt' || fileType == 'doc' || fileType == 'pdf'){
 				  $('.file-modal').css('display','block');
 				   $('.file-modal').append(
-				"<iframe src='https://docs.google.com/gview?url=https://www.adobe.com/support/ovation/ts/docs/ovation_test_show.ppt&embedded=true' class=file-view>"+
+				"<iframe src='https://docs.google.com/gview?url=https://www.adobe.com/support/ovation/ts/docs/"+realFileName+"&embedded=true' class=file-view>"+
 				"</iframe>"
 				  );
 			  }else{

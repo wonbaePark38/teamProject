@@ -183,7 +183,7 @@ $(document).ready(function() {
 	//웹소켓 접속
 	function connect() {
 		
-		var ws = new WebSocket("ws://localhost:8080/plugProject/chat.do");
+		var ws = new WebSocket("ws://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/chat.do");
 		socket = ws;
 
 		socket.onopen = function() {
@@ -307,6 +307,7 @@ $(document).ready(function() {
 				}
 				
 				if(message.messageType == 'exit'){ //메시지 타입이 채팅방 나가기면
+					opener.document.location.reload();
 					self.close(); //채팅 팝업 닫음
 				}
 				

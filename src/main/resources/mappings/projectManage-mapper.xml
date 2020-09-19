@@ -16,6 +16,8 @@
 	 	<result property="writeCount" column="ARTICLECOUNT"/>
 	 	<result property="accompanyCount" column="MEMBERCOUNT"/>
 	 	<result property="createDate" column="CREATEDATE"/>
+	 	<result property="deskCount" column="DESKCOUNT"/>
+	 	<result property="scheduleCount" column="SCHEDULECOUNT"/>
 	 </resultMap>
 	 
 	 <resultMap type="pmVO" id="getMemberInfo">
@@ -93,7 +95,7 @@
 	
 	<select id="getProjectInfo" parameterType="int" resultMap="getInfo">
    SELECT A.PROJECT_NAME,  D.MEMBER_NAME,  
-   		B.MEMBERCOUNT, E.ARTICLECOUNT, F.REPLYCOUNT, 
+   		B.MEMBERCOUNT, E.ARTICLECOUNT, F.REPLYCOUNT, G.DESKCOUNT, H.SCHEDULECOUNT,
    		TO_CHAR(A.CREATEDATE,'YYYY-MM-DD') AS CREATEDATE,A.PROJECT_ID 
    		FROM PROJECTDIR A
    INNER JOIN
@@ -107,6 +109,10 @@
    		ON A.PROJECT_ID = E.PROJECT_ID
    LEFT OUTER JOIN (SELECT PROJECT_ID, COUNT(*) AS REPLYCOUNT FROM ARTICLE_REPLY WHERE PROJECT_ID = #{projectId} GROUP BY PROJECT_ID ) F
    		ON E.PROJECT_ID = F.PROJECT_ID
+   LEFT OUTER JOIN (SELECT PROJECT_ID, COUNT(*) AS DESKCOUNT FROM MAINPAGE_ARTICLE WHERE PROJECT_ID = #{projectId} AND WRITEFORM3_STATUS = '요청' GROUP BY PROJECT_ID) G		
+		ON A.PROJECT_ID = G.PROJECT_ID
+   LEFT OUTER JOIN (SELECT PROJECT_ID, COUNT(*) AS SCHEDULECOUNT FROM MAINPAGE_ARTICLE WHERE PROJECT_ID = #{projectId} AND WRITEFORM4_CONTENT IS NOT NULL GROUP BY PROJECT_ID) H		
+   		ON A.PROJECT_ID = H.PROJECT_ID
 	</select>
 	
 	<select id="getMemberInfo" parameterType="int" resultMap="getMemberInfo">
