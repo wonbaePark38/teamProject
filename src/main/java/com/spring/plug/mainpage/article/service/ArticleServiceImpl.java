@@ -76,4 +76,24 @@ public class ArticleServiceImpl implements ArticleService {
 		dao.updateTodoSuccess(wvo);
 	}
 
+	@Override
+	public void deleteArticle(Article1VO vo) {
+		dao.deleteArticle(vo);
+	}
+
+	@Override
+	public void deleteTodo(ArticleWorkerVO wvo) {
+		dao.deleteTodo(wvo);
+	}
+
+	@Override
+	public void mergeArticleLookup(Article1VO vo) {
+		dao.mergeArticleLookup(vo);
+	}
+
+	@Override
+	public List<Article1VO> getArticleLookupList(Article1VO vo) {
+		return dao.getArticleLookupList(vo);
+	}
+
 }

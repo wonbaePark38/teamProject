@@ -361,7 +361,7 @@ function headerOption(){
         todoWorkerUl.setAttribute('style','list-style: none; padding-left: 10px; position: absolute;');
         
     
-        $('#project_user').each(function(){
+        $('.project_user').each(function(){
         	var member_name = $(this).attr('name');
         	var member_id = $(this).attr('value');
         	

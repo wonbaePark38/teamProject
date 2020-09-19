@@ -79,7 +79,9 @@ public class MainPageController {
 		// 할일 리스트
 		List<ArticleWorkerVO> todoList = service.getTodoList(wvo);
 		
+		List<Article1VO> containList = service.getArticleLookupList(vo);
 		
+		mav.addObject("containList",containList);
 		mav.addObject("todoList",todoList);
 		mav.addObject("taskList",taskList);
 		mav.addObject("taskStatusList",taskStatusList);
@@ -217,6 +219,34 @@ public class MainPageController {
 	@RequestMapping(value = "/todoupdate.do")
 	public String updateTodoSuccess(ArticleWorkerVO wvo, ProjectDirVO project, HttpSession session) {
 		service.updateTodoSuccess(wvo);
+		return "mainpage.do";
+	}
+	
+	@RequestMapping(value = "/deletearticle.do")
+	public String deleteArticle(Article1VO vo, ProjectDirVO project, HttpSession session) {
+		
+		service.deleteArticle(vo);
+		
+		return "mainpage.do";
+	}
+	
+	@RequestMapping(value = "/deletetodo.do")
+	public String deleteTodo(Article1VO vo, ProjectDirVO project, HttpSession session) {
+		ArticleWorkerVO wvo = new ArticleWorkerVO();
+		wvo.setArticle_id(vo.getArticle_id());
+		service.deleteArticle(vo);
+		service.deleteTodo(wvo);
+		return "mainpage.do";
+	}
+	
+	@RequestMapping(value = "/mergecontain.do")
+	public String updateContain(Article1VO vo, ProjectDirVO project, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		System.out.println(vo.getMember_id());
+		System.out.println(vo.getArticle_contain());
+		System.out.println(vo.getArticle_id());
+		service.mergeArticleLookup(vo);
 		return "mainpage.do";
 	}
 }

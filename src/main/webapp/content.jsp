@@ -9,7 +9,7 @@
 <div style="padding-left: 15px;" id="content_div">
 	<div class="projectdir_content_header">
 		<div class="setting_div" id="setting_" style="float: right;">
-			<a onclick="lockerset()" style="float: left; padding-right: 5px; border-right: 1px solid #eaeaea;">설정</a>
+			<!-- <a onclick="lockerset()" style="float: left; padding-right: 5px; border-right: 1px solid #eaeaea;">설정</a> -->
 			<a id="dir_setting" class="dir_set">편집</a>
 
 			<div id="content_set" class="content_set">

@@ -19,7 +19,6 @@
 		var project_name = $('p[id=title]').text();
 		// project_id
 		var project_id = $(this).next('input[name=project_id]').val();
-		alert(project_id);
 		
 		var article_pix = $('<form></form>');
 		// form 설정
@@ -58,15 +57,17 @@
 	      var worker_append_cancle = document.createElement('button');
 	      worker_append_cancle.setAttribute('style','vertical-align: middle; display: inline-block; height: 30px; width: 14px; border: none; background: url(images/btn_del_name.png) no-repeat center center;');
 	      worker_append.append(worker_append_cancle);
-	      
-	   
+			      
 	   document.getElementById('worker_append_div').appendChild(worker_append);
-	 
+	 	$(this).parent().parent().parent().hide();
   });
 	
   
+ $(document).on('click','.todo_worker',function(){
+	 alert($(this).next().attr('id'));
+ }) ;
   
-  
+
   $(document).on('click','#member_a',function(){
 	  var value = $(this).attr('name');
 	  $(this).parent().parent().parent().prev().val(value);
@@ -139,11 +140,163 @@ $(document).on('click','.tcheck',function(){
 	todo_check.appendTo('body');
 	todo_check.submit();
 });
+
+$(document).on('click','#set_icon',function(){
+	if ($(this).attr('class') == 'article_setting') {
+		$(this).attr('class','article_setting_on');
+		$(this).parent().next().next().show();
+	} else if ($(this).attr('class') == 'article_setting_on') {
+		$(this).attr('class','article_setting');
+		$(this).parent().next().next().hide();
+	}
+});
+
+$(document).on('click','#article_set',function(){
+	if ($(this).text() == '수정') {
+		alert('미구현');
+	} else if ($(this).text() == '삭제') {
+		 if (confirm('게시글을 정말로 삭제하시겠습니까?')) {
+			
+			 var article_id = $(this).parent().parent().parent().parent().parent().parent().attr('id');
+			 var form_name = $(this).parent().parent().parent().parent().parent().parent().attr('name');
+			 var p_title = $('p#title').text();
+			var p_id = $('#p_id').val();
+			 var article_del = $('<form></form>');
+			
+			// form 설정
+			article_del.attr('method','post');
+			if (form_name == 'todoWrite') {
+				article_del.attr('action','deletetodo.do');
+			} else {
+				article_del.attr('action','deletearticle.do');
+			}
+			
+			// form 데이터
+			article_del.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
+			article_del.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
+			article_del.append($('<input/>',{type:'hidden', name:'article_id', value: article_id}));
+			
+			// form 생성하는 곳
+			article_del.appendTo('body');
+			article_del.submit();
+		 } else {
+			alert('취소되었습니다.');
+		 }
+	}
+});
+
+ $(document).ready(function(){
+	// 할일 게시글 반복문
+	$('.todo_datas').each(function(){
+		var todo_count = 0;
+		var todo_success_count = 0;
+		// 할일 게시글 안에 리스트 반복문
+		$(this).children('.tdlist').each(function(){
+			todo_count++;
+			if ($(this).children().first().children('.tcheck').attr('id') == 'todo_check_on') {
+				todo_success_count++;
+			}
+		});
+		
+		var percentage = todo_success_count/ todo_count * 100;
+		$(this).find('#todo_success').text(todo_success_count);
+		$(this).find('#todo_total').text(todo_count);
+		$(this).find('#set_bar').text(percentage);
+		$(this).find('#pgval').val();
+	});
+	
+	// 댓글 리스트
+	$('.post_idx').each(function(){
+		var reply_count = 0;
+		$(this).find('.remark_data').each(function(){
+			reply_count++;
+		});
+		$(this).find('.reply_count').text(reply_count);
+	});
+	
+	// 멘션
+	$('.div_text_write').on('input', function() {
+	    var currentVal = $(this).val();
+	    var textarea = $(this);
+	   if (currentVal.indexOf('@') != -1) {
+			$(this).parent().parent().find('#mention_select_div').css('display','initial');
+			
+			
+			
+		} else {
+			$(this).parent().parent().find('#mention_select_div').hide();
+		}
+	    console.log(currentVal);
+	});
+	
+	// 멘션 리스트
+	$('.mention_User').on('click',function(){
+		if ($(this).attr('id') == 'mention_off') {
+			$(this).attr('id','mention_on');
+			$(this).attr('name',$(this).parent().val());
+			$(this).text('@'+$(this).text());
+			$(this).parent().parent().parent().parent().parent().find('#menstionbar').append($(this));
+			$(this).parent().parent().parent().parent().parent().find('#mention_select_div').hide();
+			
+			var textarea = $(this).parent().parent().parent().parent().parent().find('.div_text_write');
+			
+			textarea.val(textarea.val().substr(0,textarea.val().length -1));
+		} else if ($(this).attr('id') == 'mention_on') {
+			$(this).attr('id','mention_off');
+			$(this).text($(this).text().substr(1,$(this).text().length));
+			$(this).parent().prev().find('li#mid[value='+$(this).attr('name')+']').append($(this));
+			$(this).parent().prev().find('#mention_select_div').hide();
+		}
+	});
+	
+	// 고정 게시물 리스트
+	$('#apx_count').each(function(){
+		
+	});
+ }); 
+
+ $(document).on('click','#bringIcon',function(){
+	
+	 var article_id = $(this).parent().parent().parent().parent().attr('id');
+	 var p_title = $('p#title').text();
+	 var p_id = $('#p_id').val();
+	 var aricle_lookup = $('<form></form>');
+	
+	// form 설정
+	aricle_lookup.attr('method','post');
+	aricle_lookup.attr('action','mergecontain.do');
+	
+	// form 데이터
+	aricle_lookup.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
+	aricle_lookup.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
+	aricle_lookup.append($('<input/>',{type:'hidden', name:'article_id', value: article_id}));
+	 if ($(this).attr('class') == 'bringIcon') {
+		aricle_lookup.append($('<input/>',{type:'hidden', name:'article_contain', value: 'bringIcon_on'}));
+	} else if ($(this).attr('class') == 'bringIcon_on') {
+		aricle_lookup.append($('<input/>',{type:'hidden', name:'article_contain', value: 'bringIcon'}));
+		
+	}
+		 
+	// form 생성하는 곳
+	aricle_lookup.appendTo('body');
+	aricle_lookup.submit();
+	
+ });
+ 
+ 
+ $(document).on('click','#input_btn_icon', function(){
+	 var reply_div = $(this).parent().parent().parent().next('.reply_div');
+	 reply_div.toggle();
+ });
+ 
+ 
+ 
+ 
 </script>
 <!-- 게시글 넣는곳 -->
 <div>
 	<c:forEach var="userList" items="${userList }">
-		<input type="hidden" id="project_user" name="${userList.member_name }" value="${userList.member_id }"/>
+		<input type="hidden" id="project_user" class="project_user" name="${userList.member_name }" value="${userList.member_id }"/>
 	</c:forEach>
 </div>
 <div class="article">
@@ -242,7 +395,7 @@ $(document).on('click','.tcheck',function(){
 							<div id="writeForm_div">
 
 								<textarea name="writeForm1_content" id="writeForm1_content_text"
-									class="div_text_write" placeholder="내용을 입력해주세요."></textarea>
+									class="div_text_write" placeholder="내용을 입력해주세요." oninput=""></textarea>
 
 
 
@@ -295,7 +448,7 @@ $(document).on('click','.tcheck',function(){
 
 								<!-- 하단 툴바 -->
 								<hr>
-								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;"
+								<div id="toolbar" style="width: 100%; margin-top: 5px; margin-bottom: 5px;"
 									onsubmit="attech_file_check()">
 
 									<input type="file" id="writeForm1_file" name="writeForm_file"
@@ -305,15 +458,29 @@ $(document).on('click','.tcheck',function(){
 										onchange="imgCheck(this,writeForm1_uploadImg)"
 										accept="image/gif, image/jpg, image/png"
 										style="display: none;"> <a id="writeForm1_file_add"
-										class="add_file"></a> <a id="writeForm1_img_add"
-										class="add_pic"></a>
+										class="add_file"></a> 
+										<a id="writeForm1_img_add" class="add_pic"></a>
+										<a class="add_mention"></a>
+										<div id="mention_select_div" style="display: initial;z-index: 300; display: initial; position: absolute; margin-left: 7px; display: none;">
+											<ul
+												style="list-style: none; border: 1px solid lightgray; background-color: white; padding-left: 0px;">
+												<!-- forEach -->
+												<c:forEach var="userList" items="${userList}">
+													<li id="mid" value="${userList.member_id }">
+														<a class="mention_User" id="mention_off">${userList.member_name}</a>
+													</li>
+												</c:forEach>
+												<!-- //forEach -->
+											</ul>
+										</div>
 
 									<div style="display: inline-block; float: right;">
 										<a class="submit_a" onclick="writeForm_submit1()">올리기</a>
 									</div>
+									
 								</div>
 								<!-- //하단 툴바 -->
-
+								<div id="menstionbar"></div>
 							</div>
 
 						</form>
@@ -412,14 +579,12 @@ $(document).on('click','.tcheck',function(){
 										accept="image/gif, image/jpg, image/png"
 										style="display: none;"> <a id="writeForm2_file_add"
 										class="add_file"></a> <a id="writeForm2_img_add"
-										class="add_pic"></a> <a class="add_loc"
-										onclick="locationPick()"></a>
+										class="add_pic"></a> 
+										<a class="add_loc" onclick="locationPick()"></a>
+										<a class="add_mention"></a>
 
 									<div style="display: inline-block; float: right;">
-										<select style="vertical-align: middle; height: 27px;">
-											<option></option>
-											<option></option>
-										</select> <a class="submit_a" onclick="writeForm_submit2()">올리기</a>
+										<a class="submit_a" onclick="writeForm_submit2()">올리기</a>
 									</div>
 
 
@@ -670,12 +835,9 @@ $(document).on('click','.tcheck',function(){
 										accept="image/gif, image/jpg, image/png"
 										style="display: none;"> <a id="writeForm3_file_add"
 										class="add_file"></a> <a id="writeForm3_img_add"
-										class="add_pic"></a>
+										class="add_pic"></a><a class="add_mention"></a>
 									<div style="display: inline-block; float: right;">
-										<select style="vertical-align: middle; height: 27px;">
-											<option></option>
-											<option></option>
-										</select> <a class="submit_a" onclick="writeForm_submit3()">올리기</a>
+										<a class="submit_a" onclick="writeForm_submit3()">올리기</a>
 									</div>
 								</div>
 
@@ -813,10 +975,11 @@ $(document).on('click','.tcheck',function(){
 											</li>  -->
 											<!-- //몇분전에 알람줄지 -->
 
-											<hr>
 
 											<!-- 일정 메모 -->
-											<li><textarea name="writeForm4_content"
+											<li>
+												<hr>
+												<textarea name="writeForm4_content"
 													id="sche_text_write"></textarea>
 											<li>
 												<!-- 하단 툴바 -->
@@ -824,10 +987,7 @@ $(document).on('click','.tcheck',function(){
 												<div
 													style="width: 100%; text-align: right; margin-top: 5px; margin-bottom: 5px;">
 													<div style="display: inline-block;">
-														<select style="vertical-align: middle; height: 27px;">
-															<option></option>
-															<option></option>
-														</select> <a class="submit_a" onclick="writeForm_submit4()">올리기</a>
+														 <a class="submit_a" onclick="writeForm_submit4()">올리기</a>
 													</div>
 												</div> <!-- //하단 툴바 -->
 											</li>
@@ -883,10 +1043,7 @@ $(document).on('click','.tcheck',function(){
 								<div
 									style="width: 100%; text-align: right; margin-top: 5px; margin-bottom: 5px;">
 									<div style="display: inline-block;">
-										<select style="vertical-align: middle; height: 27px;">
-											<option></option>
-											<option></option>
-										</select> <a id="writeForm5_submit" class="submit_a">올리기</a>
+										<a id="writeForm5_submit" class="submit_a">올리기</a>
 
 									</div>
 								</div>
@@ -964,7 +1121,7 @@ $(document).on('click','.tcheck',function(){
 				<span id="upper_fixed_img"
 					style="display: inline-block; vertical-align: middle; width: 20px; height: 22px; background: url(images/sp_sectiontitle_ico1.gif) no-repeat 0 -66px;"></span>
 				<span style="display: inline-block;">상단 고정글</span> <span
-					style="margin-left: 5px;"><strong>2</strong></span>
+					style="margin-left: 5px;"><strong id="apx_count"></strong></span>
 
 			</div>
 			<c:forEach var="pix_list" items="${pixedList}">
@@ -1003,10 +1160,10 @@ $(document).on('click','.tcheck',function(){
 					
 				</div>
 				<!-- 누르면 나올 게시물 -->
-				<div style="display: none;"></div>
 				<!-- //누르면 나올 게시물 -->
 				<!-- //forEach -->
 			</c:forEach>
+			<div style="display: none;"></div>
 		</div>
 		<!-- //상단 고정글 -->
 
@@ -1020,7 +1177,7 @@ $(document).on('click','.tcheck',function(){
 				<c:choose>
 
 					<c:when test="${form_name eq 'nomalWrite'}">
-						<div class="post_idx" id="${list.article_id }">
+						<div class="post_idx" id="${list.article_id }" name="${list.form_name }">
 							<!-- 탑 -->
 							
 							<div class="top_writer">
@@ -1035,9 +1192,12 @@ $(document).on('click','.tcheck',function(){
 										id="공개범위설정"> <img></span>
 								</div>
 								<div style="margin: -10px 0px 0px 10px;">
-									<div style="float: right; padding-left: 10px;">
-										<a id="set_icon"></a>
-									</div>
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
 									<div style="float: right;">
 										<c:choose>
 											<c:when test="${list.article_pix eq '0'}">
@@ -1048,6 +1208,12 @@ $(document).on('click','.tcheck',function(){
 											</c:when>
 										</c:choose>
 										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -1086,8 +1252,8 @@ $(document).on('click','.tcheck',function(){
 								</c:if>
 
 								<div style="text-align: right; padding-right: 10px;">
-									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
-										style="font-size: 12px;">읽음 n 명</span>
+									<span style="font-size: 12px;">좋아요 <span class='like_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
 								<!-- 일반글 -->
 							</div>
@@ -1098,13 +1264,21 @@ $(document).on('click','.tcheck',function(){
 							<div class="bottom_lay" style="height: 40px;">
 								<ul class="bottom_list">
 									<li><a id="like_icon">좋아요</a></li>
-									<li><a id="input_btn_icon">댓글작성</a></li>
-									<li><a id="bringIcon">담아두기</a></li>
+									<li><a id="input_btn_icon" class="input_btn_icon">댓글작성</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${list.article_id eq containList.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
 								</ul>
 							</div>
 							<!-- 글내용 -->
 
-
+							<div class="reply_div"  style="display: none;">
+							
 							<!-- 						댓글 작성 -->
 							<c:forEach var="reply" items="${replyList }">
 
@@ -1145,18 +1319,19 @@ $(document).on('click','.tcheck',function(){
 
 									<input name="reply_content" type="text"
 										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
-										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 83%; height: 32px;">
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
 
-									<a class="remark_upload"></a>
 
 								</div>
 							</form>
 							<!-- 						댓글 -->
+							</div>
 						</div>
+						
 					</c:when>
 
 					<c:when test="${form_name eq 'nomalWrite2.0'}">
-						<div class="post_idx"id="${list.article_id }">
+						<div class="post_idx"id="${list.article_id }" name="${list.form_name }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
@@ -1170,9 +1345,11 @@ $(document).on('click','.tcheck',function(){
 										id="공개범위설정"> <img></span>
 								</div>
 								<div style="margin: -10px 0px 0px 10px;">
-									<div style="float: right; padding-left: 10px;">
-										<a id="set_icon"></a>
-									</div>
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
 									<div style="float: right;">
 										<c:choose>
 											<c:when test="${list.article_pix eq '0'}">
@@ -1183,6 +1360,12 @@ $(document).on('click','.tcheck',function(){
 											</c:when>
 										</c:choose>
 										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -1239,8 +1422,8 @@ $(document).on('click','.tcheck',function(){
 								</c:if>
 
 								<div style="text-align: right; padding-right: 10px;">
-									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
-										style="font-size: 12px;">읽음 n 명</span>
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
 								<!-- 일반글 -->
 
@@ -1256,11 +1439,19 @@ $(document).on('click','.tcheck',function(){
 								<ul class="bottom_list">
 									<li><a id="like_icon">좋아요</a></li>
 									<li><a id="input_btn_icon">댓글작성</a></li>
-									<li><a id="bringIcon">담아두기</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" name="article_id" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
 								</ul>
 							</div>
 							<!-- 글내용 -->
-
+							<div class="reply_div"  style="display: none;">
+							
 							<!-- 						댓글 작성 -->
 							<c:forEach var="reply" items="${replyList }">
 
@@ -1301,20 +1492,20 @@ $(document).on('click','.tcheck',function(){
 
 									<input name="reply_content" type="text"
 										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
-										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 83%; height: 32px;">
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
 
-									<a class="remark_upload"></a>
 
 								</div>
 							</form>
 							<!-- 						댓글 -->
+							</div>	
 						</div>
 
 					</c:when>
 
 
 					<c:when test="${form_name eq 'taskWrite'}">
-						<div class="post_idx"id="${list.article_id }">
+						<div class="post_idx"id="${list.article_id }" name="${list.form_name }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
@@ -1327,9 +1518,12 @@ $(document).on('click','.tcheck',function(){
 									<span id="공개범위설정"> <img></span>
 								</div>
 								<div style="margin: -10px 0px 0px 10px;">
-									<div style="float: right; padding-left: 10px;">
-										<a id="set_icon"></a>
-									</div>
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
 									<div style="float: right;">
 										<c:choose>
 											<c:when test="${list.article_pix eq '0'}">
@@ -1340,6 +1534,12 @@ $(document).on('click','.tcheck',function(){
 											</c:when>
 										</c:choose>
 										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -1601,8 +1801,8 @@ $(document).on('click','.tcheck',function(){
 								</c:if>
 
 								<div style="text-align: right; padding-right: 10px;">
-									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
-										style="font-size: 12px;">읽음 n 명</span>
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
 								<!-- 일반글 -->
 
@@ -1618,11 +1818,20 @@ $(document).on('click','.tcheck',function(){
 								<ul class="bottom_list">
 									<li><a id="like_icon">좋아요</a></li>
 									<li><a id="input_btn_icon">댓글작성</a></li>
-									<li><a id="bringIcon">담아두기</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
 								</ul>
 							</div>
 							<!-- 글내용 -->
 
+							<div class="reply_div"  style="display: none;">
+							
 							<!-- 						댓글 작성 -->
 							<c:forEach var="reply" items="${replyList }">
 
@@ -1646,9 +1855,9 @@ $(document).on('click','.tcheck',function(){
 									</div>
 								</c:if>
 							</c:forEach>
-							<!-- 댓글 작성 -->
+							<!-- 						댓글 작성 -->
 
-							<!-- 댓글 -->
+							<!-- 						댓글 -->
 							<form method="post" action="articlereply.do">
 								<input type="hidden" name="reply_writer"
 									value="${sessionScope.user.name }"> <input
@@ -1663,19 +1872,19 @@ $(document).on('click','.tcheck',function(){
 
 									<input name="reply_content" type="text"
 										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
-										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 83%; height: 32px;">
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
 
-									<a class="remark_upload"></a>
 
 								</div>
 							</form>
 							<!-- 						댓글 -->
+							</div>
 						</div>
 
 					</c:when>
 
 					<c:when test="${form_name eq 'scheWrite'}">
-						<div class="post_idx"id="${list.article_id }">
+						<div class="post_idx"id="${list.article_id }" name="${list.form_name }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
@@ -1688,9 +1897,12 @@ $(document).on('click','.tcheck',function(){
 										id="공개범위설정"> <img></span>
 								</div>
 								<div style="margin: -10px 0px 0px 10px;">
-									<div style="float: right; padding-left: 10px;">
-										<a id="set_icon"></a>
-									</div>
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
 									<div style="float: right;">
 										<c:choose>
 											<c:when test="${list.article_pix eq '0'}">
@@ -1701,6 +1913,12 @@ $(document).on('click','.tcheck',function(){
 											</c:when>
 										</c:choose>
 										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -1767,8 +1985,8 @@ $(document).on('click','.tcheck',function(){
 								<!-- 일정 -->
 
 								<div style="text-align: right; padding-right: 10px;">
-									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
-										style="font-size: 12px;">읽음 n 명</span>
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
 							</div>
 
@@ -1780,11 +1998,20 @@ $(document).on('click','.tcheck',function(){
 								<ul class="bottom_list">
 									<li><a id="like_icon">좋아요</a></li>
 									<li><a id="input_btn_icon">댓글작성</a></li>
-									<li><a id="bringIcon">담아두기</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
 								</ul>
 							</div>
 							<!-- 글내용 -->
 
+							<div class="reply_div"  style="display: none;">
+							
 							<!-- 						댓글 작성 -->
 							<c:forEach var="reply" items="${replyList }">
 
@@ -1825,19 +2052,19 @@ $(document).on('click','.tcheck',function(){
 
 									<input name="reply_content" type="text"
 										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
-										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 83%; height: 32px;">
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
 
-									<a class="remark_upload"></a>
 
 								</div>
 							</form>
 							<!-- 						댓글 -->
+							</div>
 						</div>
 
 					</c:when>
 
 					<c:when test="${form_name eq 'todoWrite'}">
-						<div class="post_idx" id="${list.article_id }">
+						<div class="post_idx" id="${list.article_id }" name="${list.form_name }">
 							<!-- 탑 -->
 							<div class="top_writer">
 								<div class="photo" style="float: left;">
@@ -1850,9 +2077,12 @@ $(document).on('click','.tcheck',function(){
 										id="공개범위설정"> <img></span>
 								</div>
 								<div style="margin: -10px 0px 0px 10px;">
-									<div style="float: right; padding-left: 10px;">
-										<a id="set_icon"></a>
-									</div>
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
 									<div style="float: right;">
 										<c:choose>
 											<c:when test="${list.article_pix eq '0'}">
@@ -1864,28 +2094,19 @@ $(document).on('click','.tcheck',function(){
 										</c:choose>
 										<input type="hidden" name="project_id" value="${project.project_id}"> 
 									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
 							<!-- 탑 -->
 
 							<!-- 글내용 -->
 							<div class="post">
-								<!-- <script>
-									$(document).ready(function(){
-										// 할일 게시글 반복문
-										$('.todo_datas').each(function(){
-											var todo_count = 0;
-											// 할일 게시글 안에 리스트 반복문
-											$(this).children('.tdlist').each(function(){
-												todo_count++;
-												alert(todo_count);
-											});
-											$(this).find('#todo_total').text(todo_count);
-											$(this).find('#set_bar').text(
-											$(this).find('#pgval').val());
-										});
-									});
-								</script>  -->
+								
 								<div class="todo_datas"
 									style="width: 100%; padding: 10px 10px 10px 10px; border: 1px solid lightgray;">
 
@@ -1935,8 +2156,8 @@ $(document).on('click','.tcheck',function(){
 								</div>
 
 								<div style="text-align: right; padding-right: 10px;">
-									<span style="font-size: 12px;">댓글 n 개</span>&nbsp;<span
-										style="font-size: 12px;">읽음 n 명</span>
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
 							</div>
 
@@ -1948,11 +2169,19 @@ $(document).on('click','.tcheck',function(){
 								<ul class="bottom_list">
 									<li><a id="like_icon">좋아요</a></li>
 									<li><a id="input_btn_icon">댓글작성</a></li>
-									<li><a id="bringIcon">담아두기</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
 								</ul>
 							</div>
 							<!-- 글내용 -->
-
+							<div class="reply_div"  style="display: none;">
+							
 							<!-- 						댓글 작성 -->
 							<c:forEach var="reply" items="${replyList }">
 
@@ -1993,13 +2222,13 @@ $(document).on('click','.tcheck',function(){
 
 									<input name="reply_content" type="text"
 										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
-										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 83%; height: 32px;">
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
 
-									<a class="remark_upload"></a>
 
 								</div>
 							</form>
 							<!-- 						댓글 -->
+							</div>
 						</div>
 					</c:when>
 
@@ -2012,6 +2241,8 @@ $(document).on('click','.tcheck',function(){
 		<!-- 게시글 출력하는 곳 -->
 	</div>
 </div>
+
+
 <!-- //게시글 넣는곳 -->
 <c:if test="${list.writeForm3_tasknum ne null}">
 	<script>

@@ -37,4 +37,16 @@ public interface ArticleService {
    
    // 할일 업데이트
    void updateTodoSuccess(ArticleWorkerVO wvo);
+   
+   // 게시글 삭제
+   void deleteArticle(Article1VO vo);
+   
+   // 할일 삭제
+   void deleteTodo(ArticleWorkerVO wvo);
+   
+   // 담아두기
+   void mergeArticleLookup(Article1VO vo);
+   
+   // 담아두기 리스트
+   List<Article1VO> getArticleLookupList(Article1VO vo);
 }

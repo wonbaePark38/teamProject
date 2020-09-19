@@ -218,6 +218,14 @@ hr {
 	background-position: -48px 0;
 }
 
+.add_mention {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background: url(../images/sp_fteditbox_ico.png);
+	background-position: -192px 0;
+}
+
 #write_form_margin {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -239,6 +247,9 @@ hr {
 
 #write_form_select_table {
 	width: 100%;
+}
+#write_form_select_table td{
+	cursor: pointer;
 }
 
 #write_form_select_table tr {
@@ -498,4 +509,9 @@ hr {
 	height: 18px; 
 	background: url(../images/btn_todo_checkbox.png) no-repeat 0 0;
 	background-position: 0 -56px;
+}
+
+#mentionbar a{
+	margin: 0 0 5px 3px;
+	display: inline-block;
 }

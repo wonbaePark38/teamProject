@@ -392,6 +392,19 @@
 	background-image: url(../images/icon_post_btm.png);
 	background-repeat: no-repeat;
 }
+#bringIcon_on {
+	background-position: 0 -99px;
+	display: block;
+	padding-left: 20px;
+	padding-right: 15px;
+	height: 17px;
+	line-height: 17px;
+	font-size: 13px;
+	font-weight: 700;
+	color: #a2a2a2;
+	background-image: url(../images/icon_post_btm.png);
+	background-repeat: no-repeat;
+}
 
 .bottom_lay {
 	border-bottom: 1px solid #eaeaea;
@@ -805,17 +818,18 @@
 .locker_list_set{
 	display:none;
 	position: absolute;
-    padding: 200px 0px 0 450px;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -47%);
     z-index: 1000;
 }
 .locker_save{
+	border-radius: 10px 10px 0 0;
 	overflow:scroll;
 	-ms-overflow-style: none; 
 	position:absolute;
 	font-size:18px;
-	background-color: gray;
+	background-color: rgb(160 178 198 / 25%);
 	width: 300px; 
 	max-height: 600px;
 }
@@ -833,8 +847,11 @@
 	height: 16px;
 	
 }
+.locker_save_list label{
+	cursor: pointer;	
+}
 .locker_save_h {
-	background-color: aqua; 
+	background-color: #6b65dc; 
 	text-align: center;
 }
 .locker_save_h a{

@@ -33,7 +33,7 @@
 <style>
 </style>
 
-<body>
+<body style="background-color: rgb(242, 242, 242);">
 
 	<div class="mainWrap">
 		<!-- Navigation -->

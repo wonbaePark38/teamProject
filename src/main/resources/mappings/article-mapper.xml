@@ -75,6 +75,14 @@
 		<result property="todo_success" column="TODO_SUCCESS"/>
 	</resultMap>
 
+	<resultMap type="article1VO" id="lookupResult">
+		<id property="article_lookup_id" column="ARTICLE_LOOKUP_ID"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="article_id" column="ARTICLE_ID"/>
+		<result property="article_contain" column="ARTICLE_CONTAIN"/>
+	</resultMap>
+
+
 	<insert id="workerInsert" parameterType="articleWorkerVO">
 		INSERT INTO article_worker
 		(
@@ -217,10 +225,28 @@
 		)
 	</insert>
 	
+	<update id="mergeArticleLookup" parameterType="article1VO">
+		MERGE INTO 
+			article_lookup 
+		USING DUAL 
+			ON(member_id = #{member_id} AND article_id = #{article_id})
+			WHEN MATCHED THEN 
+				UPDATE SET article_contain = #{article_contain}
+			WHEN NOT MATCHED THEN 
+				INSERT (article_lookup_id, member_id, article_id, article_contain)
+				VALUES ((SELECT NVL(MAX(article_lookup_id),0) +1 FROM article_lookup), #{member_id}, #{article_id}, #{article_contain})
+	</update>
+	
+	
 	<update id="updateArticlePix" parameterType="article1VO">
 		UPDATE mainpage_article SET article_pix = #{article_pix}
 		WHERE article_id = #{article_id}
 	</update>
+	
+	<select id="getArticleLookupList" parameterType="article1VO" resultMap="lookupResult">
+		SELECT * FROM article_lookup
+		WHERE member_id = #{member_id}
+	</select>
 	
 	<select id="getArticlePixedList" parameterType="article1VO" resultMap="articleResult">
 		SELECT * FROM mainpage_article
@@ -249,4 +275,13 @@
 		WHERE todo_id = #{todo_id} 
 	</update>
 
+	<delete id="deleteArticle" parameterType="article1VO">
+		DELETE FROM mainpage_article
+		WHERE article_id = #{article_id}
+	</delete>
+	
+	<delete id="deleteTodo" parameterType="articleWorkerVO">
+		DELETE FROM article_worker
+		WHERE article_id = #{article_id}
+	</delete>
 </mapper>

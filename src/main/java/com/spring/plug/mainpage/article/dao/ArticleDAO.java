@@ -74,4 +74,23 @@ public class ArticleDAO{
    public void updateTodoSuccess(ArticleWorkerVO wvo) {
 	   sqlSessionTemplate.update("ArticleDAO.updateTodoSuccess",wvo);
    }
+   
+   // 게시글 삭제
+   public void deleteArticle(Article1VO vo) {
+	   sqlSessionTemplate.delete("ArticleDAO.deleteArticle",vo);
+   }
+   // 등록된 할일 삭제
+   public void deleteTodo(ArticleWorkerVO wvo) {
+	   sqlSessionTemplate.delete("ArticleDAO.deleteTodo",wvo);
+   }
+   
+   // 담아두기
+   public void mergeArticleLookup(Article1VO vo) {
+	   sqlSessionTemplate.update("ArticleDAO.mergeArticleLookup",vo);
+   }
+   
+   // 담아두기 리스트
+   public List<Article1VO> getArticleLookupList(Article1VO vo){
+	   return sqlSessionTemplate.selectList("ArticleDAO.getArticleLookupList",vo);
+   }
 }

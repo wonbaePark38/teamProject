@@ -15,6 +15,7 @@ public class Article1VO {
 	private String project_name;
 	private int member_id;
 	private int article_id;
+	private int article_lookup_id;
 	private String form_name;
 	private Date regDate;
 	private String file_name;
@@ -24,6 +25,7 @@ public class Article1VO {
 	private String img_size;
 	private String writer;
 	private int article_pix;
+	private String article_contain;
 	private String writeForm1_content;
 
 	private String writeForm2_title;
@@ -54,6 +56,27 @@ public class Article1VO {
 	private String writeForm5_content;
 	private String writeForm5_date;
 	private String writeForm5_worker;
+
+	
+	
+
+	public int getArticle_lookup_id() {
+		return article_lookup_id;
+	}
+
+	public void setArticle_lookup_id(int article_lookup_id) {
+		this.article_lookup_id = article_lookup_id;
+	}
+
+
+
+	public String getArticle_contain() {
+		return article_contain;
+	}
+
+	public void setArticle_contain(String article_contain) {
+		this.article_contain = article_contain;
+	}
 
 	public int getMember_id() {
 		return member_id;

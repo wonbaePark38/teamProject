@@ -26,7 +26,7 @@ function writeForm_submit2() {
 
 function writeForm_submit3() {
 	var form3 = document.getElementById('writeForm3_form');
-	if ($('#Form3_title').attr('value') == '') {
+	if ($('#Form3_title').attr('value') == null) {
 		alert('업무명을 입력해주세요.');
 	} else if ($('#work_workers').attr('value')== null) {
 		alert('담당자를 선택해주세요.');
@@ -38,9 +38,9 @@ function writeForm_submit3() {
 
 function writeForm_submit4() {
 	var form4 = document.getElementById('writeForm4_form');
-	if ($('#writeForm4_title').val() == null) {
+	if ($('#writeForm4_title').val() == '') {
 		alert('제목을 입력해주세요.');
-	} else if ($('#sche_start_date').val() == null || $('#sche_end_date').val() == null) {
+	} else if ($('#sche_start_date').val() == '' || $('#sche_end_date').val() == '') {
 		alert('일정을 선택해주세요.');
 	} else {
 		form4.submit();
