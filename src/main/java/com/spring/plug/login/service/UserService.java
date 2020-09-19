@@ -14,7 +14,7 @@ public interface UserService {
 	void addSocialUser(UserVO vo);
 	UserVO checkEmail(UserVO vo);
 	void updatePasswordAuthKey(UserVO vo);
-	void sendPasswordCheckEmail(UserVO vo) throws Exception;
+	String sendPasswordCheckEmail(UserVO vo) throws Exception;
 	void changePasswordBytempPassword(UserVO vo);
 	void keepLogin(String email, String sessionId, Date sessionLimit);
 	UserVO checkLoginBefore(String sessionId) throws Exception;

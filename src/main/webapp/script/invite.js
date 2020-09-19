@@ -53,7 +53,7 @@ $(document).ready(function(){
 					//$('#hidden-status').css('display','none'); 
 				 }, 
 				 error : function(e){
-					 alert('에러 발생');
+					 alert('메일보내기 에러 발생');
 				 }
 			 })
 			

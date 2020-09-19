@@ -30,20 +30,25 @@ $(document).ready(function(){
 
 	});
 
-	$("#USER_PW").keypress(function(event){
+	$("#USER_PW").keydown(function(e){
 
 		var passwordLength=$('#USER_PW').val();
 		var str = passwordLength.length+1;
 
-		if(str>0){
+		if((e.keyCode == ctrlKey && e.keyCode == vKey) || str>0){
+			ctrlDown = true;
 			$('.signup_btn_st1').css('background-color','#5a53d0');
 			$('.signup_btn_st1').attr('disabled',false);
 		}
+	}).keyup(function(e){
+    	if(e.keyCode == ctrlKey){
+    		ctrlDown = false;
+    	}
 	});
 
-	$(document).keydown(function(e) {
+	/*$(document).keydown(function(e) {
 		var passwordLength=$('#USER_PW').val();
-		var str = passwordLength.length+1;
+		var str = passwordLength.length;
 		
         if (e.keyCode == ctrlKey && str>0){
         	ctrlDown = true;
@@ -54,7 +59,7 @@ $(document).ready(function(){
     	if(e.keyCode == ctrlKey){
     		ctrlDown = false;
     	}
-    });
+    });*/
 
 
 });
