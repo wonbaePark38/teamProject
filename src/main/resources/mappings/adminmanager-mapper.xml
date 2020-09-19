@@ -23,6 +23,7 @@
 		<result property="createmonth" column="CREATE_MONTH" />
 		<result property="daycount" column="DAY_COUNT" />
 		<result property="createyear" column="CREATE_YEAR" />
+		<result property="sharework" column="SHARE_WORK" />
 	</resultMap>
 	
 	<select id="getUser" resultMap="managerResult">
@@ -112,6 +113,10 @@
 		WHERE (TO_CHAR(REGDATE, 'YYYY')) = #{searchDay}
 		GROUP BY (TO_CHAR(REGDATE, 'MM'))
 		ORDER BY (TO_CHAR(REGDATE, 'MM')) ASC
+	</select>
+	
+	<select id="getShareWork" resultMap="managerResult">
+		SELECT COUNT(FORM_NAME) AS SHARE_WORK FROM MAINPAGE_ARTICLE WHERE FORM_NAME = 'taskWrite'
 	</select>
 	
 </mapper>

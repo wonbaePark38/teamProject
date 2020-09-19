@@ -83,4 +83,9 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<ManagerVO> getArticleYear(ManagerVO vo) {
 		return managerDAO.getArticleYear(vo);
 	}
+	
+	@Override
+	public ManagerVO getShareWork() {
+		return managerDAO.getShareWork();
+	}
 }
