@@ -202,7 +202,7 @@ $(document).on('click','#article_set',function(){
 		$(this).find('#todo_success').text(todo_success_count);
 		$(this).find('#todo_total').text(todo_count);
 		$(this).find('#set_bar').text(percentage);
-		$(this).find('#pgval').val();
+		$(this).find('#pgval').val(percentage);
 	});
 	
 	// 댓글 리스트
