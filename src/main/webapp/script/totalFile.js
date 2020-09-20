@@ -742,12 +742,13 @@ $(document).ready(function(){
 			  url :'getRealPath.do',
 			  data : sendData
 		  }).done(function(data){
+			  console.log('하위');
 			  console.log(data);
 			  var fileName = data.fileName;
 			  var filePath = data.filePath;
-			  var fileArr = filePath.split('\\');
+			  var fileArr = filePath.split('/');
 			  var realFileName = fileArr[fileArr.length-1];
-			  var src = "upload/"+data.projectId+"/"+ realFileName;
+			  var src = "http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+"/"+ realFileName;
 
 			  var fileTypeArr = fileName.split('.');
 			  var fileType = fileTypeArr[1];
@@ -761,7 +762,7 @@ $(document).ready(function(){
 			  }else if(fileType == 'ppt' || fileType == 'doc' || fileType == 'pdf'){
 				  $('.file-modal').css('display','block');
 				   $('.file-modal').append(
-				"<iframe src='https://docs.google.com/gview?url=https://www.adobe.com/support/ovation/ts/docs/"+realFileName+"&embedded=true' class=file-view>"+
+				"<iframe src='https://docs.google.com/gview?url=http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+'/'+realFileName+"&embedded=true' class=file-view>"+
 				"</iframe>"
 				  );
 			  }else{

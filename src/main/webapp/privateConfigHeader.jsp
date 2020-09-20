@@ -351,7 +351,7 @@ function settingChatList(element){
 var socket = null;
 
 function connect(){
-	 var ws = new WebSocket("ws://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/echo.do");
+	 var ws = new WebSocket("ws://http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/echo.do");
 	 socket = ws;
 		ws.onopen = function(){
 			console.log('Info: connection opened');
