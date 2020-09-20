@@ -21,6 +21,7 @@ import com.spring.plug.projectmanager.vo.ProjectManageVO;
 
 @Service
 public class ProjectManageServiceImpl implements ProjectManageService{
+	
 	@Autowired
 	ProjectManageDAO pmDAO;
 	
@@ -82,13 +83,13 @@ public class ProjectManageServiceImpl implements ProjectManageService{
 	@Override
 	public void sendInviteMail(List<String> mailAddress) throws AddressException, MessagingException {
 		String host = "smtp.gmail.com";
-		final String username = "dbhssqo3@gmail.com";
-		final String password = "p5061703";
+		final String username = "97dnjswhdzld@gmail.com";
+		final String password = "one1two22@";
 		int port = 465;
 		String subject = "FLOW 초대 메일";
 		String body = username+"님으로 부터 메일을 받았습니다.";
 		body += "<p> 아래 링크를 클릭하시면 플로우 로그인 페이지로 이동합니다. </p>";
-		body += "<a href='ec2-3-17-73-167.us-east-2.compute.amazonaws.com'>플로우 페이지로 이동</a>";
+		body += "<a href='ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/login.do'>플로우 페이지로 이동</a>";
 		
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", host); 
