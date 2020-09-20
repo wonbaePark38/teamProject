@@ -8,13 +8,11 @@ import java.util.List;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
-import com.spring.plug.common.util.MailUtils;
 import com.spring.plug.login.dao.UserDAO;
 import com.spring.plug.login.vo.UserVO;
 
