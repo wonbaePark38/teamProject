@@ -289,9 +289,6 @@ $(document).on('click','#article_set',function(){
 	 reply_div.toggle();
  });
  
- 
- 
- 
 </script>
 <!-- 게시글 넣는곳 -->
 <div>

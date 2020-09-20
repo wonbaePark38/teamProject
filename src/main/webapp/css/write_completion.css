@@ -132,7 +132,6 @@
 <!--
 -->
 .project_div {
-	z-index:300;
 	box-sizing: border-box;
 	margin: 0 10px 22px 10px;
 	float: left;
@@ -173,7 +172,6 @@
 	border: 0px;
 	right: 17px;
 	bottom: 19px;
-	z-index: 200;
 	background: url(../images/ico_star.png) no-repeat 0 -30px;
 }
 
@@ -185,7 +183,6 @@
 	border: 0px;
 	right: 17px;
 	bottom: 19px;
-	z-index: 200;
 	background-position: 0 0 !important;
 	background: url(../images/ico_star.png) no-repeat 0 -30px;
 }
@@ -768,7 +765,6 @@
 }
 
 .project_div_on{
-	z-index:300;
 	box-sizing: border-box;
 	margin: 0 10px 22px 10px;
 	float: left;

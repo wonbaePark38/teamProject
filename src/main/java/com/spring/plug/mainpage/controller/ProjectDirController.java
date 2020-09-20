@@ -27,17 +27,14 @@ public class ProjectDirController {
 		vo.setMember_id(user.getSeq());
 
 		projectDirService.insertProjectDir(vo);
-		System.out.println("project insert");
 
-		projectDirService.insertProjectLookup(vo);
-		System.out.println("project lookup insert");
 		vo.setProject_manager(1);
 		vo.setProject_favorites(0);
 		vo.setProject_locker("");
 		vo.setHide_locker(0);
+		projectDirService.insertProjectLookup(vo);
 
 		projectDirService.insertProjectLocker(vo);
-		System.out.println("project locker insert");
 
 		
 		File file = new File("C:\\plug");
