@@ -180,7 +180,7 @@
 			 <!-- //알람 영역 -->
 
 			 <!-- 채팅 영역 -->
-			 <div id="header_chat_div">
+			 <div id="header_chat_div" class='header_chat_class'>
 				
 				<!-- 선택 영역 -->
 				<div style="margin-left: 10px;">
@@ -215,7 +215,7 @@
 				<!-- 채팅방 -->
 				<div id="header_chat_chattingRoom" style="display: block;">
 				   <div style="padding-left: 6px; padding-right: 6px;">
-					  <input type="text" style=" width: 100%;" id="searchChatRoom" placeholder="채팅방 또는 이름 검색">
+					  <input type="text" style=" width: 100%;" id="searchChatRoom" class="chat-search-class" placeholder="채팅방 또는 이름 검색">
 				   </div>
 
 				 
@@ -236,7 +236,7 @@
 				   <!-- 내프로필 -->
 				   <div>
 					  <div>
-						 <span style="font-size: 12px;"><stong>내 프로필</stong></span>
+						 <span style="font-size: 12px;"><strong>내 프로필</strong></span>
 					  </div>
 					  <div style="display: inline-block;">
 						 <img src="images/empty_photo_s.png">
@@ -509,9 +509,15 @@ function chatAlert(result,message){
 	socket.send(JSON.stringify(message)); //대화 상대방에게 쏴줌
 }
 
-function resetCharList(roomId){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
+function resetChatList(roomId){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
 	var target = $('.chatting-list-div').children('#'+roomId);
 	target.remove();
+}
+
+function resetChatRoomName(roomId, roomName){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
+	$('.chatting-list-div').children('#'+roomId).children('.row-label').text("");
+	$('.chatting-list-div').children('#'+roomId).children('.row-label').text(roomName);
+	
 }
 </script>
 </html>

@@ -424,10 +424,13 @@ $(document).ready(function() {
 		message.messageType = 'changeChatRoomName';
 		socket.send(JSON.stringify(message));
 		insertMessageInfo(message); //db에 저장할 메시지 정보
+		
+		var roomId = ${roomInfo.chatRoomId};
+		opener.parent.resetChatRoomName(roomId, roomName);
 	}
 	
 	function exitChatRoom(){ //채팅방 나갈때 호출하는 함수
-		var input = confirm('채팅방에서 나가시겠습니까?');
+		var input = confirm('채팅방에서 나가시겠습니까? 대화 기록이 모두 삭제 됩니다.\n단순히 채팅 창을 끄고 싶으신 경우는 상단의 X 를 클릭하거나\nALT+F4를 누르시면 됩니다');
 		if(input){
 			var sendData = { 
 					chatRoomName : '${roomInfo.chatRoomName}',
@@ -467,8 +470,7 @@ $(document).ready(function() {
 		
 		
 		var roomId = ${roomInfo.chatRoomId};
-		opener.parent.resetCharList(roomId);
-		console.log(roomId);
+		opener.parent.resetChatList(roomId);
 		self.close(); //채팅 팝업 닫음
 		}//end if
 		

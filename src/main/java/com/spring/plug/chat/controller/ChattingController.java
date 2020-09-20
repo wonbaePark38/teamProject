@@ -48,7 +48,7 @@ public class ChattingController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		
 		ChatRoomVO roomInfo = (ChatRoomVO)chatService.getChatRoomInfo(param);
-		
+		System.out.println(roomInfo.toString());
 		session.setAttribute("roomId",param);
 		
 		mav.addObject("vo",user);

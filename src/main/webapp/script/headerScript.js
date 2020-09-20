@@ -38,13 +38,15 @@ $(document).ready(function(){
 	  });
 	  
 	  $('body').on('click',function(e){ //히든 메뉴 열려있을때 바디 클릭하면 닫히는 이벤트
-		  if($('#header_chat_div').css('display') === 'block' ){
-			  $('#header_chat_div').css('display','none');
-		  }
-		  
-		  if($('#header_option_div').css('display') === 'block' ){
-			  $('#header_option_div').css('display','none');
-		  }
+		  var chatContainer = $('#header_chat_div');
+		  var configContainer = $('#header_option_div');
+		    if( chatContainer.has(e.target).length === 0){
+		      chatContainer.css('display','none');
+		    }
+			  
+		    if( configContainer.has(e.target).length === 0){
+		    	configContainer.css('display','none');
+		    }
 	  });
 	  
 	//채팅 리스트 div에서 채팅 알림 온오프 버튼 클릭 이벤트
