@@ -172,7 +172,7 @@ public class UserSettingController {
 	@RequestMapping(value="lockPassword.do", method=RequestMethod.POST)
 	public String checkPassword(HttpSession session,@RequestParam("password")String password) {
 		UserVO user = (UserVO)session.getAttribute("user");
-		if(user.getSocialCompare().equals("y")) { //소셜 로그인 한 사람
+		if(!user.getSocialCompare().equals("N")) { //소셜 로그인 한 사람
 			if(password.equals(user.getEmail())) {
 				return "true";
 			}else {
