@@ -97,7 +97,6 @@ public class ProjectDirController {
 		projectDirService.updateProjectFavorites(vo);
 		return "projectdir.do";
 	}
-
 	// 프로젝트 선택
 	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
 	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav,HttpSession session) {

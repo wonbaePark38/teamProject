@@ -39,8 +39,14 @@
                 USING(project_id)
             )
 		USING(project_id, member_id)
-		WHERE member_id = #{member_id} ORDER BY project_id ASC
+		WHERE member_id = #{member_id} 
+		<if test="project_manager == 1">
+			and project_manager = #{project_manager}
+		</if>
+		ORDER BY project_id ASC
 	</select>
+
+
 	
 	<select id="getTaskUser" resultType="project_lookup" parameterType="project_lookup">
 		SELECT project_id, member_id, member_name 

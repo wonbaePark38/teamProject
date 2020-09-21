@@ -2,6 +2,36 @@
 
 
 // 프로젝트 생성
+
+//죽시 실행 함수
+$(document).ready(function(){
+	load_projectdir();
+	
+	
+
+});
+function load_projectdir(){
+	
+	// ajax option
+	var ajaxOption = {
+			url : 'projectdir.do',
+			async : true,
+			type : "GET",
+			dataType : "json",
+			cache : false
+	};
+	
+	$.ajax(ajaxOption).done(function(data) {
+		// Contents 영역 삭제
+		$('#ajaxpagecontainer').children().remove();
+		// Contents 영역 교체
+		
+		for ( var iterable_element in iterable) {
+			$('#ajaxpagecontainer').html(data);
+		}
+	});
+	
+}
 function new_project_form(){
 	
 	var project_name = $('input[name=project_name]').val();
