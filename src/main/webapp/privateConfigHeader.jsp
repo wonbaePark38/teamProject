@@ -327,10 +327,9 @@ $(document).ready(function(){
 
 //채팅 리스트 화면에 출력하는 함수
 function settingChatList(element){
-	var chatUnreadCount = parseInt(element.unReadCount);
-
+	//var chatUnreadCount = parseInt(element.unReadCount);
+	//alert(chatUnreadCount);
 	$('.chatting-list-div').append(
-			
 			"<button type='button' class='chat-row' id=" + element.chatRoomId + ">" + 
 			
 					"<div class='row-label'>" +element.chatRoomName +"</div>" +
@@ -339,19 +338,32 @@ function settingChatList(element){
 				"<input type='hidden' class='room' value='" + element.chatRoomId +"'/>" +
 			"</button>"
 	);
-	if(chatUnreadCount == 0){
+	if(element.unReadCount == '0'){
 		$('#'+element.chatRoomId).children('.bdg').css('display','none');
 	}
 	
 }
 
+function appendChatList(element,unreadCount){
+	$('.chatting-list-div').append(
+			"<button type='button' class='chat-row' id=" + element.chatRoomId + ">" + 
+					"<div class='row-label'>" +element.chatRoomName +"</div>" +
+					 "<strong class='bdg'>"+unreadCount+"</strong>"+
+					"<span class='chat-user-number'>"+element.joinNumber+"</span>"+
+				"<input type='hidden' class='room' value='" + element.chatRoomId +"'/>" +
+			"</button>"
+	);
+	if(element.unReadCount == '0'){
+		$('#'+element.chatRoomId).children('.bdg').css('display','none');
+	}
+}
 
 
 
 var socket = null;
 
 function connect(){
-	 var ws = new WebSocket("ws://localhost:8080/plugProject/echo.do");
+	 var ws = new WebSocket("ws://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/echo.do");
 	 socket = ws;
 		ws.onopen = function(){
 			console.log('Info: connection opened');
@@ -365,13 +377,14 @@ function connect(){
 			if(data.header == 'chatting'){ //채팅 메시지용 알람
 				myId = '${user.seq}';
 				var unreaders = data.unReaderId; //문자열 형태로 읽지 않은 사람 목록 변수 저장
-				
+				var unreaderCounts = data.unReadCount;
 				var unreaderArray = unreaders.split(","); //읽지 않은 사람 배열로 저장
+				var unreaderCountArray = unreaderCounts.split(",");
 				var chatRoomId = data.chatRoomId;
-				
 				$.each(unreaderArray,function(index,element){
 					
 					if(element === myId){ //읽지 않은 사람중에 내가 있을때 alert띠움
+						settingChatAlramCount(chatRoomId); //알람 카운트 띄워줌
 						
 						let $socketChatAlert = $('div#socketChatAlert'); 
 						if('${user.pushAlram}' == 'on'  && '${user.chatAlram}' == 'true'){ //개인 환경에서 알림이 켜져있을때만 알림 div 보여줌
@@ -391,24 +404,19 @@ function connect(){
 						
 						target = $('#'+data.chatRoomId).children().last();
 						
-						console.log($(target).val());
+						
 						if(!$(target).val()){ //메시지가 왔는데 만들어진 채팅방이 없는 경우
-							settingChatList(data);	//받은 사람 화면에 채팅방 추가
+							appendChatList(data,unreaderCountArray[index]);	//받은 사람 화면에 채팅방 추가
 						}
 						
+						
 						//초대, 나가기, 방이름 변경 메시지이가 아닐 경우
-					
-							settingChatAlramCount(chatRoomId); //알람 띄워줌
-					
 					}
 					
 				}); 
-			}else{ // 댓글 알림
+				
 				
 			}
-			/*
-			접속하지 않은 채팅방에서 채팅이 올때 안읽은 메시지 카운트 추가 시켜주는 로직
-			*/
 			
 			
 		};
@@ -431,14 +439,16 @@ function settingChatAlramCount(chatRoomId){
 
 	var count = $(target).text();
 	if(!count){
-		count = 0;
+		count = '0';
 	}
 	var count = parseInt(count);
 	
 	count += 1; //읽지 않은 메시지 카운트 1씩 증가
+	
+	
 	totalUnreadCount += 1;
 	
-	if(count == 1){ //리스트에서 안읽은 메시지 있으면 숫자표시
+	if(count >= 1){ //리스트에서 안읽은 메시지 있으면 숫자표시
 		$(target).css('display','block');
 	}
 	if(totalUnreadCount == 1){//안읽은 메시지 있을때 헤더 아이콘 위에 숫자 표시
@@ -448,7 +458,6 @@ function settingChatAlramCount(chatRoomId){
 	$(target).text(count); //리스트 카운트 반영
 	$('#headerChatBt').next().text(totalUnreadCount); //헤더 카운트 반영
 	
-	$(target).text(count); // 목록에 있는 방번호에 카운트 반영
 }
 //헤더 채팅영역
 
@@ -497,10 +506,10 @@ function chatAlert(result,message){
 		chatRoomId = element.chatroom_id;
 		joinNumber = element.joinNumber;
 		chatRoomName = element.chatRoomName;
-		unReadCount = element.unReadCount;
-
+		unReadCount += element.unReadCount +",";
+		
 	});
-	unreader = unreader.substr(0, unreader.length -1);
+	
 	message.header = 'chatting';
 	message.unReaderId = unreader;
 	message.joinNumber = joinNumber;
@@ -511,6 +520,7 @@ function chatAlert(result,message){
 
 function resetChatList(roomId){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
 	var target = $('.chatting-list-div').children('#'+roomId);
+	$(target).children('.bdg').text("0");
 	target.remove();
 }
 

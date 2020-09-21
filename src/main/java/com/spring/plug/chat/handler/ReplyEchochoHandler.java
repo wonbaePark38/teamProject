@@ -44,7 +44,7 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		String msg = message.getPayload();
-		
+		System.out.println(msg.toString());
 		for(WebSocketSession sess : sessions) {
 			sess.sendMessage(new TextMessage(message.getPayload()));
 		}
