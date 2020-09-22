@@ -8,11 +8,11 @@
     <title>접속 통계</title>
     
     <script src="script/jquery-3.5.1-min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
     <link href="css/connectionStatistics.css" rel="stylesheet">
     <script src="script/jquery-3.5.1-min.js"></script>
-    <script type="text/javascript" src="script/connectionStatistics.js"></script>
-  
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="script/connectionStatistics.js"></script>
 
 </head>
 <body>
@@ -92,7 +92,6 @@
 		</div>
     </div>
 </body>
-
 
   
 </html>

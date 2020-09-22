@@ -78,6 +78,7 @@
 	</select>
 	
 	<select id="getRecentData" resultMap="getMemberUse" parameterType="int">
+	<![CDATA[
 	SELECT TO_CHAR(b.dt, 'YYYY-MM') AS CONNECTIONDATE, NVL(SUM(a.CONNECTIONCOUNT), 0) CONNECTIONCOUNT
   	FROM ( SELECT TO_CHAR(PROJECT_CONNECTION_START, 'YYYY-MM-DD') AS CONNECTIONDATE, COUNT(*) CONNECTIONCOUNT
            FROM PROJECT_CONNECTION
@@ -85,12 +86,13 @@
                  AND TRUNC(LAST_DAY(SYSDATE)) AND PROJECT_ID = #{projectId}
            GROUP BY PROJECT_CONNECTION_START) a, 
          	(SELECT ADD_MONTHS(TRUNC(SYSDATE),-5) + LEVEL - 1 AS dt FROM dual 
-         	<![CDATA[
+         	
          	CONNECT BY LEVEL <= TRUNC(LAST_DAY(SYSDATE)) - ADD_MONTHS(TRUNC(SYSDATE),-5) +1) b
-         	]]>
+         	
     WHERE b.dt = a.CONNECTIONDATE(+) 
     GROUP BY TO_CHAR(b.dt, 'YYYY-MM')
    	ORDER BY TO_CHAR(b.dt, 'YYYY-MM')
+   	]]>
 	</select>
 	
 	<select id="getProjectInfo" parameterType="int" resultMap="getInfo">

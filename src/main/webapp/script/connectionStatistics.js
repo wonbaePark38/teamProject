@@ -1,7 +1,7 @@
 /*
  * 프로젝트 구성원 접속자 통계 자바스크립트파일
  */
-var chartList = []; //구글 차트에 들어갈 데이터를 받는 배열
+//var chartList = []; //구글 차트에 들어갈 데이터를 받는 배열
 $( document ).ready(function() {
 	 var presentList = []; //현재 리스트에 뿌려진 데이터를 받는 배열
 	 
