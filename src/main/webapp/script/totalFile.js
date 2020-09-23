@@ -8,14 +8,13 @@ $(document).ready(function(){
 	  var updateStatus = 1;
 	  initFileList();
 	  var idx;
-	  
 	  /* 받아온 데이터 설정  */
 	  function initFileList() {
 		  getFileList().done(function(data) {
 			  dataObj = data; //db에서 받아온 데이터 전역변수에 넣고
 			  var projectList = [];
 			  $.each(data,function(index,element) {
-
+				  
 				  settingList(index,element); // 메인 아티클에 프로젝트별 파일 목록 삽입 함수 호출
 				  projectList.push(element.projectName); //임시 배열에 프로젝트 이름만 푸쉬
 				  presentList.push(element);//복사본 배열 생성
@@ -31,7 +30,7 @@ $(document).ready(function(){
 		  var list = [];
 		  $.ajax({
 			  url: 'fileSearch.do',
-			  method: 'GET',
+			  method: 'POST',
 
 		  }).done(function(data) {
 			  $.each(data, function(i, e) {
@@ -730,9 +729,7 @@ $(document).ready(function(){
 	  
 	  $(document).on('click','.moreMenuOpenBt',function(){
 		  $('.file-modal *').remove();
-		  console.log(this);
 		  var articleId = $(this).children('.articleId').val();
-		  console.log('글 id'+articleId);
 		  var sendData ={
 				  articleId : articleId
 		  }	
@@ -742,8 +739,6 @@ $(document).ready(function(){
 			  url :'getRealPath.do',
 			  data : sendData
 		  }).done(function(data){
-			  console.log('하위');
-			  console.log(data);
 			  var fileName = data.fileName;
 			  var filePath = data.filePath;
 			  var fileArr = filePath.split('/');
@@ -879,7 +874,6 @@ function settingList(index,element){
 //파일 열기 모달창 생성
 function makeOpenFileView(articleId){
 	var winObject = null;
-	console.log(articleId);
 	$('file-modal').css('display','block');
 }
 
