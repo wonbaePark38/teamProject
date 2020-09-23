@@ -229,11 +229,11 @@
 								<td> 
 									<select id="comm_user_catg2">
 										<option >이름</option>
-										<option >아이디</option>
+										<option >이메일</option>
 									</select>
 								</td>
 								<td><input id="comm_user_srch_word2" type="text" style=""></td>
-								<td><a style="cursor:pointer" class="btn srchbtn_style">검색</a></td>
+								
 							</tr>
 							</tbody>
 						</table>
@@ -252,7 +252,7 @@
 							<thead>
 								<tr>
 									<th scope="col"><div><span>이름</span><a data="TTL" style="cursor:pointer" class="sort"></a></div></th>
-									<th scope="col"><div><span>아이디</span><a data="SENDIENCE_CNT" style="cursor:pointer" class="sort"></a></div></th>
+									<th scope="col"><div><span>이메일</span><a data="SENDIENCE_CNT" style="cursor:pointer" class="sort"></a></div></th>
 									<th scope="col"><div><span>선택</span><a data="COMMT_CNT" style="cursor:pointer" class="sort"></a></div></th>
 								</tr>
 							</thead>
