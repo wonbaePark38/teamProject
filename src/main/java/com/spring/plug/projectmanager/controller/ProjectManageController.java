@@ -93,16 +93,6 @@ public class ProjectManageController {
 		List<ProjectManageVO> connectionList = pmService.getConnectionStatistics(vo.getProject_id());
 		return connectionList;
 	}
-	//기간별 프로젝트 접속 통계 불러오는 컨트롤러
-	@ResponseBody
-	@RequestMapping(value="getRecentData.do", method=RequestMethod.POST)
-	public List<ProjectManageVO> getRecentData(HttpSession session, ModelAndView mav){
-		
-		ProjectDirVO vo = (ProjectDirVO) session.getAttribute("projectdir");
-		List<ProjectManageVO> connectionTermList = pmService.getRecentData(vo.getProject_id());
-		return connectionTermList;
-	}
-	
 	
 	@RequestMapping(value="projectManage.do",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView getProjectInfo(ModelAndView mav,HttpSession session,HttpServletResponse response) {
