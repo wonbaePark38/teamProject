@@ -1,5 +1,6 @@
 package com.spring.plug.projectmanager.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -73,6 +74,14 @@ public class ProjectManageController {
 	@RequestMapping(value="getConnectionStatisticsView.do")
 	public ModelAndView getConnectionStatisticsView(ModelAndView mav,HttpSession session) {
 		ProjectDirVO vo = (ProjectDirVO) session.getAttribute("projectdir");
+		List<ProjectManageVO> connectionTermList = pmService.getRecentData(vo.getProject_id());
+		String str = new String();
+		for(ProjectManageVO temp : connectionTermList) {
+			str += temp.getConnectionDate() + "-"+temp.getConnectionCount() + ",";
+		}
+		str = str.substring(0, str.length()-1);
+		System.out.println(str);
+		mav.addObject("chartList",str);
 		mav.setViewName("connectionStatistics.jsp");
 		return mav;
 	}
@@ -88,6 +97,7 @@ public class ProjectManageController {
 	@ResponseBody
 	@RequestMapping(value="getRecentData.do", method=RequestMethod.POST)
 	public List<ProjectManageVO> getRecentData(HttpSession session, ModelAndView mav){
+		
 		ProjectDirVO vo = (ProjectDirVO) session.getAttribute("projectdir");
 		List<ProjectManageVO> connectionTermList = pmService.getRecentData(vo.getProject_id());
 		return connectionTermList;
