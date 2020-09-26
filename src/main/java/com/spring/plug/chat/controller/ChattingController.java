@@ -63,12 +63,13 @@ public class ChattingController {
 	public List<MessageVO> insertMessage(MessageVO msgVO) {
 		
 		chatService.insertMessage(msgVO);
-		if(msgVO.getSenderId() != 0) { //관리자 메시지
+		if(msgVO.getSenderId() != 0) { //관리자 메시지가 아닐 경우 
 			chatService.updateChatRoomStatus(msgVO);
 			chatService.updateUnreadCount(msgVO);
 		}
 		
 		List<MessageVO> unreadList = chatService.getUnreadUser(msgVO);//현재 방 접속상태 아닌 사람 목록 가저옴
+		
 		return unreadList;
 		
 	}
@@ -263,7 +264,6 @@ public class ChattingController {
 		roomVO.setInviteUser(chatName);
 		
 		chatService.insertMember(infoData); //참여자들 db에 추가
-		System.out.println(roomVO.toString());
 		return roomVO; //만들어진 방번호 리턴
 	}
 

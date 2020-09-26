@@ -238,6 +238,7 @@ $(document).ready(function() {
 			message.message_sendTime = inputDate;
 			message.senderId = '${user.seq}';
 			message.messageType = 'chattingMessage';
+			message.unReadCount = 0;
 			socket.send(JSON.stringify(message));
 			insertMessageInfo(message); //db에 저장할 메시지 정보
 			$("#message").val("");
@@ -304,6 +305,8 @@ $(document).ready(function() {
 				
 				if(message.messageType == 'chattingMessage'){ //메시지 타입이 나가기, 방제 변경, 초대가 아니고 단순 채팅일 경우
 					opener.parent.chatAlert(result, message); //알림 쏴주는 메시지 호출
+				}else if(message.messageType == 'exit'){
+					window.open("about:blank","_self").close();
 				}
 				
 			},
@@ -466,12 +469,12 @@ $(document).ready(function() {
 		message.senderId = 0;
 		message.messageType = 'exit';
 		socket.send(JSON.stringify(message));
+		var roomId = '${roomInfo.chatRoomId}';
+		
 		insertMessageInfo(message); //db에 저장할 메시지 정보
-		
-		
-		var roomId = ${roomInfo.chatRoomId};
 		opener.parent.resetChatList(roomId);
-		self.close(); //채팅 팝업 닫음
+		
+		
 		}//end if
 		
 	}

@@ -42,8 +42,8 @@ $(document).ready(function(){
 				$('#comm_user_tbody2').append(
 						"<tr>" +
 							"<input type='hidden' value="+element.userId+">"+
-							"<td>"+element.name+"</td>" +
-							"<td>"+element.email+"</td>" +
+							"<td class='nomal_name'>"+element.name+"</td>" +
+							"<td class='nomal_email'>"+element.email+"</td>" +
 							"<td>&nbsp;<a href='javascript:void(0)' class='out_bt tbold_uline admin-release' onclick='addManager();'>관리자 등록</a></td>" +
 						"</tr>");
 			}
@@ -71,6 +71,22 @@ $(document).ready(function(){
 			})
 		}
 	});
+	
+	
+	 
+    $("#comm_user_srch_word2").keyup(function(e){ //검색
+		  var searchCondition = $('#comm_user_catg2').val();
+		  var keyword = $(this).val();
+		  $('#comm_user_tbody2').children('tr').hide();
+		  
+		  if(searchCondition == '이름'){
+			  var listDiv = $(".nomal_name:contains('" + keyword + "')");
+		  }else if(searchCondition == '이메일'){
+			  var listDiv = $(".nomal_email:contains('" + keyword + "')");
+		  }
+		  $(listDiv).parent().show();
+	});
+    
 });
 
 function settingList(element){

@@ -35,6 +35,7 @@ li{
     margin-top: 15px;
     width: 100%;
     height: 70%;
+    margin-bottom: 150px;
   
 }
 .input-form ul{
@@ -59,7 +60,7 @@ li{
     flex-direction: row; 
     justify-content: center;
     align-items: center;
-    
+    background-color : white;
     width: 100%;
     height: 80px;
     position: fixed;

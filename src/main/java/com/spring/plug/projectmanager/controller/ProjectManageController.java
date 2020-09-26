@@ -1,5 +1,6 @@
 package com.spring.plug.projectmanager.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -71,7 +72,16 @@ public class ProjectManageController {
 	}
 	//접속 통계 뷰 컨트롤러
 	@RequestMapping(value="getConnectionStatisticsView.do")
-	public ModelAndView getConnectionStatisticsView(ModelAndView mav) {
+	public ModelAndView getConnectionStatisticsView(ModelAndView mav,HttpSession session) {
+		ProjectDirVO vo = (ProjectDirVO) session.getAttribute("projectdir");
+		List<ProjectManageVO> connectionTermList = pmService.getRecentData(vo.getProject_id());
+		String str = new String();
+		for(ProjectManageVO temp : connectionTermList) {
+			str += temp.getConnectionDate() + "-"+temp.getConnectionCount() + ",";
+		}
+		str = str.substring(0, str.length()-1);
+		System.out.println(str);
+		mav.addObject("chartList",str);
 		mav.setViewName("connectionStatistics.jsp");
 		return mav;
 	}
@@ -83,15 +93,6 @@ public class ProjectManageController {
 		List<ProjectManageVO> connectionList = pmService.getConnectionStatistics(vo.getProject_id());
 		return connectionList;
 	}
-	//기간별 프로젝트 접속 통계 불러오는 컨트롤러
-	@ResponseBody
-	@RequestMapping(value="getRecentData.do", method=RequestMethod.POST)
-	public List<ProjectManageVO> getRecentData(HttpSession session){
-		ProjectDirVO vo = (ProjectDirVO) session.getAttribute("projectdir");
-		List<ProjectManageVO> connectionTermList = pmService.getRecentData(vo.getProject_id());
-		return connectionTermList;
-	}
-	
 	
 	@RequestMapping(value="projectManage.do",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView getProjectInfo(ModelAndView mav,HttpSession session,HttpServletResponse response) {

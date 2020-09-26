@@ -12,10 +12,8 @@
 
     <!-- Custom styles for this template -->
     <link href='css/totalFile.css' rel='stylesheet'>
-    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
    
     <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
-    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
  	<script type="text/javascript" src="jquery.gdocsviewer.min.js"></script>
     <script type='text/javascript' src='./script/totalFile.js'></script>
     

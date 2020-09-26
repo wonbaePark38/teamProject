@@ -1,25 +1,11 @@
 /*
  * 프로젝트 구성원 접속자 통계 자바스크립트파일
  */
-var chartList = []; //구글 차트에 들어갈 데이터를 받는 배열
 $( document ).ready(function() {
+	google.charts.load('current', {'packages':['line','controls']});
+	chartDrowFun.chartDrow(); //chartDrow()
+	
 	 var presentList = []; //현재 리스트에 뿌려진 데이터를 받는 배열
-	 
-	 google.charts.load('current', {'packages':['line','controls']});
-	 chartDrowFun.chartDrow();
-
-     
-    $.ajax({
-    	type :'POST',
-    	url : 'getRecentData.do' //최근 6개월 데이터 가져옴
-    }).done(function(data){
-    	console.log(data);
-    	$.each(data,function(index,element){
-    		chartList.push(element);
-    	});
-    }).fail(function(){
-    	alert('정보 가져오기 실패')
-    })
     
     $.ajax({ //해당 프로젝트 구성원 정보 가져옴
     	type : 'POST',
@@ -206,5 +192,4 @@ var chartDrowFun = {
 	 
 	      }
 	    }
-
 
