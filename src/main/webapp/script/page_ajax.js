@@ -46,7 +46,11 @@ function newprojectPop(url) {
 		// Contents 영역 교체
 		$('.mainWrap').parent().prepend(data);
 	});
+	
 };
+function projectPopdel(){
+	$('#new_project_div').remove();
+}
 
 function clientQnA() {
 	// ajax option
@@ -63,10 +67,6 @@ function clientQnA() {
 		$('.mainWrap').parent().prepend(data);
 	});
 };
-
-function clientQnA_Cancel(){
-	
-}
 
 
 

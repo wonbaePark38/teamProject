@@ -1,37 +1,8 @@
 // projectdir.jsp - script
 
 
+
 // 프로젝트 생성
-
-//죽시 실행 함수
-$(document).ready(function(){
-	load_projectdir();
-	
-	
-
-});
-function load_projectdir(){
-	
-	// ajax option
-	var ajaxOption = {
-			url : 'projectdir.do',
-			async : true,
-			type : "GET",
-			dataType : "json",
-			cache : false
-	};
-	
-	$.ajax(ajaxOption).done(function(data) {
-		// Contents 영역 삭제
-		$('#ajaxpagecontainer').children().remove();
-		// Contents 영역 교체
-		
-		for ( var iterable_element in iterable) {
-			$('#ajaxpagecontainer').html(data);
-		}
-	});
-	
-}
 function new_project_form(){
 	
 	var project_name = $('input[name=project_name]').val();
@@ -123,10 +94,6 @@ $(document).on('click', '#main_side', function() {
 		$('#project_dir_list4').css('display', 'inline-block');
 	} else if (click_menu == '전체 업무') {
 		alert('전체 업무');
-	} else if (click_menu == '전체 일정') {
-		alert('전체 일정');
-	} else if (click_menu == '전체 파일') {
-		alert('전체 파일');
 	} else if (click_menu == '담아둔 글') {
 		alert('담아둔 글');
 	} else if (click_menu == '나를 지정') {
@@ -185,7 +152,6 @@ $(document).on('click', '.locker_setbtn', function() {
 				$(search_name).find('input[class=div_btn_on]').each(function(){
 					locker_del_list += ($(this).next().val())+",";
 				}); 
-				alert(locker_del_list);
 				if (locker_del_list == null || locker_del_list == '') {
 					alert('보관함에 프로젝트가 없습니다.');
 				} else {
@@ -249,33 +215,76 @@ $(document).on('click', '.locker_setbtn', function() {
 // 보관함 삭제
 $(document).on('click', '#locker_del', function() {
 	
-	var locker_del_list = "";
-	var locker_del_name = $(this).next().text();
-	var locker_del_id = $(this).prev().val();
-	var search_name = 'div[id='+locker_del_name+']';
-	$(search_name).children('input[name=project_id]').each(function(){
-		locker_del_list += ($(this).val())+",";
-	}); 
-	if (locker_del_list == null || locker_del_list == '') {
-		alert('보관함에 프로젝트가 없습니다.')
+	if (confirm('게시글을 정말로 삭제하시겠습니까?')) {
+	
+		var locker_del_list = "";
+		var locker_del_name = $(this).parent().text().trim();
+		var locker_del_id = $(this).parent().prev().val();
+		var search_name = 'div[id='+locker_del_name+']';
+		$(search_name).children('input[name=project_id]').each(function(){
+			locker_del_list += ($(this).val())+",";
+		}); 
+		if (locker_del_list) {
+			alert('보관함에 프로젝트가 있습니다.')
+		} else {
+			// form 생성
+			var locker_del = $('<form></form>');
+	
+			// form 설정
+			locker_del.attr('method', 'post');
+			locker_del.attr('action', 'deletelocker.do');
+	
+			// form 데이터
+			locker_del.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_del_list}));
+			locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
+			locker_del.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_del_id}));
+	
+			// form 생성하는 곳
+			locker_del.appendTo('.mainWrap');
+	
+			locker_del.submit();
+		} 
 	} else {
-		// form 생성
-		var locker_del = $('<form></form>');
-
-		// form 설정
-		locker_del.attr('method', 'post');
-		locker_del.attr('action', 'deletelocker.do');
-
-		// form 데이터
-		locker_del.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_del_list}));
-		locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
-		locker_del.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_del_id}));
-
-		// form 생성하는 곳
-		locker_del.appendTo('.mainWrap');
-
-		locker_del.submit();
+		alert('취소되었습니다.');
 	}
+});
+
+// 보관함 수정
+
+$(document).on('click', '#locker_update', function() {
+	$('#locker_change').show();
+	var locker_change_list = "";
+	var locker_change_name = $(this).parent().text().trim();
+	var locker_change_id = $(this).parent().prev().val();
+	var search_name = 'div[id='+locker_change_name+']';
+	$(search_name).children('input[name=project_id]').each(function(){
+		locker_change_list += ($(this).val())+",";
+	}); 
+	var locker_change = $('<form></form>');
+	locker_change.attr('id','locker_cf');
+	// form 설정
+	locker_change.attr('method', 'post');
+	locker_change.attr('action', 'updatelockername.do');
+
+	// form 데이터
+	locker_change.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_change_list}));
+	locker_change.append($('<input/>', {id:'lc_name',type : 'hidden', name :'locker_name'}));
+	locker_change.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_change_id}));
+
+	// form 생성하는 곳
+	locker_change.appendTo('.mainWrap');
+
+
+});
+
+$(document).on('click','#lc_close',function(){
+	$('#locker_change').hide();
+});
+
+$(document).on('click','#lc_locker',function(){
+	var change_name = $('#change_locker_name').val()
+	$('#locker_cf').find('#lc_name').attr('value',change_name);
+	$('#locker_cf').submit();
 });
 
 
@@ -299,7 +308,6 @@ $(document).on('click','#locker_success',function(){
 		select_locker = null;
 	}
 	
-	alert(select_locker);
 	
 	if (select_project == null || select_project == '') {
 		alert('프로젝트를 선택해 주세요.')
@@ -321,6 +329,10 @@ $(document).on('click','#locker_success',function(){
 		locker_set_name.submit();
 	}
 }); 
+
+$(document).on('click','#locker_cancel',function(){
+	$('.locker_list_set').hide();
+});
 
 // 보관함 생성
 $(document).on('click','#locker_add',function(){
@@ -365,6 +377,7 @@ $(document).on('click','#locker_add',function(){
 
 $(document).ready(function(){
 	
+	
 	var project_select_num;
 	
 	$('.content_type').hide();
@@ -400,7 +413,7 @@ $(document).ready(function(){
 				$('.div_btn_on').hide();
 				
 			}
-		} /* else {
+		}  else {
 			if ($(this).attr('class') == 'dir_set') {
 				project_select_num = 0;
 				$('.select_num').text(project_select_num);
@@ -424,7 +437,7 @@ $(document).ready(function(){
 				$('.div_btn_on').hide();
 				
 			}
-		} */
+		} 
 	});
 	
 	$(document).on('click','#div_button',function(){
@@ -472,5 +485,15 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('.locker_a').mouseenter(function(){
+		$(this).find('#locker_update').show();
+		$(this).find('#locker_del').show();
+	});
+	$('.locker_a').mouseleave(function(){
+		$(this).find('#locker_update').hide();
+		$(this).find('#locker_del').hide();
+	});
+	
 });
+
 

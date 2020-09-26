@@ -42,7 +42,7 @@
 			<div class="sidebarContainer">
 
 				<div class="new_collabo">
-					<a id="newPrjBtn" onclick="newprojectPop('newproject.jsp')">새
+					<a id="newPrjBtn" onclick="new_project()">새
 						프로젝트</a>
 
 				</div>

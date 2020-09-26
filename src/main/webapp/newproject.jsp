@@ -4,14 +4,14 @@
 <link rel="stylesheet" href="css/newproject_css.css">
 <script src="script/projectdir.js"></script>
 
-<div id="new_project_div"></div>
+<div id="new_project_div">
 <div class="background_shadow" style="z-index: 9000; position: absolute;"></div>
 	<div class="layerstyle4" style="width: 500px; z-index: 9001" >
 		<div id="projectOptionLayer" class="layerstyle4_po" style="display: block;">
 			<div class="layerstyle4_title">
 				<h3>프로젝트 만들기</h3>
-				<a id="flowMakeCloseBtn" class="btn_layerstyle4_close" onclick="">
-					<img alt="닫기" src="images/btn_layerstyle3_close.gif">
+				<a id="flowMakeCloseBtn" class="btn_layerstyle4_close" onclick="projectPopdel()">
+					<img alt="닫기" src="./images/btn_layerstyle4_close.png">
 				</a>
 			</div>
 			<div class="newrm_wrap" style="background-color: #fff;">
@@ -31,3 +31,4 @@
 			</div>
 		</div>
 	</div>
+</div>

@@ -49,4 +49,7 @@ public interface ArticleService {
    
    // 담아두기 리스트
    List<Article1VO> getArticleLookupList(Article1VO vo);
+   
+   // 게시글 수정
+   void updateArticleModified(Article1VO vo);
 }

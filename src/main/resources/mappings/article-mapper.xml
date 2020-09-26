@@ -254,7 +254,7 @@
 	</select>
 	
 	<select id="getTaskList" parameterType="article1VO" resultMap="articleResult">
-		SELECT writeForm3_tasknum, writeForm3_workersName FROM mainpage_article
+		SELECT member_id, writeForm3_tasknum, writeForm3_workersName FROM mainpage_article
 		WHERE project_id = #{project_id}
 	</select>
 
@@ -284,4 +284,16 @@
 		DELETE FROM article_worker
 		WHERE article_id = #{article_id}
 	</delete>
+	<update id="updateArticleModified" parameterType="article1VO">
+		<choose>
+			<when test="form_name == 'nomalWrite'">
+				UPDATE mainpage_article SET writeform1_content = #{writeForm1_content}
+				WHERE article_id = #{article_id}
+			</when>
+			<when test="form_name == 'nomalWrite2.0'">
+				UPDATE mainpage_article SET writeform2_title = #{writeForm2_title}, writeform2_content = #{writeForm2_content}
+				WHERE article_id = #{article_id}
+			</when>
+		</choose>
+	</update>
 </mapper>

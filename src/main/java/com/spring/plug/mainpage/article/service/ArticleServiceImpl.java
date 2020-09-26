@@ -96,4 +96,9 @@ public class ArticleServiceImpl implements ArticleService {
 		return dao.getArticleLookupList(vo);
 	}
 
+	@Override
+	public void updateArticleModified(Article1VO vo) {
+		dao.updateArticleModified(vo);
+	}
+
 }

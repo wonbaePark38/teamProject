@@ -112,6 +112,23 @@ public class MainPageController {
 		}
 		
 	}
+	public void imageSave(Article1VO vo, UserVO user, ProjectDirVO project) throws IOException {
+		MultipartFile uploadFile = vo.getWriteForm_img();
+		if (!uploadFile.isEmpty()) {
+			String memberID = Integer.toString(user.getSeq());
+			vo.setImg_name(uploadFile.getOriginalFilename());
+			String image_path = "/usr/local/tomcat/webapps/plugProject/upload_image/"+project.getProject_id()+"/"+ memberID + "_" + vo.getImg_name();
+			File destdir = new File(image_path);
+			 if(!destdir.exists()) {
+				 destdir.mkdirs();
+			 }
+			
+			uploadFile.transferTo(new File(image_path));
+			vo.setImg_size(image_path);
+		} else {
+			vo.setImg_name(null);
+		}
+	}
 	
 	@RequestMapping(value = "/writeform1.do")
 	public String article1Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
@@ -119,6 +136,7 @@ public class MainPageController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
+		imageSave(vo, user, project);
 		service.insertArticle(vo);
 
 		return "mainpage.do";
@@ -254,4 +272,10 @@ public class MainPageController {
 		service.mergeArticleLookup(vo);
 		return "mainpage.do";
 	}
+	
+	@RequestMapping(value = "/articlemodified.do")
+	public String articleModified(Article1VO vo, ProjectDirVO project, HttpSession session) {
+			service.updateArticleModified(vo);
+		return "mainpage.do";
+	};
 }

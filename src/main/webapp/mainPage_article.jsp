@@ -2,6 +2,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+	#article_show div_text_write{
+		margin:5px;
+	}
+	textarea{
+		overflow-y: hidden;
+	}
+	.modified_worker_select_div{
+	    display: none;
+	    z-index: 99;
+	    position: absolute;
+	    width: 94px;
+	    max-height: 150px;
+	    overflow: auto;
+	}
+	.modified_worker{
+		width: 100px;
+	   	display: inline-block;
+	}
+</style>
+
 <script>
 
 	$(document).on('click','#pin_icon',function(){
@@ -142,26 +163,146 @@ $(document).on('click','.tcheck',function(){
 });
 
 $(document).on('click','#set_icon',function(){
-	if ($(this).attr('class') == 'article_setting') {
-		$(this).attr('class','article_setting_on');
-		$(this).parent().next().next().show();
-	} else if ($(this).attr('class') == 'article_setting_on') {
-		$(this).attr('class','article_setting');
-		$(this).parent().next().next().hide();
-	}
+	$(this).parent().next().next().toggle();
 });
 
+function article_modified_set(type, parent){
+	
+	if (type == 'initialize') {
+		parent.find('#set_icon').hide();	// 게시글 설정버튼
+		parent.find('#set_icon_list').hide();	// 게시글 설정버튼 리스트
+		parent.find('.article_status').hide();	// 게시글 좋아요/댓글 갯수
+		parent.find('.bottom_list').children('li').hide();	// 게시글 좋아요/댓글/담아두기
+		if (parent.find('#write_t').length) { // 게시글 제목 유무 
+			var title = parent.find('#write_t').text();
+			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" style="width:100%;" value="'+title+'">');
+		}
+		if (parent.find('pre#write_c').length) { // 게시글 내용 유무
+			parent.find('pre#write_c').contents().unwrap().wrap('<textarea id="write_c" style="width:100%;"></textarea>');
+		}
+		if (parent.attr('name') == 'taskWrite') { // 업무 타입 유무
+			
+		}
+		parent.find('.bottom_list').append('<li class="modified_set" style="float:right;"><a id="modified_cancel" class="modified_btn">취소</a></li>')
+		parent.find('.bottom_list').append('<li class="modified_set" style="float:right;"><a id="modified_success" class="modified_btn">수정</a></li>')
+	} else if (type == 'terminate') {
+		parent.find('#write_c').contents().unwrap().wrap('<pre id="write_c" style="font-size: 15px;"></pre>');
+		if ($('#write_t')) { 
+			parent.find('#write_t').contents().unwrap().wrap('<strong id="write_t" style="width:100%;"></strong');
+		}
+		parent.find('.bottom_list').children('.modified_set').remove();
+		parent.find('.bottom_list').children('li').show();
+		parent.find('.article_status').show();
+		parent.find('#set_icon').show();
+	}
+	
+}
+
+function article_modified_form(type,parent){
+	var write_title = parent.find('#write_t').val();
+	var write_content = parent.find('#write_c').val();
+	
+	var modified_success = $('<form></form>');
+
+	// form 설정
+	modified_success.attr('method','post');
+	modified_success.attr('action','articlemodified.do');
+	
+	// form 데이터
+	modified_success.append($('<input/>',{type:'hidden', name:'form_name', value: parent.attr('name')}));
+	modified_success.append($('<input/>',{type:'hidden', name:'project_id', value: $('#p_id').val()}));
+	modified_success.append($('<input/>',{type:'hidden', name:'project_name', value: $('p#title').text()}));
+	modified_success.append($('<input/>',{type:'hidden', name:'article_id', value: parent.attr('id')}));
+	
+	if (type == 'nomalWrite') {
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm1_content', value: write_content}));
+	} else if (type == 'nomalWrite2.0') {
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm2_title', value: write_title}));
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm2_content', value: write_content}));
+	}
+	
+	// form 생성하는 곳
+	modified_success.appendTo('body');
+	modified_success.submit();
+	
+}
 $(document).on('click','#article_set',function(){
+	var parent = $(this).parent().parent().parent().parent().parent().parent();
+	
+	
 	if ($(this).text() == '수정') {
-		alert('미구현');
+		if (parent.attr('name') == 'nomalWrite') {
+			article_modified_set('initialize',parent);
+			$(document).on('click','.modified_btn',function(){
+				if ($(this).attr('id') == 'modified_cancel') {
+					article_modified_set('terminate',parent);
+				} else if ($(this).attr('id') == 'modified_success') {
+					article_modified_form(parent.attr('name'),parent);
+				}
+			});
+		} else if(parent.attr('name') == 'nomalWrite2.0') {
+			article_modified_set('initialize',parent);
+			$(document).on('click','.modified_btn',function(){
+				if ($(this).attr('id') == 'modified_cancel') {
+					article_modified_set('terminate',parent);
+				} else if ($(this).attr('id') == 'modified_success') {
+					article_modified_form(parent.attr('name'),parent);
+				}
+			});
+		} /* else if (parent.attr('name') == 'taskWrite') {
+			article_modified_set('initialize',parent);
+			var init_task = parent.find('.task_type_select');
+			var init_worker_manager = parent.find('.')
+			parent.find('.task_type').attr('class','task_type_on');
+			
+			$(document).on('click','.task_type_on',function(){
+				var select_status = $(this); 
+				if (confirm('상태를 수정하시겠습니까?')) {
+					parent.find('#status_select_div').find('span').attr('class','task_type_on');
+					select_status.attr('class','task_type_select');
+					$('.task_type_on').css('backgroundColor','white');
+					if (select_status.text() == '요청') {
+						select_status.css('backgroundColor','#4aaefb')
+					} else if (select_status.text() == '진행') {
+						select_status.css('backgroundColor','#50b766')
+					} else if (select_status.text() == '피드백') {
+						select_status.css('backgroundColor','#f17a19')
+					} else if (select_status.text() == '완료') {
+						select_status.css('backgroundColor','#798ed1')
+					} else if (select_status.text() == '보류') {
+						select_status.css('backgroundColor','#aeaeae')
+					}
+				 } 
+			 });
+			$(document).on('click','.modified_worker',function(){
+				var task_parent = $(this).parent().parent().parent().parent().parent().parent();
+				
+				task_parent.find('.modified_worker_select_div').toggle();
+				
+			});
+			
+			$(document).on('click','#modified_task_User',function(){
+				var task_user = $(this).parent().parent().parent().parent().prev();
+				task_user.append('<input type="button" name="'+$(this).prev().attr('value')+'"value="'+$(this).text()+'">');
+				parent.find('.modified_worker_select_div').hide();
+			});
+			
+			$(document).on('click','.modified_btn',function(){
+				if ($(this).attr('id') == 'modified_cancel') {
+					article_modified_set('terminate',parent);
+					
+					parent.find('.task_type_on').attr('class','task_type');
+				} else if ($(this).attr('id') == 'modified_success') {
+					article_modified_form(parent.attr('name'),parent);
+				}
+			});
+		} */
+		
 	} else if ($(this).text() == '삭제') {
+		parent.find('#set_icon_list').hide();
 		 if (confirm('게시글을 정말로 삭제하시겠습니까?')) {
 			
-			 var article_id = $(this).parent().parent().parent().parent().parent().parent().attr('id');
-			 var form_name = $(this).parent().parent().parent().parent().parent().parent().attr('name');
-			 var p_title = $('p#title').text();
-			var p_id = $('#p_id').val();
-			 var article_del = $('<form></form>');
+			var article_del = $('<form></form>');
 			
 			// form 설정
 			article_del.attr('method','post');
@@ -170,11 +311,13 @@ $(document).on('click','#article_set',function(){
 			} else {
 				article_del.attr('action','deletearticle.do');
 			}
-			
+			var form_name = parent.attr('name');
+			var p_title = $('p#title').text();
+			var p_id = $('#p_id').val();
 			// form 데이터
-			article_del.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
-			article_del.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
-			article_del.append($('<input/>',{type:'hidden', name:'article_id', value: article_id}));
+			article_del.append($('<input/>',{type:'hidden', name:'project_id', value: $('#p_id').val()}));
+			article_del.append($('<input/>',{type:'hidden', name:'project_name', value:  $('p#title').text()}));
+			article_del.append($('<input/>',{type:'hidden', name:'article_id', value: parent.attr('id')}));
 			
 			// form 생성하는 곳
 			article_del.appendTo('body');
@@ -184,6 +327,7 @@ $(document).on('click','#article_set',function(){
 		 }
 	}
 });
+
 
  $(document).ready(function(){
 	// 할일 게시글 반복문
@@ -289,6 +433,10 @@ $(document).on('click','#article_set',function(){
 	 reply_div.toggle();
  });
  
+ $(document).on('keydown keyup', 'textarea', function () {
+	  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+});
+
 </script>
 <!-- 게시글 넣는곳 -->
 <div>
@@ -422,6 +570,7 @@ $(document).on('click','#article_set',function(){
 								<!-- 이미지 업로드 -->
 								<div id="writeForm1_uploadImg" class="post_images"
 									style="display: none; margin-top: 5px;">
+									<div class='post_image'><div class='post_box'><img class='post_load_img'><input type='button' id='img_close'></div></div>
 									<div
 										style="width: 100%; padding: 10px; border: 1px solid black;">
 										<input type="hidden" name="file_name"> <img
@@ -1210,7 +1359,10 @@ $(document).on('click','#article_set',function(){
 										<ul>
 											<li><a id="article_set">수정</a></li>
 											<li><a id="article_set">삭제</a></li>
+											
+											
 										</ul>
+										
 									</div>
 								</div>
 							</div>
@@ -1221,7 +1373,7 @@ $(document).on('click','#article_set',function(){
 								<!-- 일반글 -->
 								<!-- 택스트박스 -->
 								<div class="div_text_write" contenteditable="false">
-									<p style="font-size: 15px;">${list.writeForm1_content }</p>
+									<pre id="write_c" style="font-size: 15px;">${list.writeForm1_content }</pre>
 								</div>
 								<!-- 이미지 -->
 								<div id="post_images">
@@ -1248,7 +1400,7 @@ $(document).on('click','#article_set',function(){
 									</div>
 								</c:if>
 
-								<div style="text-align: right; padding-right: 10px;">
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">좋아요 <span class='like_count'></span> 개</span>
 									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
@@ -1372,11 +1524,11 @@ $(document).on('click','#article_set',function(){
 							<div class="post">
 								<!-- 일반글 -->
 								<div class="post_title">
-									<strong>${list.writeForm2_title }</strong>
+									<strong id="write_t">${list.writeForm2_title }</strong>
 								</div>
 								<!-- 택스트박스 -->
 								<div class="div_text_write" contenteditable="false">
-									<p style="font-size: 15px;">${list.writeForm2_content }</p>
+									<pre id="write_c" style="font-size: 15px;">${list.writeForm2_content }</pre>
 								</div>
 
 								<!-- 지도 찍는곳 -->
@@ -1418,7 +1570,7 @@ $(document).on('click','#article_set',function(){
 									</div>
 								</c:if>
 
-								<div style="text-align: right; padding-right: 10px;">
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
 									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
@@ -1544,17 +1696,14 @@ $(document).on('click','#article_set',function(){
 
 							<!-- 글내용 -->
 							<div class="post">
-								<!-- 일반글 -->
+								
 								<div class="post_title">
-									<strong>${list.writeForm3_title }</strong>
+									<strong id='write_t'>${list.writeForm3_title }</strong>
 								</div>
 
 
 								<!-- 업무 내용 들어가는 곳 -->
 								<div class="div_text_write" contenteditable="false">
-									<!-- 업무명 -->
-
-									<!-- //업무명 -->
 									<hr>
 									<!-- 상태 -->
 									<div class="work_form_status">
@@ -1567,91 +1716,91 @@ $(document).on('click','#article_set',function(){
 											<c:choose>
 												<c:when test="${list.writeForm3_status eq '요청' }">
 													<div style="display: inline-block; width: 16%;">
-														<span id="request" style="background-color: #4aaefb;">요청</span>
+														<span id="request" class="task_type_select" style="background-color: #4aaefb;">요청</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="doing" >진행</span>
+														<span id="doing" class="task_type" >진행</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="feedback">피드백</span>
+														<span id="feedback" class="task_type" >피드백</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="complete">완료</span>
+														<span id="complete" class="task_type">완료</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="postpone">보류</span>
+														<span id="postpone" class="task_type">보류</span>
 													</div>
 												</c:when>
 
 												<c:when test="${list.writeForm3_status eq '진행' }">
 													<div style="display: inline-block; width: 16%;">
-														<span id="request" >요청</span>
+														<span id="request" class="task_type">요청</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="doing" style="background-color: #50b766;">진행</span>
+														<span id="doing" class="task_type_select" style="background-color: #50b766;">진행</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="feedback">피드백</span>
+														<span id="feedback" class="task_type">피드백</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="complete">완료</span>
+														<span id="complete" class="task_type">완료</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="postpone">보류</span>
+														<span id="postpone" class="task_type">보류</span>
 													</div>
 												</c:when>
 												
 												<c:when test="${list.writeForm3_status eq '피드백' }">
 													<div style="display: inline-block; width: 16%;">
-														<span id="request" >요청</span>
+														<span id="request" class="task_type" >요청</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="doing">진행</span>
+														<span id="doing" class="task_type">진행</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="feedback" style="background-color: #f17a19;">피드백</span>
+														<span id="feedback" class="task_type_select" style="background-color: #f17a19;">피드백</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="complete">완료</span>
+														<span id="complete" class="task_type">완료</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="postpone">보류</span>
+														<span id="postpone" class="task_type">보류</span>
 													</div>
 												</c:when>
 												
 												<c:when test="${list.writeForm3_status eq '완료' }">
 													<div style="display: inline-block; width: 16%;">
-														<span id="request" >요청</span>
+														<span id="request" class="task_type" >요청</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="doing" >진행</span>
+														<span id="doing" class="task_type" >진행</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="feedback">피드백</span>
+														<span id="feedback" class="task_type">피드백</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="complete"style="background-color: #2e417e;">완료</span>
+														<span id="complete" class="task_type_select" style="background-color: #2e417e;">완료</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="postpone">보류</span>
+														<span id="postpone" class="task_type">보류</span>
 													</div>
 												</c:when>
 												
 												<c:when test="${list.writeForm3_status eq '보류' }">
 													<div style="display: inline-block; width: 16%;">
-														<span id="request" >요청</span>
+														<span id="request"  class="task_type">요청</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="doing">진행</span>
+														<span id="doing" class="task_type">진행</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="feedback">피드백</span>
+														<span id="feedback" class="task_type">피드백</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="complete">완료</span>
+														<span id="complete" class="task_type">완료</span>
 													</div>
 													<div style="display: inline-block; width: 16%;">
-														<span id="postpone" style="background-color: #aeaeae;">보류</span>
+														<span id="postpone" class="task_type_select" style="background-color: #aeaeae;">보류</span>
 													</div>
 												</c:when>
 												
@@ -1675,15 +1824,34 @@ $(document).on('click','#article_set',function(){
 												<c:if test="${taskNum eq  taskList.writeForm3_tasknum}">
 													<c:set var="workerName" value="${fn:split(taskList.writeForm3_workersName,',')}"/>
 													<c:forEach var="names" items="${workerName}">
-														<input type="button" value="${names}" />
+														<input type="button"  value="${names}" name="" />
 													</c:forEach>
 												</c:if>
 											</c:forEach>
+											</div>
 											
+											<div style="display: inline-block;">
+											
+											<input type="text" class="modified_worker" placeholder="담당자 추가" style="display: none;"/>
+											<div class="modified_worker_select_div">
+												<ul style="list-style: none; border: 1px solid lightgray; background-color: white; padding-left: 0px;">
+													<!-- forEach -->
+													<c:forEach var="userList" items="${userList}">
+														<li>
+															<input type="hidden" name="member_id" value="${userList.member_id }"/>
+															<a id="modified_task_User">${userList.member_name}</a>
+														</li>
+													</c:forEach>
+													<!-- //forEach -->
+												</ul>
+											</div>
 											
 											</div>
-											<div id="worker_append_div"
-												style="margin-left: 26px; margin-top: 5px"></div>
+											
+											<div id="worker_append_div" style="margin-left: 26px; margin-top: 5px">
+												
+											
+											</div>
 										</div>
 									</div>
 									</c:if>
@@ -1763,8 +1931,8 @@ $(document).on('click','#article_set',function(){
 
 									<!-- 내용 -->
 									<c:if test="${list.writeForm3_content ne null}">
-									<textarea class="div_text_write" readonly="readonly"
-										style="border: none;">${list.writeForm3_content }</textarea>
+									<pre class="div_text_write" 
+										style="border: none;">${list.writeForm3_content }</pre>
 
 									</c:if>
 									<!-- //내용 -->
@@ -1797,7 +1965,7 @@ $(document).on('click','#article_set',function(){
 									</div>
 								</c:if>
 
-								<div style="text-align: right; padding-right: 10px;">
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
 									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
@@ -1981,7 +2149,7 @@ $(document).on('click','#article_set',function(){
 
 								<!-- 일정 -->
 
-								<div style="text-align: right; padding-right: 10px;">
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
 									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>
@@ -2152,7 +2320,7 @@ $(document).on('click','#article_set',function(){
 
 								</div>
 
-								<div style="text-align: right; padding-right: 10px;">
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
 									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
 									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
 								</div>

@@ -1,11 +1,11 @@
+// 새 프로젝트
+function new_project() {
+	document.getElementById('new_project_div').style.display = (document.getElementById('new_project_div').style.display == 'block') ? 'none'	: 'block';
+}
 
 // 보관함 버튼 
 function new_plus() {
 	document.getElementById('new_plus').style.display = (document.getElementById('new_plus').style.display == 'block') ? 'none'	: 'block';
-}
-
-function btn_listback(){
-	
 }
 
 

@@ -79,7 +79,7 @@ public class ProjectManageServiceImpl implements ProjectManageService{
 	public void deleteProject(ProjectManageVO pmVO) {
 		pmDAO.deleteProject(pmVO);
 	}
-
+	
 	@Override
 	public void sendInviteMail(List<String> mailAddress) throws AddressException, MessagingException {
 		String host = "smtp.gmail.com";

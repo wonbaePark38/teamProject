@@ -63,7 +63,7 @@ hr {
 	z-index: 99;
 	position: absolute;
 	top: 60px;
-	right: 10px;
+	right: 300px;
 }
 
 .work_form hr {
@@ -99,6 +99,28 @@ hr {
 	margin-left: 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	margin-top: 16px;
+}
+
+#locker_update{
+	position:absolute; 
+	background: url(../images/btn_lnbmenu_edit.png); 
+	width: 15px; 
+	height: 15px; 
+	z-index: 300; 
+	right: 23px; 
+	margin-top: 2px;
+	display: none;
+}
+
+#locker_del{
+	position:absolute;
+	background: url(../images/btn_lnbmenu_del.png); 
+	width: 15px; 
+	height: 15px; 
+	z-index: 300; 
+	right: 5px; 
+	margin-top: 2px;
+	display: none;
 }
 
 .title_margin {
@@ -294,6 +316,9 @@ hr {
 	text-align:center;
 	width: 90%;
 }
+#status_select_div div{
+	cursor: pointer;
+}
 
 #status_select_div div span {
 	width: 100%;
@@ -323,7 +348,7 @@ hr {
 	height: 20px;
 	background: url(../images/ico_worktit.png) no-repeat;
 	background-position: 0px 1px;
-	margin-bottom: 0px;
+	margin-bottom: -4px;
 }
 
 #work_worker_img {
@@ -332,7 +357,7 @@ hr {
 	height: 20px;
 	background: url(../images/ico_worktit.png) no-repeat;
 	background-position: 1px -45px;
-	margin-bottom: 0px;
+	margin-bottom: -4px;
 }
 
 #work_start_img {
@@ -341,7 +366,7 @@ hr {
 	height: 20px;
 	background: url(../images/ico_worktit.png) no-repeat;
 	background-position: 1px -85px;
-	margin-bottom: 0px;
+	margin-bottom: -4px;
 }
 
 #work_end_img {
@@ -350,7 +375,7 @@ hr {
 	height: 20px;
 	background: url(../images/ico_worktit.png) no-repeat;
 	background-position: 1px -125px;
-	margin-bottom: 0px;
+	margin-bottom: -4px;
 }
 
 #work_progress_img {
@@ -359,7 +384,7 @@ hr {
 	height: 20px;
 	background: url(../images/ico_worktit.png) no-repeat;
 	background-position: 1px -165px;
-	margin-bottom: 0px;
+	margin-bottom: -4px;
 }
 
 #work_order_img {
@@ -368,7 +393,7 @@ hr {
 	height: 20px;
 	background: url(../images/ico_worktit.png) no-repeat;
 	background-position: 1px -205px;
-	margin-bottom: 0px;
+	margin-bottom: -4px;
 }
 
 

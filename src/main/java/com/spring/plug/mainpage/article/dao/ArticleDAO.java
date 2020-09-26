@@ -93,4 +93,9 @@ public class ArticleDAO{
    public List<Article1VO> getArticleLookupList(Article1VO vo){
 	   return sqlSessionTemplate.selectList("ArticleDAO.getArticleLookupList",vo);
    }
+   
+   // 게시글 수정하기
+   public void updateArticleModified(Article1VO vo) {
+	   sqlSessionTemplate.update("ArticleDAO.updateArticleModified",vo);
+   }
 }

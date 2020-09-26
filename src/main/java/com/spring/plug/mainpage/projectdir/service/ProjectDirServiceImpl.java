@@ -84,5 +84,10 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	public List<ProjectDirVO> getTaskUser(ProjectDirVO vo) {
 		return projectDirDAO.getTaskUser(vo);
 	}
+
+	@Override
+	public void updateLockerName(ProjectDirVO vo) {
+		projectDirDAO.updateLockerName(vo);
+	}
 	
 }

@@ -51,9 +51,8 @@
 			<div class="sidebarContainer">
 
 				<div class="new_collabo">
-					<a id="newPrjBtn" onclick="newprojectPop('newproject.jsp')">새
-						프로젝트</a>
-
+					<a id="newPrjBtn" onclick="newprojectPop('newproject.jsp')">새 프로젝트</a>
+				
 				</div>
 				<!--사이드바-->
 				<div class="sidebar">
@@ -81,9 +80,8 @@
 					</div>
 					<c:forEach var="locker_list" items="${projectLockerList}">
 						<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id}">
-						<span id="locker_del" style="position:absolute; background-color: pink; width: 15px; height: 15px; z-index: 300; right: 15px; margin-top: 12px;"></span>
-						<a id="main_side" class="list-group-item"
-							style="padding: .5rem 1.25rem;">${locker_list.locker_name}
+						
+						<a id="main_side" class="list-group-item locker_a" style="padding: .5rem 1.25rem;">${locker_list.locker_name}<img id="locker_update"></img><img id="locker_del"></img>
 						</a>
 					</c:forEach>
 					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">
@@ -345,7 +343,7 @@
 		<div class=locker_list_set>
 			<div class="locker_save">
 				<div class="locker_save_h">
-					<a onclick="">X</a>
+					<span class="locker_cancel">X</span>
 					<h3>보관함 설정</h3>
 				</div>
 				<div class="locker_save_list">
@@ -353,17 +351,18 @@
 						<c:forEach var="locker_list" items="${projectLockerList}">
 							<li>
 								<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id }"/>
-								<label><input name="locker_cbox" type="radio" value="${locker_list.locker_name}">${locker_list.locker_name}</label><br>
+								<label><input style="margin:5px 10px;" name="locker_cbox" type="radio" value="${locker_list.locker_name}">${locker_list.locker_name}</label><br>
 							</li>
 						</c:forEach>
 					</ul>
 				</div>
-				<div class="locker_set_div" style="width: 100%; font-size: 20px; height: 40px;">
+				<div class="locker_set_div" style="width: 100%; font-size: 18px; height: 40px;">
 					<span id="locker_success" style="padding: 5px 55px;">확인</span>
-					<span class="locker_list_set" style="padding: 5px 55px;">취소</span>
+					<span class="locker_cancel" style="padding: 5px 55px;">취소</span>
 				</div>
 			</div>
 		</div>
+		
 		<div id="new_plus" style="display: none; z-index: 1001;">
 			<div
 				style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px 10px 10px 10px; background-color: white;">
@@ -376,10 +375,23 @@
 					<input id="locker_name" type="text" placeholder="보관함명 입력(최대50자)"
 						style="width: 90%; height: 30px;">
 					<div style="padding-top: 15px">
-						<input class="box_btn" type="button" value="취소"
-							onclick="new_plus()"> <input id="locker_add"
-							style="background-color: aqua;" class="box_btn" type="button"
-							value="만들기">
+						<input class="box_btn" type="button" value="취소" onclick="new_plus()"> <input id="locker_add"  class="box_btn" type="button" value="만들기">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="locker_change" style="display: none; z-index: 1001;">
+			<div style="text-align: center; width: 340px; height: 180px; border: 1px solid pink; margin-top: 200px; margin-left: auto; margin-right: auto; padding: 10px; background-color: white;">
+				<div style="text-align: center; margin: auto; padding-bottom: 10px; border-bottom: 1px solid #eaeaea;">
+					<span style="padding-left: 15px; font-size: 20px;">보관함 수정</span> 
+					<a id="lc_close" style="float: right;" >X</a>
+				</div>
+				<div style="margin: auto; padding: 20px;">
+					<input id="change_locker_name" type="text" placeholder="보관함명 입력(최대50자)"
+						style="width: 90%; height: 30px;">
+					<div style="padding-top: 15px">
+						<input id="lc_close" class="box_btn" type="button" value="취소">
+						<input id="lc_locker" class="box_btn" type="button" value="만들기">
 					</div>
 				</div>
 			</div>

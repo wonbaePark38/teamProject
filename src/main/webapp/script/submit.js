@@ -26,7 +26,7 @@ function writeForm_submit2() {
 
 function writeForm_submit3() {
 	var form3 = document.getElementById('writeForm3_form');
-	if ($('#Form3_title').attr('value') == null) {
+	if ($('#Form3_title').val() == '') {
 		alert('업무명을 입력해주세요.');
 	} else if ($('#work_workers').attr('value')== null) {
 		alert('담당자를 선택해주세요.');

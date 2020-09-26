@@ -71,6 +71,10 @@ public class ProjectDirDAO {
 	public void projectUpdateLocker(ProjectDirVO vo) {
 		sqlSessionTemplate.update("ProjectDirDAO.updateProjectLocker",vo);
 	}
+	// 보관함 이름 수정
+	public void updateLockerName(ProjectDirVO vo) {
+		sqlSessionTemplate.update("ProjectDirDAO.updateLockerName",vo);
+	}
 	
 	// 프로젝트 숨기기
 	public void projectUpdateHide(ProjectDirVO vo) {
@@ -80,7 +84,6 @@ public class ProjectDirDAO {
 	// 로그
 	public void insertProjectConnectionLog(ProjectDirVO vo) {
 		sqlSessionTemplate.insert("ProjectDirDAO.insertProject_ConnectionLog",vo);
-		System.out.println("프로젝트 로그");
 	}
 	
 	// 업무 사용자 리스트

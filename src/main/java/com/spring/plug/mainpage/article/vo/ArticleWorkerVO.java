@@ -60,5 +60,4 @@ public class ArticleWorkerVO {
 		this.worker_name = worker_name;
 	}
 	
-	
 }

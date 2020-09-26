@@ -25,4 +25,9 @@
 		DELETE FROM project_locker_list
 		WHERE locker_list_id = #{locker_list_id}
 	</delete>
+	
+	<update id="updateLockerName" parameterType="project_locker_list">
+		UPDATE project_locker_list SET locker_name = #{locker_name}
+		WHERE locker_list_id = #{locker_list_id}
+	</update>
 </mapper>

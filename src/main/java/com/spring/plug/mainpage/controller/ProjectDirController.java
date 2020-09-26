@@ -37,13 +37,11 @@ public class ProjectDirController {
 		projectDirService.insertProjectLocker(vo);
 
 		
-		File file = new File("C:\\plug");
-        if(!file.exists()) {
-            file.mkdir();
-        }
-		String path = "C:\\plug\\"+vo.getProject_id();
-		File folder = new File(path);
-		folder.mkdir();
+		/*
+		 * File file = new File("C:\\plug"); if(!file.exists()) { file.mkdir(); } String
+		 * path = "C:\\plug\\"+vo.getProject_id(); File folder = new File(path);
+		 * folder.mkdir();
+		 */		
 		return "projectdir.do";
 	}
 
@@ -127,9 +125,15 @@ public class ProjectDirController {
 		UserVO user = (UserVO) session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		String[] del_project_id_list = vo.getProject_id_list().split(",");
-		for (String project_id : del_project_id_list) {
-			vo.setProject_id(Integer.parseInt(project_id));
-			projectDirService.deleteProjectLocker(vo);
+		try {
+			if (vo.getProject_id_list() != null) {
+				for (String project_id : del_project_id_list) {
+					vo.setProject_id(Integer.parseInt(project_id));
+					projectDirService.deleteProjectLocker(vo);
+				}
+			}
+		} catch (NumberFormatException e) {
+			
 		}
 		projectDirService.deleteLocker(vo);
 		return "projectdir.do";
@@ -137,7 +141,6 @@ public class ProjectDirController {
 	
 	// 보관함 해제
 	@RequestMapping(value = "/deletelockername.do", method = RequestMethod.POST)
-
 	public String deleteLockerListName(ProjectDirVO vo, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
@@ -146,6 +149,24 @@ public class ProjectDirController {
 			vo.setProject_id(Integer.parseInt(project_id));
 			projectDirService.deleteProjectLocker(vo);
 		}
+		return "projectdir.do";
+	}
+
+	// 보관함 이름 변경
+	@RequestMapping(value = "/updatelockername.do", method = RequestMethod.POST)
+	public String updateLockerListName(ProjectDirVO vo, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		String[] update_project_id_list = vo.getProject_id_list().split(",");
+		try {
+			for (String project_id : update_project_id_list) {
+				vo.setProject_id(Integer.parseInt(project_id));
+				projectDirService.updateProjectLocker(vo);
+			}
+		} catch (Exception e) {
+			
+		}
+		projectDirService.updateLockerName(vo);
 		return "projectdir.do";
 	}
 	

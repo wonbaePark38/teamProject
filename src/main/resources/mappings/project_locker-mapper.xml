@@ -39,4 +39,5 @@
 		UPDATE project_locker SET project_locker = NULL
 		WHERE member_id = #{member_id} AND project_id = #{project_id}
 	</update>
+
 </mapper>
