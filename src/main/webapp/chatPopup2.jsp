@@ -183,7 +183,7 @@ $(document).ready(function() {
 	//웹소켓 접속
 	function connect() {
 		
-		var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/chat.do");
+		var ws = new WebSocket("ws://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/chat.do");
 		socket = ws;
 
 		socket.onopen = function() {
@@ -196,8 +196,18 @@ $(document).ready(function() {
 			
 			data = JSON.parse(data);
 			var myName = '${user.seq}';
+			
 			if(data.senderId == 0){ //관리자 메시지인 경우(나가기,초대받아 들어옴, 채팅방 이름 변경)
-				 location.reload(); //현재 채팅 팝업창에 반영하기 위해서 새로고침
+				if('${roomInfo.roomNameChange}' == 'n' && data.messageType == 'invite'){ //초대 됐을때 헤더에 있는 채팅방 이름 변경
+					var presentRoomName = '${roomInfo.chatRoomName}';
+					var roomName = presentRoomName + "," + data.userName;
+					opener.parent.resetChatRoomName('${roomId}', roomName,data.joinNumber);
+				}else if('${roomInfo.roomNameChange}' == 'n' && data.messageType == 'exit'){ //나갔을때 헤더에 있는 채팅방 이름 변경
+					var presentRoomName = '${roomInfo.chatRoomName}';
+					var roomName = presentRoomName.replace(data.userName,"");
+					opener.parent.resetChatRoomName('${roomId}', roomName, -1);
+				}
+			location.reload(); //현재 채팅 팝업창에 반영하기 위해서 새로고침
 			}
 			msgPositionSelect(data); 
 			
@@ -302,7 +312,6 @@ $(document).ready(function() {
 			url : 'insertMessage.do',
 			data : message,
 			success : function(result) { //result : 현재 메시지가 발생한 채팅방에 접속해 있는 않은 사람 목록 반환됨
-				
 				if(message.messageType == 'chattingMessage'){ //메시지 타입이 나가기, 방제 변경, 초대가 아니고 단순 채팅일 경우
 					opener.parent.chatAlert(result, message); //알림 쏴주는 메시지 호출
 				}else if(message.messageType == 'exit'){
@@ -374,6 +383,8 @@ $(document).ready(function() {
 		message = {};
 		message.header = 'chatting'; //채팅방에서 쓸 메시지
 		message.message_content = inviteUsers + " 님이 초대되었습니다";
+		message.userName = inviteUsers;
+		message.joinNumber = invitedUserInfo.length;
 		message.message_sender = 'admin';
 		message.chatRoomId = '${roomInfo.chatRoomId}';
 		message.message_sendTime = inputDate;
@@ -429,7 +440,7 @@ $(document).ready(function() {
 		insertMessageInfo(message); //db에 저장할 메시지 정보
 		
 		var roomId = ${roomInfo.chatRoomId};
-		opener.parent.resetChatRoomName(roomId, roomName);
+		opener.parent.resetChatRoomName(roomId, roomName,0);
 	}
 	
 	function exitChatRoom(){ //채팅방 나갈때 호출하는 함수
@@ -463,6 +474,7 @@ $(document).ready(function() {
 		message = {};
 		message.header = 'chatting';
 		message.message_content = name+ " 님이 채팅방에서 나갔습니다";
+		message.userName = name;
 		message.message_sender = 'admin';
 		message.chatRoomId = '${roomInfo.chatRoomId}';
 		message.message_sendTime = inputDate;

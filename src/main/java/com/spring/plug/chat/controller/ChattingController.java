@@ -300,8 +300,8 @@ public class ChattingController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		String id = Integer.toString(user.getSeq());
 		roomVO.setUserId(user.getSeq());
-		if(roomVO.getRoomNameChange().equals("n")) { //방이름 바꾼적이 없을때 방제에서 이름 뺌
-			String str = roomVO.getChatRoomName();
+		System.out.println(roomVO.getInviteUser());
+			String str = roomVO.getInviteUser();
 			String[] array = str.split(",");
 			String result = "";
 			for(String temp : array) {
@@ -311,21 +311,23 @@ public class ChattingController {
 				result += temp + ",";
 			}
 			result = result.replaceAll(",$", "");
-			roomVO.setChatRoomName(result); //방이름 세팅
+			if(roomVO.getRoomNameChange().equals("n")) { //방이름 바꾼적이 없을때
+				roomVO.setChatRoomName(result); //방이름 세팅
+			}	
 			roomVO.setInviteUser(result); //유저이름 세팅
-		} //end if
 		
-			String str = roomVO.getInviteUserId();
-			String[] array = str.split(",");
-			String result = "";
-			for(String temp : array) {
+			String strId = roomVO.getInviteUserId();
+			String[] arrayId = strId.split(",");
+			String resultId = "";
+			for(String temp : arrayId) {
 				if(temp.contains(id)) {
 					continue;
 				}
-				result += temp + ",";
+				resultId += temp + ",";
 			}
-			result = result.replaceAll(",$", "");
-			roomVO.setInviteUserId(result);
+			resultId = resultId.replaceAll(",$", "");
+			roomVO.setInviteUser(result);
+			roomVO.setInviteUserId(resultId);
 			roomVO.setJoinNumber(roomVO.getJoinNumber()-1);
 			chatService.updateChatRoom(roomVO);
 			chatService.deleteChatUser(roomVO);

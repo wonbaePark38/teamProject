@@ -743,7 +743,7 @@ $(document).ready(function(){
 			  var filePath = data.filePath;
 			  var fileArr = filePath.split('/');
 			  var realFileName = fileArr[fileArr.length-1];
-			  var src = "http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+"/"+ realFileName;
+			  var src = "http://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+"/"+ realFileName;
 
 			  var fileTypeArr = fileName.split('.');
 			  var fileType = fileTypeArr[1];
@@ -754,10 +754,10 @@ $(document).ready(function(){
 						  "<img src="+ src + ">"+
 						  "</div>"
 				  );
-			  }else if(fileType == 'ppt' || fileType == 'doc' || fileType == 'pdf'){
+			  }else if(fileType == 'ppt' || fileType == 'doc' || fileType == 'docx' || fileType == 'pdf' || fileType == 'pptx'  || fileType == 'xls' || fileType == 'xlsx' || fileType == 'txt'){
 				  $('.file-modal').css('display','block');
 				   $('.file-modal').append(
-				"<iframe src='https://docs.google.com/gview?url=http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+'/'+realFileName+"&embedded=true' class=file-view>"+
+				"<iframe src='https://docs.google.com/gview?url=http://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+'/'+realFileName+"&embedded=true' class=file-view>"+
 				"</iframe>"
 				  );
 			  }else{

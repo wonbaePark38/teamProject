@@ -363,7 +363,7 @@ function appendChatList(element,unreadCount){
 var socket = null;
 
 function connect(){
-	 var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/echo.do");
+	 var ws = new WebSocket("ws://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/echo.do");
 	 socket = ws;
 		ws.onopen = function(){
 			console.log('Info: connection opened');
@@ -524,9 +524,16 @@ function resetChatList(roomId){ // 대화방에서 빠저나오면 헤더에 있
 	target.remove();
 }
 
-function resetChatRoomName(roomId, roomName){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
+function resetChatRoomName(roomId, roomName,changeNumber){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
 	$('.chatting-list-div').children('#'+roomId).children('.row-label').text("");
 	$('.chatting-list-div').children('#'+roomId).children('.row-label').text(roomName);
+	if(changeNumber != 0){
+		var presentNumber = $('.chatting-list-div').children('#'+roomId).children('.chat-user-number').text();
+		var joinNumber = parseInt(presentNumber);
+		joinNumber += changeNumber;
+		
+		$('.chatting-list-div').children('#'+roomId).children('.chat-user-number').text(joinNumber);
+	}
 	
 }
 </script>
