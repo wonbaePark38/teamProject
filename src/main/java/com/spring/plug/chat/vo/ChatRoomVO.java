@@ -15,7 +15,14 @@ public class ChatRoomVO {
 	private int joinNumber;
 	private String roomNameChange;
 	private int unReadCount;
+	private String message;
 	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public int getUnReadCount() {
 		return unReadCount;
 	}

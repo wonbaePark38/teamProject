@@ -1,5 +1,11 @@
-   	  *{ margin: 0; padding: 0; }
- /*#5f5ab9*/
+*{ margin: 0; padding: 0; }
+a{
+	color : red;
+	font-weight:bold;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 .chat {
 	margin-top: 70px;
 }
@@ -16,7 +22,28 @@
 	margin-right: 20px;
 	cursor: pointer;
 }
-
+.input-file{
+	height: 40px;
+    margin: 0;
+    padding: 0 4px;
+    font-size: 0px;
+    color: #505050;
+    border: 1px solid #cdcdce;
+    margin-left: 5px;
+    line-height: 40px;
+    opacity: 0;
+    cursor: pointer;
+}
+#FILE_FORM{
+	text-align: left;
+}
+.add-file{
+	display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(../images/sp_fteditbox_ico.png);
+    background-position: 0 0;
+}
 #exit-bt{
 margin-left: 30px; 
 	ertical-align: middle;

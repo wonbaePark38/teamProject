@@ -10,13 +10,12 @@
 <meta name="google-signin-client_id" content='198753219443-qhctu45a6g5mv2o4rp7f0evfr9gfni0t.apps.googleusercontent.com'>
 <title>개인환경 설정</title>
 
-<link href="css/privateConfig.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
 <script src='https://kit.fontawesome.com/be57023a12.js' crossorigin='anonymous'></script>
 <script src="script/headerScript.js"></script>
 <script src="script/script.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link href="css/privateConfig.css" rel="stylesheet">
  <script>
         function onLoad() {
             gapi.load('auth2', function() {
@@ -327,12 +326,12 @@ $(document).ready(function(){
 
 //채팅 리스트 화면에 출력하는 함수
 function settingChatList(element){
-	//var chatUnreadCount = parseInt(element.unReadCount);
-	//alert(chatUnreadCount);
 	$('.chatting-list-div').append(
 			"<button type='button' class='chat-row' id=" + element.chatRoomId + ">" + 
-			
-					"<div class='row-label'>" +element.chatRoomName +"</div>" +
+					"<div class='row-label'>" +
+						"<span class='chatroom-name'>"+element.chatRoomName +"</span>"+
+						"<div class='last-message'>"+element.message+"</div>"+
+					"</div>"+	
 					 "<strong class='bdg'>"+element.unReadCount+"</strong>"+
 					"<span class='chat-user-number'>"+element.joinNumber+"</span>"+
 				"<input type='hidden' class='room' value='" + element.chatRoomId +"'/>" +
@@ -347,7 +346,10 @@ function settingChatList(element){
 function appendChatList(element,unreadCount){
 	$('.chatting-list-div').append(
 			"<button type='button' class='chat-row' id=" + element.chatRoomId + ">" + 
-					"<div class='row-label'>" +element.chatRoomName +"</div>" +
+					"<div class='row-label'>" +
+						"<span class='chatroom-name'>"+element.chatRoomName +"</span>"+
+						"<div class='last-message'>"+element.message_content+"</div>"+
+					"</div>" +
 					 "<strong class='bdg'>"+unreadCount+"</strong>"+
 					"<span class='chat-user-number'>"+element.joinNumber+"</span>"+
 				"<input type='hidden' class='room' value='" + element.chatRoomId +"'/>" +
@@ -363,7 +365,7 @@ function appendChatList(element,unreadCount){
 var socket = null;
 
 function connect(){
-	 var ws = new WebSocket("ws://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/echo.do");
+	 var ws = new WebSocket("ws://localhost:8080/plugProject/echo.do");
 	 socket = ws;
 		ws.onopen = function(){
 			console.log('Info: connection opened');
@@ -385,7 +387,7 @@ function connect(){
 					
 					if(element === myId){ //읽지 않은 사람중에 내가 있을때 alert띠움
 						settingChatAlramCount(chatRoomId); //알람 카운트 띄워줌
-						
+						updateLastMessage(chatRoomId,data.message_content);
 						let $socketChatAlert = $('div#socketChatAlert'); 
 						if('${user.pushAlram}' == 'on'  && '${user.chatAlram}' == 'true'){ //개인 환경에서 알림이 켜져있을때만 알림 div 보여줌
 							$('div#socketChatAlert').empty();
@@ -524,9 +526,10 @@ function resetChatList(roomId){ // 대화방에서 빠저나오면 헤더에 있
 	target.remove();
 }
 
-function resetChatRoomName(roomId, roomName,changeNumber){ // 대화방에서 빠저나오면 헤더에 있는 채팅방 리스트에서 해당 대화방 삭제 
-	$('.chatting-list-div').children('#'+roomId).children('.row-label').text("");
-	$('.chatting-list-div').children('#'+roomId).children('.row-label').text(roomName);
+function resetChatRoomName(roomId, roomName,changeNumber){ // 대화방에서 인원 변경 있을때 해당 대화방 목록에 반영
+	"<span class='chatroom-name'>"+element.chatRoomName +"</span>"
+	$('.chatting-list-div').children('#'+roomId).children('.row-label').children('.chatroom-name').text("");
+	$('.chatting-list-div').children('#'+roomId).children('.row-label').children('.chatroom-name').text(roomName);
 	if(changeNumber != 0){
 		var presentNumber = $('.chatting-list-div').children('#'+roomId).children('.chat-user-number').text();
 		var joinNumber = parseInt(presentNumber);
@@ -535,6 +538,11 @@ function resetChatRoomName(roomId, roomName,changeNumber){ // 대화방에서 �
 		$('.chatting-list-div').children('#'+roomId).children('.chat-user-number').text(joinNumber);
 	}
 	
+}
+
+function updateLastMessage(roomId,message){ //헤더 채팅방 리스트에 마지막 메시지 보여줌
+	$('.chatting-list-div').children('#'+roomId).children('.row-label').children('.last-message').text("");
+	$('.chatting-list-div').children('#'+roomId).children('.row-label').children('.last-message').text(message);
 }
 </script>
 </html>

@@ -14,6 +14,7 @@
 		<result property="message_sender" column="MESSAGE_SENDER"/>
 		<result property="message_content" column="MESSAGE_CONTENT"/>
 		<result property="message_sendTime" column="MESSAGE_SENDTIME"/>
+		<result property="chatRoomId" column="CHATROOM_ID"/>
 	</resultMap>
 	
 	<resultMap id="friendList" type="user">
@@ -69,23 +70,43 @@
 	</select>
 	
 	<select id="getChatList" resultMap="chatList" parameterType="int">
-		SELECT A.JOINNUMBER, A.CHATROOMNAME , A.CHATROOMID, B.UNREADCOUNT FROM CHATROOM A INNER JOIN CHATROOMSTATUS B ON A.CHATROOMID = B.CHATROOMID
-		WHERE B.MEMBER_ID = #{userId} AND B.CHATSTATUS = 'y'
+		SELECT A.JOINNUMBER, A.CHATROOMNAME , A.CHATROOMID, B.UNREADCOUNT, NVL(C.MESSAGE_CONTENT,'최근 대화 내용 없음') AS MESSAGE FROM CHATROOM A 
+    INNER JOIN CHATROOMSTATUS B ON A.CHATROOMID = B.CHATROOMID
+    LEFT JOIN (SELECT * from MESSAGE WHERE (CHATROOM_ID, MESSAGE_SENDTIME) IN
+    (SELECT CHATROOM_ID ,MAX(MESSAGE_SENDTIME) FROM MESSAGE GROUP BY CHATROOM_ID)) C
+                ON C.CHATROOM_ID = A.CHATROOMID
+    WHERE B.MEMBER_ID = #{userId} AND B.CHATSTATUS = 'y'
 	</select>
 	
 	<insert id="insertMessage" parameterType="msgVO">
 	
-		INSERT INTO MESSAGE (MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
-		CHATROOM_ID,MESSAGE_SENDTIME)
-		VALUES( #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
-		#{message_sendTime})
+	<choose>
+	
+		 <when test="messageType != 'file'">
+			INSERT INTO MESSAGE (MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
+			CHATROOM_ID,MESSAGE_SENDTIME, MESSAGETYPE)
+			VALUES( #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
+			SYSTIMESTAMP, #{messageType})	
+		</when>
+		<otherwise>
+			INSERT INTO MESSAGE (MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
+			CHATROOM_ID,MESSAGE_SENDTIME, MESSAGETYPE, FILENAME, FILEPATH)
+			VALUES( #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
+			SYSTIMESTAMP, #{messageType}, #{fileName}, #{filePath})	
+		</otherwise>
+		
+	</choose>	
 	</insert>
 	
 	 <select id="loadChatHistory" resultMap="chatHistory" parameterType="msgVO" >
-		SELECT * FROM MESSAGE WHERE CHATROOM_ID = #{chatRoomId}
-		AND MESSAGE_SENDTIME >= (SELECT JOINTIME FROM CHATROOMSTATUS 
+		<![CDATA[
+		SELECT MESSAGE_SENDER, MESSAGE_CONTENT, 
+			SENDERID, CHATROOM_ID, MESSAGETYPE, 
+			FILENAME, FILEPATH, TO_CHAR(MESSAGE_SENDTIME,'YYYY-MM-DD HH24:MI') AS MESSAGE_SENDTIME
+		FROM MESSAGE WHERE CHATROOM_ID = #{chatRoomId}
+		AND TO_CHAR(MESSAGE_SENDTIME,'YYYY-MM-DD HH24:MI:SS') >= (SELECT JOINTIME FROM CHATROOMSTATUS 
 		WHERE CHATROOMID = #{chatRoomId} AND MEMBER_ID= #{userId}) ORDER BY MESSAGE_SENDTIME ASC
-
+		]]>
 	</select>
 	
 	
