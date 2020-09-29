@@ -169,6 +169,7 @@ $(document).ready(function() {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13' && !e.shiftKey) {
 				send();
+				e.preventDefault();
 			}
 			event.stopPropagation(); //이벤트 버블링 막기
 
@@ -191,7 +192,7 @@ $(document).ready(function() {
 	//웹소켓 접속
 	function connect() {
 		
-		var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/chat.do");
+		var ws = new WebSocket("ws://localhost:8080/plugProject/chat.do");
 		socket = ws;
 
 		socket.onopen = function() {
@@ -206,6 +207,9 @@ $(document).ready(function() {
 			var myName = '${user.seq}';
 			
 			if(data.senderId == 0){ //관리자 메시지인 경우(나가기,초대받아 들어옴, 채팅방 이름 변경)
+				if(data.messageType == 'changeChatRoomName'){
+					opener.parent.resetChatRoomName('${roomId}', data.chatRoomName, 0);
+				}
 				if('${roomInfo.roomNameChange}' == 'n' && data.messageType == 'invite'){ //초대 됐을때 헤더에 있는 채팅방 이름 변경
 					var presentRoomName = '${roomInfo.chatRoomName}';
 					var roomName = presentRoomName + "," + data.userName;
@@ -448,6 +452,7 @@ $(document).ready(function() {
 		message = {};
 		message.header = 'chatting';
 		message.message_content = roomName+ " 으로 방이름이 변경되었습니다";
+		message.chatRoomName = roomName;
 		message.message_sender = 'admin';
 		message.chatRoomId = '${roomInfo.chatRoomId}';
 		message.message_sendTime = inputDate;
@@ -456,8 +461,7 @@ $(document).ready(function() {
 		socket.send(JSON.stringify(message));
 		insertMessageInfo(message); //db에 저장할 메시지 정보
 		
-		var roomId = ${roomInfo.chatRoomId};
-		opener.parent.resetChatRoomName(roomId, roomName,0);
+		
 	}
 	
 	function exitChatRoom(){ //채팅방 나갈때 호출하는 함수

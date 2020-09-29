@@ -365,7 +365,7 @@ function appendChatList(element,unreadCount){
 var socket = null;
 
 function connect(){
-	 var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/echo.do");
+	 var ws = new WebSocket("ws://localhost:8080/plugProject/echo.do");
 	 socket = ws;
 		ws.onopen = function(){
 			console.log('Info: connection opened');
@@ -527,7 +527,6 @@ function resetChatList(roomId){ // 대화방에서 빠저나오면 헤더에 있
 }
 
 function resetChatRoomName(roomId, roomName,changeNumber){ // 대화방에서 인원 변경 있을때 해당 대화방 목록에 반영
-	"<span class='chatroom-name'>"+element.chatRoomName +"</span>"
 	$('.chatting-list-div').children('#'+roomId).children('.row-label').children('.chatroom-name').text("");
 	$('.chatting-list-div').children('#'+roomId).children('.row-label').children('.chatroom-name').text(roomName);
 	if(changeNumber != 0){
