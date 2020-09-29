@@ -93,7 +93,7 @@
 </body>
 <script>
 var socket = null;
-
+var presentJoinUser = '${roomInfo.inviteUser}'.split(',');
 $(document).ready(function() {
 	
 	
@@ -130,31 +130,7 @@ $(document).ready(function() {
 		success : function(data) {
 			
 			$.each(data,function(index,element){
-				console.log(element);
 				msgHistoryPosition(element); //채팅방에 최초 들어온 시점부터 화면에 뿌려줌
-				
-				var myName = '${user.seq}';
-				var LR = (element.senderId != myName) ? "left" : "right";
-				if(element.senderId == 0){
-					LR = 'center';
-				}
-				if(LR == 'left' && LR != 'center'){ //메시지 div 와 날짜 div 위치 변경
-					var target = $('#chat-ul').children().last();
-					var message = $(target).children().last();
-					var date = $(message).prev();
-					$(message).css('margin-left','20px');
-					$(date).insertAfter(message);
-				} else if(LR == 'center'){
-					
-					var target = $('#chat-ul').children().last();
-					var message = $(target).children().last();
-					var date = $(message).prev();
-					$(message).css('background-color', '#888');
-					$(message).css('font-weight','bold');
-					$(message).css('color','white');
-						
-				}
-				
 			});
 			window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
 			data = null;
@@ -192,7 +168,7 @@ $(document).ready(function() {
 	//웹소켓 접속
 	function connect() {
 		
-		var ws = new WebSocket("ws://localhost:8080/plugProject/chat.do");
+		var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/chat.do");
 		socket = ws;
 
 		socket.onopen = function() {
@@ -209,32 +185,39 @@ $(document).ready(function() {
 			if(data.senderId == 0){ //관리자 메시지인 경우(나가기,초대받아 들어옴, 채팅방 이름 변경)
 				if(data.messageType == 'changeChatRoomName'){
 					opener.parent.resetChatRoomName('${roomId}', data.chatRoomName, 0);
+				}else if(data.messageType == 'invite'){
+					if('${roomInfo.roomNameChange}' == 'n'){
+						var presentRoomName = '${roomInfo.chatRoomName}';
+						var roomName = presentRoomName + "," + data.userName;
+						$('.header').children('label').text("");
+						$('.header').children('label').text(roomName);
+						opener.parent.resetChatRoomName('${roomId}', roomName, data.joinNumber);
+					}
+					var addMember = data.userName;
+					var tempArray = addMember.split(",");
+					$.each(tempArray,function(index,element){
+						presentJoinUser.push(element);
+					});
+					joinedMember();
+				}else if(data.messageType == 'exit'){
+					if('${roomInfo.roomNameChange}' == 'n'){
+						var presentRoomName = '${roomInfo.chatRoomName}';
+						var roomName = presentRoomName.replace(data.userName,"");
+						$('.header').children('label').text("");
+						$('.header').children('label').text(roomName);
+						opener.parent.resetChatRoomName('${roomId}', roomName, -1);
+					}
+					var exitMember = data.userName;
+					var idx = presentJoinUser.indexOf(exitMember);
+					presentJoinUser.splice(idx,1);
+					joinedMember();
 				}
-				if('${roomInfo.roomNameChange}' == 'n' && data.messageType == 'invite'){ //초대 됐을때 헤더에 있는 채팅방 이름 변경
-					var presentRoomName = '${roomInfo.chatRoomName}';
-					var roomName = presentRoomName + "," + data.userName;
-					opener.parent.resetChatRoomName('${roomId}', roomName, data.joinNumber);
-				}else if('${roomInfo.roomNameChange}' == 'n' && data.messageType == 'exit'){ //나갔을때 헤더에 있는 채팅방 이름 변경
-					var presentRoomName = '${roomInfo.chatRoomName}';
-					var roomName = presentRoomName.replace(data.userName,"");
-					opener.parent.resetChatRoomName('${roomId}', roomName, -1);
-				}
-			
-			location.reload(); //현재 채팅 팝업창에 반영하기 위해서 새로고침
+				
 			}
 			
 			msgPositionSelect(data); 
 			opener.parent.updateLastMessage('${roomId}',data.message_content);
-			var LR = (data.senderId != myName) ? "left" : "right";
 			
-			if(LR == 'left'){
-				var target = $('#chat-ul').children().last();
-				var message = $(target).children().last();
-				var date = $(message).prev();
-				$(message).css('margin-left','20px');
-				$(date).insertAfter(message);
-			
-			}
 			
 			window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
 		};
@@ -272,34 +255,47 @@ $(document).ready(function() {
 	function msgHistoryPosition(obj){ //db에서 뽑아논 메시지 위치 정하는 함수
 		var myName = '${user.seq}';
 		var LR = (obj.senderId != myName) ? "left" : "right";
+		if(obj.senderId == '0'){
+			LR = 'center';
+		}
 		appendMessageTag(LR, obj.message_sender, obj.message_content, obj.message_sendTime, obj.messageType);
 	}
 	
 	function msgPositionSelect(presentMessage) { //유저가 입력한 메시지 위치 정하는 함수
 		var myName = '${user.seq}';
-		const LR = (presentMessage.senderId != myName) ? "left" : "right";
+		var LR = (presentMessage.senderId != myName) ? "left" : "right";
+		if(presentMessage.senderId == '0'){
+			LR = 'center';
+		}
 		appendMessageTag(LR, presentMessage.message_sender, presentMessage.message_content, presentMessage.message_sendTime, presentMessage.messageType);
 		
 	}
 	// 메세지 태그 append
 	function appendMessageTag(LR_className, message_sender, message_content, message_sendTime, messageType) {
+		
 		const chatLi = createMessageTag(LR_className, message_sender,message_content, message_sendTime, messageType);
+		$('div.chat:not(.format) ul').append(chatLi);
 		if(LR_className == 'right'){
 			var target = $(chatLi).children('.message');
 			target.css('background-color','#5f5ab9');
 			target.css('color','white');
-		} else if(LR_className == 'admin'){
-			var target = $(chatLi).children('.message');
-			target.css('background-color','#5f5ab9');
-			target.css('color','white');
+		}if(LR_className == 'left'){
+			var messageNode = $(chatLi).children('.message');
+			var dateNode = $(chatLi).children('.date');
+			$(dateNode).insertAfter(messageNode);
 		}
-	
-
-		$('div.chat:not(.format) ul').append(chatLi);
+		
 		
 		var dateNode = $('#chat-ul').children().last().children('.date');
-		
 		$(dateNode).text(message_sendTime);
+		if(message_sender == 'admin'){
+			var target = $('#chat-ul').children().last();
+			var message = $(target).children('.message');
+			$(message).css('background-color', '#888');
+			$(message).css('font-weight','bold');
+			$(message).css('color','white');
+		}
+		
 	}
 
 	// 메세지 태그 생성
@@ -349,12 +345,9 @@ $(document).ready(function() {
 		e.stopPropagation();
 		$('.hidden').show();
 	}
-
 	function joinedMember(){ //참여자 목록 띄우기
-		
-		var listData = '${roomInfo.inviteUser}'.split(',');
-		
-		$.each(listData,function(index,element){
+		$('.member-list').children('ul').children('li').remove();
+		$.each(presentJoinUser,function(index,element){
 			$('.member-list').children().append(
 			"<li>"+element+"</li>"
 			);	
@@ -442,7 +435,6 @@ $(document).ready(function() {
 				});
 					
 		} //end if
-		
 	}
 	
 	function changeRoomName(roomName){ //채팅방 이름 변경되면 채팅창 메시지로 쏴줌 
