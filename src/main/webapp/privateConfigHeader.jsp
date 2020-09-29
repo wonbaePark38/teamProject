@@ -16,6 +16,7 @@
 <script src="script/script.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link href="css/privateConfig.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
  <script>
         function onLoad() {
             gapi.load('auth2', function() {
