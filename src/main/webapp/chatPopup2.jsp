@@ -94,6 +94,7 @@
 <script>
 var socket = null;
 var presentJoinUser = '${roomInfo.inviteUser}'.split(',');
+var roomNameChangeStatus = '${roomInfo.roomNameChange}';
 $(document).ready(function() {
 	
 	
@@ -184,9 +185,12 @@ $(document).ready(function() {
 			
 			if(data.senderId == 0){ //관리자 메시지인 경우(나가기,초대받아 들어옴, 채팅방 이름 변경)
 				if(data.messageType == 'changeChatRoomName'){
+					$('.header').children('label').text("");
+					$('.header').children('label').text(data.chatRoomName);
+					roomNameChangeStatus = 'y';
 					opener.parent.resetChatRoomName('${roomId}', data.chatRoomName, 0);
 				}else if(data.messageType == 'invite'){
-					if('${roomInfo.roomNameChange}' == 'n'){
+					if(roomNameChangeStatus == 'n'){
 						var presentRoomName = '${roomInfo.chatRoomName}';
 						var roomName = presentRoomName + "," + data.userName;
 						$('.header').children('label').text("");
@@ -200,7 +204,7 @@ $(document).ready(function() {
 					});
 					joinedMember();
 				}else if(data.messageType == 'exit'){
-					if('${roomInfo.roomNameChange}' == 'n'){
+					if(roomNameChangeStatus == 'n'){
 						var presentRoomName = '${roomInfo.chatRoomName}';
 						var roomName = presentRoomName.replace(data.userName,"");
 						$('.header').children('label').text("");
@@ -465,7 +469,7 @@ $(document).ready(function() {
 					inviteUser : '${roomInfo.inviteUser}',
 					inviteUserId : '${roomInfo.inviteUserId}',
 					joinNumber : '${roomInfo.joinNumber}',
-					roomNameChange : '${roomInfo.roomNameChange}'
+					roomNameChange : roomNameChangeStatus
 				}
 			$.ajax({
 				type : "POST",
