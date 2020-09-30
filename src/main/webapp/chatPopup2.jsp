@@ -95,6 +95,7 @@
 var socket = null;
 var presentJoinUser = '${roomInfo.inviteUser}'.split(',');
 var roomNameChangeStatus = '${roomInfo.roomNameChange}';
+var roomName = '${roomInfo.chatRoomName}';
 $(document).ready(function() {
 	
 	
@@ -190,31 +191,41 @@ $(document).ready(function() {
 					roomNameChangeStatus = 'y';
 					opener.parent.resetChatRoomName('${roomId}', data.chatRoomName, 0);
 				}else if(data.messageType == 'invite'){
-					if(roomNameChangeStatus == 'n'){
-						var presentRoomName = '${roomInfo.chatRoomName}';
-						var roomName = presentRoomName + "," + data.userName;
-						$('.header').children('label').text("");
-						$('.header').children('label').text(roomName);
-						opener.parent.resetChatRoomName('${roomId}', roomName, data.joinNumber);
-					}
 					var addMember = data.userName;
 					var tempArray = addMember.split(",");
 					$.each(tempArray,function(index,element){
 						presentJoinUser.push(element);
 					});
 					joinedMember();
-				}else if(data.messageType == 'exit'){
+					
 					if(roomNameChangeStatus == 'n'){
-						var presentRoomName = '${roomInfo.chatRoomName}';
-						var roomName = presentRoomName.replace(data.userName,"");
+						var roomName = "";
+						$.each(presentJoinUser,function(index,element){
+							roomName += element+",";
+						});
+						roomName = roomName.substr(0, roomName.length -1); 
 						$('.header').children('label').text("");
 						$('.header').children('label').text(roomName);
-						opener.parent.resetChatRoomName('${roomId}', roomName, -1);
+						opener.parent.resetChatRoomName('${roomId}', roomName, data.joinNumber);
 					}
+					
+				}else if(data.messageType == 'exit'){
 					var exitMember = data.userName;
 					var idx = presentJoinUser.indexOf(exitMember);
 					presentJoinUser.splice(idx,1);
 					joinedMember();
+					
+					if(roomNameChangeStatus == 'n'){
+						var roomName = "";
+						$.each(presentJoinUser,function(index,element){
+							roomName += element+",";
+						});
+						roomName = roomName.substr(0, roomName.length -1); 
+						$('.header').children('label').text("");
+						$('.header').children('label').text(roomName);
+						opener.parent.resetChatRoomName('${roomId}', roomName, -1);
+					}
+					
 				}
 				
 			}

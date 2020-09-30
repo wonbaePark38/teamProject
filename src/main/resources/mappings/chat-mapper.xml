@@ -83,15 +83,15 @@
 	<choose>
 	
 		 <when test="messageType != 'file'">
-			INSERT INTO MESSAGE (MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
+			INSERT INTO MESSAGE (SEQ,MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
 			CHATROOM_ID,MESSAGE_SENDTIME, MESSAGETYPE)
-			VALUES( #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
+			VALUES(MESSAGE_SEQ.NEXTVAL, #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
 			SYSTIMESTAMP, #{messageType})	
 		</when>
 		<otherwise>
-			INSERT INTO MESSAGE (MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
+			INSERT INTO MESSAGE (SEQ,MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
 			CHATROOM_ID,MESSAGE_SENDTIME, MESSAGETYPE, FILENAME, FILEPATH)
-			VALUES( #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
+			VALUES(MESSAGE_SEQ.NEXTVAL, #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
 			SYSTIMESTAMP, #{messageType}, #{fileName}, #{filePath})	
 		</otherwise>
 		
@@ -103,9 +103,11 @@
 		SELECT MESSAGE_SENDER, MESSAGE_CONTENT, 
 			SENDERID, CHATROOM_ID, MESSAGETYPE, 
 			FILENAME, FILEPATH, TO_CHAR(MESSAGE_SENDTIME,'YYYY-MM-DD HH24:MI') AS MESSAGE_SENDTIME
-		FROM MESSAGE WHERE CHATROOM_ID = #{chatRoomId}
-		AND TO_CHAR(MESSAGE_SENDTIME,'YYYY-MM-DD HH24:MI:SS') >= (SELECT JOINTIME FROM CHATROOMSTATUS 
-		WHERE CHATROOMID = #{chatRoomId} AND MEMBER_ID= #{userId}) ORDER BY MESSAGE_SENDTIME ASC
+		FROM MESSAGE
+			WHERE MESSAGE_SENDTIME >= 
+			(SELECT TO_TIMESTAMP(JOINTIME,'YYYY-MM-DD HH24:MI:SS.FF5') FROM CHATROOMSTATUS 
+				WHERE CHATROOMID = #{chatRoomId} AND MEMBER_ID= #{userId}) 
+        ORDER BY SEQ ASC
 		]]>
 	</select>
 	
@@ -130,14 +132,14 @@
 	</insert> 
 	
 	<insert id="createRoomStatus" parameterType="roomVO">
-		INSERT INTO CHATROOMSTATUS (CHATROOMID, MEMBER_NAME, MEMBER_ID, CONNECTTIME, CHATSTATUS, JOINTIME)
-		VALUES( #{chatRoomId}, #{userName}, #{userId}, #{connectTime}, #{status}, #{connectTime})
+		INSERT INTO CHATROOMSTATUS (SEQ, CHATROOMID, MEMBER_NAME, MEMBER_ID, CONNECTTIME, CHATSTATUS, JOINTIME)
+		VALUES(CHATROOMSTATUS_SEQ.NEXTVAL, #{chatRoomId}, #{userName}, #{userId}, #{connectTime}, #{status}, TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD HH24:MI:SS.FF5'))
 	</insert>
 	
 	<insert id="insertMember" parameterType="java.util.Map">
 			<foreach collection="roomList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-				INTO CHATROOMSTATUS (MEMBER_NAME, MEMBER_ID, CHATROOMID)
-				VALUES( #{item.userName}, #{item.inviteUser}, #{item.chatRoomId})
+				INTO CHATROOMSTATUS (SEQ, MEMBER_NAME, MEMBER_ID, CHATROOMID)
+				VALUES(CHATROOMSTATUS_SEQ.NEXTVAL, #{item.userName}, #{item.inviteUser}, #{item.chatRoomId})
 			</foreach>
 	
 	</insert> 
@@ -167,7 +169,7 @@
 	</update>
 	
 	<update id="updateChatRoomStatus" parameterType="msgVO">
-		UPDATE CHATROOMSTATUS SET JOINTIME= #{message_sendTime}, CHATSTATUS='y' WHERE CHATSTATUS = 'n' AND CHATROOMID = #{chatRoomId}
+		UPDATE CHATROOMSTATUS SET JOINTIME= TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD HH24:MI:SS.FF5'), CHATSTATUS='y' WHERE CHATSTATUS = 'n' AND CHATROOMID = #{chatRoomId}
 	</update>
 	
 	<update id="updateUnreadCount" parameterType="msgVO">

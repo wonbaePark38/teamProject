@@ -69,6 +69,12 @@ public class ChattingController {
 	@ResponseBody
 	@RequestMapping(value="/insertMessage.do", method = RequestMethod.POST)
 	public List<MessageVO> insertMessage(MessageVO msgVO){
+		
+		if(msgVO.getSenderId() != 0) { //관리자 메시지가 아닐 경우 
+			chatService.updateChatRoomStatus(msgVO);
+			chatService.updateUnreadCount(msgVO);
+		}
+		
 		if(msgVO.getMessageType().equals("file")) {
 			String roomId = msgVO.getChatRoomId();
 			String realFileName = msgVO.getSenderId()+ "_" + msgVO.getMessage_content();
@@ -78,10 +84,7 @@ public class ChattingController {
 		}
 		chatService.insertMessage(msgVO);
 		
-		if(msgVO.getSenderId() != 0) { //관리자 메시지가 아닐 경우 
-			chatService.updateChatRoomStatus(msgVO);
-			chatService.updateUnreadCount(msgVO);
-		}
+		
 		List<MessageVO> unreadList = chatService.getUnreadUser(msgVO);//현재 방 접속상태 아닌 사람 목록 가저옴
 		
 		return unreadList;
