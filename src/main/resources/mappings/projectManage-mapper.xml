@@ -54,7 +54,7 @@
 			WHERE A.PROJECT_ID = #{projectId}
 	</select>
 	
-	<select id="getConnectionStatistics" resultMap="getMemberUse" parameterType="int">
+	<select id="getConnectionStatistics" resultMap="getMemberUse" parameterType="pmVO">
 		SELECT NVL(F.CONNECTIONCOUNT,0) AS CONNECTIONCOUNT ,
 			   E.MEMBER_NAME, 
 			   E.MEMBER_EMAIL, 
@@ -69,7 +69,7 @@
 					(SELECT MEMBER_ID, PROJECT_ID, COUNT(*) AS CONNECTIONCOUNT
     				FROM PROJECT_CONNECTION
     				WHERE PROJECT_ID = #{projectId} AND PROJECT_CONNECTION_START  
-		    		BETWEEN ADD_MONTHS(TRUNC(SYSDATE),-0) AND TRUNC(LAST_DAY(SYSDATE))
+		    		BETWEEN ADD_MONTHS(TRUNC(SYSDATE), #{selectMonth}) AND ADD_MONTHS(TRUNC(LAST_DAY(SYSDATE)), #{selectMonth})
         			GROUP BY MEMBER_ID , PROJECT_ID) B
 					ON A.MEMBER_ID = B.MEMBER_ID
 					WHERE A.PROJECT_ID = #{projectId})) D

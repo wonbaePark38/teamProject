@@ -80,7 +80,6 @@ public class ProjectManageController {
 			str += temp.getConnectionDate() + "-"+temp.getConnectionCount() + ",";
 		}
 		str = str.substring(0, str.length()-1);
-		System.out.println(str);
 		mav.addObject("chartList",str);
 		mav.setViewName("connectionStatistics.jsp");
 		return mav;
@@ -88,9 +87,15 @@ public class ProjectManageController {
 	//사용자별 프로젝트 접속통계 불러오는 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="getConnectionStatistics.do",method=RequestMethod.POST)
-	public List<ProjectManageVO> getConnectionStatistics(HttpSession session){
+	public List<ProjectManageVO> getConnectionStatistics(ProjectManageVO pmVO, HttpSession session){
 		ProjectDirVO vo = (ProjectDirVO) session.getAttribute("projectdir");
-		List<ProjectManageVO> connectionList = pmService.getConnectionStatistics(vo.getProject_id());
+		pmVO.setProjectId(vo.getProject_id());
+		System.out.println("프로젝트 id " + pmVO.getProjectId());
+		System.out.println("몇달 전 선택? "+ pmVO.getSelectMonth());
+		List<ProjectManageVO> connectionList = pmService.getConnectionStatistics(pmVO);
+		for(ProjectManageVO temp : connectionList) {
+			System.out.println(temp.toString());
+		}
 		return connectionList;
 	}
 	

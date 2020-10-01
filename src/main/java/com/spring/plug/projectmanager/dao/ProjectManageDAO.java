@@ -35,9 +35,9 @@ public class ProjectManageDAO {
 		return sqlSessionTemplate.selectList("ProjectManageDAO.getUseStatistics", projectId);
 	}
 	
-	public List<ProjectManageVO> getConnectionStatistics(int projectId){
+	public List<ProjectManageVO> getConnectionStatistics(ProjectManageVO pmVO){
 		System.out.println("--->mybatis로 프로젝트 접속 통계 셀렉트");
-		return sqlSessionTemplate.selectList("ProjectManageDAO.getConnectionStatistics", projectId);
+		return sqlSessionTemplate.selectList("ProjectManageDAO.getConnectionStatistics", pmVO);
 	}
 	
 	public List<ProjectManageVO> getRecentData(int projectId){

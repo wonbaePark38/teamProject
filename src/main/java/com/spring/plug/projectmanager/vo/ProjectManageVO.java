@@ -26,7 +26,16 @@ public class ProjectManageVO {
 	private int lookup_id;
 	private int deskCount;
 	private int scheduleCount;
+	private int selectMonth;
 	
+	public int getSelectMonth() {
+		return selectMonth;
+	}
+
+	public void setSelectMonth(int selectMonth) {
+		this.selectMonth = selectMonth;
+	}
+
 	public int getScheduleCount() {
 		return scheduleCount;
 	}
