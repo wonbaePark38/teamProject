@@ -137,12 +137,15 @@
 	</insert>
 	
 	<insert id="insertMember" parameterType="java.util.Map">
-			<foreach collection="roomList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-				INTO CHATROOMSTATUS (SEQ, MEMBER_NAME, MEMBER_ID, CHATROOMID)
-				VALUES(CHATROOMSTATUS_SEQ.NEXTVAL, #{item.userName}, #{item.inviteUser}, #{item.chatRoomId})
-			</foreach>
 	
-	</insert> 
+	<foreach collection="roomList" item="item" separator=" "
+		open="INSERT ALL" close="SELECT * FROM DUAL">
+		INTO CHATROOMSTATUS (SEQ, MEMBER_NAME, MEMBER_ID, CHATROOMID)
+		VALUES(GET_CHATROOMSTATUS_SEQ(), #{item.userName},
+		#{item.inviteUser}, #{item.chatRoomId})
+	</foreach>
+
+</insert> 
 	
 	
 	<select id="getChatRoomInfo" resultMap="roomInfo" parameterType="String">
