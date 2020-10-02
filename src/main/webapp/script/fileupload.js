@@ -13,17 +13,6 @@ $(function() {
 
 });
 
-$(function() {
-
-   $('#writeForm1_img_add').click(function(e) {
-
-      e.preventDefault();
-
-      $('#writeForm1_img').click();
-
-   });
-
-});
 
 
 $(function() {
@@ -38,17 +27,6 @@ $(function() {
 
 });
 
-$(function() {
-
-   $('#writeForm2_img_add').click(function(e) {
-
-      e.preventDefault();
-
-      $('#writeForm1_img').click();
-
-   });
-
-});
 
 
 $(function() {
@@ -58,18 +36,6 @@ $(function() {
       e.preventDefault();
 
       $('#writeForm3_file').click();
-
-   });
-
-});
-
-$(function() {
-
-   $('#writeForm3_img_add').click(function(e) {
-
-      e.preventDefault();
-
-      $('#writeForm3_img').click();
 
    });
 
@@ -108,40 +74,3 @@ function fileCheck(obj,id) {
    
 }
 
-function imgCheck(obj,id) {
-   
-   var img_name_param = obj.parentNode.parentNode.parentNode.childNodes[5];
-   var img_size_param = obj.parentNode.parentNode.parentNode.childNodes[7];
-   console.log(obj);
-   console.log(img_name_param);
-   console.log(img_size_param);
-   imgPoint = obj.value.lastIndexOf('.');
-   extName = obj.value.substring(imgPoint + 1,obj.length);
-   fileType = extName.toLowerCase();
-   
-   var imgPointCut = obj.value.lastIndexOf('\\');
-   var imgName = obj.value.substring(imgPointCut + 1, obj.length);
-   var imgSize = obj.files[0].size;
-   console.log(imgName);
-   console.log(fileType);
-   
-   if(fileType == 'jpg'||fileType == 'png'||fileType == 'gif'){
-      img_name_param.value = imgName;
-      img_size_param.value = imgSize;
-      console.log('test : ',id.childNodes[1].childNodes[5].childNodes[3]);
-      
-      console.log(id);
-      
-      id.childNodes[1].childNodes[5].childNodes[1].innerText = imgName;
-      id.childNodes[1].childNodes[5].childNodes[3].innerText = imgSize + ' bytes';
-         
-      
-      
-      id.style.display = 'block';
-   }else{
-      alert('이미지 파일이 아닙니다.');
-      return false;
-   }
-   
-   id = null;
-}

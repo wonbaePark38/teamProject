@@ -3,12 +3,22 @@ package com.spring.plug.mainpage.article.vo;
 import java.sql.Date;
 
 public class ArticleReplyVO {
+	private int reply_id;
 	private int member_id;
 	private int project_id;
 	private int article_id;
 	private Date reply_regdate;
 	private String reply_writer;
 	private String reply_content;
+
+	
+	public int getReply_id() {
+		return reply_id;
+	}
+
+	public void setReply_id(int reply_id) {
+		this.reply_id = reply_id;
+	}
 
 	public int getMember_id() {
 		return member_id;

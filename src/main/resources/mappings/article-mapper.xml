@@ -14,7 +14,7 @@
 		<result property="file_name" column="FILE_NAME" />
 		<result property="file_size" column="FILE_SIZE" />
 		<result property="img_name" column="IMG_NAME" />
-		<result property="img_size" column="IMG_SIZE" />
+		<result property="img_path" column="IMG_PATH" />
 		<result property="writer" column="WRITER" />
 		<result property="writeForm1_content" column="WRITEFORM1_CONTENT" />
 		<result property="writeForm2_title" column="WRITEFORM2_TITLE" />
@@ -25,6 +25,8 @@
 			column="WRITEFORM3_TASKNUM" />
 		<result property="writeForm3_title" column="WRITEFORM3_TITLE" />
 		<result property="writeForm3_status" column="WRITEFORM3_STATUS" />
+		<result property="writeForm3_workersID"
+			column="WRITEFORM3_WORKERSID" />
 		<result property="writeForm3_workersName"
 			column="WRITEFORM3_WORKERSNAME" />
 		<result property="writeForm3_start_date"
@@ -58,7 +60,8 @@
 	</resultMap>
 
 	<resultMap type="articleReplyVO" id="replyResult">
-		<id property="article_id" column="ARTICLE_ID" />
+		<id property="reply_id" column="REPLY_ID" />
+		<result property="article_id" column="ARTICLE_ID" />
 		<result property="reply_writer" column="REPLY_WRITER" />
 		<result property="reply_regdate" column="REPLY_REGDATE" />
 		<result property="reply_content" column="REPLY_CONTENT" />
@@ -114,6 +117,7 @@
 	<insert id="replyInsert" parameterType="articleReplyVO">
 		INSERT INTO article_reply
 		(
+		reply_id,
 		member_id,
 		project_id,
 		article_id,
@@ -122,14 +126,22 @@
 		reply_content
 		)
 		VALUES
-		( #{member_id}, #{project_id}, #{article_id}, #{reply_writer},sysdate ,#{reply_content} )
+		((select nvl(max(reply_id), 0) +1 from article_reply), #{member_id}, #{project_id}, #{article_id}, #{reply_writer},sysdate ,#{reply_content} )
 	</insert>
-
-
+	
+	<update id="updateReply" parameterType="articleReplyVO">
+		UPDATE article_reply SET reply_content = #{reply_content}
+		WHERE reply_id = #{reply_id} AND member_id = #{member_id}
+	</update>
+	
+	<delete id="deleteReply" parameterType="articleReplyVO">
+		DELETE FROM article_reply WHERE reply_id = #{reply_id}
+	</delete>
+	
 	<select id="articleSelectAll" resultMap="articleResult">
 		SELECT * FROM mainpage_article WHERE project_id = #{project_id} ORDER BY article_id DESC
 	</select>
-
+	
 	<insert id="articleInsert" useGeneratedKeys="true"
 		parameterType="article1VO" keyProperty="article_id" keyColumn="article_id">
 		INSERT INTO mainpage_article
@@ -144,7 +156,7 @@
 		file_size,
 		file_path,
 		img_name,
-		img_size,
+		img_path,
 		writer,
 
 		writeform1_content,
@@ -156,6 +168,7 @@
 		writeForm3_tasknum,
 		writeForm3_title,
 		writeForm3_status,
+		writeForm3_workersID,
 		writeForm3_workersName,
 		writeForm3_start_date,
 		writeForm3_end_date,
@@ -189,7 +202,7 @@
 		#{file_size, jdbcType=VARCHAR},
 		#{file_path, jdbcType=VARCHAR},
 		#{img_name, jdbcType=VARCHAR},
-		#{img_size, jdbcType=VARCHAR},
+		#{img_path, jdbcType=VARCHAR},
 		#{writer},
 
 		#{writeForm1_content, jdbcType=VARCHAR},
@@ -201,6 +214,7 @@
 		(select nvl(max(writeForm3_tasknum), 0) +1 from mainpage_article),
 		#{writeForm3_title, jdbcType=VARCHAR},
 		#{writeForm3_status, jdbcType=VARCHAR},
+		#{writeForm3_workersID, jdbcType=VARCHAR},
 		#{writeForm3_workersName, jdbcType=VARCHAR},
 		#{writeForm3_start_date, jdbcType=VARCHAR},
 		#{writeForm3_end_date, jdbcType=VARCHAR},
@@ -254,7 +268,7 @@
 	</select>
 	
 	<select id="getTaskList" parameterType="article1VO" resultMap="articleResult">
-		SELECT member_id, writeForm3_tasknum, writeForm3_workersName FROM mainpage_article
+		SELECT member_id, writeForm3_tasknum, writeForm3_workersName, writeForm3_workersID FROM mainpage_article
 		WHERE project_id = #{project_id}
 	</select>
 
@@ -292,6 +306,18 @@
 			</when>
 			<when test="form_name == 'nomalWrite2.0'">
 				UPDATE mainpage_article SET writeform2_title = #{writeForm2_title}, writeform2_content = #{writeForm2_content}
+				WHERE article_id = #{article_id}
+			</when>
+			<when test="form_name == 'taskWrite'">
+				UPDATE mainpage_article SET writeform3_title = #{writeForm3_title}, writeform3_content = #{writeForm3_content}, writeform3_status = #{writeForm3_status}, writeform3_progress = #{writeForm3_progress}
+				WHERE article_id = #{article_id}
+			</when>
+			<when test="form_name == 'scheWrite'">
+				UPDATE mainpage_article SET writeform4_title = #{writeForm4_title}, writeform4_content = #{writeForm4_content}
+				WHERE article_id = #{article_id}
+			</when>
+			<when test="form_name == 'todoWrite'">
+				UPDATE mainpage_article SET writeform5_title = #{writeForm5_title}, writeform5_content = #{writeForm5_content}
 				WHERE article_id = #{article_id}
 			</when>
 		</choose>

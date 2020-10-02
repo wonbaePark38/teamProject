@@ -21,6 +21,42 @@
 		width: 100px;
 	   	display: inline-block;
 	}
+	.todo_datas #write_t{
+		display: inline-block; 
+		width: 250px;
+	}
+	
+	.todo_datas #todo_c{
+		vertical-align: middle;
+	    width: 276px;
+	    display: inline-block;
+	}
+	
+	.todo_c{
+		vertical-align: middle;
+    	width: 276px;
+    	display: inline-block;
+	}
+	.remark_setting span{
+		cursor: pointer;
+	}
+	#reply_c{
+	    display: block;
+    	width: 112%;
+    	margin: 0px;
+    }
+    
+	.post_images div{
+		border: 2px solid #eaeaea;
+	}
+	.post_images img{
+		max-height: 150px;
+		margin: 5px;
+	}
+	.post_images a{
+	    float: right;
+    	margin: 0 5px;
+    }
 </style>
 
 <script>
@@ -62,10 +98,15 @@
 	// 업무탭 작업자 추가 및 작업자들 저장
   $(document).on('click','#task_User',function(){
 	var workers_name = $('#work_workers').val();
+	var workers_id = $('#work_workers_id').val();
 	  var worker_name = $(this).text();
+	  var worker_id = $(this).prev().val();
+	  
+	  workers_id += (worker_id+',');
 	  workers_name += (worker_name + ',');
 	 
 	  $('#work_workers').attr('value',workers_name);
+	  $('#work_workers_id').attr('value',workers_id);
 	  // 작업자 띄우기
 	   var worker_append = document.createElement('div');
 	   worker_append.setAttribute('style','display:inline-block; width: 100px; background-color: #efeff9; margin-top: 3px; margin-right: 3px; height: 30px; border-radius: 3px;');
@@ -100,16 +141,23 @@
   $(document).on('click','#writeForm5_submit',function(){
 		
 		var form5 = document.getElementById('writeForm5_form');
-		
-		if ($('#todo_title').val() == '' || $('#todo_title').val() == null) {
-			alert('제목을 입력해주세요');
-		} else if ($('.todo_content').val() == '' || $('.todo_content').val() == null) {
-			alert('할일을 입력해주세요.');
-		} else if ($('.todo_date').val() == '' || $('.todo_date').val() == null) {
-			alert('일자를 정해주세요.')
-		} else if ($('.todo_worker').val() == '' || $('.todo_worker').val() == null) {
-			alert('담당자를 정해주세요.')
-		} else {
+		var bl = true;
+		$('#todoContent_external').find('input').each(function(){
+			if ($(this).attr('class') == 'todo_content' && $(this).val() == '') {
+				alert('할일을 입력해주세요.');
+				bl = false;
+				return false;
+			} else if ($(this).attr('class') == 'todo_date' && $(this).val() == '') {
+				alert('일자를 정해주세요.')
+				bl = false;
+				return false;
+			} else if ($(this).attr('class') == 'todo_worker' && $(this).val() == '') {
+				alert('담당자를 정해주세요.')
+				bl = false;
+				return false;
+			}
+		});
+		if (bl == true) {
 			var contents = ""; 
 			$('.todo_content').each(function(){
 				contents += ($(this).val())+',';
@@ -129,6 +177,8 @@
 			
 			form5.submit();
 		}
+		
+		
 	});
   
 $(document).on('click','.tcheck',function(){
@@ -166,6 +216,17 @@ $(document).on('click','#set_icon',function(){
 	$(this).parent().next().next().toggle();
 });
 
+$(document).on('click','.pix_div',function(){
+	$('.pix_div').next().hide();
+	if ($(this).next().hide()) {
+		$(this).next().show();
+	} else {
+		$(this).next().hide();
+		
+	}
+});
+
+
 function article_modified_set(type, parent){
 	
 	if (type == 'initialize') {
@@ -173,22 +234,37 @@ function article_modified_set(type, parent){
 		parent.find('#set_icon_list').hide();	// 게시글 설정버튼 리스트
 		parent.find('.article_status').hide();	// 게시글 좋아요/댓글 갯수
 		parent.find('.bottom_list').children('li').hide();	// 게시글 좋아요/댓글/담아두기
-		if (parent.find('#write_t').length) { // 게시글 제목 유무 
+		if (parent.attr('name') == 'scheWrite') {
 			var title = parent.find('#write_t').text();
-			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" style="width:100%;" value="'+title+'">');
-		}
-		if (parent.find('pre#write_c').length) { // 게시글 내용 유무
-			parent.find('pre#write_c').contents().unwrap().wrap('<textarea id="write_c" style="width:100%;"></textarea>');
-		}
-		if (parent.attr('name') == 'taskWrite') { // 업무 타입 유무
 			
+			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" style="width: 60%; padding: 0px; margin-left: 110px; font-weight: 700; height: 35px;" value="'+title+'">');
+			parent.find('#write_c').contents().unwrap().wrap('<textarea id="write_c" style="width:100%;margin-left: 25px;"></textarea>');
+		} else if (parent.attr('name') == 'todoWrite') {
+			var title = parent.find('#write_t').text();
+			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" value="'+title+'">');
+			parent.find('.todo_c').each(function(){
+				var content = $(this).text();
+				$(this).contents().unwrap().wrap('<input type="text" class="todo_c" value="'+content+'">');
+			});
+		} else { // 게시글 내용 유무
+			var title = parent.find('#write_t').text();
+			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" style="width:95%;" value="'+title+'">');
+			parent.find('#write_c').contents().unwrap().wrap('<textarea id="write_c" style="width:100%;"></textarea>');
 		}
 		parent.find('.bottom_list').append('<li class="modified_set" style="float:right;"><a id="modified_cancel" class="modified_btn">취소</a></li>')
 		parent.find('.bottom_list').append('<li class="modified_set" style="float:right;"><a id="modified_success" class="modified_btn">수정</a></li>')
 	} else if (type == 'terminate') {
-		parent.find('#write_c').contents().unwrap().wrap('<pre id="write_c" style="font-size: 15px;"></pre>');
-		if ($('#write_t')) { 
+		if (parent.attr('name') == 'scheWrite') {
+			parent.find('#write_t').contents().unwrap().wrap('<dd id="write_t" class="wc_title"></dd>');
+			parent.find('#write_c').contents().unwrap().wrap('<pre id="write_c" style="font-size: 15px;margin-left: 25px;"></pre>');
+		} else if (parent.attr('name') == 'todoWrite') {
+			parent.find('#write_t').contents().unwrap().wrap('<strong id="write_t"></strong');
+			parent.find('.todo_c').each(function(){
+				$(this).contents().unwrap().wrap('<span type="text" class="todo_c"></span>');
+			});
+		} else { 
 			parent.find('#write_t').contents().unwrap().wrap('<strong id="write_t" style="width:100%;"></strong');
+			parent.find('#write_c').contents().unwrap().wrap('<pre id="write_c" style="font-size: 15px;"></pre>');
 		}
 		parent.find('.bottom_list').children('.modified_set').remove();
 		parent.find('.bottom_list').children('li').show();
@@ -219,6 +295,23 @@ function article_modified_form(type,parent){
 	} else if (type == 'nomalWrite2.0') {
 		modified_success.append($('<input/>',{type:'hidden', name:'writeForm2_title', value: write_title}));
 		modified_success.append($('<input/>',{type:'hidden', name:'writeForm2_content', value: write_content}));
+	} else if (type == 'taskWrite') {
+		var task_status = parent.find('.task_type_select').text();
+		var task_progress = parent.find('#progress_a').val();
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm3_title', value: write_title}));
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm3_status', value: task_status}));
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm3_progress', value: task_progress}));
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm3_content', value: write_content}));
+	} else if (type == 'scheWrite') {
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm4_title', value: write_title}));
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm4_content', value: write_content}));
+	} else if (type == 'todoWrite') {
+		var todo_content = '';
+		parent.find('.todo_c').each(function(){
+			todo_content += $(this).val()+',';
+		});
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm5_title', value: write_title}));
+		modified_success.append($('<input/>',{type:'hidden', name:'writeForm5_content', value: todo_content}));
 	}
 	
 	// form 생성하는 곳
@@ -233,7 +326,7 @@ $(document).on('click','#article_set',function(){
 	if ($(this).text() == '수정') {
 		if (parent.attr('name') == 'nomalWrite') {
 			article_modified_set('initialize',parent);
-			$(document).on('click','.modified_btn',function(){
+			parent.find('.modified_btn').on('click',function(){
 				if ($(this).attr('id') == 'modified_cancel') {
 					article_modified_set('terminate',parent);
 				} else if ($(this).attr('id') == 'modified_success') {
@@ -242,20 +335,20 @@ $(document).on('click','#article_set',function(){
 			});
 		} else if(parent.attr('name') == 'nomalWrite2.0') {
 			article_modified_set('initialize',parent);
-			$(document).on('click','.modified_btn',function(){
+			parent.find('.modified_btn').on('click',function(){
 				if ($(this).attr('id') == 'modified_cancel') {
 					article_modified_set('terminate',parent);
 				} else if ($(this).attr('id') == 'modified_success') {
 					article_modified_form(parent.attr('name'),parent);
 				}
 			});
-		} /* else if (parent.attr('name') == 'taskWrite') {
+		} else if (parent.attr('name') == 'taskWrite') {
 			article_modified_set('initialize',parent);
 			var init_task = parent.find('.task_type_select');
-			var init_worker_manager = parent.find('.')
+			//var init_worker_manager = parent.find('.');
 			parent.find('.task_type').attr('class','task_type_on');
 			
-			$(document).on('click','.task_type_on',function(){
+			parent.find('.task_type_on').on('click',function(){
 				var select_status = $(this); 
 				if (confirm('상태를 수정하시겠습니까?')) {
 					parent.find('#status_select_div').find('span').attr('class','task_type_on');
@@ -274,29 +367,58 @@ $(document).on('click','#article_set',function(){
 					}
 				 } 
 			 });
-			$(document).on('click','.modified_worker',function(){
+			parent.find('.modified_worker').on('click',function(){
 				var task_parent = $(this).parent().parent().parent().parent().parent().parent();
 				
 				task_parent.find('.modified_worker_select_div').toggle();
 				
 			});
 			
-			$(document).on('click','#modified_task_User',function(){
+			parent.find('#modified_task_User').on('click',function(){
 				var task_user = $(this).parent().parent().parent().parent().prev();
 				task_user.append('<input type="button" name="'+$(this).prev().attr('value')+'"value="'+$(this).text()+'">');
 				parent.find('.modified_worker_select_div').hide();
 			});
 			
-			$(document).on('click','.modified_btn',function(){
+			parent.find('#progress_a').on('click',function(){
+				if ($(this).attr('value') == '100') {
+					$(this).attr('value',0);
+				} else{
+					$(this).attr('value',$(this).val()+20);
+				}
+			});
+			
+			
+			parent.find('.modified_btn').on('click',function(){
 				if ($(this).attr('id') == 'modified_cancel') {
 					article_modified_set('terminate',parent);
-					
 					parent.find('.task_type_on').attr('class','task_type');
+					// 임시
+					var task_cancel = $('<form></form>');
+					task_cancel.attr('method','post');
+					task_cancel.attr('action','mainpage.do');
+					task_cancel.append($('<input/>',{type:'hidden', name:'project_id', value: $('#p_id').val()}));
+					task_cancel.append($('<input/>',{type:'hidden', name:'project_name', value:  $('p#title').text()}));
+					task_cancel.appendTo('body');
+					task_cancel.submit();
 				} else if ($(this).attr('id') == 'modified_success') {
 					article_modified_form(parent.attr('name'),parent);
 				}
 			});
-		} */
+		} else if (type = 'scheWrite') {
+			article_modified_set('initialize',parent);			
+			
+			parent.find('.modified_btn').on('click',function(){
+				if ($(this).attr('id') == 'modified_cancel') {
+					article_modified_set('terminate',parent);
+					
+					
+				} else if ($(this).attr('id') == 'modified_success') {
+					article_modified_form(parent.attr('name'),parent);
+					
+				}
+			});
+		}
 		
 	} else if ($(this).text() == '삭제') {
 		parent.find('#set_icon_list').hide();
@@ -437,6 +559,110 @@ $(document).on('click','#article_set',function(){
 	  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
 });
 
+$(document).on('click','.remark_btn',function(){
+	var p_title = $('p#title').text();
+	var p_id = $('#p_id').val();
+	
+	if ($(this).text() == '수정') {
+		$(this).text('확인');
+		$(this).next().next().text('취소');
+		var content = $(this).parent().next().find('pre').text();
+		$(this).parent().next().find('#reply_c').contents().unwrap().wrap('<input type="text" id="reply_c" value="'+content+'">');
+		
+	} else if ($(this).text() == '삭제') {
+		var reply_id = $(this).parent().next().find('strong').attr('id');
+		
+		var reply_delete = $('<form></form>');
+		
+		// form 설정
+		reply_delete.attr('method','post');
+		reply_delete.attr('action','deletereply.do');
+		
+		// form 데이터
+		reply_delete.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
+		reply_delete.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
+		reply_delete.append($('<input/>',{type:'hidden', name:'reply_id', value: reply_id}));
+		
+			 
+		// form 생성하는 곳
+		reply_delete.appendTo('body');
+		reply_delete.submit();
+		
+		
+	} else if ($(this).text() == '취소') {
+		$(this).text('수정');
+		$(this).next().next().text('삭제');
+		$(this).parent().next().find('#reply_c').contents().unwrap().wrap('<pre id="reply_c"></pre>');
+	} else if ($(this).text() == '확인') {
+		
+		var reply_content = $(this).parent().next().find('#reply_c').val();
+		var reply_id = $(this).parent().next().find('strong').attr('id');
+		
+		var reply_update = $('<form></form>');
+		
+		// form 설정
+		reply_update.attr('method','post');
+		reply_update.attr('action','updatereply.do');
+		
+		// form 데이터
+		reply_update.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
+		reply_update.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
+		reply_update.append($('<input/>',{type:'hidden', name:'reply_content', value: reply_content}));
+		reply_update.append($('<input/>',{type:'hidden', name:'reply_id', value: reply_id}));
+		
+			 
+		// form 생성하는 곳
+		reply_update.appendTo('body');
+		reply_update.submit();
+		
+	}
+});
+ 
+// 이미지 업로드
+
+var sel_files = [];
+
+$(document).ready(function(){
+	$('#img_input').on('change',handleImgFileSelect);
+});
+
+function fildUploadAction(){
+	$('#img_input').trigger('click');
+}
+
+function handleImgFileSelect(e) {
+	sel_file = [];
+	//$('.post_images').empty();
+	var imgDiv = $(this).parent().parent().find('#uploadImg');
+	var imgView = $(this).parent().parent().find('.post_images');
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	
+	var index = 0;
+	filesArr.forEach(function(f){
+		if (!f.type.match('image.*')) {
+			alert('이미지 확장자만 가능합니다.')
+				return;
+		}
+		
+		sel_files.push(f);
+		
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			var html = '<div id="img_id_'+index+'"><img src="'+e.target.result+'" data-file="'+f.name+'" class="selProductFile" title="Click to remove"><a href="javascript:;" onclick="deleteImageAction('+index+')" >삭제</a></div>';
+			imgDiv.append(html);
+			index++;
+
+		}
+		reader.readAsDataURL(f);
+		imgView.show();
+	});
+}
+function deleteImageAction(index){
+	var img_id = '#img_id_'+index;
+	$(img_id).remove();
+}
+ 
 </script>
 <!-- 게시글 넣는곳 -->
 <div>
@@ -566,32 +792,12 @@ $(document).on('click','#article_set',function(){
 									</div>
 								</div>
 								<!-- //파일 업로드 -->
-
+								
 								<!-- 이미지 업로드 -->
-								<div id="writeForm1_uploadImg" class="post_images"
-									style="display: none; margin-top: 5px;">
-									<div class='post_image'><div class='post_box'><img class='post_load_img'><input type='button' id='img_close'></div></div>
-									<div
-										style="width: 100%; padding: 10px; border: 1px solid black;">
-										<input type="hidden" name="file_name"> <img
-											src="images/file_icon2_down.png"
-											style="display: inline-block">
-										<div
-											style="display: inline-block; margin-left: 10px; width: 385px;">
-											<p id="writeForm1_uploadImg_name"
-												style="display: block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
-											<p id="writeForm1_uploadImg_size"
-												style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
-										</div>
-										<div
-											style="display: inline-block; text-align: right; padding-bottom: 7px;">
-											<a
-												style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;"></a>
-										</div>
-									</div>
+								<div id="uploadImg" class="post_images" style="display: none; padding: 5px;">
 								</div>
 								<!-- //이미지 업로드 -->
-
+								
 								<!-- 하단 툴바 -->
 								<hr>
 								<div id="toolbar" style="width: 100%; margin-top: 5px; margin-bottom: 5px;"
@@ -600,12 +806,9 @@ $(document).on('click','#article_set',function(){
 									<input type="file" id="writeForm1_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm1_uploadFile)"
 										style="display: none;"> 
-									<input type="file" id="writeForm1_img" name="writeForm_img"
-										onchange="imgCheck(this,writeForm1_uploadImg)"
-										accept="image/gif, image/jpg, image/png"
-										style="display: none;"> <a id="writeForm1_file_add"
-										class="add_file"></a> 
-										<a id="writeForm1_img_add" class="add_pic"></a>
+										<input type="file" id="img_input" name="writeForm_img" style="display: none;" multiple/>
+										<a id="writeForm1_file_add" class="add_file"></a> 
+										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a>
 										<a class="add_mention"></a>
 										<div id="mention_select_div" style="display: initial;z-index: 300; display: initial; position: absolute; margin-left: 7px; display: none;">
 											<ul
@@ -689,26 +892,7 @@ $(document).on('click','#article_set',function(){
 								<!-- //파일 업로드 -->
 
 								<!-- 이미지 업로드 -->
-								<div id="writeForm2_uploadImg" class="post_images"
-									style="display: none; margin-top: 5px;">
-									<div
-										style="width: 100%; padding: 10px; border: 1px solid black;">
-										<input type="hidden" name="file_name"> <img
-											src="images/file_icon2_down.png"
-											style="display: inline-block">
-										<div
-											style="display: inline-block; margin-left: 10px; width: 385px;">
-											<p id="writeForm2_uploadImg_name"
-												style="display: block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
-											<p id="writeForm2_uploadImg_size"
-												style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
-										</div>
-										<div
-											style="display: inline-block; text-align: right; padding-bottom: 7px;">
-											<a
-												style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;"></a>
-										</div>
-									</div>
+								<div id="uploadImg" class="post_images" style="display: none; padding: 5px;">
 								</div>
 								<!-- //이미지 업로드 -->
 
@@ -719,13 +903,10 @@ $(document).on('click','#article_set',function(){
 
 									<input type="file" id="writeForm2_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm2_uploadFile)"
-										style="display: none;"> <input type="file"
-										id="writeForm2_img" name="writeForm_img"
-										onchange='imgCheck(this,writeForm2_uploadImg)'
-										accept="image/gif, image/jpg, image/png"
-										style="display: none;"> <a id="writeForm2_file_add"
-										class="add_file"></a> <a id="writeForm2_img_add"
-										class="add_pic"></a> 
+										style="display: none;"> 
+										<input type="file" id="img_input" name="writeForm_img" style="display: none;" multiple/>
+										 <a id="writeForm2_file_add" class="add_file"></a> 
+										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a>
 										<a class="add_loc" onclick="locationPick()"></a>
 										<a class="add_mention"></a>
 
@@ -821,8 +1002,8 @@ $(document).on('click','#article_set',function(){
 											</ul>
 										</div>
 
-										<input type="hidden" id="work_workers"
-											name="writeForm3_workersName">
+										<input type="hidden" id="work_workers" name="writeForm3_workersName">
+										<input type="hidden" id="work_workers_id" name="writeForm3_workersID">
 
 										<div id="worker_append_div" style="margin-left: 26px; margin-top: 5px">
 
@@ -946,26 +1127,7 @@ $(document).on('click','#article_set',function(){
 								<!-- //파일 업로드 -->
 
 								<!-- 이미지 업로드 -->
-								<div id="writeForm3_uploadImg" class="post_images"
-									style="display: none; margin-top: 5px;">
-									<div
-										style="width: 100%; padding: 10px; border: 1px solid black;">
-										<input type="hidden" name="file_name"> <img
-											src="images/file_icon2_down.png"
-											style="display: inline-block">
-										<div
-											style="display: inline-block; margin-left: 10px; width: 385px;">
-											<p
-												style="display: block; margin-top: 0px; margin-bottom: 0px; font-size: 13px;"></p>
-											<p
-												style="margin-top: 0px; margin-bottom: 0px; font-size: 12px;"></p>
-										</div>
-										<div
-											style="display: inline-block; text-align: right; padding-bottom: 7px;">
-											<a
-												style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
-										</div>
-									</div>
+								<div id="uploadImg" class="post_images" style="display: none; padding: 5px;">
 								</div>
 								<!-- //이미지 업로드 -->
 
@@ -975,13 +1137,11 @@ $(document).on('click','#article_set',function(){
 								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 									<input type="file" id="writeForm3_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm3_uploadFile)"
-										style="display: none;"> <input type="file"
-										id="writeForm3_img" name="writeForm_img"
-										onchange="imgCheck(this,writeForm3_uploadImg)"
-										accept="image/gif, image/jpg, image/png"
-										style="display: none;"> <a id="writeForm3_file_add"
-										class="add_file"></a> <a id="writeForm3_img_add"
-										class="add_pic"></a><a class="add_mention"></a>
+										style="display: none;"> 
+										<input type="file" id="img_input" name="writeForm_img" style="display: none;" multiple/>
+										<a id="writeForm3_file_add" class="add_file"></a> 
+										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a> 
+										<a class="add_mention"></a>
 									<div style="display: inline-block; float: right;">
 										<a class="submit_a" onclick="writeForm_submit3()">올리기</a>
 									</div>
@@ -1095,17 +1255,18 @@ $(document).on('click','#article_set',function(){
 												style="display: inline-block;"></span> <!-- 장소 검색 -->
 												<div class="schedule_place" id="sche_place"
 													style="display: inline-block;">
-													<input id="address" type="text" placeholder="주소입력" />
+													<input id="address" type="text" placeholder="주소입력 후 Enter" />
 												</div> <!-- //장소 검색 --> <!-- google Map -->
 												<div id="googleMap_div">
 													<div id="googleMap" style="width: 100%; height: 200px;"></div>
 												</div> <!-- //google Map --></li>
 
-											<hr>
+											
 
 											<!-- 몇분전에 알람줄지 -->
 											
 											<!-- <li>
+												<hr>
 												알람
 												<div class="schedule_alarm">
 
@@ -1270,36 +1431,37 @@ $(document).on('click','#article_set',function(){
 					style="margin-left: 5px;"><strong id="apx_count"></strong></span>
 
 			</div>
-			<c:forEach var="pix_list" items="${pixedList}">
+			<c:forEach var="list" items="${articleList}">
 				<!-- forEach -->
-				<div style="background-color: white; padding: 5px;">
+				<c:if test="${list.article_pix eq '1'}">
+				<div id="ps" class="pix_div" style="background-color: white; padding: 5px;">
 					<div style="display: inline-block; width: 100%;">
 						<c:choose>
-							<c:when test="${pix_list.form_name eq 'nomalWrite'}">
-								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+							<c:when test="${list.form_name eq 'nomalWrite'}">
+								<input type="hidden" name="article_id" value="${list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일반</span>]</span> 
-								<span style="display: inline-block;">${pix_list.writeForm1_content}</span>
+								<span style="display: inline-block;">${list.writeForm1_content}</span>
 							</c:when>
-							<c:when test="${pix_list.form_name eq 'nomalWrite2.0'}">
-								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+							<c:when test="${list.form_name eq 'nomalWrite2.0'}">
+								<input type="hidden" name="article_id" value="${list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일반</span>]</span> 
-								<span style="display: inline-block;">${pix_list.writeForm2_title}</span>
+								<span style="display: inline-block;">${list.writeForm2_title}</span>
 							</c:when>
-							<c:when test="${pix_list.form_name eq 'taskWrite'}">
-								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+							<c:when test="${list.form_name eq 'taskWrite'}">
+								<input type="hidden" name="article_id" value="${list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">업무</span>]</span>
-								<span style="display: inline-block;">${pix_list.writeForm3_title}</span>
-								<span style="margin-top: 8px; float: right; display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 20px; font-size: 12px; border-radius: 5px; background-color: lightblue; margin-right: 10px;">${pix_list.writeForm3_status }</span>
+								<span style="display: inline-block;">${list.writeForm3_title}</span>
+								<span style="margin-top: 8px; float: right; display: inline-block; vertical-align: middle; text-align: center; width: 60px; height: 20px; font-size: 12px; border-radius: 5px; background-color: lightblue; margin-right: 10px;">${list.writeForm3_status }</span>
 							</c:when>
-							<c:when test="${pix_list.form_name eq 'scheWrite'}">
-								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+							<c:when test="${list.form_name eq 'scheWrite'}">
+								<input type="hidden" name="article_id" value="${list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">일정</span>]</span>
-								<span style="display: inline-block;">${pix_list.writeForm4_title}</span>
+								<span style="display: inline-block;">${list.writeForm4_title}</span>
 							</c:when>
-							<c:when test="${pix_list.form_name eq 'todoWrite'}">
-								<input type="hidden" name="article_id" value="${pix_list.article_id}"/>
+							<c:when test="${list.form_name eq 'todoWrite'}">
+								<input type="hidden" name="article_id" value="${list.article_id}"/>
 								<span style="display: inline-block; font-size: 20px;">[<span style="font-size: 14px;">할일</span>]</span>
-								<span style="display: inline-block;">${pix_list.writeForm5_title}</span>
+								<span style="display: inline-block;">${list.writeForm5_title}</span>
 							</c:when>
 						</c:choose>
 					</div>
@@ -1308,8 +1470,1099 @@ $(document).on('click','#article_set',function(){
 				<!-- 누르면 나올 게시물 -->
 				<!-- //누르면 나올 게시물 -->
 				<!-- //forEach -->
+			<div style="display: none;">
+				<!-- !@# -->
+				<c:choose>
+					<c:when test="${list.form_name eq 'nomalWrite'}">
+						<div class="post_idx" id="${list.article_id }" name="${list.form_name }" style="margin-bottom: 0px;">
+							<!-- 탑 -->
+							
+							<div class="top_writer">
+								<div class="photo" style="float: left;">
+									<!-- 스크립트로 실행 -->
+									<img id="user_profile"
+										style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+								</div>
+								<div style="padding-left: 30px; float: left;">
+									<span>${list.writer }</span><br> <span
+										style="font-size: 12px;">${list.regDate }</span><span
+										id="공개범위설정"> <img></span>
+								</div>
+								<div style="margin: -10px 0px 0px 10px;">
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
+									<div style="float: right;">
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+											
+											
+										</ul>
+										
+									</div>
+								</div>
+							</div>
+							<!-- 탑 -->
+
+							<!-- 글내용 -->
+							<div class="post">
+								<!-- 일반글 -->
+								<!-- 택스트박스 -->
+								<div class="div_text_write" contenteditable="false">
+									<pre id="write_c" style="font-size: 15px;">${list.writeForm1_content }</pre>
+								</div>
+								<!-- 이미지 -->
+								<div id="post_images">
+									<c:set var="imgList" value="${fn:split(list.img_name,',')}"/>
+									<c:forEach var="img" items="${imgList}">
+										<img src="${list.img_path }${img}">
+										
+									</c:forEach>
+								</div>
+								<!-- 파일 -->
+								<c:if test="${list.file_name ne null}">
+									<div id="post_files">
+										<div class='post_file' >
+											<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
+												<img id='download_icon'>
+													<dl class='file_div'>
+														<dt>
+															<a>${list.file_name}</a>	
+														</dt>
+														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+													</dl>
+											<div class='down_fil' >
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											</div>
+										</div>
+									</div>
+	
+									</div>
+								</c:if>
+
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
+									<span style="font-size: 12px;">좋아요 <span class='like_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
+								</div>
+								<!-- 일반글 -->
+							</div>
+							<!-- 글내용 -->
+
+							<!-- 좋아요 담아두기 -->
+
+							<div class="bottom_lay" style="height: 40px;">
+								<ul class="bottom_list">
+									<li><a id="like_icon">좋아요</a></li>
+									<li><a id="input_btn_icon" class="input_btn_icon">댓글작성</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${list.article_id eq containList.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
+								</ul>
+							</div>
+							<!-- 글내용 -->
+
+							<div class="reply_div"  style="display: none;">
+							
+							<!-- 						댓글 작성 -->
+							<c:forEach var="reply" items="${replyList }">
+
+								<c:set var="reply_article_id" value="${reply.article_id }" />
+
+								<c:if test="${list.article_id eq reply_article_id }">
+									<div class="remark_div">
+
+										<div class="photo" style="float: left; padding-left: 10px;">
+											<img id="user_profile_remark">
+										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
+										<div class="remark_data">
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
+										</div>
+
+									</div>
+								</c:if>
+							</c:forEach>
+							<!-- 						댓글 작성 -->
+
+							<!-- 						댓글 -->
+							<form method="post" action="articlereply.do">
+								<input type="hidden" name="reply_writer"
+									value="${sessionScope.user.name }"> <input
+									type="hidden" name="project_id" value="${project.project_id }">
+								<input type="hidden" name="article_id"
+									value="${list.article_id }">
+								<div style="position: relative; padding-bottom: 10px;">
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile"
+											style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+									</div>
+
+									<input name="reply_content" type="text"
+										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
+
+
+								</div>
+							</form>
+							<!-- 						댓글 -->
+							</div>
+						</div>
+						
+					</c:when>
+
+					<c:when test="${list.form_name eq 'nomalWrite2.0'}">
+						<div class="post_idx"id="${list.article_id }" name="${list.form_name }" style="margin-bottom: 0px;">
+							<!-- 탑 -->
+							<div class="top_writer">
+								<div class="photo" style="float: left;">
+									<!-- 스크립트로 실행 -->
+									<img id="user_profile"
+										style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+								</div>
+								<div style="padding-left: 30px; float: left;">
+									<span>${list.writer }</span><br> <span
+										style="font-size: 10px;">${list.regDate }</span><span
+										id="공개범위설정"> <img></span>
+								</div>
+								<div style="margin: -10px 0px 0px 10px;">
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+									<div style="float: right;">
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- 탑 -->
+
+							<!-- 글내용 -->
+							<div class="post">
+								<!-- 일반글 -->
+								<div class="post_title">
+									<strong id="write_t">${list.writeForm2_title }</strong>
+								</div>
+								<!-- 택스트박스 -->
+								<div class="div_text_write" contenteditable="false">
+									<pre id="write_c" style="font-size: 15px;">${list.writeForm2_content }</pre>
+								</div>
+
+								<!-- 지도 찍는곳 -->
+								<c:if test="${list.writeForm2_latlng ne null}">
+									<div id="writeForm2_map">
+										<img src="https://maps.googleapis.com/maps/api/staticmap?
+									center=${list.writeForm2_latlng }
+									&zoom=18
+									&size=480x300
+									&maptype=roadmap
+									&markers=color:red%7Clabel:C%7C${list.writeForm2_latlng }
+									&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
+									</div>
+								</c:if>
+
+								<!-- 이미지 -->
+
+								<div id="post_images"></div>
+								<!-- 파일 -->
+
+								<!-- 파일 -->
+								<c:if test="${list.file_name ne null}">
+									<div id="post_files">
+										<div class='post_file' >
+											<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
+												<img id='download_icon'>
+													<dl class='file_div'>
+														<dt>
+															<a>${list.file_name}</a>	
+														</dt>
+														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+													</dl>
+											<div class='down_fil' >
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											</div>
+										</div>
+									</div>
+	
+									</div>
+								</c:if>
+
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
+								</div>
+								<!-- 일반글 -->
+
+
+
+
+							</div>
+							<!-- 글내용 -->
+
+							<!-- 좋아요 담아두기 -->
+
+							<div class="bottom_lay" style="height: 40px;">
+								<ul class="bottom_list">
+									<li><a id="like_icon">좋아요</a></li>
+									<li><a id="input_btn_icon">댓글작성</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" name="article_id" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
+								</ul>
+							</div>
+							<!-- 글내용 -->
+							<div class="reply_div"  style="display: none;">
+							
+							<!-- 						댓글 작성 -->
+							<c:forEach var="reply" items="${replyList }">
+
+								<c:set var="reply_article_id" value="${reply.article_id }" />
+
+								<c:if test="${list.article_id eq reply_article_id }">
+									<div class="remark_div">
+
+										<div class="photo" style="float: left; padding-left: 10px;">
+											<img id="user_profile_remark">
+										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
+										<div class="remark_data">
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
+										</div>
+
+									</div>
+								</c:if>
+							</c:forEach>
+							<!-- 						댓글 작성 -->
+
+							<!-- 						댓글 -->
+							<form method="post" action="articlereply.do">
+								<input type="hidden" name="reply_writer"
+									value="${sessionScope.user.name }"> <input
+									type="hidden" name="project_id" value="${project.project_id }">
+								<input type="hidden" name="article_id"
+									value="${list.article_id }">
+								<div style="position: relative; padding-bottom: 10px;">
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile"
+											style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+									</div>
+
+									<input name="reply_content" type="text"
+										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
+
+
+								</div>
+							</form>
+							<!-- 						댓글 -->
+							</div>	
+						</div>
+
+					</c:when>
+
+
+					<c:when test="${list.form_name eq 'taskWrite'}">
+						<div class="post_idx"id="${list.article_id }" name="${list.form_name }" style="margin-bottom: 0px;">
+							<!-- 탑 -->
+							<div class="top_writer">
+								<div class="photo" style="float: left;">
+									<!-- 스크립트로 실행 -->
+									<img id="user_profile" style="width: 40px; height: 40px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+								</div>
+								<div style="padding-left: 30px; float: left;">
+									<span>${list.writer }</span><br> 
+									<span style="font-size: 10px;">${list.regDate }</span>
+									<span id="공개범위설정"> <img></span>
+								</div>
+								<div style="margin: -10px 0px 0px 10px;">
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
+									<div style="float: right;">
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- 탑 -->
+
+							<!-- 글내용 -->
+							<div class="post">
+								
+								<div class="post_title">
+									<strong id='write_t'>${list.writeForm3_title }</strong>
+								</div>
+
+
+								<!-- 업무 내용 들어가는 곳 -->
+								<div class="div_text_write" contenteditable="false">
+									<hr>
+									<!-- 상태 -->
+									<div class="work_form_status">
+										<label id="work_status_img"></label>
+
+										<!-- 상태 선택 테이블 -->
+										<div id="status_select_div">
+
+											<input type="hidden" id="work_status">
+											<c:choose>
+												<c:when test="${list.writeForm3_status eq '요청' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" class="task_type_select" style="background-color: #4aaefb;">요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" class="task_type" >진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback" class="task_type" >피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete" class="task_type">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone" class="task_type">보류</span>
+													</div>
+												</c:when>
+
+												<c:when test="${list.writeForm3_status eq '진행' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" class="task_type">요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" class="task_type_select" style="background-color: #50b766;">진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback" class="task_type">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete" class="task_type">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone" class="task_type">보류</span>
+													</div>
+												</c:when>
+												
+												<c:when test="${list.writeForm3_status eq '피드백' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" class="task_type" >요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" class="task_type">진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback" class="task_type_select" style="background-color: #f17a19;">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete" class="task_type">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone" class="task_type">보류</span>
+													</div>
+												</c:when>
+												
+												<c:when test="${list.writeForm3_status eq '완료' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request" class="task_type" >요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" class="task_type" >진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback" class="task_type">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete" class="task_type_select" style="background-color: #2e417e;">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone" class="task_type">보류</span>
+													</div>
+												</c:when>
+												
+												<c:when test="${list.writeForm3_status eq '보류' }">
+													<div style="display: inline-block; width: 16%;">
+														<span id="request"  class="task_type">요청</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="doing" class="task_type">진행</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="feedback" class="task_type">피드백</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="complete" class="task_type">완료</span>
+													</div>
+													<div style="display: inline-block; width: 16%;">
+														<span id="postpone" class="task_type_select" style="background-color: #aeaeae;">보류</span>
+													</div>
+												</c:when>
+												
+											</c:choose>
+										</div>
+										<!-- //상태 선택 테이블 -->
+
+									</div>
+									<!-- //상태 -->
+
+									<c:if test="${list.writeForm3_workersName ne null}">
+									<hr>	
+									<!-- 담당자 -->
+									<div class="work_form_manager">
+										<div>
+											<label id="work_worker_img" style="margin-right: 5px;"></label> 
+											<div style="display: inline-flex;">
+											<c:set var="taskNum" value="${list.writeForm3_tasknum }"/>
+											<!-- 담당자 들어갈곳 -->
+											<c:forEach var="taskList" items="${taskList }">
+												<c:if test="${taskNum eq  taskList.writeForm3_tasknum}">
+													<c:set var="workerName" value="${fn:split(taskList.writeForm3_workersName,',')}"/>
+													<c:forEach var="names" items="${workerName}">
+														<input type="button"  value="${names}" name="" />
+													</c:forEach>
+												</c:if>
+											</c:forEach>
+											</div>
+											
+											<div style="display: inline-block;">
+											
+											<input type="text" class="modified_worker" placeholder="담당자 추가" style="display: none;"/>
+											<div class="modified_worker_select_div">
+												<ul style="list-style: none; border: 1px solid lightgray; background-color: white; padding-left: 0px;">
+													<!-- forEach -->
+													<c:forEach var="userList" items="${userList}">
+														<li>
+															<input type="hidden" name="member_id" value="${userList.member_id }"/>
+															<a id="modified_task_User">${userList.member_name}</a>
+														</li>
+													</c:forEach>
+													<!-- //forEach -->
+												</ul>
+											</div>
+											
+											</div>
+											
+											<div id="worker_append_div" style="margin-left: 26px; margin-top: 5px">
+												
+											
+											</div>
+										</div>
+									</div>
+									</c:if>
+									<!-- //담당자 -->
+
+
+									<!-- 시작일 -->
+									<c:if test="${list.writeForm3_start_date ne null}">
+									<hr>
+									
+									<div>
+										<div>
+											<label id="work_start_img"></label>
+											<div style="display: inline;">
+												<input type="text" placeholder="시작일" readonly="readonly"
+													value="${list.writeForm3_start_date }"
+													style="border-style: none;">
+											</div>
+
+										</div>
+									</div>
+									</c:if>
+									<!-- 시작일 -->
+
+
+									<!-- 마감일 -->
+									<c:if test="${list.writeForm3_end_date ne null}">
+									<hr>
+									<div>
+										<div>
+											<label id="work_end_img"></label>
+											<div style="display: inline;">
+												<input type="text" placeholder="마감일" readonly="readonly"
+													value="${list.writeForm3_end_date }"
+													style="border-style: none;">
+											</div>
+
+										</div>
+									</div>
+									</c:if>
+									<!-- 마감일 -->
+
+
+									<!-- 달성도 -->
+									<c:if test="${list.writeForm3_progress ne null}">
+									<hr>
+									<div>
+										<div>
+											<label id="work_progress_img"></label> <input type="hidden"
+												id="work_progress" value="0">
+											<div style="display: inline;">
+												<progress id="progress_a" value="${list.writeForm3_progress }"
+													max="100"></progress>
+											</div>
+										</div>
+									</div>
+									</c:if>
+									<!-- 달성도 -->
+
+
+									<!-- 우선순위 -->
+									<c:if test="${list.writeForm3_order ne null}">
+									<hr>
+									<div>
+										<div>
+											<label id="work_order_img"></label>
+											<div style="width: 40%; display: inline-block;">
+												<input type="text" placeholder="우선순위 선택" readonly="readonly"
+													value="${list.writeForm3_order }"
+													onclick="orderSelectDiv()" style="border-style: none;">
+											</div>
+										</div>
+									</div>
+									</c:if>
+									<!-- 우선순위 -->
+									<hr>
+
+									<!-- 내용 -->
+									<pre id="write_c" class="div_text_write" 
+										style="border: none;">${list.writeForm3_content }</pre>
+
+									<!-- //내용 -->
+
+								</div>
+								<!-- //업무 내용 들어가는 곳 -->
+
+								<!-- 이미지 -->
+
+								<div id="post_images"></div>
+								<!-- 파일 -->
+
+								<c:if test="${list.file_name ne null}">
+									<div id="post_files">
+										<div class='post_file' >
+											<div style='height: 80px; width: 100%; border: 1px solid #eaeaea; position: relative;'>
+												<img id='download_icon'>
+													<dl class='file_div'>
+														<dt>
+															<a>${list.file_name}</a>	
+														</dt>
+														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+													</dl>
+											<div class='down_fil' >
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											</div>
+										</div>
+									</div>
+	
+									</div>
+								</c:if>
+
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
+								</div>
+								<!-- 일반글 -->
+
+
+
+
+							</div>
+							<!-- 글내용 -->
+
+							<!-- 좋아요 담아두기 -->
+
+							<div class="bottom_lay" style="height: 40px;">
+								<ul class="bottom_list">
+									<li><a id="like_icon">좋아요</a></li>
+									<li><a id="input_btn_icon">댓글작성</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
+								</ul>
+							</div>
+							<!-- 글내용 -->
+
+							<div class="reply_div"  style="display: none;">
+							
+							<!-- 						댓글 작성 -->
+							<c:forEach var="reply" items="${replyList }">
+
+								<c:set var="reply_article_id" value="${reply.article_id }" />
+
+								<c:if test="${list.article_id eq reply_article_id }">
+									<div class="remark_div">
+
+										<div class="photo" style="float: left; padding-left: 10px;">
+											<img id="user_profile_remark">
+										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
+										<div class="remark_data">
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
+										</div>
+
+									</div>
+								</c:if>
+							</c:forEach>
+							<!-- 						댓글 작성 -->
+
+							<!-- 						댓글 -->
+							<form method="post" action="articlereply.do">
+								<input type="hidden" name="reply_writer"
+									value="${sessionScope.user.name }"> <input
+									type="hidden" name="project_id" value="${project.project_id }">
+								<input type="hidden" name="article_id"
+									value="${list.article_id }">
+								<div style="position: relative; padding-bottom: 10px;">
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile"
+											style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+									</div>
+
+									<input name="reply_content" type="text"
+										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
+
+
+								</div>
+							</form>
+							<!-- 						댓글 -->
+							</div>
+						</div>
+
+					</c:when>
+
+					<c:when test="${list.form_name eq 'scheWrite'}">
+						<div class="post_idx"id="${list.article_id }" name="${list.form_name }" style="margin-bottom: 0px;">
+							<!-- 탑 -->
+							<div class="top_writer">
+								<div class="photo" style="float: left;">
+									<!-- 스크립트로 실행 -->
+									<img id="user_profile">
+								</div>
+								<div style="padding-left: 30px; float: left;">
+									<span>${list.writer }</span><br> <span
+										style="font-size: 10px;">${list.regDate }</span><span
+										id="공개범위설정"> <img></span>
+								</div>
+								<div style="margin: -10px 0px 0px 10px;">
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
+									<div style="float: right;">
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- 탑 -->
+
+							<!-- 글내용 -->
+							<div class="post">
+
+								<!-- 일정 -->
+								<div class="works" style="border: 1px solid #eaeaea;">
+									<!-- 글제목 -->
+									<dl class="work_calendar">
+										<dt class="work_calendar_header">
+											<c:set var="start_date" value="${list.writeForm4_start_date}" />
+											<span class="work_month">${fn:substring(start_date,5,7)} 월</span><br> <strong
+												class="work_day">${fn:substring(start_date,9,11)}일</strong>
+										</dt>
+										<dd id="write_t" class="wc_title">${list.writeForm4_title }</dd>
+										<c:choose>
+											<c:when test="${list .writeForm4_start_time eq null and list.writeForm4_end_time eq null} ">
+												<dd class="wc_date">${list.writeForm4_start_date}  ~  ${list.writeForm4_end_date}</dd>
+											</c:when>
+											<c:when test="${list .writeForm4_start_date eq list.writeForm4_end_date} ">
+												<dd class="wc_date">${list.writeForm4_start_date}, ${list.writeForm4_start_time}:00  ~  ${list.writeForm4_end_time}:00</dd>
+											</c:when>
+											<c:otherwise>
+												<dd class="wc_date">${list.writeForm4_start_date} ${list.writeForm4_start_time}:00  ~  ${list.writeForm4_end_date} ${list.writeForm4_end_time}:00</dd>
+											</c:otherwise>
+										</c:choose>
+									</dl>
+									<!-- 글제목 -->
+
+									<!-- 지도 -->
+									<c:if test="${list.writeForm4_latlng ne null}">
+										<div class="work_map">
+											<span class="map_icon"></span> <span
+												style="margin-left: 25px;">검색 위치</span> 
+												<div id="writeForm2_map">
+													<img src="https://maps.googleapis.com/maps/api/staticmap?
+												center=${list.writeForm4_latlng }
+												&zoom=18
+												&size=480x300
+												&maptype=roadmap
+												&markers=color:red%7Clabel:C%7C${list.writeForm4_latlng }
+												&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
+												</div>
+										</div>
+									</c:if>
+									<div class="work_memo">
+										<span class="memo_icon"></span> <pre id="write_c" style="margin-left: 25px;">${list.writeForm4_content }</pre>
+									</div>
+									<!-- 알람 -->
+									<!-- <div class="work_alarm">
+										<span class="alarm_icon"></span> 
+										<span style="margin-left: 25px;">알림</span>
+
+									</div> -->
+									<!-- 알람 -->
+									
+									<!-- 지도 -->
+								</div>
+
+								<!-- 일정 -->
+
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
+								</div>
+							</div>
+
+
+
+							<!-- 좋아요 담아두기 -->
+
+							<div class="bottom_lay">
+								<ul class="bottom_list">
+									<li><a id="like_icon">좋아요</a></li>
+									<li><a id="input_btn_icon">댓글작성</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
+								</ul>
+							</div>
+							<!-- 글내용 -->
+
+							<div class="reply_div"  style="display: none;">
+							
+							<!-- 						댓글 작성 -->
+							<c:forEach var="reply" items="${replyList }">
+
+								<c:set var="reply_article_id" value="${reply.article_id }" />
+
+								<c:if test="${list.article_id eq reply_article_id }">
+									<div class="remark_div">
+
+										<div class="photo" style="float: left; padding-left: 10px;">
+											<img id="user_profile_remark">
+										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
+										<div class="remark_data">
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
+										</div>
+
+									</div>
+								</c:if>
+							</c:forEach>
+							<!-- 						댓글 작성 -->
+
+							<!-- 						댓글 -->
+							<form method="post" action="articlereply.do">
+								<input type="hidden" name="reply_writer"
+									value="${sessionScope.user.name }"> <input
+									type="hidden" name="project_id" value="${project.project_id }">
+								<input type="hidden" name="article_id"
+									value="${list.article_id }">
+								<div style="position: relative; padding-bottom: 10px;">
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile"
+											style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+									</div>
+
+									<input name="reply_content" type="text"
+										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
+
+
+								</div>
+							</form>
+							<!-- 						댓글 -->
+							</div>
+						</div>
+
+					</c:when>
+
+					<c:when test="${list.form_name eq 'todoWrite'}">
+						<div class="post_idx" id="${list.article_id }" name="${list.form_name }" style="margin-bottom: 0px;">
+							<!-- 탑 -->
+							<div class="top_writer">
+								<div class="photo" style="float: left;">
+									<!-- 스크립트로 실행 -->
+									<img id="user_profile">
+								</div>
+								<div style="padding-left: 30px; float: left;">
+									<span>${list.writer }</span><br> <span
+										style="font-size: 10px;">${list.regDate }</span><span
+										id="공개범위설정"> <img></span>
+								</div>
+								<div style="margin: -10px 0px 0px 10px;">
+									<c:if test="${user.seq eq list.member_id}">
+										<div style="float: right; padding-left: 10px;">
+											<a id="set_icon" class="article_setting"></a>
+										</div>
+									</c:if>
+
+									<div style="float: right;">
+										<c:choose>
+											<c:when test="${list.article_pix eq '0'}">
+												<input id="pin_icon" class="pin" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+											<c:when test="${list.article_pix eq '1'}">
+												<input id="pin_icon" class="pin_pixed" type="button" name="article_pix" value="${list.article_pix}"/>
+											</c:when>
+										</c:choose>
+										<input type="hidden" name="project_id" value="${project.project_id}"> 
+									</div>
+									<div id="set_icon_list" style="display:none; width: 45px; height: 50px; background-color: rgb(242, 242, 242); z-index: 500; position: absolute;  margin-top: 41px; margin-left: 431px; text-align: center; border-radius: 5px;">
+										<ul>
+											<li><a id="article_set">수정</a></li>
+											<li><a id="article_set">삭제</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- 탑 -->
+
+							<!-- 글내용 -->
+							<div class="post">
+								
+								<div class="todo_datas"
+									style="width: 100%; padding: 10px 10px 10px 10px; border: 1px solid lightgray;">
+
+									<div style="width: 100%; height: 50px;">
+										<div>
+											<strong id="write_t" >${list.writeForm5_title }</strong>
+											<span
+												style="display: inline-block; width: 80px; font-size: 11px;"><span id="set_bar"></span>%</span>
+											<span class="totalpg" style="display: inline-block; font-size: 12px;">완료
+												<span id="todo_success"></span>건 / 전체 <span id="todo_total"></span>건</span>
+										</div>
+										<div>
+											<progress id="pgval" value="0" max="100" style="width: 100%;"></progress>
+										</div>
+									</div>
+
+									<!--  forEach  -->
+									<c:forEach var="todoList" items="${todoList}">
+										<c:if test="${list.article_id eq todoList.article_id }">
+											
+										<hr style="margin-bottom: 0.6rem;">
+											
+										<div id="todoList" class="tdlist" name="${todoList.todo_id}" style="height: 50px;">
+											<div
+												style="display: inline-block; vertical-align: middle; width: 5%;">
+												<c:choose>
+													<c:when test="${todoList.todo_success eq '0' }">
+														<a id="todo_check" class="tcheck"></a>
+													</c:when>
+													<c:when test="${todoList.todo_success eq '1' }">
+														<a id="todo_check_on"class="tcheck"></a>
+													</c:when>
+												</c:choose>
+											</div>
+											<div
+												style="display: inline-block; vertical-align: middle; width: 94%; height: 40px;">
+												<span class="todo_c" style="vertical-align: middle; width: 276px; display: inline-block;">${todoList.worker_content}</span> 
+												<span class="todo_d" style="vertical-align: middle; margin-right:10px;">${todoList.worker_date }</span> 
+													<img src="images/empty_photo_s.png" id="${todoList.member_id}" name="${todoList.worker_name }" style="display: inline-block; vertical-align: middle;">
+											</div>
+										</div>
+										</c:if>
+									</c:forEach>
+
+									<!--  //forEach  -->
+
+								</div>
+
+								<div class="article_status" style="text-align: right; padding-right: 10px;">
+									<span style="font-size: 12px;">좋아요 <span class='reply_count'></span> 개</span>
+									<span style="font-size: 12px;">댓글 <span class='reply_count'></span> 개</span>
+								</div>
+							</div>
+
+
+
+							<!-- 좋아요 담아두기 -->
+
+							<div class="bottom_lay">
+								<ul class="bottom_list">
+									<li><a id="like_icon">좋아요</a></li>
+									<li><a id="input_btn_icon">댓글작성</a></li>
+									<li>
+										<c:forEach var="containList" items="${containList }">
+											<c:if test="${containList.article_id eq list.article_id }">
+												<input type="hidden" value="${containList.article_contain}"/>
+											</c:if>
+										</c:forEach>
+										<a id="bringIcon" class="bringIcon">담아두기</a>
+									</li>
+								</ul>
+							</div>
+							<!-- 글내용 -->
+							<div class="reply_div"  style="display: none;">
+							
+							<!-- 						댓글 작성 -->
+							<c:forEach var="reply" items="${replyList }">
+
+								<c:set var="reply_article_id" value="${reply.article_id }" />
+
+								<c:if test="${list.article_id eq reply_article_id }">
+									<div class="remark_div">
+
+										<div class="photo" style="float: left; padding-left: 10px;">
+											<img id="user_profile_remark">
+										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
+										<div class="remark_data">
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
+										</div>
+
+									</div>
+								</c:if>
+							</c:forEach>
+							<!-- 						댓글 작성 -->
+
+							<!-- 						댓글 -->
+							<form method="post" action="articlereply.do">
+								<input type="hidden" name="reply_writer"
+									value="${sessionScope.user.name }"> <input
+									type="hidden" name="project_id" value="${project.project_id }">
+								<input type="hidden" name="article_id"
+									value="${list.article_id }">
+								<div style="position: relative; padding-bottom: 10px;">
+									<div class="photo" style="float: left; padding-left: 10px;">
+										<img id="user_profile"
+											style="width: 32px; height: 32px; cover; background-image: url(images/empty_photo_s.png); background-size: cover; background-repeat: no-repeat;">
+									</div>
+
+									<input name="reply_content" type="text"
+										placeholder="댓글을 입력하세요(Enter는 입력, shift or ctrl + Enter는 줄바꿈)"
+										style="display: inline-block; font-size: 13px; margin-left: 5px; width: 89%; height: 32px;">
+
+
+								</div>
+							</form>
+							<!-- 						댓글 -->
+							</div>
+						</div>
+					</c:when>
+
+
+
+				</c:choose>
+
+
+				<!-- !@# -->
+			</div>
+			</c:if>
 			</c:forEach>
-			<div style="display: none;"></div>
 		</div>
 		<!-- //상단 고정글 -->
 
@@ -1439,13 +2692,14 @@ $(document).on('click','#article_set',function(){
 										<div class="photo" style="float: left; padding-left: 10px;">
 											<img id="user_profile_remark">
 										</div>
-										<div class="remark_setting">
-											<span>수정</span><em>|</em><span>삭제</span>
-										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
 										<div class="remark_data">
-											<strong>${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
-											<a id="remark_like_icon">좋아요</a>
-											<pre>${reply.reply_content }</pre>
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
 										</div>
 
 									</div>
@@ -1612,13 +2866,14 @@ $(document).on('click','#article_set',function(){
 										<div class="photo" style="float: left; padding-left: 10px;">
 											<img id="user_profile_remark">
 										</div>
-										<div class="remark_setting">
-											<span>수정</span><em>|</em><span>삭제</span>
-										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
 										<div class="remark_data">
-											<strong>${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
-											<a id="remark_like_icon">좋아요</a>
-											<pre>${reply.reply_content }</pre>
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
 										</div>
 
 									</div>
@@ -1903,8 +3158,8 @@ $(document).on('click','#article_set',function(){
 											<label id="work_progress_img"></label> <input type="hidden"
 												id="work_progress" value="0">
 											<div style="display: inline;">
-												<progress id="progress" value="${list.writeForm3_progress }"
-													max="100" onclick="progressBar()"></progress>
+												<progress id="progress_a" value="${list.writeForm3_progress }"
+													max="100"></progress>
 											</div>
 										</div>
 									</div>
@@ -1930,11 +3185,9 @@ $(document).on('click','#article_set',function(){
 									<hr>
 
 									<!-- 내용 -->
-									<c:if test="${list.writeForm3_content ne null}">
-									<pre class="div_text_write" 
+									<pre id="write_c" class="div_text_write" 
 										style="border: none;">${list.writeForm3_content }</pre>
 
-									</c:if>
 									<!-- //내용 -->
 
 								</div>
@@ -2008,13 +3261,14 @@ $(document).on('click','#article_set',function(){
 										<div class="photo" style="float: left; padding-left: 10px;">
 											<img id="user_profile_remark">
 										</div>
-										<div class="remark_setting">
-											<span>수정</span><em>|</em><span>삭제</span>
-										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
 										<div class="remark_data">
-											<strong>${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
-											<a id="remark_like_icon">좋아요</a>
-											<pre>${reply.reply_content }</pre>
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
 										</div>
 
 									</div>
@@ -2101,7 +3355,7 @@ $(document).on('click','#article_set',function(){
 											<span class="work_month">${fn:substring(start_date,5,7)} 월</span><br> <strong
 												class="work_day">${fn:substring(start_date,9,11)}일</strong>
 										</dt>
-										<dd class="wc_title">제목</dd>
+										<dd id="write_t" class="wc_title">${list.writeForm4_title }</dd>
 										<c:choose>
 											<c:when test="${list .writeForm4_start_time eq null and list.writeForm4_end_time eq null} ">
 												<dd class="wc_date">${list.writeForm4_start_date}  ~  ${list.writeForm4_end_date}</dd>
@@ -2133,8 +3387,7 @@ $(document).on('click','#article_set',function(){
 										</div>
 									</c:if>
 									<div class="work_memo">
-										<span class="memo_icon"></span> <span
-											style="margin-left: 25px;">${list.writeForm4_content }</span>
+										<span class="memo_icon"></span> <pre id="write_c" style="margin-left: 25px;">${list.writeForm4_content }</pre>
 									</div>
 									<!-- 알람 -->
 									<!-- <div class="work_alarm">
@@ -2188,13 +3441,14 @@ $(document).on('click','#article_set',function(){
 										<div class="photo" style="float: left; padding-left: 10px;">
 											<img id="user_profile_remark">
 										</div>
-										<div class="remark_setting">
-											<span>수정</span><em>|</em><span>삭제</span>
-										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
 										<div class="remark_data">
-											<strong>${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
-											<a id="remark_like_icon">좋아요</a>
-											<pre>${reply.reply_content }</pre>
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
 										</div>
 
 									</div>
@@ -2277,7 +3531,7 @@ $(document).on('click','#article_set',function(){
 
 									<div style="width: 100%; height: 50px;">
 										<div>
-											<span style="display: inline-block; width: 250px;">${list.writeForm5_title }</span>
+											<strong id="write_t" >${list.writeForm5_title }</strong>
 											<span
 												style="display: inline-block; width: 80px; font-size: 11px;"><span id="set_bar"></span>%</span>
 											<span class="totalpg" style="display: inline-block; font-size: 12px;">완료
@@ -2308,8 +3562,8 @@ $(document).on('click','#article_set',function(){
 											</div>
 											<div
 												style="display: inline-block; vertical-align: middle; width: 94%; height: 40px;">
-												<span style="vertical-align: middle; width: 276px; display: inline-block;">${todoList.worker_content}</span> 
-												<span style="vertical-align: middle; margin-right:10px;">${todoList.worker_date }</span> 
+												<span class="todo_c" style="vertical-align: middle; width: 276px; display: inline-block;">${todoList.worker_content}</span> 
+												<span class="todo_d" style="vertical-align: middle; margin-right:10px;">${todoList.worker_date }</span> 
 													<img src="images/empty_photo_s.png" id="${todoList.member_id}" name="${todoList.worker_name }" style="display: inline-block; vertical-align: middle;">
 											</div>
 										</div>
@@ -2358,13 +3612,14 @@ $(document).on('click','#article_set',function(){
 										<div class="photo" style="float: left; padding-left: 10px;">
 											<img id="user_profile_remark">
 										</div>
-										<div class="remark_setting">
-											<span>수정</span><em>|</em><span>삭제</span>
-										</div>
+										<c:if test="${list.member_id eq reply.member_id }">
+											<div class="remark_setting">
+												<span class="remark_btn">수정</span><em>|</em><span class="remark_btn">삭제</span>
+											</div>
+										</c:if>
 										<div class="remark_data">
-											<strong>${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
-											<a id="remark_like_icon">좋아요</a>
-											<pre>${reply.reply_content }</pre>
+											<strong id="${reply.reply_id}">${reply.reply_writer }</strong> <span>${reply.reply_regdate }</span>
+											<pre id="reply_c">${reply.reply_content }</pre>
 										</div>
 
 									</div>

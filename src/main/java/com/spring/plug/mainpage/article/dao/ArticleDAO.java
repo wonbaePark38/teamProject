@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.plug.chat.handler.ReplyEchochoHandler;
 import com.spring.plug.mainpage.article.vo.Article1VO;
 import com.spring.plug.mainpage.article.vo.ArticleReplyVO;
 import com.spring.plug.mainpage.article.vo.ArticleWorkerVO;
@@ -21,14 +22,10 @@ public class ArticleDAO{
 	}
 
    public void article1_insert(Article1VO vo) {
-      System.out.println("article1 insert 기능 처리");
-      System.out.println("dao : " + vo.toString());
       sqlSessionTemplate.insert("ArticleDAO.articleInsert",vo);
    }
    
    public void reply_insert(ArticleReplyVO vo) {
-	   System.out.println("reply insert 기능 처리");
-	   System.out.println("dao : " + vo.toString());
 	   sqlSessionTemplate.insert("ArticleDAO.replyInsert",vo);
    }
    
@@ -39,9 +36,6 @@ public class ArticleDAO{
 	   }
   
    public List<ArticleReplyVO> reply_select(ArticleReplyVO rvo){
-	   
-	   System.out.println("댓글 : "+rvo.toString());
-	   
 	   return sqlSessionTemplate.selectList("ArticleDAO.replySelect",rvo);
    }
    
@@ -97,5 +91,15 @@ public class ArticleDAO{
    // 게시글 수정하기
    public void updateArticleModified(Article1VO vo) {
 	   sqlSessionTemplate.update("ArticleDAO.updateArticleModified",vo);
+   }
+   
+   // 댓글 업데이트
+   public void updateReply(ArticleReplyVO vo) {
+	   sqlSessionTemplate.update("ArticleDAO.updateReply",vo);
+   }
+   
+   // 댓글 삭제
+   public void deleteReply(ArticleReplyVO vo) {
+	   sqlSessionTemplate.delete("ArticleDAO.deleteReply",vo);
    }
 }

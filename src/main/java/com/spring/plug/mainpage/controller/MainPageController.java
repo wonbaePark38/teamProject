@@ -8,7 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,27 +34,46 @@ public class MainPageController {
 	@Autowired 
 	private ProjectDirService project_service;
 	
-	
-	
-	
 	private String[] arr;
 	private int count;
-
+	
 	@RequestMapping(value = "/articlereply.do")
-	public String articleReplyInsert(ArticleReplyVO vo, ProjectDirVO project, HttpSession session) {
+	public String articleReplyInsert(Model model,ArticleReplyVO vo, ProjectDirVO project, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
-		System.out.println(vo.toString());
 
 		service.insertReply(vo);
 
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
-
-	@RequestMapping(value = "/mainpage.do")
-	public ModelAndView articleSelect(ProjectDirVO project, ArticleReplyVO rvo, Article1VO vo, ModelAndView mav,
-			HttpSession session) {
+	
+	@RequestMapping(value = "/updatereply.do")
+	public String articleReplyUpdate(Model model,ArticleReplyVO vo, ProjectDirVO project, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		service.updateReply(vo);
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
+	}
+	
+	@RequestMapping(value = "deletereply.do")
+	public String articleReplyDelete(Model model, ArticleReplyVO vo, ProjectDirVO project, HttpSession session) {
+		service.deleteReply(vo);
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("project_name",project.getProject_name());
 		
+		return "redirect:mainpage.do";
+	}
+	
+	@RequestMapping(value = "/mainpage.do")
+	public ModelAndView articleSelect(Model model,ProjectDirVO project, ArticleReplyVO rvo, Article1VO vo, ModelAndView mav,
+			HttpSession session,@ModelAttribute(value="pvo")ProjectDirVO pvo) {
+		System.out.println(vo.toString());
+
 		ArticleWorkerVO wvo = new ArticleWorkerVO();
 		wvo.setProject_id(project.getProject_id());
 
@@ -60,7 +83,6 @@ public class MainPageController {
 
 		// 게시글 리스트
 		List<Article1VO> articleList = service.selectArticle(vo);
-
 		// 댓글 리스트
 		List<ArticleReplyVO> replyList = service.selectReply(rvo);
 
@@ -113,46 +135,59 @@ public class MainPageController {
 		
 	}
 	public void imageSave(Article1VO vo, UserVO user, ProjectDirVO project) throws IOException {
-		MultipartFile uploadFile = vo.getWriteForm_img();
-		if (!uploadFile.isEmpty()) {
+		List<MultipartFile> uploadImg = vo.getWriteForm_img();
+		if (!uploadImg.isEmpty()) {
 			String memberID = Integer.toString(user.getSeq());
-			vo.setImg_name(uploadFile.getOriginalFilename());
-			String image_path = "/usr/local/tomcat/webapps/plugProject/upload_image/"+project.getProject_id()+"/"+ memberID + "_" + vo.getImg_name();
-			File destdir = new File(image_path);
-			 if(!destdir.exists()) {
-				 destdir.mkdirs();
-			 }
-			
-			uploadFile.transferTo(new File(image_path));
-			vo.setImg_size(image_path);
+			String image_path = "/usr/local/tomcat/webapps/plugProject/upload_image/"+project.getProject_id()+"/"+memberID+"_";
+			String imageList = "";
+			try {
+				for (MultipartFile multipartFile : uploadImg) {
+					imageList += multipartFile.getOriginalFilename()+",";
+					File destdir = new File(image_path);
+					if(!destdir.exists()) {
+						destdir.mkdirs();
+					}
+					
+					multipartFile.transferTo(new File(image_path+multipartFile.getOriginalFilename()));
+				}
+				
+				vo.setImg_path(image_path);
+				vo.setImg_name(imageList.substring(0,imageList.length()-1));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			vo.setImg_name(null);
 		}
 	}
 	
 	@RequestMapping(value = "/writeform1.do")
-	public String article1Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
-		
+	public String article1Insert(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
 		imageSave(vo, user, project);
 		service.insertArticle(vo);
-
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 
 	@RequestMapping(value = "/writeform2.do")
-	public String article2Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+	public String article2Insert(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
 		service.insertArticle(vo);
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 
 	@RequestMapping(value = "/writeform3.do")
-	public String article3Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+	public String article3Insert(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
 		if (vo.getWriteForm3_workersName() != null || vo.getWriteForm3_workersName() != "") {
 			
@@ -164,19 +199,25 @@ public class MainPageController {
 		fileSave(vo,user,project);
 
 		service.insertArticle(vo);
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 
 	@RequestMapping(value = "/writeform4.do")
-	public String article4Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+	public String article4Insert(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		service.insertArticle(vo);
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 
 	@RequestMapping(value = "/writeform5.do")
-	public String article5Insert(Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
+	public String article5Insert(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) throws IOException {
 		ArticleWorkerVO workerVO = new ArticleWorkerVO();
 
 		System.out.println(vo.getWriteForm5_worker());
@@ -222,15 +263,21 @@ public class MainPageController {
 		}
 		
 
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 
 	// 상단 고정 게시글
 	@RequestMapping(value = "/articlepix.do")
-	public String updateArticlePix(Article1VO vo, ProjectDirVO project, HttpSession session) {
+	public String updateArticlePix(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
 		System.out.println(vo.toString());
 		service.updateArticlePixed(vo);
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 	
 	// 파일 불러오기
@@ -246,36 +293,45 @@ public class MainPageController {
 	}
 	
 	@RequestMapping(value = "/deletearticle.do")
-	public String deleteArticle(Article1VO vo, ProjectDirVO project, HttpSession session) {
+	public String deleteArticle(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
 		
 		service.deleteArticle(vo);
 		
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 	
 	@RequestMapping(value = "/deletetodo.do")
-	public String deleteTodo(Article1VO vo, ProjectDirVO project, HttpSession session) {
+	public String deleteTodo(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
 		ArticleWorkerVO wvo = new ArticleWorkerVO();
 		wvo.setArticle_id(vo.getArticle_id());
 		service.deleteArticle(vo);
 		service.deleteTodo(wvo);
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 	
 	@RequestMapping(value = "/mergecontain.do")
-	public String updateContain(Article1VO vo, ProjectDirVO project, HttpSession session) {
+	public String updateContain(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
-		System.out.println(vo.getMember_id());
-		System.out.println(vo.getArticle_contain());
-		System.out.println(vo.getArticle_id());
 		service.mergeArticleLookup(vo);
-		return "mainpage.do";
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 	
 	@RequestMapping(value = "/articlemodified.do")
-	public String articleModified(Article1VO vo, ProjectDirVO project, HttpSession session) {
-			service.updateArticleModified(vo);
-		return "mainpage.do";
+	public String articleModified(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
+		service.updateArticleModified(vo);
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	};
 }

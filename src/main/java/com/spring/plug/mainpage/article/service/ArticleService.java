@@ -14,6 +14,10 @@ public interface ArticleService {
    
    void insertReply(ArticleReplyVO vo);
    
+   void updateReply(ArticleReplyVO vo);
+   
+   void deleteReply(ArticleReplyVO vo);
+   
    void insertWorker(ArticleWorkerVO vo);
    
    List<Article1VO> selectArticle(Article1VO vo);

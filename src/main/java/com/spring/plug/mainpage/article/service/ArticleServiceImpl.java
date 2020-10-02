@@ -33,7 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
 		dao.reply_insert(vo);
 
 	}
-
+	
 	@Override
 	public List<Article1VO> selectArticle(Article1VO vo) {
 
@@ -99,6 +99,16 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void updateArticleModified(Article1VO vo) {
 		dao.updateArticleModified(vo);
+	}
+
+	@Override
+	public void updateReply(ArticleReplyVO vo) {
+		dao.updateReply(vo);
+	}
+
+	@Override
+	public void deleteReply(ArticleReplyVO vo) {
+		dao.deleteReply(vo);
 	}
 
 }

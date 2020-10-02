@@ -4,12 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
 <title>Insert title here</title>
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/write_completion.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -27,12 +25,12 @@
     }
 </script>
 </head>
-<body>
-
-	<div class="container">
-		<div class="row">
+<body style="background-color:rgb(242, 242, 242);">
+<jsp:include page='privateConfigHeader.jsp'></jsp:include>
+	<div class="container" style="top: 60px;position: relative;">
+		<div class="">
 			<!-- 업무 메뉴 -->
-			<div class="col-lg-3" id="task_menu" style="padding: 0px;">
+			<div class="" id="task_menu" style="float:left;">
 				<div>
 					<div>
 						<div>업무 구분</div>
@@ -192,8 +190,8 @@
 
 
 			<!-- 업무 내용 -->
-			<div class="col-lg-9" style="padding: 0px;">
-				<div style="float: left; width: 60%;">
+			<div class="" >
+				<div style="float: left; width: 60%; margin-left: 45px;">
 					<span>전체 업무 (1)</span>
 				</div>
 
@@ -223,7 +221,7 @@
 				<!-- task_header -->
 
 
-				<div class="task_contents">
+				<div class="task_contents"style="margin-left:140px;">
 					<div id="contents_container">
 						<div class="work_table">
 							<table class="table_list">
