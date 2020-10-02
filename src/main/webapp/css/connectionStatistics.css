@@ -154,4 +154,7 @@ label {
     padding: 3px;
 }
 
-
+#select-month{
+	width: 70px;
+    margin-right: 20px;
+}

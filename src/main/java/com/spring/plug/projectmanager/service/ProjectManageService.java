@@ -13,7 +13,7 @@ public interface ProjectManageService {
 	String getDownProhibition(int projectId);
 	void changeDownProhibitionSetting(ProjectManageVO pmVO);
 	List<ProjectManageVO> getUseStatistics(int projectId);
-	List<ProjectManageVO> getConnectionStatistics(int projectId);
+	List<ProjectManageVO> getConnectionStatistics(ProjectManageVO pmVO);
 	List<ProjectManageVO> getRecentData(int projectId);
 	List<ProjectManageVO> getProjectInfo(int projectId);
 	List<ProjectManageVO> getMemberInfo(int projectId);

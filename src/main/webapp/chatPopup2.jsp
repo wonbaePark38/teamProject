@@ -25,7 +25,14 @@
 				<!-- 동적 생성 -->
 			</ul>
 		</div>
+		
+		
 		<div class="input-div">
+		 	<form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
+				<a id="upload-file" class="add-file">
+					<input type="file" class="input-file" name="upload" onchange="uploadFile()"/>
+				</a>
+			</form>
 			<textarea id="message" placeholder="Press Enter for send message."></textarea>
 		</div>
 
@@ -86,7 +93,9 @@
 </body>
 <script>
 var socket = null;
-
+var presentJoinUser = '${roomInfo.inviteUser}'.split(',');
+var roomNameChangeStatus = '${roomInfo.roomNameChange}';
+var roomName = '${roomInfo.chatRoomName}';
 $(document).ready(function() {
 	
 	
@@ -124,29 +133,6 @@ $(document).ready(function() {
 			
 			$.each(data,function(index,element){
 				msgHistoryPosition(element); //채팅방에 최초 들어온 시점부터 화면에 뿌려줌
-				
-				var myName = '${user.seq}';
-				var LR = (element.senderId != myName) ? "left" : "right";
-				if(element.senderId == 0){
-					LR = 'center';
-				}
-				if(LR == 'left' && LR != 'center'){ //메시지 div 와 날짜 div 위치 변경
-					var target = $('#chat-ul').children().last();
-					var message = $(target).children().last();
-					var date = $(message).prev();
-					$(message).css('margin-left','20px');
-					$(date).insertAfter(message);
-				} else if(LR == 'center'){
-					
-					var target = $('#chat-ul').children().last();
-					var message = $(target).children().last();
-					var date = $(message).prev();
-					$(message).css('background-color', '#888');
-					$(message).css('font-weight','bold');
-					$(message).css('color','white');
-						
-				}
-				
 			});
 			window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
 			data = null;
@@ -161,6 +147,7 @@ $(document).ready(function() {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13' && !e.shiftKey) {
 				send();
+				e.preventDefault();
 			}
 			event.stopPropagation(); //이벤트 버블링 막기
 
@@ -183,7 +170,7 @@ $(document).ready(function() {
 	//웹소켓 접속
 	function connect() {
 		
-		var ws = new WebSocket("ws://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/chat.do");
+		var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/chat.do");
 		socket = ws;
 
 		socket.onopen = function() {
@@ -198,30 +185,54 @@ $(document).ready(function() {
 			var myName = '${user.seq}';
 			
 			if(data.senderId == 0){ //관리자 메시지인 경우(나가기,초대받아 들어옴, 채팅방 이름 변경)
-				if('${roomInfo.roomNameChange}' == 'n' && data.messageType == 'invite'){ //초대 됐을때 헤더에 있는 채팅방 이름 변경
-					var presentRoomName = '${roomInfo.chatRoomName}';
-					var roomName = presentRoomName + "," + data.userName;
-					opener.parent.resetChatRoomName('${roomId}', roomName,data.joinNumber);
-				}else if('${roomInfo.roomNameChange}' == 'n' && data.messageType == 'exit'){ //나갔을때 헤더에 있는 채팅방 이름 변경
-					var presentRoomName = '${roomInfo.chatRoomName}';
-					var roomName = presentRoomName.replace(data.userName,"");
-					opener.parent.resetChatRoomName('${roomId}', roomName, -1);
+				if(data.messageType == 'changeChatRoomName'){
+					$('.header').children('label').text("");
+					$('.header').children('label').text(data.chatRoomName);
+					roomNameChangeStatus = 'y';
+					opener.parent.resetChatRoomName('${roomId}', data.chatRoomName, 0);
+				}else if(data.messageType == 'invite'){
+					var addMember = data.userName;
+					var tempArray = addMember.split(",");
+					$.each(tempArray,function(index,element){
+						presentJoinUser.push(element);
+					});
+					joinedMember();
+					
+					if(roomNameChangeStatus == 'n'){
+						var roomName = "";
+						$.each(presentJoinUser,function(index,element){
+							roomName += element+",";
+						});
+						roomName = roomName.substr(0, roomName.length -1); 
+						$('.header').children('label').text("");
+						$('.header').children('label').text(roomName);
+						opener.parent.resetChatRoomName('${roomId}', roomName, data.joinNumber);
+					}
+					
+				}else if(data.messageType == 'exit'){
+					var exitMember = data.userName;
+					var idx = presentJoinUser.indexOf(exitMember);
+					presentJoinUser.splice(idx,1);
+					joinedMember();
+					
+					if(roomNameChangeStatus == 'n'){
+						var roomName = "";
+						$.each(presentJoinUser,function(index,element){
+							roomName += element+",";
+						});
+						roomName = roomName.substr(0, roomName.length -1); 
+						$('.header').children('label').text("");
+						$('.header').children('label').text(roomName);
+						opener.parent.resetChatRoomName('${roomId}', roomName, -1);
+					}
+					
 				}
-			location.reload(); //현재 채팅 팝업창에 반영하기 위해서 새로고침
+				
 			}
+			
 			msgPositionSelect(data); 
+			opener.parent.updateLastMessage('${roomId}',data.message_content);
 			
-			//if(data,senderId != myName && )
-			var LR = (data.senderId != myName) ? "left" : "right";
-			
-			if(LR == 'left'){
-				var target = $('#chat-ul').children().last();
-				var message = $(target).children().last();
-				var date = $(message).prev();
-				$(message).css('margin-left','20px');
-				$(date).insertAfter(message);
-			
-			}
 			
 			window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
 		};
@@ -252,54 +263,75 @@ $(document).ready(function() {
 			socket.send(JSON.stringify(message));
 			insertMessageInfo(message); //db에 저장할 메시지 정보
 			$("#message").val("");
+			
 		}
 
 	}
 	function msgHistoryPosition(obj){ //db에서 뽑아논 메시지 위치 정하는 함수
 		var myName = '${user.seq}';
 		var LR = (obj.senderId != myName) ? "left" : "right";
-		appendMessageTag(LR, obj.message_sender, obj.message_content, obj.message_sendTime);
-		
+		if(obj.senderId == '0'){
+			LR = 'center';
+		}
+		appendMessageTag(LR, obj.message_sender, obj.message_content, obj.message_sendTime, obj.messageType);
 	}
 	
 	function msgPositionSelect(presentMessage) { //유저가 입력한 메시지 위치 정하는 함수
 		var myName = '${user.seq}';
-		const LR = (presentMessage.senderId != myName) ? "left" : "right";
-		appendMessageTag(LR, presentMessage.message_sender, presentMessage.message_content, presentMessage.message_sendTime);
+		var LR = (presentMessage.senderId != myName) ? "left" : "right";
+		if(presentMessage.senderId == '0'){
+			LR = 'center';
+		}
+		appendMessageTag(LR, presentMessage.message_sender, presentMessage.message_content, presentMessage.message_sendTime, presentMessage.messageType);
 		
 	}
 	// 메세지 태그 append
-	function appendMessageTag(LR_className, message_sender, message_content, message_sendTime) {
-		const chatLi = createMessageTag(LR_className, message_sender,message_content, message_sendTime);
+	function appendMessageTag(LR_className, message_sender, message_content, message_sendTime, messageType) {
 		
-		if(LR_className == 'right'){
-			
-			var target = $(chatLi).children('.message');
-			target.css('background-color','#5f5ab9');
-			target.css('color','white');
-		} else if(LR_className == 'admin'){
-			var target = $(chatLi).children('.message');
-			target.css('background-color','#5f5ab9');
-			target.css('color','white');
-		}
-	
-
+		const chatLi = createMessageTag(LR_className, message_sender,message_content, message_sendTime, messageType);
 		$('div.chat:not(.format) ul').append(chatLi);
+		if(LR_className == 'right'){
+			var target = $(chatLi).children('.message');
+			target.css('background-color','#5f5ab9');
+			target.css('color','white');
+		}if(LR_className == 'left'){
+			var messageNode = $(chatLi).children('.message');
+			var dateNode = $(chatLi).children('.date');
+			$(dateNode).insertAfter(messageNode);
+		}
+		
 		
 		var dateNode = $('#chat-ul').children().last().children('.date');
-		
 		$(dateNode).text(message_sendTime);
+		if(message_sender == 'admin'){
+			var target = $('#chat-ul').children().last();
+			var message = $(target).children('.message');
+			$(message).css('background-color', '#888');
+			$(message).css('font-weight','bold');
+			$(message).css('color','white');
+		}
+		
 	}
 
 	// 메세지 태그 생성
-	function createMessageTag(LR_className, message_sender, message_content, message_sendTime) {
+	function createMessageTag(LR_className, message_sender, message_content, message_sendTime, messageType) {
 		// 형식 가져오기
 		let chatLi = $('div.chat.format ul li').clone();
-		
+		if(messageType == 'file'){
+			chatLi.addClass(LR_className);
+			chatLi.find('.message span').append(
+					"<a onclick='fileDownload(this);'>"+message_content+
+						"<input type='hidden' value="+message_sender+">"+
+					"</a>"
+					
+			);
+		}else{
+			chatLi.addClass(LR_className);
+			chatLi.find('.message span').text(message_content);
+			chatLi.find('.sender span').text(message_sender);
+		}
 		// 값 채우기
-		chatLi.addClass(LR_className);
-		chatLi.find('.message span').text(message_content);
-		chatLi.find('.sender span').text(message_sender);
+		
 		
 		return chatLi;
 	}
@@ -312,7 +344,7 @@ $(document).ready(function() {
 			url : 'insertMessage.do',
 			data : message,
 			success : function(result) { //result : 현재 메시지가 발생한 채팅방에 접속해 있는 않은 사람 목록 반환됨
-				if(message.messageType == 'chattingMessage'){ //메시지 타입이 나가기, 방제 변경, 초대가 아니고 단순 채팅일 경우
+				if(message.messageType == 'chattingMessage' || message.messageType =='file'){ //메시지 타입이 나가기, 방제 변경, 초대가 아니고 단순 채팅일 경우
 					opener.parent.chatAlert(result, message); //알림 쏴주는 메시지 호출
 				}else if(message.messageType == 'exit'){
 					window.open("about:blank","_self").close();
@@ -328,12 +360,9 @@ $(document).ready(function() {
 		e.stopPropagation();
 		$('.hidden').show();
 	}
-
 	function joinedMember(){ //참여자 목록 띄우기
-		
-		var listData = '${roomInfo.inviteUser}'.split(',');
-		
-		$.each(listData,function(index,element){
+		$('.member-list').children('ul').children('li').remove();
+		$.each(presentJoinUser,function(index,element){
 			$('.member-list').children().append(
 			"<li>"+element+"</li>"
 			);	
@@ -421,7 +450,6 @@ $(document).ready(function() {
 				});
 					
 		} //end if
-		
 	}
 	
 	function changeRoomName(roomName){ //채팅방 이름 변경되면 채팅창 메시지로 쏴줌 
@@ -431,6 +459,7 @@ $(document).ready(function() {
 		message = {};
 		message.header = 'chatting';
 		message.message_content = roomName+ " 으로 방이름이 변경되었습니다";
+		message.chatRoomName = roomName;
 		message.message_sender = 'admin';
 		message.chatRoomId = '${roomInfo.chatRoomId}';
 		message.message_sendTime = inputDate;
@@ -439,8 +468,7 @@ $(document).ready(function() {
 		socket.send(JSON.stringify(message));
 		insertMessageInfo(message); //db에 저장할 메시지 정보
 		
-		var roomId = ${roomInfo.chatRoomId};
-		opener.parent.resetChatRoomName(roomId, roomName,0);
+		
 	}
 	
 	function exitChatRoom(){ //채팅방 나갈때 호출하는 함수
@@ -452,7 +480,7 @@ $(document).ready(function() {
 					inviteUser : '${roomInfo.inviteUser}',
 					inviteUserId : '${roomInfo.inviteUserId}',
 					joinNumber : '${roomInfo.joinNumber}',
-					roomNameChange : '${roomInfo.roomNameChange}'
+					roomNameChange : roomNameChangeStatus
 				}
 			$.ajax({
 				type : "POST",
@@ -473,7 +501,7 @@ $(document).ready(function() {
 		var name = '${user.name}';
 		message = {};
 		message.header = 'chatting';
-		message.message_content = name+ " 님이 채팅방에서 나갔습니다";
+		message.message_content = name+ " 님이 나갔습니다";
 		message.userName = name;
 		message.message_sender = 'admin';
 		message.chatRoomId = '${roomInfo.chatRoomId}';
@@ -491,6 +519,55 @@ $(document).ready(function() {
 		
 	}
 	
+	function uploadFile(){
+		
+		var fileValue = $(".input-file").val().split("\\");
+        var fileName = fileValue[fileValue.length-1];
+        
+       
+		let today = new Date();   
+		var inputDate = date_to_str(today);
+		message = {};
+		message.header = 'chatting';
+		message.message_content = fileName;
+		message.message_sender = '${user.name}';
+		message.chatRoomId = '${roomId}';
+		message.message_sendTime = inputDate;
+		message.senderId = '${user.seq}';
+		message.messageType = 'file';
+		message.unReadCount = 0;
+		socket.send(JSON.stringify(message));
+		insertMessageInfo(message); //db에 저장할 메시지 정보
+		$("#message").val("");
+		
+		uploadFileForm(message);
+    
+    }
 	
+	function uploadFileForm(message){
+		var formData = new FormData();
+		formData.append("upload",$('input[name=upload]')[0].files[0]);
+		formData.append("chatRoomId",message.chatRoomId);
+		formData.append("fileName",message.message_content);
+		formData.append("message_sender",message.message_sender);
+		$.ajax({ 
+			type: 'POST', 
+			url: 'uploadFile.do', 
+			processData: false, // 필수 
+			contentType: false, // 필수 data: formData, 
+			data : formData,
+			success: function(data){ 
+				
+			},fail : function(err) {
+				alert('에러발생');
+			} 
+		});
+
+	}
+	function fileDownload(target){
+		var message_sender = $(target).children().val();
+		var fileName = $(target).text();
+		window.location = 'chatFileDown.do?message_sender='+message_sender +'&fileName='+fileName + '&chatRoomId='+${roomId};
+	}
 </script>
 </html>

@@ -780,7 +780,7 @@ fnSleep = function (delay){
 
 };
 
-function removeArray(){ //전역에 선언한 오브젝트에 화면 출력값 저장하는 함수
+function removeArray(){ //전역에 선언한 화면에 출력할 배열 기존 요소 삭제
 	presentList.splice(0,presentList.length);
 }
 

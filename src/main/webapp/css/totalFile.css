@@ -5,7 +5,7 @@ html{
 body {
 	
 margin: 0 auto;
-    background-color: #e4e6e9;
+    background-color: #f2f2f2;
     border: 1px solid #eaeaea;
     font-size: 16px;
     overflow-y:scroll;
@@ -46,7 +46,7 @@ a {
 button {
 	border: 0;
 	outline:none;
-	background-color: white;
+	background: none;
 }
 
 
@@ -497,6 +497,7 @@ a:hover {
 	flex-basis: 20%;
 	border-right: 1px solid #f2f2f2;
 	align-items: center;
+	background-color: #f2f2f2;
 }
 
 .checkImage {
@@ -615,7 +616,6 @@ a:hover {
 	align-items: center;
 	width: 100%;
 	border: 0;
-	background-color: #ffffff;
 }
 
 .list-main-article-container {

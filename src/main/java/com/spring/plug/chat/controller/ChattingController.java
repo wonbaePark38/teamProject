@@ -1,11 +1,18 @@
 package com.spring.plug.chat.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -60,20 +68,103 @@ public class ChattingController {
 	//db에 채팅 메시지 저장하는 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="/insertMessage.do", method = RequestMethod.POST)
-	public List<MessageVO> insertMessage(MessageVO msgVO) {
+	public List<MessageVO> insertMessage(MessageVO msgVO){
 		
-		chatService.insertMessage(msgVO);
 		if(msgVO.getSenderId() != 0) { //관리자 메시지가 아닐 경우 
 			chatService.updateChatRoomStatus(msgVO);
 			chatService.updateUnreadCount(msgVO);
 		}
 		
+		if(msgVO.getMessageType().equals("file")) {
+			String roomId = msgVO.getChatRoomId();
+			String realFileName = msgVO.getSenderId()+ "_" + msgVO.getMessage_content();
+			String file_path = "C:\\CHATUPLOADTEST\\"+roomId+"\\"+ realFileName;
+			msgVO.setFileName(msgVO.getMessage_content());
+			msgVO.setFilePath(file_path);
+		}
+		chatService.insertMessage(msgVO);
+		
+		
 		List<MessageVO> unreadList = chatService.getUnreadUser(msgVO);//현재 방 접속상태 아닌 사람 목록 가저옴
 		
 		return unreadList;
-		
 	}
-
+	
+	//채팅창 첨부파일 서버에 저장
+	@ResponseBody
+	@RequestMapping(value="/uploadFile.do",method = RequestMethod.POST) //서버에 파일 업로드
+	public void uploadFile(MessageVO msgVO) throws IllegalStateException, IOException {
+			MultipartFile uploadFile = msgVO.getUpload();
+			String roomId = msgVO.getChatRoomId();
+			System.out.println("!!!!!");
+			System.out.println(msgVO.getMessage_sender());
+			System.out.println(msgVO.getFileName());
+			String realFileName = msgVO.getMessage_sender()+ "_" + msgVO.getFileName();
+			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/chat/"+roomId+"/"+ realFileName;
+			System.out.println("업로드패스");
+			System.out.println(file_path);
+			File destdir = new File(file_path);
+			 if(!destdir.exists()) {
+				 destdir.mkdirs();
+			 }
+			uploadFile.transferTo(new File(file_path));
+	}
+	
+	//채팅창 첨부파일 다운로드 컨트롤러
+	@ResponseBody
+	@RequestMapping(value="/chatFileDown.do")
+	public void downloadFile(MessageVO msgVO,HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+			String sender = request.getParameter("message_sender");
+			String fileName = request.getParameter("fileName");
+			String roomId = request.getParameter("chatRoomId");
+			String realFileName = sender + "_" + fileName;
+			String browser = request.getHeader("User-Agent");
+			if(browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
+				fileName = URLEncoder.encode(fileName,"UTF-8").replaceAll("\\+", "%20");
+				sender = URLEncoder.encode(sender,"UTF-8").replaceAll("\\+", "%20");
+			} else {
+				fileName = new String(fileName.getBytes("UTF-8"),"ISO-8859-1");
+				sender = new String(sender.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/chat/"+roomId+"/"+ realFileName;
+			
+			System.out.println(file_path);
+			File file1 = new File(file_path);
+			if(!file1.exists()) {
+				return ;
+			}
+			
+			//파일명 지정
+			response.setContentType("application/octer-stream");
+			response.setHeader("Content-Transfer-Encoding", "binary;");
+			response.setHeader("Content-Disposition", "attachment; fileName=\"" + fileName + "\"");
+			
+			OutputStream os = response.getOutputStream();
+			FileInputStream fis = new FileInputStream(file_path);
+			
+			int ncount = 0;
+			byte[] bytes = new byte[512];
+			try {
+				while((ncount = fis.read(bytes)) != -1) {
+					os.write(bytes, 0 , ncount);
+				}
+			} catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				fis.close();
+				os.close();
+				
+			}
+	
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
 	//채팅창 켰을때 메시지 히스토리 가저오고 접속 시간 로그 남김 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="/loadMessage.do", method = RequestMethod.POST)

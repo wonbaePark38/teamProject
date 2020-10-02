@@ -54,6 +54,9 @@
                     </select>
 
                     <input type="text" placeholder="검색어를 입력해주세요" name="keyword" class="search-keyword">
+                    <select id="select-month">
+                    	<!-- 동적 value 생성 -->
+                    </select>
 					<input type="radio" name="login-or-not" value="all" checked='checked'>&nbsp;&nbsp;전체&nbsp;&nbsp;
                     <input type="radio" name="login-or-not" value="connect">&nbsp;&nbsp;접속자&nbsp;&nbsp;
                     <input type="radio" name="login-or-not" value="disconnect">&nbsp;&nbsp;비접속자
@@ -125,10 +128,10 @@ var chartDrowFun = {
 	         var dataRow = [];
 	       	  var temp = '${chartList}';
 	          var array = temp.split(",");
-	          for(var i = 0; i <= 5; i++){ //랜덤 데이터 생성
+	          for(var i = 0; i <= 5; i++){ //컨트롤러에서 받은 문자열 데이터 배열로 변환
 	              var dataArray = array[i].split('-');	
 	   			  var count = parseInt(dataArray[2]);	
-	              dataRow = [new Date(dataArray[0],dataArray[1]), count];
+	              dataRow = [new Date(dataArray[0],dataArray[1]-1), count];
 	              data.addRow(dataRow);
 	            }
 

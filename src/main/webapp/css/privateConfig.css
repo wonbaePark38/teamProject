@@ -220,15 +220,21 @@ button{
     background-color: white;
 }
 .row-label{
-	
-    overflow: hidden;
+	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 190px;
-    font-size: 13px;
+    font-size: 14px;
     margin-left: -10px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
 }
 
+.last-message{
+	font-weight: 100;
+    font-size: 13px;
+}
 .chat-user-number{
 	vertical-align: bottom;
     display: inline-block;

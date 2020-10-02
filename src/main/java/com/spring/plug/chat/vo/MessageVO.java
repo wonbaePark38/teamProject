@@ -1,7 +1,10 @@
 package com.spring.plug.chat.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MessageVO {
-	
+	private MultipartFile upload;
+
 	private String message_sender;
 	private int senderId;
 	private String message_content;
@@ -17,7 +20,27 @@ public class MessageVO {
 	private String messageType;
 	private int joinNumber;
 	private String header;
+	private String fileName;
+	private String filePath;
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public int getJoinNumber() {
 		return joinNumber;
 	}

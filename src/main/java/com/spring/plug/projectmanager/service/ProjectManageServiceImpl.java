@@ -41,8 +41,8 @@ public class ProjectManageServiceImpl implements ProjectManageService{
 	}
 
 	@Override
-	public List<ProjectManageVO> getConnectionStatistics(int projectId) {
-		return pmDAO.getConnectionStatistics(projectId);
+	public List<ProjectManageVO> getConnectionStatistics(ProjectManageVO pmVO) {
+		return pmDAO.getConnectionStatistics(pmVO);
 	}
 
 	@Override
