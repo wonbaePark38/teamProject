@@ -490,7 +490,7 @@ $(document).ready(function(){
 			  $.each(dataObj,function(index,element){
 				  var strArray = element.fileName.split('.');
 				  var dataFileType = strArray[1];
-				  if(element.projectName == selectedProjectName && dataFileType == 'ppt'){
+				  if(element.projectName == selectedProjectName && (dataFileType == 'ppt' || dataFileType == 'pptx')){
 					  settingList(index,element);
 					  presentList.push(element);
 				  } 
@@ -574,7 +574,7 @@ $(document).ready(function(){
 			  $.each(dataObj,function(index,element){
 				  var strArray = element.fileName.split('.');
 				  var dataFileType = strArray[1];
-				  if(element.projectName == selectedProjectName && dataFileType == 'doc'){
+				  if(element.projectName == selectedProjectName && (dataFileType == 'doc' || dataFileType == 'docx')){
 					  settingList(index,element);
 					  presentList.push(element);
 				  } 
@@ -630,7 +630,7 @@ $(document).ready(function(){
 			  $.each(dataObj,function(index,element){
 				  var strArray = element.fileName.split('.');
 				  var dataFileType = strArray[1];
-				  if(element.projectName == selectedProjectName && dataFileType == 'png' || dataFileType == 'jpg' || dataFileType == 'gif'){
+				  if(element.projectName == selectedProjectName && (dataFileType == 'png' || dataFileType == 'jpg' || dataFileType == 'gif')){
 					  settingList(index,element);
 					  presentList.push(element);
 				  } 
