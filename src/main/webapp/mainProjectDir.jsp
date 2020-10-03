@@ -62,18 +62,8 @@
 						style="padding: .5rem 1.25rem; text-decoration: line-through;">읽지않음</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
-					<div style="font-size: 13px; color: #000000; font-weight: bold; padding: 1px 0px 1px 10px; border-top: 1px solid #e7e8e9; margin: 22px 0 10px 0;">모아보기</div>
-					<a id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;" href="task.jsp">전체 업무</a> <a id="main_side"
-						href="calendar.jsp" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 일정</a> <a id="main_side"
-						href="totalFileView.do" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 파일</a> <a id="main_side"
-						class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
-					<a id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;">나를 지정</a> <a id="main_side"
-						class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
-
+					<div style="font-size: 13px; color: #000000; font-weight: bold; padding: 1px 0px 1px 10px; border-top: 1px solid #e7e8e9; margin: 22px 0 10px 0;">파일함</div>
+						<a id="main_side" href="totalFileView.do" class="list-group-item" style="padding: .5rem 1.25rem;">전체 파일</a> 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
 					</div>
@@ -93,10 +83,6 @@
 
 					<ul id="helpMenu_on">
 						<li><a id="oneToOneBt" onclick="clientQnA()">1:1 문의</a></li>
-						<li><a id="helpBt">도움말</a></li>
-						<li><a id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
-						<li><a id="newNoticeBt">플로우 새소식</a></li>
-						<!-- 알림 있을 경우 class on 추가 -->
 					</ul>
 					<div class="helpButtonContainer">
 						<div id="helpMenuImg"></div>
