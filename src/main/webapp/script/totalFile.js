@@ -743,7 +743,7 @@ $(document).ready(function(){
 			  var filePath = data.filePath;
 			  var fileArr = filePath.split('/');
 			  var realFileName = fileArr[fileArr.length-1];
-			  var src = "http://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+"/"+ realFileName;
+			  var src = "http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+"/"+ realFileName;
 
 			  var fileTypeArr = fileName.split('.');
 			  var fileType = fileTypeArr[1];
