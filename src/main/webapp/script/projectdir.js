@@ -7,6 +7,7 @@ function new_project_form(){
 	
 	var project_name = $('input[name=project_name]').val();
 	var project_content = $('input[name=project_content]').val();
+	var viewType = $('#vt').val();
 	
 	// form 생성
 	var new_project = $('<form></form>');
@@ -16,6 +17,9 @@ function new_project_form(){
 	new_project.attr('action','newproject.do');
 	
 	// form 데이터
+	if (viewType != '보관함' && viewType != '숨김') {
+		new_project.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
+	}
 	new_project.append($('<input/>',{type:'hidden', name:'project_name', value:project_name}));
 	new_project.append($('<input/>',{type:'hidden', name:'project_content', value:project_content}));
 	new_project.append($('<input/>',{type:'hidden', name:'project_manager', value:'0'}));
@@ -41,6 +45,7 @@ $(document).on('click','#star_btn',function(){
 		$(this).attr('value','0');
 	}
 	
+	var viewType = $('#vt').val();
 	var project_id = $(this).prev().prev().attr('value');
 	var project_favorites = $(this).attr('value');
 	
@@ -53,6 +58,7 @@ $(document).on('click','#star_btn',function(){
 	// form 데이터
 	favorites_form.append($('<input/>',{type:'hidden', name:'project_id', value: project_id}));
 	favorites_form.append($('<input/>',{type:'hidden', name:'project_favorites', value:project_favorites}));
+	favorites_form.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
 	
 	// form 생성하는 곳
 	favorites_form.appendTo('#content_div');
@@ -60,38 +66,51 @@ $(document).on('click','#star_btn',function(){
 });
 
 
-function init(){
-	$('#locker_list').text('보관함 설정');
-	$('#locker_hide').text('숨기기');
-	$('.dir_set_bar').hide();
-	$('.headerWrap').show();
+function viewType(type){
+	// form 생성
+	var view = $('<form></form>');
 	
-	// 프로젝트 선택css
-	$('.setting_div').attr('id','setting_');
-	$('.dir_set_on').attr('class','dir_set');
-	$(this).attr('class','dir_set');
-	$('.project_div_on').attr('class','project_div');
-	$('.div_btn').hide();
-	$('.div_btn_on').hide();
+	// form 설정
+	view.attr('method','post');
+	view.attr('action','projectdir.do');
+	
+	// form 데이터
+	view.append($('<input/>',{type:'hidden', name:'viewType', value:type}));
+	
+	// form 생성하는 곳
+	view.appendTo('body');
+	
+	view.submit();
 }
-
+function viewLocker(type){
+	// form 생성
+	var view = $('<form></form>');
+	
+	// form 설정
+	view.attr('method','post');
+	view.attr('action','projectdir.do');
+	
+	// form 데이터
+	view.append($('<input/>',{type:'hidden', name:'viewType', value:'보관함'}));
+	view.append($('<input/>',{type:'hidden', name:'project_locker', value:type}));
+	
+	// form 생성하는 곳
+	view.appendTo('body');
+	
+	view.submit();
+}
 $(document).on('click', '#main_side', function() {
-	init();
 	
 	var click_menu = $(this).text().trim();
 	
 	if (click_menu == '전체') {
-		$('.content_type').hide();
-		$('#project_dir_list1').show();
+		viewType(null);
 	} else if (click_menu == '미보관') {
-		$('.content_type').hide();
-		$('#project_dir_list2').css('display', 'inline-block');
+		viewType('미보관');
 	} else if (click_menu == '읽지않음') {
-		$('.content_type').hide();
-		$('#project_dir_list3').css('display', 'inline-block');
+		viewType('읽지않음');
 	} else if (click_menu == '즐겨찾기') {
-		$('.content_type').hide();
-		$('#project_dir_list4').css('display', 'inline-block');
+		viewType('즐겨찾기');
 	} else if (click_menu == '전체 업무') {
 		alert('전체 업무');
 	} else if (click_menu == '담아둔 글') {
@@ -101,18 +120,10 @@ $(document).on('click', '#main_side', function() {
 	} else if (click_menu == '내 게시물') {
 		alert('내 게시물');
 	} else if (click_menu == '숨김') {
-		$('.content_type').hide();
-		$('.setting_div').attr('id','setting_hide');
-		$('#locker_hide').text('숨기기 해제');
-		$('#locker_n').text(click_menu);
-		$('#hide_load').css('display', 'inline-block');
-		
+		viewType('숨김');
 	} else {
-		// 보관함 선택
-		$('.content_type').hide();
-		$('.setting_div').attr('id','setting_locker');
-		$('#locker_list').text('보관함 해제');
-		$('div[id='+click_menu+']').css('display', 'inline-block');
+		
+		viewLocker(click_menu);
 	}
 });
 
@@ -121,7 +132,7 @@ $(document).on('click', '.locker_setbtn', function() {
 	// 선택된 프로젝트
 	var select_project = "";
 	var select_btn = false;
-	
+	var viewType = $('#vt').val();
 	// 프로젝트 선택 여부
 	$("input:button[class=div_btn_on]").each(function(){
 		select_project += ($(this).next().val())+",";
@@ -129,6 +140,7 @@ $(document).on('click', '.locker_setbtn', function() {
 	
 	// 보관함 추가
 	if ($(this).attr('id') == 'locker_list') {
+		
 		if ($('#locker_list').text() == '보관함 설정') {
 			if (select_project == null || select_project == '') {
 				alert('프로젝트를 선택해 주세요.')
@@ -140,21 +152,16 @@ $(document).on('click', '.locker_setbtn', function() {
 				alert('프로젝트를 선택해 주세요.')
 			} else {
 				var locker_del_list = "";
-				var locker_del_name = "";
-				// 선택된 보관함 이름 찾음
-				$('.content_type').each(function(){ 
-					if($(this).css('display') == 'inline-block'){
-						locker_del_name = ($(this).attr('id'));
-					}
-				});
+				var locker_del_name = $('.content_type').attr('id');
 				// 선택한 보관함 안에 프로젝트 리스트 찾음
-				var search_name = 'div[id='+locker_del_name+']';
-				$(search_name).find('input[class=div_btn_on]').each(function(){
+				var search_name = $('.content_type');
+				search_name.find('input[class=div_btn_on]').each(function(){
 					locker_del_list += ($(this).next().val())+",";
 				}); 
 				if (locker_del_list == null || locker_del_list == '') {
 					alert('보관함에 프로젝트가 없습니다.');
 				} else {
+					
 					// form 생성
 					var locker_del = $('<form></form>');
 			
@@ -165,6 +172,7 @@ $(document).on('click', '.locker_setbtn', function() {
 					// form 데이터
 					locker_del.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_del_list}));
 					locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
+					locker_del.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
 			
 					// form 생성하는 곳
 					locker_del.appendTo('.mainWrap');
@@ -203,6 +211,7 @@ $(document).on('click', '.locker_setbtn', function() {
 			// form 데이터
 			hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
 			hide_locker_set_name.append($('<input/>', {type : 'hidden', name :'hide_locker', value :hide_locker}));
+			hide_locker_set_name.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
 
 			// form 생성하는 곳
 			hide_locker_set_name.appendTo('.mainWrap');
@@ -214,7 +223,7 @@ $(document).on('click', '.locker_setbtn', function() {
 
 // 보관함 삭제
 $(document).on('click', '#locker_del', function() {
-	
+	var viewType = $('#vt').val();
 	if (confirm('게시글을 정말로 삭제하시겠습니까?')) {
 	
 		var locker_del_list = "";
@@ -238,6 +247,7 @@ $(document).on('click', '#locker_del', function() {
 			locker_del.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_del_list}));
 			locker_del.append($('<input/>', {type : 'hidden', name :'project_locker', value :locker_del_name}));
 			locker_del.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_del_id}));
+			locker_del.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
 	
 			// form 생성하는 곳
 			locker_del.appendTo('.mainWrap');
@@ -253,6 +263,7 @@ $(document).on('click', '#locker_del', function() {
 
 $(document).on('click', '#locker_update', function() {
 	$('#locker_change').show();
+	var viewType = $('#vt').val();
 	var locker_change_list = "";
 	var locker_change_name = $(this).parent().text().trim();
 	var locker_change_id = $(this).parent().prev().val();
@@ -270,6 +281,7 @@ $(document).on('click', '#locker_update', function() {
 	locker_change.append($('<input/>', {type : 'hidden', name :'project_id_list', value :locker_change_list}));
 	locker_change.append($('<input/>', {id:'lc_name',type : 'hidden', name :'locker_name'}));
 	locker_change.append($('<input/>', {type : 'hidden', name :'locker_list_id', value :locker_change_id}));
+	locker_change.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
 
 	// form 생성하는 곳
 	locker_change.appendTo('.mainWrap');
@@ -293,6 +305,7 @@ $(document).on('click','#lc_locker',function(){
 $(document).on('click','#locker_success',function(){
 	
 	// 선택된 프로젝트
+	var viewType = $('#vt').val();
 	var select_project = "";
 	$("input:button[class=div_btn_on]").each(function(){
 		select_project += ($(this).next().val())+",";
@@ -322,7 +335,7 @@ $(document).on('click','#locker_success',function(){
 			// form 데이터
 		locker_set_name.append($('<input/>', {type : 'hidden', name :'project_id_list', value :select_project}));
 		locker_set_name.append($('<input/>', {type : 'hidden', name :'project_locker', value :select_locker}));
-		
+		locker_set_name.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
 		// form 생성하는 곳
 		locker_set_name.appendTo('.mainWrap');
 	
@@ -337,6 +350,7 @@ $(document).on('click','#locker_cancel',function(){
 // 보관함 생성
 $(document).on('click','#locker_add',function(){
 	// 특수문자 구분
+	var viewType = $('#vt').val();
 	var blank_pattern = /[\s]/g;
 	var locker_name = $('#locker_name').val();
 	var locker_name_check = null;
@@ -359,7 +373,7 @@ $(document).on('click','#locker_add',function(){
 		locker_form.attr('action','insertlocker.do');
 		// form 데이터
 		locker_form.append($('<input/>',{type:'hidden', name:'locker_name', value:locker_name}));
-		
+		locker_form.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
 		// form 생성하는 곳
 		locker_form.appendTo('.mainWrap');
 		locker_form.submit();
@@ -380,64 +394,40 @@ $(document).ready(function(){
 	
 	var project_select_num;
 	
-	$('.content_type').hide();
-	$('#project_dir_list1').show();
-	
+	if ($('#vt').val() == '숨김') {
+		$('#locker_list').hide();
+		$('#locker_hide').text('숨기기 해제');
+	} else if ($('#vt').val() == '보관함') {
+		$('#locker_hide').hide();
+		$('#locker_list').text('보관함 해제');
+	}
 	$(document).on('click','#dir_setting',function(){
-		$('.div_btn_on').attr('class','div_btn');
 		// 편집 버튼 누를 때
-		if ($('.setting_div').attr('id') != 'setting_hide' &&  $('.setting_div').attr('id') != 'setting_locker') {
-
-			if ($(this).attr('class') == 'dir_set') {
-				$('.content_type').hide();
-				$('#project_dir_list2').css('display', 'inline-block');
-				project_select_num = 0;
-				$('.select_num').text(project_select_num);
-				// 세팅 바
-				$('.headerWrap').hide();
-				$('.dir_set_bar').show();
-				// 프로젝트 선택 css
-				$(this).attr('class','dir_set_on');
-				$('.project_div').attr('class','project_div_on');
-				$('.div_btn').show();
-			// 편집 취소할 때
-			} else if ($(this).attr('class') == 'dir_set_on') {
-				// 세팅 바
-				$('.dir_set_bar').hide();
-				$('.headerWrap').show();
-				
-				// 프로젝트 선택css
-				$(this).attr('class','dir_set');
-				$('.project_div_on').attr('class','project_div');
-				$('.div_btn').hide();
-				$('.div_btn_on').hide();
-				
-			}
-		}  else {
-			if ($(this).attr('class') == 'dir_set') {
-				project_select_num = 0;
-				$('.select_num').text(project_select_num);
-				// 세팅 바
-				$('.headerWrap').hide();
-				$('.dir_set_bar').show();
-				// 프로젝트 선택 css
-				$(this).attr('class','dir_set_on');
-				$('.project_div').attr('class','project_div_on');
-				$('.div_btn').show();
-			// 편집 취소할 때
-			} else if ($(this).attr('class') == 'dir_set_on') {
-				// 세팅 바
-				$('.dir_set_bar').hide();
-				$('.headerWrap').show();
-				
-				// 프로젝트 선택css
-				$(this).attr('class','dir_set');
-				$('.project_div_on').attr('class','project_div');
-				$('.div_btn').hide();
-				$('.div_btn_on').hide();
-				
-			}
-		} 
+		
+		if ($(this).attr('class') == 'dir_set') {
+			project_select_num = 0;
+			$('.select_num').text(project_select_num);
+			// 세팅 바
+			$('.headerWrap').hide();
+			$('.dir_set_bar').show();
+			// 프로젝트 선택 css
+			$(this).attr('class','dir_set_on');
+			$('.project_div').attr('class','project_div_on');
+			$('.div_btn').show();
+			
+		} else if ($(this).attr('class') == 'dir_set_on') {
+			// 세팅 바
+			$('.dir_set_bar').hide();
+			$('.headerWrap').show();
+			
+			// 프로젝트 선택css
+			$(this).attr('class','dir_set');
+			$('.project_div_on').attr('class','project_div');
+			$('.div_btn').hide();
+			$('.div_btn_on').hide();
+			
+		}
+		
 	});
 	
 	$(document).on('click','#div_button',function(){

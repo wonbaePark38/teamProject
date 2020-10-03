@@ -32,8 +32,8 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	}
 
 	@Override
-	public List<ProjectDirVO> getProjectDirTotalList(int member_id) {
-		return projectDirDAO.getProjectDirTotalList(member_id);
+	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo) {
+		return projectDirDAO.getProjectDirTotalList(vo);
 	}
 
 	public List<ProjectDirVO> getLockerList(int member_id) {
@@ -88,6 +88,11 @@ public class ProjectDirServiceImpl implements ProjectDirService{
 	@Override
 	public void updateLockerName(ProjectDirVO vo) {
 		projectDirDAO.updateLockerName(vo);
+	}
+
+	@Override
+	public  List<ProjectDirVO> getProjectUserList(ProjectDirVO vo) {
+		return projectDirDAO.getProjectUserList(vo);
 	}
 	
 }

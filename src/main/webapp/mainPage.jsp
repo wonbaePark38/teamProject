@@ -21,10 +21,10 @@
 <script src="script/page_ajax.js"></script>
 <link href="css/contentPage.css" rel="stylesheet">
 <link rel="stylesheet" href="css/write_completion.css">
-
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/submit.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
+<script type="text/javascript" src="script/projectdir.js"></script>
 </head>
 <style>
 </style>
@@ -52,12 +52,12 @@
 						style="padding: .5rem 1.25rem;">전체</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">미보관</a> <a
 						id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;">읽지않음</a> <a id="main_side"
+						style="padding: .5rem 1.25rem; text-decoration: line-through;">읽지않음</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
 					<div style="font-size: 13px; color: #000000; font-weight: bold; padding: 1px 0px 1px 10px; border-top: 1px solid #e7e8e9; margin: 22px 0 10px 0;">모아보기</div>
 					<a id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 업무</a> <a id="main_side"
+						style="padding: .5rem 1.25rem;" href="task.jsp">전체 업무</a> <a id="main_side"
 						href="calendar.jsp" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 일정</a> <a id="main_side"
 						href="totalFileView.do" class="list-group-item"
@@ -72,9 +72,8 @@
 					</div>
 					<c:forEach var="locker_list" items="${projectLockerList}">
 						<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id}">
-						<span id="locker_del" style="position:absolute; background-color: pink; width: 15px; height: 15px; z-index: 300; right: 15px; margin-top: 12px;"></span>
-						<a id="main_side" class="list-group-item"
-							style="padding: .5rem 1.25rem;">${locker_list.locker_name}
+						
+						<a id="main_side" class="list-group-item locker_a" style="padding: .5rem 1.25rem;">${locker_list.locker_name}<img id="locker_update"></img><img id="locker_del"></img>
 						</a>
 					</c:forEach>
 					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">
@@ -389,7 +388,7 @@
 								<div>
 									<div>
 										<h5>
-											<strong id="msg">관리자</strong> <span id="msg">(1)</span>
+											<strong id="msg">관리자</strong>
 										</h5>
 									</div>
 									<ul>
@@ -398,14 +397,16 @@
 												<img id="uimg" src="images/noimg.gif">
 											</div>
 											<div id="sendience-right-btns" class="btn_right">
-												<a id="sendience-chat" class="btn chat"> <span
-													class="blind">채팅</span>
+												<a id="sendience-chat" class="btn chat"> 
 												</a>
 											</div>
-											<div class="username" style="cursor: pointer;">
-												<span id="sendience-name" user-id="" use-intt-id="">안세영
-													(나)</span>
-											</div>
+											<c:forEach var="userList" items="${userList}"> 
+												<c:if test="${userList.project_manager eq '1'}">
+													<div class="username" style="cursor: pointer;">
+														<span id="sendience-name" >${userList.member_name } (나)</span>
+													</div>
+												</c:if>
+											</c:forEach>
 										</li>
 									</ul>
 
@@ -415,19 +416,23 @@
 										</h5>
 									</div>
 									<ul>
-										<li class="right-sendience-li">
-											<div class="msgphoto">
-												<img id="uimg" src="images/noimg.gif">
-											</div>
-											<div id="sendience-right-btns" class="btn_right">
-												<a id="sendience-chat" class="btn chat"> <span
-													class="blind">채팅</span>
-												</a>
-											</div>
-											<div class="username" style="cursor: pointer;">
-												<span id="sendience-name" user-id="" use-intt-id="">장원종</span>
-											</div>
-										</li>
+										<c:forEach var="userList" items="${userList}"> 
+											<c:if test="${userList.project_manager eq '0' }">
+											
+												<li class="right-sendience-li">
+													<div class="msgphoto">
+														<img id="uimg" src="images/noimg.gif">
+													</div>
+													<div id="sendience-right-btns" class="btn_right">
+														<a id="sendience-chat" class="btn chat"> 
+														</a>
+													</div>
+													<div class="username" style="cursor: pointer;">
+														<span id="sendience-name" >${userList.member_name }</span>
+													</div>
+												</li>
+											</c:if>
+										</c:forEach>
 									</ul>
 								</div>
 							</div>

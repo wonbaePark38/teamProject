@@ -72,7 +72,6 @@ public class MainPageController {
 	@RequestMapping(value = "/mainpage.do")
 	public ModelAndView articleSelect(Model model,ProjectDirVO project, ArticleReplyVO rvo, Article1VO vo, ModelAndView mav,
 			HttpSession session,@ModelAttribute(value="pvo")ProjectDirVO pvo) {
-		System.out.println(vo.toString());
 
 		ArticleWorkerVO wvo = new ArticleWorkerVO();
 		wvo.setProject_id(project.getProject_id());
@@ -121,13 +120,13 @@ public class MainPageController {
 		if (!uploadFile.isEmpty()) {
 			String memberID = Integer.toString(user.getSeq());
 			vo.setFile_name(uploadFile.getOriginalFilename());
-			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/"+project.getProject_id()+"/"+ memberID + "_" + vo.getFile_name();
-			File destdir = new File(file_path);
+			String file_path = "/plugProject/upload/"+project.getProject_id()+"/"+ memberID + "_" + vo.getFile_name();
+			File destdir = new File("/usr/local/tomcat/webapps"+file_path);
 			 if(!destdir.exists()) {
 				 destdir.mkdirs();
 			 }
 			
-			uploadFile.transferTo(new File(file_path));
+			uploadFile.transferTo(new File("/usr/local/tomcat/webapps"+file_path));
 			vo.setFile_path(file_path);
 		} else {
 			vo.setFile_name(null);
@@ -138,17 +137,17 @@ public class MainPageController {
 		List<MultipartFile> uploadImg = vo.getWriteForm_img();
 		if (!uploadImg.isEmpty()) {
 			String memberID = Integer.toString(user.getSeq());
-			String image_path = "/usr/local/tomcat/webapps/plugProject/upload_image/"+project.getProject_id()+"/"+memberID+"_";
+			String image_path = "/plugProject/upload_image/"+project.getProject_id()+"/"+memberID+"_";
 			String imageList = "";
 			try {
 				for (MultipartFile multipartFile : uploadImg) {
 					imageList += multipartFile.getOriginalFilename()+",";
-					File destdir = new File(image_path);
+					File destdir = new File("/usr/local/tomcat/webapps"+image_path);
 					if(!destdir.exists()) {
 						destdir.mkdirs();
 					}
 					
-					multipartFile.transferTo(new File(image_path+multipartFile.getOriginalFilename()));
+					multipartFile.transferTo(new File("/usr/local/tomcat/webapps"+image_path+multipartFile.getOriginalFilename()));
 				}
 				
 				vo.setImg_path(image_path);
@@ -179,6 +178,7 @@ public class MainPageController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
+		imageSave(vo, user, project);
 		service.insertArticle(vo);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
@@ -197,7 +197,7 @@ public class MainPageController {
 		
 		vo.setMember_id(user.getSeq());
 		fileSave(vo,user,project);
-
+		imageSave(vo, user, project);
 		service.insertArticle(vo);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());

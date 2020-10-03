@@ -30,18 +30,13 @@ public class ProjectDirController {
 
 		vo.setProject_manager(1);
 		vo.setProject_favorites(0);
-		vo.setProject_locker("");
+		vo.setProject_locker("PLN-400");
 		vo.setHide_locker(0);
 		projectDirService.insertProjectLookup(vo);
 
 		projectDirService.insertProjectLocker(vo);
 
 		
-		/*
-		 * File file = new File("C:\\plug"); if(!file.exists()) { file.mkdir(); } String
-		 * path = "C:\\plug\\"+vo.getProject_id(); File folder = new File(path);
-		 * folder.mkdir();
-		 */		
 		return "projectdir.do";
 	}
 
@@ -56,7 +51,7 @@ public class ProjectDirController {
 
 		vo.setProject_favorites(0);
 		vo.setProject_manager(0);
-		vo.setProject_locker("");
+		vo.setProject_locker("PLN-400");
 		vo.setHide_locker(0);
 
 		projectDirService.insertProjectLocker(vo);
@@ -71,16 +66,13 @@ public class ProjectDirController {
 	public ModelAndView getProjectDirTotalList(ProjectDirVO vo, ModelAndView mav, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
-
-		// 임시
-		vo.setClist_type(0);
-		vo.setSort_type(2);
-		vo.setManager_type(0);
-
-		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo.getMember_id());
-		List<ProjectDirVO> locker_list = projectDirService.getLockerList(vo.getMember_id());
+		String type = vo.getViewType();
 		
+		List<ProjectDirVO> list = projectDirService.getProjectDirTotalList(vo);
+		List<ProjectDirVO> locker_list = projectDirService.getLockerList(vo.getMember_id());
+		mav.addObject("lockerN", vo.getProject_locker());
 		mav.addObject(vo);
+		mav.addObject("type", type);
 		mav.addObject("projectDirList", list);
 		mav.addObject("projectLockerList", locker_list);
 		mav.setViewName("mainProjectDir.jsp");
@@ -101,9 +93,13 @@ public class ProjectDirController {
 		UserVO uvo = (UserVO) session.getAttribute("user");
 		vo.setMember_id(uvo.getSeq());
 		session.setAttribute("projectdir", vo);
+		List<ProjectDirVO> locker_list = projectDirService.getLockerList(vo.getMember_id());
+		List<ProjectDirVO> projectUser_list = projectDirService.getProjectUserList(vo);
 		
 		mav.addObject("getProject", vo);
 		mav.setViewName("mainpage.do");
+		mav.addObject("projectLockerList", locker_list);
+		mav.addObject("userList", projectUser_list);
 		projectDirService.insertProject_ConnectionLog(vo);
 		return mav;
 	}

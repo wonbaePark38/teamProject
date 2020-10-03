@@ -37,10 +37,15 @@ public class ProjectDirDAO {
 	}
 	
 	// 프로젝트 리스트
-	public List<ProjectDirVO> getProjectDirTotalList(int member_id){
-		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotalList",member_id);
+	public List<ProjectDirVO> getProjectDirTotalList(ProjectDirVO vo){
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectDirTotalList",vo);
 	}
-
+	
+	// 프로젝트 유저 리스트
+	public List<ProjectDirVO> getProjectUserList(ProjectDirVO vo){
+		return sqlSessionTemplate.selectList("ProjectDirDAO.getProjectUserList",vo);
+	}
+	
 	// 보관함 리스트
 	public List<ProjectDirVO> getLockerList(int member_id){
 		return sqlSessionTemplate.selectList("ProjectDirDAO.getLockerList",member_id);
@@ -90,4 +95,5 @@ public class ProjectDirDAO {
 	public List<ProjectDirVO> getTaskUser(ProjectDirVO vo){
 		return sqlSessionTemplate.selectList("ProjectDirDAO.getTaskUser",vo);
 	}
+	
 }

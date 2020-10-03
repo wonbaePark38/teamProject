@@ -25,7 +25,6 @@
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/fileupload.js"></script>
 <script type="text/javascript" src="script/task.js"></script>
-<!-- projectdir -->
 <script>
 	
 </script>
@@ -60,7 +59,7 @@
 						style="padding: .5rem 1.25rem;">전체</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">미보관</a> <a
 						id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;">읽지않음</a> <a id="main_side"
+						style="padding: .5rem 1.25rem; text-decoration: line-through;">읽지않음</a> <a id="main_side"
 						class="list-group-item" style="padding: .5rem 1.25rem;">즐겨찾기</a>
 
 					<div style="font-size: 13px; color: #000000; font-weight: bold; padding: 1px 0px 1px 10px; border-top: 1px solid #e7e8e9; margin: 22px 0 10px 0;">모아보기</div>

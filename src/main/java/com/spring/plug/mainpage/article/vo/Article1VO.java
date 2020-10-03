@@ -11,7 +11,7 @@ public class Article1VO {
 
 	private MultipartFile writeForm_file;
 	private List<MultipartFile> writeForm_img;
-
+	
 	private int project_id;
 	private String project_name;
 	private int member_id;

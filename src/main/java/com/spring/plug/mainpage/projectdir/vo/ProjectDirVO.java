@@ -19,9 +19,7 @@ public class ProjectDirVO {
 	private String member_name;
 	
 	// 프로젝트 정렬 세팅
-	private int clist_type;
-	private int sort_type;
-	private int manager_type;
+	private String viewType;
 	
 	// 프로젝트 정보
 	private int locker_id;
@@ -131,23 +129,11 @@ public class ProjectDirVO {
 	public void setProject_user(int project_user) {
 		this.project_user = project_user;
 	}
-	public int getClist_type() {
-		return clist_type;
+	public String getViewType() {
+		return viewType;
 	}
-	public void setClist_type(int clist_type) {
-		this.clist_type = clist_type;
-	}
-	public int getSort_type() {
-		return sort_type;
-	}
-	public void setSort_type(int sort_type) {
-		this.sort_type = sort_type;
-	}
-	public int getManager_type() {
-		return manager_type;
-	}
-	public void setManager_type(int manager_type) {
-		this.manager_type = manager_type;
+	public void setViewType(String viewType) {
+		this.viewType = viewType;
 	}
 	public int getLocker_list_id() {
 		return locker_list_id;
@@ -181,15 +167,4 @@ public class ProjectDirVO {
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
-	@Override
-	public String toString() {
-		return "ProjectDirVO [project_id=" + project_id + ", project_name=" + project_name + ", project_content="
-				+ project_content + ", project_type=" + project_type + ", createdate=" + createdate + ", lookup_id="
-				+ lookup_id + ", member_id=" + member_id + ", project_manager=" + project_manager + ", joindate="
-				+ joindate + ", clist_type=" + clist_type + ", sort_type=" + sort_type + ", manager_type="
-				+ manager_type + ", locker_id=" + locker_id + ", project_favorites=" + project_favorites
-				+ ", project_locker=" + project_locker + ", hide_locker=" + hide_locker + ", project_user="
-				+ project_user + "]";
-	}
-	
 }

@@ -623,16 +623,16 @@ $(document).on('click','.remark_btn',function(){
 var sel_files = [];
 
 $(document).ready(function(){
-	$('#img_input').on('change',handleImgFileSelect);
+	$('.img_input').on('change',handleImgFileSelect);
 });
 
-function fildUploadAction(){
-	$('#img_input').trigger('click');
-}
+$(document).on('click','#img_upload',function(){
+	$(this).parent().find('.img_input').trigger('click');
+});
 
 function handleImgFileSelect(e) {
 	sel_file = [];
-	//$('.post_images').empty();
+	$('.post_images').empty();
 	var imgDiv = $(this).parent().parent().find('#uploadImg');
 	var imgView = $(this).parent().parent().find('.post_images');
 	var files = e.target.files;
@@ -806,7 +806,7 @@ function deleteImageAction(index){
 									<input type="file" id="writeForm1_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm1_uploadFile)"
 										style="display: none;"> 
-										<input type="file" id="img_input" name="writeForm_img" style="display: none;" multiple/>
+										<input type="file"   class="img_input" name="writeForm_img" style="display: none;" multiple/>
 										<a id="writeForm1_file_add" class="add_file"></a> 
 										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a>
 										<a class="add_mention"></a>
@@ -904,7 +904,7 @@ function deleteImageAction(index){
 									<input type="file" id="writeForm2_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm2_uploadFile)"
 										style="display: none;"> 
-										<input type="file" id="img_input" name="writeForm_img" style="display: none;" multiple/>
+										<input type="file"   class="img_input" name="writeForm_img" style="display: none;" multiple/>
 										 <a id="writeForm2_file_add" class="add_file"></a> 
 										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a>
 										<a class="add_loc" onclick="locationPick()"></a>
@@ -1138,7 +1138,7 @@ function deleteImageAction(index){
 									<input type="file" id="writeForm3_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm3_uploadFile)"
 										style="display: none;"> 
-										<input type="file" id="img_input" name="writeForm_img" style="display: none;" multiple/>
+										<input type="file"   class="img_input" name="writeForm_img" style="display: none;" multiple/>
 										<a id="writeForm3_file_add" class="add_file"></a> 
 										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a> 
 										<a class="add_mention"></a>
@@ -1702,7 +1702,13 @@ function deleteImageAction(index){
 
 								<!-- 이미지 -->
 
-								<div id="post_images"></div>
+								<div id="post_images">
+									<c:set var="imgList" value="${fn:split(list.img_name,',')}"/>
+									<c:forEach var="img" items="${imgList}">
+										<img src="${list.img_path }${img}">
+										
+									</c:forEach>
+								</div>
 								<!-- 파일 -->
 
 								<!-- 파일 -->
@@ -2097,7 +2103,13 @@ function deleteImageAction(index){
 
 								<!-- 이미지 -->
 
-								<div id="post_images"></div>
+								<div id="post_images">
+									<c:set var="imgList" value="${fn:split(list.img_name,',')}"/>
+									<c:forEach var="img" items="${imgList}">
+										<img src="${list.img_path }${img}">
+										
+									</c:forEach>
+								</div>
 								<!-- 파일 -->
 
 								<c:if test="${list.file_name ne null}">
@@ -2630,7 +2642,11 @@ function deleteImageAction(index){
 								</div>
 								<!-- 이미지 -->
 								<div id="post_images">
-									
+									<c:set var="imgList" value="${fn:split(list.img_name,',')}"/>
+									<c:forEach var="img" items="${imgList}">
+										<img src="${list.img_path }${img}">
+										
+									</c:forEach>
 								</div>
 								<!-- 파일 -->
 								<c:if test="${list.file_name ne null}">
@@ -2799,8 +2815,13 @@ function deleteImageAction(index){
 								</c:if>
 
 								<!-- 이미지 -->
-
-								<div id="post_images"></div>
+								<div id="post_images">
+									<c:set var="imgList" value="${fn:split(list.img_name,',')}"/>
+									<c:forEach var="img" items="${imgList}">
+										<img src="${list.img_path }${img}">
+										
+									</c:forEach>
+								</div>
 								<!-- 파일 -->
 
 								<!-- 파일 -->
@@ -3194,8 +3215,13 @@ function deleteImageAction(index){
 								<!-- //업무 내용 들어가는 곳 -->
 
 								<!-- 이미지 -->
-
-								<div id="post_images"></div>
+								<div id="post_images">
+									<c:set var="imgList" value="${fn:split(list.img_name,',')}"/>
+									<c:forEach var="img" items="${imgList}">
+										<img src="${list.img_path }${img}">
+										
+									</c:forEach>
+								</div>
 								<!-- 파일 -->
 
 								<c:if test="${list.file_name ne null}">

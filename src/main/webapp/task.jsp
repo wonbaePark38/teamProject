@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -191,7 +192,7 @@
 
 			<!-- 업무 내용 -->
 			<div class="" >
-				<div style="float: left; width: 60%; margin-left: 45px;">
+				<div style="float: left; margin-left: 45px;">
 					<span>전체 업무 (1)</span>
 				</div>
 
@@ -238,19 +239,21 @@
 									<th class="work_table_th"><a>등록일</a></th>
 									<th class="work_table_th"><a>수정일</a></th>
 								</tr>
-								<tr>
-									<td><a>1</a></td>
-									<td><a>2</a></td>
-									<td><a>긴급</a></td>
-									<td style="width: 100%"><a>신입사원</a></td>
-									<td><a>0%</a></td>
-									<td><a>홍길동</a></td>
-									<td><a>홍길동</a></td>
-									<td><a>-</a></td>
-									<td><a>-</a></td>
-									<td><a>2020-07-18</a></td>
-									<td><a>2020-07-18</a></td>
-								</tr>
+								<c:forEach var="" items="">
+									<tr>
+										<td><a>1</a></td>
+										<td><a>2</a></td>
+										<td><a>긴급</a></td>
+										<td style="width: 100%"><a>신입사원</a></td>
+										<td><a>0%</a></td>
+										<td><a>홍길동</a></td>
+										<td><a>홍길동</a></td>
+										<td><a>-</a></td>
+										<td><a>-</a></td>
+										<td><a>2020-07-18</a></td>
+										<td><a>2020-07-18</a></td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 					</div>
