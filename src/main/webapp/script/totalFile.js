@@ -481,7 +481,7 @@ $(document).ready(function(){
 
 				  var strArray = element.fileName.split('.');//파일이름 . 구분자로 자름
 				  var dataFileType = strArray[1]; //확장자 저장
-				  if(dataFileType == 'ppt'){ //확장자가 ppt인 파일만
+				  if(dataFileType == 'ppt' || dataFileType == 'pptx'){ //확장자가 ppt인 파일만
 					  settingList(index,element);   //화면에 출력
 					  presentList.push(element);
 				  }
@@ -565,7 +565,7 @@ $(document).ready(function(){
 
 				  var strArray = element.fileName.split('.');
 				  var dataFileType = strArray[1];
-				  if(dataFileType == 'doc'){
+				  if(dataFileType == 'doc' || dataFileType == 'docx'){
 					  settingList(index,element);
 					  presentList.push(element);
 				  }
@@ -743,7 +743,7 @@ $(document).ready(function(){
 			  var filePath = data.filePath;
 			  var fileArr = filePath.split('/');
 			  var realFileName = fileArr[fileArr.length-1];
-			  var src = "http://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+"/"+ realFileName;
+			  var src = "http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+"/"+ realFileName;
 
 			  var fileTypeArr = fileName.split('.');
 			  var fileType = fileTypeArr[1];
@@ -757,7 +757,7 @@ $(document).ready(function(){
 			  }else if(fileType == 'ppt' || fileType == 'doc' || fileType == 'docx' || fileType == 'pdf' || fileType == 'pptx'  || fileType == 'xls' || fileType == 'xlsx' || fileType == 'txt'){
 				  $('.file-modal').css('display','block');
 				   $('.file-modal').append(
-				"<iframe src='https://docs.google.com/gview?url=http://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+'/'+realFileName+"&embedded=true' class=file-view>"+
+				"<iframe src='https://docs.google.com/gview?url=http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/upload/"+data.projectId+'/'+realFileName+"&embedded=true' class=file-view>"+
 				"</iframe>"
 				  );
 			  }else{
@@ -957,13 +957,13 @@ function getFileType(fileName){
 	 	case "pdf":
 	 		filePath = 'images/filemoa_ico03.png';
 	 			break;
-	 	case "doc":
+	 	case "doc" || "docx":
 	 		filePath = 'images/filemoa_ico04.png';
 	 			break;
 	 	case "hwp":
 	 		filePath = 'images/filemoa_ico12.png';
 	 			break;
-	 	case "ppt":
+	 	case "ppt" || "pptx":
 	 		filePath = 'images/filemoa_ico06.png';
 	 			break;
 	 	case "jpg":		
