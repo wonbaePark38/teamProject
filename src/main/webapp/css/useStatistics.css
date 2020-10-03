@@ -86,10 +86,11 @@ tr {
 }
 
 .useStatistics-table td {
-	align-items: center;
 	font-size: 13px;
-	text-align: center;
-	
+    background-color: #f9f9fb;
+    font-weight: normal;
+    border: 1px solid #e1e1e2;
+    padding: 3px;
 }
 
 .useStatistics-table {
