@@ -139,7 +139,15 @@
 	</delete>
 	
 	<select id="articleSelectAll" resultMap="articleResult">
-		SELECT * FROM mainpage_article WHERE project_id = #{project_id} ORDER BY article_id DESC
+		SELECT * FROM mainpage_article WHERE 
+		<choose>
+			<when test="selectType == 'totaltask'">
+				member_id = #{member_id} AND form_name = 'taskWrite'			
+			</when>
+			<otherwise>
+				project_id = #{project_id} ORDER BY article_id DESC
+			</otherwise>
+		</choose>
 	</select>
 	
 	<insert id="articleInsert" useGeneratedKeys="true"
@@ -210,8 +218,14 @@
 		#{writeForm2_title, jdbcType=VARCHAR},
 		#{writeForm2_content, jdbcType=VARCHAR},
 		#{writeForm2_latlng, jdbcType=VARCHAR},
-
-		(select nvl(max(writeForm3_tasknum), 0) +1 from mainpage_article),
+		<choose>
+			<when test="form_name == 'taskWrite'">
+				(select nvl(max(writeForm3_tasknum), 0) +1 from mainpage_article where project_id = ${project_id}),
+			</when>
+			<otherwise>
+				#{writeForm3_tasknum, jdbcType=VARCHAR},
+			</otherwise>
+		</choose>
 		#{writeForm3_title, jdbcType=VARCHAR},
 		#{writeForm3_status, jdbcType=VARCHAR},
 		#{writeForm3_workersID, jdbcType=VARCHAR},
@@ -302,24 +316,20 @@
 		<choose>
 			<when test="form_name == 'nomalWrite'">
 				UPDATE mainpage_article SET writeform1_content = #{writeForm1_content}
-				WHERE article_id = #{article_id}
 			</when>
 			<when test="form_name == 'nomalWrite2.0'">
 				UPDATE mainpage_article SET writeform2_title = #{writeForm2_title}, writeform2_content = #{writeForm2_content}
-				WHERE article_id = #{article_id}
 			</when>
 			<when test="form_name == 'taskWrite'">
 				UPDATE mainpage_article SET writeform3_title = #{writeForm3_title}, writeform3_content = #{writeForm3_content}, writeform3_status = #{writeForm3_status}, writeform3_progress = #{writeForm3_progress}
-				WHERE article_id = #{article_id}
 			</when>
 			<when test="form_name == 'scheWrite'">
 				UPDATE mainpage_article SET writeform4_title = #{writeForm4_title}, writeform4_content = #{writeForm4_content}
-				WHERE article_id = #{article_id}
 			</when>
 			<when test="form_name == 'todoWrite'">
 				UPDATE mainpage_article SET writeform5_title = #{writeForm5_title}, writeform5_content = #{writeForm5_content}
-				WHERE article_id = #{article_id}
 			</when>
 		</choose>
+		WHERE article_id = #{article_id}
 	</update>
 </mapper>

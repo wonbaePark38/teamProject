@@ -57,7 +57,7 @@
 
 					<div style="font-size: 13px; color: #000000; font-weight: bold; padding: 1px 0px 1px 10px; border-top: 1px solid #e7e8e9; margin: 22px 0 10px 0;">모아보기</div>
 					<a id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;" href="task.jsp">전체 업무</a> <a id="main_side"
+						style="padding: .5rem 1.25rem;">전체 업무</a> <a id="main_side"
 						href="calendar.jsp" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 일정</a> <a id="main_side"
 						href="totalFileView.do" class="list-group-item"
@@ -355,7 +355,7 @@
 							<a class="btn_listback" href="projectdir.do">이전화면</a>
 						</div>
 
-						<div class="set_wrap col-12">
+						<div class="set_wrap col-12" style="display: none;">
 							<ul style="padding-inline-start: 0px;">
 								<li><a href="totalFile.html" id="file-box" class="ico1"
 									style="padding-top: 30px; height: 50px;">파일함</a></li>
@@ -379,9 +379,8 @@
 							<div class="participant_wrap">
 								<div>
 									<div class="msg_user">
-										<strong>전체 참여자</strong>&nbsp; <strong>2</strong>
-										<!-- 프로젝트 참여인원 db -->
-										<strong>명</strong> <a>전체보기</a>
+										<strong>전체 참여자</strong>&nbsp;<strong id="totaluser"></strong>
+										<strong>명</strong>
 									</div>
 								</div>
 
@@ -392,53 +391,47 @@
 										</h5>
 									</div>
 									<ul>
-										<li class="right-sendience-li">
-											<div class="msgphoto">
-												<img id="uimg" src="images/noimg.gif">
-											</div>
-											<div id="sendience-right-btns" class="btn_right">
-												<a id="sendience-chat" class="btn chat"> 
-												</a>
-											</div>
-											<c:forEach var="userList" items="${userList}"> 
-												<c:if test="${userList.project_manager eq '1'}">
-													<div class="username" style="cursor: pointer;">
-														<span id="sendience-name" >${userList.member_name } (나)</span>
-													</div>
-												</c:if>
-											</c:forEach>
-										</li>
+									<c:forEach var="userList" items="${joinlist}"> 
+										<c:if test="${userList.project_manager eq '1'}">
+											<li class="right-sendience-li">
+												<div class="msgphoto">
+													<img id="uimg" src="images/noimg.gif">
+												</div>
+												<div class="username" style="cursor: pointer;">
+													<span id="sendience-name" >${userList.member_name }</span>
+													<c:if test="${userList.member_id eq user.seq}">
+														<span>(나)</span>
+													</c:if>
+												</div>
+											</li>	
+										</c:if>
+									</c:forEach>
 									</ul>
 
 									<div>
 										<h5>
-											<strong id="msg">참여자</strong> <span id="msg">(1)</span>
+											<strong id="msg">참여자</strong> <span id="cluser"></span>
 										</h5>
 									</div>
-									<ul>
-										<c:forEach var="userList" items="${userList}"> 
+									<ul id="juser" style="overflow-y: scroll;max-height: 300px;">
+										<c:forEach var="userList" items="${joinlist}"> 
 											<c:if test="${userList.project_manager eq '0' }">
 											
 												<li class="right-sendience-li">
 													<div class="msgphoto">
 														<img id="uimg" src="images/noimg.gif">
 													</div>
-													<div id="sendience-right-btns" class="btn_right">
-														<a id="sendience-chat" class="btn chat"> 
-														</a>
-													</div>
 													<div class="username" style="cursor: pointer;">
 														<span id="sendience-name" >${userList.member_name }</span>
+														<c:if test="${userList.member_id eq user.seq}">
+															<span>(나)</span>
+														</c:if>
 													</div>
 												</li>
 											</c:if>
 										</c:forEach>
 									</ul>
 								</div>
-							</div>
-
-							<div class="btn_prj_chat_box">
-								<a id="project-open-chat" class="btn_prj_chat">프로젝트 채팅</a>
 							</div>
 
 						</div>

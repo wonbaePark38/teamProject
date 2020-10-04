@@ -57,6 +57,17 @@
 	    float: right;
     	margin: 0 5px;
     }
+    .t_num {
+    	background-color: lightgray; 
+    	border-radius: 15px; 
+    	padding: 3px; 
+    	font-size: 11px; 
+    	float: right;
+    }
+    .t_num span{
+    	margin-left: 2px;
+    }
+    
 </style>
 
 <script>
@@ -1861,7 +1872,7 @@ function deleteImageAction(index){
 							<div class="post">
 								
 								<div class="post_title">
-									<strong id='write_t'>${list.writeForm3_title }</strong>
+									<strong id='write_t'>${list.writeForm3_title }</strong><span class="t_num"><span>업무번호</span>${list.writeForm3_tasknum}</span>
 								</div>
 
 
@@ -2974,7 +2985,7 @@ function deleteImageAction(index){
 							<div class="post">
 								
 								<div class="post_title">
-									<strong id='write_t'>${list.writeForm3_title }</strong>
+									<strong id='write_t'>${list.writeForm3_title }</strong><span class="t_num"><span>업무번호</span>${list.writeForm3_tasknum}</span>
 								</div>
 
 

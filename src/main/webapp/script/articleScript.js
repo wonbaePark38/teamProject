@@ -1,3 +1,18 @@
+$(document).ready(function(){
+	
+	//게시글 참여자
+	var project_user_num = 0;
+	var project_juser_num = 0;
+	$('.right-sendience-li').each(function(){
+		project_user_num ++;
+	});
+	$('.msg_user').find('#totaluser').text(project_user_num);
+	$('#juser').find('.right-sendience-li').each(function(){
+		project_juser_num++;
+	});
+	$('#cluser').text('('+(project_juser_num)+')');
+});
+
 
 //헤더 채팅영역
 function headerChatting(){

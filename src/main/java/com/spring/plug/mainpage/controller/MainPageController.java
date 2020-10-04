@@ -120,13 +120,13 @@ public class MainPageController {
 		if (!uploadFile.isEmpty()) {
 			String memberID = Integer.toString(user.getSeq());
 			vo.setFile_name(uploadFile.getOriginalFilename());
-			String file_path = "/plugProject/upload/"+project.getProject_id()+"/"+ memberID + "_" + vo.getFile_name();
-			File destdir = new File("/usr/local/tomcat/webapps"+file_path);
+			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/"+project.getProject_id()+"/"+ memberID + "_" + vo.getFile_name();
+			File destdir = new File(file_path);
 			 if(!destdir.exists()) {
 				 destdir.mkdirs();
 			 }
 			
-			uploadFile.transferTo(new File("/usr/local/tomcat/webapps"+file_path));
+			uploadFile.transferTo(new File(file_path));
 			vo.setFile_path(file_path);
 		} else {
 			vo.setFile_name(null);
@@ -334,4 +334,19 @@ public class MainPageController {
 		model.addAttribute("project_name",project.getProject_name());
 		return "redirect:mainpage.do";
 	};
+	
+	@RequestMapping(value = "/task.do")
+	public ModelAndView totalTask(Article1VO vo, ModelAndView mav, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		vo.setMember_id(user.getSeq());
+		vo.setSelectType("totaltask");
+		List<Article1VO> taskList = service.selectArticle(vo);
+		for (Article1VO article1vo : taskList) {
+			System.out.println(article1vo.toString());
+		}
+		mav.addObject("taskList",taskList);
+		mav.setViewName("task.jsp");
+		return mav;
+	}
+	
 }

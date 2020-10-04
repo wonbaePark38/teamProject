@@ -11,6 +11,30 @@
 <title>Insert title here</title>
 <link href="css/write_completion.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<style type="text/css">
+	.pspan {
+		font-weight:bold;
+		position: absolute;
+	    margin-top: 8.5px;
+	    margin-left: 46px;
+	}
+	.taskpbar{
+	    height: 40px;
+    	width: 110px;
+	}
+	.tdate {
+		 padding: 0px 17px;
+	 }
+	 .table_list a{
+		 font-weight: normal;
+	 }
+	 .tstatus{
+	 	padding: 1px 10px;
+	    border-radius: 5px;
+	    color: #fff;
+	    font-weight: 800;
+	 }
+</style>
 <script type="text/javascript">
     function fold1(){
       document.getElementById('more1').style.display=(document.getElementById('more1').style.display=='block') ? 'none' : 'block';
@@ -230,28 +254,58 @@
 									<th class="work_table_th"><a>번호</a></th>
 									<th class="work_table_th"><a>상태</a></th>
 									<th class="work_table_th"><a>우선순위</a></th>
-									<th class="work_table_th" style="width: 100%"><a>제목</a></th>
+									<th class="work_table_th"><a>제목</a></th>
 									<th class="work_table_th"><a>진척도</a></th>
 									<th class="work_table_th"><a>담당자</a></th>
 									<th class="work_table_th"><a>작성자</a></th>
-									<th class="work_table_th"><a>시작일</a></th>
-									<th class="work_table_th"><a>마감일</a></th>
-									<th class="work_table_th"><a>등록일</a></th>
-									<th class="work_table_th"><a>수정일</a></th>
+									<th class="work_table_th"><a class="tdate">시작일</a></th>
+									<th class="work_table_th"><a class="tdate">마감일</a></th>
+									<th class="work_table_th"><a class="tdate">등록일</a></th>
+									<th class="work_table_th"><a class="tdate">수정일</a></th>
 								</tr>
-								<c:forEach var="" items="">
+								<c:forEach var="taskList" items="${taskList}">
 									<tr>
-										<td><a>1</a></td>
-										<td><a>2</a></td>
-										<td><a>긴급</a></td>
-										<td style="width: 100%"><a>신입사원</a></td>
-										<td><a>0%</a></td>
-										<td><a>홍길동</a></td>
-										<td><a>홍길동</a></td>
-										<td><a>-</a></td>
-										<td><a>-</a></td>
-										<td><a>2020-07-18</a></td>
-										<td><a>2020-07-18</a></td>
+										<td><a>${taskList.writeForm3_tasknum}</a></td>
+										<c:choose>
+											<c:when test="${taskList.writeForm3_status eq '요청'}">
+												<td><a class="tstatus" style="background-color: #4aaefb;">${taskList.writeForm3_status}</a></td>
+											</c:when>
+											<c:when test="${taskList.writeForm3_status eq '진행'}">
+												<td><a class="tstatus" style="background-color: #50b766;">${taskList.writeForm3_status}</a></td>
+											</c:when>
+											<c:when test="${taskList.writeForm3_status eq '피드백'}">
+												<td><a class="tstatus" style="background-color: #f17a19;">${taskList.writeForm3_status}</a></td>
+											</c:when>
+											<c:when test="${taskList.writeForm3_status eq '완료'}">
+												<td><a class="tstatus" style="background-color: #2e417e;">${taskList.writeForm3_status}</a></td>
+											</c:when>
+											<c:when test="${taskList.writeForm3_status eq '보류'}">
+												<td><a class="tstatus" style="background-color: #aeaeae;">${taskList.writeForm3_status}</a></td>
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${taskList.writeForm3_order ne null}">
+												<td><a>${taskList.writeForm3_order}</a></td>
+											</c:when>
+											<c:when test="${taskList.writeForm3_order eq null}">
+												<td><a>-</a></td>
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${taskList.writeForm3_title ne null}">
+												<td><a>${taskList.writeForm3_title}</a></td>
+											</c:when>
+											<c:when test="${taskList.writeForm3_title eq null}">
+												<td><a>-</a></td>
+											</c:when>
+										</c:choose>
+										<td><span class="pspan">${taskList.writeForm3_progress}%</span><progress class="taskpbar" value="${taskList.writeForm3_progress}" max="100"></progress></td>
+										<td><a>${taskList.writeForm3_workersName}</a></td>
+										<td><a>${taskList.writer}</a></td>
+										<td><a>${taskList.writeForm3_start_date}</a></td>
+										<td><a>${taskList.writeForm3_end_date}</a></td>
+										<td><a>${taskList.regDate}</a></td>
+										<td><a>수정일</a></td>
 									</tr>
 								</c:forEach>
 							</table>

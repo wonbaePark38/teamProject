@@ -66,13 +66,13 @@ $(document).on('click','#star_btn',function(){
 });
 
 
-function viewType(type){
+function viewType(type,url){
 	// form 생성
 	var view = $('<form></form>');
 	
 	// form 설정
 	view.attr('method','post');
-	view.attr('action','projectdir.do');
+	view.attr('action',url);
 	
 	// form 데이터
 	view.append($('<input/>',{type:'hidden', name:'viewType', value:type}));
@@ -106,13 +106,13 @@ $(document).on('click', '#main_side', function() {
 	if (click_menu == '전체') {
 		viewType(null);
 	} else if (click_menu == '미보관') {
-		viewType('미보관');
+		viewType('미보관','projectdir.do');
 	} else if (click_menu == '읽지않음') {
-		viewType('읽지않음');
+		viewType('읽지않음','projectdir.do');
 	} else if (click_menu == '즐겨찾기') {
-		viewType('즐겨찾기');
+		viewType('즐겨찾기','projectdir.do');
 	} else if (click_menu == '전체 업무') {
-		alert('전체 업무');
+		viewType('전체 업무','task.do');
 	} else if (click_menu == '담아둔 글') {
 		alert('담아둔 글');
 	} else if (click_menu == '나를 지정') {
@@ -120,12 +120,13 @@ $(document).on('click', '#main_side', function() {
 	} else if (click_menu == '내 게시물') {
 		alert('내 게시물');
 	} else if (click_menu == '숨김') {
-		viewType('숨김');
+		viewType('숨김','projectdir.do');
 	} else {
 		
 		viewLocker(click_menu);
 	}
 });
+
 
 // 보관함 설정
 $(document).on('click', '.locker_setbtn', function() {

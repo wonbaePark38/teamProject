@@ -11,7 +11,7 @@ public class Article1VO {
 
 	private MultipartFile writeForm_file;
 	private List<MultipartFile> writeForm_img;
-	
+	private String selectType;
 	private int project_id;
 	private String project_name;
 	private int member_id;
@@ -58,6 +58,13 @@ public class Article1VO {
 	private String writeForm5_content;
 	private String writeForm5_date;
 	private String writeForm5_worker;
+	
+	public String getSelectType() {
+		return selectType;
+	}
+	public void setSelectType(String selectType) {
+		this.selectType = selectType;
+	}
 	public MultipartFile getWriteForm_file() {
 		return writeForm_file;
 	}

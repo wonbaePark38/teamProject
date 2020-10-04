@@ -63,12 +63,9 @@
 
 .table_list td {
 	text-align: center;
-}
-
-.table_list td {
-	padding-left: 8px;
 	font-size: 14px;
 }
+
 
 .work_header {
 	width: 100%;
@@ -82,26 +79,20 @@
 	white-space: nowrap;
 	max-width: 100%;
 	overflow: hidden;
-	text-overflow: ellipsis
-}
-
-.work_table_th {
-	padding-left: 1px;
+	text-overflow: ellipsis;
+	padding: 0 1px;
 	border-bottom: 1px solid #eaeaea;
-	padding-right: 1px;
 	height: 44px;
 	margin-bottom: 10px
 }
 
 .work_table_th a {
-	padding-left: 8px;
 	font-size: 14px;
 	color: #969696;
 	font-weight: 700
 }
 
 .work_table_th a.on {
-	padding-left: 8px;
 	font-size: 14px;
 	color: #111;
 	font-weight: 700;

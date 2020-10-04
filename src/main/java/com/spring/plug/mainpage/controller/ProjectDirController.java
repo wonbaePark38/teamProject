@@ -99,7 +99,7 @@ public class ProjectDirController {
 		mav.addObject("getProject", vo);
 		mav.setViewName("mainpage.do");
 		mav.addObject("projectLockerList", locker_list);
-		mav.addObject("userList", projectUser_list);
+		mav.addObject("joinlist", projectUser_list);
 		projectDirService.insertProject_ConnectionLog(vo);
 		return mav;
 	}
@@ -193,5 +193,7 @@ public class ProjectDirController {
 		}
 		return "projectdir.do";
 	}
+	
+	
 	
 }
