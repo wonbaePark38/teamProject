@@ -170,7 +170,7 @@ $(document).ready(function() {
 	//웹소켓 접속
 	function connect() {
 		
-		var ws = new WebSocket("ws://localhost:8080/plugProject/chat.do");
+		var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/chat.do");
 		socket = ws;
 
 		socket.onopen = function() {
@@ -325,6 +325,7 @@ $(document).ready(function() {
 					"</a>"
 					
 			);
+			chatLi.find('.sender span').text(message_sender);
 		}else{
 			chatLi.addClass(LR_className);
 			chatLi.find('.message span').text(message_content);
@@ -349,10 +350,9 @@ $(document).ready(function() {
 				}else if(message.messageType == 'exit'){
 					window.open("about:blank","_self").close();
 				}
-				
 			},
-			fail : function(err) {
-				alert('에러발생');
+			error : function() {
+				alert('문자열 길이가 초과되어 에러가 발생했습니다');
 			}
 		});
 	}
