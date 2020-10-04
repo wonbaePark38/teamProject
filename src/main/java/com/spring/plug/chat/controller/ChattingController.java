@@ -78,7 +78,7 @@ public class ChattingController {
 		if(msgVO.getMessageType().equals("file")) {
 			String roomId = msgVO.getChatRoomId();
 			String realFileName = msgVO.getSenderId()+ "_" + msgVO.getMessage_content();
-			String file_path = "C:\\CHATUPLOADTEST\\"+roomId+"\\"+ realFileName;
+			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/chat/"+roomId+"/"+ realFileName;
 			msgVO.setFileName(msgVO.getMessage_content());
 			msgVO.setFilePath(file_path);
 		}
