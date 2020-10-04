@@ -118,8 +118,8 @@ $(document).ready(function() {
 			success : function(data) {
 				//joinedMember(data); //참여자 목록 세팅
 			},
-			fail : function(err) {
-				alert('에러발생');
+			error : function(err) {
+				alert('접속 로드 쓰는 도중 에러발생');
 			}
 		});
 	
@@ -128,20 +128,18 @@ $(document).ready(function() {
 	$.ajax({ //채팅 내역 로드
 		type : "POST",
 		url : 'loadMessage.do',
-		data : sendData,
-		success : function(data) {
-			
-			$.each(data,function(index,element){
-				msgHistoryPosition(element); //채팅방에 최초 들어온 시점부터 화면에 뿌려줌
-			});
-			window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
-			data = null;
-		},
-		fail : function(err) {
-			alert('에러발생');
-		}
-			
-	})	
+		data : sendData
+	}).done(function(data){
+		$.each(data,function(index,element){
+			msgHistoryPosition(element); //채팅방에 최초 들어온 시점부터 화면에 뿌려줌
+		});
+		window.scrollTo(0, document.body.scrollHeight); // 스크롤 하단 고정
+		data = null;
+	}).fail(function(){
+		alert('메시지 내역 불러오는 도중 에러 발생');
+	})
+		
+		
 	
 		$(document).on('keydown', '#message', function(e) { //엔터 이벤트
 			var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -325,6 +323,7 @@ $(document).ready(function() {
 					"</a>"
 					
 			);
+			chatLi.find('.sender span').text(message_sender);
 		}else{
 			chatLi.addClass(LR_className);
 			chatLi.find('.message span').text(message_content);
@@ -349,10 +348,9 @@ $(document).ready(function() {
 				}else if(message.messageType == 'exit'){
 					window.open("about:blank","_self").close();
 				}
-				
 			},
-			fail : function(err) {
-				alert('에러발생');
+			error : function() {
+				alert('문자열 길이가 초과되어 에러가 발생했습니다');
 			}
 		});
 	}
@@ -444,7 +442,7 @@ $(document).ready(function() {
 					success : function(data) {
 						changeRoomName(userInput) 
 					},
-					fail : function(err) {
+					error : function(err) {
 						alert('에러발생');
 					}
 				});
@@ -490,7 +488,7 @@ $(document).ready(function() {
 				success : function(data) {
 					
 				},
-				fail : function(err) {
+				error : function(err) {
 					alert('에러발생');
 				}
 			}) //end ajax
@@ -558,7 +556,8 @@ $(document).ready(function() {
 			data : formData,
 			success: function(data){ 
 				
-			},fail : function(err) {
+			},
+			error : function(err) {
 				alert('에러발생');
 			} 
 		});

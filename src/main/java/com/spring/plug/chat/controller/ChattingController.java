@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,12 +69,8 @@ public class ChattingController {
 	//db에 채팅 메시지 저장하는 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="/insertMessage.do", method = RequestMethod.POST)
-	public List<MessageVO> insertMessage(MessageVO msgVO){
+	public synchronized List<MessageVO> insertMessage(MessageVO msgVO){
 		
-		if(msgVO.getSenderId() != 0) { //관리자 메시지가 아닐 경우 
-			chatService.updateChatRoomStatus(msgVO);
-			chatService.updateUnreadCount(msgVO);
-		}
 		
 		if(msgVO.getMessageType().equals("file")) {
 			String roomId = msgVO.getChatRoomId();
@@ -82,7 +79,13 @@ public class ChattingController {
 			msgVO.setFileName(msgVO.getMessage_content());
 			msgVO.setFilePath(file_path);
 		}
+		
 		chatService.insertMessage(msgVO);
+		
+		if(msgVO.getSenderId() != 0) { //관리자 메시지가 아닐 경우 
+			chatService.updateChatRoomStatus(msgVO);
+			chatService.updateUnreadCount(msgVO);
+		}
 		
 		
 		List<MessageVO> unreadList = chatService.getUnreadUser(msgVO);//현재 방 접속상태 아닌 사람 목록 가저옴

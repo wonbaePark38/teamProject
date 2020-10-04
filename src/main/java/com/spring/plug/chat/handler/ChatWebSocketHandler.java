@@ -46,7 +46,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		
 		for(WebSocketSession sess : sessions){
 			if(messageVO.getChatRoomId().equals(roomSessions.get(sess))) {
-				sess.sendMessage(new TextMessage(message.getPayload()));
+				synchronized (message) {
+					sess.sendMessage(new TextMessage(message.getPayload()));
+				}
 			}
 			
 		}
