@@ -32,7 +32,6 @@ import com.spring.plug.chat.vo.ChatRoomVO;
 import com.spring.plug.chat.vo.MessageVO;
 import com.spring.plug.common.util.ScanNowTime;
 import com.spring.plug.login.vo.UserVO;
-import com.spring.plug.user.accountinfo.service.UserSettingService;
 
 @Controller
 public class ChattingController {
@@ -53,6 +52,7 @@ public class ChattingController {
 	@RequestMapping("/chatting.do")
 	public ModelAndView chatting(ChatRoomVO roomVO, HttpServletRequest request, ModelAndView mav,HttpSession session,
 			@RequestParam String param) {
+		
 		UserVO user = (UserVO)session.getAttribute("user");
 		
 		ChatRoomVO roomInfo = (ChatRoomVO)chatService.getChatRoomInfo(param);
@@ -168,8 +168,11 @@ public class ChattingController {
 	//채팅창 켰을때 메시지 히스토리 가저오고 접속 시간 로그 남김 컨트롤러
 	@ResponseBody
 	@RequestMapping(value="/loadMessage.do", method = RequestMethod.POST)
-	public List<MessageVO> loadChatHistory(MessageVO msgVO, HttpSession session,
+	public List<MessageVO> loadChatHistory(MessageVO msgVO,HttpServletResponse response, HttpSession session,
 			@RequestParam String param) {
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		response.setHeader("Pragma", "no-cache"); 
+		response.setHeader("Expires", "0");
 		UserVO user = (UserVO)session.getAttribute("user");
 		msgVO.setUserId(user.getSeq());
 		msgVO.setChatRoomId(param);
