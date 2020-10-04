@@ -170,7 +170,7 @@ $(document).ready(function() {
 	//웹소켓 접속
 	function connect() {
 		
-		var ws = new WebSocket("ws://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/chat.do");
+		var ws = new WebSocket("ws://localhost:8080/plugProject/chat.do");
 		socket = ws;
 
 		socket.onopen = function() {
