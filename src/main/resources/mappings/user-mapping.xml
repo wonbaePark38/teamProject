@@ -44,16 +44,12 @@
 		SELECT MEMBER_EMAIL, MEMBER_ISSOCIAL FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
 	</select>
 	
-	<update id="sendPasswordCheckEmail" parameterType="user">
-		UPDATE MEMBERINFO SET PASSWORDAUTHSTATUS = #{passwordAuthStatus} WHERE MEMBER_EMAIL = #{email}
-	</update>
-	
 	<update id="keepLogin">
 		UPDATE MEMBERINFO SET SESSIONID = #{sessionId}, SESSIONTIMEOUT = #{sessionLimit} WHERE MEMBER_EMAIL = #{email}
 	</update>
 	
 	<update id="changePasswordBytempPassword" parameterType="user">
-		UPDATE MEMBERINFO SET MEMBER_PASSWORD = #{password} WHERE MEMBER_EMAIL = #{email}
+		UPDATE MEMBERINFO SET MEMBER_PASSWORD = #{password}, PASSWORDAUTHSTATUS = #{passwordAuthStatus} WHERE MEMBER_EMAIL = #{email}
 	</update>
 	
 	<select id="checkUserWithSessionKey" parameterType="String" resultMap="getUser">

@@ -160,6 +160,7 @@ public class LoginController{
 		System.out.println("임시비밀번호" + password);
 		vo.setEmail(email);
 		vo.setPassword(password);
+		vo.setPasswordAuthStatus("0");
 		userService.changePasswordBytempPassword(vo);//db에 임시비밀먼호 세팅
 		mav.setViewName("newlogin.jsp");
 		return mav;

@@ -84,8 +84,6 @@ public class UserServiceImpl implements UserService{
 				} 
 			}; 
 			javaMailSender.send(preparator);
-			vo.setPasswordAuthStatus("0");
-			userDAO.sendPasswordCheckEmail(vo);
 			return "result";
 	}
 
