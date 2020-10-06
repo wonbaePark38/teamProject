@@ -137,8 +137,6 @@ public class LoginController{
 	@RequestMapping(value="/searchEmail.do", method=RequestMethod.POST)
 	@ResponseBody
 	public UserVO searchEmail(UserVO vo,Model model,HttpServletRequest request) {
-		//String checkEmail = request.getParameter("email");
-		String checkEmail = vo.getEmail();
 		UserVO check = userService.checkEmail(vo);
 
 		if(check != null && check.getSocialCompare().equals("N")) {

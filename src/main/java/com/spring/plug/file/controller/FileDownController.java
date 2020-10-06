@@ -27,7 +27,8 @@ public class FileDownController {
 	public void fileDownload(FileVO vo, HttpServletRequest request, HttpServletResponse response) {
 		String articleId = request.getParameter("articleId");
 		int articleNumber = Integer.parseInt(articleId);
-		vo = fileService.getFilePath(articleNumber); 
+		vo = fileService.getFilePath(articleNumber);
+		System.out.println(vo.toString());
 		String fileName = vo.getFileName();
 		System.out.println(request.getRequestURI());
 

@@ -23,8 +23,14 @@ $(document).ready(function(){
     	           email:userInputEmail,
     	       },
     	       success : function(data){
-    	       		var target = $('.email-check-div');
-    	       		target.css('display','block');
+    	    	    if(data.emailCheck == 'true'){
+    	    	    	var target = $('.email-check-div');
+        	       		target.css('display','block');
+    	    	    }else{
+    	    	    	alert('가입되어 잇는 이메일이 아닙니다');
+    	    	    }
+    	    	    
+    	       		
     	       },
     	       error : function(err){
     	       	alert("통신에러발생");
