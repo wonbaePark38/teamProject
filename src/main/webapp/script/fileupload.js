@@ -64,7 +64,7 @@ function fileCheck(obj,id) {
 	   fileSize = Math.ceil(fileSize/1048576);
    }
    file_name_param.value = fileName;
-   file_size_param.value = fileSize;
+   file_size_param.value = fileSize+dataSize;
    
    
    id.childNodes[1].childNodes[3].childNodes[1].innerText = fileName;

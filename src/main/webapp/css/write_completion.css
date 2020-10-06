@@ -844,12 +844,12 @@
 }
 
 .locker_save {
-	border-radius: 10px 10px 0 0;
+	border-radius: 10px;
 	overflow: scroll;
 	-ms-overflow-style: none;
 	position: absolute;
 	font-size: 18px;
-	background-color: rgb(160, 178, 198);
+	background-color: whitesmoke;
 	width: 300px;
 	max-height: 600px;
 }
@@ -857,6 +857,16 @@
 .locker_save::-webkit-scrollbar {
 	display: none;
 }
+.locker_cancel{
+	cursor: pointer;
+}
+.locker_set_div{
+    background-color: #eaeaea;
+}
+.locker_set_div span{
+	cursor: pointer;
+}
+
 
 .locker_save_list ul {
 	list-style: none;
@@ -874,7 +884,7 @@
 }
 
 .locker_save_h {
-	background-color: #6b65dc;
+	background-color: darkgray;
 	text-align: center;
 }
 

@@ -882,7 +882,7 @@
 														<dt>
 															<a>${list.file_name}</a>	
 														</dt>
-														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+														<dd style='margin: 0px;'>${list.file_size }</dd>
 													</dl>
 											<div class='down_fil' >
 											<c:set var="file_path" value="${list.file_path}"></c:set>
@@ -1061,7 +1061,7 @@
 														<dt>
 															<a>${list.file_name}</a>	
 														</dt>
-														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+														<dd style='margin: 0px;'>${list.file_size }</dd>
 													</dl>
 											<div class='down_fil' >
 											<c:set var="file_path" value="${list.file_path}"></c:set>
@@ -1463,7 +1463,7 @@
 														<dt>
 															<a>${list.file_name}</a>	
 														</dt>
-														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+														<dd style='margin: 0px;'>${list.file_size }</dd>
 													</dl>
 											<div class='down_fil' >
 											<c:set var="file_path" value="${list.file_path}"></c:set>
@@ -2002,7 +2002,7 @@
 														<dt>
 															<a>${list.file_name}</a>	
 														</dt>
-														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+														<dd style='margin: 0px;'>${list.file_size }</dd>
 													</dl>
 											<div class='down_fil'>
 											<c:set var="file_path" value="${list.file_path}"></c:set>
@@ -2180,7 +2180,7 @@
 														<dt>
 															<a>${list.file_name}</a>	
 														</dt>
-														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+														<dd style='margin: 0px;'>${list.file_size }</dd>
 													</dl>
 											<div class='down_fil' >
 											<c:set var="file_path" value="${list.file_path}"></c:set>
@@ -2581,7 +2581,7 @@
 														<dt>
 															<a>${list.file_name}</a>	
 														</dt>
-														<dd style='margin: 0px;'>${list.file_size } byte</dd>
+														<dd style='margin: 0px;'>${list.file_size }</dd>
 													</dl>
 											<div class='down_fil' >
 											<c:set var="file_path" value="${list.file_path}"></c:set>

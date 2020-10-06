@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>메인페이지</title>
+<title>Plug</title>
 <link rel="stylesheet" href="css/newproject_css.css">
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,6 +27,7 @@
 <script type="text/javascript" src="script/task.js"></script>
 <script>
 	$('#project-manage-bt').css('display','none');
+	
 </script>
 </head>
 <style>
@@ -350,7 +351,7 @@
 						</c:forEach>
 					</ul>
 				</div>
-				<div class="locker_set_div" style="width: 100%; font-size: 18px; height: 40px;">
+				<div class="locker_set_div" style="width: 100%; font-size: 18px; height: 40px;margin-top:8px;">
 					<span id="locker_success" style="padding: 5px 55px;">확인</span>
 					<span class="locker_cancel" style="padding: 5px 55px;">취소</span>
 				</div>

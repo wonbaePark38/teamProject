@@ -37,7 +37,7 @@ public class ProjectDirController {
 		projectDirService.insertProjectLocker(vo);
 
 		
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 
 	// 프로젝트 초대 - 유효성 해야함
@@ -47,7 +47,6 @@ public class ProjectDirController {
 		vo.setMember_id(user.getSeq());
 		
 		projectDirService.insertProjectLookup(vo);
-		System.out.println("project lookup insert");
 
 		vo.setProject_favorites(0);
 		vo.setProject_manager(0);
@@ -55,9 +54,8 @@ public class ProjectDirController {
 		vo.setHide_locker(0);
 
 		projectDirService.insertProjectLocker(vo);
-		System.out.println("project locker insert");
 
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 
 	// 프로젝트 정렬
@@ -85,7 +83,7 @@ public class ProjectDirController {
 		UserVO user = (UserVO) session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		projectDirService.updateProjectFavorites(vo);
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 	// 프로젝트 선택
 	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
@@ -112,7 +110,7 @@ public class ProjectDirController {
 
 		projectDirService.insertLockerList(vo);
 
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 
 	// 보관함 삭제
@@ -132,7 +130,7 @@ public class ProjectDirController {
 			
 		}
 		projectDirService.deleteLocker(vo);
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 	
 	// 보관함 해제
@@ -145,7 +143,7 @@ public class ProjectDirController {
 			vo.setProject_id(Integer.parseInt(project_id));
 			projectDirService.deleteProjectLocker(vo);
 		}
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 
 	// 보관함 이름 변경
@@ -163,7 +161,7 @@ public class ProjectDirController {
 			
 		}
 		projectDirService.updateLockerName(vo);
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 	
 	// 프로젝트 보관함에 넣기
@@ -177,7 +175,7 @@ public class ProjectDirController {
 			vo.setProject_id(Integer.parseInt(project_id));
 			projectDirService.updateProjectLocker(vo);
 		}
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 	
 	// 프로젝트 숨기기
@@ -191,7 +189,7 @@ public class ProjectDirController {
 			vo.setProject_id(Integer.parseInt(project_id));
 			projectDirService.updateProjectHide(vo);
 		}
-		return "projectdir.do";
+		return "redirect:projectdir.do";
 	}
 	
 	

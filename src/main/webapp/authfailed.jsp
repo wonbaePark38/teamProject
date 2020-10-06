@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Plug</title>
 </head>
 <body>
 <h1>이메일 인증 실패</h1>

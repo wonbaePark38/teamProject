@@ -5,7 +5,7 @@
 <head>
 <script src="script/jquery-3.5.1-min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Plug</title>
 <script>
 	$(document).on('click','.qna_btn',function(){
 

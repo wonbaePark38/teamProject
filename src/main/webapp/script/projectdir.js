@@ -351,7 +351,7 @@ $(document).on('click','#locker_success',function(){
 	}
 }); 
 
-$(document).on('click','#locker_cancel',function(){
+$(document).on('click','.locker_cancel',function(){
 	$('.locker_list_set').hide();
 });
 
@@ -435,9 +435,10 @@ $(document).ready(function(){
 			// 프로젝트 선택css
 			$(this).attr('class','dir_set');
 			$('.project_div_on').attr('class','project_div');
+			$('.div_btn_on').each(function(){
+				$(this).attr('class','div_btn');
+			});
 			$('.div_btn').hide();
-			$('.div_btn_on').hide();
-			
 		}
 		
 	});

@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+<title>Plug</title>
         <link href="css/makeChatRoom2.css" rel="stylesheet">
         <script src="vendor/jquery/jquery.min.js"></script>
        <script type="text/javascript" src="script/makeChatRoom2.js"></script>

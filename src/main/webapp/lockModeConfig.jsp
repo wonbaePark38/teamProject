@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Plug</title>
 <link href="css/lockModeConfig.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/lockModeConfig.js"></script>

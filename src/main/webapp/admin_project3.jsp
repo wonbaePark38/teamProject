@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Plug</title>
 <link rel="stylesheet" href="css/admin_project.css">
 <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
 </head>

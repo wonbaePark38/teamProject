@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>계정정보</title>
+<title>Plug</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>계정 정보</title>

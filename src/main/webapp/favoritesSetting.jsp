@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>즐겨찾기 설정</title>
+<title>Plug</title>
 <link href="css/favoritesSetting.css" rel="stylesheet" />
 <script type="text/javascript" src="script/favoritesSetting.js"></script>
 <script src="vendor/jquery/configScript.js"></script>

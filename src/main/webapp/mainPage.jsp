@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>메인페이지</title>
+<title>Plug</title>
 
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -42,7 +42,7 @@
 			<div class="sidebarContainer">
 
 				<div class="new_collabo">
-					<a id="newPrjBtn" onclick="new_project()">새
+					<a id="newPrjBtn" onclick="newprojectPop('newproject.jsp')">새
 						프로젝트</a>
 
 				</div>
@@ -366,10 +366,9 @@
 						</div>
 
 						<div>
-							<div class="r_invite_box">
+							<div class="r_invite_box" style="display: none;">
 								<a id="project-invite-btn" class="invite"
 									onclick="invitePop('invitedetail.jsp')">초대하기</a>
-
 							</div>
 							<!-- 참여자목록 -->
 

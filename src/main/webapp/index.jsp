@@ -36,7 +36,7 @@
 
 <meta name="theme-color" content="#5f5ab9">
 
-<title>【플로우】 - 1위 스마트워크 협업툴</title>
+<title>Plug</title>
 
 <!--<meta property="og:url" content="https://flow.team/index.act">-->
 <meta property="og:title" content="【플로우】 - 1위 스마트워크 협업툴">

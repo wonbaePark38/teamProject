@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글 등록화면</title>
+<title>Plug</title>
 </head>
 <body>
 <h1>글 등록화면</h1>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>접속 기기 관리 페이지</title>
+<title>Plug</title>
 <link href="css/connectManage.css" rel="stylesheet">
 <script type="text/javascript" src="script/configScript.js"></script>
 </head>

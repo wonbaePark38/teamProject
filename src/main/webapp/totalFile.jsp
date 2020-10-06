@@ -6,7 +6,6 @@
 <head>
 <meta charset='UTF-8'>
 
-<title>전체 파일</title>
     <!-- Bootstrap core CSS -->
     <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 
@@ -21,7 +20,7 @@
     
 </head>
 
-<body>
+<body style="background-color: #eaeaea;">
     <div class='mainWrap'>
 		
        <jsp:include page="privateConfigHeader.jsp" flush="true" />
@@ -42,7 +41,7 @@
                     
 
                     <button id='downloadAllBt' type='button'  alt='다운로드' >
-                        <i class='fas fa-download' style='color:#615cba; font-size: 25px;'></i> 다운로드
+                        <i class='fas fa-download' style='color:#615cba; font-size: 25px; padding: 4px;'></i> 다운로드
 
                     </button>
                    
@@ -64,8 +63,8 @@
                         파일형태
                     </div>
                     <div class='totalBtDiv'>
-                        <button type='button' class="totalTypeBt"  value='모든 포맷'>
-                            <i class='fas fa-file-alt'  style='color:#615cba; font-size: 30px; margin-right: 30px;'></i>
+                        <button type='button' class="totalTypeBt" style="text-align: left;" value='모든 포맷'>
+                            <i class='fas fa-file-alt'  style='color:#615cba; font-size: 30px; margin-right:10px; float: left;'></i>
                             모든 포맷
                         </button>
                     </div>

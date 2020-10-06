@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>플로우 채팅</title>
+<title>Plug</title>
 <link href='css/chatPopup2.css' rel='stylesheet' />
 <script src="script/jquery-3.5.1-min.js"></script>
 
