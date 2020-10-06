@@ -86,9 +86,6 @@
 
 					<ul id="helpMenu_on">
 						<li><a id="oneToOneBt" onclick="clientQnA()">1:1 문의</a></li>
-						<li><a id="helpBt">도움말</a></li>
-						<li><a id="pcVersionDownloadBt">데스크탑 앱 다운로드</a></li>
-						<li><a id="newNoticeBt">플로우 새소식</a></li>
 						<!-- 알림 있을 경우 class on 추가 -->
 					</ul>
 					<div class="helpButtonContainer">

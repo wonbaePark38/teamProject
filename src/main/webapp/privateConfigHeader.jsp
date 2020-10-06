@@ -85,10 +85,7 @@
 					  <img src="images/pf_ico1_off.png">
 					  <a href="accountInfo.do">환경설정</a>
 				   </div>
-				   <div style="margin-top: 10px;">
-					  <img src="images/pf_ico5_off.png">
-					  <a>도움말</a>
-				   </div>
+				   
 					<div style="margin-top: 10px;">
 						<img src="images/pf_ico3_off.png"> 
 							 <a href="javascript:signOut('${user.socialCompare}');">로그아웃</a>
