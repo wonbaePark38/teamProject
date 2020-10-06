@@ -51,10 +51,26 @@
 .work_table {
 	/* width: 87%; */
 	top: 100px;
-    height: 100%;
-    position: fixed;
-    background-color: #fff;
-    width: 972px;
+	height: 88%;
+	position: fixed;
+	background-color: #fff;
+	width: 972px;
+}
+
+.work_table::-webkit-scrollbar {
+	width: 10px;
+}
+
+.work_table::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+
+.work_table::-webkit-scrollbar-track {
+	background-color: grey;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
 }
 
 .table_list {
@@ -65,7 +81,6 @@
 	text-align: center;
 	font-size: 14px;
 }
-
 
 .work_header {
 	width: 100%;
@@ -270,8 +285,8 @@
 }
 
 .pin {
-	font-size:0px;
-	border:0px;
+	font-size: 0px;
+	border: 0px;
 	margin-top: 3px;
 	cursor: pointer;
 	display: block;
@@ -281,8 +296,8 @@
 }
 
 .pin_pixed {
-	font-size:0px;
-	border:0px;
+	font-size: 0px;
+	border: 0px;
 	margin-top: 3px;
 	cursor: pointer;
 	display: block;
@@ -290,7 +305,6 @@
 	height: 40px;
 	background: url(../images/aln_pin_on.png) no-repeat;
 }
-
 
 #set_icon {
 	cursor: pointer;
@@ -384,6 +398,7 @@
 	background-image: url(../images/icon_post_btm.png);
 	background-repeat: no-repeat;
 }
+
 #bringIcon_on {
 	background-position: 0 -99px;
 	display: block;
@@ -446,13 +461,13 @@
 }
 
 .remark_data #reply {
-    width: 80%;
-    display: block;
-    font-family: monospace;
-    white-space: pre;
-    margin: 0em 0px;
-    padding: 1px;
-    font-size: 14px;
+	width: 80%;
+	display: block;
+	font-family: monospace;
+	white-space: pre;
+	margin: 0em 0px;
+	padding: 1px;
+	font-size: 14px;
 }
 
 .remarkcntn {
@@ -474,9 +489,11 @@
 	padding-top: 5px;
 	margin-right: 10px;
 }
-.remark_setting span:hover{
+
+.remark_setting span:hover {
 	
 }
+
 .remark_upload {
 	display: block;
 	position: absolute;
@@ -753,16 +770,17 @@
 	background-repeat: no-repeat 3px 0;
 }
 
-.dir_set { 
-	float: right;
-	padding-left: 5px;
-}
-.dir_set_on{
+.dir_set {
 	float: right;
 	padding-left: 5px;
 }
 
-.project_div_on{
+.dir_set_on {
+	float: right;
+	padding-left: 5px;
+}
+
+.project_div_on {
 	box-sizing: border-box;
 	margin: 0 10px 22px 10px;
 	float: left;
@@ -773,112 +791,193 @@
 	opacity: 0.4;
 }
 
-.div_btn{
-	display:none;
-	z-index:201;
-	border:0;
+.div_btn {
+	display: none;
+	z-index: 201;
+	border: 0;
 	position: absolute;
-	top:50%;
-	left:50%;
-	transform: translate(-50%,-50%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 38px;
 	height: 38px;
-	background: url(../images/btn_checkbox3.png); 
+	background: url(../images/btn_checkbox3.png);
 }
-.div_btn_on{
-	z-index:201;
-	border:0;
+
+.div_btn_on {
+	z-index: 201;
+	border: 0;
 	position: absolute;
-	top:50%;
-	left:50%;
-	transform: translate(-50%,-50%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 38px;
 	height: 38px;
-	background: url(../images/btn_checkbox3.png); 
+	background: url(../images/btn_checkbox3.png);
 	background-position: 0 -38px;
 }
 
-.dir_set_bar{
-	margin:auto;
-	width:1024px;
+.dir_set_bar {
+	margin: auto;
+	width: 1024px;
 	font-size: 24px;
 	text-align: center;
 	margin-top: 9px;
 }
-.dir_set_bar span{
+
+.dir_set_bar span {
 	margin-left: 20px;
 	cursor: pointer;
 }
-.locker_list_set{
-	display:none;
+
+.locker_list_set {
+	display: none;
 	position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-49%, -47%);
-    z-index: 1000;
+	top: 25%;
+	left: 50%;
+	transform: translate(-49%, -47%);
+	z-index: 1000;
 }
 
-.locker_list_set sapn:hover{
+.locker_list_set sapn:hover {
 	cursor: pointer;
 }
-.locker_save{
+
+.locker_save {
 	border-radius: 10px 10px 0 0;
-	overflow:scroll;
-	-ms-overflow-style: none; 
-	position:absolute;
-	font-size:18px;
-	background-color: rgb(160 178 198);
-	width: 300px; 
+	overflow: scroll;
+	-ms-overflow-style: none;
+	position: absolute;
+	font-size: 18px;
+	background-color: rgb(160, 178, 198);
+	width: 300px;
 	max-height: 600px;
 }
-.locker_save::-webkit-scrollbar{ 
-	display:none; 
+
+.locker_save::-webkit-scrollbar {
+	display: none;
 }
 
-.locker_save_list ul{
-	list-style: none;	
+.locker_save_list ul {
+	list-style: none;
 	padding: 0 0 0 6px;
 }
-.locker_save_list input[type=checkbox]{
+
+.locker_save_list input[type=checkbox] {
 	margin: 10px 16px;
 	width: 16px;
 	height: 16px;
-	
 }
-.locker_save_list label{
-	cursor: pointer;	
+
+.locker_save_list label {
+	cursor: pointer;
 }
+
 .locker_save_h {
-	background-color: #6b65dc; 
+	background-color: #6b65dc;
 	text-align: center;
 }
-.locker_save_h span{
+
+.locker_save_h span {
 	float: right;
-    margin-top: 1px;
-    right: 14px;
-    position: relative;
-    font-size: 20px;
+	margin-top: 1px;
+	right: 14px;
+	position: relative;
+	font-size: 20px;
 }
-.locker_save_h h3{
+
+.locker_save_h h3 {
 	margin-bottom: 10px;
 }
-.locker_save_list{
-	
-} 
 
-.modified_btn{
-	margin-top: 5px;
-    margin-right: 10px;
-    height: 17px;
-    line-height: 17px;
-    font-size: 13px;
-    padding: 5px 20px;
-    font-weight: 700;
-    background: blanchedalmond;
-    border-radius: 10px;
-    color: #a2a2a2;
+.locker_save_list {
+	
 }
 
-.modified_ta{
+.modified_btn {
+	margin-top: 5px;
+	margin-right: 10px;
+	height: 17px;
+	line-height: 17px;
+	font-size: 13px;
+	padding: 5px 20px;
+	font-weight: 700;
+	background: blanchedalmond;
+	border-radius: 10px;
+	color: #a2a2a2;
+}
+
+.modified_ta {
 	min-height: 50%;
+}
+
+.pspan {
+	font-weight: bold;
+	position: absolute;
+	margin-top: 8.5px;
+	margin-left: 46px;
+}
+
+.taskpbar {
+	height: 40px;
+	width: 110px;
+}
+
+.tdate {
+	padding: 0px 17px;
+}
+
+.table_list a {
+	font-weight: normal;
+}
+
+.work_table {
+	overflow-y: auto;
+}
+
+.tstatus {
+	padding: 1px 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 800;
+}
+
+.container {
+	top: 66px;
+	position: relative;
+}
+
+#task_menu {
+	float: left;
+	padding: 5px 40px 0px 5px;
+}
+
+#task_menu span {
+	margin-left: 10px;
+}
+
+#status_select_div span {
+	width: 100%;
+	display: block;
+	border-radius: 3px;
+}
+
+tr#task_board:hover {
+	cursor: pointer;
+	background-color: #eaeaea;
+}
+#juser::-webkit-scrollbar {
+	width: 10px;
+}
+
+#juser::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 1px solid transparent;
+}
+
+#juser::-webkit-scrollbar-track {
+	background-color: grey;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
 }

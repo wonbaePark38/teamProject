@@ -54,20 +54,22 @@ function fileCheck(obj,id) {
    
    var filePoint = obj.value.lastIndexOf('\\');
    var fileName = obj.value.substring(filePoint + 1, obj.length);
-   
+   var dataSize;
    var fileSize = obj.files[0].size;
-   
+   if (fileSize < 1048576) {
+	   dataSize = "Kb";
+	   fileSize = Math.ceil(fileSize/1024);
+   } else if (fileSize > 1048576) {
+	   dataSize = "Mb";
+	   fileSize = Math.ceil(fileSize/1048576);
+   }
    file_name_param.value = fileName;
    file_size_param.value = fileSize;
    
-   console.log(file_name_param.value);
-   console.log(file_size_param.value);
-   
    
    id.childNodes[1].childNodes[3].childNodes[1].innerText = fileName;
-   id.childNodes[1].childNodes[3].childNodes[3].innerText = fileSize + ' bytes';
+   id.childNodes[1].childNodes[3].childNodes[3].innerText = fileSize+dataSize;
    
-   console.log(id);
    
    id.style.display = 'block';
    

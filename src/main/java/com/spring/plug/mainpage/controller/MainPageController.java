@@ -43,7 +43,8 @@ public class MainPageController {
 		vo.setMember_id(user.getSeq());
 
 		service.insertReply(vo);
-
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -55,6 +56,8 @@ public class MainPageController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		service.updateReply(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("project_name",project.getProject_name());
 		return "redirect:mainpage.do";
@@ -63,6 +66,8 @@ public class MainPageController {
 	@RequestMapping(value = "deletereply.do")
 	public String articleReplyDelete(Model model, ArticleReplyVO vo, ProjectDirVO project, HttpSession session) {
 		service.deleteReply(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("project_name",project.getProject_name());
 		
@@ -82,6 +87,7 @@ public class MainPageController {
 
 		// 게시글 리스트
 		List<Article1VO> articleList = service.selectArticle(vo);
+	
 		// 댓글 리스트
 		List<ArticleReplyVO> replyList = service.selectReply(rvo);
 
@@ -101,6 +107,8 @@ public class MainPageController {
 		List<ArticleWorkerVO> todoList = service.getTodoList(wvo);
 		
 		List<Article1VO> containList = service.getArticleLookupList(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		
 		mav.addObject("containList",containList);
 		mav.addObject("todoList",todoList);
@@ -135,7 +143,7 @@ public class MainPageController {
 	}
 	public void imageSave(Article1VO vo, UserVO user, ProjectDirVO project) throws IOException {
 		List<MultipartFile> uploadImg = vo.getWriteForm_img();
-		if (!uploadImg.isEmpty()) {
+		if (!uploadImg.get(0).isEmpty()) {
 			String memberID = Integer.toString(user.getSeq());
 			String image_path = "/plugProject/upload_image/"+project.getProject_id()+"/"+memberID+"_";
 			String imageList = "";
@@ -149,9 +157,8 @@ public class MainPageController {
 					
 					multipartFile.transferTo(new File("/usr/local/tomcat/webapps"+image_path+multipartFile.getOriginalFilename()));
 				}
-				
-				vo.setImg_path(image_path);
 				vo.setImg_name(imageList.substring(0,imageList.length()-1));
+				vo.setImg_path(image_path);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -167,6 +174,8 @@ public class MainPageController {
 		fileSave(vo,user,project);
 		imageSave(vo, user, project);
 		service.insertArticle(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -180,6 +189,8 @@ public class MainPageController {
 		fileSave(vo,user,project);
 		imageSave(vo, user, project);
 		service.insertArticle(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -199,6 +210,8 @@ public class MainPageController {
 		fileSave(vo,user,project);
 		imageSave(vo, user, project);
 		service.insertArticle(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -210,6 +223,8 @@ public class MainPageController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		service.insertArticle(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -262,7 +277,8 @@ public class MainPageController {
 			service.insertWorker(workerVO);
 		}
 		
-
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -272,31 +288,32 @@ public class MainPageController {
 	// 상단 고정 게시글
 	@RequestMapping(value = "/articlepix.do")
 	public String updateArticlePix(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
-		System.out.println(vo.toString());
 		service.updateArticlePixed(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
 		return "redirect:mainpage.do";
 	}
 	
-	// 파일 불러오기
-	public String getFileList(Article1VO vo) {
-		
-		return "mainpage.do";
-	}
-	
 	@RequestMapping(value = "/todoupdate.do")
-	public String updateTodoSuccess(ArticleWorkerVO wvo, ProjectDirVO project, HttpSession session) {
+	public String updateTodoSuccess(Model model,Article1VO vo,ArticleWorkerVO wvo, ProjectDirVO project, HttpSession session) {
 		service.updateTodoSuccess(wvo);
-		return "mainpage.do";
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
+		model.addAttribute("project_id", project.getProject_id());
+		model.addAttribute("member_id", vo.getMember_id());
+		model.addAttribute("project_name",project.getProject_name());
+		return "redirect:mainpage.do";
 	}
 	
 	@RequestMapping(value = "/deletearticle.do")
 	public String deleteArticle(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
 		
 		service.deleteArticle(vo);
-		
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -309,6 +326,8 @@ public class MainPageController {
 		wvo.setArticle_id(vo.getArticle_id());
 		service.deleteArticle(vo);
 		service.deleteTodo(wvo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -320,6 +339,8 @@ public class MainPageController {
 		UserVO user = (UserVO) session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
 		service.mergeArticleLookup(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -329,6 +350,8 @@ public class MainPageController {
 	@RequestMapping(value = "/articlemodified.do")
 	public String articleModified(Model model,Article1VO vo, ProjectDirVO project, HttpSession session) {
 		service.updateArticleModified(vo);
+		List<ProjectDirVO> projectUser_list = project_service.getProjectUserList(project);
+		model.addAttribute("joinlist", projectUser_list);
 		model.addAttribute("project_id", project.getProject_id());
 		model.addAttribute("member_id", vo.getMember_id());
 		model.addAttribute("project_name",project.getProject_name());
@@ -336,15 +359,29 @@ public class MainPageController {
 	};
 	
 	@RequestMapping(value = "/task.do")
-	public ModelAndView totalTask(Article1VO vo, ModelAndView mav, HttpSession session) {
+	public ModelAndView totalTask(Article1VO vo, ModelAndView mav, ArticleReplyVO rvo, ProjectDirVO pvo, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		vo.setMember_id(user.getSeq());
-		vo.setSelectType("totaltask");
-		List<Article1VO> taskList = service.selectArticle(vo);
-		for (Article1VO article1vo : taskList) {
-			System.out.println(article1vo.toString());
+		
+		String taskStatusLoad = "";
+		if (vo.getTask_checked() != null) {
+			for (String arr : vo.getTask_checked()) {
+				taskStatusLoad += (arr+",");
+			}
+			taskStatusLoad = taskStatusLoad.substring(0,taskStatusLoad.length()-1);
 		}
+		// 업무 담당자
+		List<Article1VO> taskList = service.getTaskList(vo);
+		
+		List<Article1VO> totalTaskList = service.selectArticle(vo);
+		
+		List<Article1VO> containList = service.getArticleLookupList(vo);
+		
+		mav.addObject("taskStatusLoad",taskStatusLoad);
+		mav.addObject("taskTypes",vo.getSelectType());
+		mav.addObject("containList",containList);
 		mav.addObject("taskList",taskList);
+		mav.addObject("totalTaskList",totalTaskList);
 		mav.setViewName("task.jsp");
 		return mav;
 	}

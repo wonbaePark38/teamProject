@@ -294,8 +294,11 @@ button:focus {
 	font-weight: 500;
 	width: 100%;
 }
-.list-group-item :hover{
+
+.list-group-item :hover {
+	
 }
+
 .leftContainer {
 	display: flex;
 	margin-left: 10px;
@@ -567,4 +570,83 @@ a.chat {
 	border-bottom: 1px solid #d7d7d7;
 	border-radius: 0 0 3px 3px;
 	background-color: #fff;
+}
+
+#article_show div_text_write {
+	margin: 5px;
+}
+
+textarea {
+	overflow-y: hidden;
+}
+
+.modified_worker_select_div {
+	display: none;
+	z-index: 99;
+	position: absolute;
+	width: 94px;
+	max-height: 150px;
+	overflow: auto;
+}
+
+.modified_worker {
+	width: 100px;
+	display: inline-block;
+}
+
+.todo_datas #write_t {
+	display: inline-block;
+	width: 250px;
+}
+
+.todo_datas #todo_c {
+	vertical-align: middle;
+	width: 276px;
+	display: inline-block;
+}
+
+.todo_c {
+	vertical-align: middle;
+	width: 276px;
+	display: inline-block;
+}
+
+.remark_setting span {
+	cursor: pointer;
+}
+
+#reply_c {
+	display: block;
+	width: 112%;
+	margin: 0px;
+}
+
+.post_images div {
+	border: 2px solid #eaeaea;
+}
+
+.post_images img {
+	max-height: 150px;
+	margin: 5px;
+}
+
+.post_images a {
+	float: right;
+	margin: 0 5px;
+}
+
+.t_num {
+	background-color: lightgray;
+	border-radius: 15px;
+	padding: 3px;
+	font-size: 11px;
+	float: right;
+}
+
+.t_num span {
+	margin-left: 2px;
+}
+
+.post_images img {
+	max-width: 460px;
 }

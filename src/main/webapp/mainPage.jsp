@@ -59,13 +59,13 @@
 					<a id="main_side" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 업무</a> <a id="main_side"
 						href="calendar.jsp" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 일정</a> <a id="main_side"
+						style="padding: .5rem 1.25rem; display: none;">전체 일정</a> <a id="main_side"
 						href="totalFileView.do" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 파일</a> <a id="main_side"
-						class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
+						class="list-group-item" style="padding: .5rem 1.25rem; display: none;">담아둔 글</a>
 					<a id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;">나를 지정</a> <a id="main_side"
-						class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
+						style="padding: .5rem 1.25rem; display: none;">나를 지정</a> <a id="main_side"
+						class="list-group-item" style="padding: .5rem 1.25rem; display: none;">내 게시물</a>
 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>

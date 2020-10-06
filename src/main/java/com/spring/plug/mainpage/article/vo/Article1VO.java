@@ -11,6 +11,7 @@ public class Article1VO {
 
 	private MultipartFile writeForm_file;
 	private List<MultipartFile> writeForm_img;
+	private String[] task_checked;
 	private String selectType;
 	private int project_id;
 	private String project_name;
@@ -59,6 +60,13 @@ public class Article1VO {
 	private String writeForm5_date;
 	private String writeForm5_worker;
 	
+	
+	public String[] getTask_checked() {
+		return task_checked;
+	}
+	public void setTask_checked(String[] task_checked) {
+		this.task_checked = task_checked;
+	}
 	public String getSelectType() {
 		return selectType;
 	}

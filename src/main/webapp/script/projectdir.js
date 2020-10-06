@@ -76,7 +76,11 @@ function viewType(type,url){
 	
 	// form 데이터
 	view.append($('<input/>',{type:'hidden', name:'viewType', value:type}));
-	
+	if (url == 'task.do') {
+		var task_checked = ['cbrequest','cbdoing','cbfeedback','cbcomplete','cbhold','cbemergency','cbhigh','cbnomal','cblow','cbnone','sdtotal','edtotal'];
+		view.append($('<input/>',{type:'hidden', name:'selectType', value:'totaltask'}));
+		view.append($('<input/>',{type:'hidden', name:'task_checked', value:task_checked}));
+	}
 	// form 생성하는 곳
 	view.appendTo('body');
 	
@@ -104,7 +108,7 @@ $(document).on('click', '#main_side', function() {
 	var click_menu = $(this).text().trim();
 	
 	if (click_menu == '전체') {
-		viewType(null);
+		viewType(null,'projectdir.do');
 	} else if (click_menu == '미보관') {
 		viewType('미보관','projectdir.do');
 	} else if (click_menu == '읽지않음') {
@@ -223,7 +227,8 @@ $(document).on('click', '.locker_setbtn', function() {
 });
 
 // 보관함 삭제
-$(document).on('click', '#locker_del', function() {
+$(document).on('click', '#locker_del', function(e) {
+	e.stopPropagation();
 	var viewType = $('#vt').val();
 	if (confirm('게시글을 정말로 삭제하시겠습니까?')) {
 	
@@ -262,7 +267,8 @@ $(document).on('click', '#locker_del', function() {
 
 // 보관함 수정
 
-$(document).on('click', '#locker_update', function() {
+$(document).on('click', '#locker_update', function(e) {
+	e.stopPropagation();
 	$('#locker_change').show();
 	var viewType = $('#vt').val();
 	var locker_change_list = "";
@@ -272,6 +278,7 @@ $(document).on('click', '#locker_update', function() {
 	$(search_name).children('input[name=project_id]').each(function(){
 		locker_change_list += ($(this).val())+",";
 	}); 
+	
 	var locker_change = $('<form></form>');
 	locker_change.attr('id','locker_cf');
 	// form 설정
@@ -374,7 +381,11 @@ $(document).on('click','#locker_add',function(){
 		locker_form.attr('action','insertlocker.do');
 		// form 데이터
 		locker_form.append($('<input/>',{type:'hidden', name:'locker_name', value:locker_name}));
-		locker_form.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
+		if (viewType == '보관함') {
+			locker_form.append($('<input/>',{type:'hidden', name:'viewType', value:""}));
+		} else {
+			locker_form.append($('<input/>',{type:'hidden', name:'viewType', value:viewType}));
+		}
 		// form 생성하는 곳
 		locker_form.appendTo('.mainWrap');
 		locker_form.submit();
@@ -484,6 +495,9 @@ $(document).ready(function(){
 		$(this).find('#locker_update').hide();
 		$(this).find('#locker_del').hide();
 	});
+	if ($('.project_div').find()) {
+		$('#none_project').hide();
+	}
 	
 });
 

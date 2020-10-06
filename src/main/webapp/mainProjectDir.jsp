@@ -26,7 +26,7 @@
 <script type="text/javascript" src="script/fileupload.js"></script>
 <script type="text/javascript" src="script/task.js"></script>
 <script>
-	
+	$('#project-manage-bt').css('display','none');
 </script>
 </head>
 <style>
@@ -40,9 +40,7 @@
 		<jsp:include page='privateConfigHeader.jsp'></jsp:include>
 		<!--end navigation-->
 
-<script>
-	$('#project-manage-bt').css('display','none');
-</script>
+
 		<div class="centerArea" id="ch">
 			<!--중앙영역-->
 			<!--   <div class="leftContainer">-->
@@ -66,22 +64,22 @@
 					<a id="main_side" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 업무</a> <a id="main_side"
 						href="calendar.jsp" class="list-group-item"
-						style="padding: .5rem 1.25rem;">전체 일정</a> <a id="main_side"
+						style="padding: .5rem 1.25rem; display: none;">전체 일정</a> <a id="main_side"
 						href="totalFileView.do" class="list-group-item"
 						style="padding: .5rem 1.25rem;">전체 파일</a> <a id="main_side"
-						class="list-group-item" style="padding: .5rem 1.25rem;">담아둔 글</a>
+						class="list-group-item" style="padding: .5rem 1.25rem; display: none;">담아둔 글</a>
 					<a id="main_side" class="list-group-item"
-						style="padding: .5rem 1.25rem;">나를 지정</a> <a id="main_side"
-						class="list-group-item" style="padding: .5rem 1.25rem;">내 게시물</a>
+						style="padding: .5rem 1.25rem; display: none;">나를 지정</a> <a id="main_side"
+						class="list-group-item" style="padding: .5rem 1.25rem; display: none;">내 게시물</a>
 
 					<div class="menu_plus">
 						<a class="sort" onclick="new_plus()">보관함</a>
 					</div>
 					<c:forEach var="locker_list" items="${projectLockerList}">
+						<div>
 						<input type="hidden" name="locker_list_id" value="${locker_list.locker_list_id}">
-						
-						<a id="main_side" class="list-group-item locker_a" style="padding: .5rem 1.25rem;">${locker_list.locker_name}<img id="locker_update"></img><img id="locker_del"></img>
-						</a>
+							<a id="main_side" class="list-group-item locker_a" style="padding: .5rem 1.25rem;">${locker_list.locker_name}<img id="locker_update"></img><img id="locker_del"></img></a>
+						</div>
 					</c:forEach>
 					<a id="main_side" class="list-group-item" style="padding: .5rem 1.25rem;">
 						숨김

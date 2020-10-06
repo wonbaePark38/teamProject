@@ -97,9 +97,9 @@ public class ProjectDirController {
 		List<ProjectDirVO> projectUser_list = projectDirService.getProjectUserList(vo);
 		
 		mav.addObject("getProject", vo);
-		mav.setViewName("mainpage.do");
 		mav.addObject("projectLockerList", locker_list);
 		mav.addObject("joinlist", projectUser_list);
+		mav.setViewName("mainpage.do");
 		projectDirService.insertProject_ConnectionLog(vo);
 		return mav;
 	}

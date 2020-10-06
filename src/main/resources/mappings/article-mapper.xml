@@ -144,6 +144,12 @@
 			<when test="selectType == 'totaltask'">
 				member_id = #{member_id} AND form_name = 'taskWrite'			
 			</when>
+			<when test="selectType == 'rmyTask'">
+				member_id = #{member_id} AND form_name = 'taskWrite' AND writer = #{writer}			
+			</when>
+			<when test="selectType == 'rrequireTask'">
+				member_id = #{member_id} AND form_name = 'taskWrite' AND writeForm3_workersName = #{writeForm3_workersName}			
+			</when>
 			<otherwise>
 				project_id = #{project_id} ORDER BY article_id DESC
 			</otherwise>
