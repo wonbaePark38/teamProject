@@ -268,11 +268,11 @@
 						<!-- 업무 글쓰기 -->
 						<form method="post" action="writeform3.do" id="writeForm3_form"
 							enctype="multipart/form-data">
-							<input type="hidden" name="form_name" value="taskWrite">
 							<input type="hidden" name="file_name"> 
 							<input type="hidden" name="file_size"> 
 							<input type="hidden" name="img_name"> 
 							<input type="hidden" name="img_size">
+							<input type="hidden" name="form_name" value="taskWrite">
 							<input type="hidden" name="project_name" value="${project.project_name}"> 
 							<input type="hidden" name="project_id" value="${project.project_id }">
 							<input type="hidden" name="writer" value="${sessionScope.user.name }">
@@ -885,7 +885,9 @@
 														<dd style='margin: 0px;'>${list.file_size } byte</dd>
 													</dl>
 											<div class='down_fil' >
-											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											<c:set var="file_path" value="${list.file_path}"></c:set>
+											<c:set var="file_path_length" value="${fn:length(file_path) }"></c:set>
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${fn:substring(file_path,25,file_path_length)}'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
 											</div>
 										</div>
 									</div>
@@ -1062,7 +1064,9 @@
 														<dd style='margin: 0px;'>${list.file_size } byte</dd>
 													</dl>
 											<div class='down_fil' >
-											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											<c:set var="file_path" value="${list.file_path}"></c:set>
+											<c:set var="file_path_length" value="${fn:length(file_path) }"></c:set>
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${fn:substring(file_path,25,file_path_length)}'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
 											</div>
 										</div>
 									</div>
@@ -1462,7 +1466,9 @@
 														<dd style='margin: 0px;'>${list.file_size } byte</dd>
 													</dl>
 											<div class='down_fil' >
-											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											<c:set var="file_path" value="${list.file_path}"></c:set>
+											<c:set var="file_path_length" value="${fn:length(file_path) }"></c:set>
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${fn:substring(file_path,25,file_path_length)}'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
 											</div>
 										</div>
 									</div>
@@ -2177,7 +2183,9 @@
 														<dd style='margin: 0px;'>${list.file_size } byte</dd>
 													</dl>
 											<div class='down_fil' >
-											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											<c:set var="file_path" value="${list.file_path}"></c:set>
+											<c:set var="file_path_length" value="${fn:length(file_path) }"></c:set>
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${fn:substring(file_path,25,file_path_length)}'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
 											</div>
 										</div>
 									</div>
@@ -2576,7 +2584,9 @@
 														<dd style='margin: 0px;'>${list.file_size } byte</dd>
 													</dl>
 											<div class='down_fil' >
-											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${list.file_path }'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
+											<c:set var="file_path" value="${list.file_path}"></c:set>
+											<c:set var="file_path_length" value="${fn:length(file_path) }"></c:set>
+											<a id='down_logo' style='display: inline-block;color: #555;' target="_blank" href='${fn:substring(file_path,25,file_path_length)}'download>&nbsp;&nbsp;&nbsp;다운로드</a>	
 											</div>
 										</div>
 									</div>
