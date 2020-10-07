@@ -57,7 +57,6 @@ public class ChattingController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		
 		ChatRoomVO roomInfo = (ChatRoomVO)chatService.getChatRoomInfo(param);
-		System.out.println(roomInfo.toString());
 		session.setAttribute("roomId",param);
 		
 		mav.addObject("vo",user);
@@ -99,13 +98,8 @@ public class ChattingController {
 	public void uploadFile(MessageVO msgVO) throws IllegalStateException, IOException {
 			MultipartFile uploadFile = msgVO.getUpload();
 			String roomId = msgVO.getChatRoomId();
-			System.out.println("!!!!!");
-			System.out.println(msgVO.getMessage_sender());
-			System.out.println(msgVO.getFileName());
 			String realFileName = msgVO.getMessage_sender()+ "_" + msgVO.getFileName();
 			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/chat/"+roomId+"/"+ realFileName;
-			System.out.println("업로드패스");
-			System.out.println(file_path);
 			File destdir = new File(file_path);
 			 if(!destdir.exists()) {
 				 destdir.mkdirs();
@@ -133,7 +127,6 @@ public class ChattingController {
 			}
 			String file_path = "/usr/local/tomcat/webapps/plugProject/upload/chat/"+roomId+"/"+ realFileName;
 			
-			System.out.println(file_path);
 			File file1 = new File(file_path);
 			if(!file1.exists()) {
 				return ;
@@ -397,7 +390,6 @@ public class ChattingController {
 		UserVO user = (UserVO)session.getAttribute("user");
 		String id = Integer.toString(user.getSeq());
 		roomVO.setUserId(user.getSeq());
-		System.out.println(roomVO.getInviteUser());
 			String str = roomVO.getInviteUser();
 			String[] array = str.split(",");
 			String result = "";
