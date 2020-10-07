@@ -79,14 +79,12 @@ public class ChattingController {
 			msgVO.setFilePath(file_path);
 		}
 		
-		chatService.insertMessage(msgVO);
-		
 		if(msgVO.getSenderId() != 0) { //관리자 메시지가 아닐 경우 
 			chatService.updateChatRoomStatus(msgVO);
 			chatService.updateUnreadCount(msgVO);
 		}
 		
-		
+		chatService.insertMessage(msgVO);
 		List<MessageVO> unreadList = chatService.getUnreadUser(msgVO);//현재 방 접속상태 아닌 사람 목록 가저옴
 		
 		return unreadList;
