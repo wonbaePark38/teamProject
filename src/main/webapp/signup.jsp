@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Sign up</title>
 <link rel="stylesheet" href="css/signup.css"/>
+<link rel="stylesheet" href="css/login.css"/>
 <script src="script/jquery-3.5.1-min.js"></script>
 <script>
 function validate() {
@@ -77,7 +78,18 @@ function sameEmail(){
 		sameEmail();
 		</script>
 	</c:if>
-
+	<div>
+		<div class="btn-register">
+            <div class="header-left-menu">
+                <a href="index.jsp">
+                   <img src="images/bi_flow.png" style="vertical-align: middle;">
+                </a>
+            </div>
+			<div>
+                <a href="javascript:history.go(-1)">뒤로가기</a>
+            </div>
+		</div>
+	</div>
 	<div class="sign-up-wrap">
 		<form action="signupPost.do" name="join" method="post" onsubmit="return validate();">
 			<input type="hidden" name="socialCompare" value="N" >

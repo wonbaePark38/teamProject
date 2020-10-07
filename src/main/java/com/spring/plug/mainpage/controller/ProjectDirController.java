@@ -14,12 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.plug.login.vo.UserVO;
 import com.spring.plug.mainpage.projectdir.service.ProjectDirService;
 import com.spring.plug.mainpage.projectdir.vo.ProjectDirVO;
+import com.spring.plug.user.accountinfo.service.UserSettingService;
+import com.spring.plug.user.accountinfo.vo.UserSettingVO;
 
 @Controller
 public class ProjectDirController {
 
 	@Autowired
 	private ProjectDirService projectDirService;
+
+	@Autowired
+	private UserSettingService userSettingService;
 
 	@RequestMapping(value = "/newproject.do", method = RequestMethod.POST)
 	public String projectDirInsert(ProjectDirVO vo, HttpSession session) {
@@ -87,7 +92,7 @@ public class ProjectDirController {
 	}
 	// 프로젝트 선택
 	@RequestMapping(value = "/projectselect.do", method = RequestMethod.POST)
-	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav,HttpSession session) {
+	public ModelAndView getProjectDir(ProjectDirVO vo, ModelAndView mav,HttpSession session, UserSettingVO usvo) {
 		UserVO uvo = (UserVO) session.getAttribute("user");
 		vo.setMember_id(uvo.getSeq());
 		session.setAttribute("projectdir", vo);

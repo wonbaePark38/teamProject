@@ -30,7 +30,6 @@ public class ProjectDirVO {
 	private int hide_locker;
 	private int project_user;
 	private int joinuser;
-	
 	// 보관함 리스트
 	private int locker_list_id;
 	private String locker_name;
