@@ -68,8 +68,8 @@ function getToDayType(){
 function taskStatusChecked(type){
 	if (type == 'cbstatus' || type == 'total') {
 		$('.cbstatus').each(function(){
+			var status = $(this).next().text();
 			if (!$(this).is(':checked')) {
-				var status = $(this).next().text();
 				$('.tstatus').each(function(){
 					if ($(this).text() == status) {
 						$(this).attr('id','task_off')
@@ -77,7 +77,6 @@ function taskStatusChecked(type){
 				});
 				
 			} else {
-				var status = $(this).next().text();
 				$('.tstatus').each(function(){
 					if ($(this).text() == status) {
 						$(this).attr('id','task_on')
@@ -88,17 +87,24 @@ function taskStatusChecked(type){
 	}
 	if (type == 'cbtaskrank' || type == 'total') {
 		$('.cbtaskrank').each(function(){
+			var status = $(this).next().text();
 			if (!$(this).is(':checked')) {
-				var status = $(this).next().text();
 				$('.task_order').each(function(){
-					if ($(this).text() == status) {
+					if ('없음' == status) {
+						if ($(this).text() == '-') {
+							$(this).attr('id','task_off')
+						}
+					} else if ($(this).text() == status) {
 						$(this).attr('id','task_off')
 					}
 				});
 			} else {
-				var status = $(this).next().text();
 				$('.task_order').each(function(){
-					if ($(this).text() == status) {
+					if ('없음' == status) {
+						if ($(this).text() == '-') {
+							$(this).attr('id','task_on')
+						}
+					} else if ($(this).text() == status) {
 						$(this).attr('id','task_on')
 					}
 				});
@@ -107,65 +113,94 @@ function taskStatusChecked(type){
 	}
 	var toDay = getToDayType(); // 현재 날짜
 	var toWeek = getToWeekType();
-		console.log(toDay);
-		console.log(toWeek);
 	if (type == 'rsdate' || type == 'total') {
 		$('.rsdate').each(function(){
 			var status = $(this).next().text();
 			if ($(this).is(':checked')) {
 				$('.task_sdate').each(function(){
-					if (status == '오늘' && toDay != $(this).text() || $(this).text() == '-') {
-						console.log(status);
-						$(this).parent().parent().hide();
-					} else if (status == '이번주' && toDay >= $(this).text() && toWeek.substring(11,21) <= $(this).text() || $(this).text() == '-') {
-						console.log(status);
-						$(this).parent().parent().hide();
-					} else if (status == '이번달' && toDay.substring(0,7) != $(this).text().substring(0,7) || $(this).text() == '-') {
-						console.log(status);
-						$(this).parent().parent().hide();
-					} else if (status == '날짜미정' && '-' == $(this).text()) {
-						console.log(status);
-						$(this).parent().parent().hide();
-					} else if (status == '전체') {
-						$(this).parent().parent().show();
-					}
+					var weekDate = $(this).text().slice(0,-1) + (parseInt($(this).text().charAt($(this).text().length-1))+1);
+					
+					$(this).attr('id','task_off');
+					
+					if (status == '전체') {
+						$(this).attr('id','task_on');
+					} else if (status == '오늘') {
+						if (toDay == $(this).text() && $(this).text() != '-') {
+							$(this).attr('id','task_on');
+						}
+					} else if (status == '이번주') {
+						if (toWeek.substring(0,10) < weekDate && toWeek.substring(11,21) > weekDate && $(this).text() != '-') {
+							$(this).attr('id','task_on');
+						}
+					} else if (status == '이번달') {
+						if (toDay.substring(0,7) == $(this).text().substring(0,7) && $(this).text() != '-') {
+							$(this).attr('id','task_on');
+						}
+					} else if (status == '날짜미정') {
+						if ('-' == $(this).text()) {
+							$(this).attr('id','task_on');
+						}
+					} 
 				});
 			}
 		});
 	}
-//	if (type == '.redate' || type == 'total') {
-//		$('.redate').each(function(){
-//			if ($(this).is(':checked')) {
-//				var status = $(this).next().text();
-//				$('.task_edate').each(function(){
-//					if (status == '지연' && toDay < $(this).text()) {
-//						$(this).parent().parent().hide();
-//					} else if (status == '오늘까지' && toDay > $(this).text() && toDay > $(this).text() && $(this).text() == '-') {
-//						$(this).parent().parent().hide();
-//					} else if (status == '이번주까지' && toDay != $(this).text().substring(0,7) && toDay != $(this).text().substring(11,21) && $(this).text() == '-') {
-//						$(this).parent().parent().hide();
-//					} else if (status == '이번달까지' && toDay > $(this).text() && toDay.substring(0,7) != $(this).text().substring(0,7) && $(this).text() == '-') {
-//						$(this).parent().parent().hide();
-//					} else if (status == '날짜미정' && '-' != $(this).text()) {
-//						$(this).parent().parent().hide();
-//					}
-//				});
-//			}
-//		}); 
-//	}
-// 	$('.table_list').find('tr').each(function(){
-// 		var count = 0;
-// 		$(this).each(function(){
-// 			if ($(this).find('#task_off').length > 0) {
-// 				count++;
-// 			}
-// 			if(count == 0){
-// 				$(this).show();
-// 			} else if (count > 0) {
-// 				$(this).hide();
-// 			} 
-// 		});
-// 	});
+	if (type == 'redate' || type == 'total') {
+		$('.redate').each(function(){
+			if ($(this).is(':checked')) {
+				var status = $(this).next().text();
+				$('.task_edate').each(function(){
+					var dayDate = $(this).text().slice(0,-1) + (parseInt($(this).text().charAt($(this).text().length-1))+1);
+					console.log(toWeek.substring(11,21));
+					console.log(dayDate);
+					console.log(toWeek.substring(11,21) > dayDate);
+					$(this).attr('id','task_off');
+					if (status == '전체') {
+						console.log('전체 들어옴');
+						$(this).attr('id','task_on');
+					} else if (status == '지연') {
+						if (toDay > dayDate && $(this).text() != '-') {
+							console.log('지연 들어옴');
+							$(this).attr('id','task_on');
+						}
+					} else if (status == '오늘까지') {
+						if (toDay == $(this).text() && $(this).text() != '-') {
+							console.log('오늘까지 들어옴');
+							$(this).attr('id','task_on');
+						}
+					} else if (status == '이번주까지') {
+						if (toWeek.substring(11,21) > dayDate && $(this).text() != '-') {
+							console.log('이번주까지 들어옴');
+							$(this).attr('id','task_on');
+						}
+					} else if (status == '이번달까지') {
+						if (toDay.substring(0,7) == $(this).text().substring(0,7) && $(this).text() != '-') {
+							console.log('이번달까지 들어옴');
+							$(this).attr('id','task_on');
+						}
+					} else if (status == '날짜미정') {
+						if ('-' == $(this).text()) {
+							console.log('날짜미정 들어옴');
+							$(this).attr('id','task_on');
+						}
+					}
+				});
+			}
+		}); 
+	}
+	$('.table_list').find('tr').each(function(){
+		var count = 0;
+		$(this).each(function(){
+			if ($(this).find('#task_off').length > 0) {
+				count++;
+			}
+			if(count == 0){
+				$(this).show();
+			} else if (count > 0) {
+				$(this).hide();
+			} 
+		});
+	});
 }
 
 // 전체 업무 체크 컨트롤러 받기
@@ -865,19 +900,19 @@ $(document).on('click','#spbtn',function(){
 										<td><span>${totalTaskList.writeForm3_tasknum}</span></td>
 										<c:choose>
 											<c:when test="${totalTaskList.writeForm3_status eq '요청'}">
-												<td><a id="task_on" class="tstatus" style="background-color: #4aaefb;">${totalTaskList.writeForm3_status}</a></td>
+												<td><a id="task_off" class="tstatus" style="background-color: #4aaefb;">${totalTaskList.writeForm3_status}</a></td>
 											</c:when>
 											<c:when test="${totalTaskList.writeForm3_status eq '진행'}">
-												<td><a id="task_on" class="tstatus" style="background-color: #50b766;">${totalTaskList.writeForm3_status}</a></td>
+												<td><a id="task_off" class="tstatus" style="background-color: #50b766;">${totalTaskList.writeForm3_status}</a></td>
 											</c:when>
 											<c:when test="${totalTaskList.writeForm3_status eq '피드백'}">
-												<td><a id="task_on" class="tstatus" style="background-color: #f17a19;">${totalTaskList.writeForm3_status}</a></td>
+												<td><a id="task_off" class="tstatus" style="background-color: #f17a19;">${totalTaskList.writeForm3_status}</a></td>
 											</c:when>
 											<c:when test="${totalTaskList.writeForm3_status eq '완료'}">
-												<td><a id="task_on" class="tstatus" style="background-color: #2e417e;">${totalTaskList.writeForm3_status}</a></td>
+												<td><a id="task_off" class="tstatus" style="background-color: #2e417e;">${totalTaskList.writeForm3_status}</a></td>
 											</c:when>
 											<c:when test="${totalTaskList.writeForm3_status eq '보류'}">
-												<td><a id="task_on" class="tstatus" style="background-color: #aeaeae;">${totalTaskList.writeForm3_status}</a></td>
+												<td><a id="task_off" class="tstatus" style="background-color: #aeaeae;">${totalTaskList.writeForm3_status}</a></td>
 											</c:when>
 										</c:choose>
 										<c:choose>
