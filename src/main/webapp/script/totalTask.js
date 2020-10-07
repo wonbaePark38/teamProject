@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 		$('#project-manage-bt').hide();
 		
 		task_num_check(); // 업무 게시글 카운트
@@ -7,20 +7,20 @@ $(document).ready(function(){
 		
 		taskStatusTypeLoad(); // 전체 업무 체크 컨트롤러 받기
 		
-		taskStatusChecked(); // 체크된 항목 표시
+		taskStatusChecked('total'); // 체크된 항목 표시
 	});
 	
 	$(document).on('click','.cbstatus',function(){
-		taskStatusChecked();
+		taskStatusChecked('cbstatus');
 	});
 	$(document).on('click','.cbtaskrank',function(){
-		taskStatusChecked();
+		taskStatusChecked('cbtaskrank');
 	});
 	$(document).on('click','.rsdate',function(){
-		taskStatusChecked();
+		taskStatusChecked('rsdate');
 	});
 	$(document).on('click','.redate',function(){
-		taskStatusChecked();
+		taskStatusChecked('redate');
 	});
 	
 	// 이번주 날짜
@@ -47,81 +47,95 @@ $(document).ready(function(){
 		var date = new Date();
 		return date.getFullYear()+'-'+('0'+(date.getMonth()+1)).slice(-2)+'-'+('0'+date.getDate()).slice(-2);
 	}
-	
-	// 체크된 항목 표시
-	function taskStatusChecked(){
-		$('.cbstatus').each(function(){
-			if (!$(this).is(':checked')) {
-				var status = $(this).next().text();
-				$('.tstatus').each(function(){
-					if ($(this).text() == status) {
-						$(this).parent().parent().hide();
-					}
-				});
-				
-			} else {
-				var status = $(this).next().text();
-				$('.tstatus').each(function(){
-					if ($(this).text() == status) {
-						$(this).parent().parent().show();
-					}
-				});
-			}
-		}) 
-		$('.cbtaskrank').each(function(){
-			if (!$(this).is(':checked')) {
-				var status = $(this).next().text();
-				$('.task_order').each(function(){
-					if ($(this).text() == status) {
-						$(this).parent().parent().hide();
-					}
-				});
-			} else {
-				var status = $(this).next().text();
-				$('.task_order').each(function(){
-					if ($(this).text() == status) {
-						$(this).parent().parent().show();
-					}
-				});
-			}
-		});
+	// 체크 된 항목 표시
+	function taskStatusChecked(type){
+		if (type == 'cbstatus' || type == 'total') {
+			$('.cbstatus').each(function(){
+				if (!$(this).is(':checked')) {
+					var status = $(this).next().text();
+					$('.tstatus').each(function(){
+						if ($(this).text() == status) {
+							$(this).attr('id','task_off')
+						}
+					});
+					
+				} else {
+					var status = $(this).next().text();
+					$('.tstatus').each(function(){
+						if ($(this).text() == status) {
+							$(this).attr('id','task_on')
+						}
+					});
+				}
+			}) 
+		}
+		if (type == 'cbtaskrank' || type == 'total') {
+			$('.cbtaskrank').each(function(){
+				if (!$(this).is(':checked')) {
+					var status = $(this).next().text();
+					$('.task_order').each(function(){
+						if ($(this).text() == status) {
+							$(this).attr('id','task_off')
+						}
+					});
+				} else {
+					var status = $(this).next().text();
+					$('.task_order').each(function(){
+						if ($(this).text() == status) {
+							$(this).attr('id','task_on')
+						}
+					});
+				}
+			});
+		}
 		var toDay = getToDayType(); // 현재 날짜
 		var toWeek = getToWeekType();
+			console.log(toDay);
+			console.log(toWeek);
+//		if (type == 'rsdate' || type == 'total') {
+//			$('.rsdate').each(function(){
+//				var status = $(this).next().text();
+//				console.log(status);
+//				if ($(this).is(':checked')) {
+//					$('.task_sdate').each(function(){
+//						if (status == '오늘' && toDay != $(this).text() || $(this).text() == '-') {
+//							$(this).parent().parent().hide();
+//						} else if (status == '이번주' && toDay >= $(this).text() && toWeek.substring(11,21) <= $(this).text() || $(this).text() == '-') {
+//							
+//							console.log($(this).text());
+//							$(this).parent().parent().hide();
+//						} else if (status == '이번달' && toDay.substring(0,7) != $(this).text().substring(0,7) || $(this).text() == '-') {
+//							$(this).parent().parent().hide();
+//						} else if (status == '날짜미정' && '-' != $(this).text()) {
+//							$(this).parent().parent().hide();
+//						} else {
+//							$(this).parent().parent().show();
+//						}
+//					});
+//				}
+//			});
+//		}
+//		if (type == '.redate' || type == 'total') {
+//			$('.redate').each(function(){
+//				if ($(this).is(':checked')) {
+//					var status = $(this).next().text();
+//					$('.task_edate').each(function(){
+//						if (status == '지연' && toDay < $(this).text()) {
+//							$(this).parent().parent().hide();
+//						} else if (status == '오늘까지' && toDay > $(this).text() && toDay > $(this).text() && $(this).text() == '-') {
+//							$(this).parent().parent().hide();
+//						} else if (status == '이번주까지' && toDay != $(this).text().substring(0,7) && toDay != $(this).text().substring(11,21) && $(this).text() == '-') {
+//							$(this).parent().parent().hide();
+//						} else if (status == '이번달까지' && toDay > $(this).text() && toDay.substring(0,7) != $(this).text().substring(0,7) && $(this).text() == '-') {
+//							$(this).parent().parent().hide();
+//						} else if (status == '날짜미정' && '-' != $(this).text()) {
+//							$(this).parent().parent().hide();
+//						}
+//					});
+//				}
+//			}); 
+//		}
 		
-		$('.rsdate').each(function(){
-			if ($(this).is(':checked')) {
-				var status = $(this).next().text();
-				$('.task_sdate').each(function(){
-					if (status == '오늘' && toDay != $(this).text() && $(this).text() == '-') {
-						$(this).parent().parent().hide();
-					} else if (status == '이번주' && toDay < $(this).text() && toWeek.substring(11,21) > $(this).text() && $(this).text() == '-') {
-						$(this).parent().parent().hide();
-					} else if (status == '이번달' && toDay.substring(0,7) != $(this).text().substring(0,7) && $(this).text() == '-') {
-						$(this).parent().parent().hide();
-					} else if (status == '날짜미정' && '-' != $(this).text()) {
-						$(this).parent().parent().hide();
-					}
-				});
-			}
-		});
-		$('.redate').each(function(){
-			if ($(this).is(':checked')) {
-				var status = $(this).next().text();
-				$('.task_edate').each(function(){
-					if (status == '지연' && toDay < $(this).text()) {
-						$(this).parent().parent().hide();
-					} else if (status == '오늘까지' && toDay > $(this).text() && toDay > $(this).text() && $(this).text() == '-') {
-						$(this).parent().parent().hide();
-					} else if (status == '이번주까지' && toDay != $(this).text().substring(0,7) && toDay != $(this).text().substring(11,21) && $(this).text() == '-') {
-						$(this).parent().parent().hide();
-					} else if (status == '이번달까지' && toDay > $(this).text() && toDay.substring(0,7) != $(this).text().substring(0,7) && $(this).text() == '-') {
-						$(this).parent().parent().hide();
-					} else if (status == '날짜미정' && '-' != $(this).text()) {
-						$(this).parent().parent().hide();
-					}
-				});
-			}
-		}); 
 	}
 	
 	// 전체 업무 체크 컨트롤러 받기
@@ -224,7 +238,7 @@ $(document).ready(function(){
     }
     
     // task 게시글 선택
-    $(document).on('click','#task_board',function(e){
+    $(document).on('click','.task_board',function(e){
     	e.stopPropagation();
     	// 선택 게시글 정보
     	var article_id = $(this).attr('name');
@@ -251,4 +265,4 @@ $(document).ready(function(){
     	project_move.appendTo('body');
     	
     	project_move.submit();
-    });
+    });*/

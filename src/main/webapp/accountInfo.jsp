@@ -19,7 +19,7 @@
 </head>
    
    
-<body>
+<body style="background-color: #eaeaea;">
 	
 	<div class="wrap">
 	

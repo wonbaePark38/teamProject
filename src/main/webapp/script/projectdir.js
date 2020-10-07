@@ -400,9 +400,29 @@ $(document).on('click','#locker_add',function(){
 
 // content.jsp - script
 
-
+function initProject(){
+	// 즐겨찾기 프로젝트 여부
+	var projectF = $('#total_favorites').find('.project_div');
+	// 일반 프로젝트 여부
+	var project = $('#join_project').find('.project_div');
+	console.log(project.is(':visible'));
+	console.log(projectF.is(':visible'));
+	// 프로젝트가 없을때 none_project.show
+	
+	if (project.length > 0) {
+		$('#join_project').css('display','inline-block');
+	}
+	if (projectF.length > 0) {
+		$('#total_favorites').show();
+	}
+	if (project.is(':visible') == false && projectF.is(':visible') == false) {
+		$('#none_project').show();	
+	}
+}
 $(document).ready(function(){
 	
+	
+		initProject();
 	
 	var project_select_num;
 	
@@ -496,9 +516,6 @@ $(document).ready(function(){
 		$(this).find('#locker_update').hide();
 		$(this).find('#locker_del').hide();
 	});
-	if ($('.project_div').find()) {
-		$('#none_project').hide();
-	}
 	
 });
 

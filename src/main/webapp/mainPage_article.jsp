@@ -147,7 +147,7 @@
 										<input type="file"   class="img_input" name="writeForm_img" style="display: none;" multiple/>
 										<a id="writeForm1_file_add" class="add_file"></a> 
 										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a>
-										<a class="add_mention"></a>
+										<a class="add_mention" style="display: none;"></a>
 										<div id="mention_select_div" style="display: initial;z-index: 300; display: initial; position: absolute; margin-left: 7px; display: none;">
 											<ul
 												style="list-style: none; border: 1px solid lightgray; background-color: white; padding-left: 0px;">
@@ -246,7 +246,7 @@
 										 <a id="writeForm2_file_add" class="add_file"></a> 
 										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a>
 										<a class="add_loc" onclick="locationPick()"></a>
-										<a class="add_mention"></a>
+										<a class="add_mention" style="display: none;"></a>
 
 									<div style="display: inline-block; float: right;">
 										<a class="submit_a" onclick="writeForm_submit2()">올리기</a>
@@ -479,7 +479,7 @@
 										<input type="file"   class="img_input" name="writeForm_img" style="display: none;" multiple/>
 										<a id="writeForm3_file_add" class="add_file"></a> 
 										<a href="javascript:" id="img_upload" onclick="fildUploadAction()" class="add_pic"></a> 
-										<a class="add_mention"></a>
+										<a class="add_mention" style="display: none;"></a>
 									<div style="display: inline-block; float: right;">
 										<a class="submit_a" onclick="writeForm_submit3()">올리기</a>
 									</div>

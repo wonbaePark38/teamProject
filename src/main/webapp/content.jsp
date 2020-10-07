@@ -6,6 +6,7 @@
 <link href="css/write_completion.css" rel="stylesheet">
 <script src="script/jquery-3.5.1-min.js"></script>
 <script src="script/projectdir.js"></script>
+
 <div style="padding-left: 15px;" id="content_div">
 	<div class="projectdir_content_header">
 		<div class="setting_div" id="setting_" style="float: right;">
@@ -29,22 +30,21 @@
 			</div>
 		</div>
 	</div>
-
+	<script>
+		$('#project-manage-bt').hide();
+	</script>
 	<c:set var="view" value="${type}" />
 	<input id="vt" type="hidden" value="${view}">
+	<div id="none_project" style="display: none;">
+		<strong style="position: absolute; color: darkgray; top: 45%; left: 36%; font-size: 40px;">프로젝트를 생성해보세요.</strong>
+	</div>
 	<c:choose>
 		<c:when test="${view eq '' or view eq null }">
-			<div id="none_project" style="display: block;">
-				<strong
-					style="position: absolute; color: darkgray; top: 45%; left: 36%; font-size: 40px;">프로젝트를
-					생성해보세요.</strong>
-			</div>
 			<div id="project_dir_list1" class="content_type">
-				<div id="total_favorites">
+				<div id="total_favorites" style="display: none;">
 					<h4 id="content_type_title">즐겨찾기</h4>
 					<c:forEach var="project_lookup" items="${projectDirList}">
-						<c:if
-							test="${project_lookup.project_favorites ne '0' and project_lookup.hide_locker eq '0'}">
+						<c:if test="${project_lookup.project_favorites ne '0' and project_lookup.hide_locker eq '0'}">
 							<div class="project_div">
 								<input class="div_btn" id="div_button" type="button"> <input
 									type="hidden" name="project_id"
@@ -65,11 +65,10 @@
 						</c:if>
 					</c:forEach>
 				</div>
-				<div style="z-index: 1; width: 100%; display: inline-block;">
+				<div id="join_project" style="z-index: 1; width: 100%; display: none;">
 					<h4 style="padding-bottom: 10px;">참여중</h4>
 					<c:forEach var="project_lookup" items="${projectDirList}">
-						<c:if
-							test="${project_lookup.project_favorites eq '0' and project_lookup.hide_locker eq '0'}">
+						<c:if test="${project_lookup.project_favorites eq '0' and project_lookup.hide_locker eq '0'}">
 							<div class="project_div">
 								<input class="div_btn" id="div_button" type="button"> <input
 									type="hidden" name="project_id"
