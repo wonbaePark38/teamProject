@@ -86,7 +86,7 @@ function sameEmail(){
                 </a>
             </div>
 			<div>
-                <a href="javascript:history.go(-1)">뒤로가기</a>
+                <a href="/plugProject/">뒤로가기</a>
             </div>
 		</div>
 	</div>
