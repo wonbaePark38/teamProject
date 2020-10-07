@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Plug</title>
-<link rel="stylesheet" href="css/profile_css.css" />
+<link rel="stylesheet" href="css/profile.css" />
 </head>
 <body>
 	

@@ -12,7 +12,7 @@
 <meta name="author" content="">
 
 <title>Plug</title>
-<link rel="stylesheet" href="css/newproject_css.css">
+<link rel="stylesheet" href="css/newproject.css">
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->

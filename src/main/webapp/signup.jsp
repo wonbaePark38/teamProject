@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Sign up</title>
-<link rel="stylesheet" href="css/signup_css.css"/>
+<link rel="stylesheet" href="css/signup.css"/>
 <script src="script/jquery-3.5.1-min.js"></script>
 <script>
 function validate() {

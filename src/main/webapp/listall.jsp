@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Plug</title>
-<link rel="stylesheet" href="css/listall_css.css">
+<link rel="stylesheet" href="css/listall.css">
 
 </head>
 <body>

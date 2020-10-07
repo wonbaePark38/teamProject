@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<link rel="stylesheet" href="css/newproject_css.css">
+<link rel="stylesheet" href="css/newproject.css">
 <script src="script/projectdir.js"></script>
 
 <div id="new_project_div">

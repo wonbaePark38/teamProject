@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Plug</title>
 <!-- Custom styles for this template -->
 <link href="css/projectManagerPageSidebar.css" rel="stylesheet">
 <script src="js/jquery-3.5.1-min.js"></script>	
@@ -15,7 +15,7 @@
                 <div class="sidebarContainer">
     
                     <div class="go-back-container">
-                        <a id="go-back-bt">flow</a>
+                        <a id="go-back-bt">Plug</a>
     
                     </div>
                     <!--사이드바-->

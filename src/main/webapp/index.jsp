@@ -39,10 +39,8 @@
 <title>Plug</title>
 
 <!--<meta property="og:url" content="https://flow.team/index.act">-->
-<meta property="og:title" content="【플로우】 - 1위 스마트워크 협업툴">
+<meta property="og:title" content="Plug">
 <meta property="og:type" content="website">
-<meta property="og:description"
-	content="프로젝트관리 중심의 그룹웨어 협업툴 플로우는 프로젝트 일정관리, 일정공유, 업무관리를 통해 업무생산성을 높여 스마트워크가 가능하게 해드리는 1위 업무관리시스템입니다. 업무용메신저, 사내메신저를 통해 사내커뮤니케이션 효율성을 높여드립니다. 30일 무료 체험이 가능합니다.">
 <!--<meta property="og:image" content="https://flow.team/design2/homepage_2019/img/flow_meta.png">-->
 
 <meta name="author" content="Madras check">

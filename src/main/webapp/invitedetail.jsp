@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Plug</title>
-<link rel="stylesheet" href="css/invite_css.css">
+<link rel="stylesheet" href="css/invite.css">
 <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
 </head>
 <body>

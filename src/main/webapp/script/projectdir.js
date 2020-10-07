@@ -405,9 +405,8 @@ function initProject(){
 	var projectF = $('#total_favorites').find('.project_div');
 	// 일반 프로젝트 여부
 	var project = $('#join_project').find('.project_div');
-	console.log(project.is(':visible'));
-	console.log(projectF.is(':visible'));
-	// 프로젝트가 없을때 none_project.show
+	// 보관함 여부
+	var projectL = $('.sidebar').find('.locker_a');
 	
 	if (project.length > 0) {
 		$('#join_project').css('display','inline-block');
@@ -418,12 +417,15 @@ function initProject(){
 	if (project.is(':visible') == false && projectF.is(':visible') == false) {
 		$('#none_project').show();	
 	}
+	if (projectL.length > 0) {
+		$('#locker_list').hide();
+	}
 }
 $(document).ready(function(){
 	
 	
 		initProject();
-	
+		
 	var project_select_num;
 	
 	if ($('#vt').val() == '숨김') {

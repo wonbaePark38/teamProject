@@ -11,7 +11,7 @@
     
     
 <title>Login</title>
-<link rel="stylesheet" href="css/login_css.css" />
+<link rel="stylesheet" href="css/login.css" />
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="script/script.js"></script>

@@ -17,7 +17,7 @@
 <!-- Custom styles for this template -->
 <link href="css/mainPage.css" rel="stylesheet">
 <link href="css/task.css" rel="stylesheet">
-<link href="css/messanger_css.css" rel="stylesheet">
+<link href="css/messanger.css" rel="stylesheet">
 <script src="script/page_ajax.js"></script>
 <link href="css/contentPage.css" rel="stylesheet">
 <link rel="stylesheet" href="css/write_completion.css">
