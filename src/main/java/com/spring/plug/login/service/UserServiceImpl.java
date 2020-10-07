@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService{
 						"<p>아래 버튼을 클릭해야만 인증이 완료되고 로그인 페이지로 이동합니다.</p>"+
 						"<p>아래의 비밀번호로 로그인 후에 비밀번호 변경해 주시기 바랍니다.</p>"+
 						"<p>"+password+"</p>"+
-						"<form action='http://ec2-3-17-73-167.us-east-2.compute.amazonaws.com/plugProject/passlogin.do' method='POST'>"+
+						"<form action='http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/passlogin.do' method='POST'>"+
 						"<input type='hidden' name=email value="+
 						email + '>'+
 						"<input type='hidden' name=password value="+

@@ -57,11 +57,9 @@ public class LoginController{
 		}
 		
 		String inputPassword = vo.getPassword();
-		if(!user.getPasswordAuthStatus().equals("0") && user.getSocialCompare().equals("N")) { //임시비밀번호가 아닌 사람
+		if(user.getPasswordAuthStatus().equals("1") && user.getSocialCompare().equals("N")) { //임시비밀번호가 아닌 사람
 			inputPassword = SHA256Util.getEncrypt(vo.getPassword(), user.getSalt()); //사용자가 입력한 비밀번호 암호화
 		}
-		
-		
 		if(inputPassword.equals(user.getPassword()) && user.getAuthStatus().equals("0")) { //정보는 맞지만 이메일 인증 하지않은 회원
 			System.out.println("이메일 인증 하지 않았습니다");
 			mav.addObject("status", "notCheckEmail");

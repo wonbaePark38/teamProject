@@ -89,7 +89,7 @@ public class ProjectManageServiceImpl implements ProjectManageService{
 		String subject = "FLOW 초대 메일";
 		String body = username+"님으로 부터 메일을 받았습니다.";
 		body += "<p> 아래 링크를 클릭하시면 플로우 로그인 페이지로 이동합니다. </p>";
-		body += "<a href='ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/login.do'>플로우 페이지로 이동</a>";
+		body += "<a href='http://ec2-13-124-251-3.ap-northeast-2.compute.amazonaws.com/plugProject/login.do'>플로우 페이지로 이동</a>";
 		
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", host); 
@@ -108,7 +108,7 @@ public class ProjectManageServiceImpl implements ProjectManageService{
 		session.setDebug(true);
 		
 		Message mimeMessage = new MimeMessage(session); //MimeMessage 생성 
-		mimeMessage.setFrom(new InternetAddress("dbhssqo3@gmail.com"));
+		mimeMessage.setFrom(new InternetAddress("97dnjswhdzld@gmail.com"));
 		
 		InternetAddress[] toAddr = new InternetAddress[mailAddress.size()];
 		for(int i = 0; i<mailAddress.size(); i++) {
