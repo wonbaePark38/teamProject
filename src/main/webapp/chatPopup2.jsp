@@ -484,11 +484,10 @@ $(document).ready(function() {
 				type : "POST",
 				url : 'exitChatRoom.do',
 				data : sendData,
-				dataType:"json",
-				success : function(data) {
+				success : function() {
 					
 				},
-				error : function(err) {
+				error : function() {
 					alert('에러발생');
 				}
 			}) //end ajax
