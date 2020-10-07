@@ -112,20 +112,21 @@ function taskStatusChecked(type){
 	if (type == 'rsdate' || type == 'total') {
 		$('.rsdate').each(function(){
 			var status = $(this).next().text();
-			console.log(status);
 			if ($(this).is(':checked')) {
 				$('.task_sdate').each(function(){
 					if (status == '오늘' && toDay != $(this).text() || $(this).text() == '-') {
+						console.log(status);
 						$(this).parent().parent().hide();
 					} else if (status == '이번주' && toDay >= $(this).text() && toWeek.substring(11,21) <= $(this).text() || $(this).text() == '-') {
-						
-						console.log($(this).text());
+						console.log(status);
 						$(this).parent().parent().hide();
 					} else if (status == '이번달' && toDay.substring(0,7) != $(this).text().substring(0,7) || $(this).text() == '-') {
+						console.log(status);
 						$(this).parent().parent().hide();
-					} else if (status == '날짜미정' && '-' != $(this).text()) {
+					} else if (status == '날짜미정' && '-' == $(this).text()) {
+						console.log(status);
 						$(this).parent().parent().hide();
-					} else {
+					} else if (status == '전체') {
 						$(this).parent().parent().show();
 					}
 				});
@@ -152,19 +153,19 @@ function taskStatusChecked(type){
 //			}
 //		}); 
 //	}
-	$('.table_list').find('tr').each(function(){
-		var count = 0;
-		$(this).each(function(){
-			if ($(this).find('#task_off').length > 0) {
-				count++;
-			}
-			if(count == 0){
-				$(this).show();
-			} else if (count > 0) {
-				$(this).hide();
-			} 
-		});
-	});
+// 	$('.table_list').find('tr').each(function(){
+// 		var count = 0;
+// 		$(this).each(function(){
+// 			if ($(this).find('#task_off').length > 0) {
+// 				count++;
+// 			}
+// 			if(count == 0){
+// 				$(this).show();
+// 			} else if (count > 0) {
+// 				$(this).hide();
+// 			} 
+// 		});
+// 	});
 }
 
 // 전체 업무 체크 컨트롤러 받기
