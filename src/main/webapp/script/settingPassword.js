@@ -2,7 +2,7 @@
  * 비밀번호 변경 페이지에서 쓸 자바스크립트 파일
  */
 $(document).ready(function(){
-		
+	$('#searchArea').css('display','none'); //헤더 검색창 숨김	
 	$('.change-button').click(function(){
 		if(passwordCheck()){
 			var inputPassword = $("#password1").val();

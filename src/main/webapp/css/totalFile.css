@@ -223,7 +223,6 @@ a:hover {
 	padding-top: 3px;
 	padding-left: -2px;
 	border: 0;
-	background-color: #615cba;
 }
 
 #badukSortSpan {
@@ -614,6 +613,7 @@ a:hover {
 	align-items: center;
 	width: 100%;
 	border: 0;
+	background: none;
 }
 
 .list-main-article-container {
