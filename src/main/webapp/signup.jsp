@@ -77,6 +77,19 @@ function sameEmail(){
 		sameEmail();
 		</script>
 	</c:if>
+	
+	<div>
+		<div class="btn-register">
+            <div class="header-left-menu">
+                <a href="index.jsp">
+                   <img src="images/bi_flow.png" style="vertical-align: middle;">
+                </a>
+            </div>
+			<div>
+                <a href="javascript:history.go(-1)">뒤로가기</a>
+            </div>
+		</div>
+	</div>
 
 	<div class="sign-up-wrap">
 		<form action="signupPost.do" name="join" method="post" onsubmit="return validate();">
