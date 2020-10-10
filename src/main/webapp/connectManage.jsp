@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Plug</title>
 <link href="css/connectManage.css" rel="stylesheet">
+<script src="script/jquery-3.5.1-min.js"></script>
 <script type="text/javascript" src="script/connectManage.js"></script>
 </head>
 <body>

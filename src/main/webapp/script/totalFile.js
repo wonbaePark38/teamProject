@@ -761,7 +761,7 @@ $(document).ready(function(){
 				"</iframe>"
 				  );
 			  }else{
-				  alert('지원 되지 않는 포맷입니다 ㅈㅅㅈㅅ');
+				  alert('지원 되지 않는 확장자입니다.');
 			  }
 		  }).fail(function(){
 			  alert('경로 받아오기 실패');

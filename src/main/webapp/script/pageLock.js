@@ -38,7 +38,7 @@ $(document).ready(function(){
 				resetLock(setTime);
 			}else{
 				setLock();
-				alert('누구냐 넌');
+				alert('비밀번호가 틀렸습니다.');
 			}
 		}).fail(function(err){
 			alert('통신오류');
