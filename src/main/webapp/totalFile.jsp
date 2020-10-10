@@ -71,42 +71,51 @@
 
                     <div id='filetypeSelectContainer'>
                         <ul class='selectfiletypeDiv'>
-                           
+                            <li>
                             <button type='button' id='pdfBt'>
                                 <span id='pdfBtSpan'></span>PDF
                             </button>
+                            </li>
                             <li>
                                 <button type='button' id='wordBt'>
                                     <span id='wordBtSpan'></span>워드
                                 </button>
                             </li>
-                            <button type='button' id='excelBt'>
-                                <span id='excelBtSpan'></span>엑셀
-                            </button>
+                            <li>
+                            	<button type='button' id='excelBt'>
+                                	<span id='excelBtSpan'></span>엑셀
+                            	</button>
+                            </li>	
                             <li>
                                 <button type='button' id='hangeulBt'>
                                     <span id='hangeulBtSpan'></span>한글
                                 </button>
                             </li>
-                            <button type='button' id='pptBt'>
-                                <span id='pptBtSpan'></span>파워포인트
-                            </button>
+                            <li>
+                            	<button type='button' id='pptBt'>
+                                	<span id='pptBtSpan'></span>파워포인트
+                            	</button>
+                            </li>
                             <li>
                                 <button type='button' id='imgBt'>
                                     <span id='imgBtSpan'></span>이미지
                                 </button>
                             </li>
-                            <button type='button' id='multimediaBt'>
-                                <span id='multimediaBtSpan'></span>음악/동영상
-                            </button>
+                            <li>
+                            	<button type='button' id='multimediaBt'>
+                                	<span id='multimediaBtSpan'></span>음악/동영상
+                            	</button>
+                            </li>
                             <li>
                                 <button type='button' id='htmlBt'>
                                     <span id='htmlBtSpan'></span>HTML
                                 </button>
                             </li>
-                            <button type='button' id='cadBt'>
-                                <span id='cadBtSpan'></span>캐드파일
-                            </button>
+                            <li>
+                            	<button type='button' id='cadBt'>
+                                	<span id='cadBtSpan'></span>캐드파일
+                            	</button>
+                            </li>	
                             <li>
                                 <button type='button' id='archiveBt' value='압축파일'>
                                     <span id='archiveBtSpan'></span>압축파일
