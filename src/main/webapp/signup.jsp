@@ -72,7 +72,7 @@ function sameEmail(){
 }
 
 function joinSuccess() {
-	alert('회원 가입 성공 / 인증메일이 발송되었습니다.');
+	alert('가입하신 이메일 인증을 해주세요.');
 	setTimeout(function() {
 		location.href = 'login.do';
 	}, 500);
