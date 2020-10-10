@@ -139,24 +139,6 @@
                             </li>
 	                       <!-- 가입된 프로젝트 들어올 자리 -->
                         	
-
-                            <li>
-                                <div class='totalProjectDiv'>
-                                    <span class='colorIcon2'></span>
-                                    <input type='button' value='1:1 문의하기' class='projectNameBt'>
-
-
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class='totalProjectDiv'>
-                                    <span class='colorIcon3'></span>
-                                    <input type='button' value='플로우 이용 가이드' class='projectNameBt'>
-
-
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
