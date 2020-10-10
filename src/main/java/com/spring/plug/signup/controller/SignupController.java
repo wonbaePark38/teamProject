@@ -40,9 +40,11 @@ public class SignupController {
 		try {
 			signupService.insertMember(vo);
 			signupService.addUserInfo(vo);
-			mav.setViewName("newlogin.jsp");
+			mav.addObject("status", "success");
+			mav.setViewName("signup.jsp");
 		} catch (Exception e) {
 			System.out.println("중복 이메일");
+			e.printStackTrace();
 			mav.addObject("status", "sameEmail");
 			mav.setViewName("signup.jsp");
 		}

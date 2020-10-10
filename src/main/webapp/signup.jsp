@@ -70,12 +70,24 @@ function check(re, me, message) {
 function sameEmail(){
 	  alert('이미 사용중인 이메일 입니다.\n다른 이메일을 사용해 주세요.');
 }
+
+function joinSuccess() {
+	alert('회원 가입 성공 / 인증메일이 발송되었습니다.');
+	setTimeout(function() {
+		location.href = 'login.do';
+	}, 500);
+}
 </script>
 </head>
 <body>
 	<c:if test="${status eq 'sameEmail'}">
 		<script type="text/javascript">
 		sameEmail();
+		</script>
+	</c:if>
+	<c:if test="${status eq 'success'}">
+		<script type="text/javascript">
+		joinSuccess();
 		</script>
 	</c:if>
 	<div>
