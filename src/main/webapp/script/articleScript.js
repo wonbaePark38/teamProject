@@ -919,28 +919,31 @@ $(document).on('click','.remark_btn',function(){
 		$(this).parent().next().find('#reply_c').contents().unwrap().wrap('<input type="text" id="reply_c" value="'+content+'">');
 		
 	} else if ($(this).text() == '삭제') {
-		var reply_id = $(this).parent().next().find('strong').attr('id');
-		
-		var reply_delete = $('<form></form>');
-		
-		// form 설정
-		reply_delete.attr('method','post');
-		reply_delete.attr('action','deletereply.do');
-		
-		// form 데이터
-		reply_delete.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
-		reply_delete.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
-		reply_delete.append($('<input/>',{type:'hidden', name:'reply_id', value: reply_id}));
-		
-			 
-		// form 생성하는 곳
-		reply_delete.appendTo('body');
-		reply_delete.submit();
-		
+		if (confirm('댓글을 정말로 삭제하시겠습니까?')) {
+			var reply_id = $(this).parent().next().find('strong').attr('id');
+			
+			var reply_delete = $('<form></form>');
+			
+			// form 설정
+			reply_delete.attr('method','post');
+			reply_delete.attr('action','deletereply.do');
+			
+			// form 데이터
+			reply_delete.append($('<input/>',{type:'hidden', name:'project_id', value: p_id}));
+			reply_delete.append($('<input/>',{type:'hidden', name:'project_name', value: p_title}));
+			reply_delete.append($('<input/>',{type:'hidden', name:'reply_id', value: reply_id}));
+			
+				 
+			// form 생성하는 곳
+			reply_delete.appendTo('body');
+			reply_delete.submit();
+		} else {
+			alert('취소 되었습니다.')
+		}
 		
 	} else if ($(this).text() == '취소') {
-		$(this).text('수정');
-		$(this).next().next().text('삭제');
+		$(this).prev().prev().text('수정');
+		$(this).text('삭제');
 		$(this).parent().next().find('#reply_c').contents().unwrap().wrap('<pre id="reply_c"></pre>');
 	} else if ($(this).text() == '확인') {
 		
@@ -1003,8 +1006,12 @@ function handleImgFileSelect(e) {
 		imgView.show();
 	});
 }
+$(document).on('click','#file_del',function(){
+	alert('개발 중 입니다.');
+});
 function deleteImageAction(index){
-	var img_id = '#img_id_'+index;
-	$(img_id).remove();
+	alert('개발 중 입니다.')
+//	var img_id = '#img_id_'+index;
+//	$(img_id).remove();
 }
  

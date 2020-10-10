@@ -396,7 +396,9 @@ $(document).on('click','#locker_add',function(){
 	
 });
 
-
+$(document).on('click','.u_profile',function(){
+	alert('개발 중 입니다.');
+});
 
 // content.jsp - script
 

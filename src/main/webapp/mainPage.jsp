@@ -26,8 +26,6 @@
 <script type="text/javascript" src="script/fileupload.js"></script>
 <script type="text/javascript" src="script/projectdir.js"></script>
 </head>
-<style>
-</style>
 <body style="background-color: rgb(242, 242, 242)">
 	<div class="mainWrap">
 		<!-- Navigation -->
@@ -386,7 +384,7 @@
 											<strong id="msg">관리자</strong>
 										</h5>
 									</div>
-									<ul>
+									<ul class="u_profile">
 									<c:forEach var="userList" items="${joinlist}"> 
 										<c:if test="${userList.project_manager eq '1'}">
 											<li class="right-sendience-li">
@@ -409,7 +407,7 @@
 											<strong id="msg">참여자</strong> <span id="cluser"></span>
 										</h5>
 									</div>
-									<ul id="juser" style="overflow-y: scroll;max-height: 300px;">
+									<ul id="juser" class="u_profile" style="overflow-y: scroll;max-height: 300px;">
 										<c:forEach var="userList" items="${joinlist}"> 
 											<c:if test="${userList.project_manager eq '0' }">
 											

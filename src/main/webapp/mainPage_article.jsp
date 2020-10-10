@@ -114,7 +114,7 @@
 									<div
 										style="width: 100%; padding: 10px; border: 1px solid black;">
 										<img src="images/file_icon2_down.png"
-											style="display: inline-block">
+											style="display: inline-block;margin-bottom: 5px;">
 										<div
 											style="display: inline-block; margin-left: 10px; width: 385px;">
 											<p id="writeForm1_uploadFile_name"
@@ -124,8 +124,7 @@
 										</div>
 										<div
 											style="display: inline-block; text-align: right; padding-bottom: 7px;">
-											<a
-												style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
+											<a id="file_del" style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
 										</div>
 									</div>
 								</div>
@@ -212,7 +211,7 @@
 									<div
 										style="width: 100%; padding: 10px; border: 1px solid black;">
 										<img src="images/file_icon2_down.png"
-											style="display: inline-block">
+											style="display: inline-block;margin-bottom: 5px">
 										<div
 											style="display: inline-block; margin-left: 10px; width: 385px;">
 											<p id="writeForm2_uploadFile_name"
@@ -222,8 +221,7 @@
 										</div>
 										<div
 											style="display: inline-block; text-align: right; padding-bottom: 7px;">
-											<a
-												style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
+											<a id="file_del" style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
 										</div>
 									</div>
 								</div>
@@ -447,7 +445,7 @@
 									<div
 										style="width: 100%; padding: 10px; border: 1px solid black;">
 										<img src="images/file_icon2_down.png"
-											style="display: inline-block">
+											style="display: inline-block; margin-bottom: 5px">
 										<div
 											style="display: inline-block; margin-left: 10px; width: 385px;">
 											<p id="writeForm3_uploadFile_name"
@@ -457,8 +455,7 @@
 										</div>
 										<div
 											style="display: inline-block; text-align: right; padding-bottom: 7px;">
-											<a
-												style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
+											<a id="file_del" style="display: inline-block; text-align: center; vertical-align: middle; border: 1px solid black; width: 50px; height: 20px; padding-bottom: 3px; border-radius: 20px;">삭제</a>
 										</div>
 									</div>
 								</div>
