@@ -594,7 +594,6 @@ function headerOption(){
 	  $('.todo_worker_select_div').css('display','none');
   });
   
-  
  
 // 할일 게시글 진행상황
 $(document).on('click','.tcheck',function(){
@@ -635,13 +634,7 @@ $(document).on('click','#set_icon',function(){
 
 // 상단게시글
 $(document).on('click','.pix_div',function(){
-	$('.pix_div').next().hide();
-	if ($(this).next().hide()) {
-		$(this).next().show();
-	} else {
-		$(this).next().hide();
-		
-	}
+	$('.pix_div').next().toggle();
 });
 
 // 게시글 수정하기
@@ -656,7 +649,7 @@ function article_modified_set(type, parent){
 			var title = parent.find('#write_t').text();
 			
 			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" style="width: 60%; padding: 0px; margin-left: 110px; font-weight: 700; height: 35px;" value="'+title+'">');
-			parent.find('#write_c').contents().unwrap().wrap('<textarea id="write_c" style="width:100%;margin-left: 25px;"></textarea>');
+			parent.find('#write_c').contents().unwrap().wrap('<textarea id="write_c" style="width:95%;margin-left: 25px;"></textarea>');
 		} else if (parent.attr('name') == 'todoWrite') {
 			var title = parent.find('#write_t').text();
 			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" value="'+title+'">');
@@ -666,7 +659,7 @@ function article_modified_set(type, parent){
 			});
 		} else { // 게시글 내용 유무
 			var title = parent.find('#write_t').text();
-			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" style="width:95%;" value="'+title+'">');
+			parent.find('#write_t').contents().unwrap().wrap('<input type="text" id="write_t" style="width:85%;" value="'+title+'">');
 			parent.find('#write_c').contents().unwrap().wrap('<textarea id="write_c" style="width:100%;"></textarea>');
 		}
 		parent.find('.bottom_list').append('<li class="modified_set" style="float:right;"><a id="modified_cancel" class="modified_btn">취소</a></li>')
@@ -1008,6 +1001,10 @@ function handleImgFileSelect(e) {
 }
 $(document).on('click','#file_del',function(){
 	alert('개발 중 입니다.');
+});
+
+$(document).on('click','img#user_profile',function(){
+	alert('개발 중 입니다.')
 });
 function deleteImageAction(index){
 	alert('개발 중 입니다.')

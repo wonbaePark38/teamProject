@@ -386,7 +386,7 @@
 						style="width: 90%; height: 30px;">
 					<div style="padding-top: 15px">
 						<input id="lc_close" class="box_btn" type="button" value="취소">
-						<input id="lc_locker" class="box_btn" type="button" value="만들기">
+						<input id="lc_locker" class="box_btn" type="button" value="확인">
 					</div>
 				</div>
 			</div>

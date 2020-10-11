@@ -111,7 +111,7 @@
 				style="display: inline-block; position: absolute; font-size: 0;">
 				<a href="index.act" class="on"><img id="logoImg"
 					style="height: 30px;"
-					src="https://flow.team/design2/homepage_2019/img/logo_flow.png" alt="Flow"></a>
+					src="images/bi_flow.png" alt="Flow"></a>
 			</div>
 
 			<div class="hdedit">

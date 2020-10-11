@@ -43,7 +43,7 @@
 					<div class="headLogo">
 						<a href="projectdir.do"><img src="images/logo_top.png"></a>
 					</div>
-					 <div id="searchArea" >
+					 <div id="searchArea" style="display: none;">
                     	<input type='text' id='inputkeyword' placeholder='키워드를 입력하세요'>
                      </div>
 

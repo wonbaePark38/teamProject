@@ -230,7 +230,7 @@ $(document).on('click', '.locker_setbtn', function() {
 $(document).on('click', '#locker_del', function(e) {
 	e.stopPropagation();
 	var viewType = $('#vt').val();
-	if (confirm('게시글을 정말로 삭제하시겠습니까?')) {
+	if (confirm('보관함을 정말로 삭제하시겠습니까?')) {
 	
 		var locker_del_list = "";
 		var locker_del_name = $(this).parent().text().trim();
@@ -418,9 +418,6 @@ function initProject(){
 	}
 	if (project.is(':visible') == false && projectF.is(':visible') == false) {
 		$('#none_project').show();	
-	}
-	if (projectL.length > 0) {
-		$('#locker_list').hide();
 	}
 }
 $(document).ready(function(){

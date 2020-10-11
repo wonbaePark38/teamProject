@@ -2755,7 +2755,7 @@
 												&size=480x300
 												&maptype=roadmap
 												&markers=color:red%7Clabel:C%7C${list.writeForm4_latlng }
-												&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10">
+												&key=AIzaSyA2ufsIg_pi0agHyW6dFEgXMCPIH8Aiw10" style="max-width: 455px;">
 												</div>
 										</div>
 									</c:if>
