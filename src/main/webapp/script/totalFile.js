@@ -751,7 +751,7 @@ $(document).ready(function(){
 				  $('.file-modal').css('display','block');
 				  $('.file-modal').append(
 						  "<div class='file-modal-content'>" +
-						  "<img src="+ src + ">"+
+						  "<img class='img-modal' src="+ src + ">"+
 						  "</div>"
 				  );
 			  }else if(fileType == 'ppt' || fileType == 'doc' || fileType == 'docx' || fileType == 'pdf' || fileType == 'pptx'  || fileType == 'xls' || fileType == 'xlsx' || fileType == 'txt'){

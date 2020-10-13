@@ -35,9 +35,10 @@
 	</script>
 	<c:set var="view" value="${type}" />
 	<input id="vt" type="hidden" value="${view}">
-	<div id="none_project" style="display: none;">
-		<strong style="position: absolute; color: darkgray; top: 45%; left: 36%; font-size: 40px;">프로젝트를 생성해보세요.</strong>
-	</div>
+	
+		<div id="none_project" style="display: none;">
+			<strong style="position: absolute; color: darkgray; top: 45%; left: 36%; font-size: 40px;">프로젝트를 생성해보세요.</strong>
+		</div>
 	<c:choose>
 		<c:when test="${view eq '' or view eq null }">
 			<div id="project_dir_list1" class="content_type">
@@ -93,7 +94,7 @@
 		</c:when>
 		<c:otherwise>
 			
-			<div id="${lockerN}" class="content_type" style="z-index: 1; width: 100%; display: inline-block;">
+			<div id="join_project" class="content_type" style="z-index: 1; width: 100%; display: inline-block;">
 				<h4 style="padding-bottom: 10px;"><span id="locker_n">${lockerN}</span>${view}</h4>
 				<c:forEach var="project_lookup" items="${projectDirList}">
 					<c:choose>

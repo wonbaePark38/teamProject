@@ -939,6 +939,14 @@ a:hover {
     align-items: center;
     margin: 0 auto;
 }
+
+.img-modal{
+	ertical-align: middle;
+    border-style: none;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .modal-header{
 	display:flex;
 	flex-direction:row;
