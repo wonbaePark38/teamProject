@@ -28,9 +28,7 @@ public class FileDownController {
 		String articleId = request.getParameter("articleId");
 		int articleNumber = Integer.parseInt(articleId);
 		vo = fileService.getFilePath(articleNumber);
-		System.out.println(vo.toString());
 		String fileName = vo.getFileName();
-		System.out.println(request.getRequestURI());
 
 		String browser = request.getHeader("User-Agent");
 		try {

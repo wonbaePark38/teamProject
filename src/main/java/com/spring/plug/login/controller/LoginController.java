@@ -50,7 +50,6 @@ public class LoginController{
 		UserVO user = userService.getUser(vo);
 		//db에 가입 정보가 없음
 		if(user == null) { 
-			System.out.println("가입된 회원이 아님");
 			mav.setViewName("newlogin.jsp");
 			mav.addObject("status", "notJoin");
 			return mav;
@@ -61,12 +60,10 @@ public class LoginController{
 			inputPassword = SHA256Util.getEncrypt(vo.getPassword(), user.getSalt()); //사용자가 입력한 비밀번호 암호화
 		}
 		if(inputPassword.equals(user.getPassword()) && user.getAuthStatus().equals("0")) { //정보는 맞지만 이메일 인증 하지않은 회원
-			System.out.println("이메일 인증 하지 않았습니다");
 			mav.addObject("status", "notCheckEmail");
 			mav.setViewName("newlogin.jsp");
 			return mav;
 		} else if(!inputPassword.equals(user.getPassword())) { //비밀번호 다르게 입력한 사람
-			System.out.println("비밀번호가 틀렸습니다");
 			mav.setViewName("newlogin.jsp");
 			mav.addObject("status", "passwordFalse");
 			return mav;
@@ -84,7 +81,6 @@ public class LoginController{
 				addr = InetAddress.getLocalHost();
 				hostName = addr.getHostName();
 			} catch (UnknownHostException e) {
-				System.out.println("정보가 없는 접속임");
 				e.printStackTrace();
 			}
 		    //접속 정보 db에 저장
@@ -155,7 +151,6 @@ public class LoginController{
 	/*임시 비밀번호 발송된 이메일에서 버튼 클릭하면 임시 비밀번호 db에 저장하는 컨트롤러*/
 	@RequestMapping("/passlogin.do")
 	public ModelAndView loginView(UserVO vo,ModelAndView mav,@RequestParam("email") String email, @RequestParam("password") String password) {
-		System.out.println("임시비밀번호" + password);
 		vo.setEmail(email);
 		vo.setPassword(password);
 		vo.setPasswordAuthStatus("0");

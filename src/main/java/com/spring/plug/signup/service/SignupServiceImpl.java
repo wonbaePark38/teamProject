@@ -23,18 +23,6 @@ public class SignupServiceImpl implements SignupService {
 	@Autowired
 	private JavaMailSender mailSender;	
 	
-//	@Override
-//	public void insertMember(UserVO vo) {
-//		Date date = new Date();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		vo.setJoinDate(date); 
-//		String salt = SHA256Util.generateSalt();
-//		String password = vo.getPassword();
-//		password = SHA256Util.getEncrypt(password, salt);
-//		vo.setSalt(salt);
-//		vo.setPassword(password);
-//		signupDAO.insertMember(vo);
-//	}
 	
 	public void updateAuthkey(UserVO vo) {
 		signupDAO.updateAuthkey(vo);
@@ -44,7 +32,6 @@ public class SignupServiceImpl implements SignupService {
 	@Transactional
 	public void insertMember(UserVO vo) throws Exception {
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		vo.setJoinDate(date); 
 		String salt = SHA256Util.generateSalt();
 		String password = vo.getPassword();
@@ -62,7 +49,6 @@ public class SignupServiceImpl implements SignupService {
 
 		// mail 작성 관련 
 		MailUtils sendMail = new MailUtils(mailSender);
-		System.out.println(vo.getEmail());
 		sendMail.setSubject("회원가입 이메일 인증");
 		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
 				.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")

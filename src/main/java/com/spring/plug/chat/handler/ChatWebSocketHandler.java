@@ -32,7 +32,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("afterConnectionEstablished" + session);
 		sessions.add(session); //웹소켓 세션 리스트에 추가
 		String sessionRoomId = getRoomId(session);
 		roomSessions.put(session,sessionRoomId);
@@ -41,8 +40,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String msg = message.getPayload();
 		MessageVO messageVO = objectMapper.readValue(msg, MessageVO.class);
-		System.out.println("핸들러에 메시지 도착");
-		System.out.println(messageVO.getChatRoomId());
 		
 		for(WebSocketSession sess : sessions){
 			if(messageVO.getChatRoomId().equals(roomSessions.get(sess))) {

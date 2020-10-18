@@ -50,7 +50,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updatePasswordAuthKey(UserVO vo) {
-		System.out.println("비밀번호 변경 관련 키 db에 추가");
 		userDAO.updatePasswordAuthKey(vo);
 		
 	}
@@ -90,7 +89,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void changePasswordBytempPassword(UserVO vo) {
-		System.out.println("임시비밀번호 발급자 db에 임시 비번 저장");
 		userDAO.changePasswordBytempPassword(vo);
 	}
 
@@ -103,7 +101,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserVO checkUserWithSessionKey(String sessionkey) {
-		System.out.println("세션키 체크");
 		return userDAO.checkUserWithSessionKey(sessionkey);
 	}
 

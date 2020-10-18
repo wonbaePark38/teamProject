@@ -33,10 +33,8 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 	
 	@Override //연결됐을때
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("afterConnectionEstablished" + session);
 		sessions.add(session); //웹소켓 세션 리스트에 추가
 		int userId = getId(session);
-		System.out.println("세션 아이디 체크"+userId);
 		
 	}
 
@@ -44,7 +42,6 @@ public class ReplyEchochoHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		String msg = message.getPayload();
-		System.out.println(msg.toString());
 		for(WebSocketSession sess : sessions) {
 			sess.sendMessage(new TextMessage(message.getPayload()));
 		}

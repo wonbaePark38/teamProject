@@ -43,7 +43,6 @@ public class SocialLoginController{
 		UserVO user = userService.getSocialUser(vo);
 		
 		if(user == null) { // 소셜 로그인으로 처음 로그인한 사람
-			System.out.println("소셜 유저 추가");
 			userService.addSocialUser(vo); //db에 정보 추가
 			signupService.addUserInfo(vo); //usersetting 테이블에 정보 insert
 			user = userService.getSocialUser(vo);
@@ -59,7 +58,6 @@ public class SocialLoginController{
 			addr = InetAddress.getLocalHost();
 			hostName = addr.getHostName();
 		} catch (UnknownHostException e) {
-			System.out.println("정보가 없는 접속임");
 			e.printStackTrace();
 		}
 	    //접속 정보 db에 저장

@@ -23,9 +23,7 @@ public class prohibitController extends HandlerInterceptorAdapter{
       if(obj != null) { //로그인 세션이 있나 체크(로그인 상태인지 아닌지)
     	  
     	  String uri = request.getRequestURI(); 
-    	  System.out.println("uri 체크" + uri);
     	  if(uri.equals("/plugProject/login.do") || uri.equals("/plugProject/slogin.do")) { //uri 비교해서  로그인 요청이면
-    		  System.out.println("uri 체크 if체크");
     		  response.sendRedirect("/plugProject/projectdir.do");
     	  }
       }

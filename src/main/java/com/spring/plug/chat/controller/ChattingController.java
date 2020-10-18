@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,8 +65,7 @@ public class ChattingController {
 		mav.setViewName("chatPopup2.jsp");
 		return mav;
 	}
-
-	//db에 채팅 메시지 저장하는 컨트롤러
+	
 	@ResponseBody
 	@RequestMapping(value="/insertMessage.do", method = RequestMethod.POST)
 	public synchronized List<MessageVO> insertMessage(MessageVO msgVO){
@@ -192,7 +192,6 @@ public class ChattingController {
 		mav.setViewName("inviteChatting.jsp");
 		return mav;
 	}
-	
 	
 	//나랑 같은 프로젝트 소속된 사람 중에서 입장한 채팅방에 없는 사람 목록 불러오는 컨트롤러
 		@ResponseBody

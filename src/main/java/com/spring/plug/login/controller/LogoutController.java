@@ -39,7 +39,6 @@ public class LogoutController {
 		}
 		session.removeAttribute("user");
 		session.invalidate();
-		System.out.println("로그아웃");
 		mav.setViewName("newlogin.jsp");
 		return mav;
 	}
