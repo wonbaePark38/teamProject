@@ -146,7 +146,7 @@ function headerOption(){
     document.getElementById('writeForm3_form').reset();
     document.getElementById('writeForm4_form').reset();
     document.getElementById('writeForm5_form').reset();
-
+    file_init(); 
   }
 
   function write20Form(){
@@ -159,6 +159,7 @@ function headerOption(){
     document.getElementById('writeForm3_form').reset();
     document.getElementById('writeForm4_form').reset();
     document.getElementById('writeForm5_form').reset();
+    file_init(); 
   }
 
   function workForm(){
@@ -171,6 +172,7 @@ function headerOption(){
     document.getElementById('writeForm2_form').reset();
     document.getElementById('writeForm4_form').reset();
     document.getElementById('writeForm5_form').reset();
+    file_init(); 
   }
 
   function scheduleForm(){
@@ -183,6 +185,7 @@ function headerOption(){
     document.getElementById('writeForm2_form').reset();
     document.getElementById('writeForm3_form').reset();
     document.getElementById('writeForm5_form').reset();
+    file_init(); 
   }
 
   function todoForm(){
@@ -195,6 +198,7 @@ function headerOption(){
     document.getElementById('writeForm2_form').reset();
     document.getElementById('writeForm3_form').reset();
     document.getElementById('writeForm4_form').reset();
+    file_init(); 
   }
 
   // work status select
@@ -999,15 +1003,43 @@ function handleImgFileSelect(e) {
 		imgView.show();
 	});
 }
+
+function file_init(){
+	$('#write_form_content').each(function(){
+		$(this).find('.post_file').css('display','none');
+		$(this).find('.post_file').next().next().children('input[type=file]').first().val('');
+		$(this).find('.post_images').children().remove();
+		$(this).parent().parent().find('input[name=file_name]').val('');
+		$(this).parent().parent().find('input[name=file_size]').val('');
+	});
+	
+}
+$(document).on('click','.post_images a',function(){
+	if(confirm('업로드한 이미지를 삭제하시겠습니까?')){
+		$(this).parent().parent().parent().find('#toolbar').find('.img_input').val('');
+		$(this).parent().remove();
+	} else {
+		alert('취소되었습니다.');
+	}
+});
+
 $(document).on('click','#file_del',function(){
-	alert('개발 중 입니다.');
+	if(confirm('업로드한 파일을 삭제하시겠습니까?')){
+		var file_post = $(this).closest('.post_file');
+		file_post.css('display','none');
+		file_post.next().parent().find('#toolbar').children('input[type=file]').first().val('');
+		file_post.parent().parent().find('input[name=file_name]').val('');
+		file_post.parent().parent().find('input[name=file_size]').val('');
+		
+	} else {
+		alert('취소되었습니다.');
+	}
 });
 
 $(document).on('click','img#user_profile',function(){
 	alert('개발 중 입니다.')
 });
 function deleteImageAction(index){
-	alert('개발 중 입니다.')
 //	var img_id = '#img_id_'+index;
 //	$(img_id).remove();
 }
