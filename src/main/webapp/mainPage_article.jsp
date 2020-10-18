@@ -8,12 +8,13 @@
 		<input type="hidden" id="project_user" class="project_user" name="${userList.member_name }" value="${userList.member_id }"/>
 	</c:forEach>
 </div>
+
 <div class="article">
 	<div class="article_margin">
 		<!-- 타이틀 -->
 		<div class="title_margin">
 			<input id="p_id" type="hidden" name="project_id" value="${project.project_id }"/>
-			<div class="title_border">
+			<div class="title_border" id="${project.downProhibition}">
 				<p id="title">${project.project_name}</p>
 			</div>
 		</div>
@@ -235,7 +236,7 @@
 
 								<!-- 하단 툴바 -->
 								<hr>
-								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
+								<div id="toolbar" style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 
 									<input type="file" id="writeForm2_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm2_uploadFile)"
@@ -469,7 +470,7 @@
 
 								<!-- 하단 툴바 -->
 								<hr>
-								<div style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
+								<div id="toolbar" style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
 									<input type="file" id="writeForm3_file" name="writeForm_file"
 										onchange="fileCheck(this,writeForm3_uploadFile)"
 										style="display: none;"> 
@@ -626,7 +627,7 @@
 											<li>
 												<!-- 하단 툴바 -->
 												<hr>
-												<div
+												<div id="toolbar"
 													style="width: 100%; text-align: right; margin-top: 5px; margin-bottom: 5px;">
 													<div style="display: inline-block;">
 														 <a class="submit_a" onclick="writeForm_submit4()">올리기</a>
@@ -682,7 +683,7 @@
 								
 								<!-- 하단 툴바 -->
 								<hr>
-								<div
+								<div id="toolbar"
 									style="width: 100%; text-align: right; margin-top: 5px; margin-bottom: 5px;">
 									<div style="display: inline-block;">
 										<a id="writeForm5_submit" class="submit_a">올리기</a>
