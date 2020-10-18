@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserSettingDAO">
+	
+	<resultMap id="getUserConfig" type="configInfo" >
+		<result property="name" column="MEMBER_NAME" />
+		<result property="email" column="MEMBER_EMAIL" />
+		<result property="profileFileName" column="PROFILEIMG" />
+	</resultMap>
+	
+	<select id="userConfig" resultMap="getUserConfig" parameterType="int">
+		SELECT A.MEMBER_NAME, A.MEMBER_ID, A.MEMBER_EMAIL, A.MEMBER_PASSWORD, 
+			  B.*
+		FROM MEMBERINFO A LEFT OUTER JOIN USERSETTING B ON A.MEMBER_ID = B.MEMBER_ID 
+		WHERE B.MEMBER_ID=#{id}
+	</select>
+	
+	<update id="updateProfileImg" parameterType="configInfo">
+		UPDATE USERSETTING SET PROFILEIMG = #{profileFileName} WHERE MEMBER_ID = #{id}
+	</update>
+	
+	<update id="changePassword" parameterType="user">
+		UPDATE MEMBERINFO SET MEMBER_PASSWORD =#{password}, PASSWORDAUTHSTATUS =#{passwordAuthStatus}
+		WHERE MEMBER_ID = #{seq}
+	</update>
+	
+	<update id="changeLockSetting" parameterType="user">
+		UPDATE USERSETTING SET LOCKMODESTATUS =#{lockSwitchStatus}, LOCKTIME =#{lockTime}
+		WHERE MEMBER_ID = #{seq}
+	</update>
+	
+	<update id="updateAccountInfo" parameterType="configInfo">
+		UPDATE USERSETTING SET PHONENUMBER = #{phoneNumber}, COMPANYNAME = #{companyName}, DEPARTMENT = #{department}, 
+		MYPOSITION = #{myPosition}, COMPANYCALLNUMBER =#{companyCallNumber}
+		WHERE MEMBER_ID = #{id}
+	</update>
+	
+	<update id="updatePushAlram" parameterType="user">
+		UPDATE USERSETTING SET PUSHALRAM = #{pushAlram}, PROJECTALRAM = #{projectAlram}, CHATALRAM =#{chatAlram}
+		WHERE MEMBER_ID = #{seq}
+	</update>
+	
+	<update id="changeChatAlarm" parameterType="user">
+		UPDATE USERSETTING SET PUSHALRAM = #{pushAlram} , CHATALRAM = #{chatAlram}
+		WHERE MEMBER_ID = #{seq}
+	</update>
+</mapper>

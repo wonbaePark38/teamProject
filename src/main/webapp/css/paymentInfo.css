@@ -1,99 +1,94 @@
-body{
-    
-    margin: 0 auto;
-    background-color:#f2f2f2 ;
-    border: 1px solid  #eaeaea;
-    overflow-x: hidden;
-    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
-    height: 768px;
-  }
-  a{
-    cursor: pointer;
-    font-size: 15px;
-    margin: 3px 0 3px 0;
-    color: #bebec3;
-    text-decoration: none;
-  }
-  button{
-      cursor: pointer;
-  }
-  a:hover{
-    text-decoration: underline;
-    
-  }
-  
-  li:hover{
-    background-color:#e7e8e9;
-  }
-.mainWrap{
-    display: flex;
-    flex-direction: column;
-   
-    flex-wrap: nowrap;
-    background-color:#f2f2f2 ;
-    
-    margin: 0 auto;
-    }
-
-header{
-        display: flex;
-        align-items: center;
-       
-        height: 60px;
-        font-size: 20px;
-        box-sizing: border-box;
-        border-bottom: 1px solid grey;
-        
+body {
+	margin: 0 auto;
+	background-color: #f2f2f2;
+	border: 1px solid #eaeaea;
+	overflow-x: hidden;
+	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
+		sans-serif;
+	height: 768px;
 }
 
-.method-of-payment-div{
-    
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 6%;
-    justify-content: space-between;
-    align-items: center;
-    background-color: lavender;
-
+a {
+	cursor: pointer;
+	font-size: 15px;
+	margin: 3px 0 3px 0;
+	color: #bebec3;
+	text-decoration: none;
 }
 
-.card-info{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    margin-top: 20px;
-  
+button {
+	cursor: pointer;
 }
 
-.card-type{
-    display: table;
-    width: 100%;
-    
-    empty-cells: show;
-    border-collapse: collapse;
-    table-layout: fixed;
-    border-color: grey;
-}
-tr{
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
-    height: 40px;
+a:hover {
+	text-decoration: underline;
 }
 
-th{
-    vertical-align: middle;
-    font-size: 13px;
-    
-    color: blueviolet;
-    font-weight: normal;
-    border: 1px solid #e1e1e2;
+li:hover {
+	background-color: #e7e8e9;
 }
 
-td{
-    font-size: 13px;
-    text-align: center;
+.mainWrap {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	background-color: #f2f2f2;
+	margin: 0 auto;
+	min-width:600px;
 }
 
+header {
+	display: flex;
+	align-items: center;
+	height: 60px;
+	font-size: 20px;
+	box-sizing: border-box;
+	border-bottom: 1px solid grey;
+}
+
+.method-of-payment-div {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 6%;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+
+.card-info {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 100%;
+	margin-top: 20px;
+}
+
+.card-type {
+	display: table;
+	width: 100%;
+	empty-cells: show;
+	border-collapse: collapse;
+	
+	border-color: grey;
+}
+
+tr {
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+	height: 40px;
+}
+
+th {
+	vertical-align: middle;
+	font-size: 13px;
+	color: blueviolet;
+	font-weight: normal;
+	border: 1px solid #e1e1e2;
+}
+
+td {
+	font-size: 13px;
+	text-align: center;
+}

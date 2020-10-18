@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+	<resultMap id="getUser" type="user" >
+		<id property="seq" column="MEMBER_ID"/>
+		<result property="name" column="MEMBER_NAME" />
+		<result property="email" column="MEMBER_EMAIL" />
+		<result property="password" column="MEMBER_PASSWORD" />
+		<result property="socialCompare" column="MEMBER_ISSOCIAL"/>
+		<result property="lockSwitchStatus" column="LOCKMODESTATUS"/>
+		<result property="lockTime" column="LOCKTIME"/>
+	</resultMap>
+	
+	<resultMap type="getUserConnection" id="getUserConnection">
+		<id property="connection_set" column="connection_set"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="connection_start" column="CONNECTION_START"/>
+		<result property="connection_end" column="CONNECTION_END"/>
+	</resultMap>
+	
+	<select id="getUser" resultMap="getUser" parameterType="user">
+		SELECT * FROM MEMBERINFO A INNER JOIN USERSETTING B
+		ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE MEMBER_EMAIL=#{email}
+	</select>
+	
+	<select id="getSocialUser" resultMap="getUser" parameterType="user">
+		SELECT * FROM MEMBERINFO A INNER JOIN USERSETTING B
+		ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE MEMBER_EMAIL=#{email}
+	</select>
+	
+	
+	<insert id="addSocialUser" parameterType="user">
+		INSERT INTO MEMBERINFO 
+		(MEMBER_ID, MEMBER_EMAIL, MEMBER_NAME, REGDATE, MEMBER_ISSOCIAL) 
+		VALUES
+		((select nvl(max(MEMBER_ID), 0)+1 from MEMBERINFO), #{email}, #{name}, SYSDATE, #{socialCompare})
+	</insert>
+	
+	<select id="checkEmail" resultMap="getUser" parameterType="user">
+		SELECT MEMBER_EMAIL, MEMBER_ISSOCIAL FROM MEMBERINFO WHERE MEMBER_EMAIL=#{email}
+	</select>
+	
+	<update id="keepLogin">
+		UPDATE MEMBERINFO SET SESSIONID = #{sessionId}, SESSIONTIMEOUT = #{sessionLimit} WHERE MEMBER_EMAIL = #{email}
+	</update>
+	
+	<update id="changePasswordBytempPassword" parameterType="user">
+		UPDATE MEMBERINFO SET MEMBER_PASSWORD = #{password}, PASSWORDAUTHSTATUS = #{passwordAuthStatus} WHERE MEMBER_EMAIL = #{email}
+	</update>
+	
+	<select id="checkUserWithSessionKey" parameterType="String" resultMap="getUser">
+		SELECT * FROM MEMBERINFO WHERE SESSIONID = #{sessionId} and SESSIONTIMEOUT > SYSDATE
+	</select>
+	
+	<update id="writeLoginDate">
+		UPDATE USERSETTING SET LOGINDATE= #{loginDate}, CONNECTDEVICE =#{connectDevice} WHERE MEMBER_ID =#{seq}
+	</update>
+	
+	<insert id="insertConnectionLog" parameterType="int">
+		INSERT INTO USER_CONNECTION (CONNECTION_SEQ, MEMBER_ID, CONNECTION_START)
+		VALUES((SELECT nvl(MAX(connection_seq),0)+1 FROM user_connection), #{userId}, SYSDATE)
+	</insert>
+	
+	<update id="updateDisconnectionLog" parameterType="int">
+		UPDATE USER_CONNECTION SET CONNECTION_END = SYSDATE 
+		WHERE MEMBER_ID = #{userId} 
+		AND CONNECTION_START = (SELECT max(CONNECTION_START) FROM USER_CONNECTION WHERE MEMBER_ID = #{userId})
+
+	</update>
+	
+	<select id="userConnectionTime" parameterType="getUserConnection" resultMap="getUserConnection">
+		SELECT (TO_CHAR(connection_start,'HH24')) AS connection_times, COUNT(*) AS user_time 
+		FROM user_connection WHERE TO_CHAR(CONNECTION_START, 'yyyy-mm-dd') = #{searchDay} GROUP BY (TO_CHAR(connection_start,'HH24')) order by (TO_CHAR(connection_start,'HH24'))
+	</select>
+</mapper>

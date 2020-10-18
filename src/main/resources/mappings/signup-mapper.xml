@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SignupDAO">
+
+	<resultMap type="signup" id="signResult">
+		<id property="seq" column="MEMBER_ID" />
+		<result property="email" column="MEMBER_EMAIL" />
+		<result property="name" column="MEMBER_NAME" />
+		<result property="password" column="MEMBER_PASSWORD" />
+		<result property="socialCompare" column="MEMBER_ISSOCIAL" />
+		<result property="joinDate" column="REGDATE" />
+		<result property="salt" column="SALT" />
+		<result property="authKey" column="AUTHKEY" />
+		<result property="authStatus" column="AUTHSTATUS" />
+		
+	</resultMap>
+
+	<insert id="insertMember" parameterType="signup">
+		INSERT INTO MEMBERINFO (MEMBER_ID, MEMBER_EMAIL, MEMBER_NAME, MEMBER_PASSWORD, MEMBER_ISSOCIAL, REGDATE, SALT, AUTHKEY, AUTHSTATUS) VALUES((select nvl(max(MEMBER_ID), 0)+1 from memberinfo), 
+		#{email}, #{name}, #{password}, #{socialCompare}, 
+		#{joinDate}, #{salt}, #{authKey}, #{authStatus})
+	</insert>
+	
+	<update id="updateAuthkey" parameterType="signup">
+		UPDATE MEMBERINFO SET AUTHKEY = #{authKey} WHERE MEMBER_EMAIL = #{email}
+	</update>
+	
+	<update id="updateAuthstatus" parameterType="signup">
+		UPDATE MEMBERINFO SET AUTHSTATUS = #{authStatus} WHERE MEMBER_EMAIL = #{email}
+	</update>
+	
+	<select id="selectAuthkey" resultMap="signResult">
+		SELECT * FROM MEMBERINFO WHERE MEMBER_EMAIL = #{email}
+	</select>
+	
+	<update id="addUserInfo" parameterType="signup">
+		INSERT INTO USERSETTING (MEMBER_ID) VALUES((select MAX(MEMBER_ID) from MEMBERINFO))
+	</update>
+	
+</mapper>

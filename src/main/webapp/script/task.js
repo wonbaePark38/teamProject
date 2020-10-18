@@ -1,44 +1,13 @@
-// 센터 전환 
-function acyncMovePage(url) {
-	// ajax option
-	var ajaxOption = {
-		url : url,
-		async : true,
-		type : "POST",
-		dataType : "html",
-		cache : false
-	};
-
-	$.ajax(ajaxOption).done(function(data) {
-		// Contents 영역 삭제
-		$('#ch').children().remove();
-		// Contents 영역 교체
-		$('#ch').html(data);
-	});
-}
-// 컨텐츠 전체 전환
-function acyncMovePage1(url) {
-	// ajax option
-	var ajaxOption = {
-		url : url,
-		async : true,
-		type : "POST",
-		dataType : "html",
-		cache : false
-	};
-
-	$.ajax(ajaxOption).done(function(data) {
-		// Contents 영역 삭제
-		$('#ch2').children().remove();
-		// Contents 영역 교체
-		$('#ch2').html(data);
-	});
+// 새 프로젝트
+function new_project() {
+	document.getElementById('new_project_div').style.display = (document.getElementById('new_project_div').style.display == 'block') ? 'none'	: 'block';
 }
 
 // 보관함 버튼 
 function new_plus() {
 	document.getElementById('new_plus').style.display = (document.getElementById('new_plus').style.display == 'block') ? 'none'	: 'block';
 }
+
 
 // 이미지 업로드
 function img_load(){

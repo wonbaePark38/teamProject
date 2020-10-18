@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectDirDAO">
+	<!-- 프로젝트 조회 맵 -->
+	<resultMap type="project_lookup" id="project_lookup">
+		<id property="lookup_id" column="LOOKUP_ID"/>
+		<result property="project_id" column="PROJECT_NAME"/>
+		<result property="member_id" column="USER_NAME"/>
+		<result property="project_manager" column="PROJECT_MANAGER" />
+		<result property="joindate" column="JOINDATE"/>
+		<collection property="project_locker" resultMap="PROJECT_LOCKER"></collection>
+	</resultMap>
+
+	<insert id="insertProjectLookup" parameterType="project_lookup">
+		INSERT INTO project_lookup (lookup_id, project_id, member_id, project_manager)
+		VALUES((select nvl(max(lookup_id), 0) +1 from project_lookup), #{project_id}, #{member_id}, #{project_manager})
+	</insert>
+	
+	<select id="getProjectDirTotalList" resultType="project_lookup" parameterType="project_lookup">
+		SELECT lookup_id, project_id, member_id, project_favorites, project_locker, hide_locker, project_manager, project_name, joinuser
+		FROM project_lookup 
+		INNER JOIN 
+		    (
+		    SELECT project_id, member_id, project_favorites, project_locker, hide_locker, project_name, joinuser
+		    FROM project_locker
+            INNER JOIN
+                (
+                    SELECT project_id, project_name, joinuser
+                    FROM projectdir 
+                    INNER JOIN 
+                    	(
+    						SELECT project_id, count(*) AS joinuser 
+    						FROM project_lookup group BY project_id
+						)
+						USING(project_id)
+                )	
+                USING(project_id)
+            )
+		USING(project_id, member_id)
+		WHERE member_id = #{member_id} 	
+		<choose>
+			<when test="viewType == '미보관'">
+				AND project_locker = 'PLN-400' AND hide_locker = 0
+			</when>
+			<when test="viewType == '즐겨찾기'">
+				AND project_favorites = 1 AND hide_locker = 0
+			</when>
+			<when test="viewType == '숨김'">
+				AND hide_locker = 1 
+			</when>
+			<when test="viewType == '보관함'">
+				AND project_locker = #{project_locker} AND hide_locker = 0
+			</when>
+		</choose>
+		ORDER BY project_id ASC
+	</select>
+
+	<select id="getProjectUserList" resultType="project_lookup" parameterType="project_lookup">
+		SELECT project_id, member_id, project_manager, member_name, member_email 
+		FROM project_lookup 
+		    INNER JOIN
+		        (SELECT member_id, member_email, member_name FROM memberinfo)
+		    USING(member_id)
+		WHERE project_id = #{project_id}
+	</select>
+	
+	<select id="getTaskUser" resultType="project_lookup" parameterType="project_lookup">
+		SELECT project_id, member_id, member_name 
+		FROM project_lookup 
+		INNER JOIN
+			(
+				SELECT member_id, member_name FROM memberinfo
+			)
+        USING(member_id)
+        WHERE project_id = #{project_id}
+	</select>
+	
+</mapper>

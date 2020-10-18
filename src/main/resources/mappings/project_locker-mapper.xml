@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectDirDAO">
+	<resultMap type="project_locker" id="PROJECT_LOCKER">
+		<id property="locker_id" column="LOCKER_ID"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="project_id" column="PROJECT_ID"/>
+		<result property="locker_list_id" column="LOCKER_LIST_ID"/>
+		<result property="project_favorites" column="PROJECT_FAVORITES"/>
+		<result property="project_locker" column="PROJECT_LOCKER"/>
+		<result property="hide_locker" column="HIDE_LOCKER"/>
+	</resultMap>
+	
+	
+	<!-- 프로젝트 세팅 정보 생성 -->	
+	<insert id="insertProjectLocker" parameterType="project_locker" useGeneratedKeys="true" keyProperty="project_id" keyColumn="project_id">
+		INSERT INTO project_locker (locker_id, member_id, project_id, project_favorites, project_locker, hide_locker)
+		VALUES ((select nvl(max(locker_id), 0) +1 from project_locker), #{member_id}, #{project_id}, #{project_favorites}, #{project_locker}, #{hide_locker})
+	</insert>
+	
+	<update id="updateProjectFavorites" parameterType="project_locker">
+		UPDATE project_locker SET project_favorites = #{project_favorites}
+		WHERE member_id = #{member_id} AND project_id = #{project_id}
+	</update>
+	
+	<update id="updateProjectLocker" parameterType="project_locker">
+		UPDATE project_locker SET project_locker = #{project_locker}
+		WHERE member_id = #{member_id} AND project_id = #{project_id}
+	</update>
+
+	<update id="updateProjectHide" parameterType="project_locker">
+		UPDATE project_locker SET hide_locker = #{hide_locker}
+		WHERE member_id = #{member_id} AND project_id = #{project_id}
+	</update>
+	
+	<update id="deleteProjectLocker" parameterType="project_locker">
+		UPDATE project_locker SET project_locker = NULL
+		WHERE member_id = #{member_id} AND project_id = #{project_id}
+	</update>
+
+</mapper>

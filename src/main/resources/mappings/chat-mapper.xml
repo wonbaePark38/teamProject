@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChatDAO">
+
+	<resultMap id="chatList" type="roomVO">
+		<result property="chatRoomName" column="CHATROOMNAME" />
+		<result property="chatRoomId" column="CHATROOMID"/>
+		<result property="unReadCount" column="UNREADCOUNT"/>
+	</resultMap>
+	
+	<resultMap id="chatHistory" type="msgVO">
+		<result property="message_sender" column="MESSAGE_SENDER"/>
+		<result property="message_content" column="MESSAGE_CONTENT"/>
+		<result property="message_sendTime" column="MESSAGE_SENDTIME"/>
+		<result property="chatRoomId" column="CHATROOM_ID"/>
+	</resultMap>
+	
+	<resultMap id="friendList" type="user">
+		<result property="seq" column="MEMBER_ID"/>
+		<result property="email" column="MEMBER_EMAIL"/>
+		<result property="name" column="MEMBER_NAME"/>
+	</resultMap>
+	
+	<resultMap id="getJoinedList" type="roomVO">
+		<result property="chatRoomId" column="CHATROOMID"/>
+		<result property="joinedUserId" column="MEMBER_ID"/>
+		<result property="connectTime" column="CONNECTTIME"/>
+		<result property="userName" column="MEMBER_NAME"/>
+		<result property="userEmail" column="MEMBER_EMAIL"/>
+	</resultMap>
+	
+	<resultMap id="roomInfo" type="roomVO">
+		<result property="chatRoomId" column="CHATROOMID"/>
+		<result property="inviteUser" column="JOINUSER"/>
+		<result property="inviteUserId" column="JOINUSERID"/>
+		<result property="joinNumber" column="JOINNUMBER"/>
+		<result property="connectTime" column="CONNECTTIME"/>
+		<result property="userName" column="MEMBER_NAME"/>
+		<result property="userEmail" column="MEMBER_EMAIL"/>
+		<result property="roomNameChange" column="ROOMNAMECHANGE"/>
+	</resultMap>
+	
+	<resultMap id="unReadUser" type="msgVO">
+		<result property="unReadCount" column="UNREADCOUNT"/>
+		<result property="userId" column="MEMBER_ID"/>
+		<result property="chatRoomId" column="CHATROOMID"/>
+		<result property="userName" column="MEMBER_NAME"/>
+		<result property="joinNumber" column="JOINNUMBER"/>
+		<result property="chatRoomName" column="CHATROOMNAME"/>
+	</resultMap>
+	
+	<resultMap type="msgVO" id="getProjectId">
+		<result property="projectId" column="PROJECT_ID"/>
+		<result property="projectName" column="PROJECT_NAME"/>
+	</resultMap>
+	
+	<select id="getProjectList" resultMap="getProjectId" parameterType="int">
+		SELECT A.PROJECT_ID, B.PROJECT_NAME 
+			FROM PROJECT_LOOKUP A 
+			INNER JOIN PROJECTDIR B 
+			ON A.PROJECT_ID = B.PROJECT_ID 
+			WHERE MEMBER_ID = #{userId}
+	</select>
+	<select id="getUnreadUser" resultMap="unReadUser" parameterType="msgVO">
+		SELECT A.UNREADCOUNT, A.MEMBER_ID, A.CHATROOMID, A.MEMBER_NAME, B.CHATROOMNAME, B.JOINNUMBER
+		FROM CHATROOMSTATUS A INNER JOIN CHATROOM B ON(A.CHATROOMID = B.CHATROOMID) 
+        WHERE A.CHATROOMID = #{chatRoomId} AND A.CONNECTTIME IS NULL
+	</select>
+	
+	<select id="getChatList" resultMap="chatList" parameterType="int">
+		SELECT A.JOINNUMBER, A.CHATROOMNAME , A.CHATROOMID, B.UNREADCOUNT, NVL(C.MESSAGE_CONTENT,'최근 대화 내용 없음') AS MESSAGE FROM CHATROOM A 
+    INNER JOIN CHATROOMSTATUS B ON A.CHATROOMID = B.CHATROOMID
+    LEFT JOIN (SELECT * from MESSAGE WHERE (CHATROOM_ID, MESSAGE_SENDTIME) IN
+    (SELECT CHATROOM_ID ,MAX(MESSAGE_SENDTIME) FROM MESSAGE GROUP BY CHATROOM_ID)) C
+                ON C.CHATROOM_ID = A.CHATROOMID
+    WHERE B.MEMBER_ID = #{userId} AND B.CHATSTATUS = 'y'
+	</select>
+	
+	<insert id="insertMessage" parameterType="msgVO">
+	
+	<choose>
+	
+		 <when test="messageType != 'file'">
+			INSERT INTO MESSAGE (SEQ,MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
+			CHATROOM_ID,MESSAGE_SENDTIME, MESSAGETYPE)
+			VALUES(MESSAGE_SEQ.NEXTVAL, #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
+			SYSTIMESTAMP, #{messageType})	
+		</when>
+		<otherwise>
+			INSERT INTO MESSAGE (SEQ,MESSAGE_SENDER, SENDERID, MESSAGE_CONTENT,
+			CHATROOM_ID,MESSAGE_SENDTIME, MESSAGETYPE, FILENAME, FILEPATH)
+			VALUES(MESSAGE_SEQ.NEXTVAL, #{message_sender}, #{senderId}, #{message_content}, #{chatRoomId},
+			SYSTIMESTAMP, #{messageType}, #{fileName}, #{filePath})	
+		</otherwise>
+		
+	</choose>	
+	</insert>
+	
+	 <select id="loadChatHistory" resultMap="chatHistory" parameterType="msgVO" >
+		<![CDATA[
+		SELECT MESSAGE_SENDER, MESSAGE_CONTENT, 
+			SENDERID, CHATROOM_ID, MESSAGETYPE, 
+			FILENAME, FILEPATH, TO_CHAR(MESSAGE_SENDTIME,'YYYY-MM-DD HH24:MI') AS MESSAGE_SENDTIME
+		FROM MESSAGE
+			WHERE MESSAGE_SENDTIME >= 
+			(SELECT TO_TIMESTAMP(JOINTIME,'YYYY-MM-DD HH24:MI:SS.FF5') FROM CHATROOMSTATUS 
+				WHERE CHATROOMID = #{chatRoomId} AND MEMBER_ID= #{userId}) 
+		 	AND CHATROOM_ID = #{chatRoomId}		
+        ORDER BY SEQ ASC
+		]]>
+	</select>
+	
+	
+	<select id="getFriendList" resultMap="friendList" parameterType="int">
+		SELECT DISTINCT C.MEMBER_ID, C.MEMBER_EMAIL, C.MEMBER_NAME FROM MEMBERINFO C 
+		RIGHT OUTER JOIN 
+		(SELECT B.MEMBER_ID , B.PROJECT_ID FROM PROJECT_LOOKUP A 
+        RIGHT OUTER JOIN (SELECT * FROM PROJECT_LOOKUP) B 
+    ON A.PROJECT_ID = B.PROJECT_ID WHERE A.MEMBER_ID = #{myId}) D 
+    ON C.MEMBER_ID = D.MEMBER_ID WHERE C.MEMBER_ID IS NOT NULL AND  NOT C.MEMBER_ID IN #{myId} 
+
+	</select>
+	 
+	 <insert id="createChatRoom" parameterType="roomVO">
+		INSERT INTO CHATROOM (MAKERID, CHATROOMNAME, JOINUSER, JOINUSERID, JOINNUMBER, CHATROOMID) 
+		VALUES( #{userId}, #{chatRoomName}, #{chatRoomName}, #{inviteUserId}, #{joinNumber}, (SELECT NVL(MAX(CHATROOMID), 0)+1 FROM CHATROOM))
+		
+		<selectKey keyProperty="chatRoomId" resultType="int" order="AFTER">
+			SELECT MAX(CHATROOMID) FROM CHATROOM
+		</selectKey>
+	</insert> 
+	
+	<insert id="createRoomStatus" parameterType="roomVO">
+		INSERT INTO CHATROOMSTATUS (SEQ, CHATROOMID, MEMBER_NAME, MEMBER_ID, CONNECTTIME, CHATSTATUS, JOINTIME)
+		VALUES(CHATROOMSTATUS_SEQ.NEXTVAL, #{chatRoomId}, #{userName}, #{userId}, #{connectTime}, #{status}, TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD HH24:MI:SS.FF5'))
+	</insert>
+	
+	<insert id="insertMember" parameterType="java.util.Map">
+	
+	<foreach collection="roomList" item="item" separator=" "
+		open="INSERT ALL" close="SELECT * FROM DUAL">
+		INTO CHATROOMSTATUS (SEQ, MEMBER_NAME, MEMBER_ID, CHATROOMID)
+		VALUES(GET_CHATROOMSTATUS_SEQ(), #{item.userName},
+		#{item.inviteUser}, #{item.chatRoomId})
+	</foreach>
+
+</insert> 
+	
+	
+	<select id="getChatRoomInfo" resultMap="roomInfo" parameterType="String">
+		SELECT * FROM CHATROOM WHERE CHATROOMID = #{chatRoomId}
+	</select>
+	
+	 <update id="updateConnectTime" parameterType="roomVO">
+		UPDATE CHATROOMSTATUS SET UNREADCOUNT = 0, CONNECTTIME = #{connectTime} WHERE MEMBER_ID = #{joinedUserId} AND CHATROOMID = #{chatRoomId}
+	</update>
+	
+	<select id="getJoinedMember" resultMap="getJoinedList" parameterType="roomVO">
+		SELECT MEMBER_NAME,MEMBER_EMAIL FROM MEMBERINFO INNER JOIN (
+			SELECT MEMBER_ID FROM CHATROOMSTATUS WHERE CHATROOMID = #{chatRoomId})
+				USING(MEMBER_ID)
+	</select>
+	
+	<update id="updateDisconnectTime" parameterType="msgVO">
+		UPDATE CHATROOMSTATUS SET CONNECTTIME = NULL, DISCONNECTTIME= #{message_sendTime} WHERE CHATROOMID = #{chatRoomId} AND MEMBER_ID = #{senderId}  
+	</update>
+	
+	<update id="addUserChatRoom" parameterType="roomVO">
+		UPDATE CHATROOM SET CHATROOMNAME = #{chatRoomName}, JOINNUMBER = #{joinNumber}, 
+		JOINUSER = #{inviteUser}, JOINUSERID = #{inviteUserId} WHERE CHATROOMID = #{chatRoomId}
+	</update>
+	
+	<update id="updateChatRoomStatus" parameterType="msgVO">
+		UPDATE CHATROOMSTATUS SET JOINTIME= TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD HH24:MI:SS.FF5'), CHATSTATUS='y' WHERE CHATSTATUS = 'n' AND CHATROOMID = #{chatRoomId}
+	</update>
+	
+	<update id="updateUnreadCount" parameterType="msgVO">
+		UPDATE CHATROOMSTATUS SET UNREADCOUNT = UNREADCOUNT+1 WHERE CONNECTTIME IS NULL AND CHATROOMID= #{chatRoomId}
+	</update>
+	<update id="updateChatRoomName" parameterType="roomVO">
+		UPDATE CHATROOM SET CHATROOMNAME= #{chatRoomName}, ROOMNAMECHANGE = 'y' WHERE CHATROOMID = #{chatRoomId}
+	</update>
+	
+	<update id="updateChatRoom" parameterType="roomVO">
+		UPDATE CHATROOM SET CHATROOMNAME = #{chatRoomName}, JOINNUMBER = #{joinNumber}, JOINUSER = #{inviteUser},
+			JOINUSERID = #{inviteUserId} WHERE CHATROOMID = #{chatRoomId}
+	</update> 
+	
+	<delete id="deleteChatUser" parameterType="roomVO">
+		DELETE CHATROOMSTATUS WHERE CHATROOMID = #{chatRoomId} AND MEMBER_ID = #{userId}
+	</delete>
+</mapper>

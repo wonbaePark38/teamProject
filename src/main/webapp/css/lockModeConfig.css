@@ -1,100 +1,137 @@
-body{
-    font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial, sans-serif;
- 
-}
-a{
-    cursor: pointer;
+body {
+	font-family: Malgun Gothic, Apple SD Gothic Neo, '돋움', '굴림', Arial,
+		sans-serif;
+	background-color: #f2f2f2 !important;
+	margin-top: 0;
 }
 
-.wrap{
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 800px;
-    height: 700px;
-    
+a {
+	cursor: pointer;
 }
-header{
 
-    width: 100%;
-    height:10%;
-    font-size: 30px;
-    border-bottom: 3px solid #6862c3;
-}
-.lock-switch-div{
+.centerArea {
     display: flex;
+    width: 1024px;
+    height: 768px;
     flex-direction: row;
-    justify-content: space-between;
-    padding-top: 25px;
+    margin: 0 auto;
+    padding-left: 30px;
+    background-color: #f2f2f2;
+    padding-top: 90px;
+}
+
+.wrap {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}
+
+.article {
+    width: 824px;
+    margin-left: 20px;
+}
+
+header {
+	width: 100%;
+	height: 10%;
+	font-size: 30px;
+	border-bottom: 3px solid #6862c3;
+}
+
+.lock-switch-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 25px;
 }
 
 .lock-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    vertical-align:middle;
-  }
-  
-  /* Hide default HTML checkbox */
-  .lock-switch input {display:none;}
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  #lock:checked + .slider {
-    background-color: #2196F3;
-  }
-  
-  #lock:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-  
-  #lock:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
-  
-  .onoff-message{
-      margin:0px;
-      display:inline-block;
-      font-size:15px;
-      font-weight:bold;
-  }
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+	vertical-align: middle;
+}
 
-  .lock-select{
-      width: 10%;
-      height:40px;
-  }
+/* Hide default HTML checkbox */
+.lock-switch input {
+	display: none;
+}
+
+#change-lock-settingBt {
+	width: 80px;
+	height: 40px;
+	margin-left: 20px;
+	display: none;
+}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+#lock:checked+.slider {
+	background-color: #2196F3;
+}
+
+#lock:focus+.slider {
+	box-shadow: 0 0 1px #2196F3;
+}
+
+#lock:checked+.slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+.onoff-message {
+	margin: 0px;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.lock-select {
+	width: 10%;
+	height: 40px;
+}
+
+#hidden-status{
+	width: 300px;
+    background-color: #6862c3;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-left: 40px;
+    margin-top: 30px;
+    display:none;
+}

@@ -7,40 +7,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사용 통계</title>
     <link href="css/useStatistics.css" rel="stylesheet">
+    <script src="script/jquery-3.5.1-min.js"></script>
+    <script src="script/useStatistics.js"></script>
     <script src="https://kit.fontawesome.com/be57023a12.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<jsp:include page="privateConfigHeader.jsp" flush="true" />
     <div class="mainWrap">
-        <header>
-            플로우 사용 통계        
-        </header>
+    <jsp:include page="projectManagerPageSidebar.jsp" flush="true" />
+    <script>
+    	$('.headerWrap').css('width','100%');
+		$('.headerWrap').css('border','0');
+		$('#inputkeyword').css('display','none');
+    </script>
+    <div id="main-contents">
+        <div class="header">
+           	 플로우 사용 통계        
+        </div>
 
         <div class="input-div">
-            <form method="POST" action="#">
+           
                 <select id="select-type">
                     <option value="이름">이름</option>
                     <option value="부서">부서</option>
                     <option value="직책">직책</option>
                     <option value="계정">계정</option>
                 </select>
-                <input type="text" class="search-keyword" value="검색어를 적어주세요">
-                <input type="submit" class="submit-bt" value="검색">
-            </form>
-            <button id="excel-down" type="button" alt="엑셀 다운로드"> 
-                <i class="fas fa-download" style="color:#615cba; font-size: 20px;"></i> 
-                엑셀 다운로드
-            </button>   
+                <input type="text" class="search-keyword" placeholder="검색어를 입력해주세요">
+               
+          
+       
         </div>
 
         <table class="useStatistics-table">
             <thead>
                 <tr>
                     <th scope="col">
-                        회사
+                       이름
                     </th>
 
                     <th scope="col">
-                        이름
+                        계정
+                    </th>
+
+                    <th scope="col">
+                        회사
                     </th>
 
                     <th scope="col">
@@ -50,14 +61,7 @@
                     <th scope="col">
                         직책
                     </th>
-
-                    <th scope="col">
-                        계정
-                    </th>
-                    <th scope="col">
-                        참여 프로젝트
-                    </th>
-
+        
                     <th scope="col">
                         게시물수
                     </th>
@@ -65,59 +69,11 @@
                     <th scope="col">
                         댓글수
                     </th>
-
-                    <th scope="col">
-                        채팅방수
-                    </th>
-
-                    <th scope="col">
-                        채팅메세지수
-                    </th>
                 </tr>
             </thead>
-
-            <tbody> <!--for문 들어올 자리-->
-                <tr>
-                    <td>
-                        kkk     
-                    </td>
-
-                    <td>
-                        박원배
-                    </td>
-
-                    <td>
-                        3조
-                    </td>
-
-                    <td>
-                        
-                    </td>
-
-                    <td>
-                        deux38@naver.com
-                    </td>
-                    <td>
-                        2개
-                    </td>
-                    <td>
-                        5개
-                    </td>
-
-                    <td>
-                        5개
-                    </td>
-
-                    <td>
-                        1개
-                    </td>
-
-                    <td>
-                        50개
-                    </td>
-                </tr>
-            </tbody><!--for문 들어올 자리-->
+            
         </table>
+    </div>
     </div>
 </body>
 </html>

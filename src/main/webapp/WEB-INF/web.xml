@@ -11,7 +11,9 @@
    <listener>
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
    </listener>
-
+<!-- //공통으로 사용할 빈 객체가 있을때 사용하는 구문 -->
+   
+   
    <filter>
       <filter-name>encodingFilter</filter-name>
       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -28,16 +30,16 @@
 
    <servlet>
       <servlet-name>action</servlet-name>
-      <servlet-class>org.springframework.web.servlet.DispatcherServlet
-      </servlet-class>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
       <init-param>
          <param-name>contextConfigLocation</param-name>
          <param-value>/WEB-INF/config/presentation-layer.xml</param-value>
       </init-param>
+      <async-supported>true</async-supported>
    </servlet>
    <servlet-mapping>
       <servlet-name>action</servlet-name>
       <url-pattern>*.do</url-pattern>
    </servlet-mapping>
-
+	
 </web-app>

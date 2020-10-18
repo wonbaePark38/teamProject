@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FileDAO">
+	<resultMap id="fileList" type="file" >
+		<result property="projectId" column="PROJECT_ID" />	
+		<result property="projectName" column="PROJECT_NAME"/>
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileSize" column="FILE_SIZE"/>
+		<result property="writer" column="WRITER"/>
+		<result property="writeDate" column="REGDATE"/>
+		<result property="articleId" column="ARTICLE_ID"/>
+	</resultMap>
+	
+	<resultMap id="filePath" type="file">
+		<result property="articleId" column="ARTICLE_ID"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="projectId" column="PROJECT_ID"/>
+	</resultMap>
+<select id="getProjectList" resultMap="fileList" parameterType="int"> 
+ SELECT C.ARTICLE_ID,C.PROJECT_ID, C.PROJECT_NAME, LOWER(FILE_NAME) FILE_NAME, C.FILE_SIZE, LOWER(WRITER) WRITER, C.REGDATE, D.DOWNPROHIBITION
+ FROM MAINPAGE_ARTICLE C 
+    INNER JOIN (SELECT B.MEMBER_ID, A.PROJECT_ID, A.DOWNPROHIBITION FROM PROJECTDIR A RIGHT OUTER JOIN (SELECT * FROM PROJECT_LOOKUP WHERE MEMBER_ID = #{loginUser}) B 
+        ON A.PROJECT_ID = B.PROJECT_ID) D ON C.PROJECT_ID = D.PROJECT_ID 
+ WHERE D.MEMBER_ID = #{loginUser}
+ AND FILE_NAME IS NOT NULL 
+ ORDER BY FILE_NAME ASC
+</select> 
+	
+<select id="getFilePath" resultMap="filePath" parameterType="int">
+	SELECT ARTICLE_ID, FILE_NAME, FILE_PATH FROM MAINPAGE_ARTICLE WHERE ARTICLE_ID = #{articleId}
+</select>	
+
+<select id="getRealPath" parameterType="int" resultMap="filePath">
+	SELECT ARTICLE_ID, PROJECT_ID, FILE_NAME, FILE_PATH 
+		FROM MAINPAGE_ARTICLE
+	 	WHERE ARTICLE_ID = #{articleId}
+</select>		
+ 
+</mapper>

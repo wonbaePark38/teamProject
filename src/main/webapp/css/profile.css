@@ -1,0 +1,53 @@
+.prof_bx .prof_info {
+	padding: 15px 30px 0;
+}
+
+.prof_bx .prof_info .prof_top {
+	position: relative;
+	height: 84px;
+	border-bottom: 1px solid #e9eaed;
+}
+
+.prof_bx .prof_info .prof_cn {
+	margin-top: 16px;
+	height: 80px;
+}
+
+.prof_bx .prof_info .prof_btn {
+	margin-top: 24px;
+	text-align: center;
+}
+
+.btn_prd_sty1_b {
+	height: 30px;
+	padding: 0 2px 0 0;
+	background: url(../images/btn_prd_sty1_b.gif) no-repeat right top;
+}
+
+.btn_prd_sty1_b span {
+	min-width: 80px;
+	height: 26px;
+	padding: 4px 13px 0 15px;
+	font-weight: bold;
+	color: #fff;
+	background: url(../images/btn_prd_sty1_b.gif) no-repeat left top;
+}
+
+.btn_prd_sty1_b span, .btn_prd_sty1 span {
+	padding-top: 7px;
+}
+
+.btn_prd_sty1, .btn_prd_sty1_b {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.btn_prd_sty1 span, .btn_prd_sty1_b span {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	vertical-align: top;
+}

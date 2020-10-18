@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectManageDAO">
+	 <resultMap type="pmVO" id="getMemberUse">
+	 	<result property="userId" column="MEMBER_ID" />
+	 	<result property="email" column="MEMBER_EMAIL"/>
+	 	<result property="name" column="MEMBER_NAME"/>
+	 </resultMap>
+	 
+	 <resultMap type="pmVO" id="getInfo">
+	 	<result property="name" column="MEMBER_NAME"/>
+	 	<result property="projectId" column="PROJECT_ID"/>
+	 	<result property="projectName" column="PROJECT_NAME"/>
+	 	<result property="writeCount" column="ARTICLECOUNT"/>
+	 	<result property="accompanyCount" column="MEMBERCOUNT"/>
+	 	<result property="createDate" column="CREATEDATE"/>
+	 	<result property="deskCount" column="DESKCOUNT"/>
+	 	<result property="scheduleCount" column="SCHEDULECOUNT"/>
+	 </resultMap>
+	 
+	 <resultMap type="pmVO" id="getMemberInfo">
+	 	<result property="userId" column="MEMBER_ID" />
+	 	<result property="name" column="MEMBER_NAME"/>
+	 	<result property="email" column="MEMBER_EMAIL"/>
+	 	<result property="managerStatus" column="PROJECT_MANAGER"/>
+	 </resultMap>
+	 
+	 <select id="accessAuth" parameterType="projectdir" resultMap="getMemberInfo">
+	 	SELECT MEMBER_ID FROM PROJECT_LOOKUP WHERE MEMBER_ID =#{member_id} 
+	 		AND PROJECT_ID = #{project_id} AND PROJECT_MANAGER = 1
+	 </select>
+	<select id="getDownProhibition" parameterType="int" resultType="String">
+		SELECT DOWNPROHIBITION FROM PROJECTDIR WHERE PROJECT_ID = #{projectId}
+	</select>
+
+	<update id="changeDownProhibitionSetting" parameterType="pmVO">
+		UPDATE PROJECTDIR SET DOWNPROHIBITION = #{downProhibition} WHERE PROJECT_ID = #{projectId} 
+	</update>
+	
+	<select id="getUseStatistics" resultMap="getMemberUse" parameterType="int">
+		SELECT B.MEMBER_ID, 
+			NVL(B.COMPANYNAME,' ') AS COMPANYNAME, 
+			NVL(B.DEPARTMENT,' ') AS DEPARTMENT, 
+			NVL(B.MYPOSITION,' ') AS MYPOSITION, 
+			NVL(B.COMPANYCALLNUMBER,' ')AS COMPANYCALLNUMBER, 
+			C.MEMBER_NAME, C.MEMBER_EMAIL, D.WRITECOUNT, E.REPLYCOUNT 
+			FROM PROJECT_LOOKUP A 
+    			LEFT OUTER JOIN USERSETTING B ON (A.MEMBER_ID = B.MEMBER_ID)    
+        		LEFT OUTER JOIN MEMBERINFO C ON (C.MEMBER_ID = A.MEMBER_ID)
+            	LEFT OUTER JOIN (SELECT MEMBER_ID,COUNT(MEMBER_ID) AS WRITECOUNT FROM MAINPAGE_ARTICLE GROUP BY MEMBER_ID) D ON (C.MEMBER_ID = D.MEMBER_ID) 
+            	LEFT OUTER JOIN (SELECT MEMBER_ID, COUNT(MEMBER_ID) AS REPLYCOUNT FROM ARTICLE_REPLY GROUP BY MEMBER_ID) E ON (C.MEMBER_ID = E.MEMBER_ID)
+			WHERE A.PROJECT_ID = #{projectId}
+	</select>
+	
+	<select id="getConnectionStatistics" resultMap="getMemberUse" parameterType="pmVO">
+		SELECT NVL(F.CONNECTIONCOUNT,0) AS CONNECTIONCOUNT ,
+			   E.MEMBER_NAME, 
+			   E.MEMBER_EMAIL, 
+			   NVL(F.COMPANYNAME,' ') AS COMPANYNAME, 
+			   NVL(F.DEPARTMENT,' ') AS DEPARTMENT, 
+			   NVL(F.MYPOSITION,' ') AS MYPOSITION FROM MEMBERINFO E 
+		INNER JOIN
+			(SELECT C.MEMBER_ID, C.COMPANYNAME, C.DEPARTMENT, C.MYPOSITION, D.CONNECTIONCOUNT FROM USERSETTING C 
+			RIGHT OUTER JOIN
+				((SELECT A.PROJECT_ID, A.MEMBER_ID, B.CONNECTIONCOUNT FROM PROJECT_LOOKUP A 
+					LEFT OUTER JOIN
+					(SELECT MEMBER_ID, PROJECT_ID, COUNT(*) AS CONNECTIONCOUNT
+    				FROM PROJECT_CONNECTION
+    				WHERE PROJECT_ID = #{projectId} AND PROJECT_CONNECTION_START  
+		    		BETWEEN ADD_MONTHS(TRUNC(SYSDATE,'MM'), #{selectMonth}) AND ADD_MONTHS((LAST_DAY(SYSDATE)), #{selectMonth})
+        			GROUP BY MEMBER_ID , PROJECT_ID) B
+					ON A.MEMBER_ID = B.MEMBER_ID
+					WHERE A.PROJECT_ID = #{projectId})) D
+			ON C.MEMBER_ID = D.MEMBER_ID) F
+		ON E.MEMBER_ID = F.MEMBER_ID
+	</select>
+	
+	<select id="getRecentData" resultMap="getMemberUse" parameterType="int">
+	<![CDATA[
+		SELECT TO_CHAR(b.dt, 'YYYY-MM') AS CONNECTIONDATE, NVL(SUM(a.CONNECTIONCOUNT), 0) CONNECTIONCOUNT
+  	FROM ( SELECT TO_DATE(TO_CHAR(PROJECT_CONNECTION_START, 'YYYY-MM-DD'),'YYYY-MM-DD') AS CONNECTIONDATE, COUNT(*) CONNECTIONCOUNT
+           FROM PROJECT_CONNECTION
+           WHERE PROJECT_ID = #{projectId}
+           GROUP BY PROJECT_CONNECTION_START, TO_CHAR(PROJECT_CONNECTION_START, 'YYYY-MM-DD'), PROJECT_CONNECTION_START, 'YYYY-MM-DD', TO_DATE(TO_CHAR(PROJECT_CONNECTION_START, 'YYYY-MM-DD'),'YYYY-MM-DD')) a, 
+         	(SELECT ADD_MONTHS(TRUNC(SYSDATE),-5) + LEVEL - 1 AS dt FROM dual 
+         	CONNECT BY LEVEL <= LAST_DAY(SYSDATE) - ADD_MONTHS(SYSDATE,-5) +1) b
+    WHERE b.dt = a.CONNECTIONDATE(+) 
+    GROUP BY TO_CHAR(b.dt, 'YYYY-MM')
+   	ORDER BY TO_CHAR(b.dt, 'YYYY-MM')
+   	]]>
+	</select>
+	
+	<select id="getProjectInfo" parameterType="int" resultMap="getInfo">
+   SELECT A.PROJECT_NAME,  D.MEMBER_NAME,  
+   		B.MEMBERCOUNT, E.ARTICLECOUNT, F.REPLYCOUNT, G.DESKCOUNT, H.SCHEDULECOUNT,
+   		TO_CHAR(A.CREATEDATE,'YYYY-MM-DD') AS CREATEDATE,A.PROJECT_ID 
+   		FROM PROJECTDIR A
+   INNER JOIN
+   		(SELECT PROJECT_ID, COUNT(*) AS MEMBERCOUNT FROM PROJECT_LOOKUP WHERE PROJECT_ID = #{projectId} GROUP BY PROJECT_ID) B 
+   		ON A.PROJECT_ID = B.PROJECT_ID
+   INNER JOIN (SELECT MEMBER_ID,PROJECT_ID FROM PROJECT_LOOKUP A WHERE PROJECT_MANAGER = 1 AND PROJECT_ID =#{projectId}) C
+   		ON A.PROJECT_ID = C.PROJECT_ID
+   INNER JOIN (SELECT MEMBER_NAME ,MEMBER_ID FROM MEMBERINFO) D
+   		ON C.MEMBER_ID = D.MEMBER_ID
+   LEFT OUTER  JOIN (SELECT PROJECT_ID, COUNT(*) AS ARTICLECOUNT FROM MAINPAGE_ARTICLE WHERE PROJECT_ID = #{projectId} GROUP BY PROJECT_ID) E
+   		ON A.PROJECT_ID = E.PROJECT_ID
+   LEFT OUTER JOIN (SELECT PROJECT_ID, COUNT(*) AS REPLYCOUNT FROM ARTICLE_REPLY WHERE PROJECT_ID = #{projectId} GROUP BY PROJECT_ID ) F
+   		ON E.PROJECT_ID = F.PROJECT_ID
+   LEFT OUTER JOIN (SELECT PROJECT_ID, COUNT(*) AS DESKCOUNT FROM MAINPAGE_ARTICLE WHERE PROJECT_ID = #{projectId} AND WRITEFORM3_STATUS = '요청' GROUP BY PROJECT_ID) G		
+		ON A.PROJECT_ID = G.PROJECT_ID
+   LEFT OUTER JOIN (SELECT PROJECT_ID, COUNT(*) AS SCHEDULECOUNT FROM MAINPAGE_ARTICLE WHERE PROJECT_ID = #{projectId} AND WRITEFORM4_CONTENT IS NOT NULL GROUP BY PROJECT_ID) H		
+   		ON A.PROJECT_ID = H.PROJECT_ID
+	</select>
+	
+	<select id="getMemberInfo" parameterType="int" resultMap="getMemberInfo">
+	SELECT B.MEMBER_NAME, B.MEMBER_ID, B.MEMBER_EMAIL,  NVL(C.COMPANYNAME,' ') AS COMPANYNAME, NVL(C.DEPARTMENT,' ') AS DEPARTMENT, 
+			NVL(C.COMPANYNAME,' ') AS COMPANYNAME, NVL(C.PHONENUMBER,' ') AS PHONENUMBER,  NVL(A.PROJECT_MANAGER,'0') AS PROJECT_MANAGER 
+	FROM PROJECT_LOOKUP A  
+	LEFT OUTER JOIN MEMBERINFO B 
+		ON A.MEMBER_ID = B.MEMBER_ID
+	LEFT OUTER JOIN USERSETTING C 
+		ON A.MEMBER_ID = C.MEMBER_ID
+	WHERE A.PROJECT_ID = #{projectId}
+	</select>
+	
+	<update id="deleteManager" parameterType="pmVO">
+		UPDATE PROJECT_LOOKUP SET PROJECT_MANAGER = 0 WHERE PROJECT_ID = #{projectId} AND MEMBER_ID = #{userId}
+	</update>
+	
+	<update id="addManager" parameterType="pmVO">
+		UPDATE PROJECT_LOOKUP SET PROJECT_MANAGER = 1 WHERE PROJECT_ID = #{projectId} AND MEMBER_ID = #{userId}
+	</update>
+	
+	<update id="deleteProject" parameterType="pmVO">
+		UPDATE PROJECTDIR SET PROJECT_ID = #{changedProjectId} WHERE PROJECT_ID = #{projectId}
+	</update>
+	
+	<select id="joinedStatus" resultMap="getMemberUse" parameterType="hashmap">
+		SELECT MEMBER_EMAIL FROM MEMBERINFO WHERE MEMBER_EMAIL IN
+		<foreach collection="users" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	
+	 <insert id="addMemberProject" parameterType="pmVO">
+	 	INSERT INTO PROJECT_LOOKUP
+	 (LOOKUP_ID, PROJECT_ID, MEMBER_ID, JOINDATE)
+	 SELECT
+	 	(SELECT NVL(MAX(LOOKUP_ID), 0)+1 FROM PROJECT_LOOKUP),
+	 	#{projectId},
+	 	(SELECT MEMBER_ID FROM MEMBERINFO WHERE MEMBER_EMAIL = #{email}),
+	 	SYSDATE
+	 	FROM DUAL
+	 	
+	 WHERE NOT EXISTS
+	 (
+	 	SELECT LOOKUP_ID
+	 	FROM PROJECT_LOOKUP
+	 	WHERE PROJECT_ID = #{projectId} AND MEMBER_ID = (SELECT MEMBER_ID FROM MEMBERINFO WHERE MEMBER_EMAIL = #{email})
+	 )
+	</insert> 
+	
+	<insert id="addMemberLocker" parameterType="pmVO">
+	 INSERT INTO PROJECT_LOCKER
+	 (LOCKER_ID, PROJECT_ID, MEMBER_ID)
+	 SELECT
+	 	(SELECT NVL(MAX(LOCKER_ID), 0)+1 FROM PROJECT_LOCKER),
+	 	#{projectId},
+	 	(SELECT MEMBER_ID FROM MEMBERINFO WHERE MEMBER_EMAIL = #{email})
+	 	FROM DUAL
+	 	
+	 WHERE NOT EXISTS
+	 (
+	 	SELECT LOCKER_ID
+	 	FROM PROJECT_LOCKER
+	 	WHERE PROJECT_ID = #{projectId} AND MEMBER_ID = (SELECT MEMBER_ID FROM MEMBERINFO WHERE MEMBER_EMAIL = #{email})
+	 )	
+	 
+	 
+	</insert>
+</mapper>

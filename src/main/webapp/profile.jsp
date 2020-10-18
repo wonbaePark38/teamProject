@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/profile_css.css" />
+<title>Plug</title>
+<link rel="stylesheet" href="css/profile.css" />
 </head>
 <body>
 	

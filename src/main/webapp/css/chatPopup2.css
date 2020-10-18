@@ -1,0 +1,188 @@
+*{ margin: 0; padding: 0; }
+a{
+	color : red;
+	font-weight:bold;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.chat {
+	margin-top: 70px;
+}
+
+.header label{
+	display: flex;
+    text-align: center;
+    margin-left: -40%;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+.header a{
+	margin-right: 20px;
+	cursor: pointer;
+}
+.input-file{
+	height: 40px;
+    margin: 0;
+    padding: 0 4px;
+    font-size: 0px;
+    color: #505050;
+    border: 1px solid #cdcdce;
+    margin-left: 5px;
+    line-height: 40px;
+    opacity: 0;
+    cursor: pointer;
+}
+#FILE_FORM{
+	text-align: left;
+}
+.add-file{
+	display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(../images/sp_fteditbox_ico.png);
+    background-position: 0 0;
+}
+#exit-bt{
+margin-left: 30px; 
+	ertical-align: middle;
+	text-decoration: none;
+}
+#change-chatroom-name{
+	margin-left: 150px;
+	vertical-align: middle;
+}
+.more-bt{
+	border: none;
+	width: 22px;
+	height: 22px;
+	margin-right: 20px;
+	background: url('../images/icon-more.png') no-repeat;
+	cursor: pointer;
+}
+
+
+.chat_wrap .header{ display:flex; justify-content: flex-end; position:fixed; top:0; width:100%; font-size: 14px; padding: 15px 0; background-color:#5f5ab9; color: white; text-align: center;}
+
+
+.chat_wrap .chat {}
+.chat_wrap .chat ul { width: 100%; list-style: none; margin-bottom: 130px;}
+.chat_wrap .chat ul li { width: 100%; }
+.chat_wrap .chat ul li.left { text-align: left; }
+.chat_wrap .chat ul li.right { text-align: right; }
+ 
+.chat_wrap .chat ul li > div { font-size: 13px;  }
+.chat_wrap .chat ul li > div.sender { margin: 10px 20px 0 20px; font-weight: bold; }
+.chat_wrap .chat ul li > div.message { display: inline-block; word-break:break-all; margin: 0px 20px 0 10px; max-width: 75%; border: 1px solid #888; padding: 10px; border-radius: 5px; background-color: #FCFCFC; color: #555; text-align: left; }
+.chat_wrap .chat ul li > div.date { display: inline-block; word-break:break-all; margin: 5px 5px; max-width: 75%;  padding: 10px; border-radius: 5px; background-color: #FCFCFC; color: #555; text-align: left; }
+.chat_wrap .input-div { position: fixed; bottom: 0; width: 100%; background-color: #FFF; text-align: center; border-top: 1px solid #F18C7E; }
+.chat_wrap .input-div > textarea { width: 100%; height: 80px; border: none; padding: 10px; }
+ 
+.format { display: none; }
+
+.hidden{
+
+    position: fixed;
+    align-items: flex-start;
+    justify-content: left;
+    right:0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    float: right;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid black;
+    display:none;
+}
+
+.hidden-header{
+	border-bottom: 1px solid #5f5ab9;
+	background-color: #f2f2f2;
+	width: 100%;
+	height: 53px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.hidden-header label{
+	margin-left: 30px;
+	font-size: 13px;
+}
+.member-list li{
+	margin-top: 14px;
+	margin: 14px 0 0 10px;
+	font-size: 13px;
+	
+}
+#more-bt{
+	width:30px;
+	height:30px;
+	background: url("../images/icon-more.png" ) no-repeat;
+	background-position: center;
+	border:0;
+	margin-right: 15px;
+	outline: none;
+}
+
+photo-area-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 25%;
+	height: 50%;
+	margin-top: 30px;
+}
+
+.photo-area {
+	display: flex;
+	flex-direction: column;
+	width: 90px;
+	height: 90px;
+	border-radius: 90px;
+	overflow: hidden;
+}
+
+.photo-area img{
+	width:90px;
+	height:90px;
+}
+
+#change-photo {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	margin-left: -30px;
+    margin-top: 50px;
+	background-image: url('../images/ico_camera.png');
+}
+#uploadBt{
+	margin-top: 100px;
+    margin-left: -65px;
+    display:none;
+}
+.profile-photo-upload {
+	height: 40px;
+	margin: 0;
+	padding: 0 4px;
+	font-size: 0px;
+	color: #505050;
+	border: 1px solid #cdcdce;
+	margin-left: 5px;
+	line-height: 40px;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.hidden-footer{
+	background-color: #f2f2f2;
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    align-items: center;
+}
+

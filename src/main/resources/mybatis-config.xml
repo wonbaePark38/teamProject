@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	
+	<typeAliases>
+		<typeAlias alias="user" type="com.spring.plug.login.vo.UserVO"></typeAlias>
+		<typeAlias alias="getUserConnection" type="com.spring.plug.login.vo.UserVO"></typeAlias>
+		<typeAlias alias="article1VO" type="com.spring.plug.mainpage.article.vo.Article1VO" ></typeAlias>
+		<typeAlias alias="articleReplyVO" type="com.spring.plug.mainpage.article.vo.ArticleReplyVO"/>
+		<typeAlias alias="articleWorkerVO" type="com.spring.plug.mainpage.article.vo.ArticleWorkerVO"/>
+		
+		<typeAlias alias="projectdir" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
+		<typeAlias alias="project_lookup" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
+		<typeAlias alias="project_locker" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
+		<typeAlias alias="project_locker_list" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
+		<typeAlias alias="project_connection" type="com.spring.plug.mainpage.projectdir.vo.ProjectDirVO"/>
+		
+		<typeAlias alias="signup" type="com.spring.plug.login.vo.UserVO"/>
+		<typeAlias alias="file" type="com.spring.plug.file.vo.FileVO"/>
+		<typeAlias alias="adminSignup" type="com.spring.plug.adminsignup.vo.AdminVO"/>
+		<typeAlias alias="adminQnA" type="com.spring.plug.admin.qna.vo.QnAVO"/>
+		<typeAlias alias="adminManager" type="com.spring.plug.admin.manager.vo.ManagerVO"/>
+		
+		<typeAlias alias="configInfo" type="com.spring.plug.user.accountinfo.vo.UserSettingVO"/>
+		<typeAlias alias="msgVO" type="com.spring.plug.chat.vo.MessageVO"/>
+		<typeAlias alias="roomVO" type="com.spring.plug.chat.vo.ChatRoomVO"/>  
+		
+		<typeAlias alias="pmVO" type="com.spring.plug.projectmanager.vo.ProjectManageVO"/> 
+	
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mappings/article-mapper.xml" />
+		
+		<mapper resource="mappings/projectdir-mapper.xml"/>
+		<mapper resource="mappings/project_lookup-mapper.xml"/>
+		<mapper resource="mappings/project_locker-mapper.xml"/>
+		<mapper resource="mappings/project_locker_list-mapper.xml"/>
+		<mapper resource="mappings/project_connection_log-mapper.xml"/>
+		
+		<mapper resource="mappings/signup-mapper.xml"/>
+		<mapper resource="mappings/file-mapper.xml"/>
+		<mapper resource="mappings/adminsignup-mapper.xml"/>
+		<mapper resource="mappings/adminqna-mapper.xml"/>
+		<mapper resource="mappings/adminmanager-mapper.xml"/>
+		
+		<mapper resource="mappings/userConfig-mapper.xml"/>
+		<mapper resource="mappings/chat-mapper.xml"/>
+		<mapper resource="mappings/projectManage-mapper.xml"/>
+		
+	</mappers>
+	
+</configuration>

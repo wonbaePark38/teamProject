@@ -1,0 +1,145 @@
+ul {
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #5f5ab9;
+   
+    font-size: 20px;
+}
+body {
+	margin: 0 auto;
+	background-color: #e4e6e9;
+	border: 1px solid #eaeaea;
+	font-size: 16px;
+	overflow-y: scroll;
+	min-width: 670px;
+}
+div.btn-register {
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid  #e7e8e9;
+	background-color: #f2f3f4;
+	height: 70px;
+	
+}
+.header-left-menu{
+	display:flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left:100px;
+	
+}
+
+div.btn-register a {
+	display: inline-block;
+	padding: 0 25px;
+	height: 48px;
+	line-height: 44px;
+	font-size: 16px;
+	font-weight: bold;
+	margin-right:100px;
+	color:#5f5ab9;
+}
+
+.signup_box {
+	margin: 150px auto 90px auto;
+	width: 380px;
+	padding: 40px 60px;
+	background-color: #f2f3f4;
+}
+
+.signup_btn_st1 {
+	display: inline-block;
+	min-width: 380px;
+	height: 60px;
+	line-height: 60px;
+	border:0;
+	outline:0;
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+	background-color: #cccdd0;
+	cursor:pointer;
+}
+.auto-login-div{
+	margin-bottom: 20px;
+	color:#5f5ab9;
+	display:flex;
+	flex-direction:row;
+	
+}
+
+.auto-login-div input{
+	width:20px;
+	height:20px;
+}
+.line_through span {
+	display: block;
+	position: absolute;
+	top: -2px;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.line_through span em {
+	display: inline-block;
+	width: 100px;
+	font-style: normal;
+	font-size: 16px;
+	color: #505050;
+	background-color: #f2f3f4;
+}
+
+.line_through {
+	position: relative;
+	margin-top: 22px;
+	margin-bottom: 37px;
+	height: 10px;
+	border-bottom: 1px solid #505050;
+}
+
+.another_id li.google {
+	height: 48px;
+	line-height: 48px;
+	border: 1px solid #ebebeb;
+	background: #fff url(../images/ico_google.gif) no-repeat 91px 11px;
+}
+
+.another_id li.kakao {
+	height: 48px;
+	line-height: 48px;
+	border: 1px solid #ebebeb;
+	background: #fddc3f url(../images/ico_kakao.jpg) no-repeat 88px 11px;
+}
+.another_id a{
+	text-decoration: none;
+}
+.another_id li {
+	cursor: pointer;
+	padding-left: 128px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: #333;
+	margin-left: -40px;
+}
+
+.forgot-password {
+	text-align: center;
+	margin-top: 8px;
+}
+
+.signup_box ul li {
+	padding-bottom: 5px;
+}
+
+#USER_ID, #USER_PW {
+	width: 372px;
+	height: 44px;
+	margin-left: -40px;
+	font-size: 16p;
+}

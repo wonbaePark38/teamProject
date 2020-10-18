@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ArticleDAO">
+
+	<resultMap type="article1VO" id="articleResult">
+		<id property="article_id" column="ARTICLE_ID" />
+		<result property="project_id" column="PROJECT_ID" />
+		<result property="project_name" column="PROJECT_NAME" />
+		<result property="article_pix" column="ARTICLE_PIX" />
+		<result property="form_name" column="FORM_NAME" />
+		<result property="regDate" column="REGDATE" />
+		<result property="file_name" column="FILE_NAME" />
+		<result property="file_size" column="FILE_SIZE" />
+		<result property="img_name" column="IMG_NAME" />
+		<result property="img_path" column="IMG_PATH" />
+		<result property="writer" column="WRITER" />
+		<result property="writeForm1_content" column="WRITEFORM1_CONTENT" />
+		<result property="writeForm2_title" column="WRITEFORM2_TITLE" />
+		<result property="writeForm2_content"
+			column="WRITEFORM2_CONTENT" />
+		<result property="writeForm2_latlng" column="WRITEFORM2_LATLNG" />
+		<result property="writeForm3_tasknum"
+			column="WRITEFORM3_TASKNUM" />
+		<result property="writeForm3_title" column="WRITEFORM3_TITLE" />
+		<result property="writeForm3_status" column="WRITEFORM3_STATUS" />
+		<result property="writeForm3_workersID"
+			column="WRITEFORM3_WORKERSID" />
+		<result property="writeForm3_workersName"
+			column="WRITEFORM3_WORKERSNAME" />
+		<result property="writeForm3_start_date"
+			column="WRITEFORM3_START_DATE" />
+		<result property="writeForm3_end_date"
+			column="WRITEFORM3_END_DATE" />
+		<result property="writeForm3_progress"
+			column="WRITEFORM3_PROGRESS" />
+		<result property="writeForm3_order" column="WRITEFORM3_ORDER" />
+		<result property="writeForm3_content"
+			column="WRITEFORM3_CONTENT" />
+		<result property="writeForm4_title" column="WRITEFORM4_TITLE" />
+		<result property="writeForm4_start_date"
+			column="WRITEFORM4_START_DATE" />
+		<result property="writeForm4_start_time"
+			column="WRITEFORM4_START_TIME" />
+		<result property="writeForm4_end_date"
+			column="WRITEFORM4_END_DATE" />
+		<result property="writeForm4_end_time"
+			column="WRITEFORM4_END_TIME" />
+		<result property="writeForm4_alarm_time"
+			column="WRITEFORM4_ALARM_TIME" />
+		<result property="writeForm4_content"
+			column="WRITEFORM4_CONTENT" />
+		<result property="writeForm4_latlng" column="WRITEFORM4_LATLNG" />
+		<result property="writeForm5_title" column="WRITEFORM5_TITLE" />
+		<result property="writeForm5_content"
+			column="WRITEFORM5_CONTENT" />
+		<result property="writeForm5_date" column="WRITEFORM5_DATE" />
+		<result property="writeForm5_worker" column="WRITEFORM5_WORKER" />
+	</resultMap>
+
+	<resultMap type="articleReplyVO" id="replyResult">
+		<id property="reply_id" column="REPLY_ID" />
+		<result property="article_id" column="ARTICLE_ID" />
+		<result property="reply_writer" column="REPLY_WRITER" />
+		<result property="reply_regdate" column="REPLY_REGDATE" />
+		<result property="reply_content" column="REPLY_CONTENT" />
+	</resultMap>
+	
+	<resultMap type="articleWorkerVO" id="workerResult">
+		<id property="todo_id" column="TODO_ID"/>
+		<result property="article_id" column="ARTICLE_ID"/>
+		<result property="project_id" column="PROJECT_ID"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="worker_name" column="WORKER_NAME"/>
+		<result property="worker_content" column="WORKER_CONTENT"/>
+		<result property="worker_date" column="WORKER_DATE"/>
+		<result property="todo_success" column="TODO_SUCCESS"/>
+	</resultMap>
+
+	<resultMap type="article1VO" id="lookupResult">
+		<id property="article_lookup_id" column="ARTICLE_LOOKUP_ID"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="article_id" column="ARTICLE_ID"/>
+		<result property="article_contain" column="ARTICLE_CONTAIN"/>
+	</resultMap>
+
+
+	<insert id="workerInsert" parameterType="articleWorkerVO">
+		INSERT INTO article_worker
+		(
+		todo_id, 
+		article_id, 
+		project_id, 
+		member_id, 
+		worker_name, 
+		worker_content, 
+		worker_date 
+		)
+		VALUES
+		(
+		(SELECT NVL(MAX(todo_id), 0) +1 FROM article_worker),
+		#{article_id},
+		#{project_id},
+		#{member_id},
+		#{worker_name},
+		#{worker_content},
+		#{worker_date}
+		)
+		
+	</insert>
+
+	<select id="replySelect" resultMap="replyResult">
+		SELECT * FROM article_reply WHERE project_id = #{project_id} ORDER BY article_id DESC
+	</select>
+
+	<insert id="replyInsert" parameterType="articleReplyVO">
+		INSERT INTO article_reply
+		(
+		reply_id,
+		member_id,
+		project_id,
+		article_id,
+		reply_writer,
+		reply_regdate,
+		reply_content
+		)
+		VALUES
+		((select nvl(max(reply_id), 0) +1 from article_reply), #{member_id}, #{project_id}, #{article_id}, #{reply_writer},sysdate ,#{reply_content} )
+	</insert>
+	
+	<update id="updateReply" parameterType="articleReplyVO">
+		UPDATE article_reply SET reply_content = #{reply_content}
+		WHERE reply_id = #{reply_id} AND member_id = #{member_id}
+	</update>
+	
+	<delete id="deleteReply" parameterType="articleReplyVO">
+		DELETE FROM article_reply WHERE reply_id = #{reply_id}
+	</delete>
+	
+	<select id="articleSelectAll" resultMap="articleResult">
+		SELECT * FROM mainpage_article WHERE 
+		<choose>
+			<when test="selectType == 'totaltask'">
+				member_id = #{member_id} AND form_name = 'taskWrite'			
+			</when>
+			<when test="selectType == 'rmyTask'">
+				member_id = #{member_id} AND form_name = 'taskWrite' AND writer = #{writer}			
+			</when>
+			<when test="selectType == 'rrequireTask'">
+				member_id = #{member_id} AND form_name = 'taskWrite' AND writeForm3_workersName = #{writeForm3_workersName}			
+			</when>
+			<otherwise>
+				project_id = #{project_id} ORDER BY article_id DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="articleInsert" useGeneratedKeys="true"
+		parameterType="article1VO" keyProperty="article_id" keyColumn="article_id">
+		INSERT INTO mainpage_article
+		(
+		member_id,
+		project_id,
+		project_name,
+		article_id,
+		form_name,
+		regDate,
+		file_name,
+		file_size,
+		file_path,
+		img_name,
+		img_path,
+		writer,
+
+		writeform1_content,
+
+		writeform2_title,
+		writeform2_content,
+		writeform2_latlng,
+
+		writeForm3_tasknum,
+		writeForm3_title,
+		writeForm3_status,
+		writeForm3_workersID,
+		writeForm3_workersName,
+		writeForm3_start_date,
+		writeForm3_end_date,
+		writeForm3_progress,
+		writeForm3_order,
+		writeForm3_content,
+
+		writeForm4_title,
+		writeForm4_start_date,
+		writeForm4_start_time,
+		writeForm4_end_date,
+		writeForm4_end_time,
+		writeForm4_alarm_time,
+		writeForm4_content,
+		writeForm4_latlng,
+
+		writeForm5_title,
+		writeForm5_content,
+		writeForm5_date,
+		writeForm5_worker
+		)
+		VALUES
+		(
+		#{member_id},
+		#{project_id},
+		#{project_name},
+		(select nvl(max(article_id), 0) +1 from mainpage_article),
+		#{form_name},
+		sysdate,
+		#{file_name, jdbcType=VARCHAR},
+		#{file_size, jdbcType=VARCHAR},
+		#{file_path, jdbcType=VARCHAR},
+		#{img_name, jdbcType=VARCHAR},
+		#{img_path, jdbcType=VARCHAR},
+		#{writer},
+
+		#{writeForm1_content, jdbcType=VARCHAR},
+
+		#{writeForm2_title, jdbcType=VARCHAR},
+		#{writeForm2_content, jdbcType=VARCHAR},
+		#{writeForm2_latlng, jdbcType=VARCHAR},
+		<choose>
+			<when test="form_name == 'taskWrite'">
+				(select nvl(max(writeForm3_tasknum), 0) +1 from mainpage_article where project_id = ${project_id}),
+			</when>
+			<otherwise>
+				#{writeForm3_tasknum, jdbcType=VARCHAR},
+			</otherwise>
+		</choose>
+		#{writeForm3_title, jdbcType=VARCHAR},
+		#{writeForm3_status, jdbcType=VARCHAR},
+		#{writeForm3_workersID, jdbcType=VARCHAR},
+		#{writeForm3_workersName, jdbcType=VARCHAR},
+		#{writeForm3_start_date, jdbcType=VARCHAR},
+		#{writeForm3_end_date, jdbcType=VARCHAR},
+		#{writeForm3_progress, jdbcType=INTEGER},
+		#{writeForm3_order, jdbcType=VARCHAR},
+		#{writeForm3_content, jdbcType=VARCHAR},
+
+		#{writeForm4_title, jdbcType=VARCHAR},
+		#{writeForm4_start_date, jdbcType=VARCHAR},
+		#{writeForm4_start_time, jdbcType=VARCHAR},
+		#{writeForm4_end_date, jdbcType=VARCHAR},
+		#{writeForm4_end_time, jdbcType=VARCHAR},
+		#{writeForm4_alarm_time, jdbcType=VARCHAR},
+		#{writeForm4_content, jdbcType=VARCHAR},
+		#{writeForm4_latlng, jdbcType=VARCHAR},
+
+		#{writeForm5_title, jdbcType=VARCHAR},
+		#{writeForm5_content, jdbcType=VARCHAR},
+		#{writeForm5_date, jdbcType=VARCHAR},
+		#{writeForm5_worker, jdbcType=VARCHAR}
+
+		)
+	</insert>
+	
+	<update id="mergeArticleLookup" parameterType="article1VO">
+		MERGE INTO 
+			article_lookup 
+		USING DUAL 
+			ON(member_id = #{member_id} AND article_id = #{article_id})
+			WHEN MATCHED THEN 
+				UPDATE SET article_contain = #{article_contain}
+			WHEN NOT MATCHED THEN 
+				INSERT (article_lookup_id, member_id, article_id, article_contain)
+				VALUES ((SELECT NVL(MAX(article_lookup_id),0) +1 FROM article_lookup), #{member_id}, #{article_id}, #{article_contain})
+	</update>
+	
+	
+	<update id="updateArticlePix" parameterType="article1VO">
+		UPDATE mainpage_article SET article_pix = #{article_pix}
+		WHERE article_id = #{article_id}
+	</update>
+	
+	<select id="getArticleLookupList" parameterType="article1VO" resultMap="lookupResult">
+		SELECT * FROM article_lookup
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<select id="getArticlePixedList" parameterType="article1VO" resultMap="articleResult">
+		SELECT * FROM mainpage_article
+		WHERE project_id = #{project_id} AND article_pix = 1
+	</select>
+	
+	<select id="getTaskList" parameterType="article1VO" resultMap="articleResult">
+		SELECT member_id, writeForm3_tasknum, writeForm3_workersName, writeForm3_workersID FROM mainpage_article
+		WHERE project_id = #{project_id}
+	</select>
+
+	
+	<select id="getTaskStatusList" parameterType="article1VO" resultMap="articleResult">
+		SELECT writeForm3_status, count(*) AS status_count FROM mainpage_article 
+		WHERE project_id = #{project_id} GROUP BY writeForm3_status
+		
+	</select>
+	
+	<select id="getTodoList" parameterType="articleWorkerVO" resultMap="workerResult">
+		SELECT * FROM article_worker
+		WHERE project_id = #{project_id}
+	</select>
+	
+	<update id="updateTodoSuccess" parameterType="articleWorkerVO">
+		UPDATE article_worker SET todo_success = #{todo_success}
+		WHERE todo_id = #{todo_id} 
+	</update>
+
+	<delete id="deleteArticle" parameterType="article1VO">
+		DELETE FROM mainpage_article
+		WHERE article_id = #{article_id}
+	</delete>
+	
+	<delete id="deleteTodo" parameterType="articleWorkerVO">
+		DELETE FROM article_worker
+		WHERE article_id = #{article_id}
+	</delete>
+	<update id="updateArticleModified" parameterType="article1VO">
+		<choose>
+			<when test="form_name == 'nomalWrite'">
+				UPDATE mainpage_article SET writeform1_content = #{writeForm1_content}
+			</when>
+			<when test="form_name == 'nomalWrite2.0'">
+				UPDATE mainpage_article SET writeform2_title = #{writeForm2_title}, writeform2_content = #{writeForm2_content}
+			</when>
+			<when test="form_name == 'taskWrite'">
+				UPDATE mainpage_article SET writeform3_title = #{writeForm3_title}, writeform3_content = #{writeForm3_content}, writeform3_status = #{writeForm3_status}, writeform3_progress = #{writeForm3_progress}
+			</when>
+			<when test="form_name == 'scheWrite'">
+				UPDATE mainpage_article SET writeform4_title = #{writeForm4_title}, writeform4_content = #{writeForm4_content}
+			</when>
+			<when test="form_name == 'todoWrite'">
+				UPDATE mainpage_article SET writeform5_title = #{writeForm5_title}, writeform5_content = #{writeForm5_content}
+			</when>
+		</choose>
+		WHERE article_id = #{article_id}
+	</update>
+</mapper>

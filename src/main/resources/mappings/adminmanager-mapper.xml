@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ManagerDAO">
+
+	<resultMap type="adminManager" id="managerResult">
+		<!-- <id property="seq" column="SEQ" /> -->
+		<result property="usercount" column="USERCOUNT" />
+		<result property="procount" column="PROCOUNT" />
+		<result property="articlecount" column="ARTCOUNT" />
+		<result property="articletoday" column="ARTTODAYCOUNT" />
+		<result property="protodaycount" column="PROTODAYCOUNT" />
+		<result property="userName" column="MEMBER_NAME" />
+		<result property="userEmail" column="MEMBER_EMAIL" />
+		<result property="regDate" column="REGDATE" />
+		<result property="startTime" column="START_TIME" />
+		<result property="endTime" column="END_TIME" />
+		<result property="searchDay" column="SEARCH_DAY" />
+		<result property="projectname" column="PROJECT_NAME" />
+		<result property="projectusercount" column="PROJECT_COUNT" />
+		<result property="projectrank" column="RANK" />
+		<result property="createmonth" column="CREATE_MONTH" />
+		<result property="daycount" column="DAY_COUNT" />
+		<result property="createyear" column="CREATE_YEAR" />
+		<result property="sharework" column="SHARE_WORK" />
+	</resultMap>
+	
+	<select id="getUser" resultMap="managerResult">
+		SELECT COUNT(*) as "USERCOUNT" FROM MEMBERINFO
+	</select>
+	
+	<select id="getProject" resultMap="managerResult">
+		SELECT COUNT(*) as "PROCOUNT" FROM PROJECTDIR
+	</select>
+	
+	<select id="getArticle" resultMap="managerResult">
+		SELECT COUNT(*) as "ARTCOUNT" FROM MAINPAGE_ARTICLE
+	</select>
+	
+	<select id="getArticleToday" resultMap="managerResult">
+		SELECT COUNT(*) as "ARTTODAYCOUNT" FROM MAINPAGE_ARTICLE WHERE TO_CHAR(REGDATE, 'yyyy-mm-dd') = #{searchDay}
+	</select>
+
+	<select id="getProjectToday" resultMap="managerResult">
+		SELECT COUNT(*) as "PROTODAYCOUNT" FROM PROJECTDIR WHERE TO_CHAR(CREATEDATE, 'yyyy-mm-dd') = #{searchDay}
+	</select>
+
+	<select id="getUserList" resultMap="managerResult">
+		<if test="searchCondition == 'NAME'">
+			SELECT * FROM MEMBERINFO WHERE 1=1 
+			AND MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		<if test="searchCondition == 'PROJECTNAME'">
+			SELECT MEMBER_NAME, MEMBER_EMAIL, PROJECT_NAME, REGDATE
+			FROM MEMBERINFO JOIN PROJECT_LOOKUP USING(MEMBER_ID) JOIN PROJECTDIR USING(PROJECT_ID) WHERE 1=1
+			AND PROJECT_NAME LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		ORDER BY MEMBER_ID ASC
+	</select>
+	
+	<select id="getTimeLog" resultMap="managerResult">
+		<if test="searchKeyword == null">
+			SELECT MEMBER_NAME, MEMBER_EMAIL, TO_CHAR(CONNECTION_START, 'yyyy-mm-dd hh24:mi:ss') AS "START_TIME", 
+			TO_CHAR(CONNECTION_END, 'yyyy-mm-dd hh24:mi:ss') AS "END_TIME" 
+			FROM USER_CONNECTION JOIN MEMBERINFO USING(MEMBER_ID)
+		</if>
+		<if test="searchKeyword != null">
+			SELECT MEMBER_NAME, MEMBER_EMAIL, TO_CHAR(CONNECTION_START, 'yyyy-mm-dd hh24:mi:ss') AS "START_TIME", 
+			TO_CHAR(CONNECTION_END, 'yyyy-mm-dd hh24:mi:ss') AS "END_TIME" 
+			FROM USER_CONNECTION JOIN MEMBERINFO USING(MEMBER_ID) WHERE TO_CHAR(CONNECTION_START, 'mm') = #{searchKeyword}
+		</if>
+		ORDER BY CONNECTION_SEQ ASC
+	</select>
+	
+	<select id="getProjectRank" resultMap="managerResult">
+		SELECT PROJECT_ID, PROJECT_NAME, COUNT(PROJECT_ID) AS PROJECT_COUNT, DENSE_RANK() OVER (ORDER BY COUNT(PROJECT_ID) DESC) AS RANK FROM PROJECT_LOOKUP JOIN
+		PROJECTDIR USING(PROJECT_ID) GROUP BY PROJECT_ID, PROJECT_NAME 
+		ORDER BY PROJECT_COUNT DESC
+	</select>
+	
+	<select id="getProjectDay" resultMap="managerResult">
+		SELECT (TO_CHAR(CREATEDATE, 'DD')) AS CREATE_MONTH,
+		COUNT(*) AS DAY_COUNT 
+		FROM PROJECTDIR
+		WHERE (TO_CHAR(CREATEDATE, 'YYYY-MM')) = #{searchDay}
+		GROUP BY (TO_CHAR(CREATEDATE, 'DD'))
+		ORDER BY (TO_CHAR(CREATEDATE, 'DD')) ASC
+	</select>
+	
+	<select id="getArticleDay" resultMap="managerResult">
+		SELECT (TO_CHAR(REGDATE, 'DD')) AS CREATE_MONTH,
+		COUNT(*) AS DAY_COUNT 
+		FROM MAINPAGE_ARTICLE
+		WHERE (TO_CHAR(REGDATE, 'YYYY-MM')) = #{searchDay}
+		GROUP BY (TO_CHAR(REGDATE, 'DD'))
+		ORDER BY (TO_CHAR(REGDATE, 'DD')) ASC
+	</select>
+	
+	<select id="getProjectYear" resultMap="managerResult">
+		SELECT (TO_CHAR(CREATEDATE, 'MM')) AS CREATE_YEAR,
+		COUNT(*) AS DAY_COUNT 
+		FROM PROJECTDIR
+		WHERE (TO_CHAR(CREATEDATE, 'YYYY')) = #{searchDay}
+		GROUP BY (TO_CHAR(CREATEDATE, 'MM'))
+		ORDER BY (TO_CHAR(CREATEDATE, 'MM')) ASC
+	</select>
+	
+	<select id="getArticleYear" resultMap="managerResult">
+		SELECT (TO_CHAR(REGDATE, 'MM')) AS CREATE_YEAR,
+		COUNT(*) AS DAY_COUNT 
+		FROM MAINPAGE_ARTICLE
+		WHERE (TO_CHAR(REGDATE, 'YYYY')) = #{searchDay}
+		GROUP BY (TO_CHAR(REGDATE, 'MM'))
+		ORDER BY (TO_CHAR(REGDATE, 'MM')) ASC
+	</select>
+	
+	<select id="getShareWork" resultMap="managerResult">
+		SELECT COUNT(FORM_NAME) AS SHARE_WORK FROM MAINPAGE_ARTICLE WHERE FORM_NAME = 'taskWrite'
+	</select>
+	
+</mapper>

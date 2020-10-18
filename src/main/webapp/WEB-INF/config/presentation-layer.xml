@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.spring.plug" />
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1" />
+	</bean>
+
+	  <bean id="intercepter" class="com.spring.plug.login.controller.Interceptor" /> 
+	<bean id="loginHistoryIntercepter"	class="com.spring.plug.login.controller.prohibitController" /> 
+	
+    
+  	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/" />
+			<mvc:exclude-mapping path="/index.do"/>
+			<mvc:exclude-mapping path="/login.do" />
+			<mvc:exclude-mapping path="/slogin.do" />
+			<mvc:exclude-mapping path="/logout.do" />
+			<mvc:exclude-mapping path="/signupPost.do"/>
+			<mvc:exclude-mapping path="/signConfirm.do"/>
+			<mvc:exclude-mapping path="/adminPage/production/**"/>
+			<mvc:exclude-mapping path="/searchEmail.do"/>
+			<mvc:exclude-mapping path="/passlogin.do"/>
+			
+			<ref bean="intercepter" />
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/login.do" />
+			<ref bean="loginHistoryIntercepter" />
+		</mvc:interceptor>
+
+	</mvc:interceptors> 
+	<bean id="echoHandler" class="com.spring.plug.chat.handler.ReplyEchochoHandler" />
+	<bean id="chatHandler" class="com.spring.plug.chat.handler.ChatWebSocketHandler" />
+	
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler" path="/echo.do" />
+		<websocket:mapping handler="chatHandler" path="/chat.do" />
+		
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>	
+	 </websocket:handlers>
+
+</beans>
+<!-- 인터셉터 선언 -->

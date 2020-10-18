@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnADAO">
+
+	<resultMap type="adminQnA" id="qnaResult">
+		<id property="seq" column="SEQ" />
+		<result property="content" column="CONTENT" />
+		<result property="time" column="REGDATE" />
+		<result property="title" column="TITLE" />
+		<result property="writer" column="WRITER" />
+		<result property="email" column="EMAIL" />
+		<result property="reply" column="REPLY" />
+		<result property="replycontent" column="REPLYCONTENT" />
+		<result property="replytime" column="REPLYTIME" />
+	</resultMap>
+
+	<insert id="insertBoard" parameterType="adminQnA">
+		INSERT INTO ADMIN_QNA (seq, email, title, content, writer)
+		VALUES((select nvl(max(seq), 0) +1 from ADMIN_QNA), #{email}, #{title}, #{content}, #{writer})
+	</insert>
+
+	<select id="getBoardList" resultMap="qnaResult">
+		SELECT * FROM ADMIN_QNA WHERE 1=1 
+		<if test="searchCondition == 'TITLE'">
+			AND TITLE LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		<if test="searchCondition == 'WRITER'">
+			AND WRITER LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		ORDER BY SEQ DESC
+	</select>
+	
+	<select id="getBoard" resultMap="qnaResult">
+		SELECT * FROM ADMIN_QNA WHERE SEQ=#{seq}
+	</select>
+	
+	<update id="updateBoard" parameterType="adminQnA">
+		UPDATE ADMIN_QNA SET REPLY = #{reply}, REPLYCONTENT = #{replycontent}, REPLYTIME = SYSDATE WHERE SEQ = #{seq}
+	</update>
+	
+	
+</mapper>

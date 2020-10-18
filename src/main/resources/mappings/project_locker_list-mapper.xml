@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectDirDAO">
+
+	<resultMap type="project_locker_list" id="project_locker_list">
+		<id property="locker_list_id" column="LOCKER_LIST_ID"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="locker_name" column="LOCKER_NAME"/>
+	</resultMap>
+
+	<!-- 프로젝트 세팅 정보 생성 -->	
+	<insert id="insertLockerList" parameterType="project_locker_list" >
+		INSERT INTO project_locker_list (locker_list_id, member_id, locker_name)
+		VALUES ((select nvl(max(locker_list_id), 0) +1 from project_locker_list), #{member_id}, #{locker_name})
+	</insert>
+	
+	<select id="getLockerList" parameterType="project_locker_list" resultType="project_locker_list">
+		SELECT * FROM project_locker_list
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<delete id="deleteLocker" parameterType="project_locker_list">
+		DELETE FROM project_locker_list
+		WHERE locker_list_id = #{locker_list_id}
+	</delete>
+	
+	<update id="updateLockerName" parameterType="project_locker_list">
+		UPDATE project_locker_list SET locker_name = #{locker_name}
+		WHERE locker_list_id = #{locker_list_id}
+	</update>
+</mapper>

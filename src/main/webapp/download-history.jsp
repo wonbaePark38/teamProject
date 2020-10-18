@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>파일 다운로드 이력</title>
+    <title>Plug</title>
     <link href="css/download-history.css" rel="stylesheet">
     <script src="script/jquery-3.5.1-min.js"></script>
     <script src="script/download-history.js"></script>
