@@ -4,17 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Plug</title>
 <link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery-3.5.1-min.js"></script>	
+<script src="script/jquery-3.5.1-min.js"></script>	
 <script>
-$(function(){
-	$('#setting').click(function(){
-		$(this).hide();
-		$('input[id^=set_btn]').show();
+	$(document).on('click', '#setting' ,function(){
+		if ($(this).val()=='수정') {
+			$(this).val('취소');
+		} else {
+			$(this).val('수정');
+		}
+		$(this).parent().children('input[id^=set_btn]').fadeToggle('fast');
 	});
+<<<<<<< HEAD
 	console.log("원종바보");
 });
+=======
+>>>>>>> 2485aa6b5ca5b2210f0a2d564b19fea2b1ba724f
 </script>
 </head>
 <body>
@@ -28,14 +34,13 @@ $(function(){
 			<dt style="padding-top: 15px;">회사명</dt>
 			<dd>
 				<input type="text"disabled="disabled" value="입력한 회사명" maxlength="20" style="">
-				<input id="setting" type="button" class="btn1" value="수정">
 				<input id="set_btn" type="button" value="저장" class="btn1 blue" style="display: none;">
-				<input id="set_btn" type="button" class="btn1" value="취소" style="display: none;">
+				<input id="setting" type="button" class="btn1" value="수정">
 			</dd>
 			<dt>로고설정</dt>
 			<dd>
 				<div class="admin_logo_load" >
-					<a>+ 로고 등록</a>
+					<a onclick="officePop('office_logo.jsp')">+ 로고 등록</a>
 				</div>
 				<p style="font-size: 12px; color: #a2a2a2; margin: 3px 0px;">권장사항 - 200*100px, PNG / 최대 500KB</p>
 			</dd>
@@ -49,9 +54,8 @@ $(function(){
 				<dd>
 					<p>전용 URL 주소를 전달하여 회사 직원들을 참여시킬 수 있습니다.</p>
 					<input type="text"disabled="disabled" value="https://회사주소" maxlength="20" style="color:#307cff; font:bold;">
-					<input type="button" class="btn1" value="수정">
-					<input type="button" value="저장" class="btn1 blue" style="display: none;">
-					<input type="button" class="btn1" value="취소" style="display: none;">
+					<input id="set_btn" type="button" value="저장" class="btn1 blue" style="display: none;">
+					<input id="setting" type="button" class="btn1" value="수정">
 				</dd>
 			</dl>
 			
