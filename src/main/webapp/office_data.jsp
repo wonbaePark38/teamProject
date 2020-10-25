@@ -16,11 +16,6 @@
 		}
 		$(this).parent().children('input[id^=set_btn]').fadeToggle('fast');
 	});
-<<<<<<< HEAD
-	console.log("원종바보");
-});
-=======
->>>>>>> 2485aa6b5ca5b2210f0a2d564b19fea2b1ba724f
 </script>
 </head>
 <body>

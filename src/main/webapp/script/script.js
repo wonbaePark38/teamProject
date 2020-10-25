@@ -85,7 +85,9 @@ function errorNotCheckEmail(){
 	document.getElementById('USER_PW').value ="";
 }
 
-
+function errorSocial(){
+	alert('이미 가입되어 있는 이메일입니다.');
+}
 
 var googleUser = {};
 var startGoogleLogin = function() {

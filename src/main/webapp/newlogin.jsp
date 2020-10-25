@@ -37,6 +37,13 @@
 				errorNotCheckEmail();
 			</script>
 		</c:when>
+		
+		<c:when test="${status eq 'socialFalse'}">
+			<script type="text/javascript">
+				errorSocial();
+			</script>
+		</c:when>
+		
 	</c:choose>
 	<div>
 		<div class="btn-register">

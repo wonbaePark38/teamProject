@@ -46,7 +46,7 @@ public class SocialLoginController{
 			userService.addSocialUser(vo); //db에 정보 추가
 			signupService.addUserInfo(vo); //usersetting 테이블에 정보 insert
 			user = userService.getSocialUser(vo);
-		}
+		} 
 		String prevConnectDevice = user.getConnectDevice();//이전 접속 기계
 		String prevLoginTime = user.getLoginDate(); //이전 접속 시간
 		String hostName= "";
@@ -87,6 +87,7 @@ public class SocialLoginController{
 		userService.insertConnectionLog(user.getSeq()); //로그 기록 남김
 		session.setAttribute("user", user);
 		mav.addObject("user" , user);
+		//mav.addObject("socialConnection", "true");
 		mav.setViewName("projectdir.do");
 		return mav;
 		/*
