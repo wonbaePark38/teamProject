@@ -103,7 +103,7 @@ public class AdminLoginController {
 		
 		if(dbVO.getPassword().equals(vo.getPassword())) {
 			System.out.println("비번 맞음");
-			session.setAttribute("user", dbVO);
+			session.setAttribute("admin-user", dbVO);
 			mav.addObject("vo", dbVO);
 			mav.setViewName("LoginSuccess.do");
 		} else {

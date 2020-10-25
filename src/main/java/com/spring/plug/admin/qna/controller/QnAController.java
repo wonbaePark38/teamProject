@@ -37,7 +37,7 @@ public class QnAController {
 	
 	@RequestMapping(value = "/insertQnA.do")
 	public String insertQnA(QnAVO vo, HttpSession session) {
-		UserVO user = (UserVO) session.getAttribute("user");
+		UserVO user = (UserVO) session.getAttribute("admin-user");
 		
 		vo.setEmail(user.getEmail());
 		vo.setWriter(user.getName());
